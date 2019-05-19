@@ -1,1 +1,1 @@
-# stocos
+# STOChastic Optimization Solver (stocos)
