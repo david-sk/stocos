@@ -20,12 +20,13 @@ EXEC_NAME = stocos
 #OBJ_FILES = fichier_1.o fichier_2.o
 #INSTALL_DIR = /usr/bin
 #SOURCES_DIR = ./sources/
+BUILD_DIR = ./build/
 
 #all : $(EXEC_NAME)
 
 #$(EXEC_NAME): $(SOURCES_DIR)main.cpp
 all : ./sources/main.cpp
-	$(CC) $(FLAGS) $< -o $(EXEC_NAME) -lboost_program_options
+	$(CC) $(FLAGS) $< -o $(BUILD_DIR)$(EXEC_NAME) -lboost_program_options
 
 run:
 	./$(EXEC_NAME)
@@ -34,7 +35,7 @@ packagesDebain:
 	apt-get install g++ build-essential
 
 unittest : ./sources/unitTest.cpp
-	$(CC) $(FLAGS) $< -o unittest_$(EXEC_NAME) -lcppunit -lboost_program_options
+	$(CC) $(FLAGS) $< -o $(BUILD_DIR)unittest_$(EXEC_NAME) -lcppunit -lboost_program_options
 
 doxygen:
 	doxygen doxygen.cfg
