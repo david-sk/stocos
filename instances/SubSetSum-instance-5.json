@@ -1,0 +1,8 @@
+{
+    "problem": {
+        "name": "sussetsum",
+        "numInstance": "5",
+	"fitnessObjectif": 102,
+        "set": [11, 12, 33, 54, 66, 1, 36, 22, 2, 41, 23, 66]
+    }
+}
