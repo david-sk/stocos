@@ -24,6 +24,7 @@
 #include "solution/unitTest_solution.h"
 #include "solution/unitTest_solutionArray.h"
 #include "problem/unitTest_OneMax.h"
+#include "problem/unitTest_knapsack.h"
 #include "problem/unitTest_QAP.h"
 #include "optimizationAlgorithm/bruteforceSearch/unitTest_combinationGenerator.h"
 
@@ -32,6 +33,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_criteriaBudget);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solution);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solutionArray);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_OneMax);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_knapsack);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_QAP);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_combinationGenerator);
 

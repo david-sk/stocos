@@ -117,8 +117,9 @@ class SolverSubsetsum : public Solver {
     }
 
     void operator()(SOL &s, int numParameter) {
+        assert(0 <= numParameter);
         assert(numParameter < static_cast<int>(optimizationAlgorithm.size()));
-        optimizationAlgorithm[numParameter].second->operator()(s);
+        optimizationAlgorithm[static_cast<unsigned int>(numParameter)].second->operator()(s);
     }
 
     void operator()(string &solution, int numParameter) {
