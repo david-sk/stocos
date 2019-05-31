@@ -7,18 +7,18 @@
 /// \brief 
 ///
 
-#ifndef UNITTEST_COMBINATIONGENERATOR_H
-#define UNITTEST_COMBINATIONGENERATOR_H
+#ifndef UNITTEST_BACKTRACKING_H
+#define UNITTEST_BACKTRACKING_H
 
 using namespace CppUnit;
 
 #include "../../problem/problem.h"
 #include "../../solution/solution.h"
-#include "combinationGenerator.h"
+#include "backtracking.h"
 
-class UnitTest_combinationGenerator : public CppUnit::TestFixture {
+class UnitTest_backtraking : public CppUnit::TestFixture {
 
-    CPPUNIT_TEST_SUITE(UnitTest_combinationGenerator);
+    CPPUNIT_TEST_SUITE(UnitTest_backtraking);
     CPPUNIT_TEST(test);
     CPPUNIT_TEST_SUITE_END();
 
@@ -39,21 +39,10 @@ class UnitTest_combinationGenerator : public CppUnit::TestFixture {
         StoppingCriteria<TYPESOL> stoppingCriteria;
         Statistic<TYPESOL> statistic;
         OneMax<TYPESOL> oneMax;
+        TYPESOL s(4);
 
-        CombinationGenerator<TYPESOL> cg(mt_rand, statistic, stoppingCriteria, oneMax, 2, 4);
-
-        //cg();
-       
-        const unique_ptr<unsigned int []> &u = cg.reset();
-        for (unsigned int k = 0; k < 4; k++)
-            cout<<u[k];
-        cout<<endl;
-        do {
-            const unique_ptr<unsigned int []> &y = cg.step();
-            for (unsigned int k = 0; k < 4; k++)
-                cout<<y[k];
-            cout<<endl;
-        } while (cg.stop());
+        Backtraking<TYPESOL> backtraking(mt_rand, statistic, stoppingCriteria, oneMax, 2, 4);
+        backtraking.recursive(0);
     }
 
     private:

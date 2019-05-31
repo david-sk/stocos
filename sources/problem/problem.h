@@ -24,7 +24,9 @@ public:
 	
 	virtual void full_eval(SOL &s) const = 0;
 	virtual void reset_solution(SOL &s) const = 0;
-	
+	virtual bool filtering(SOL &s) const {
+		return true;
+	}
 	/*void incremental(const SOL &s) = 0;*/
 	
 private:

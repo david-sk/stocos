@@ -26,7 +26,8 @@
 #include "problem/unitTest_OneMax.h"
 #include "problem/unitTest_knapsack.h"
 #include "problem/unitTest_QAP.h"
-#include "optimizationAlgorithm/bruteforceSearch/unitTest_combinationGenerator.h"
+#include "optimizationAlgorithm/exhaustiveSearch/unitTest_combinationGenerator.h"
+#include "optimizationAlgorithm/exhaustiveSearch/unitTest_backtracking.h"
 
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_criteriaBudget);
@@ -36,6 +37,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_OneMax);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_knapsack);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_QAP);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_combinationGenerator);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_backtraking);
 
 int main(int argc, char* argv[])
 {
