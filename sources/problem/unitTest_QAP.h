@@ -72,12 +72,12 @@ class UnitTest_QAP : public CppUnit::TestFixture {
         }
         
         //
-        SolutionArray<unsigned int, unsigned int> s(1, n);
+        SOL_QAP s(1, n);
         for (unsigned int i = 0 ; i < n ; i++)
             s(i, p[i]);
 
         // 
-        QAP<SolutionArray<unsigned int, unsigned int>, unsigned int> eQAP(n, _A, _B);
+        QAP eQAP(n, _A, _B);
 
        for (unsigned int i=0; i < n; i++){
             delete[] _A[i];

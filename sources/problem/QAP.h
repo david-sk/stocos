@@ -23,8 +23,8 @@
 
 using namespace std;
 
-template<class SOL, typename TYPE_FITNESS>
-class QAP : public Problem<SOL> {
+using SOL_QAP = SolutionArray<unsigned int, unsigned int>;
+class QAP : public Problem<SOL_QAP> {
 public:
     QAP(string pathfile_instance) {
         loadInstance(pathfile_instance);
@@ -98,7 +98,7 @@ public:
         }
     }
 
-    void full_eval(SOL &p) const {
+    void full_eval(SOL_QAP &p) const {
         unsigned int sum = 0;
         for (unsigned int i = 0 ; i < n ; i++) {
             for (unsigned int j = 0 ; j < n ; j++)
@@ -107,7 +107,7 @@ public:
         p.setFitness(0, sum);
     }
 
-    void reset_solution(SOL &s) const {
+    void reset_solution(SOL_QAP &s) const {
         
     }
 

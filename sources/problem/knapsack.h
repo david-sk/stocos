@@ -19,8 +19,8 @@
 #include <utility>
 #include <unistd.h>
 
-template<class SOL>
-class Knapsack : public Problem<SOL> {
+using SOL_KNAPSACK = SolutionArray<int, int>;
+class Knapsack : public Problem<SOL_KNAPSACK> {
     public:
     
     Knapsack(string pathfile_instance) {
@@ -59,7 +59,7 @@ class Knapsack : public Problem<SOL> {
         }
     }
 
-    void full_eval(SOL &s) const {
+    void full_eval(SOL_KNAPSACK &s) const {
         int fitness = 0;
         for (unsigned int i = 0 ; i < s.sizeArray() ; i++)
             fitness += profit[i] * s(i);
@@ -78,7 +78,7 @@ class Knapsack : public Problem<SOL> {
 
     }*/
 
-    void reset_solution(SOL &s) const {
+    void reset_solution(SOL_KNAPSACK &s) const {
         for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
             s(i, 0);
         }
