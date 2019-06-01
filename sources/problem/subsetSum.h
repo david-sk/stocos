@@ -18,8 +18,8 @@
 
 using namespace std;
 
-template<class SOL, typename TYPE_FITNESS>
-class Subsetsum : public Problem<SOL> {
+using SOL_OSUBSETSUM = SolutionArray<unsigned int, bool>;
+class Subsetsum : public Problem<SOL_OSUBSETSUM> {
     public:
     
     Subsetsum(const unsigned int N) {
@@ -67,13 +67,13 @@ class Subsetsum : public Problem<SOL> {
         fclose(fp);
     }
 
-    TYPE_FITNESS getFitnessObjectif() {
+    unsigned int getFitnessObjectif() {
         return fitnessObjectif;
     }
 
-    void full_eval(SOL &s) const {
+    void full_eval(SOL_OSUBSETSUM &s) const {
         assert(setOfNumbers.size() == s.sizeArray());
-        TYPE_FITNESS sum = 0;
+        unsigned int sum = 0;
         for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
             if (s(i) == 1) {
                 sum += setOfNumbers[i];
@@ -86,15 +86,15 @@ class Subsetsum : public Problem<SOL> {
 
     }*/
 
-    void reset_solution(SOL &s) const {
+    void reset_solution(SOL_OSUBSETSUM &s) const {
         for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
             s(i, 0);
         }
     }
 
     private:
-        vector<TYPE_FITNESS> setOfNumbers;
-        TYPE_FITNESS fitnessObjectif;
+        vector<unsigned int> setOfNumbers;
+        unsigned int fitnessObjectif;
 };
 
 #endif

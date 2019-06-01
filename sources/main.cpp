@@ -82,13 +82,13 @@ int main(int argc, char **argv, char **envp) {
 
 	switch (problemSolving) {
 		case 0: 
-			solver.reset(new SolverOneMax<SolutionArray<unsigned int, bool>>(mt_rand, vm, menuHelp, argc, argv));
+			solver.reset(new SolverOneMax(mt_rand, vm, menuHelp, argc, argv));
 			break;
 		case 1: 
-			solver.reset(new SolverSubsetsum<SolutionArray<unsigned int, bool>>(mt_rand, vm, menuHelp, argc, argv));
+			solver.reset(new SolverSubsetsum(mt_rand, vm, menuHelp, argc, argv));
 			break;
 		default:
-			solver.reset(new SolverOneMax<SolutionArray<unsigned int, bool>>(mt_rand, vm, menuHelp, argc, argv));
+			solver.reset(new SolverOneMax(mt_rand, vm, menuHelp, argc, argv));
 			break;
 	}
 

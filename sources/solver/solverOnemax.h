@@ -31,7 +31,6 @@
 #include "../optimizationAlgorithm/metaheuristic/selection/selection.h"
 #include "../optimizationAlgorithm/metaheuristic/selection/selection_maximization.h"
 
-template<class SOL>
 class SolverOneMax : public Solver {
     public:
     SolverOneMax(std::mt19937 &mt_rand, 
@@ -74,7 +73,7 @@ class SolverOneMax : public Solver {
     }
 
     void operator()() {
-        SOL s(1, sizeArray);
+        SOL_ONEMAX s(1, sizeArray);
         for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
             s(i, 0);
         }
@@ -84,38 +83,38 @@ class SolverOneMax : public Solver {
         cout<<s<<endl;
     }
 
-    void operator()(SOL &s, int numParameter) {
+    void operator()(SOL_ONEMAX &s, int numParameter) {
         OneMax eOneMax;
 
-        Mutation_FlipBit<SOL> mutation_FlipBit(this->_mt_rand, 5);
+        Mutation_FlipBit<SOL_ONEMAX> mutation_FlipBit(this->_mt_rand, 5);
         
-        Selection_maximization<SOL> selection;
+        Selection_maximization<SOL_ONEMAX> selection;
 
 
-        StoppingCriteria<SOL> stoppingCriteria;
-        stoppingCriteria.addCriteria(new CriteriaBudget<SOL>(budget));
-        stoppingCriteria.addCriteria(new CriteriaFitnessObjectif<SOL>(s.sizeArray()));
+        StoppingCriteria<SOL_ONEMAX> stoppingCriteria;
+        stoppingCriteria.addCriteria(new CriteriaBudget<SOL_ONEMAX>(budget));
+        stoppingCriteria.addCriteria(new CriteriaFitnessObjectif<SOL_ONEMAX>(s.sizeArray()));
         
-    	Statistic<SOL> statistic(statStatistic);
-	    statistic.addSensor(new SensorNumRound<SOL>);
-	    statistic.addSensor(new SensorSolution<SOL>);
+    	Statistic<SOL_ONEMAX> statistic(statStatistic);
+	    statistic.addSensor(new SensorNumRound<SOL_ONEMAX>);
+	    statistic.addSensor(new SensorSolution<SOL_ONEMAX>);
 
-        OptimizationAlgorithm<SOL> *optimizationAlgorithm;
+        OptimizationAlgorithm<SOL_ONEMAX> *optimizationAlgorithm;
 
         
         switch (numParameter) {
             case 0:
-                optimizationAlgorithm = new FirstImprovement<SOL>(this->_mt_rand, statistic, stoppingCriteria, eOneMax, mutation_FlipBit, selection, sizeArray);
+                optimizationAlgorithm = new FirstImprovement<SOL_ONEMAX>(this->_mt_rand, statistic, stoppingCriteria, eOneMax, mutation_FlipBit, selection, sizeArray);
                 optimizationAlgorithm->operator()(s);
                 delete optimizationAlgorithm;
                 break;
             case 1:
-                optimizationAlgorithm = new BestImprovement<SOL>(this->_mt_rand, statistic, stoppingCriteria, eOneMax, mutation_FlipBit, selection, sizeArray);
+                optimizationAlgorithm = new BestImprovement<SOL_ONEMAX>(this->_mt_rand, statistic, stoppingCriteria, eOneMax, mutation_FlipBit, selection, sizeArray);
                 optimizationAlgorithm->operator()(s);
                 delete optimizationAlgorithm;
                 break;
             case 2:
-                optimizationAlgorithm = new OnePlusLambda<SOL>(this->_mt_rand, statistic, stoppingCriteria, eOneMax, sizeArray, 50);
+                optimizationAlgorithm = new OnePlusLambda<SOL_ONEMAX>(this->_mt_rand, statistic, stoppingCriteria, eOneMax, sizeArray, 50);
                 optimizationAlgorithm->operator()(s);
                 delete optimizationAlgorithm;
                 break;
@@ -128,7 +127,7 @@ class SolverOneMax : public Solver {
     
     //---------------
     void operator()(string &solution, int numParameter) {
-        SOL s(solution);
+        SOL_ONEMAX s(solution);
         //s.toSolution(solution);
 
         this->operator()(s, numParameter);
@@ -138,7 +137,7 @@ class SolverOneMax : public Solver {
 
     void initializationSolution() {
         OneMax eOneMax;
-        SOL s(1, sizeArray);
+        SOL_ONEMAX s(1, sizeArray);
         
         for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
             s(i, 0);

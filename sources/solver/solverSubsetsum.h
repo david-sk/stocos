@@ -37,7 +37,6 @@
 #include "../optimizationAlgorithm/metaheuristic/selection/selection_maximization.h"
 #include "../optimizationAlgorithm/metaheuristic/selection/selection_difference.h"
 
-template<class SOL>
 class SolverSubsetsum : public Solver {
     public:
     SolverSubsetsum(std::mt19937 &mt_rand, 
@@ -55,27 +54,27 @@ class SolverSubsetsum : public Solver {
         settings(argc, argv);
 
         //----------
-        eSubsetsum = make_shared<Subsetsum<SOL,  unsigned int>>(N);
+        eSubsetsum = make_shared<Subsetsum>(N);
 
-        mutation_FlipBit = make_shared<Mutation_FlipBit<SOL>>(this->_mt_rand, 5);
+        mutation_FlipBit = make_shared<Mutation_FlipBit<SOL_OSUBSETSUM>>(this->_mt_rand, 5);
         
-        selection = make_shared<Selection_difference<SOL>>(eSubsetsum->getFitnessObjectif());
+        selection = make_shared<Selection_difference<SOL_OSUBSETSUM>>(eSubsetsum->getFitnessObjectif());
         
-        stoppingCriteria = make_shared<StoppingCriteria<SOL>>();
-        stoppingCriteria->addCriteria(new CriteriaBudget<SOL>(budget));
-        stoppingCriteria->addCriteria(new CriteriaFitnessObjectif<SOL>(eSubsetsum->getFitnessObjectif()));
+        stoppingCriteria = make_shared<StoppingCriteria<SOL_OSUBSETSUM>>();
+        stoppingCriteria->addCriteria(new CriteriaBudget<SOL_OSUBSETSUM>(budget));
+        stoppingCriteria->addCriteria(new CriteriaFitnessObjectif<SOL_OSUBSETSUM>(eSubsetsum->getFitnessObjectif()));
         
-    	statistic = make_shared<Statistic<SOL>>(statStatistic);
-	    statistic->addSensor(new SensorNumRound<SOL>);
-	    statistic->addSensor(new SensorSolution<SOL>);
-        statistic->addSensor(new SensorStopwatch<SOL>);
+    	statistic = make_shared<Statistic<SOL_OSUBSETSUM>>(statStatistic);
+	    statistic->addSensor(new SensorNumRound<SOL_OSUBSETSUM>);
+	    statistic->addSensor(new SensorSolution<SOL_OSUBSETSUM>);
+        statistic->addSensor(new SensorStopwatch<SOL_OSUBSETSUM>);
 
-        optimizationAlgorithm.push_back(pair<string, OptimizationAlgorithm<SOL> *>("FirstImprovement", 
-        new FirstImprovement<SOL>(this->_mt_rand, *statistic, *stoppingCriteria, *eSubsetsum, *mutation_FlipBit, *selection, N)));
-        optimizationAlgorithm.push_back(pair<string, OptimizationAlgorithm<SOL> *>("BestImprovement", 
-        new BestImprovement<SOL>(this->_mt_rand, *statistic, *stoppingCriteria, *eSubsetsum, *mutation_FlipBit, *selection, N)));
-        optimizationAlgorithm.push_back(pair<string, OptimizationAlgorithm<SOL> *>("OnePlusLambda", 
-        new OnePlusLambda<SOL>(this->_mt_rand, *statistic, *stoppingCriteria, *eSubsetsum, N, 50)));
+        optimizationAlgorithm.push_back(pair<string, OptimizationAlgorithm<SOL_OSUBSETSUM> *>("FirstImprovement", 
+        new FirstImprovement<SOL_OSUBSETSUM>(this->_mt_rand, *statistic, *stoppingCriteria, *eSubsetsum, *mutation_FlipBit, *selection, N)));
+        optimizationAlgorithm.push_back(pair<string, OptimizationAlgorithm<SOL_OSUBSETSUM> *>("BestImprovement", 
+        new BestImprovement<SOL_OSUBSETSUM>(this->_mt_rand, *statistic, *stoppingCriteria, *eSubsetsum, *mutation_FlipBit, *selection, N)));
+        optimizationAlgorithm.push_back(pair<string, OptimizationAlgorithm<SOL_OSUBSETSUM> *>("OnePlusLambda", 
+        new OnePlusLambda<SOL_OSUBSETSUM>(this->_mt_rand, *statistic, *stoppingCriteria, *eSubsetsum, N, 50)));
     }
 
     virtual ~SolverSubsetsum() {
@@ -106,7 +105,7 @@ class SolverSubsetsum : public Solver {
     }
 
     void operator()() {
-        SOL s(1, N);
+        SOL_OSUBSETSUM s(1, N);
 
         eSubsetsum->reset_solution(s);
 
@@ -116,20 +115,20 @@ class SolverSubsetsum : public Solver {
         cout<<s<<endl;
     }
 
-    void operator()(SOL &s, int numParameter) {
+    void operator()(SOL_OSUBSETSUM &s, int numParameter) {
         assert(0 <= numParameter);
         assert(numParameter < static_cast<int>(optimizationAlgorithm.size()));
         optimizationAlgorithm[static_cast<unsigned int>(numParameter)].second->operator()(s);
     }
 
     void operator()(string &solution, int numParameter) {
-        SOL s(solution);
+        SOL_OSUBSETSUM s(solution);
         this->operator()(s, numParameter);
         cout<<s;
     }
 
     void initializationSolution() {
-        SOL s(1, N);
+        SOL_OSUBSETSUM s(1, N);
         
         eSubsetsum->reset_solution(s);
         eSubsetsum->full_eval(s);
@@ -144,13 +143,13 @@ class SolverSubsetsum : public Solver {
     bool statStatistic;
 
     // 
-    shared_ptr<Subsetsum<SOL,  unsigned int>> eSubsetsum;
-    vector<pair<string, OptimizationAlgorithm<SOL> *>> optimizationAlgorithm; /// < pair : name and pointer of algo
+    shared_ptr<Subsetsum> eSubsetsum;
+    vector<pair<string, OptimizationAlgorithm<SOL_OSUBSETSUM> *>> optimizationAlgorithm; /// < pair : name and pointer of algo
 
-    shared_ptr<Mutation_FlipBit<SOL>> mutation_FlipBit;
-    shared_ptr<Selection_difference<SOL>> selection;
-    shared_ptr<StoppingCriteria<SOL>> stoppingCriteria;
-    shared_ptr<Statistic<SOL>> statistic;
+    shared_ptr<Mutation_FlipBit<SOL_OSUBSETSUM>> mutation_FlipBit;
+    shared_ptr<Selection_difference<SOL_OSUBSETSUM>> selection;
+    shared_ptr<StoppingCriteria<SOL_OSUBSETSUM>> stoppingCriteria;
+    shared_ptr<Statistic<SOL_OSUBSETSUM>> statistic;
 };
 
 #endif
