@@ -29,21 +29,11 @@ class UnitTest_solution : public CppUnit::TestFixture {
     void tearDown(void) {
     }
 
-    void test_numberOfObjective(void) {
+    void test_fitnessIsValid(void) {
         Solution<double> s1;
-        CPPUNIT_ASSERT(s1.numberOfObjective() == 1);
-
-        Solution<double> s2(5);
-        CPPUNIT_ASSERT(s2.numberOfObjective() == 5);
-
-        Solution<double> s3(s2);
-        CPPUNIT_ASSERT(s3.numberOfObjective() == 5);
-
-        Solution<double> s4;
-        Solution<double> s5(6);
-        s4 = s5;
-        CPPUNIT_ASSERT(s4.numberOfObjective() == 6);
-        CPPUNIT_ASSERT(s4.numberOfObjective() == s5.numberOfObjective());
+        CPPUNIT_ASSERT(s1.fitnessIsValid() == false);
+        s1.setFitness(32);
+        CPPUNIT_ASSERT(s1.fitnessIsValid() == true);
     }
 
     void test_fitness(void) {
@@ -77,11 +67,21 @@ class UnitTest_solution : public CppUnit::TestFixture {
             
     }
 
-    void test_fitnessIsValid(void) {
+    void test_numberOfObjective(void) {
         Solution<double> s1;
-        CPPUNIT_ASSERT(s1.fitnessIsValid() == false);
-        s1.setFitness(32);
-        CPPUNIT_ASSERT(s1.fitnessIsValid() == true);
+        CPPUNIT_ASSERT(s1.numberOfObjective() == 1);
+
+        Solution<double> s2(5);
+        CPPUNIT_ASSERT(s2.numberOfObjective() == 5);
+
+        Solution<double> s3(s2);
+        CPPUNIT_ASSERT(s3.numberOfObjective() == 5);
+
+        Solution<double> s4;
+        Solution<double> s5(6);
+        s4 = s5;
+        CPPUNIT_ASSERT(s4.numberOfObjective() == 6);
+        CPPUNIT_ASSERT(s4.numberOfObjective() == s5.numberOfObjective());
     }
 
     private:

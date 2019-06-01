@@ -26,9 +26,8 @@ class Solution {
 		Solution(const Solution & s) :
 			_numberOfObjective(s._numberOfObjective) {
 			DEBUG_TRACE("Constructeur de copie Solution");
-			//_fitness = new TYPE_FITNESS[_numberOfObjective];
+			assert(0 < _numberOfObjective);
 			_fitness = unique_ptr<TYPE_FITNESS []>(new TYPE_FITNESS[_numberOfObjective]);
-			//_fitnessIsValid = new bool[_numberOfObjective];
 			_fitnessIsValid = unique_ptr<bool []>(new bool[_numberOfObjective]);
 			for(unsigned int i = 0 ; i < _numberOfObjective ; i++) {
 				_fitness[i] = s._fitness[i];
@@ -39,9 +38,7 @@ class Solution {
 		Solution(): 
 			_numberOfObjective(1) {
 			DEBUG_TRACE("Creation Solution");
-			//_fitness = new TYPE_FITNESS[_numberOfObjective];
 			_fitness = unique_ptr<TYPE_FITNESS []>(new TYPE_FITNESS[_numberOfObjective]);
-			//_fitnessIsValid = new bool[_numberOfObjective];
 			_fitnessIsValid = unique_ptr<bool []>(new bool[_numberOfObjective]);
 			for(unsigned int i = 0 ; i < _numberOfObjective ; i++)
 				_fitnessIsValid[i] = false;
@@ -50,9 +47,8 @@ class Solution {
 		Solution(const unsigned int numberOfObjective): 
 			_numberOfObjective(numberOfObjective) {
 			DEBUG_TRACE("Creation Solution");
-			//_fitness = new TYPE_FITNESS[_numberOfObjective];
+			assert(0 < _numberOfObjective);
 			_fitness = unique_ptr<TYPE_FITNESS []>(new TYPE_FITNESS[_numberOfObjective]);
-			//_fitnessIsValid = new bool[_numberOfObjective];
 			_fitnessIsValid = unique_ptr<bool []>(new bool[_numberOfObjective]);
 			for(unsigned int i = 0 ; i < _numberOfObjective ; i++)
 				_fitnessIsValid[i] = false;

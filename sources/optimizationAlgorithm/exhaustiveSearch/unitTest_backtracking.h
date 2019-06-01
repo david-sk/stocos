@@ -10,6 +10,8 @@
 #ifndef UNITTEST_BACKTRACKING_H
 #define UNITTEST_BACKTRACKING_H
 
+#include <typeinfo>
+
 using namespace CppUnit;
 
 #include "../../problem/problem.h"

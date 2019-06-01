@@ -23,6 +23,7 @@
 #include "stoppingCriteria/unitTest_criteriaBudget.h"
 #include "solution/unitTest_solution.h"
 #include "solution/unitTest_solutionArray.h"
+#include "solution/unitTest_population.h"
 #include "problem/unitTest_OneMax.h"
 #include "problem/unitTest_knapsack.h"
 #include "problem/unitTest_QAP.h"
@@ -33,6 +34,7 @@
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_criteriaBudget);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solution);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solutionArray);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_population);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_OneMax);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_knapsack);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_QAP);

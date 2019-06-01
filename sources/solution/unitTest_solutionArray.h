@@ -1,5 +1,5 @@
 ///
-/// \file unitTest_criteriaBudget.h
+/// \file unitTest_solutionArray.h
 /// \author Jxtopher
 /// \version 1
 /// \copyright CC-BY-NC-SA
