@@ -32,7 +32,7 @@ class UnitTest_backtraking : public CppUnit::TestFixture {
     }
 
     void test(void) {
-        typedef SolutionArray<unsigned int, bool> TYPESOL;
+        using TYPESOL = SolutionArray<unsigned int, bool>;
         //CPPUNIT_ASSERT(o->operator()(s) == false);
     
 	    std::mt19937 mt_rand;
@@ -40,7 +40,7 @@ class UnitTest_backtraking : public CppUnit::TestFixture {
 
         StoppingCriteria<TYPESOL> stoppingCriteria;
         Statistic<TYPESOL> statistic;
-        OneMax<TYPESOL> oneMax;
+        OneMax oneMax;
         TYPESOL s(4);
 
         Backtraking<TYPESOL> backtraking(mt_rand, statistic, stoppingCriteria, oneMax, 2, 4);

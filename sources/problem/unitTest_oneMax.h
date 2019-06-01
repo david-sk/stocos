@@ -40,7 +40,7 @@ class UnitTest_OneMax : public CppUnit::TestFixture {
             }
         }
 
-        OneMax<SolutionArray<unsigned int, bool> > eOneMax;
+        OneMax eOneMax;
 
         eOneMax.full_eval(s);
 

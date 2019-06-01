@@ -85,7 +85,7 @@ class SolverOneMax : public Solver {
     }
 
     void operator()(SOL &s, int numParameter) {
-        OneMax<SOL > eOneMax;
+        OneMax eOneMax;
 
         Mutation_FlipBit<SOL> mutation_FlipBit(this->_mt_rand, 5);
         
@@ -137,7 +137,7 @@ class SolverOneMax : public Solver {
     }
 
     void initializationSolution() {
-        OneMax<SOL > eOneMax;
+        OneMax eOneMax;
         SOL s(1, sizeArray);
         
         for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {

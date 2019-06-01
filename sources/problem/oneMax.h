@@ -13,8 +13,8 @@
 #include "../solution/solutionArray.h"
 #include "problem.h"
 
-template<class SOL>
-class OneMax : public Problem<SOL> {
+using SOL_ONEMAX = SolutionArray<unsigned int, bool>;
+class OneMax : public Problem<SOL_ONEMAX> {
     public:
     
     OneMax() {
@@ -29,7 +29,7 @@ class OneMax : public Problem<SOL> {
         
     }
 
-    void full_eval(SOL &s) const {
+    void full_eval(SOL_ONEMAX &s) const {
         unsigned int sum = 0;
         for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
             sum += s(i);
@@ -41,7 +41,7 @@ class OneMax : public Problem<SOL> {
 
     }*/
 
-    void reset_solution(SOL &s) const {
+    void reset_solution(SOL_ONEMAX &s) const {
         for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
             s(i, 0);
         }

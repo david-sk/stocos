@@ -27,7 +27,7 @@ public:
 	
 	// Generating a solution
 	virtual void reset_solution(SOL &s) const = 0;
-	//virtual SOL new_solution() const = 0;
+	//virtual unique_ptr<SOL> new_solution() const = 0;
 
 	// Evaluation of the solution
 	virtual void full_eval(SOL &s) const = 0;

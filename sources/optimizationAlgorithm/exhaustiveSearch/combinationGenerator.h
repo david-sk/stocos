@@ -19,15 +19,16 @@ using namespace std;
 template <class SOL>
 class CombinationGenerator : public OptimizationAlgorithm<SOL> {
    public:
-    CombinationGenerator(std::mt19937 &mt_rand, Statistic<SOL> &statistic, 
-												 StoppingCriteria<SOL> &stoppingCriteria,
-                         Problem<SOL> &problem, const unsigned int nbDigit, 
-												 const unsigned int len_string)
-        								 : OptimizationAlgorithm<SOL>(mt_rand, statistic, stoppingCriteria, problem),
-          							 _nbDigit(nbDigit),
-                         _len_string(len_string) {
-                         nbCall = 0;
-                         string = unique_ptr<unsigned int[]>(new unsigned int[_len_string]);
+    CombinationGenerator(std::mt19937 &mt_rand, 
+                        Statistic<SOL> &statistic, 
+						StoppingCriteria<SOL> &stoppingCriteria,
+                        Problem<SOL> &problem, const unsigned int nbDigit, 
+						const unsigned int len_string)
+        				: OptimizationAlgorithm<SOL>(mt_rand, statistic, stoppingCriteria, problem),
+          				_nbDigit(nbDigit),
+                        _len_string(len_string) {
+                        nbCall = 0;
+                        string = unique_ptr<unsigned int[]>(new unsigned int[_len_string]);
     }
 
     virtual ~CombinationGenerator() {}

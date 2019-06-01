@@ -26,6 +26,7 @@
 #include "solution/unitTest_population.h"
 #include "problem/unitTest_OneMax.h"
 #include "problem/unitTest_knapsack.h"
+#include "problem/unitTest_magicSequence.h"
 #include "problem/unitTest_QAP.h"
 #include "optimizationAlgorithm/exhaustiveSearch/unitTest_combinationGenerator.h"
 #include "optimizationAlgorithm/exhaustiveSearch/unitTest_backtracking.h"
@@ -37,6 +38,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solutionArray);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_population);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_OneMax);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_knapsack);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_magicSequence);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_QAP);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_combinationGenerator);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_backtraking);
