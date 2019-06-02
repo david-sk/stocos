@@ -19,7 +19,7 @@ using namespace CppUnit;
 class UnitTest_population : public CppUnit::TestFixture {
 
     CPPUNIT_TEST_SUITE(UnitTest_population);
-    CPPUNIT_TEST(test);
+    CPPUNIT_TEST(constructor);
     CPPUNIT_TEST_SUITE_END();
 
     public:
@@ -29,7 +29,7 @@ class UnitTest_population : public CppUnit::TestFixture {
     void tearDown(void) {
     }
 
-    void test(void) {
+    void constructor(void) {
         SolutionArray<double, bool> s(1, 22);
         Population<SolutionArray<double, bool>> p;
         p.push_back(s);

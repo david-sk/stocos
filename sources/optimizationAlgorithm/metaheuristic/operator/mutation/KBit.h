@@ -10,38 +10,77 @@
 #ifndef OPERATION_KBIT_H
 #define OPERATION_KBIT_H
 
-
+#include <algorithm>    // std::find
+#include <vector>       // std::vector
 #include <random>
 #include "../../../../solution/solutionArray.h"
 
 #include "../atomicOperation.h"
 
+using namespace std;
+
 template<class SOL>
 class KBit : public AtomicOperation<SOL> {
     public:
-    FlipBit(std::mt19937 &mt_rand, unsigned int c) :
-    AtomicOperation<SOL>(mt_rand) {
+    KBit(std::mt19937 &mt_rand, unsigned int k) :
+    AtomicOperation<SOL>(mt_rand),
+    _k(k) {
         rid = make_unique<uniform_int_distribution<unsigned int>>(0, 1);
     }
-    virtual ~FlipBit() {
+    virtual ~KBit() {
 
     }
 
     void operator()(SOL &s) {
-        if (s.sizeArray() - 1 != rid->max())
-            rid = make_unique<uniform_int_distribution<unsigned int>>(0, s.sizeArray() - 1);
+         unique_ptr<vector<unsigned int>> list = listOfMutations(s);
+
+         for (unsigned int i = 0 ; i < list->size() ; i++) {
+            if (s((*list)[i]) == 1) 
+                s((*list)[i], 0);
+            else 
+                s((*list)[i], 1);
+        }
+
+        backup = move(list);
+    }
+
+    unique_ptr<vector<unsigned int>> listOfMutations(SOL &s) {
+        assert(_k <= s.sizeArray());
+
+        unique_ptr<vector<unsigned int>> list(make_unique<vector<unsigned int>>());
         
+        if (s.sizeArray() != N) {
+            N = s.sizeArray();
+            rid = make_unique<uniform_int_distribution<unsigned int>>(0, N);
+            
+        }
 
-        unsigned int ret = rid->operator()(this->_mt_rand);
+        while (list->size() != _k) {
+            unsigned int element = rid->operator()(this->_mt_rand);
+            auto it = std::find(list->begin(), list->end(), element);
 
-        if (s(ret) == 1) 
-            s(ret, 0);
-        else 
-            s(ret, 1);
+            if (it == list->end()) {
+                list->push_back(element);
+            }
+        }
+
+        return move(list);
+    }
+
+    void cancelMutations(SOL &s) const {
+        for (unsigned int i = 0 ; i < backup->size() ; i++) {
+            if (s((*backup)[i]) == 1) 
+                s((*backup)[i], 0);
+            else 
+                s((*backup)[i], 1);
+        }
     }
 
     private:
         unique_ptr<uniform_int_distribution<unsigned int>> rid;
+        unique_ptr<vector<unsigned int>> backup;
+        unsigned int _k;
+        unsigned int N;
 };
 
 #endif

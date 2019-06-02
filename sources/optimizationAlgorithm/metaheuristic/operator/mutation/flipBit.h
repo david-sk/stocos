@@ -13,6 +13,7 @@
 
 #include <random>
 #include <vector>
+#include <memory>
 #include "../../../../solution/solutionArray.h"
 
 #include "../atomicOperation.h"
@@ -56,6 +57,22 @@ class FlipBit : public AtomicOperation<SOL> {
             else 
                 s(backup[i], 1);
         }
+    }
+
+    unique_ptr<vector<unsigned int>> listOfMutations(SOL &s) {
+        unique_ptr<vector<unsigned int>> list(make_unique<vector<unsigned int>>());
+        
+        if (s.sizeArray() != N) {
+            N = s.sizeArray();
+            mutation_rate = static_cast<double>(_c) / static_cast<double>(N);
+        }
+
+        for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
+            if (urd->operator()(this->_mt_rand) < mutation_rate) {
+                list->push_back(i);
+            }
+        }
+        return move(list);
     }
 
     private:

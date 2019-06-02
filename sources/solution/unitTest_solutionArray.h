@@ -18,7 +18,7 @@ using namespace CppUnit;
 class UnitTest_solutionArray : public CppUnit::TestFixture {
 
     CPPUNIT_TEST_SUITE(UnitTest_solutionArray);
-    CPPUNIT_TEST(test_sizeArray);
+    CPPUNIT_TEST(sizeArray);
     CPPUNIT_TEST_SUITE_END();
 
     public:
@@ -28,7 +28,7 @@ class UnitTest_solutionArray : public CppUnit::TestFixture {
     void tearDown(void) {
     }
 
-    void test_sizeArray(void) {
+    void sizeArray(void) {
         SolutionArray<double, unsigned int> s1(2, 100);
         CPPUNIT_ASSERT(s1.sizeArray() == 100);
 

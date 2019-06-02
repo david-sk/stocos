@@ -18,7 +18,7 @@ using namespace CppUnit;
 class UnitTest_criteriaBudget : public CppUnit::TestFixture {
 
     CPPUNIT_TEST_SUITE(UnitTest_criteriaBudget);
-    CPPUNIT_TEST(test);
+    CPPUNIT_TEST(constructor);
     CPPUNIT_TEST_SUITE_END();
 
     public:
@@ -30,7 +30,7 @@ class UnitTest_criteriaBudget : public CppUnit::TestFixture {
         delete o;
     }
 
-    void test(void) {
+    void constructor(void) {
         Solution<int> s;
         for (unsigned int i = 0 ; i < 200 ; i++) {
             o->operator()(s);

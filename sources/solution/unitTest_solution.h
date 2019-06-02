@@ -17,9 +17,9 @@ using namespace CppUnit;
 class UnitTest_solution : public CppUnit::TestFixture {
 
     CPPUNIT_TEST_SUITE(UnitTest_solution);
-    CPPUNIT_TEST(test_numberOfObjective);
-    CPPUNIT_TEST(test_fitness);
-    CPPUNIT_TEST(test_fitnessIsValid);
+    CPPUNIT_TEST(numberOfObjective);
+    CPPUNIT_TEST(fitness);
+    CPPUNIT_TEST(fitnessIsValid);
     CPPUNIT_TEST_SUITE_END();
 
     public:
@@ -29,14 +29,14 @@ class UnitTest_solution : public CppUnit::TestFixture {
     void tearDown(void) {
     }
 
-    void test_fitnessIsValid(void) {
+    void fitnessIsValid(void) {
         Solution<double> s1;
         CPPUNIT_ASSERT(s1.fitnessIsValid() == false);
         s1.setFitness(32);
         CPPUNIT_ASSERT(s1.fitnessIsValid() == true);
     }
 
-    void test_fitness(void) {
+    void fitness(void) {
         Solution<double> s1;
         s1.setFitness(32);
         CPPUNIT_ASSERT(s1.getFitness() == 32);
@@ -67,7 +67,7 @@ class UnitTest_solution : public CppUnit::TestFixture {
             
     }
 
-    void test_numberOfObjective(void) {
+    void numberOfObjective(void) {
         Solution<double> s1;
         CPPUNIT_ASSERT(s1.numberOfObjective() == 1);
 
