@@ -32,7 +32,7 @@
 #include "../optimizationAlgorithm/metaheuristic/firstImprovement.h"
 #include "../optimizationAlgorithm/metaheuristic/bestImprovement.h"
 #include "../optimizationAlgorithm/metaheuristic/onePlusLambda.h"
-#include "../optimizationAlgorithm/metaheuristic/operator/mutation/mutation_FlipBit.h"
+#include "../optimizationAlgorithm/metaheuristic/operator/mutation/flipBit.h"
 #include "../optimizationAlgorithm/metaheuristic/selection/selection.h"
 #include "../optimizationAlgorithm/metaheuristic/selection/selection_maximization.h"
 #include "../optimizationAlgorithm/metaheuristic/selection/selection_difference.h"
@@ -56,7 +56,7 @@ class SolverSubsetsum : public Solver {
         //----------
         eSubsetsum = make_shared<Subsetsum>(N);
 
-        mutation_FlipBit = make_shared<Mutation_FlipBit<SOL_OSUBSETSUM>>(this->_mt_rand, 5);
+        mutation_FlipBit = make_shared<FlipBit<SOL_OSUBSETSUM>>(this->_mt_rand, 5);
         
         selection = make_shared<Selection_difference<SOL_OSUBSETSUM>>(eSubsetsum->getFitnessObjectif());
         
@@ -146,7 +146,7 @@ class SolverSubsetsum : public Solver {
     shared_ptr<Subsetsum> eSubsetsum;
     vector<pair<string, OptimizationAlgorithm<SOL_OSUBSETSUM> *>> optimizationAlgorithm; /// < pair : name and pointer of algo
 
-    shared_ptr<Mutation_FlipBit<SOL_OSUBSETSUM>> mutation_FlipBit;
+    shared_ptr<FlipBit<SOL_OSUBSETSUM>> mutation_FlipBit;
     shared_ptr<Selection_difference<SOL_OSUBSETSUM>> selection;
     shared_ptr<StoppingCriteria<SOL_OSUBSETSUM>> stoppingCriteria;
     shared_ptr<Statistic<SOL_OSUBSETSUM>> statistic;

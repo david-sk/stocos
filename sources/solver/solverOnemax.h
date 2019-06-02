@@ -27,7 +27,7 @@
 #include "../optimizationAlgorithm/metaheuristic/firstImprovement.h"
 #include "../optimizationAlgorithm/metaheuristic/bestImprovement.h"
 #include "../optimizationAlgorithm/metaheuristic/onePlusLambda.h"
-#include "../optimizationAlgorithm/metaheuristic/operator/mutation/mutation_FlipBit.h"
+#include "../optimizationAlgorithm/metaheuristic/operator/mutation/flipBit.h"
 #include "../optimizationAlgorithm/metaheuristic/selection/selection.h"
 #include "../optimizationAlgorithm/metaheuristic/selection/selection_maximization.h"
 
@@ -53,7 +53,7 @@ class SolverOneMax : public Solver {
     void settings(int argc, char **argv) {
         boost::program_options::options_description config("[*] OneMax parameter");
 	    config.add_options()
-			(",N", boost::program_options::value<unsigned int>(&sizeArray), "taille de l'instance (default: 1000)")
+			("N", boost::program_options::value<unsigned int>(&sizeArray), "taille de l'instance (default: 1000)")
             ("algo,A", boost::program_options::value<int>(&optimizationAlgo), "algorithme utiliser (default: )")
             ("budget", boost::program_options::value<unsigned int>(&budget), "budget alouer à l'algorithme (default:400)")
             ("statistic", boost::program_options::value<bool>(&statStatistic), "Affiche des statistiques (default:false)");
@@ -84,9 +84,9 @@ class SolverOneMax : public Solver {
     }
 
     void operator()(SOL_ONEMAX &s, int numParameter) {
-        OneMax eOneMax;
+        OneMax eOneMax(sizeArray);
 
-        Mutation_FlipBit<SOL_ONEMAX> mutation_FlipBit(this->_mt_rand, 5);
+        FlipBit<SOL_ONEMAX> mutation_FlipBit(this->_mt_rand, 5);
         
         Selection_maximization<SOL_ONEMAX> selection;
 
@@ -136,16 +136,12 @@ class SolverOneMax : public Solver {
     }
 
     void initializationSolution() {
-        OneMax eOneMax;
-        SOL_ONEMAX s(1, sizeArray);
+        OneMax eOneMax(sizeArray);
+        unique_ptr<SOL_ONEMAX> s = eOneMax.new_solution();
+
+        eOneMax.full_eval((*s));
         
-        for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
-            s(i, 0);
-        }
-
-        eOneMax.full_eval(s);
-
-        cout<<s;
+        cout<<(*s);
     }
 
     protected:

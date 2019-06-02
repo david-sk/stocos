@@ -27,6 +27,7 @@
 #include "problem/unitTest_OneMax.h"
 #include "problem/unitTest_knapsack.h"
 #include "problem/unitTest_magicSequence.h"
+#include "optimizationAlgorithm/metaheuristic/operator/mutation/unitTest_flipBit.h"
 #include "problem/unitTest_QAP.h"
 #include "optimizationAlgorithm/exhaustiveSearch/unitTest_combinationGenerator.h"
 #include "optimizationAlgorithm/exhaustiveSearch/unitTest_backtracking.h"
@@ -42,6 +43,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_magicSequence);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_QAP);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_combinationGenerator);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_backtraking);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_flipBit);
 
 int main(int argc, char* argv[])
 {

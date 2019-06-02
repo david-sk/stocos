@@ -10,14 +10,19 @@
 #ifndef EVALONEMAX_H
 #define EVALONEMAX_H
 
+#include <iostream>
+#include <memory>
+
 #include "../solution/solutionArray.h"
 #include "problem.h"
+
+using namespace std;
 
 using SOL_ONEMAX = SolutionArray<unsigned int, bool>;
 class OneMax : public Problem<SOL_ONEMAX> {
     public:
     
-    OneMax() {
+    OneMax(unsigned int N) : _N(N) {
 
     }
     
@@ -27,6 +32,14 @@ class OneMax : public Problem<SOL_ONEMAX> {
 
     void loadInstance(string file) {
         
+    }
+
+    unique_ptr<SOL_ONEMAX> new_solution() const {
+        unique_ptr<SOL_ONEMAX> s(make_unique<SOL_ONEMAX>(_N) );
+        for (unsigned int i = 0 ; i < s->sizeArray() ; i++) {
+            s->operator()(i, 0);
+        } 
+        return move(s);
     }
 
     void full_eval(SOL_ONEMAX &s) const {
@@ -48,6 +61,7 @@ class OneMax : public Problem<SOL_ONEMAX> {
     }
 
     private:
+        unsigned int _N;
 };
 
 #endif

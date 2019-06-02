@@ -151,6 +151,18 @@ public:
 		
 		return *this;
 	}
+
+	bool operator==(const SolutionArray & s) const {
+		if (sizeArray() != s.sizeArray())
+			return false;
+		else {
+			for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
+				if (array[i] != s(i))
+					return false;
+			}
+		}
+		return true;
+	}
 	
 	// Serialization
 	unsigned char *serialization() {

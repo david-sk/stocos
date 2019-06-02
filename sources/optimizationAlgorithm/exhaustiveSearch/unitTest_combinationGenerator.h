@@ -38,7 +38,7 @@ class UnitTest_combinationGenerator : public CppUnit::TestFixture {
 
         StoppingCriteria<TYPESOL> stoppingCriteria;
         Statistic<TYPESOL> statistic;
-        OneMax oneMax;
+        OneMax oneMax(100);
         TYPESOL s(4);
 
         CombinationGenerator<TYPESOL> cg(mt_rand, statistic, stoppingCriteria, oneMax, 2, 4);

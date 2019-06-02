@@ -40,7 +40,7 @@ class UnitTest_backtraking : public CppUnit::TestFixture {
 
         StoppingCriteria<TYPESOL> stoppingCriteria;
         Statistic<TYPESOL> statistic;
-        OneMax oneMax;
+        OneMax oneMax(100);
         TYPESOL s(4);
 
         Backtraking<TYPESOL> backtraking(mt_rand, statistic, stoppingCriteria, oneMax, 2, 4);
