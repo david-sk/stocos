@@ -24,15 +24,10 @@ class Selection_difference : public Selection<SOL> {
 
     }
 
-    SOL operator()(const SOL &s1, const SOL &s2) {
+    bool operator()(const SOL &s1, const SOL &s2) {
         assert(s1.fitnessIsValid());
         assert(s2.fitnessIsValid());
-
-        if (abs(_fitnessObjectif - s1.getFitness()) < abs(_fitnessObjectif - s2.getFitness())) {
-            return s1;
-        } else {
-            return s2;
-        }
+        return abs(_fitnessObjectif - s1.getFitness()) < abs(_fitnessObjectif - s2.getFitness());
     }
     
     private:

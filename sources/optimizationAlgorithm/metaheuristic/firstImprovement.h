@@ -33,6 +33,7 @@ class FirstImprovement : public OptimizationAlgorithm<SOL, TYPE_CELL> {
     OptimizationAlgorithm<SOL, TYPE_CELL>(mt_rand, statistic, stoppingCriteria, problem),
     _atomicOperations(atomicOperations),
     _selection(selection) {
+        DEBUG_TRACE("Creation FirstImprovement");
         rid = new uniform_int_distribution<unsigned int>(0, N-1);
     }
 
@@ -40,40 +41,31 @@ class FirstImprovement : public OptimizationAlgorithm<SOL, TYPE_CELL> {
         delete rid;
     }
     
-    void operator()(SOL &s) {        
+    void operator()(SOL &s) {    
         if (!s.fitnessIsValid()) {
             this->_problem.full_eval(s);
         }
-        //unsigned int i = 0;
+        
         while (this->_stoppingCriteria.operator()(s)) {
-            //auto fitnessBefore = s.getFitness();
-            
-
-            #ifdef DEBUG
-            cerr<<s<<endl;
-            #endif
             this->_statistic.operator()(s);
 
-
-            SOL s1(s);
-            //-------------------------------
+            s1 = s;
+            
             _atomicOperations.operator()(s1);
             this->_problem.full_eval(s1);
-            s = _selection(s1, s);
-            //-------------------------------
+            if (_selection(s1, s)) {
+                s = s1;
+            }
         }
-        
-        #ifdef DEBUG
-        cerr<<s<<endl;
-        #endif
+
         this->_statistic.operator()(s);
-        
     }
 
     protected:
         uniform_int_distribution<unsigned int> *rid;
         AtomicOperation<SOL, TYPE_CELL> &_atomicOperations;
         Selection<SOL> &_selection;
+        SOL s1;
 };
 
 #endif

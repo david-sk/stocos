@@ -21,15 +21,11 @@ class Selection_minimization : public Selection<SOL> {
 
     }
 
-    SOL operator()(const SOL &s1, const SOL &s2) {
+    bool operator()(const SOL &s1, const SOL &s2) {
         assert(s1.fitnessIsValid());
         assert(s2.fitnessIsValid());
         
-        if (s1.getFitness() < s2.getFitness()) {
-            return s1;
-        } else {
-            return s2;
-        }
+        return s1.getFitness() < s2.getFitness();
     }
 };
 

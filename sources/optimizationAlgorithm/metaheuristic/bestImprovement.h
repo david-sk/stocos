@@ -32,6 +32,7 @@ class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_CELL> {
         Selection<SOL> &selection,
         unsigned int N) :
         OptimizationAlgorithm<SOL, TYPE_CELL>(mt_rand, statistic, stoppingCriteria, problem) {
+        DEBUG_TRACE("Creation BestImprovement");
         rid = new uniform_int_distribution<unsigned int>(0, N-1);
     }
 

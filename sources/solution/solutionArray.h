@@ -15,6 +15,13 @@
 template<typename TYPE_FITNESS, typename TYPE_CELL>
 class SolutionArray : public Solution<TYPE_FITNESS> {
 public:
+	SolutionArray() : 
+	Solution<TYPE_FITNESS>(1),
+	_sizeArray(1) {
+		DEBUG_TRACE("Creation SolutionArray");
+		array = new TYPE_CELL[_sizeArray];
+	}
+
 	SolutionArray(const unsigned int sizeArray) : 
 	Solution<TYPE_FITNESS>(1),
 	_sizeArray(sizeArray) {

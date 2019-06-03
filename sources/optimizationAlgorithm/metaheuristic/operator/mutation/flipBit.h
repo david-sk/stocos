@@ -59,23 +59,6 @@ class FlipBit : public AtomicOperation<SOL, TYPE_CELL> {
         }
     }
 
-    /*unique_ptr<vector<unsigned int>> listOfMutations(const SOL &s) {
-        unique_ptr<vector<unsigned int>> list(make_unique<vector<unsigned int>>());
-        
-        if (s.sizeArray() != N) {
-            N = s.sizeArray();
-            mutation_rate = static_cast<double>(_c) / static_cast<double>(N);
-        }
-
-        for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
-            if (urd->operator()(this->_mt_rand) < mutation_rate) {
-                list->push_back(i);
-            }
-        }
-        return move(list);
-    }*/
-
-
     unique_ptr<vector<pair<unsigned int, TYPE_CELL>>> listOfMutations(const SOL &s) {
         unique_ptr<vector<pair<unsigned int, TYPE_CELL>>> list(make_unique<vector<pair<unsigned int, TYPE_CELL>>>());
         
@@ -94,6 +77,14 @@ class FlipBit : public AtomicOperation<SOL, TYPE_CELL> {
             }
         }
         return move(list);
+    }
+
+    void applyMutation(SOL &s, const vector<pair<unsigned int, TYPE_CELL>> &_listOfMutations) {
+        backup.clear();
+        for (unsigned int i = 0 ; i < _listOfMutations.size() ; i++) {
+            s(_listOfMutations[i].first, _listOfMutations[i].second);
+            backup.push_back(i);
+        }
     }
 
     

@@ -23,6 +23,7 @@ class OnePlusLambda : public OptimizationAlgorithm<SOL, TYPE_CELL> {
         unsigned int lambda) : 
         OptimizationAlgorithm<SOL, TYPE_CELL>(mt_rand, statistic, stoppingCriteria, problem),
         _lambda(lambda) {
+        DEBUG_TRACE("Creation OnePlusLambda");
         rid = new uniform_int_distribution<unsigned int>(0, N-1);
         lambdaNumber = new unsigned int[_lambda];
     }

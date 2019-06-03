@@ -21,7 +21,7 @@ class Selection {
 
     }
 
-    virtual SOL operator()(const SOL &s1, const SOL &s2) = 0;
+    virtual bool operator()(const SOL &s1, const SOL &s2) = 0;
 };
 
 #endif

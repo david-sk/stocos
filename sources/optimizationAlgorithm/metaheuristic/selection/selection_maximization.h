@@ -21,15 +21,11 @@ class Selection_maximization : public Selection<SOL> {
 
     }
 
-    SOL operator()(const SOL &s1, const SOL &s2) {
+    bool operator()(const SOL &s1, const SOL &s2) {
         assert(s1.fitnessIsValid());
         assert(s2.fitnessIsValid());
-        
-        if (s1.getFitness() < s2.getFitness()) {
-            return s2;
-        } else {
-            return s1;
-        }
+
+        return s2.getFitness() < s1.getFitness();
     }
 };
 

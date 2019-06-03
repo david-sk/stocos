@@ -20,6 +20,7 @@ class UnitTest_flipBit : public CppUnit::TestFixture {
     CPPUNIT_TEST(operator());
     CPPUNIT_TEST(cancelMutations);
     CPPUNIT_TEST(listOfMutations);
+    CPPUNIT_TEST(applyMutation);
     CPPUNIT_TEST_SUITE_END();
 
     public:
@@ -75,10 +76,22 @@ class UnitTest_flipBit : public CppUnit::TestFixture {
 
         FlipBit<SolutionArray<int, bool>, bool> flipbit(mt_rand, 5);
         unique_ptr<vector<pair<unsigned int, bool>>> mutations = flipbit.listOfMutations(s1);
+        
+    }
 
-        for (unsigned int i = 0 ; i < mutations->size() ; i++) {
-            cout<<i<<" : "<<(*mutations)[i].first<<endl;
-        }
+    void applyMutation(void) {
+        unsigned int N = 50;
+        SolutionArray<int, bool> s1(1, N);
+        SolutionArray<int, bool> s2(s1);
+	    
+        std::mt19937 mt_rand;
+	    mt_rand.seed(0);
+
+        FlipBit<SolutionArray<int, bool>, bool> flipbit(mt_rand, 5);
+        unique_ptr<vector<pair<unsigned int, bool>>> mutations = flipbit.listOfMutations(s1);
+        flipbit.applyMutation(s1, *mutations);
+
+        CPPUNIT_ASSERT(!(s1 == s2));
     }
 
     private:

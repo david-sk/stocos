@@ -33,7 +33,10 @@ public:
 
 	// Evaluation of the solution
 	virtual void full_eval(SOL &s) const = 0;
-	//void incremental_eval(const SOL &s, vector<pair<unsigned int, bool>>) = 0;
+	/*virtual void incremental_eval(const SOL &s, const vector<pair<unsigned int, TYPE_CELL>> &_listOfMutations) const {
+		cerr<<"[-] not implemented"<<endl;
+		exit(EXIT_FAILURE);
+	};*/
 	virtual bool filtering(SOL &s) const {
 		return true;
 	}
