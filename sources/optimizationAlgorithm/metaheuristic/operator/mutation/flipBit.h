@@ -18,11 +18,11 @@
 
 #include "../atomicOperation.h"
 
-template<class SOL>
-class FlipBit : public AtomicOperation<SOL> {
+template<typename SOL, typename TYPE_CELL>
+class FlipBit : public AtomicOperation<SOL, TYPE_CELL> {
     public:
     FlipBit(std::mt19937 &mt_rand, unsigned int c) :
-    AtomicOperation<SOL>(mt_rand),
+    AtomicOperation<SOL, TYPE_CELL>(mt_rand),
     _c(c) {
         urd = make_unique<uniform_real_distribution<>>(0, 1);
         
@@ -59,7 +59,7 @@ class FlipBit : public AtomicOperation<SOL> {
         }
     }
 
-    unique_ptr<vector<unsigned int>> listOfMutations(SOL &s) {
+    /*unique_ptr<vector<unsigned int>> listOfMutations(const SOL &s) {
         unique_ptr<vector<unsigned int>> list(make_unique<vector<unsigned int>>());
         
         if (s.sizeArray() != N) {
@@ -73,8 +73,30 @@ class FlipBit : public AtomicOperation<SOL> {
             }
         }
         return move(list);
+    }*/
+
+
+    unique_ptr<vector<pair<unsigned int, TYPE_CELL>>> listOfMutations(const SOL &s) {
+        unique_ptr<vector<pair<unsigned int, TYPE_CELL>>> list(make_unique<vector<pair<unsigned int, TYPE_CELL>>>());
+        
+        if (s.sizeArray() != N) {
+            N = s.sizeArray();
+            mutation_rate = static_cast<double>(_c) / static_cast<double>(N);
+        }
+
+        for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
+            if (urd->operator()(this->_mt_rand) < mutation_rate) {
+                if (s(i) == 1) 
+                    list->push_back(pair<unsigned int, TYPE_CELL>(i, 0));
+                else 
+                    list->push_back(pair<unsigned int, TYPE_CELL>(i, 1));
+                
+            }
+        }
+        return move(list);
     }
 
+    
     private:
         unique_ptr<uniform_real_distribution<>> urd;
         double mutation_rate;

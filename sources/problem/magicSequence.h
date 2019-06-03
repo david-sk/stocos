@@ -13,9 +13,10 @@
 #include "problem.h"
 #include "../solution/solutionArray.h"
 
+
+using TYPE_CELL_MAGICSEQUENCE = int;
 using SOL = SolutionArray<double, int>;
-//template<class SOL>
-class MagicSequence : public Problem<SOL> {
+class MagicSequence : public Problem<SOL, TYPE_CELL_MAGICSEQUENCE> {
     public:
     MagicSequence() {
 

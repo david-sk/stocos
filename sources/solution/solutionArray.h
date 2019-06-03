@@ -259,7 +259,6 @@ public:
 			out<<s(i)<<" ";
 		return out;
 	}
-	
 private:
 	TYPE_CELL *array;
 	unsigned int _sizeArray;

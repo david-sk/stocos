@@ -19,8 +19,11 @@
 #include <utility>
 #include <unistd.h>
 
-using SOL_KNAPSACK = SolutionArray<int, int>;
-class Knapsack : public Problem<SOL_KNAPSACK> {
+
+using TYPE_CELL_KNAPSACK = int;
+using SOL_KNAPSACK = SolutionArray<int, TYPE_CELL_KNAPSACK>;
+
+class Knapsack : public Problem<SOL_KNAPSACK,TYPE_CELL_KNAPSACK> {
     public:
     
     Knapsack(string pathfile_instance) {

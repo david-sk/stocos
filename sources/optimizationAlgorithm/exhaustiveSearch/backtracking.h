@@ -16,15 +16,16 @@
 
 using namespace std;
 
-template <class SOL>
-class Backtraking : public OptimizationAlgorithm<SOL> {
+template <typename SOL, typename TYPE_CELL>
+class Backtraking : public OptimizationAlgorithm<SOL, TYPE_CELL> {
    public:
     Backtraking(std::mt19937 &mt_rand, 
                 Statistic<SOL> &statistic, 
 				StoppingCriteria<SOL> &stoppingCriteria,
-                Problem<SOL> &problem, const unsigned int nbDigit, 
+                Problem<SOL, TYPE_CELL> &problem, 
+                const unsigned int nbDigit, 
 				const unsigned int len_string)
-        		: OptimizationAlgorithm<SOL>(mt_rand, statistic, stoppingCriteria, problem),
+        		: OptimizationAlgorithm<SOL, TYPE_CELL>(mt_rand, statistic, stoppingCriteria, problem),
           		_nbDigit(nbDigit),
                 _len_string(len_string) {
                 nbCall = 0;
@@ -44,9 +45,9 @@ class Backtraking : public OptimizationAlgorithm<SOL> {
 	void recursive(unsigned int currentCell) {
 		//current_sol.print();
 		if (_len_string == currentCell) {
-            for(unsigned int j = 0 ; j < _len_string ; j++)
-                cout<<string[j];
-            cout<<endl;
+            // for(unsigned int j = 0 ; j < _len_string ; j++)
+            //     cout<<string[j];
+            // cout<<endl;
 			//cout<<"Wine : ";
 			//current_sol.print();
 		} else {

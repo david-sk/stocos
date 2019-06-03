@@ -16,15 +16,15 @@
 
 using namespace std;
 
-template <class SOL>
-class CombinationGenerator : public OptimizationAlgorithm<SOL> {
+template <typename SOL, typename TYPE_CELL>
+class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_CELL> {
    public:
     CombinationGenerator(std::mt19937 &mt_rand, 
                         Statistic<SOL> &statistic, 
 						StoppingCriteria<SOL> &stoppingCriteria,
-                        Problem<SOL> &problem, const unsigned int nbDigit, 
+                        Problem<SOL, TYPE_CELL> &problem, const unsigned int nbDigit, 
 						const unsigned int len_string)
-        				: OptimizationAlgorithm<SOL>(mt_rand, statistic, stoppingCriteria, problem),
+        				: OptimizationAlgorithm<SOL, TYPE_CELL>(mt_rand, statistic, stoppingCriteria, problem),
           				_nbDigit(nbDigit),
                         _len_string(len_string) {
                         nbCall = 0;

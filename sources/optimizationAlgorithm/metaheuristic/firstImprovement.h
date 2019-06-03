@@ -20,17 +20,17 @@
 
 using namespace std;
 
-template<class SOL>
-class FirstImprovement : public OptimizationAlgorithm<SOL> {
+template<typename SOL, typename TYPE_CELL>
+class FirstImprovement : public OptimizationAlgorithm<SOL, TYPE_CELL> {
     public:
     FirstImprovement(std::mt19937 &mt_rand, 
     Statistic<SOL> &statistic,
     StoppingCriteria<SOL> &stoppingCriteria,
-    Problem<SOL> &problem,
-    AtomicOperation<SOL> &atomicOperations,
+    Problem<SOL, TYPE_CELL> &problem,
+    AtomicOperation<SOL, TYPE_CELL> &atomicOperations,
     Selection<SOL> &selection,
     unsigned int N) : 
-    OptimizationAlgorithm<SOL>(mt_rand, statistic, stoppingCriteria, problem),
+    OptimizationAlgorithm<SOL, TYPE_CELL>(mt_rand, statistic, stoppingCriteria, problem),
     _atomicOperations(atomicOperations),
     _selection(selection) {
         rid = new uniform_int_distribution<unsigned int>(0, N-1);
@@ -40,8 +40,7 @@ class FirstImprovement : public OptimizationAlgorithm<SOL> {
         delete rid;
     }
     
-    void operator()(SOL &s) {
-        
+    void operator()(SOL &s) {        
         if (!s.fitnessIsValid()) {
             this->_problem.full_eval(s);
         }
@@ -61,27 +60,8 @@ class FirstImprovement : public OptimizationAlgorithm<SOL> {
             _atomicOperations.operator()(s1);
             this->_problem.full_eval(s1);
             s = _selection(s1, s);
-            
             //-------------------------------
-
-
-            /*unsigned int ret = rid->operator()(this->_mt_rand);
-
-            if (s(ret) == 1) 
-                s(ret, 0);
-            else 
-                s(ret, 1);
-
-            this->_problem.full(s);
-            if (s.getFitness() < fitnessBefore ) {
-                if (s(ret) == 1) 
-                    s(ret, 0);
-                else 
-                    s(ret, 1);
-                s.setFitness(fitnessBefore);
-            }*/
         }
-
         
         #ifdef DEBUG
         cerr<<s<<endl;
@@ -92,7 +72,7 @@ class FirstImprovement : public OptimizationAlgorithm<SOL> {
 
     protected:
         uniform_int_distribution<unsigned int> *rid;
-        AtomicOperation<SOL> &_atomicOperations;
+        AtomicOperation<SOL, TYPE_CELL> &_atomicOperations;
         Selection<SOL> &_selection;
 };
 

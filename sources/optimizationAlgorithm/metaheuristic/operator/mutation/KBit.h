@@ -19,11 +19,11 @@
 
 using namespace std;
 
-template<class SOL>
-class KBit : public AtomicOperation<SOL> {
+template<typename SOL, typename TYPE_CELL>
+class KBit : public AtomicOperation<SOL, TYPE_CELL> {
     public:
     KBit(std::mt19937 &mt_rand, unsigned int k) :
-    AtomicOperation<SOL>(mt_rand),
+    AtomicOperation<SOL, TYPE_CELL>(mt_rand),
     _k(k) {
         rid = make_unique<uniform_int_distribution<unsigned int>>(0, 1);
     }
@@ -44,7 +44,7 @@ class KBit : public AtomicOperation<SOL> {
         backup = move(list);
     }
 
-    unique_ptr<vector<unsigned int>> listOfMutations(SOL &s) {
+    unique_ptr<vector<unsigned int>> listOfMutations(const SOL &s) {
         assert(_k <= s.sizeArray());
 
         unique_ptr<vector<unsigned int>> list(make_unique<vector<unsigned int>>());

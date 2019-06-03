@@ -17,7 +17,7 @@
 #include "problem.h"
 
 template<class SOL>
-class JobShopProblem : public Problem<SOL> {
+class JobShopProblem : public Problem<SOL, bool> {
     public:
     
     JobShopProblem(string pathfile_instance) {

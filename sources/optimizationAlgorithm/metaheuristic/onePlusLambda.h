@@ -12,16 +12,16 @@
 
 #include "../optimizationAlgorithm.h"
 
-template<class SOL>
-class OnePlusLambda : public OptimizationAlgorithm<SOL> {
+template<typename SOL, typename TYPE_CELL>
+class OnePlusLambda : public OptimizationAlgorithm<SOL, TYPE_CELL> {
     public:
     OnePlusLambda(std::mt19937 &mt_rand, 
         Statistic<SOL> &statistic,
         StoppingCriteria<SOL> &stoppingCriteria,
-        Problem<SOL> &problem,
+        Problem<SOL, TYPE_CELL> &problem,
         unsigned int N, 
         unsigned int lambda) : 
-        OptimizationAlgorithm<SOL>(mt_rand, statistic, stoppingCriteria, problem),
+        OptimizationAlgorithm<SOL, TYPE_CELL>(mt_rand, statistic, stoppingCriteria, problem),
         _lambda(lambda) {
         rid = new uniform_int_distribution<unsigned int>(0, N-1);
         lambdaNumber = new unsigned int[_lambda];

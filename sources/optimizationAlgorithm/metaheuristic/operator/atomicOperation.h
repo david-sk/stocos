@@ -12,7 +12,7 @@
 
 #include <random>
 
-template<class SOL>
+template<typename SOL, typename TYPE_CELL>
 class AtomicOperation  {
     public:
     AtomicOperation(std::mt19937 &mt_rand) : _mt_rand(mt_rand) {

@@ -16,13 +16,13 @@
 #include "../problem/problem.h"
 #include "../statistic/statistic.h"
 
-template<class SOL>
+template<class SOL, typename TYPE_CELL>
 class OptimizationAlgorithm {
     public:
         OptimizationAlgorithm(std::mt19937 &mt_rand,
         Statistic<SOL> &statistic,
         StoppingCriteria<SOL> &stoppingCriteria,
-        Problem<SOL> &problem) : 
+        Problem<SOL, TYPE_CELL> &problem) : 
             _mt_rand(mt_rand),
             _statistic(statistic),
             _stoppingCriteria(stoppingCriteria),
@@ -40,7 +40,7 @@ class OptimizationAlgorithm {
         std::mt19937 &_mt_rand;
         Statistic<SOL> &_statistic;
         StoppingCriteria<SOL> &_stoppingCriteria;
-        Problem<SOL> &_problem;
+        Problem<SOL, TYPE_CELL> &_problem;
 
 };
 

@@ -18,8 +18,9 @@
 
 using namespace std;
 
-using SOL_ONEMAX = SolutionArray<unsigned int, bool>;
-class OneMax : public Problem<SOL_ONEMAX> {
+using TYPE_CELL_ONEMAX = bool;
+using SOL_ONEMAX = SolutionArray<unsigned int, TYPE_CELL_ONEMAX>;
+class OneMax : public Problem<SOL_ONEMAX, TYPE_CELL_ONEMAX> {
     public:
     
     OneMax(unsigned int N) : _N(N) {

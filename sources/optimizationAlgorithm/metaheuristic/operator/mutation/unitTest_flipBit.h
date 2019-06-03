@@ -42,7 +42,7 @@ class UnitTest_flipBit : public CppUnit::TestFixture {
 	    std::mt19937 mt_rand;
 	    mt_rand.seed(0);
 
-        FlipBit<SolutionArray<int, bool>> flipbit(mt_rand, 0);
+        FlipBit<SolutionArray<int, bool>, bool> flipbit(mt_rand, 0);
         flipbit(s);
     }
 
@@ -60,7 +60,7 @@ class UnitTest_flipBit : public CppUnit::TestFixture {
 	    std::mt19937 mt_rand;
 	    mt_rand.seed(0);
         
-        FlipBit<SolutionArray<int, bool>> flipbit(mt_rand, 0);
+        FlipBit<SolutionArray<int, bool>, bool> flipbit(mt_rand, 0);
         flipbit(s1);
         flipbit.cancelMutations(s1);
         CPPUNIT_ASSERT(s1 == s2);   
@@ -73,9 +73,12 @@ class UnitTest_flipBit : public CppUnit::TestFixture {
         std::mt19937 mt_rand;
 	    mt_rand.seed(0);
 
-        FlipBit<SolutionArray<int, bool>> flipbit(mt_rand, 0);
-        flipbit.listOfMutations(s1);
+        FlipBit<SolutionArray<int, bool>, bool> flipbit(mt_rand, 5);
+        unique_ptr<vector<pair<unsigned int, bool>>> mutations = flipbit.listOfMutations(s1);
 
+        for (unsigned int i = 0 ; i < mutations->size() ; i++) {
+            cout<<i<<" : "<<(*mutations)[i].first<<endl;
+        }
     }
 
     private:

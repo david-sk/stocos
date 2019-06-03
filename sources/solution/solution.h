@@ -27,8 +27,8 @@ class Solution {
 			_numberOfObjective(s._numberOfObjective) {
 			DEBUG_TRACE("Constructeur de copie Solution");
 			assert(0 < _numberOfObjective);
-			_fitness = unique_ptr<TYPE_FITNESS []>(new TYPE_FITNESS[_numberOfObjective]);
-			_fitnessIsValid = unique_ptr<bool []>(new bool[_numberOfObjective]);
+			_fitness = make_unique<TYPE_FITNESS []>(_numberOfObjective);
+			_fitnessIsValid = make_unique<bool []>(_numberOfObjective);
 			for(unsigned int i = 0 ; i < _numberOfObjective ; i++) {
 				_fitness[i] = s._fitness[i];
 				_fitnessIsValid[i] = s._fitnessIsValid[i];
@@ -38,8 +38,8 @@ class Solution {
 		Solution(): 
 			_numberOfObjective(1) {
 			DEBUG_TRACE("Creation Solution");
-			_fitness = unique_ptr<TYPE_FITNESS []>(new TYPE_FITNESS[_numberOfObjective]);
-			_fitnessIsValid = unique_ptr<bool []>(new bool[_numberOfObjective]);
+			_fitness = make_unique<TYPE_FITNESS []>(_numberOfObjective);
+			_fitnessIsValid = make_unique<bool []>(_numberOfObjective);
 			for(unsigned int i = 0 ; i < _numberOfObjective ; i++)
 				_fitnessIsValid[i] = false;
 		}
@@ -48,8 +48,8 @@ class Solution {
 			_numberOfObjective(numberOfObjective) {
 			DEBUG_TRACE("Creation Solution");
 			assert(0 < _numberOfObjective);
-			_fitness = unique_ptr<TYPE_FITNESS []>(new TYPE_FITNESS[_numberOfObjective]);
-			_fitnessIsValid = unique_ptr<bool []>(new bool[_numberOfObjective]);
+			_fitness = make_unique<TYPE_FITNESS []>(_numberOfObjective);
+			_fitnessIsValid = make_unique<bool []>(_numberOfObjective);
 			for(unsigned int i = 0 ; i < _numberOfObjective ; i++)
 				_fitnessIsValid[i] = false;
 		}
@@ -161,19 +161,15 @@ class Solution {
 		
 		void setFitness(unsigned int numObjectif, TYPE_FITNESS value) {
 			assert(numObjectif < _numberOfObjective);
-			if (_fitness[numObjectif] != value) {
-				_fitness[numObjectif] = value;
-				_fitnessIsValid[numObjectif] = true;
-			}
+			_fitness[numObjectif] = value;
+			_fitnessIsValid[numObjectif] = true;
 		}
 
 		void setFitness(TYPE_FITNESS value) {
 			unsigned int numObjectif = 0;
 			assert(numObjectif < _numberOfObjective);
-			if (_fitness[numObjectif] != value) {
-				_fitness[numObjectif] = value;
-				_fitnessIsValid[numObjectif] = true;
-			}
+			_fitness[numObjectif] = value;
+			_fitnessIsValid[numObjectif] = true;
 		}
 		
 		TYPE_FITNESS getFitness() const {

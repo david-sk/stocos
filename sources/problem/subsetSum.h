@@ -18,8 +18,9 @@
 
 using namespace std;
 
-using SOL_OSUBSETSUM = SolutionArray<unsigned int, bool>;
-class Subsetsum : public Problem<SOL_OSUBSETSUM> {
+using TYPE_CELL_SUBSETSUM = bool;
+using SOL_SUBSETSUM = SolutionArray<unsigned int, TYPE_CELL_SUBSETSUM>;
+class Subsetsum : public Problem<SOL_SUBSETSUM, TYPE_CELL_SUBSETSUM> {
     public:
     
     Subsetsum(const unsigned int N) {
@@ -71,7 +72,7 @@ class Subsetsum : public Problem<SOL_OSUBSETSUM> {
         return fitnessObjectif;
     }
 
-    void full_eval(SOL_OSUBSETSUM &s) const {
+    void full_eval(SOL_SUBSETSUM &s) const {
         assert(setOfNumbers.size() == s.sizeArray());
         unsigned int sum = 0;
         for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
@@ -86,7 +87,7 @@ class Subsetsum : public Problem<SOL_OSUBSETSUM> {
 
     }*/
 
-    void reset_solution(SOL_OSUBSETSUM &s) const {
+    void reset_solution(SOL_SUBSETSUM &s) const {
         for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
             s(i, 0);
         }

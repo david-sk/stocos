@@ -28,15 +28,8 @@ class UnitTest_magicSequence : public CppUnit::TestFixture {
     void tearDown(void) {
     }
 
-    template<class SOL>
-    void func(Problem<SOL> &problem) {
-
-    }
 
     void test_loadInstance(void) {
-       MagicSequence ms; 
-
-       func<SolutionArray<double, int>>(ms);
     }
 
 

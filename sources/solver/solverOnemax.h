@@ -86,7 +86,7 @@ class SolverOneMax : public Solver {
     void operator()(SOL_ONEMAX &s, int numParameter) {
         OneMax eOneMax(sizeArray);
 
-        FlipBit<SOL_ONEMAX> mutation_FlipBit(this->_mt_rand, 5);
+        FlipBit<SOL_ONEMAX, bool> mutation_FlipBit(this->_mt_rand, 5);
         
         Selection_maximization<SOL_ONEMAX> selection;
 
@@ -99,22 +99,22 @@ class SolverOneMax : public Solver {
 	    statistic.addSensor(new SensorNumRound<SOL_ONEMAX>);
 	    statistic.addSensor(new SensorSolution<SOL_ONEMAX>);
 
-        OptimizationAlgorithm<SOL_ONEMAX> *optimizationAlgorithm;
+        OptimizationAlgorithm<SOL_ONEMAX, bool> *optimizationAlgorithm;
 
         
         switch (numParameter) {
             case 0:
-                optimizationAlgorithm = new FirstImprovement<SOL_ONEMAX>(this->_mt_rand, statistic, stoppingCriteria, eOneMax, mutation_FlipBit, selection, sizeArray);
+                optimizationAlgorithm = new FirstImprovement<SOL_ONEMAX, bool>(this->_mt_rand, statistic, stoppingCriteria, eOneMax, mutation_FlipBit, selection, sizeArray);
                 optimizationAlgorithm->operator()(s);
                 delete optimizationAlgorithm;
                 break;
             case 1:
-                optimizationAlgorithm = new BestImprovement<SOL_ONEMAX>(this->_mt_rand, statistic, stoppingCriteria, eOneMax, mutation_FlipBit, selection, sizeArray);
+                optimizationAlgorithm = new BestImprovement<SOL_ONEMAX, bool>(this->_mt_rand, statistic, stoppingCriteria, eOneMax, mutation_FlipBit, selection, sizeArray);
                 optimizationAlgorithm->operator()(s);
                 delete optimizationAlgorithm;
                 break;
             case 2:
-                optimizationAlgorithm = new OnePlusLambda<SOL_ONEMAX>(this->_mt_rand, statistic, stoppingCriteria, eOneMax, sizeArray, 50);
+                optimizationAlgorithm = new OnePlusLambda<SOL_ONEMAX, bool>(this->_mt_rand, statistic, stoppingCriteria, eOneMax, sizeArray, 50);
                 optimizationAlgorithm->operator()(s);
                 delete optimizationAlgorithm;
                 break;
