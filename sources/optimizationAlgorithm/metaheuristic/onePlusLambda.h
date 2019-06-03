@@ -33,59 +33,65 @@ class OnePlusLambda : public OptimizationAlgorithm<SOL, TYPE_CELL> {
         delete lambdaNumber;
     }
     
-    void operator()(SOL &s) {
-        while (this->_stoppingCriteria.operator()(s)) {
-            lambdaNumber[0] = rid->operator()(this->_mt_rand);
-            for (unsigned int i = 1 ; i < _lambda;) {
-                unsigned int ret = rid->operator()(this->_mt_rand);
-                
-                for (unsigned int j = 0 ; j < i ; j++) {
-                    if(ret == lambdaNumber[j])
-                        break;
-                    else if (j == ( i- 1) ){
-                        j++;
-                        lambdaNumber[j] = ret;
-                        i++;
-                    }
-                }
-            }
-
-            if (!s.fitnessIsValid()) {
-                this->_problem.full_eval(s);
-            }
-            
-            auto bestFitness = s.getFitness();
-            unsigned int cellToMutate = 0;
-
-            
-            for (unsigned int i = 0 ; i < _lambda ; i++) {
-                auto fitnessBefore = s.getFitness();
-                s(lambdaNumber[i]) == 1 ? s(lambdaNumber[i], 0) : s(lambdaNumber[i], 1);
-                this->_problem.full_eval(s);
-                
-                if (bestFitness < s.getFitness()) {
-                    bestFitness = s.getFitness();
-                    cellToMutate = lambdaNumber[i];
-                }
-
-                s(lambdaNumber[i]) == 1 ? s(lambdaNumber[i], 0) : s(lambdaNumber[i], 1);
-                s.setFitness(fitnessBefore);
-            }
-            
-            if (bestFitness != s.getFitness()) {                     
-                if (s(cellToMutate) == 1) 
-                    s(cellToMutate, 0);
-                else 
-                    s(cellToMutate, 1);
-                s.setFitness(bestFitness);
-            }
-
-            #ifdef DEBUG
-            cerr<<s<<endl;
-            #endif
-            this->_statistic.operator()(s);
-        }
+    unique_ptr<SOL> operator()(const SOL &s) {
+        unique_ptr<SOL> result;
+        return move(result);
     }
+    
+
+    // void operator()(SOL &s) {
+    //     while (this->_stoppingCriteria.operator()(s)) {
+    //         lambdaNumber[0] = rid->operator()(this->_mt_rand);
+    //         for (unsigned int i = 1 ; i < _lambda;) {
+    //             unsigned int ret = rid->operator()(this->_mt_rand);
+                
+    //             for (unsigned int j = 0 ; j < i ; j++) {
+    //                 if(ret == lambdaNumber[j])
+    //                     break;
+    //                 else if (j == ( i- 1) ){
+    //                     j++;
+    //                     lambdaNumber[j] = ret;
+    //                     i++;
+    //                 }
+    //             }
+    //         }
+
+    //         if (!s.fitnessIsValid()) {
+    //             this->_problem.full_eval(s);
+    //         }
+            
+    //         auto bestFitness = s.getFitness();
+    //         unsigned int cellToMutate = 0;
+
+            
+    //         for (unsigned int i = 0 ; i < _lambda ; i++) {
+    //             auto fitnessBefore = s.getFitness();
+    //             s(lambdaNumber[i]) == 1 ? s(lambdaNumber[i], 0) : s(lambdaNumber[i], 1);
+    //             this->_problem.full_eval(s);
+                
+    //             if (bestFitness < s.getFitness()) {
+    //                 bestFitness = s.getFitness();
+    //                 cellToMutate = lambdaNumber[i];
+    //             }
+
+    //             s(lambdaNumber[i]) == 1 ? s(lambdaNumber[i], 0) : s(lambdaNumber[i], 1);
+    //             s.setFitness(fitnessBefore);
+    //         }
+            
+    //         if (bestFitness != s.getFitness()) {                     
+    //             if (s(cellToMutate) == 1) 
+    //                 s(cellToMutate, 0);
+    //             else 
+    //                 s(cellToMutate, 1);
+    //             s.setFitness(bestFitness);
+    //         }
+
+    //         #ifdef DEBUG
+    //         cerr<<s<<endl;
+    //         #endif
+    //         this->_statistic.operator()(s);
+    //     }
+    // }
     
     protected:
         unsigned int _lambda;

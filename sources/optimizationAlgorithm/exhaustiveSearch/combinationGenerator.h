@@ -64,7 +64,7 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_CELL> {
 
     bool stop() { return i < (_len_string); }
 
-    void operator()(SOL &s) {
+    unique_ptr<SOL> operator()(const SOL &s) {
         reset();
 
         do {
@@ -72,6 +72,9 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_CELL> {
             // this-> _problem.filtering(s);
 
         } while (stop());
+
+        unique_ptr<SOL> result;
+        return move(result);
     }
 
    private:

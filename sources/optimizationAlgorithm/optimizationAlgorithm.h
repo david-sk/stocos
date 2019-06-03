@@ -33,7 +33,7 @@ class OptimizationAlgorithm {
 
         }
     
-        virtual void operator()(SOL &s) = 0;
+        virtual unique_ptr<SOL> operator()(const SOL &s) = 0;
 
 
     protected:

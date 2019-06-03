@@ -199,5 +199,4 @@ class Solution {
 		unique_ptr<bool []>_fitnessIsValid;
 };
 
-
 #endif

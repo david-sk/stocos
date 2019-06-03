@@ -11,6 +11,7 @@
 #define SOLVERONEMAX_H
 
 #include <random>
+#include <memory>
 
 #include <boost/program_options.hpp>
 
@@ -30,6 +31,8 @@
 #include "../optimizationAlgorithm/metaheuristic/operator/mutation/flipBit.h"
 #include "../optimizationAlgorithm/metaheuristic/selection/selection.h"
 #include "../optimizationAlgorithm/metaheuristic/selection/selection_maximization.h"
+
+using namespace std;
 
 class SolverOneMax : public Solver {
     public:
@@ -102,20 +105,23 @@ class SolverOneMax : public Solver {
         OptimizationAlgorithm<SOL_ONEMAX, bool> *optimizationAlgorithm;
 
         
+        unique_ptr<SOL_ONEMAX> solution_result(make_unique<SOL_ONEMAX>());
+        
+
         switch (numParameter) {
             case 0:
                 optimizationAlgorithm = new FirstImprovement<SOL_ONEMAX, bool>(this->_mt_rand, statistic, stoppingCriteria, eOneMax, mutation_FlipBit, selection, sizeArray);
-                optimizationAlgorithm->operator()(s);
+                solution_result = optimizationAlgorithm->operator()(s);
                 delete optimizationAlgorithm;
                 break;
             case 1:
                 optimizationAlgorithm = new BestImprovement<SOL_ONEMAX, bool>(this->_mt_rand, statistic, stoppingCriteria, eOneMax, mutation_FlipBit, selection, sizeArray);
-                optimizationAlgorithm->operator()(s);
+                solution_result = optimizationAlgorithm->operator()(s);
                 delete optimizationAlgorithm;
                 break;
             case 2:
                 optimizationAlgorithm = new OnePlusLambda<SOL_ONEMAX, bool>(this->_mt_rand, statistic, stoppingCriteria, eOneMax, sizeArray, 50);
-                optimizationAlgorithm->operator()(s);
+                solution_result = optimizationAlgorithm->operator()(s);
                 delete optimizationAlgorithm;
                 break;
             default:
@@ -123,6 +129,7 @@ class SolverOneMax : public Solver {
                 assert(false);
                 break;
         }
+        s = (*solution_result);
     }
     
     //---------------

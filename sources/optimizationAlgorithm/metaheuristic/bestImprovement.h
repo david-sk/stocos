@@ -40,8 +40,8 @@ class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_CELL> {
         delete rid;
     }
     
-    void operator()(SOL &s) {
-        if (!s.fitnessIsValid()) {
+    unique_ptr<SOL> operator()(const SOL &s) {
+        /*if (!s.fitnessIsValid()) {
            this-> _problem.full_eval(s);
         }
         #ifdef DEBUG
@@ -84,7 +84,10 @@ class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_CELL> {
             cerr<<s<<endl;
             #endif
             this->_statistic.operator()(s);
-        }
+        }*/
+
+        unique_ptr<SOL> result;
+        return move(result);
     }
 
     protected:

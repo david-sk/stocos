@@ -41,31 +41,35 @@ class FirstImprovement : public OptimizationAlgorithm<SOL, TYPE_CELL> {
         delete rid;
     }
     
-    void operator()(SOL &s) {    
-        if (!s.fitnessIsValid()) {
-            this->_problem.full_eval(s);
+    unique_ptr<SOL> operator()(const SOL &s) {
+        solution_star = s;
+        if (!solution_star.fitnessIsValid()) {
+            this->_problem.full_eval(solution_star);
         }
         
-        while (this->_stoppingCriteria.operator()(s)) {
-            this->_statistic.operator()(s);
+        while (this->_stoppingCriteria.operator()(solution_star)) {
+            this->_statistic.operator()(solution_star);
 
-            s1 = s;
+            solution_beta = solution_star;
             
-            _atomicOperations.operator()(s1);
-            this->_problem.full_eval(s1);
-            if (_selection(s1, s)) {
-                s = s1;
+            _atomicOperations.operator()(solution_beta);
+            this->_problem.full_eval(solution_beta);
+            if (_selection(solution_beta, solution_star)) {
+                solution_star = solution_beta;
             }
         }
 
-        this->_statistic.operator()(s);
+        this->_statistic.operator()(solution_star);
+
+        return move(make_unique<SOL>(solution_star));
     }
 
     protected:
         uniform_int_distribution<unsigned int> *rid;
         AtomicOperation<SOL, TYPE_CELL> &_atomicOperations;
         Selection<SOL> &_selection;
-        SOL s1;
+        SOL solution_star;
+        SOL solution_beta;
 };
 
 #endif

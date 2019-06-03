@@ -36,8 +36,10 @@ class Backtraking : public OptimizationAlgorithm<SOL, TYPE_CELL> {
 
 
 
-    void operator()(SOL &s) {
+    unique_ptr<SOL> operator()(const SOL &s) {
         //
+        unique_ptr<SOL> result;
+        return move(result);
     }
 
 
