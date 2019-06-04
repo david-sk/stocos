@@ -12,11 +12,11 @@
 
 #include "criteria.h"
 
-template<class SOL>
-class CriteriaBudget : public Criteria<SOL> {
+template<typename SOL, typename TYPE_FITNESS>
+class CriteriaBudget : public Criteria<SOL, TYPE_FITNESS> {
     public:
     CriteriaBudget(unsigned int _budget) : 
-        Criteria<SOL>(), 
+        Criteria<SOL, TYPE_FITNESS>(), 
         budget(_budget) {
         consumedBudget = 0;
     }

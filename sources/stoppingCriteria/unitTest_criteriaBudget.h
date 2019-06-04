@@ -24,7 +24,7 @@ class UnitTest_criteriaBudget : public CppUnit::TestFixture {
     public:
 
     void setUp(void) {
-        o = new CriteriaBudget<Solution<int>>(1000);
+        o = new CriteriaBudget<Solution<int>, unsigned int>(1000);
     }
     void tearDown(void) {
         delete o;
@@ -57,7 +57,7 @@ class UnitTest_criteriaBudget : public CppUnit::TestFixture {
     }
 
     private:
-    CriteriaBudget<Solution<int>> *o;
+    CriteriaBudget<Solution<int>, unsigned int> *o;
 
 };
 

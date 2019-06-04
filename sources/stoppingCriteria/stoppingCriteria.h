@@ -18,7 +18,7 @@
 
 using namespace std;
 
-template<class SOL>
+template<typename SOL, typename TYPE_FITNESS>
 class StoppingCriteria {
     public:
     StoppingCriteria() {
@@ -40,15 +40,13 @@ class StoppingCriteria {
         return total;
     }
 
-    void addCriteria(Criteria<SOL> *c) {
+    void addCriteria(Criteria<SOL, TYPE_FITNESS> *c) {
         criteria.push_back(c);
     }
     
     
     protected:
-    vector<Criteria<SOL> *> criteria;
-
-    vector<unique_ptr<Criteria<SOL>>> criteria1;
+    vector<Criteria<SOL, TYPE_FITNESS> *> criteria;
 };
 
 #endif

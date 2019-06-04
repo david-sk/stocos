@@ -30,8 +30,9 @@ all : ./sources/main.cpp
 
 run:
 	./$(EXEC_NAME)
-	#./build/stocos --problem=0 --instance=instances/OneMax/onemax-50.json --algo=0
-	#./build/stocos --problem=1 --instance=instances/SubSetSum/SubSetSum-5.json --algo=0
+	# ./build/stocos --problem=0 --instance=instances/OneMax/onemax-50.json --algo=0					# OneMax
+	# ./build/stocos --problem=1 --instance=instances/SubSetSum/SubSetSum-5.json --algo=0				# SubSetSum
+	# ./build/stocos --problem=2 --instance=instances/knapsackProblem/knapsackProblem-5-1.json --algo=0	# Knapsack
 
 packagesDebain:
 	apt-get install g++ build-essential rapidjson-dev

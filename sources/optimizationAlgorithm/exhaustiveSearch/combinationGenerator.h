@@ -21,7 +21,7 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
    public:
     CombinationGenerator(std::mt19937 &mt_rand, 
                         Statistic<SOL> &statistic, 
-						StoppingCriteria<SOL> &stoppingCriteria,
+						StoppingCriteria<SOL, TYPE_FITNESS> &stoppingCriteria,
                         Problem<SOL, TYPE_FITNESS, TYPE_CELL> &problem, const unsigned int nbDigit, 
 						const unsigned int len_string)
         				: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, statistic, stoppingCriteria, problem),

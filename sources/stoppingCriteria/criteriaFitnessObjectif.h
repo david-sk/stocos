@@ -14,20 +14,20 @@
 #include "criteria.h"
 
 
-template<class SOL>
-class CriteriaFitnessObjectif : public Criteria<SOL> {
+template<typename SOL, typename TYPE_FITNESS>
+class CriteriaFitnessObjectif : public Criteria<SOL, TYPE_FITNESS> {
     public:
-    CriteriaFitnessObjectif(unsigned int fitnessObjectif) : 
-        Criteria<SOL>() {
+    CriteriaFitnessObjectif(TYPE_FITNESS fitnessObjectif) : 
+        Criteria<SOL, TYPE_FITNESS>() {
             _numberOfObjective = 1;
-            _fitnessObjectif = new unsigned int[_numberOfObjective];
+            _fitnessObjectif = new TYPE_FITNESS[_numberOfObjective];
             _fitnessObjectif[0] = fitnessObjectif;
     }
 
-    CriteriaFitnessObjectif(unsigned int *fitnessObjectif, unsigned int numberOfObjective) : 
-        Criteria<SOL>() {
+    CriteriaFitnessObjectif(TYPE_FITNESS *fitnessObjectif, unsigned int numberOfObjective) : 
+        Criteria<SOL, TYPE_FITNESS>() {
             _numberOfObjective = numberOfObjective;
-            _fitnessObjectif = new unsigned int[_numberOfObjective];
+            _fitnessObjectif = new TYPE_FITNESS[_numberOfObjective];
             for (unsigned int i = 0 ; i < numberOfObjective ; i++) {
                 _fitnessObjectif[0] = fitnessObjectif;
             }
@@ -50,7 +50,7 @@ class CriteriaFitnessObjectif : public Criteria<SOL> {
     }
 
     protected:
-    unsigned int *_fitnessObjectif;
+    TYPE_FITNESS *_fitnessObjectif;
     unsigned int _numberOfObjective;
 };
 

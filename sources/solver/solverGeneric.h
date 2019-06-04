@@ -13,6 +13,7 @@
 #include <cassert>
 #include <random>
 #include <string>
+#include <memory>
 
 #include <boost/program_options.hpp>
 
@@ -23,7 +24,7 @@
 using namespace std;
 
 
-template<typename SOL, typename TYPE_FITNESS,typename TYPE_CELL>
+template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class SolverGeneric : public Solver {
 	public:
 		SolverGeneric(std::mt19937 &mt_rand, 

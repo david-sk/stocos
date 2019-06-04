@@ -10,22 +10,27 @@
 #ifndef KNAPSACK_H
 #define KNAPSACK_H
 
+#include <map>
+#include <utility>
+#include <unistd.h>
+#include <vector>
+
 #include <rapidjson/document.h>
 #include <rapidjson/filereadstream.h>
 #include "../solution/solutionArray.h"
 #include "problem.h"
 
-#include <map>
-#include <utility>
-#include <unistd.h>
-
+using namespace std;
 
 using TYPE_FITNESS_KNAPSACK = int;
-using TYPE_CELL_KNAPSACK = int;
+using TYPE_CELL_KNAPSACK = bool;
 using SOL_KNAPSACK = SolutionArray<TYPE_CELL_KNAPSACK, TYPE_CELL_KNAPSACK>;
 
 class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_KNAPSACK> {
     public:
+    Knapsack() {
+        
+    }
     
     Knapsack(string pathfile_instance) {
         loadInstance(pathfile_instance);
@@ -60,7 +65,7 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
         for (unsigned int i = 0; i < nbItems ; i++) {
             weight.push_back(_weight[i].GetInt());
             profit.push_back(_profit[i].GetInt());
-        }
+        }        
     }
 
     void full_eval(SOL_KNAPSACK &s) const {
@@ -74,7 +79,6 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
 		
 		if (capacity < W)
 			fitness = -1;
-
 		s.setFitness(fitness);
     }
 
@@ -88,9 +92,26 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
         }
     }
 
+    unique_ptr<SOL_KNAPSACK> new_solution() const {
+        unique_ptr<SOL_KNAPSACK> s(make_unique<SOL_KNAPSACK>(nbItems));
+        for (unsigned int i = 0 ; i < s->sizeArray() ; i++) {
+            s->operator()(i, 0);
+        } 
+        return move(s);
+    }
+
     unsigned int sizeArraySolution() const{
         return nbItems;
     }
+
+    TYPE_FITNESS_KNAPSACK getFitnessObjectif() const {
+        return capacity;
+    }
+
+	TYPE_FITNESS_KNAPSACK getFitnessObjectif(unsigned int numObjectif) const {
+		assert(numObjectif = 0);
+		return capacity;
+	}
 
     private:
         string numInstance;
@@ -98,6 +119,7 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
         unsigned int nbItems;
         vector<int> weight;
         vector<int> profit;
+        int fitnessObjectif;
 };
 
 #endif

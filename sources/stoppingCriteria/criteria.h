@@ -10,7 +10,7 @@
 #ifndef CRITERIA_H
 #define CRITERIA_H
 
-template<class SOL>
+template<typename SOL, typename TYPE_FITNESS>
 class Criteria {
     public:
     Criteria() {

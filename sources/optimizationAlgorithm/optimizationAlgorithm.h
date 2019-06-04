@@ -21,7 +21,7 @@ class OptimizationAlgorithm {
     public:
         OptimizationAlgorithm(std::mt19937 &mt_rand,
         Statistic<SOL> &statistic,
-        StoppingCriteria<SOL> &stoppingCriteria,
+        StoppingCriteria<SOL, TYPE_FITNESS> &stoppingCriteria,
         Problem<SOL, TYPE_FITNESS, TYPE_CELL> &problem) : 
             _mt_rand(mt_rand),
             _statistic(statistic),
@@ -39,7 +39,7 @@ class OptimizationAlgorithm {
     protected:
         std::mt19937 &_mt_rand;
         Statistic<SOL> &_statistic;
-        StoppingCriteria<SOL> &_stoppingCriteria;
+        StoppingCriteria<SOL, TYPE_FITNESS> &_stoppingCriteria;
         Problem<SOL, TYPE_FITNESS, TYPE_CELL> &_problem;
 
 };

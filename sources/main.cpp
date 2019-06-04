@@ -21,6 +21,8 @@
 #include "solver/solverSubsetsum.h"
 
 #include "problem/oneMax.h"
+#include "problem/knapsack.h"
+#include "problem/subsetSum.h"
 
 
 using namespace std;
@@ -83,6 +85,7 @@ int main(int argc, char **argv, char **envp) {
 	// Problem definition 
 	OneMax eOneMax;
 	Subsetsum eSubsetsum;
+	Knapsack eKnapsack;
 
 	//
 	unique_ptr<Solver> solver;
@@ -95,6 +98,9 @@ int main(int argc, char **argv, char **envp) {
 			break;
 		case 1: 
 			solver.reset(new SolverGeneric<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CELL_SUBSETSUM>(mt_rand, vm, menuHelp, argc, argv, eSubsetsum));
+			break;
+		case 2: 
+			solver.reset(new SolverGeneric<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_KNAPSACK>(mt_rand, vm, menuHelp, argc, argv, eKnapsack));
 			break;
 		default:
 			solver.reset(new SolverOneMax(mt_rand, vm, menuHelp, argc, argv));

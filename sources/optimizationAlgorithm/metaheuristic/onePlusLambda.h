@@ -17,7 +17,7 @@ class OnePlusLambda : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>
     public:
     OnePlusLambda(std::mt19937 &mt_rand, 
         Statistic<SOL> &statistic,
-        StoppingCriteria<SOL> &stoppingCriteria,
+        StoppingCriteria<SOL, TYPE_FITNESS> &stoppingCriteria,
         Problem<SOL, TYPE_FITNESS, TYPE_CELL> &problem,
         AtomicOperation<SOL, TYPE_CELL> &atomicOperations,
         Selection<SOL> &selection,
