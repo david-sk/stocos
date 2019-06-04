@@ -18,9 +18,10 @@
 
 using namespace std;
 
+using TYPE_FITNESS_ONEMAX = unsigned int;
 using TYPE_CELL_ONEMAX = bool;
-using SOL_ONEMAX = SolutionArray<unsigned int, TYPE_CELL_ONEMAX>;
-class OneMax : public Problem<SOL_ONEMAX, TYPE_CELL_ONEMAX> {
+using SOL_ONEMAX = SolutionArray<TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>;
+class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX> {
     public:
     
     OneMax(unsigned int N) : _N(N) {
@@ -60,6 +61,15 @@ class OneMax : public Problem<SOL_ONEMAX, TYPE_CELL_ONEMAX> {
             s(i, 0);
         }
     }
+
+    TYPE_FITNESS_ONEMAX getFitnessObjectif() const {
+        return _N;
+    }
+
+	TYPE_FITNESS_ONEMAX getFitnessObjectif(unsigned int numObjectif) const {
+		assert(numObjectif = 0);
+		return _N;
+	}
 
     private:
         unsigned int _N;

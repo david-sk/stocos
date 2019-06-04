@@ -23,9 +23,10 @@
 
 using namespace std;
 
+using TYPE_FITNESS_QAP = unsigned int;
 using TYPE_CELL_QAP = unsigned int;
-using SOL_QAP = SolutionArray<unsigned int, TYPE_CELL_QAP>;
-class QAP : public Problem<SOL_QAP, TYPE_CELL_QAP> {
+using SOL_QAP = SolutionArray<TYPE_FITNESS_QAP, TYPE_CELL_QAP>;
+class QAP : public Problem<SOL_QAP, TYPE_FITNESS_QAP, TYPE_CELL_QAP> {
 public:
     QAP(string pathfile_instance) {
         loadInstance(pathfile_instance);

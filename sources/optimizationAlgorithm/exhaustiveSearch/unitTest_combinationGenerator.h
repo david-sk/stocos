@@ -41,7 +41,7 @@ class UnitTest_combinationGenerator : public CppUnit::TestFixture {
         OneMax oneMax(100);
         TYPESOL s(4);
 
-        CombinationGenerator<TYPESOL, bool> cg(mt_rand, statistic, stoppingCriteria, oneMax, 2, 4);
+        CombinationGenerator<TYPESOL, unsigned int, bool> cg(mt_rand, statistic, stoppingCriteria, oneMax, 2, 4);
 
         //cg(s);
 

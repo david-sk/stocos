@@ -12,15 +12,22 @@
 
 #include <vector>
 #include <unistd.h>
+#include <fstream> // FileReadStream
+
+#include <rapidjson/document.h>
+#include <rapidjson/writer.h>
+#include <rapidjson/stringbuffer.h>
+#include <rapidjson/filereadstream.h>
 
 #include "../solution/solutionArray.h"
 #include "problem.h"
 
 using namespace std;
 
+using TYPE_FITNESS_SUBSETSUM =unsigned int;
 using TYPE_CELL_SUBSETSUM = bool;
-using SOL_SUBSETSUM = SolutionArray<unsigned int, TYPE_CELL_SUBSETSUM>;
-class Subsetsum : public Problem<SOL_SUBSETSUM, TYPE_CELL_SUBSETSUM> {
+using SOL_SUBSETSUM = SolutionArray<TYPE_FITNESS_SUBSETSUM, TYPE_CELL_SUBSETSUM>;
+class Subsetsum : public Problem<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CELL_SUBSETSUM> {
     public:
     
     Subsetsum(const unsigned int N) {
@@ -68,9 +75,14 @@ class Subsetsum : public Problem<SOL_SUBSETSUM, TYPE_CELL_SUBSETSUM> {
         fclose(fp);
     }
 
-    unsigned int getFitnessObjectif() {
+    TYPE_FITNESS_SUBSETSUM getFitnessObjectif() const {
         return fitnessObjectif;
     }
+
+	TYPE_FITNESS_SUBSETSUM getFitnessObjectif(unsigned int numObjectif) const {
+		assert(numObjectif = 0);
+		return fitnessObjectif;
+	}
 
     void full_eval(SOL_SUBSETSUM &s) const {
         assert(setOfNumbers.size() == s.sizeArray());

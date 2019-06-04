@@ -43,7 +43,7 @@ class UnitTest_backtraking : public CppUnit::TestFixture {
         OneMax oneMax(100);
         TYPESOL s(4);
 
-        Backtraking<TYPESOL, bool> backtraking(mt_rand, statistic, stoppingCriteria, oneMax, 2, 4);
+        Backtraking<TYPESOL, unsigned int, bool> backtraking(mt_rand, statistic, stoppingCriteria, oneMax, 2, 4);
         backtraking.recursive(0);
     }
 

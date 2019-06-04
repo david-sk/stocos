@@ -13,29 +13,9 @@
 #include <random>
 #include <fstream>
 
-#include <rapidjson/document.h>
-#include <rapidjson/writer.h>
-#include <rapidjson/stringbuffer.h>
-#include <rapidjson/filereadstream.h>
-
 #include "solver.h"
-
-#include "../statistic/statistic.h"
-#include "../statistic/sensor.h"
-#include "../statistic/sensorNumRound.h"
-#include "../statistic/sensorSolution.h"
-#include "../statistic/sensorStopwatch.h"
-#include "../stoppingCriteria/stoppingCriteria.h"
-#include "../stoppingCriteria/criteriaBudget.h"
-#include "../stoppingCriteria/criteriaFitnessObjectif.h"
+#include "defaultSetting/combinatorialOptimization.h"
 #include "../problem/SubsetSum.h"
-#include "../optimizationAlgorithm/metaheuristic/firstImprovement.h"
-#include "../optimizationAlgorithm/metaheuristic/bestImprovement.h"
-#include "../optimizationAlgorithm/metaheuristic/onePlusLambda.h"
-#include "../optimizationAlgorithm/metaheuristic/operator/mutation/flipBit.h"
-#include "../optimizationAlgorithm/metaheuristic/selection/selection.h"
-#include "../optimizationAlgorithm/metaheuristic/selection/selection_maximization.h"
-#include "../optimizationAlgorithm/metaheuristic/selection/selection_difference.h"
 
 class SolverSubsetsum : public Solver {
     public:
@@ -53,29 +33,7 @@ class SolverSubsetsum : public Solver {
 
         settings(argc, argv);
 
-        //----------
-        eSubsetsum = make_shared<Subsetsum>(N);
-
-        mutation_FlipBit = make_shared<FlipBit<SOL_SUBSETSUM, bool>>(this->_mt_rand, 5);
-        
-        selection = make_shared<Selection_difference<SOL_SUBSETSUM>>(eSubsetsum->getFitnessObjectif());
-        
-        stoppingCriteria = make_shared<StoppingCriteria<SOL_SUBSETSUM>>();
-        stoppingCriteria->addCriteria(new CriteriaBudget<SOL_SUBSETSUM>(budget));
-        stoppingCriteria->addCriteria(new CriteriaFitnessObjectif<SOL_SUBSETSUM>(eSubsetsum->getFitnessObjectif()));
-        
-    	statistic = make_shared<Statistic<SOL_SUBSETSUM>>(statStatistic);
-	    statistic->addSensor(new SensorNumRound<SOL_SUBSETSUM>);
-	    statistic->addSensor(new SensorSolution<SOL_SUBSETSUM>);
-        statistic->addSensor(new SensorStopwatch<SOL_SUBSETSUM>);
-
-        optimizationAlgorithm.push_back(pair<string, OptimizationAlgorithm<SOL_SUBSETSUM, bool> *>("FirstImprovement", 
-        new FirstImprovement<SOL_SUBSETSUM, bool>(this->_mt_rand, *statistic, *stoppingCriteria, *eSubsetsum, *mutation_FlipBit, *selection)));
-        optimizationAlgorithm.push_back(pair<string, OptimizationAlgorithm<SOL_SUBSETSUM, bool> *>("BestImprovement", 
-        new BestImprovement<SOL_SUBSETSUM, bool>(this->_mt_rand, *statistic, *stoppingCriteria, *eSubsetsum, *mutation_FlipBit, *selection)));
-        optimizationAlgorithm.push_back(pair<string, OptimizationAlgorithm<SOL_SUBSETSUM, bool> *>("OnePlusLambda", 
-        new OnePlusLambda<SOL_SUBSETSUM, bool>(this->_mt_rand, *statistic, *stoppingCriteria, *eSubsetsum, *mutation_FlipBit, *selection, 50)));
-    }
+        }
 
     virtual ~SolverSubsetsum() {
 
@@ -85,7 +43,7 @@ class SolverSubsetsum : public Solver {
     void settings(int argc, char **argv) {
         boost::program_options::options_description config("[*] Subsetsum parameter");
 	    config.add_options()
-			(",N", boost::program_options::value<unsigned int>(&N), "taille de l'instance générer (default: 1000)")
+			("N", boost::program_options::value<unsigned int>(&N), "taille de l'instance générer (default: 1000)")
 			("algo,A", boost::program_options::value<int>(&optimizationAlgo), "algorithme utiliser ()")
             ("budget", boost::program_options::value<unsigned int>(&budget), "budget alouer à l'algorithme (default:400)")
             ("statistic", boost::program_options::value<bool>(&statStatistic), "Affiche des statistiques (default:false)");
@@ -102,6 +60,9 @@ class SolverSubsetsum : public Solver {
                 cout<<this->_desc<<endl;
                 exit(EXIT_SUCCESS);
         }
+
+        eSubsetsum = make_shared<Subsetsum>(N);
+        CO = make_unique<CombinatorialOptimization<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CELL_SUBSETSUM>>(this->_mt_rand, *eSubsetsum);
     }
 
     void operator()() {
@@ -116,10 +77,7 @@ class SolverSubsetsum : public Solver {
     }
 
     void operator()(SOL_SUBSETSUM &s, int numParameter) {
-        assert(0 <= numParameter);
-        assert(numParameter < static_cast<int>(optimizationAlgorithm.size()));
-        unique_ptr<SOL_ONEMAX> solution_result(make_unique<SOL_ONEMAX>());
-        solution_result = optimizationAlgorithm[static_cast<unsigned int>(numParameter)].second->operator()(s);
+        unique_ptr<SOL_SUBSETSUM> solution_result(CO->operator()(s, numParameter));
         s = (*solution_result);
     }
 
@@ -146,10 +104,11 @@ class SolverSubsetsum : public Solver {
 
     // 
     shared_ptr<Subsetsum> eSubsetsum;
-    vector<pair<string, OptimizationAlgorithm<SOL_SUBSETSUM, bool> *>> optimizationAlgorithm; /// < pair : name and pointer of algo
+    unique_ptr<CombinatorialOptimization<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>> CO;
 
-    shared_ptr<FlipBit<SOL_SUBSETSUM, bool>> mutation_FlipBit;
-    shared_ptr<Selection_difference<SOL_SUBSETSUM>> selection;
+    vector<pair<string, OptimizationAlgorithm<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CELL_SUBSETSUM> *>> optimizationAlgorithm; /// < pair : name and pointer of algo
+    shared_ptr<FlipBit<SOL_SUBSETSUM, TYPE_CELL_SUBSETSUM>> mutation_FlipBit;
+    shared_ptr<Selection<SOL_SUBSETSUM>> selection;
     shared_ptr<StoppingCriteria<SOL_SUBSETSUM>> stoppingCriteria;
     shared_ptr<Statistic<SOL_SUBSETSUM>> statistic;
 };

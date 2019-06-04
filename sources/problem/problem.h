@@ -13,7 +13,8 @@
 
 #include "../solution/solution.h"
 
-template<typename SOL, typename TYPE_CELL>
+
+template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class Problem {
 public:
 	Problem() {
@@ -39,6 +40,15 @@ public:
 	};*/
 	virtual bool filtering(SOL &s) const {
 		return true;
+	}
+	virtual TYPE_FITNESS getFitnessObjectif() const {
+		cerr<<"[-] Not implemented !"<<endl;
+		exit(EXIT_FAILURE);
+	}
+
+	virtual TYPE_FITNESS getFitnessObjectif(unsigned int numObjectif) const {
+		cerr<<"[-] Not implemented !"<<endl;
+		exit(EXIT_FAILURE);
 	}
 	
 	

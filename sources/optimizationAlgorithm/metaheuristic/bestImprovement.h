@@ -21,16 +21,16 @@
 
 using namespace std;
 
-template<typename SOL, typename TYPE_CELL>
-class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_CELL> {
+template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
+class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
     public:
     BestImprovement(std::mt19937 &mt_rand,
         Statistic<SOL> &statistic,
         StoppingCriteria<SOL> &stoppingCriteria,
-        Problem<SOL, TYPE_CELL> &problem,
+        Problem<SOL, TYPE_FITNESS, TYPE_CELL> &problem,
         AtomicOperation<SOL, TYPE_CELL> &atomicOperations,
         Selection<SOL> &selection) :
-        OptimizationAlgorithm<SOL, TYPE_CELL>(mt_rand, statistic, stoppingCriteria, problem) {
+        OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, statistic, stoppingCriteria, problem) {
         DEBUG_TRACE("Creation BestImprovement");
     }
 

@@ -1,5 +1,6 @@
 {
-    "knapsackProblem": {
+    "problem": {
+		"name" : "knapsackProblem",
         "numInstance": "20-1",
         "capacity": 30,
         "#items" : 20,

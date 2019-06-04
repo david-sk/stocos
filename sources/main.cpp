@@ -16,8 +16,10 @@
 
 #include "macro.h"
 
+#include "solver/solverGeneric.h"
 #include "solver/solverOnemax.h"
 #include "solver/solverSubsetsum.h"
+
 
 using namespace std;
 

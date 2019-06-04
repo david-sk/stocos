@@ -222,41 +222,6 @@ public:
 	unsigned int sizeArray() const {
 		return _sizeArray;
 	}
-
-	/*void toSolution(const string &solution) {
-        std::string token;
-		std::istringstream ss(solution);
-		vector<string> x;
-
-        while(std::getline(ss, token, ':')) {
-			x.push_back(token);
-        }
-
-		// fitness
-		unsigned int i = 0;
-        std::istringstream ssFitness(x[0]);
-        while(std::getline(ssFitness, token, ' ')) {
-			std::stringstream convert(token);
-			TYPE_FITNESS value;
-			convert >> value;
-			this->setFitness(i++, value);
-        }
-		assert(i  == this->numberOfObjective());
-
-		// solution
-		i = 0;
-        std::istringstream ssSolutionString(x[1]);
-        while(std::getline(ssSolutionString, token, ' ')) {
-			if (!token.empty()) {
-				std::stringstream convert(token);
-				TYPE_CELL value;
-				convert >> value;
-				array[i++] = value;
-			}
-        }
-		
-		assert(i  == _sizeArray);
-	}*/
 	
 	friend std::ostream & operator << (std::ostream &out,  SolutionArray<TYPE_FITNESS, TYPE_CELL> const &s) {
 		for (unsigned int i = 0 ; i < s.numberOfObjective() ; i++)

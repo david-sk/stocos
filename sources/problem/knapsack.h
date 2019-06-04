@@ -20,10 +20,11 @@
 #include <unistd.h>
 
 
+using TYPE_FITNESS_KNAPSACK = int;
 using TYPE_CELL_KNAPSACK = int;
-using SOL_KNAPSACK = SolutionArray<int, TYPE_CELL_KNAPSACK>;
+using SOL_KNAPSACK = SolutionArray<TYPE_CELL_KNAPSACK, TYPE_CELL_KNAPSACK>;
 
-class Knapsack : public Problem<SOL_KNAPSACK,TYPE_CELL_KNAPSACK> {
+class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_KNAPSACK> {
     public:
     
     Knapsack(string pathfile_instance) {
@@ -45,7 +46,7 @@ class Knapsack : public Problem<SOL_KNAPSACK,TYPE_CELL_KNAPSACK> {
         FileReadStream is(fp, readBuffer, sizeof(readBuffer));
         Document d;
         d.ParseStream(is);
-        Value& problem = d["knapsackProblem"];
+        Value& problem = d["problem"];
         numInstance = problem["numInstance"].GetString();
         capacity = problem["capacity"].GetInt();
         nbItems =  problem["#items"].GetInt64();

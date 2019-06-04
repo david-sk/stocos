@@ -16,21 +16,9 @@
 #include <boost/program_options.hpp>
 
 #include "solver.h"
-
-#include "../statistic/statistic.h"
-#include "../statistic/sensor.h"
-#include "../statistic/sensorNumRound.h"
-#include "../statistic/sensorSolution.h"
-#include "../stoppingCriteria/stoppingCriteria.h"
-#include "../stoppingCriteria/criteriaBudget.h"
-#include "../stoppingCriteria/criteriaFitnessObjectif.h"
+#include "defaultSetting/combinatorialOptimization.h"
 #include "../problem/OneMax.h"
-#include "../optimizationAlgorithm/metaheuristic/firstImprovement.h"
-#include "../optimizationAlgorithm/metaheuristic/bestImprovement.h"
-#include "../optimizationAlgorithm/metaheuristic/onePlusLambda.h"
-#include "../optimizationAlgorithm/metaheuristic/operator/mutation/flipBit.h"
-#include "../optimizationAlgorithm/metaheuristic/selection/selection.h"
-#include "../optimizationAlgorithm/metaheuristic/selection/selection_maximization.h"
+
 
 using namespace std;
 
@@ -47,7 +35,6 @@ class SolverOneMax : public Solver {
             budget = 400;
             statStatistic = false;
             settings(argc, argv);
-
     }
     ~SolverOneMax() {
 
@@ -73,6 +60,9 @@ class SolverOneMax : public Solver {
                 cout<<this->_desc<<endl;
                 exit(EXIT_SUCCESS);
         }
+
+        eOneMax = make_unique<OneMax>(sizeArray);
+        CO = make_unique<CombinatorialOptimization<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>>(this->_mt_rand, *eOneMax);
     }
 
     void operator()() {
@@ -87,66 +77,22 @@ class SolverOneMax : public Solver {
     }
 
     void operator()(SOL_ONEMAX &s, int numParameter) {
-        OneMax eOneMax(sizeArray);
-
-        FlipBit<SOL_ONEMAX, bool> mutation_FlipBit(this->_mt_rand, 5);
-        
-        Selection_maximization<SOL_ONEMAX> selection;
-
-
-        StoppingCriteria<SOL_ONEMAX> stoppingCriteria;
-        stoppingCriteria.addCriteria(new CriteriaBudget<SOL_ONEMAX>(budget));
-        stoppingCriteria.addCriteria(new CriteriaFitnessObjectif<SOL_ONEMAX>(s.sizeArray()));
-        
-    	Statistic<SOL_ONEMAX> statistic(statStatistic);
-	    statistic.addSensor(new SensorNumRound<SOL_ONEMAX>);
-	    statistic.addSensor(new SensorSolution<SOL_ONEMAX>);
-
-        OptimizationAlgorithm<SOL_ONEMAX, bool> *optimizationAlgorithm;
-
-        
-        unique_ptr<SOL_ONEMAX> solution_result(make_unique<SOL_ONEMAX>());
-        
-
-        switch (numParameter) {
-            case 0:
-                optimizationAlgorithm = new FirstImprovement<SOL_ONEMAX, bool>(this->_mt_rand, statistic, stoppingCriteria, eOneMax, mutation_FlipBit, selection);
-                solution_result = optimizationAlgorithm->operator()(s);
-                delete optimizationAlgorithm;
-                break;
-            case 1:
-                optimizationAlgorithm = new BestImprovement<SOL_ONEMAX, bool>(this->_mt_rand, statistic, stoppingCriteria, eOneMax, mutation_FlipBit, selection);
-                solution_result = optimizationAlgorithm->operator()(s);
-                delete optimizationAlgorithm;
-                break;
-            case 2:
-                optimizationAlgorithm = new OnePlusLambda<SOL_ONEMAX, bool>(this->_mt_rand, statistic, stoppingCriteria, eOneMax, mutation_FlipBit, selection, 50);
-                solution_result = optimizationAlgorithm->operator()(s);
-                delete optimizationAlgorithm;
-                break;
-            default:
-                cerr<<"Le choix du parameter n'est pas valide"<<endl;
-                assert(false);
-                break;
-        }
+        unique_ptr<SOL_ONEMAX> solution_result(CO->operator()(s, numParameter));
         s = (*solution_result);
     }
     
-    //---------------
     void operator()(string &solution, int numParameter) {
         SOL_ONEMAX s(solution);
-        //s.toSolution(solution);
 
         this->operator()(s, numParameter);
-
+        
         cout<<s;
     }
 
     void initializationSolution() {
-        OneMax eOneMax(sizeArray);
-        unique_ptr<SOL_ONEMAX> s = eOneMax.new_solution();
+        unique_ptr<SOL_ONEMAX> s = eOneMax->new_solution();
 
-        eOneMax.full_eval((*s));
+        eOneMax->full_eval((*s));
         
         cout<<(*s);
     }
@@ -156,6 +102,9 @@ class SolverOneMax : public Solver {
         int optimizationAlgo;
         unsigned int budget;
         bool statStatistic;
+
+        unique_ptr<OneMax> eOneMax;
+        unique_ptr<CombinatorialOptimization<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>> CO;
 };
 
 #endif

@@ -29,7 +29,7 @@ class UnitTest_knapsack : public CppUnit::TestFixture {
     }
 
     void test_loadInstance(void) {
-        Knapsack eknapsack("instances/knapsackProblem/knapsackProblem-instance-5-1.json");
+        Knapsack eknapsack("instances/knapsackProblem/knapsackProblem-5-1.json");
         unsigned int n = eknapsack.sizeArraySolution();
         int fitness = 12;
         SOL_KNAPSACK s(n);
