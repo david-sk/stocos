@@ -36,7 +36,7 @@ class UnitTest_combinationGenerator : public CppUnit::TestFixture {
 	    std::mt19937 mt_rand;
 	    mt_rand.seed(0);
 
-        StoppingCriteria<TYPESOL> stoppingCriteria;
+        StoppingCriteria<TYPESOL, unsigned int> stoppingCriteria;
         Statistic<TYPESOL> statistic;
         OneMax oneMax(100);
         TYPESOL s(4);
