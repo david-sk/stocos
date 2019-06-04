@@ -27,6 +27,14 @@ class Selection_maximization : public Selection<SOL> {
 
         return s2.getFitness() < s1.getFitness();
     }
+
+    bool operator()(const SOL &s1, const SOL &s2, const unsigned int numObjectif) {
+        assert(s1.fitnessIsValid(numObjectif));
+        assert(s2.fitnessIsValid(numObjectif));
+
+        return s2.getFitness(numObjectif) < s1.getFitness(numObjectif);
+    }
+    
 };
 
 #endif

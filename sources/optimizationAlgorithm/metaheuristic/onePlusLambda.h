@@ -19,84 +19,53 @@ class OnePlusLambda : public OptimizationAlgorithm<SOL, TYPE_CELL> {
         Statistic<SOL> &statistic,
         StoppingCriteria<SOL> &stoppingCriteria,
         Problem<SOL, TYPE_CELL> &problem,
-        unsigned int N, 
+        AtomicOperation<SOL, TYPE_CELL> &atomicOperations,
+        Selection<SOL> &selection,
         unsigned int lambda) : 
         OptimizationAlgorithm<SOL, TYPE_CELL>(mt_rand, statistic, stoppingCriteria, problem),
+        _atomicOperations(atomicOperations),
+        _selection(selection),
         _lambda(lambda) {
         DEBUG_TRACE("Creation OnePlusLambda");
-        rid = new uniform_int_distribution<unsigned int>(0, N-1);
-        lambdaNumber = new unsigned int[_lambda];
     }
 
     ~OnePlusLambda() {
-        delete rid;
-        delete lambdaNumber;
     }
     
     unique_ptr<SOL> operator()(const SOL &s) {
-        unique_ptr<SOL> result;
-        return move(result);
+        solution_star = s;
+        if (!solution_star.fitnessIsValid()) {
+            this->_problem.full_eval(solution_star);
+        }
+        
+        while (this->_stoppingCriteria.operator()(solution_star)) {
+            this->_statistic.operator()(solution_star);
+
+            solution_beta = solution_star;
+            for (unsigned int i = 0 ; i < _lambda ; i++) {
+                solution_alpha = solution_star;
+                
+                _atomicOperations.operator()(solution_alpha);
+                this->_problem.full_eval(solution_alpha);
+                if (_selection(solution_alpha, solution_beta)) {
+                    solution_beta = solution_alpha;
+                }
+            }
+             solution_star = solution_beta;
+        }
+
+        this->_statistic.operator()(solution_star);
+
+        return move(make_unique<SOL>(solution_star));
     }
     
-
-    // void operator()(SOL &s) {
-    //     while (this->_stoppingCriteria.operator()(s)) {
-    //         lambdaNumber[0] = rid->operator()(this->_mt_rand);
-    //         for (unsigned int i = 1 ; i < _lambda;) {
-    //             unsigned int ret = rid->operator()(this->_mt_rand);
-                
-    //             for (unsigned int j = 0 ; j < i ; j++) {
-    //                 if(ret == lambdaNumber[j])
-    //                     break;
-    //                 else if (j == ( i- 1) ){
-    //                     j++;
-    //                     lambdaNumber[j] = ret;
-    //                     i++;
-    //                 }
-    //             }
-    //         }
-
-    //         if (!s.fitnessIsValid()) {
-    //             this->_problem.full_eval(s);
-    //         }
-            
-    //         auto bestFitness = s.getFitness();
-    //         unsigned int cellToMutate = 0;
-
-            
-    //         for (unsigned int i = 0 ; i < _lambda ; i++) {
-    //             auto fitnessBefore = s.getFitness();
-    //             s(lambdaNumber[i]) == 1 ? s(lambdaNumber[i], 0) : s(lambdaNumber[i], 1);
-    //             this->_problem.full_eval(s);
-                
-    //             if (bestFitness < s.getFitness()) {
-    //                 bestFitness = s.getFitness();
-    //                 cellToMutate = lambdaNumber[i];
-    //             }
-
-    //             s(lambdaNumber[i]) == 1 ? s(lambdaNumber[i], 0) : s(lambdaNumber[i], 1);
-    //             s.setFitness(fitnessBefore);
-    //         }
-            
-    //         if (bestFitness != s.getFitness()) {                     
-    //             if (s(cellToMutate) == 1) 
-    //                 s(cellToMutate, 0);
-    //             else 
-    //                 s(cellToMutate, 1);
-    //             s.setFitness(bestFitness);
-    //         }
-
-    //         #ifdef DEBUG
-    //         cerr<<s<<endl;
-    //         #endif
-    //         this->_statistic.operator()(s);
-    //     }
-    // }
-    
     protected:
+        AtomicOperation<SOL, TYPE_CELL> &_atomicOperations;
+        Selection<SOL> &_selection;
         unsigned int _lambda;
-        unsigned int *lambdaNumber;
-        uniform_int_distribution<unsigned int> *rid;
+        SOL solution_star;
+        SOL solution_alpha;
+        SOL solution_beta;
 };
 
 #endif

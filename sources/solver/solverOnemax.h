@@ -110,17 +110,17 @@ class SolverOneMax : public Solver {
 
         switch (numParameter) {
             case 0:
-                optimizationAlgorithm = new FirstImprovement<SOL_ONEMAX, bool>(this->_mt_rand, statistic, stoppingCriteria, eOneMax, mutation_FlipBit, selection, sizeArray);
+                optimizationAlgorithm = new FirstImprovement<SOL_ONEMAX, bool>(this->_mt_rand, statistic, stoppingCriteria, eOneMax, mutation_FlipBit, selection);
                 solution_result = optimizationAlgorithm->operator()(s);
                 delete optimizationAlgorithm;
                 break;
             case 1:
-                optimizationAlgorithm = new BestImprovement<SOL_ONEMAX, bool>(this->_mt_rand, statistic, stoppingCriteria, eOneMax, mutation_FlipBit, selection, sizeArray);
+                optimizationAlgorithm = new BestImprovement<SOL_ONEMAX, bool>(this->_mt_rand, statistic, stoppingCriteria, eOneMax, mutation_FlipBit, selection);
                 solution_result = optimizationAlgorithm->operator()(s);
                 delete optimizationAlgorithm;
                 break;
             case 2:
-                optimizationAlgorithm = new OnePlusLambda<SOL_ONEMAX, bool>(this->_mt_rand, statistic, stoppingCriteria, eOneMax, sizeArray, 50);
+                optimizationAlgorithm = new OnePlusLambda<SOL_ONEMAX, bool>(this->_mt_rand, statistic, stoppingCriteria, eOneMax, mutation_FlipBit, selection, 50);
                 solution_result = optimizationAlgorithm->operator()(s);
                 delete optimizationAlgorithm;
                 break;

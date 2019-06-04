@@ -70,11 +70,11 @@ class SolverSubsetsum : public Solver {
         statistic->addSensor(new SensorStopwatch<SOL_SUBSETSUM>);
 
         optimizationAlgorithm.push_back(pair<string, OptimizationAlgorithm<SOL_SUBSETSUM, bool> *>("FirstImprovement", 
-        new FirstImprovement<SOL_SUBSETSUM, bool>(this->_mt_rand, *statistic, *stoppingCriteria, *eSubsetsum, *mutation_FlipBit, *selection, N)));
+        new FirstImprovement<SOL_SUBSETSUM, bool>(this->_mt_rand, *statistic, *stoppingCriteria, *eSubsetsum, *mutation_FlipBit, *selection)));
         optimizationAlgorithm.push_back(pair<string, OptimizationAlgorithm<SOL_SUBSETSUM, bool> *>("BestImprovement", 
-        new BestImprovement<SOL_SUBSETSUM, bool>(this->_mt_rand, *statistic, *stoppingCriteria, *eSubsetsum, *mutation_FlipBit, *selection, N)));
+        new BestImprovement<SOL_SUBSETSUM, bool>(this->_mt_rand, *statistic, *stoppingCriteria, *eSubsetsum, *mutation_FlipBit, *selection)));
         optimizationAlgorithm.push_back(pair<string, OptimizationAlgorithm<SOL_SUBSETSUM, bool> *>("OnePlusLambda", 
-        new OnePlusLambda<SOL_SUBSETSUM, bool>(this->_mt_rand, *statistic, *stoppingCriteria, *eSubsetsum, N, 50)));
+        new OnePlusLambda<SOL_SUBSETSUM, bool>(this->_mt_rand, *statistic, *stoppingCriteria, *eSubsetsum, *mutation_FlipBit, *selection, 50)));
     }
 
     virtual ~SolverSubsetsum() {

@@ -29,15 +29,12 @@ class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_CELL> {
         StoppingCriteria<SOL> &stoppingCriteria,
         Problem<SOL, TYPE_CELL> &problem,
         AtomicOperation<SOL, TYPE_CELL> &atomicOperations,
-        Selection<SOL> &selection,
-        unsigned int N) :
+        Selection<SOL> &selection) :
         OptimizationAlgorithm<SOL, TYPE_CELL>(mt_rand, statistic, stoppingCriteria, problem) {
         DEBUG_TRACE("Creation BestImprovement");
-        rid = new uniform_int_distribution<unsigned int>(0, N-1);
     }
 
     virtual ~BestImprovement() {
-        delete rid;
     }
     
     unique_ptr<SOL> operator()(const SOL &s) {
@@ -91,7 +88,6 @@ class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_CELL> {
     }
 
     protected:
-        uniform_int_distribution<unsigned int> *rid;
 };
 
 #endif
