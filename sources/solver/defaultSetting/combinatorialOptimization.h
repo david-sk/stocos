@@ -34,7 +34,7 @@ class CombinatorialOptimization {
             statStatistic = true;
             budget = 400;
 
-            mutation_FlipBit = make_shared<FlipBit<SOL, TYPE_CELL>>(this->_mt_rand, 5);
+            mutation_FlipBit = make_shared<FlipBit<SOL, TYPE_CELL>>(this->_mt_rand, 1);
             
             selection = make_shared<Selection_difference<SOL>>(_problem.getFitnessObjectif());
             

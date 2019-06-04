@@ -24,7 +24,7 @@ using namespace std;
 
 using TYPE_FITNESS_KNAPSACK = int;
 using TYPE_CELL_KNAPSACK = bool;
-using SOL_KNAPSACK = SolutionArray<TYPE_CELL_KNAPSACK, TYPE_CELL_KNAPSACK>;
+using SOL_KNAPSACK = SolutionArray<TYPE_FITNESS_KNAPSACK, TYPE_CELL_KNAPSACK>;
 
 class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_KNAPSACK> {
     public:
@@ -62,10 +62,17 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
         //assert(static_cast<int>(problem["#items"].GetInt()) != static_cast<int>(_weight.Size()));
         //assert(_weight.Size() != _profit.Size());
 
+        weight.clear();
+        profit.clear();
         for (unsigned int i = 0; i < nbItems ; i++) {
             weight.push_back(_weight[i].GetInt());
             profit.push_back(_profit[i].GetInt());
-        }        
+        }
+
+        for (unsigned int i = 0 ; i < profit.size() ; i++)
+            fitnessObjectif += profit[i];
+        
+
     }
 
     void full_eval(SOL_KNAPSACK &s) const {
@@ -105,12 +112,12 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
     }
 
     TYPE_FITNESS_KNAPSACK getFitnessObjectif() const {
-        return capacity;
+        return fitnessObjectif;
     }
 
 	TYPE_FITNESS_KNAPSACK getFitnessObjectif(unsigned int numObjectif) const {
 		assert(numObjectif = 0);
-		return capacity;
+		return fitnessObjectif;
 	}
 
     private:

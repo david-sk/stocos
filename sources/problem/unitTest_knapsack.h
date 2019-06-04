@@ -18,7 +18,7 @@ using namespace CppUnit;
 
 class UnitTest_knapsack : public CppUnit::TestFixture {
     CPPUNIT_TEST_SUITE(UnitTest_knapsack);
-    CPPUNIT_TEST(test_loadInstance);
+    CPPUNIT_TEST(loadInstance);
     CPPUNIT_TEST_SUITE_END();
 
     public:
@@ -28,7 +28,7 @@ class UnitTest_knapsack : public CppUnit::TestFixture {
     void tearDown(void) {
     }
 
-    void test_loadInstance(void) {
+    void loadInstance(void) {
         Knapsack eknapsack("instances/knapsackProblem/knapsackProblem-5-1.json");
         unsigned int n = eknapsack.sizeArraySolution();
         int fitness = 12;
@@ -41,6 +41,7 @@ class UnitTest_knapsack : public CppUnit::TestFixture {
         eknapsack.full_eval(s);
         CPPUNIT_ASSERT(s.getFitness() == fitness);
     }
+
     private:
 };
 
