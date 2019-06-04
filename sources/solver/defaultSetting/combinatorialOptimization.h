@@ -31,12 +31,12 @@ class CombinatorialOptimization {
         _mt_rand(mt_rand),
         _problem(problem)
         {
-            statStatistic = false;
+            statStatistic = true;
             budget = 400;
 
             mutation_FlipBit = make_shared<FlipBit<SOL, bool>>(this->_mt_rand, 5);
             
-            selection = make_shared<Selection_maximization<SOL>>();
+            selection = make_shared<Selection_difference<SOL>>(_problem.getFitnessObjectif());
             
             stoppingCriteria = make_shared<StoppingCriteria<SOL>>();
             stoppingCriteria->addCriteria(new CriteriaBudget<SOL>(budget));

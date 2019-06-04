@@ -18,7 +18,8 @@ using namespace CppUnit;
 
 class UnitTest_OneMax : public CppUnit::TestFixture {
     CPPUNIT_TEST_SUITE(UnitTest_OneMax);
-    CPPUNIT_TEST(test_full);
+    CPPUNIT_TEST(full_eval);
+    CPPUNIT_TEST(loadInstance);
     CPPUNIT_TEST_SUITE_END();
 
     public:
@@ -28,7 +29,7 @@ class UnitTest_OneMax : public CppUnit::TestFixture {
     void tearDown(void) {
     }
 
-    void test_full(void) {
+    void full_eval(void) {
         unsigned int n = 10, fitness = 0;
         SolutionArray<unsigned int, bool> s(1, n);
         for (unsigned int i = 0 ; i < n ; i++) {
@@ -45,6 +46,10 @@ class UnitTest_OneMax : public CppUnit::TestFixture {
         eOneMax.full_eval(s);
 
         CPPUNIT_ASSERT(s.getFitness() == fitness);
+    }
+
+    void loadInstance(void) {
+        OneMax eOneMax("instances/OneMax/onemax-50.json");
     }
 
     private:

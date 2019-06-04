@@ -12,6 +12,14 @@
 
 #include <iostream>
 #include <memory>
+#include <unistd.h>
+
+#include <fstream>
+
+#include <rapidjson/document.h>
+#include <rapidjson/writer.h>
+#include <rapidjson/stringbuffer.h>
+#include <rapidjson/filereadstream.h>
 
 #include "../solution/solutionArray.h"
 #include "problem.h"
@@ -23,6 +31,12 @@ using TYPE_CELL_ONEMAX = bool;
 using SOL_ONEMAX = SolutionArray<TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>;
 class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX> {
     public:
+    OneMax() : _N(1) {
+
+    }
+    OneMax(string fileInstance) {
+        loadInstance(fileInstance);
+    }
     
     OneMax(unsigned int N) : _N(N) {
 
@@ -32,8 +46,20 @@ class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>
 
     }
 
-    void loadInstance(string file) {
-        
+    void loadInstance(const string &file) {
+        using namespace rapidjson;
+
+        // check if a file exist
+        assert(access(file.c_str(), F_OK ) != -1);
+
+        FILE* fp = fopen(file.c_str(), "rb");
+        char readBuffer[65536];
+        FileReadStream is(fp, readBuffer, sizeof(readBuffer));
+        Document d;
+        d.ParseStream(is);
+        Value& problem = d["problem"];
+        numInstance = problem["numInstance"].GetString();
+        _N = static_cast<unsigned int>(problem["N"].GetInt());
     }
 
     unique_ptr<SOL_ONEMAX> new_solution() const {
@@ -72,6 +98,7 @@ class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>
 	}
 
     private:
+        string numInstance;
         unsigned int _N;
 };
 

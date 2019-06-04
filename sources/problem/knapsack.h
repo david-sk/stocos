@@ -35,7 +35,7 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
 
     }
 
-    void loadInstance(string file) {
+    void loadInstance(const string &file) {
         using namespace rapidjson;
 
         // check if a file exist

@@ -20,6 +20,8 @@
 #include "solver/solverOnemax.h"
 #include "solver/solverSubsetsum.h"
 
+#include "problem/oneMax.h"
+
 
 using namespace std;
 
@@ -78,16 +80,21 @@ int main(int argc, char **argv, char **envp) {
 	std::mt19937 mt_rand;
 	mt_rand.seed(seed);
 
+	// Problem definition 
+	OneMax eOneMax;
+	Subsetsum eSubsetsum;
+
 	//
 	unique_ptr<Solver> solver;
 	using x = void;
+	
 
 	switch (problemSolving) {
 		case 0: 
-			solver.reset(new SolverOneMax(mt_rand, vm, menuHelp, argc, argv));
+			solver.reset(new SolverGeneric<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>(mt_rand, vm, menuHelp, argc, argv, eOneMax));
 			break;
 		case 1: 
-			solver.reset(new SolverSubsetsum(mt_rand, vm, menuHelp, argc, argv));
+			solver.reset(new SolverGeneric<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CELL_SUBSETSUM>(mt_rand, vm, menuHelp, argc, argv, eSubsetsum));
 			break;
 		default:
 			solver.reset(new SolverOneMax(mt_rand, vm, menuHelp, argc, argv));

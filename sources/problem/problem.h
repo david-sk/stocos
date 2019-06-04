@@ -26,11 +26,14 @@ public:
 	}
 	
 	// Loading an instance
-	virtual void loadInstance(string file) = 0;
+	virtual void loadInstance(const string &file) = 0;
 	
 	// Generating a solution
 	virtual void reset_solution(SOL &s) const = 0;
-	//virtual unique_ptr<SOL> new_solution() const = 0;
+	virtual unique_ptr<SOL> new_solution() const {
+		cerr<<"[-] Not implemented : new_solution()"<<endl;
+		exit(EXIT_FAILURE);
+	}
 
 	// Evaluation of the solution
 	virtual void full_eval(SOL &s) const = 0;
@@ -42,12 +45,12 @@ public:
 		return true;
 	}
 	virtual TYPE_FITNESS getFitnessObjectif() const {
-		cerr<<"[-] Not implemented !"<<endl;
+		cerr<<"[-] Not implemented : getFitnessObjectif()"<<endl;
 		exit(EXIT_FAILURE);
 	}
 
 	virtual TYPE_FITNESS getFitnessObjectif(unsigned int numObjectif) const {
-		cerr<<"[-] Not implemented !"<<endl;
+		cerr<<"[-] Not implemented : getFitnessObjectif(unsigned int numObjectif)"<<endl;
 		exit(EXIT_FAILURE);
 	}
 	

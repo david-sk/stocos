@@ -105,12 +105,6 @@ class SolverSubsetsum : public Solver {
     // 
     shared_ptr<Subsetsum> eSubsetsum;
     unique_ptr<CombinatorialOptimization<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>> CO;
-
-    vector<pair<string, OptimizationAlgorithm<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CELL_SUBSETSUM> *>> optimizationAlgorithm; /// < pair : name and pointer of algo
-    shared_ptr<FlipBit<SOL_SUBSETSUM, TYPE_CELL_SUBSETSUM>> mutation_FlipBit;
-    shared_ptr<Selection<SOL_SUBSETSUM>> selection;
-    shared_ptr<StoppingCriteria<SOL_SUBSETSUM>> stoppingCriteria;
-    shared_ptr<Statistic<SOL_SUBSETSUM>> statistic;
 };
 
 #endif

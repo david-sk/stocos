@@ -12,7 +12,7 @@
 
 #include <vector>
 #include <unistd.h>
-#include <fstream> // FileReadStream
+#include <fstream>
 
 #include <rapidjson/document.h>
 #include <rapidjson/writer.h>
@@ -29,7 +29,10 @@ using TYPE_CELL_SUBSETSUM = bool;
 using SOL_SUBSETSUM = SolutionArray<TYPE_FITNESS_SUBSETSUM, TYPE_CELL_SUBSETSUM>;
 class Subsetsum : public Problem<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CELL_SUBSETSUM> {
     public:
-    
+    Subsetsum() {
+        generateInstance(1);
+    }
+
     Subsetsum(const unsigned int N) {
         generateInstance(N);
     }
@@ -39,6 +42,7 @@ class Subsetsum : public Problem<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CEL
     }
 
     void generateInstance(const unsigned int N) {
+        setOfNumbers.clear();
         for (unsigned int i = 1 ; i <= N ; i++) {
             setOfNumbers.push_back(i % 50);
             if (i % 3)
@@ -50,7 +54,7 @@ class Subsetsum : public Problem<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CEL
 
     }
 
-    void loadInstance(string file) {
+    void loadInstance(const string &file) {
         using namespace rapidjson;
 
         // check if a file exist
@@ -69,6 +73,7 @@ class Subsetsum : public Problem<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CEL
 
         Value& set = problem["set"];
 
+        setOfNumbers.clear();
         for (SizeType i = 0; i < set.Size(); i++) {
             setOfNumbers.push_back(static_cast<unsigned int>(set[i].GetInt()));
         }
@@ -103,6 +108,14 @@ class Subsetsum : public Problem<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CEL
         for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
             s(i, 0);
         }
+    }
+
+    unique_ptr<SOL_SUBSETSUM> new_solution() const {
+        unique_ptr<SOL_SUBSETSUM> s(make_unique<SOL_SUBSETSUM>(setOfNumbers.size()));
+        for (unsigned int i = 0 ; i < s->sizeArray() ; i++) {
+            s->operator()(i, 0);
+        } 
+        return move(s);
     }
 
     private:

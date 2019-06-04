@@ -61,7 +61,7 @@ public:
         delete[] B;
     }
 
-    void loadInstance(string file) {
+    void loadInstance(const string &file) {
         std::fstream myfile(file, std::ios_base::in);
 
         unsigned int a;

@@ -13,6 +13,14 @@
 #include <map>
 #include <utility>
 
+#include <fstream>
+
+#include <rapidjson/document.h>
+#include <rapidjson/writer.h>
+#include <rapidjson/stringbuffer.h>
+#include <rapidjson/filereadstream.h>
+
+
 #include "../solution/solutionArray.h"
 #include "problem.h"
 
@@ -28,7 +36,7 @@ class JobShopProblem : public Problem<SOL, double, bool> {
 
     }
 
-    void loadInstance(string file) {
+    void loadInstance(const string &file) {
         using namespace rapidjson;
 
         // check if a file exist
