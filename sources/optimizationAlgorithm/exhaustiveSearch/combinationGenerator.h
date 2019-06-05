@@ -10,9 +10,11 @@
 #define COMBINATIONGENERATOR_H
 
 #include <iostream>
+#include <random>
 
 #include "../../solution/solutionArray.h"
 #include "../optimizationAlgorithm.h"
+#include "../problem/problem.h"
 
 using namespace std;
 

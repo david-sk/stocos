@@ -35,7 +35,7 @@ run:
 	# ./build/stocos --problem=2 --instance=instances/knapsackProblem/knapsackProblem-5-1.json --algo=0	# Knapsack
 
 packagesDebain:
-	apt-get install g++ build-essential rapidjson-dev
+	apt-get install g++ build-essential rapidjson-dev libboost-all-dev libcppunit-dev
 
 unittest : ./sources/unitTest.cpp
 	$(CC) $(FLAGS) $< -o $(BUILD_DIR)unittest_$(EXEC_NAME) -lcppunit -lboost_program_options

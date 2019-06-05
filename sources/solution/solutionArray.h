@@ -10,7 +10,14 @@
 #ifndef SOLUTIONARRAY_H
 #define SOLUTIONARRAY_H
 
+#include <iostream>
+#include <vector>
+#include <string>
+#include <sstream>
+
 #include "solution.h"
+
+using namespace std;
 
 template<typename TYPE_FITNESS, typename TYPE_CELL>
 class SolutionArray : public Solution<TYPE_FITNESS> {
