@@ -13,6 +13,9 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <signal.h>
+
+#include <sys/mman.h>
 
 #include "macro.h"
 
@@ -28,6 +31,7 @@
 using namespace std;
 
 void version(string name_software, string num_version);
+void segfault_sigaction(int signal, siginfo_t *si, void *arg);
 
 void version(string name_software, string num_version) {
 	std::cout<<"******************************************"<<std::endl;
@@ -37,9 +41,26 @@ void version(string name_software, string num_version) {
 	std::cout<<"******************************************"<<std::endl;
 }
 
+
+void segfault_sigaction(int signal, siginfo_t *si, void *arg) {
+    printf("Caught segfault at address %p\n", si->si_addr);
+    exit(0);
+}
+
 int main(int argc, char **argv, char **envp) {
 	//
 	DEBUG_TRACE("Start of the program")
+
+   //--- signal
+    struct sigaction sa;
+
+    memset(&sa, 0, sizeof(struct sigaction));
+    sigemptyset(&sa.sa_mask);
+    sa.sa_sigaction = segfault_sigaction;
+    sa.sa_flags   = SA_SIGINFO;
+
+    sigaction(SIGINT, &sa, NULL);
+   //--- end signal
 
 	unsigned long int seed = static_cast<unsigned long int>(time(0));
 	unsigned int problemSolving = 0;
