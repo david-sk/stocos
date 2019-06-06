@@ -50,7 +50,7 @@ void segfault_sigaction(int signal, siginfo_t *si, void *arg) {
 int main(int argc, char **argv, char **envp) {
 	//
 	DEBUG_TRACE("Start of the program")
-
+	
    //--- signal
     struct sigaction sa;
 

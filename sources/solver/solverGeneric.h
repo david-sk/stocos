@@ -10,7 +10,6 @@
 #ifndef SOLVER_GENERIC_H
 #define	SOLVER_GENERIC_H
 
-#include <cassert>
 #include <random>
 #include <string>
 #include <memory>

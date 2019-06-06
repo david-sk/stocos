@@ -10,7 +10,6 @@
 #ifndef SOLUTION_H
 #define SOLUTION_H
 
-#include <cassert>
 #include <cstring>
 #include <cstdio>
 #include <string>
@@ -89,11 +88,8 @@ class Solution {
 		
 		Solution & operator=(const Solution & s) {
 			if (_numberOfObjective != s._numberOfObjective) {
-				//this->~Solution();
 				_numberOfObjective = s._numberOfObjective;
-				//_fitness = new TYPE_FITNESS[_numberOfObjective];
 				_fitness = unique_ptr<TYPE_FITNESS []>(new TYPE_FITNESS[_numberOfObjective]);
-				//_fitnessIsValid = new bool[_numberOfObjective];
 				_fitnessIsValid = unique_ptr<bool []>(new bool[_numberOfObjective]);
 				for(unsigned int i = 0 ; i < _numberOfObjective ; i++)
 					_fitnessIsValid[i] = false;
