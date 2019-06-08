@@ -14,7 +14,7 @@
 
 #include "../../solution/solutionArray.h"
 #include "../optimizationAlgorithm.h"
-#include "../problem/problem.h"
+#include "../../problem/problem.h"
 
 using namespace std;
 

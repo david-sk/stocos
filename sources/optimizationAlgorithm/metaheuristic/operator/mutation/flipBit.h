@@ -79,7 +79,7 @@ class FlipBit : public AtomicOperation<SOL, TYPE_CELL> {
         return move(list);
     }
 
-    void applyMutation(SOL &s, const vector<pair<unsigned int, TYPE_CELL>> &_listOfMutations) {
+    void applyOperator(SOL &s, const vector<pair<unsigned int, TYPE_CELL>> &_listOfMutations) {
         backup.clear();
         for (unsigned int i = 0 ; i < _listOfMutations.size() ; i++) {
             s(_listOfMutations[i].first, _listOfMutations[i].second);

@@ -24,8 +24,14 @@ class AtomicOperation  {
     }
 
     virtual void operator()(SOL &s) = 0;
-    virtual unique_ptr<vector<pair<unsigned int, TYPE_CELL>>> listOfMutations(const SOL &s);
-    virtual void applyMutation(SOL &s, const vector<pair<unsigned int, TYPE_CELL>> &_listOfMutations);
+    virtual unique_ptr<vector<pair<unsigned int, TYPE_CELL>>> listOfMutations(const SOL &s) {
+        cerr<<"Not implemented"<<endl;
+        exit(EXIT_FAILURE);
+    }
+    virtual void applyOperator(SOL &s, const vector<pair<unsigned int, TYPE_CELL>> &_listOfMutations) {
+        cerr<<"Not implemented"<<endl;
+        exit(EXIT_FAILURE);
+    }
 
 
     protected:

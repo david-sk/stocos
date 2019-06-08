@@ -27,11 +27,14 @@
 #include "problem/unitTest_OneMax.h"
 #include "problem/unitTest_knapsack.h"
 #include "problem/unitTest_magicSequence.h"
+#include "problem/unitTest_travelingSalesmanProblem.h"
+#include "optimizationAlgorithm/metaheuristic/operator/unitTest_swap.h"
 #include "optimizationAlgorithm/metaheuristic/operator/mutation/unitTest_flipBit.h"
 #include "optimizationAlgorithm/metaheuristic/operator/mutation/unitTest_kBit.h"
 #include "problem/unitTest_QAP.h"
 #include "optimizationAlgorithm/exhaustiveSearch/unitTest_combinationGenerator.h"
 #include "optimizationAlgorithm/exhaustiveSearch/unitTest_backtracking.h"
+
 
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_criteriaBudget);
@@ -46,6 +49,9 @@ CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_combinationGenerator);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_backtraking);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_flipBit);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_kBit);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_swap);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_travelingSalesmanProblem);
+
 
 int main(int argc, char* argv[])
 {

@@ -66,7 +66,6 @@ class SolverGeneric : public Solver {
 			CO = make_unique<CombinatorialOptimization<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _problem);
 		}
 
-
 		void operator()() {
 			unique_ptr<SOL> s = _problem.new_solution();
 

@@ -40,19 +40,16 @@ class UnitTest_kBit : public CppUnit::TestFixture {
         unsigned int N = 50;
         SolutionArray<int, bool> s1(1, N);
         SolutionArray<int, bool> s2(1, N);
-
         for (unsigned int i = 0 ; i < N ; i++) {
             s1(i, 0);
             s2(i, 0);
         }
-
 	    std::mt19937 mt_rand;
 	    mt_rand.seed(0);
-        
         KBit<SolutionArray<int, bool>, bool> kbit(mt_rand, 20);
         kbit(s1);
         kbit.cancelMutations(s1);
-        CPPUNIT_ASSERT(s1 == s2);   
+        CPPUNIT_ASSERT(s1 == s2);
     }
 
     void listOfMutations(void) {

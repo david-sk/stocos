@@ -29,7 +29,10 @@ public:
 	virtual void loadInstance(const string &file) = 0;
 	
 	// Generating a solution
-	virtual void reset_solution(SOL &s) const = 0;
+	virtual void reset_solution(SOL &s) const {
+		cerr<<"[-] Not implemented : reset_solution()"<<endl;
+		exit(EXIT_FAILURE);
+	}
 	virtual unique_ptr<SOL> new_solution() const {
 		cerr<<"[-] Not implemented : new_solution()"<<endl;
 		exit(EXIT_FAILURE);
