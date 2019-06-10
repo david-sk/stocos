@@ -31,6 +31,7 @@
 #include "optimizationAlgorithm/metaheuristic/operator/unitTest_swap.h"
 #include "optimizationAlgorithm/metaheuristic/operator/mutation/unitTest_flipBit.h"
 #include "optimizationAlgorithm/metaheuristic/operator/mutation/unitTest_kBit.h"
+#include "optimizationAlgorithm/metaheuristic/operator/mutation/unitTest_neighborhood.h"
 #include "problem/unitTest_QAP.h"
 #include "optimizationAlgorithm/exhaustiveSearch/unitTest_combinationGenerator.h"
 #include "optimizationAlgorithm/exhaustiveSearch/unitTest_backtracking.h"
@@ -51,6 +52,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_flipBit);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_kBit);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_swap);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_travelingSalesmanProblem);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_neighborhood);
 
 
 int main(int argc, char* argv[])

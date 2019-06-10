@@ -18,6 +18,8 @@
 #include "../../optimizationAlgorithm/metaheuristic/bestImprovement.h"
 #include "../../optimizationAlgorithm/metaheuristic/onePlusLambda.h"
 #include "../../optimizationAlgorithm/metaheuristic/iteratedLocalSearch.h"
+#include "../../optimizationAlgorithm/metaheuristic/simulatedAnnealing.h"
+#include "../../optimizationAlgorithm/metaheuristic/tabuSearch.h"
 #include "../../optimizationAlgorithm/metaheuristic/operator/mutation/flipBit.h"
 #include "../../optimizationAlgorithm/metaheuristic/selection/selection.h"
 #include "../../optimizationAlgorithm/metaheuristic/selection/selection_maximization.h"
@@ -63,6 +65,8 @@ class CombinatorialOptimization {
             firstImprovement_ils = make_shared<FirstImprovement<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, *statistic_ils, *stoppingCriteria_ils, _problem, *mutation_FlipBit_1, *selection);
             optimizationAlgorithm.push_back(pair<string, OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> *>("IteratedLocalSearch", 
             new IteratedLocalSearch<SOL, TYPE_FITNESS, TYPE_CELL>(this->_mt_rand, *statistic, *stoppingCriteria, _problem, *mutation_FlipBit_N, *firstImprovement_ils, *selection)));
+        
+            TabuSearch<SOL, TYPE_FITNESS, TYPE_CELL> TS(this->_mt_rand, *statistic, *stoppingCriteria, _problem, *mutation_FlipBit_1, *selection);
         }
 
         virtual ~CombinatorialOptimization() {

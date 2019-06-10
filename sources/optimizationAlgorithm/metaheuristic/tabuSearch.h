@@ -1,5 +1,5 @@
 ///
-/// \file simulatedAnnealing.h
+/// \file tabuSearch.h
 /// \author Jxtopher
 /// \version 1
 /// \copyright CC-BY-NC-SA
@@ -7,14 +7,19 @@
 /// \brief 
 ///
 
-#ifndef SIMULATEDANNELING_H
-#define SIMULATEDANNELING_H
+#ifndef TABUSEARCH_H
+#define TABUSEARCH_H
 
+#include <boost/circular_buffer.hpp>
+
+#include <memory>
+
+using namespace std;
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-class SimulatedAnnealing : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
+class TabuSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
     public:
-    SimulatedAnnealing(std::mt19937 &mt_rand, 
+    TabuSearch(std::mt19937 &mt_rand, 
         Statistic<SOL> &statistic,
         StoppingCriteria<SOL, TYPE_FITNESS> &stoppingCriteria,
         Problem<SOL, TYPE_FITNESS, TYPE_CELL> &problem,
@@ -22,11 +27,13 @@ class SimulatedAnnealing : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_
         Selection<SOL> &selection) : 
         OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, statistic, stoppingCriteria, problem),
         _atomicOperations(atomicOperations),
-        _selection(selection) {
-        DEBUG_TRACE("Creation SimulatedAnnealing");
+        _selection(selection)  {
+        DEBUG_TRACE("Creation TabuSearch");
+        tabuList.set_capacity(5);
     }
-    virtual ~SimulatedAnnealing() {
-        
+
+    virtual ~TabuSearch() {
+
     }
 
     unique_ptr<SOL> operator()(const SOL &s) {
@@ -35,6 +42,16 @@ class SimulatedAnnealing : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_
             this->_problem.full_eval(solution_star);
         }
 
+        while (this->_stoppingCriteria.operator()(solution_star)) {
+            this->_statistic.operator()(solution_star);
+
+            //solution_beta = solution_star;
+            
+
+
+
+        }
+        
         return move(make_unique<SOL>(solution_star));
     }
 
@@ -43,6 +60,10 @@ class SimulatedAnnealing : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_
     Selection<SOL> &_selection;
 
     SOL solution_star;
+    boost::circular_buffer<pair<double, unsigned int>> tabuList;
 };
 
+
 #endif
+
+
