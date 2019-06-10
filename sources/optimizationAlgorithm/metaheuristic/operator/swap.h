@@ -14,11 +14,11 @@
 #include <algorithm>
 #include "atomicOperation.h"
 
-template<typename SOL, typename TYPE_CELL>
-class Swap : public AtomicOperation<SOL, TYPE_CELL> {
+template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
+class Swap : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
     public:
         Swap(std::mt19937 &mt_rand, unsigned int nbSwap): 
-        AtomicOperation<SOL, TYPE_CELL>(mt_rand), 
+        AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand), 
         _nbSwap(nbSwap) {
             N = 1;
             rid = make_unique<uniform_int_distribution<unsigned int>>(0, N);

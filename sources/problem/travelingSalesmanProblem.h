@@ -12,6 +12,7 @@
 
 #include <vector>
 #include <string>
+#include <cmath>
 
 #include <rapidjson/document.h>
 #include <rapidjson/filereadstream.h>
@@ -34,6 +35,14 @@ class TravelingSalesmanProblem : public Problem<SOL_STP, TYPE_FITNESS_STP, TYPE_
 
         }
 
+        unique_ptr<SOL_STP> new_solution() const {
+            unique_ptr<SOL_STP> s(make_unique<SOL_STP>(nodes.size()));
+            for (unsigned int i = 0 ; i < s->sizeArray() ; i++) {
+                s->operator()(i, i);
+            } 
+            return move(s);
+        }
+
         virtual void loadInstance(const string &file) {
             using namespace rapidjson;
 
@@ -50,23 +59,25 @@ class TravelingSalesmanProblem : public Problem<SOL_STP, TYPE_FITNESS_STP, TYPE_
             numberOfNodes = static_cast<unsigned int>(problem["numberOfNodes"].GetInt());
             Value& _nodes = problem["nodes"];
 
-            // for (SizeType i = 0; i < _nodes.Size(); i++) {
-            //     Value& node = problem[static_cast<unsigned int>(_nodes[i].GetInt())];
-            // }
+            for (SizeType i = 0; i < _nodes.Size(); i++) {
+                double x = _nodes[i]["x"].GetDouble();
+                double y = _nodes[i]["y"].GetDouble();
+                nodes.push_back(pair<double, double>(x, y));
+            }
         }
 
         virtual void full_eval(SOL_STP &s) const {
             double distance_sum = 0;
             for (unsigned int i = 0 ; i < s.sizeArray() - 1 ; i++) {
-                distance_sum += distance(nodes[s(i)], nodes[s(i + 1)]);
+                distance_sum += distance_euclidienne(nodes[s(i)], nodes[s(i + 1)]);
             }
             s.setFitness(distance_sum);
         }
 
 
     private:
-        double distance(pair<double, double> node_a, pair<double, double> node_b) const {
-            return 0.0;
+        double distance_euclidienne(pair<double, double> node_a, pair<double, double> node_b) const {
+            return sqrt(abs(node_b.second - node_a.second) * abs(node_b.second - node_a.second) + abs(node_b.first - node_a.first) * abs(node_b.first - node_a.first));
         }
 
         string numInstance;

@@ -19,7 +19,7 @@ class OnePlusLambda : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>
         Statistic<SOL> &statistic,
         StoppingCriteria<SOL, TYPE_FITNESS> &stoppingCriteria,
         Problem<SOL, TYPE_FITNESS, TYPE_CELL> &problem,
-        AtomicOperation<SOL, TYPE_CELL> &atomicOperations,
+        AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> &atomicOperations,
         Selection<SOL> &selection,
         unsigned int lambda) : 
         OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, statistic, stoppingCriteria, problem),
@@ -60,7 +60,7 @@ class OnePlusLambda : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>
     }
     
     protected:
-        AtomicOperation<SOL, TYPE_CELL> &_atomicOperations;
+        AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> &_atomicOperations;
         Selection<SOL> &_selection;
         unsigned int _lambda;
         SOL solution_star;

@@ -33,7 +33,6 @@ class CriteriaFitnessObjectif : public Criteria<SOL, TYPE_FITNESS> {
             }
     }
 
-
     virtual ~CriteriaFitnessObjectif(){
         delete[] _fitnessObjectif;
     }
@@ -42,11 +41,14 @@ class CriteriaFitnessObjectif : public Criteria<SOL, TYPE_FITNESS> {
         assert(s.numberOfObjective() == _numberOfObjective);
         // Besion de la définir pour le multi-objectifs
         if (s.fitnessIsValid()) {
-            return s.getFitness() < _fitnessObjectif[0];
+            if ((_fitnessObjectif[0] - s.getFitness()) == 0) {
+                return false;
+            } else {
+                return true;
+            }
         } else {
             return true;
         }
-        
     }
 
     protected:

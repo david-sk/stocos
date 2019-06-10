@@ -28,7 +28,7 @@ class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CEL
         Statistic<SOL> &statistic,
         StoppingCriteria<SOL, TYPE_FITNESS> &stoppingCriteria,
         Problem<SOL, TYPE_FITNESS, TYPE_CELL> &problem,
-        AtomicOperation<SOL, TYPE_CELL> &atomicOperations,
+        AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> &atomicOperations,
         Selection<SOL> &selection) :
         OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, statistic, stoppingCriteria, problem) {
         DEBUG_TRACE("Creation BestImprovement");

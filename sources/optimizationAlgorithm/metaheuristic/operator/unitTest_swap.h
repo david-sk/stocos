@@ -39,7 +39,7 @@ class UnitTest_swap : public CppUnit::TestFixture {
             s1(i,static_cast<int>(i));
         }
         SolutionArray<int, int> s2(s1);
-        Swap<SolutionArray<int, int>, int> swap(mt_rand, 5);
+        Swap<SolutionArray<int, int>, int, int> swap(mt_rand, 5);
         swap(s1);
         swap.cancelMutations(s1);
 

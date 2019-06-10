@@ -1,5 +1,5 @@
 ///
-/// \file firstImprovement.h
+/// \file IteratedLocalSearch.h
 /// \author Jxtopher
 /// \version 1
 /// \copyright CC-BY-NC-SA
@@ -8,8 +8,8 @@
 ///
  
 
-#ifndef FIRSTIMPROVEMENT_H
-#define FIRSTIMPROVEMENT_H
+#ifndef ITERATEDLOCALSEARCH_H
+#define ITERATEDLOCALSEARCH_H
 
 #include <random>
 
@@ -19,23 +19,25 @@
 #include "selection/selection.h"
 
 using namespace std;
-
+// Exploration-Exploitation
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-class FirstImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
+class IteratedLocalSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
     public:
-    FirstImprovement(std::mt19937 &mt_rand, 
+    IteratedLocalSearch(std::mt19937 &mt_rand, 
     Statistic<SOL> &statistic,
     StoppingCriteria<SOL, TYPE_FITNESS> &stoppingCriteria,
     Problem<SOL, TYPE_FITNESS, TYPE_CELL> &problem,
-    AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> &atomicOperations,
+    AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> &exploration,
+    OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> &exploitation,
     Selection<SOL> &selection) : 
     OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, statistic, stoppingCriteria, problem),
-    _atomicOperations(atomicOperations),
+    _exploration(exploration),
+    _exploitation(exploitation),
     _selection(selection) {
-        DEBUG_TRACE("Creation FirstImprovement");
+        DEBUG_TRACE("Creation IteratedLocalSearch");
     }
 
-    ~FirstImprovement() {
+    ~IteratedLocalSearch() {
     }
     
     unique_ptr<SOL> operator()(const SOL &s) {
@@ -49,9 +51,11 @@ class FirstImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CE
 
             solution_beta = solution_star;
             
-            _atomicOperations.operator()(solution_beta);
+            _exploration(solution_beta);
+            unique_ptr<SOL> solution_beta_beta = _exploitation(solution_beta);
+
             this->_problem.full_eval(solution_beta);
-            if (_selection(solution_beta, solution_star)) {
+            if (_selection(*solution_beta_beta, solution_star)) {
                 solution_star = solution_beta;
             }
         }
@@ -62,7 +66,8 @@ class FirstImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CE
     }
 
     protected:
-        AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> &_atomicOperations;
+        AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> &_exploration;
+        OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> &_exploitation;
         Selection<SOL> &_selection;
         SOL solution_star;
         SOL solution_beta;

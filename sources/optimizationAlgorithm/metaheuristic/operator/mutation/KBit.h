@@ -19,11 +19,11 @@
 
 using namespace std;
 
-template<typename SOL, typename TYPE_CELL>
-class KBit : public AtomicOperation<SOL, TYPE_CELL> {
+template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
+class KBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
     public:
     KBit(std::mt19937 &mt_rand, unsigned int k) :
-    AtomicOperation<SOL, TYPE_CELL>(mt_rand),
+    AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand),
     _k(k) {
         N = 1;
         rid = make_unique<uniform_int_distribution<unsigned int>>(0, 1);
