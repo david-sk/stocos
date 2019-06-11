@@ -16,6 +16,7 @@
 #include "../../stoppingCriteria/stoppingCriteria.h"
 #include "../../problem/problem.h"
 #include "operator/atomicOperation.h"
+#include "operator/mutation/neighborhood.h"
 #include "selection/selection.h"
 
 
@@ -30,64 +31,59 @@ class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CEL
         Problem<SOL, TYPE_FITNESS, TYPE_CELL> &problem,
         AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> &atomicOperations,
         Selection<SOL> &selection) :
-        OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, statistic, stoppingCriteria, problem) {
+        OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, statistic, stoppingCriteria, problem),
+        _selection(selection) {
         DEBUG_TRACE("Creation BestImprovement");
+        _atomicOperations = new Neighborhood<SOL, TYPE_FITNESS, SOL>(mt_rand);
     }
 
     virtual ~BestImprovement() {
     }
     
     unique_ptr<SOL> operator()(const SOL &s) {
-        /*if (!s.fitnessIsValid()) {
-           this-> _problem.full_eval(s);
+        solution_star = s;
+
+        if (!solution_star.fitnessIsValid()) {
+           this-> _problem.full_eval(solution_star);
         }
+
         #ifdef DEBUG
         cerr<<s<<endl;
         #endif
-        this->_statistic.operator()(s);
+        this->_statistic.operator()(solution_star);
 
-        while (this->_stoppingCriteria.operator()(s)) {
+        while (this->_stoppingCriteria.operator()(solution_star)) {
+            //Best neighborhood
+            unique_ptr<vector<pair<unsigned int, SOL>>> listOfNeighborhood =  _atomicOperations->listOfMutations(solution_star);
 
-            auto bestFitness = s.getFitness();
-            unsigned int cellToMutate = 0;
+            unsigned int bestNeighbour = 0;
+            this->_problem.full_eval((*listOfNeighborhood)[0].second);
 
-            for (unsigned int j = 0 ; j < s.sizeArray() ; j++) {
-                auto fitnessBefore = s.getFitness();
-
-                s(j) == 1 ? s(j, 0) : s(j, 1);
-                
-                this->_problem.full_eval(s);
-
-                if (bestFitness < s.getFitness()) {
-                    bestFitness = s.getFitness();
-                    cellToMutate = j;
+            for (unsigned int i = 1 ; i < listOfNeighborhood->size() ; i++) {
+                this->_problem.full_eval((*listOfNeighborhood)[i].second);
+                if (_selection((*listOfNeighborhood)[i].second, (*listOfNeighborhood)[bestNeighbour].second)) {
+                    bestNeighbour = i;
                 }
-
-                s(j) == 1 ? s(j, 0) : s(j, 1);
-                
-                s.setFitness(fitnessBefore);
             }
 
-            if (bestFitness != s.getFitness()) {                     
-                if (s(cellToMutate) == 1) 
-                    s(cellToMutate, 0);
-                else 
-                    s(cellToMutate, 1);
-                
-                s.setFitness(bestFitness);
+            if (_selection((*listOfNeighborhood)[bestNeighbour].second, solution_star)) {
+                solution_star = (*listOfNeighborhood)[bestNeighbour].second;
             }
+            
             
             #ifdef DEBUG
             cerr<<s<<endl;
             #endif
-            this->_statistic.operator()(s);
-        }*/
+            this->_statistic.operator()(solution_star);
+        }
 
-        unique_ptr<SOL> result;
-        return move(result);
+        return move(make_unique<SOL>(solution_star));
     }
 
     protected:
+    SOL solution_star;
+    AtomicOperation<SOL, TYPE_FITNESS, SOL> *_atomicOperations;
+    Selection<SOL> &_selection;
 };
 
 #endif
