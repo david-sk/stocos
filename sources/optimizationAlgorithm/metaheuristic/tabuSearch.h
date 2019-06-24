@@ -45,11 +45,25 @@ class TabuSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
         while (this->_stoppingCriteria.operator()(solution_star)) {
             this->_statistic.operator()(solution_star);
 
-            //solution_beta = solution_star;
-            
+            solution_beta = solution_star;
+            _atomicOperations.operator()(solution_beta);
 
+            // Recherche dans la liste tabou
+            bool inTheTabooList = false;
+            for (SOL solutionTabu : tabuList) {
+                if (solutionTabu == solution_beta) {
+                    inTheTabooList = true; 
+                    break;
+                }
+            }
 
-
+            if (!inTheTabooList) {
+                this->_problem.full_eval(solution_beta);
+                if (_selection(solution_beta, solution_star)) {
+                    solution_star = solution_beta;
+                }
+            }
+            tabuList.push_back(solution_beta);
         }
         
         return move(make_unique<SOL>(solution_star));
@@ -60,7 +74,8 @@ class TabuSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
     Selection<SOL> &_selection;
 
     SOL solution_star;
-    boost::circular_buffer<pair<double, unsigned int>> tabuList;
+    SOL solution_beta;
+    boost::circular_buffer<SOL> tabuList;
 };
 
 

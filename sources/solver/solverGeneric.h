@@ -60,8 +60,10 @@ class SolverGeneric : public Solver {
 			if (this->_vm.count("help")) {
 					cout<<this->_desc<<endl;
 					exit(EXIT_SUCCESS);
+			} else if (fileInstance.empty()) {
+				cerr<<"[-] Thank you for giving a valid instance"<<endl;
+				exit(EXIT_FAILURE);
 			}
-
 			_problem.loadInstance(fileInstance);
 			CO = make_unique<CombinatorialOptimization<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _problem);
 		}

@@ -66,7 +66,8 @@ class CombinatorialOptimization {
             optimizationAlgorithm.push_back(pair<string, OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> *>("IteratedLocalSearch", 
             new IteratedLocalSearch<SOL, TYPE_FITNESS, TYPE_CELL>(this->_mt_rand, *statistic, *stoppingCriteria, _problem, *mutation_FlipBit_N, *firstImprovement_ils, *selection)));
         
-            TabuSearch<SOL, TYPE_FITNESS, TYPE_CELL> TS(this->_mt_rand, *statistic, *stoppingCriteria, _problem, *mutation_FlipBit_1, *selection);
+            optimizationAlgorithm.push_back(pair<string, OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> *>("Tabu search", 
+            new TabuSearch<SOL, TYPE_FITNESS, TYPE_CELL>(this->_mt_rand, *statistic, *stoppingCriteria, _problem, *mutation_FlipBit_1, *selection)));
         }
 
         virtual ~CombinatorialOptimization() {
