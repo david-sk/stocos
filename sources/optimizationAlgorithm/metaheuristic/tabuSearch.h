@@ -24,12 +24,13 @@ class TabuSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
         StoppingCriteria<SOL, TYPE_FITNESS> &stoppingCriteria,
         Problem<SOL, TYPE_FITNESS, TYPE_CELL> &problem,
         AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> &atomicOperations,
-        Selection<SOL> &selection) : 
+        Selection<SOL> &selection,
+        unsigned int sizeOfTabuList = 5) : 
         OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, statistic, stoppingCriteria, problem),
         _atomicOperations(atomicOperations),
         _selection(selection)  {
         DEBUG_TRACE("Creation TabuSearch");
-        tabuList.set_capacity(5);
+        tabuList.set_capacity(sizeOfTabuList);
     }
 
     virtual ~TabuSearch() {
