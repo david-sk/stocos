@@ -62,7 +62,7 @@ class SolverOneMax : public Solver {
         }
 
         eOneMax = make_unique<OneMax>(sizeArray);
-        CO = make_unique<CombinatorialOptimization<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>>(this->_mt_rand, *eOneMax);
+        CO = make_unique<CombinatorialOptimization<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>>(this->_mt_rand, *eOneMax, budget);
     }
 
     void operator()() {

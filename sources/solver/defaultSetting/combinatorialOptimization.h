@@ -31,12 +31,12 @@
 template<typename SOL, typename TYPE_FITNESS,typename TYPE_CELL>
 class CombinatorialOptimization {
     public:
-        CombinatorialOptimization(std::mt19937 &mt_rand, Problem<SOL, TYPE_FITNESS, TYPE_CELL> &problem) :
+        CombinatorialOptimization(std::mt19937 &mt_rand, Problem<SOL, TYPE_FITNESS, TYPE_CELL> &problem, unsigned int budget) :
         _mt_rand(mt_rand),
-        _problem(problem)
+        _problem(problem),
+        _budget(budget)
         {
             statStatistic = true;
-            budget = 400;
 
             mutation_FlipBit_1 = make_shared<FlipBit<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, 1);
             mutation_FlipBit_N = make_shared<FlipBit<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, 1);
@@ -44,7 +44,7 @@ class CombinatorialOptimization {
             selection = make_shared<Selection_difference<SOL>>(_problem.getFitnessObjectif());
             
             stoppingCriteria = make_shared<StoppingCriteria<SOL, TYPE_FITNESS>>();
-            stoppingCriteria->addCriteria(new CriteriaBudget<SOL, TYPE_FITNESS>(budget));
+            stoppingCriteria->addCriteria(new CriteriaBudget<SOL, TYPE_FITNESS>(_budget));
             stoppingCriteria->addCriteria(new CriteriaFitnessObjectif<SOL, TYPE_FITNESS>(_problem.getFitnessObjectif()));
             
             statistic = make_shared<Statistic<SOL>>(statStatistic);
@@ -88,7 +88,7 @@ class CombinatorialOptimization {
         std::mt19937 &_mt_rand;
         Problem<SOL, TYPE_FITNESS, TYPE_CELL> &_problem;
 
-        unsigned int budget;            /// < budget alouer a l'aglorithme d'optimisation
+        unsigned int _budget;            /// < budget alouer a l'aglorithme d'optimisation
         bool statStatistic;
 
         vector<pair<string, OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> *>> optimizationAlgorithm; /// < pair : name and pointer of algo

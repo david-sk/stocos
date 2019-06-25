@@ -35,7 +35,9 @@ class SolverGeneric : public Solver {
 			Solver(mt_rand, vm, desc, argc, argv),
 			_problem(problem) {
 			fileInstance = "";
+			budget = 400;
 			settings(argc, argv);
+			
 			
 		}
 		virtual ~SolverGeneric() {
@@ -65,7 +67,7 @@ class SolverGeneric : public Solver {
 				exit(EXIT_FAILURE);
 			}
 			_problem.loadInstance(fileInstance);
-			CO = make_unique<CombinatorialOptimization<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _problem);
+			CO = make_unique<CombinatorialOptimization<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _problem, budget);
 		}
 
 		void operator()() {

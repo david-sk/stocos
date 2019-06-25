@@ -10,13 +10,13 @@
 #ifndef POPULATION_H
 #define POPULATION_H
 
-#include <list>
+#include <vector>
 #include "solution.h"
 
 using namespace std;
 
 template<typename SOL>
-class Population : public Solution<bool>,  public list<SOL> {
+class Population : public Solution<bool>,  public vector<SOL> {
     public:
     Population() {
 
@@ -25,8 +25,7 @@ class Population : public Solution<bool>,  public list<SOL> {
     virtual ~Population() {
 
     }
-
-
+    
     private:
 };
 

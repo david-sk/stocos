@@ -62,7 +62,7 @@ class SolverSubsetsum : public Solver {
         }
 
         eSubsetsum = make_shared<Subsetsum>(N);
-        CO = make_unique<CombinatorialOptimization<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CELL_SUBSETSUM>>(this->_mt_rand, *eSubsetsum);
+        CO = make_unique<CombinatorialOptimization<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CELL_SUBSETSUM>>(this->_mt_rand, *eSubsetsum, budget);
     }
 
     void operator()() {
