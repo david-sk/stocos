@@ -52,20 +52,21 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
         }
 
         // Initialisation de la population à partir d'une solution
-        for (SOL &p : parents) {
+        for (SOL &p : parents)
             p = solution_star;
-            _atomicOperations.operator()(p);
-        }
         
         while (parents.size() < _mu)
             parents.push_back(solution_star);
-        
-        while (offsprings.size() < _lambda)
-            offsprings.push_back(solution_star);
+
+        for (SOL &p : parents)
+            _atomicOperations.operator()(p);
         
         // Evaluation des parents
         for (SOL &p : parents)
             this->_problem.full_eval(p);
+        
+        while (offsprings.size() < _lambda)
+            offsprings.push_back(solution_star);
         
         // 
         while (this->_stoppingCriteria.operator()(solution_star)) {
