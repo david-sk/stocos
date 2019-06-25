@@ -4,7 +4,7 @@
 /// \version 1
 /// \copyright CC-BY-NC-SA
 /// \date 2018-10
-/// \brief 
+/// \brief F. Glover, "Future paths for integer programming and links to artificial intelligence," Computers & Operations Research, vol. 13, pp. 533-549, 1986.
 ///
 
 #ifndef TABUSEARCH_H
@@ -25,7 +25,7 @@ class TabuSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
         Problem<SOL, TYPE_FITNESS, TYPE_CELL> &problem,
         AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> &atomicOperations,
         Selection<SOL> &selection,
-        unsigned int sizeOfTabuList = 5) : 
+        unsigned int sizeOfTabuList = 7) : 
         OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, statistic, stoppingCriteria, problem),
         _atomicOperations(atomicOperations),
         _selection(selection)  {
