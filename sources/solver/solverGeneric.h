@@ -92,10 +92,12 @@ class SolverGeneric : public Solver {
 
 		void initializationSolution() {
 			unique_ptr<SOL> s = _problem.new_solution();
-
 			_problem.full_eval(*s);
-
 			cout<<(*s);
+		}
+
+		void statisticQuiet() {
+			CO->statisticQuiet();
 		}
 
 	protected:

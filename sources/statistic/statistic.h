@@ -32,7 +32,6 @@ class Statistic {
     Statistic(string namefile)  : 
         _namefile(namefile), 
         _standardOutput(false) {
-        
         outFile.open (_namefile);
     }
 
@@ -47,7 +46,7 @@ class Statistic {
         
         if (_standardOutput)
             cout<<ss.str()<<endl;
-        else if(!_namefile.empty()) {
+        if(!_namefile.empty()) {
             outFile<<ss.str()<<endl;
         }
         
@@ -75,6 +74,11 @@ class Statistic {
 
     void addSensor(Sensor<SOL> *s) {
         sensor.push_back(s);
+    }
+
+    void setPrint(bool standardOutput = false, string namefile = "") {
+        _namefile = namefile;
+        _standardOutput = standardOutput;
     }
 
     protected:

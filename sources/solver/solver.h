@@ -37,6 +37,9 @@ class Solver {
 		virtual void initializationSolution() = 0;
 		virtual void settings(int argc, char **argv) = 0;
 		virtual void operator()() = 0;
+		virtual void statisticQuiet() {
+			
+		}
 
 	protected:
 		std::mt19937 &_mt_rand;

@@ -84,6 +84,10 @@ class CombinatorialOptimization {
             return optimizationAlgorithm[static_cast<unsigned int>(numParameter)].second->operator()(s);
         }
 
+        void statisticQuiet() {
+            statistic->setPrint();
+        }
+
     private:
         std::mt19937 &_mt_rand;
         Problem<SOL, TYPE_FITNESS, TYPE_CELL> &_problem;

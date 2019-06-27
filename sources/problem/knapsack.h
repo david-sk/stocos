@@ -77,13 +77,13 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
 
     void full_eval(SOL_KNAPSACK &s) const {
         int fitness = 0;
-        for (unsigned int i = 0 ; i < s.sizeArray() ; i++)
-            fitness += profit[i] * s(i);
-
         int W = 0;
-		for (unsigned int i = 0 ; i < s.sizeArray() ; i++)
-			W += weight[i] * s(i);
-		
+
+        for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
+            fitness += profit[i] * s(i);
+            W += weight[i] * s(i);
+        }
+        
 		if (capacity < W)
 			fitness = -1;
 		s.setFitness(fitness);

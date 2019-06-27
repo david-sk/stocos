@@ -48,16 +48,15 @@ void segfault_sigaction(int signal, siginfo_t *si, void *arg) {
 }
 
 int main(int argc, char **argv, char **envp) {
-	//
 	DEBUG_TRACE("Start of the program")
 	
-   //--- signal
+	//--- signal
     struct sigaction sa;
 
     memset(&sa, 0, sizeof(struct sigaction));
     sigemptyset(&sa.sa_mask);
     sa.sa_sigaction = segfault_sigaction;
-    sa.sa_flags   = SA_SIGINFO;
+    sa.sa_flags = SA_SIGINFO;
 
     sigaction(SIGINT, &sa, NULL);
    //--- end signal
@@ -129,11 +128,12 @@ int main(int argc, char **argv, char **envp) {
 	}
 
 	if (vm.count("initSolution")) {
+		solver->statisticQuiet();
 		solver->initializationSolution();
 	} else if (!solution.empty() && parameter != -1) {
+		solver->statisticQuiet();
 		solver->operator()(solution, parameter);
 	} else {
-		
 		solver->operator()();
 	}
 
