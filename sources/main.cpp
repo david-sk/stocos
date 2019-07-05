@@ -20,13 +20,10 @@
 #include "macro.h"
 
 #include "solver/solverGeneric.h"
-#include "solver/solverOnemax.h"
-#include "solver/solverSubsetsum.h"
 
 #include "problem/oneMax.h"
 #include "problem/knapsack.h"
 #include "problem/subsetSum.h"
-
 
 using namespace std;
 
@@ -123,7 +120,7 @@ int main(int argc, char **argv, char **envp) {
 			solver.reset(new SolverGeneric<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_KNAPSACK>(mt_rand, vm, menuHelp, argc, argv, eKnapsack));
 			break;
 		default:
-			solver.reset(new SolverOneMax(mt_rand, vm, menuHelp, argc, argv));
+			solver.reset(new SolverGeneric<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>(mt_rand, vm, menuHelp, argc, argv, eOneMax));
 			break;
 	}
 

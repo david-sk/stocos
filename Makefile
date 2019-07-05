@@ -29,7 +29,8 @@ all : ./sources/main.cpp
 	$(CC) $(FLAGS) $< -o $(BUILD_DIR)$(EXEC_NAME) -lboost_program_options
 
 run:
-	./$(EXEC_NAME)
+	$(BUILD_DIR)$(EXEC_NAME)
+vide:
 	# ./build/stocos --problem=0 --instance=instances/OneMax/onemax-50.json --algo=0			# OneMax
 	# ./build/stocos --problem=1 --instance=instances/SubSetSum/SubSetSum-5.json --algo=0			# SubSetSum
 	# ./build/stocos --problem=2 --instance=instances/knapsackProblem/knapsackProblem-5-1.json --algo=0	# Knapsack
