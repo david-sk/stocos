@@ -20,6 +20,7 @@
 #include "macro.h"
 
 #include "solver/solverGeneric.h"
+#include "solver/defaultSetting/loadingSolverParameters.h"
 
 #include "problem/oneMax.h"
 #include "problem/knapsack.h"
@@ -45,6 +46,8 @@ void segfault_sigaction(int signal, siginfo_t *si, void *arg) {
 }
 
 int main(int argc, char **argv, char **envp) {
+	// LoadingSolverParameters<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX> lsp("test.json");
+	// exit(0);
 	DEBUG_TRACE("Start of the program")
 	
 	//--- signal

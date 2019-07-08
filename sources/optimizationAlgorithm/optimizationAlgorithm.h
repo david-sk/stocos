@@ -26,9 +26,7 @@ class OptimizationAlgorithm {
             _mt_rand(mt_rand),
             _statistic(statistic),
             _stoppingCriteria(stoppingCriteria),
-            _problem(problem) {
-
-        }
+            _problem(problem) { }
         virtual ~OptimizationAlgorithm() {
 
         }

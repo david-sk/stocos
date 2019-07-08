@@ -21,7 +21,7 @@ public:
 
 	}
 
-	~Problem() {
+	virtual ~Problem() {
 
 	}
 	
@@ -45,6 +45,8 @@ public:
 		exit(EXIT_FAILURE);
 	};*/
 	virtual bool filtering(SOL &s) const {
+		cerr<<"[-] Not implemented : getFitnessObjectif()"<<endl;
+		exit(EXIT_FAILURE);
 		return true;
 	}
 	virtual TYPE_FITNESS getFitnessObjectif() const {

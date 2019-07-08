@@ -76,7 +76,7 @@ class TravelingSalesmanProblem : public Problem<SOL_STP, TYPE_FITNESS_STP, TYPE_
 
 
     private:
-        double distance_euclidienne(pair<double, double> node_a, pair<double, double> node_b) const {
+        double distance_euclidienne(const pair<double, double> &node_a, const pair<double, double> &node_b) const {
             return sqrt(abs(node_b.second - node_a.second) * abs(node_b.second - node_a.second) + abs(node_b.first - node_a.first) * abs(node_b.first - node_a.first));
         }
 
