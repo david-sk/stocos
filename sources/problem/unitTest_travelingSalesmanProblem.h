@@ -39,9 +39,9 @@ class UnitTest_travelingSalesmanProblem : public CppUnit::TestFixture {
         tsp.loadInstance("instances/TravelingSalesmanProblem/travelingSalesmanProblem-10-1.json");
         unique_ptr<SOL_STP> s1 = tsp.new_solution();
 
-        cout<<(*s1)<<endl;
+        // cout<<(*s1)<<endl;
         tsp.full_eval((*s1));
-        cout<<(*s1)<<endl;
+        // cout<<(*s1)<<endl;
     }
 
     /*void distance_euclidienne(void) {

@@ -10,92 +10,64 @@
 #ifndef EVALJOBSHOPPROBLEM_H
 #define EVALJOBSHOPPROBLEM_H
 
+#include <jsoncpp/json/json.h>
+#include <fstream>
 #include <map>
 #include <utility>
-
-#include <fstream>
-
-#include <rapidjson/document.h>
-#include <rapidjson/writer.h>
-#include <rapidjson/stringbuffer.h>
-#include <rapidjson/filereadstream.h>
-
 
 #include "../solution/solutionArray.h"
 #include "problem.h"
 
-template<class SOL>
-class JobShopProblem : public Problem<SOL, double, bool> {
-    public:
-    
-    JobShopProblem(string pathfile_instance) {
-        loadInstance(pathfile_instance);
-    }
-    
-    ~JobShopProblem() {
+using TYPE_FITNESS_JOBSHOPPROBLEM = double;
+using TYPE_CELL_JOBSHOPPROBLEM = bool;
+using SOL_JOBSHOPPROBLEM = SolutionArray<TYPE_FITNESS_JOBSHOPPROBLEM, TYPE_CELL_JOBSHOPPROBLEM>;
+class JobShopProblem : public Problem<SOL_JOBSHOPPROBLEM, TYPE_FITNESS_JOBSHOPPROBLEM, TYPE_CELL_JOBSHOPPROBLEM> {
+   public:
+    JobShopProblem(string pathfile_instance) { loadInstance(pathfile_instance); }
 
-    }
+    ~JobShopProblem() {}
 
     void loadInstance(const string &file) {
-        using namespace rapidjson;
+        Json::Value root;  // will contains the root value after parsing.
+        Json::Reader reader;
+        std::ifstream test(file, std::ifstream::binary);
+        bool parsingSuccessful = reader.parse(test, root, false);
 
-        // check if a file exist
-        assert(access(file.c_str(), F_OK ) != -1);
+        if (!parsingSuccessful) throw runtime_error(reader.getFormattedErrorMessages());
 
-        FILE* fp = fopen(file.c_str(), "rb");
-        char readBuffer[65536];
-        FileReadStream is(fp, readBuffer, sizeof(readBuffer));
-        Document d;
-        d.ParseStream(is);
-        Value& problem = d["problem"];
-        Value& jobs = problem["jobs"];
+        std::string encoding = root.get("encoding", "UTF-8").asString();
+        // cout<<root<<endl;
+        // for (auto name : root["problem"].getMemberNames()) {
+        //     cout<<name<<endl;
+        // }
 
-        for (SizeType i = 0; i < jobs.Size(); i++) {
-            //cerr<<jobs[i].GetString()<<endl;
-            Value& job = problem[jobs[i].GetString()];
-            instance.push_back(vector<pair<unsigned int, unsigned int>>());
-
-            for (SizeType j = 0; j < job.Size(); j++) {
-                Value& machine_id = job[j]["machine_id"];
-                Value& processing_time = job[j]["processing_time"];
-
-                instance[i].push_back(pair<unsigned int, unsigned int>(static_cast<unsigned int>(machine_id.GetInt()), static_cast<unsigned int>(processing_time.GetInt())));
-            }
-        }
-        fclose(fp);
+        // _N = root["problem"]["N"].asUInt();
     }
 
-
-    friend std::ostream & operator<< (std::ostream &out, const EvalJobShopProblem<SOL> &e) {
-        cout<<"job X : (machine_id, processing_time)";
+    friend std::ostream &operator<<(std::ostream &out, const JobShopProblem &e) {
+        cout << "job X : (machine_id, processing_time)";
         vector<vector<pair<unsigned int, unsigned int>>> const _instance = e.getInstance();
-        for(unsigned int i = 0 ; i < _instance.size() ; i++) {
-            out<<endl<<"job "<<i<<":"<<endl;
-            for(unsigned int j = 0 ; j < _instance[i].size() ; j++) {
-                 out<<"("<<_instance[i][j].first<<", "<<_instance[i][j].second<<"), ";
+        for (unsigned int i = 0; i < _instance.size(); i++) {
+            out << endl << "job " << i << ":" << endl;
+            for (unsigned int j = 0; j < _instance[i].size(); j++) {
+                out << "(" << _instance[i][j].first << ", " << _instance[i][j].second << "), ";
             }
         }
         return out;
     }
 
-    const vector<vector<pair<unsigned int, unsigned int>>> &getInstance() const {
-        return instance;
-    }
+    const vector<vector<pair<unsigned int, unsigned int>>> &getInstance() const { return instance; }
 
-    void full_eval(SOL &s) const {
-        
-    }
+    void full_eval(SOL_JOBSHOPPROBLEM &s) const {}
 
     /*void incremental(SolutionArray const &s, unsigned int mutatedCell) const {
 
     }*/
 
-    void reset_solution(SOL &s) const {
-        
-    }
+    void reset_solution(SOL_JOBSHOPPROBLEM &s) const {}
 
-    private:
-        vector<vector<pair<unsigned int, unsigned int>>> instance;
+   private:
+    vector<vector<pair<unsigned int, unsigned int>>> instance;
 };
 
 #endif

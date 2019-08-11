@@ -14,10 +14,7 @@
 #include <unistd.h>
 #include <fstream>
 
-#include <rapidjson/document.h>
-#include <rapidjson/writer.h>
-#include <rapidjson/stringbuffer.h>
-#include <rapidjson/filereadstream.h>
+#include <jsoncpp/json/json.h>
 
 #include "../solution/solutionArray.h"
 #include "problem.h"
@@ -37,7 +34,7 @@ class Subsetsum : public Problem<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CEL
         generateInstance(N);
     }
 
-    Subsetsum(string pathfile_instance) {
+    Subsetsum(const string &pathfile_instance) {
         loadInstance(pathfile_instance);
     }
 
@@ -55,29 +52,20 @@ class Subsetsum : public Problem<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CEL
     }
 
     void loadInstance(const string &file) {
-        using namespace rapidjson;
+        Json::Value root;  // will contains the root value after parsing.
+        Json::Reader reader;
+        std::ifstream test(file, std::ifstream::binary);
+        bool parsingSuccessful = reader.parse(test, root, false);
 
-        // check if a file exist
-        assert(access(file.c_str(), F_OK ) != -1);
+        if (!parsingSuccessful)
+            throw runtime_error(reader.getFormattedErrorMessages());
 
-        FILE* fp = fopen(file.c_str(), "rb"); // non-Windows use "r"
-        char readBuffer[65536];
-        FileReadStream is(fp, readBuffer, sizeof(readBuffer));
-        Document d;
-        d.ParseStream(is);
+        std::string encoding = root.get("encoding", "UTF-8").asString();
 
-        Value& problem = d["problem"];
-        cerr<<"**"<<problem["name"].GetString()<<"**"<<endl;
-
-        fitnessObjectif = static_cast<unsigned int>(problem["fitnessObjectif"].GetInt());
-
-        Value& set = problem["set"];
-
-        setOfNumbers.clear();
-        for (SizeType i = 0; i < set.Size(); i++) {
-            setOfNumbers.push_back(static_cast<unsigned int>(set[i].GetInt()));
+        fitnessObjectif = root["problem"]["fitnessObjectif"].asUInt();
+        for (unsigned int i = 0; i < root["problem"]["set"].size() ; i++) {
+            setOfNumbers.push_back(root["problem"]["set"][i].asUInt());
         }
-        fclose(fp);
     }
 
     TYPE_FITNESS_SUBSETSUM getFitnessObjectif() const {

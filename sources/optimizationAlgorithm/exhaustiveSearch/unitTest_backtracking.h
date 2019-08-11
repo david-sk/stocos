@@ -16,6 +16,7 @@ using namespace CppUnit;
 
 #include "../../problem/problem.h"
 #include "../../solution/solution.h"
+#include "../../problem/oneMax.h"
 #include "backtracking.h"
 
 class UnitTest_backtraking : public CppUnit::TestFixture {

@@ -22,6 +22,7 @@ class UnitTest_solution : public CppUnit::TestFixture {
     CPPUNIT_TEST(numberOfObjective);
     CPPUNIT_TEST(fitness);
     CPPUNIT_TEST(fitnessIsValid);
+    CPPUNIT_TEST(asJson);
     CPPUNIT_TEST_SUITE_END();
 
     public:
@@ -47,16 +48,12 @@ class UnitTest_solution : public CppUnit::TestFixture {
     void operatorEQ(void) {
         Solution<double> s1(10);
         Solution<double> s2(10);
-        for (unsigned int i = 0 ; i < 10 ; i++) {
-            s1.setFitness(i);
-            s2.setFitness(10-i);
-        }
+        s1.setFitness(1);
+        s2.setFitness(9);
 
         s1 = s2;
-        for (unsigned int i = 0 ; i < 10 ; i++) {
-            CPPUNIT_ASSERT(s1.getFitness() == s2.getFitness());
-            CPPUNIT_ASSERT(s2.fitnessIsValid() == true);
-        }
+        CPPUNIT_ASSERT(s1.getFitness() == s2.getFitness());
+        CPPUNIT_ASSERT(s2.fitnessIsValid() == true);
     }
 
     void fitnessIsValid(void) {
@@ -112,6 +109,22 @@ class UnitTest_solution : public CppUnit::TestFixture {
         s4 = s5;
         CPPUNIT_ASSERT(s4.numberOfObjective() == 6);
         CPPUNIT_ASSERT(s4.numberOfObjective() == s5.numberOfObjective());
+    }
+
+    void asJson(void) {
+        Solution<double> s1(5);
+        for (unsigned int i = 0 ; i < 5 ; i++)
+            s1.setFitness(i, 21*i);
+
+        //--------------
+        Solution<double> s2(5);
+        s2.loadJson(s1.asJson());
+        CPPUNIT_ASSERT(s1.getFitness(2) == s2.getFitness(2));
+        
+        //--------------
+        Solution<double> s3(5);
+        s3.loadJson(Json::writeString(Json::StreamWriterBuilder(), s1.asJson()));
+        CPPUNIT_ASSERT(s1.getFitness(2) == s3.getFitness(2));
     }
 
     private:
