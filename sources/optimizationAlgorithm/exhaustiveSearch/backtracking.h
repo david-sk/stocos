@@ -20,16 +20,16 @@ template <typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class Backtraking : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
    public:
     Backtraking(std::mt19937 &mt_rand, 
-                Statistic<SOL> &statistic, 
-				StoppingCriteria<SOL, TYPE_FITNESS> &stoppingCriteria,
-                Problem<SOL, TYPE_FITNESS, TYPE_CELL> &problem, 
+                unique_ptr<Statistic<SOL>> statistic, 
+				unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
+                shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem, 
                 const unsigned int nbDigit, 
 				const unsigned int len_string)
-        		: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, statistic, stoppingCriteria, problem),
+        		: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, move(statistic), move(stoppingCriteria), problem),
           		_nbDigit(nbDigit),
                 _len_string(len_string) {
                 nbCall = 0;
-                string = unique_ptr<unsigned int[]>(new unsigned int[_len_string]);
+                _string = unique_ptr<unsigned int[]>(new unsigned int[_len_string]);
     }
 
     virtual ~Backtraking() {}
@@ -55,7 +55,7 @@ class Backtraking : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
 		} else {
 			unsigned int i = 0;
 			while(i < _nbDigit) {
-				string[currentCell] = i;
+				_string[currentCell] = i;
 
 				//Verification des contraites
 				//if (filtering(current_sol, currentCell + 1)) {
@@ -68,12 +68,17 @@ class Backtraking : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
 		}
 	}
 
+
+    string className() const {
+        return "Backtraking";
+    }
+    
    private:
     const unsigned int _nbDigit;
     const unsigned int _len_string;
 
     unsigned int nbCall;
-    unique_ptr<unsigned int[]> string;
+    unique_ptr<unsigned int[]> _string;
 
     const vector<unsigned int> _bijection;
 };

@@ -16,15 +16,15 @@ template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class OnePlusLambda : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
     public:
     OnePlusLambda(std::mt19937 &mt_rand, 
-        Statistic<SOL> &statistic,
-        StoppingCriteria<SOL, TYPE_FITNESS> &stoppingCriteria,
-        Problem<SOL, TYPE_FITNESS, TYPE_CELL> &problem,
-        AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> &atomicOperations,
-        Selection<SOL> &selection,
+        unique_ptr<Statistic<SOL>> statistic,
+        unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
+        shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
+        unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations,
+        unique_ptr<Selection<SOL>> selection,
         unsigned int lambda) : 
-        OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, statistic, stoppingCriteria, problem),
-        _atomicOperations(atomicOperations),
-        _selection(selection),
+        OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, move(statistic), move(stoppingCriteria), problem),
+        _atomicOperations(move(atomicOperations)),
+        _selection(move(selection)),
         _lambda(lambda) {
         DEBUG_TRACE("Creation OnePlusLambda");
     }
@@ -35,33 +35,37 @@ class OnePlusLambda : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>
     unique_ptr<SOL> operator()(const SOL &s) {
         solution_star = s;
         if (!solution_star.fitnessIsValid()) {
-            this->_problem.full_eval(solution_star);
+            this->_problem->full_eval(solution_star);
         }
         
-        while (this->_stoppingCriteria.operator()(solution_star)) {
-            this->_statistic.operator()(solution_star);
+        while (this->_stoppingCriteria->operator()(solution_star)) {
+            this->_statistic->operator()(solution_star);
 
             solution_beta = solution_star;
             for (unsigned int i = 0 ; i < _lambda ; i++) {
                 solution_alpha = solution_star;
                 
-                _atomicOperations.operator()(solution_alpha);
-                this->_problem.full_eval(solution_alpha);
-                if (_selection(solution_alpha, solution_beta)) {
+                _atomicOperations->operator()(solution_alpha);
+                this->_problem->full_eval(solution_alpha);
+                if (_selection->operator()(solution_alpha, solution_beta)) {
                     solution_beta = solution_alpha;
                 }
             }
              solution_star = solution_beta;
         }
 
-        this->_statistic.operator()(solution_star);
+        this->_statistic->operator()(solution_star);
 
         return move(make_unique<SOL>(solution_star));
     }
     
+    string className() const {
+        return "OnePlusLambda";
+    }
+
     protected:
-        AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> &_atomicOperations;
-        Selection<SOL> &_selection;
+        unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _atomicOperations;
+        unique_ptr<Selection<SOL>> _selection;
         unsigned int _lambda;
         SOL solution_star;
         SOL solution_alpha;

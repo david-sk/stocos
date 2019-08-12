@@ -20,21 +20,23 @@
 #include <netinet/in.h>
 
 
-#include "stoppingCriteria/unitTest_criteriaBudget.h"
-#include "solution/unitTest_solution.h"
-#include "solution/unitTest_solutionArray.h"
-#include "solution/unitTest_population.h"
-#include "problem/unitTest_OneMax.h"
-#include "problem/unitTest_knapsack.h"
-#include "problem/unitTest_magicSequence.h"
-#include "problem/unitTest_travelingSalesmanProblem.h"
-#include "optimizationAlgorithm/metaheuristic/operator/unitTest_swap.h"
+#include "optimizationAlgorithm/exhaustiveSearch/unitTest_backtracking.h"
+#include "optimizationAlgorithm/exhaustiveSearch/unitTest_combinationGenerator.h"
 #include "optimizationAlgorithm/metaheuristic/operator/mutation/unitTest_flipBit.h"
 #include "optimizationAlgorithm/metaheuristic/operator/mutation/unitTest_kBit.h"
 #include "optimizationAlgorithm/metaheuristic/operator/mutation/unitTest_neighborhood.h"
+#include "optimizationAlgorithm/metaheuristic/operator/unitTest_swap.h"
+#include "problem/unitTest_jobShopProblem.h"
+#include "problem/unitTest_knapsack.h"
+#include "problem/unitTest_magicSequence.h"
+#include "problem/unitTest_OneMax.h"
 #include "problem/unitTest_QAP.h"
-#include "optimizationAlgorithm/exhaustiveSearch/unitTest_combinationGenerator.h"
-#include "optimizationAlgorithm/exhaustiveSearch/unitTest_backtracking.h"
+#include "problem/unitTest_travelingSalesmanProblem.h"
+#include "problem/unitTest_subsetsum.h"
+#include "solution/unitTest_population.h"
+#include "solution/unitTest_solution.h"
+#include "solution/unitTest_solutionArray.h"
+#include "stoppingCriteria/unitTest_criteriaBudget.h"
 
 
 
@@ -53,6 +55,8 @@ CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_kBit);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_swap);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_travelingSalesmanProblem);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_neighborhood);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_jobShopProblem);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_subsetsum);
 
 
 int main(int argc, char* argv[])

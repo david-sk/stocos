@@ -15,8 +15,7 @@
 #include <unistd.h>
 #include <vector>
 
-#include <rapidjson/document.h>
-#include <rapidjson/filereadstream.h>
+#include <jsoncpp/json/json.h>
 #include "../solution/solutionArray.h"
 #include "problem.h"
 
@@ -41,38 +40,27 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
     }
 
     void loadInstance(const string &file) {
-        using namespace rapidjson;
+        Json::Value root;  // will contains the root value after parsing.
+        Json::Reader reader;
+        std::ifstream test(file, std::ifstream::binary);
+        bool parsingSuccessful = reader.parse(test, root, false);
 
-        // check if a file exist
-        assert(access(file.c_str(), F_OK ) != -1);
+        if (!parsingSuccessful)
+            throw runtime_error(reader.getFormattedErrorMessages());
 
-        FILE* fp = fopen(file.c_str(), "rb");
-        char readBuffer[65536];
-        FileReadStream is(fp, readBuffer, sizeof(readBuffer));
-        Document d;
-        d.ParseStream(is);
-        Value& problem = d["problem"];
-        numInstance = problem["numInstance"].GetString();
-        capacity = problem["capacity"].GetInt();
-        nbItems =  problem["#items"].GetInt64();
+        std::string encoding = root.get("encoding", "UTF-8").asString();
 
-        Value& _weight = problem["weight"];
-        Value& _profit = problem["profit"];
+        numInstance = root["problem"]["numInstance"].asString();
+        capacity = root["problem"]["capacity"].asInt();
+        nbItems =  root["problem"]["#items"].asUInt();
 
-        //assert(static_cast<int>(problem["#items"].GetInt()) != static_cast<int>(_weight.Size()));
-        //assert(_weight.Size() != _profit.Size());
-
-        weight.clear();
-        profit.clear();
         for (unsigned int i = 0; i < nbItems ; i++) {
-            weight.push_back(_weight[i].GetInt());
-            profit.push_back(_profit[i].GetInt());
+            weight.push_back(root["problem"]["weight"][i].asInt());
+            profit.push_back(root["problem"]["profit"][i].asInt());
         }
 
-        for (unsigned int i = 0 ; i < profit.size() ; i++)
-            fitnessObjectif += profit[i];
-        
-
+        assert(nbItems == weight.size());
+        assert(weight.size() == profit.size());
     }
 
     void full_eval(SOL_KNAPSACK &s) const {

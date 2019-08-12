@@ -24,14 +24,14 @@ template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class FirstImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
     public:
     FirstImprovement(std::mt19937 &mt_rand, 
-    Statistic<SOL> &statistic,
-    StoppingCriteria<SOL, TYPE_FITNESS> &stoppingCriteria,
-    Problem<SOL, TYPE_FITNESS, TYPE_CELL> &problem,
-    AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> &atomicOperations,
-    Selection<SOL> &selection) : 
-    OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, statistic, stoppingCriteria, problem),
-    _atomicOperations(atomicOperations),
-    _selection(selection) {
+    unique_ptr<Statistic<SOL>> statistic,
+    unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
+    shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
+    unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations,
+    unique_ptr<Selection<SOL>> selection) : 
+    OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, move(statistic), move(stoppingCriteria), problem),
+    _atomicOperations(move(atomicOperations)),
+    _selection(move(selection)) {
         DEBUG_TRACE("Creation FirstImprovement");
     }
 
@@ -41,29 +41,31 @@ class FirstImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CE
     unique_ptr<SOL> operator()(const SOL &s) {
         solution_star = s;
         if (!solution_star.fitnessIsValid()) {
-            this->_problem.full_eval(solution_star);
+            this->_problem->full_eval(solution_star);
         }
         
-        while (this->_stoppingCriteria.operator()(solution_star)) {
-            this->_statistic.operator()(solution_star);
+        while (this->_stoppingCriteria->operator()(solution_star)) {
+            this->_statistic->operator()(solution_star);
 
             solution_beta = solution_star;
             
-            _atomicOperations.operator()(solution_beta);
-            this->_problem.full_eval(solution_beta);
-            if (_selection(solution_beta, solution_star)) {
+            _atomicOperations->operator()(solution_beta);
+            this->_problem->full_eval(solution_beta);
+            if (_selection->operator()(solution_beta, solution_star)) {
                 solution_star = solution_beta;
             }
         }
 
-        this->_statistic.operator()(solution_star);
-
+        this->_statistic->operator()(solution_star);
         return move(make_unique<SOL>(solution_star));
     }
 
+    string className() const {
+        return "FirstImprovement";
+    }
     protected:
-        AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> &_atomicOperations;
-        Selection<SOL> &_selection;
+        unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _atomicOperations;
+        unique_ptr<Selection<SOL>> _selection;
         SOL solution_star;
         SOL solution_beta;
 };
