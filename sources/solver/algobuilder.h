@@ -24,6 +24,7 @@
 #include "../optimizationAlgorithm/metaheuristic/tabuSearch.h"
 #include "../optimizationAlgorithm/metaheuristic/evolutionaryAlgorithm.h"
 #include "../optimizationAlgorithm/metaheuristic/operator/mutation/flipBit.h"
+#include "../optimizationAlgorithm/metaheuristic/operator/mutation/neighborhood.h"
 #include "../optimizationAlgorithm/metaheuristic/selection/selection.h"
 #include "../optimizationAlgorithm/metaheuristic/selection/selection_maximization.h"
 #include "../optimizationAlgorithm/metaheuristic/selection/selection_minimization.h"
@@ -68,6 +69,10 @@ class AlgoBuilder {
                 optimizationAlgorithm = make_unique<TabuSearch<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, move(_statistic), move(_stoppingCriteria), _problem, move(_atomicOperation), move(_selection));
             } else if (nameAlgo == "EvolutionaryAlgorithm") {
                 optimizationAlgorithm = make_unique<EvolutionaryAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, move(_statistic), move(_stoppingCriteria), _problem, move(_atomicOperation), move(_selection), configuration["sizeOfTabuList"].isInt());
+            } else if (nameAlgo == "OnePlusLambda") {
+                optimizationAlgorithm = make_unique<OnePlusLambda<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, move(_statistic), move(_stoppingCriteria), _problem, move(_atomicOperation), move(_selection), configuration["lambda"].isInt());
+            } else if (nameAlgo == "OnePlusLambda") {
+                optimizationAlgorithm = make_unique<BestImprovement<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, move(_statistic), move(_stoppingCriteria), _problem, move(_atomicOperation), move(_selection));
             } else {
                 throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " The algorithm does not exist.");
             }
@@ -95,6 +100,9 @@ class AlgoBuilder {
         unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperation(const Json::Value &configuration) {
             if (configuration["className"].asString() == "FlipBit") {
                 return make_unique<FlipBit<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, configuration["c"].asInt());
+            } else if (configuration["className"].asString() == "Neighborhood") {
+                //return make_unique<Neighborhood<SOL, TYPE_FITNESS, SOL>>(this->_mt_rand);
+                throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " Not implemented");
             }
             return nullptr;
         }

@@ -54,12 +54,14 @@ class SolverGeneric : public Solver {
 		}
 
 		void operator()() {
-			cout<<oAlgo[_configuration["numParameter"].asUInt()]->className()<<endl;
+			
 
 			unique_ptr<SOL> s = _problem->new_solution();
 			unique_ptr<SOL> s_new = oAlgo[_configuration["numParameter"].asUInt()]->operator()(*s);
 			std::cout<<std::endl;
 			cout<<*s_new<<endl;
+
+			cout<<oAlgo[_configuration["numParameter"].asUInt()]->className()<<endl;
 		}
 		
 	protected:
