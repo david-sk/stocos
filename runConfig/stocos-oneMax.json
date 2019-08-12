@@ -1,0 +1,118 @@
+{
+    "seed": 0,
+    "problem": {
+        "name": "OneMax",
+        "instance": "instances/OneMax/onemax-50.json"
+    },
+    "numParameter": 0,
+    "optimizationAlgo": {
+        "IteratedLocalSearch": {
+            "StoppingCriteria": {
+                "budget": 100,
+                "fitnessObjectif": 50
+            },
+            "AtomicOperation": {
+                "className": "FlipBit",
+                "c": 1
+            },
+            "OptimizationAlgorithm": {
+                "className": "FirstImprovement",
+                "StoppingCriteria": {
+                    "budget": 100,
+                    "fitnessObjectif": 50
+                },
+                "AtomicOperation": {
+                    "className": "FlipBit",
+                    "c": 1
+                },
+                "Selection": "max"
+            },
+            "Selection": "max"
+        },
+        "EvolutionaryAlgorithm": {
+            "StoppingCriteria": {
+                "budget": 100,
+                "fitnessObjectif": 50
+            },
+            "AtomicOperation": {
+                "className": "FlipBit",
+                "c": 1
+            },
+            "Selection": "max",
+            "mu": 50,
+            "lambda": 50
+        },
+        "TabuSearch": {
+            "StoppingCriteria": {
+                "budget": 100,
+                "fitnessObjectif": 50
+            },
+            "AtomicOperation": {
+                "className": "FlipBit",
+                "c": 1
+            },
+            "Selection": "max",
+            "sizeOfTabuList": 7
+        }
+    },
+    "Solution": {
+        "fitness": [
+            0
+        ],
+        "fitnessIsValid": [
+            true
+        ],
+        "solution": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+        ]
+    }
+}

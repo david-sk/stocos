@@ -29,6 +29,8 @@ using SOL_ONEMAX = SolutionArray<TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>;
 class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX> {
    public:
     OneMax() : _N(1) {}
+    // OneMax(const OneMax &oneMax) : numInstance(oneMax.numInstance), _N(oneMax._N) {}
+
     OneMax(string fileInstance) { loadInstance(fileInstance); }
 
     OneMax(unsigned int N) : _N(N) {}
@@ -46,6 +48,7 @@ class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>
 
         std::string encoding = root.get("encoding", "UTF-8").asString();
 
+        numInstance = root["problem"]["numInstance"].asString();
         _N = root["problem"]["N"].asUInt();
     }
 

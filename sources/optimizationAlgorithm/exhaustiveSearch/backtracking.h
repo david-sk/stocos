@@ -20,12 +20,12 @@ template <typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class Backtraking : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
    public:
     Backtraking(std::mt19937 &mt_rand, 
-                Statistic<SOL> &statistic, 
-				StoppingCriteria<SOL, TYPE_FITNESS> &stoppingCriteria,
-                Problem<SOL, TYPE_FITNESS, TYPE_CELL> &problem, 
+                unique_ptr<Statistic<SOL>> statistic, 
+				unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
+                shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem, 
                 const unsigned int nbDigit, 
 				const unsigned int len_string)
-        		: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, statistic, stoppingCriteria, problem),
+        		: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, move(statistic), move(stoppingCriteria), problem),
           		_nbDigit(nbDigit),
                 _len_string(len_string) {
                 nbCall = 0;
@@ -68,6 +68,11 @@ class Backtraking : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
 		}
 	}
 
+
+    string className() const {
+        return "Backtraking";
+    }
+    
    private:
     const unsigned int _nbDigit;
     const unsigned int _len_string;

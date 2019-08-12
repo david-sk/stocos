@@ -25,16 +25,16 @@ template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
     public:
     EvolutionaryAlgorithm(std::mt19937 &mt_rand, 
-    Statistic<SOL> &statistic,
-    StoppingCriteria<SOL, TYPE_FITNESS> &stoppingCriteria,
-    Problem<SOL, TYPE_FITNESS, TYPE_CELL> &problem,
-    AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> &atomicOperations,
-    Selection<SOL> &selection,
+    unique_ptr<Statistic<SOL>> statistic,
+    unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
+    shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
+    unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations,
+    unique_ptr<Selection<SOL>> selection,
     unsigned int mu = 50,
     unsigned int lambda = 50) : 
-    OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, statistic, stoppingCriteria, problem),
-    _atomicOperations(atomicOperations),
-    _selection(selection),
+    OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, move(statistic), move(stoppingCriteria), problem),
+    _atomicOperations(move(atomicOperations)),
+    _selection(move(selection)),
     _mu(mu),
     _lambda(lambda) {
         DEBUG_TRACE("Creation EvolutionaryAlgorithm");
@@ -48,7 +48,7 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
         solution_star = s;
 
         if (!solution_star.fitnessIsValid()) {
-            this->_problem.full_eval(solution_star);
+            this->_problem->full_eval(solution_star);
         }
 
         // Initialisation de la population à partir d'une solution
@@ -59,18 +59,18 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
             parents.push_back(solution_star);
 
         for (SOL &p : parents)
-            _atomicOperations.operator()(p);
+            _atomicOperations->operator()(p);
         
         // Evaluation des parents
         for (SOL &p : parents)
-            this->_problem.full_eval(p);
+            this->_problem->full_eval(p);
         
         while (offsprings.size() < _lambda)
             offsprings.push_back(solution_star);
         
         // 
-        while (this->_stoppingCriteria.operator()(solution_star)) {
-            this->_statistic.operator()(solution_star);
+        while (this->_stoppingCriteria->operator()(solution_star)) {
+            this->_statistic->operator()(solution_star);
 
             // selection de deux parents aléatoire et différent pour construire la population enfants
             for (auto it=offsprings.begin(); it != offsprings.end(); ++it) {
@@ -80,7 +80,7 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
                 while (e1 == e2) 
                     e2 = rid->operator()(this->_mt_rand);
                 
-                if (_selection(parents[e1], parents[e2]))
+                if (_selection->operator()(parents[e1], parents[e2]))
                     *it = parents[e1];
                 else 
                     *it = parents[e2];
@@ -88,7 +88,7 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
             
             // Mutation des enfants et construction la population parents.
             for (SOL &o : offsprings)
-                _atomicOperations.operator()(o);
+                _atomicOperations->operator()(o);
             
             // Remplacement
             for (unsigned int i = 0 ; i < _mu ; i++) {
@@ -97,24 +97,29 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
             
             // Evaluation des parents
             for (SOL &p : parents)
-                this->_problem.full_eval(p);
+                this->_problem->full_eval(p);
 
             // Find best
             for (SOL &p : parents) {
-                if (_selection(p, solution_star))
+                if (_selection->operator()(p, solution_star))
                     solution_star = p;
             }
         }
 
-        this->_statistic.operator()(solution_star);
+        this->_statistic->operator()(solution_star);
 
         return move(make_unique<SOL>(solution_star));
     }
 
+
+    string className() const {
+        return "EvolutionaryAlgorithm";
+    }
+    
     protected:
         unique_ptr<uniform_int_distribution<unsigned int>> rid;
-        AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> &_atomicOperations;
-        Selection<SOL> &_selection;
+        unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _atomicOperations;
+        unique_ptr<Selection<SOL>> _selection;
         SOL solution_star;
         Population<SOL> parents;
         Population<SOL> offsprings;

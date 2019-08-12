@@ -26,6 +26,7 @@ class StoppingCriteria {
     }
 
     virtual ~StoppingCriteria() {
+        cout<<__FILE__<<" : "<<__LINE__<<endl;
         for(unsigned int i = 0 ; i < criteria.size() ; i++)
             delete criteria[i];
 
