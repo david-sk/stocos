@@ -74,7 +74,7 @@ class AlgoBuilder {
             } else if (nameAlgo == "OnePlusLambda") {
                 optimizationAlgorithm = make_unique<BestImprovement<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, move(_statistic), move(_stoppingCriteria), _problem, move(_atomicOperation), move(_selection));
             } else {
-                throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " The algorithm does not exist.");
+                throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " The algorithm "+ nameAlgo +" does not exist.");
             }
 
             return move(optimizationAlgorithm);
@@ -102,7 +102,8 @@ class AlgoBuilder {
                 return make_unique<FlipBit<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, configuration["c"].asInt());
             } else if (configuration["className"].asString() == "Neighborhood") {
                 //return make_unique<Neighborhood<SOL, TYPE_FITNESS, SOL>>(this->_mt_rand);
-                throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " Not implemented");
+                //throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " Not implemented : "+configuration["className"].asString());
+                return nullptr;
             }
             return nullptr;
         }

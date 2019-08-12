@@ -34,7 +34,6 @@ class SolverGeneric : public Solver {
 			Solver(),
 			_configuration(configuration),
 			_problem(problem) {
-				
 				if (!configuration["seed"].empty())
 					mt_rand.seed(configuration["seed"].isInt());
 				else
@@ -44,18 +43,15 @@ class SolverGeneric : public Solver {
 
 				AlgoBuilder<SOL, TYPE_FITNESS, TYPE_CELL> algoBuilder(mt_rand, _problem);
 
-				for (string const& id : _configuration["optimizationAlgo"].getMemberNames())
-					oAlgo.insert(oAlgo.begin(), algoBuilder(id, _configuration["optimizationAlgo"][id]));
-					//oAlgo.push_back(algoBuilder(id, _configuration["optimizationAlgo"][id]));	
-								
+				for (string const& id : _configuration["OptimizationAlgorithm"].getMemberNames())
+					oAlgo.insert(oAlgo.begin(), algoBuilder(id, _configuration["OptimizationAlgorithm"][id]));
+					//oAlgo.push_back(algoBuilder(id, _configuration["OptimizationAlgorithm"][id]));			
 		}
 		virtual ~SolverGeneric() {
 			
 		}
 
 		void operator()() {
-			
-
 			unique_ptr<SOL> s = _problem->new_solution();
 			unique_ptr<SOL> s_new = oAlgo[_configuration["numParameter"].asUInt()]->operator()(*s);
 			std::cout<<std::endl;

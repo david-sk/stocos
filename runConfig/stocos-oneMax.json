@@ -5,7 +5,7 @@
         "instance": "instances/OneMax/onemax-50.json"
     },
     "numParameter": 1,
-    "optimizationAlgo": {
+    "OptimizationAlgorithm": {
         "IteratedLocalSearch": {
             "StoppingCriteria": {
                 "budget": 100,

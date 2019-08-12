@@ -20,6 +20,7 @@
 
 #include "solver/solver.h"
 #include "solver/solverGeneric.h"
+#include "solver/solverClientRPC.h"
 #include "macro.h"
 
 using namespace std;
@@ -57,7 +58,8 @@ int main(int argc, char **argv, char **envp) {
 
 	// Paramètre du programme
     string configFile;
-    bool solve = true;
+    bool solve = false;
+    bool clientRPC = true;
     bool initSolution = false;
 
 	boost::program_options::variables_map vm;
@@ -65,7 +67,8 @@ int main(int argc, char **argv, char **envp) {
 	argements.add_options()
 						("help,h", "help message")
 						("version,v", "version")
-                        ("solve,s", boost::program_options::value<bool>(&solve), "solve the problem (default : true)")
+                        ("solve,s", boost::program_options::value<bool>(&solve), "solve the problem (default : false)")
+                        ("clientRPC", boost::program_options::value<bool>(&clientRPC), "clientRPC (default : true)")
                         ("initSolution,i", boost::program_options::value<bool>(&initSolution), "give a initial solution (default : false)")
 						("config,c", boost::program_options::value<string>(&configFile), "file configuration json (default : null)");
 	try {
@@ -94,10 +97,10 @@ int main(int argc, char **argv, char **envp) {
     bool parsingSuccessful = reader.parse(test, configuration, false);
 
     if (!parsingSuccessful)
-        throw runtime_error(reader.getFormattedErrorMessages());
+        throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " +reader.getFormattedErrorMessages());
 
     std::string encoding = configuration.get("encoding", "UTF-8").asString();
-    cout<<configuration<<endl;
+    // cout<<configuration<<endl;
 
     // Definition des problems
     shared_ptr<OneMax> eOneMax = make_shared<OneMax>();
@@ -105,19 +108,24 @@ int main(int argc, char **argv, char **envp) {
     shared_ptr<Knapsack> eKnapsack = make_shared<Knapsack>();
 
     Solver *solver = nullptr;
-    if (configuration["problem"]["name"].asString() == "OneMax")
-        solver = new SolverGeneric<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>(configuration, eOneMax);
-    else if (configuration["problem"]["name"].asString() == "Subsetsum")
-        solver = new SolverGeneric<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CELL_SUBSETSUM>(configuration, eSubsetsum);
-    else if (configuration["problem"]["name"].asString() == "Knapsack")
-        solver = new SolverGeneric<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_KNAPSACK>(configuration, eKnapsack);
-    else 
-        throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] The optimization problem does not exist.");
-
 
     if (solve) {
+        if (configuration["problem"]["name"].asString() == "OneMax")
+            solver = new SolverGeneric<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>(configuration, eOneMax);
+        else if (configuration["problem"]["name"].asString() == "Subsetsum")
+            solver = new SolverGeneric<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CELL_SUBSETSUM>(configuration, eSubsetsum);
+        else if (configuration["problem"]["name"].asString() == "Knapsack")
+            solver = new SolverGeneric<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_KNAPSACK>(configuration, eKnapsack);
+        else 
+            throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] The optimization problem does not exist.");
+
+        solver->operator()();
+    } else if (clientRPC) {
+        solver = new SolverClientRPC<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>(configuration, eOneMax);
         solver->operator()();
     }
+
+
     // if (solve) {
     //     solver->operator()();
     // } else if (initSolution) {
