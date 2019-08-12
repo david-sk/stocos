@@ -31,38 +31,38 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
           				_nbDigit(nbDigit),
                         _len_string(len_string) {
                         nbCall = 0;
-                        string = unique_ptr<unsigned int[]>(new unsigned int[_len_string]);
+                        _string = unique_ptr<unsigned int[]>(new unsigned int[_len_string]);
     }
 
     virtual ~CombinationGenerator() {}
 
     const unique_ptr<unsigned int[]> &reset() {
-        for (unsigned int j = 0; j < _len_string; j++) string[j] = 0;
+        for (unsigned int j = 0; j < _len_string; j++) _string[j] = 0;
 
         x = false;
         i = 0;
 
-        while (string[i] == (_nbDigit - 1)) {
+        while (_string[i] == (_nbDigit - 1)) {
             i++;
             x = true;
         }
 
-        return string;
+        return _string;
     }
 
     const unique_ptr<unsigned int[]> &step() {
-        string[i]++;
+        _string[i]++;
 
         if (x) {
-            for (unsigned int j = 0; j < i; j++) string[j] = 0;
+            for (unsigned int j = 0; j < i; j++) _string[j] = 0;
             i = 0;
         }
 
-        while (string[i] == (_nbDigit - 1)) {
+        while (_string[i] == (_nbDigit - 1)) {
             i++;
             x = true;
         }
-        return string;
+        return _string;
     }
 
     bool stop() { return i < (_len_string); }
@@ -88,7 +88,7 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
     const unsigned int _len_string;
 
     unsigned int nbCall;
-    unique_ptr<unsigned int[]> string;
+    unique_ptr<unsigned int[]> _string;
 
     bool x;
     unsigned int i;

@@ -29,7 +29,7 @@ class Backtraking : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
           		_nbDigit(nbDigit),
                 _len_string(len_string) {
                 nbCall = 0;
-                string = unique_ptr<unsigned int[]>(new unsigned int[_len_string]);
+                _string = unique_ptr<unsigned int[]>(new unsigned int[_len_string]);
     }
 
     virtual ~Backtraking() {}
@@ -55,7 +55,7 @@ class Backtraking : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
 		} else {
 			unsigned int i = 0;
 			while(i < _nbDigit) {
-				string[currentCell] = i;
+				_string[currentCell] = i;
 
 				//Verification des contraites
 				//if (filtering(current_sol, currentCell + 1)) {
@@ -78,7 +78,7 @@ class Backtraking : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
     const unsigned int _len_string;
 
     unsigned int nbCall;
-    unique_ptr<unsigned int[]> string;
+    unique_ptr<unsigned int[]> _string;
 
     const vector<unsigned int> _bijection;
 };
