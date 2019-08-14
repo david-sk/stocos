@@ -53,7 +53,7 @@ class SolverClientRPC : public Solver {
         return root;
     }
 
-    Json::Value initialization(const Json::Value &configuration, unsigned int id = 1) {
+    Json::Value initialization(const Json::Value &configuration, unsigned int id = 0) {
         Json::Value params;
         params["method"] = "initialization";
         params["params"].append(jsonAsString(configuration["aposd"]));
@@ -73,13 +73,45 @@ class SolverClientRPC : public Solver {
         Json::Value params;
         return params;
     }
-    Json::Value finish() {
+
+    Json::Value finish(const Json::Value &msgSend, unsigned int id = 0) {
         Json::Value params;
-        return params;
+        params["method"] = "finish";
+        params["params"].append(jsonAsString(msgSend));
+        params["id"] = id;
+
+        string result;
+
+        try {
+            client.SendRPCMessage(jsonAsString(params), result);
+        } catch (JsonRpcException &e) {
+            throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " + e.what());
+        }
+        return stringAsjson(result);
     }
 
     void operator()() {
-        cout<<initialization(_configuration)<<endl;
+        std::unique_ptr<SOL> initialSolution = _problem->new_solution();
+        Json::Value x = _configuration;
+        x["aposd"]["initialSolution"] = initialSolution->asJson();
+        received = initialization(x);
+        objectId = received["objectId"].asString();
+
+
+
+        unsigned int i = 0;
+        do {
+
+			// std::unique_ptr<SOL> s_new = oAlgo[_configuration["numParameter"].asUInt()]->operator()(*s);
+			// std::cout<<std::endl;
+			// cout<<*s_new<<endl;
+
+			// cout<<oAlgo[_configuration["numParameter"].asUInt()]->className()<<endl;
+        } while(i++ < 4);
+
+        Json::Value msgSendFinish;
+        msgSendFinish["objectId"] = objectId;
+        received = finish(msgSendFinish);
     }
 
    private:
@@ -88,6 +120,8 @@ class SolverClientRPC : public Solver {
     HttpClient client;
     std::mt19937 mt_rand;
     vector<std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>> oAlgo;
+    string objectId;
+    Json::Value received;
 };
 
 #endif

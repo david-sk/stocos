@@ -141,7 +141,7 @@
         "seed": 0,
         "CommunicationModel": "WEBAPPLICATION",
         "CalculationModel": {
-            "className": "SequentialModel",
+            "className": "Learning",
             "ParameterSelection": {
                 "className": "PsAdaptivePursuit",
                 "nbParameter": 3
