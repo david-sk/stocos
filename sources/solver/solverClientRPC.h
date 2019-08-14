@@ -38,41 +38,48 @@ class SolverClientRPC : public Solver {
     }
     virtual ~SolverClientRPC() {}
 
-    Json::Value initialization() {
-        Json::Value params;
-        params["method"] = "notify";
-        params["params"].append("msgxxxxxxxxxxxxxxxxxxxxxx");
-        params["id"] = 1;
-
-        string output;
-        string r;
-
-        Json::Value json = params;
+    string jsonAsString(const Json::Value &json) {
         Json::StreamWriterBuilder builder;
         builder["commentStyle"] = "None";
         builder["indentation"] = "";
-        // std::unique_ptr<Json::StreamWriter> writer(builder.newStreamWriter());
-        // writer->write(json, &std::cout);
-        output = Json::writeString(builder, json);
-        cout << output << endl;
+        return Json::writeString(builder, json);
+    }
+
+    Json::Value stringAsjson(const string &strJson) {
+        Json::Value root;
+        Json::Reader reader;
+        bool parsingSuccessful = reader.parse(strJson.c_str(), root);
+        if (!parsingSuccessful) throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " + reader.getFormattedErrorMessages());
+        return root;
+    }
+
+    Json::Value initialization(const Json::Value &configuration, unsigned int id = 1) {
+        Json::Value params;
+        params["method"] = "initialization";
+        params["params"].append(jsonAsString(configuration["aposd"]));
+        params["id"] = id;
+
+        string result;
 
         try {
-            client.SendRPCMessage(output, r);
-            cout << r << endl;
+            client.SendRPCMessage(jsonAsString(params), result);
         } catch (JsonRpcException &e) {
-            cerr << e.what() << endl;
+            throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " + e.what());
         }
+        return stringAsjson(result);
     }
 
     Json::Value learning() {
-
+        Json::Value params;
+        return params;
     }
     Json::Value finish() {
-
+        Json::Value params;
+        return params;
     }
 
     void operator()() {
-
+        cout<<initialization(_configuration)<<endl;
     }
 
    private:
@@ -80,7 +87,7 @@ class SolverClientRPC : public Solver {
     shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> _problem;
     HttpClient client;
     std::mt19937 mt_rand;
-    vector<unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>> oAlgo;
+    vector<std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>> oAlgo;
 };
 
 #endif

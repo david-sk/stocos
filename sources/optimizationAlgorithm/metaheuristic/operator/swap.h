@@ -33,7 +33,7 @@ class Swap : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
             }
 
             // Tirage aléatoire sans remise
-            unique_ptr<vector<unsigned int>> list(make_unique<vector<unsigned int>>());
+            std::unique_ptr<vector<unsigned int>> list(make_unique<vector<unsigned int>>());
 
             while (list->size() != (_nbSwap * 2)) {
                 unsigned int element = rid->operator()(this->_mt_rand);
@@ -69,7 +69,7 @@ class Swap : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
         }       
 
     private:
-        unique_ptr<uniform_int_distribution<unsigned int>> rid;
+        std::unique_ptr<uniform_int_distribution<unsigned int>> rid;
         vector<pair<unsigned int, TYPE_CELL>> backup;
         unsigned int _nbSwap;
         unsigned int N;

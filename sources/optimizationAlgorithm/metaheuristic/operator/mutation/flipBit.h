@@ -59,8 +59,8 @@ class FlipBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
         }
     }
 
-    unique_ptr<vector<pair<unsigned int, TYPE_CELL>>> listOfMutations(const SOL &s) {
-        unique_ptr<vector<pair<unsigned int, TYPE_CELL>>> list(make_unique<vector<pair<unsigned int, TYPE_CELL>>>());
+    std::unique_ptr<vector<pair<unsigned int, TYPE_CELL>>> listOfMutations(const SOL &s) {
+        std::unique_ptr<vector<pair<unsigned int, TYPE_CELL>>> list(make_unique<vector<pair<unsigned int, TYPE_CELL>>>());
         
         if (s.sizeArray() != N) {
             N = s.sizeArray();
@@ -89,7 +89,7 @@ class FlipBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
 
     
     private:
-        unique_ptr<uniform_real_distribution<>> urd;
+        std::unique_ptr<uniform_real_distribution<>> urd;
         double mutation_rate;
         unsigned int N;
         const unsigned int _c;                     // < parameter c

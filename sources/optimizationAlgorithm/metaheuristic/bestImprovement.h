@@ -26,11 +26,11 @@ template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
     public:
     BestImprovement(std::mt19937 &mt_rand,
-        unique_ptr<Statistic<SOL>> statistic,
-        unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
+        std::unique_ptr<Statistic<SOL>> statistic,
+        std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
         shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
-        unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations,
-        unique_ptr<Selection<SOL>> selection) :
+        std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations,
+        std::unique_ptr<Selection<SOL>> selection) :
         OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, move(statistic), move(stoppingCriteria), problem),
         _selection(move(selection)) {
         DEBUG_TRACE("Creation BestImprovement");
@@ -40,7 +40,7 @@ class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CEL
     virtual ~BestImprovement() {
     }
     
-    unique_ptr<SOL> operator()(const SOL &s) {
+    std::unique_ptr<SOL> operator()(const SOL &s) {
         solution_star = s;
 
         // if (!solution_star.fitnessIsValid()) {
@@ -54,7 +54,7 @@ class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CEL
 
         // while (this->_stoppingCriteria.operator()(solution_star)) {
         //     //Best neighborhood
-        //     unique_ptr<vector<pair<unsigned int, SOL>>> listOfNeighborhood =  _atomicOperations.listOfMutations(solution_star);
+        //     std::unique_ptr<vector<pair<unsigned int, SOL>>> listOfNeighborhood =  _atomicOperations.listOfMutations(solution_star);
 
         //     unsigned int bestNeighbour = 0;
         //     this->_problem.full_eval((*listOfNeighborhood)[0].second);
@@ -86,8 +86,8 @@ class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CEL
     }
     protected:
     SOL solution_star;
-    unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, SOL>> _atomicOperations;
-    unique_ptr<Selection<SOL>> _selection;
+    std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, SOL>> _atomicOperations;
+    std::unique_ptr<Selection<SOL>> _selection;
 };
 
 #endif

@@ -75,7 +75,7 @@ class UnitTest_flipBit : public CppUnit::TestFixture {
 	    mt_rand.seed(0);
 
         FlipBit<SolutionArray<int, bool>, int, bool> flipbit(mt_rand, 5);
-        unique_ptr<vector<pair<unsigned int, bool>>> mutations = flipbit.listOfMutations(s1);
+        std::unique_ptr<vector<pair<unsigned int, bool>>> mutations = flipbit.listOfMutations(s1);
         
     }
 
@@ -88,7 +88,7 @@ class UnitTest_flipBit : public CppUnit::TestFixture {
 	    mt_rand.seed(0);
 
         FlipBit<SolutionArray<int, bool>, int, bool> flipbit(mt_rand, 5);
-        unique_ptr<vector<pair<unsigned int, bool>>> mutations = flipbit.listOfMutations(s1);
+        std::unique_ptr<vector<pair<unsigned int, bool>>> mutations = flipbit.listOfMutations(s1);
         flipbit.applyOperator(s1, *mutations);
 
         CPPUNIT_ASSERT(!(s1 == s2));

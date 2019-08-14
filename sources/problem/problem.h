@@ -33,7 +33,7 @@ public:
 		cerr<<"[-] Not implemented : reset_solution()"<<endl;
 		exit(EXIT_FAILURE);
 	}
-	virtual unique_ptr<SOL> new_solution() const {
+	virtual std::unique_ptr<SOL> new_solution() const {
 		cerr<<"[-] Not implemented : new_solution()"<<endl;
 		exit(EXIT_FAILURE);
 	}

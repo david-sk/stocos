@@ -25,11 +25,11 @@ template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
     public:
     EvolutionaryAlgorithm(std::mt19937 &mt_rand, 
-    unique_ptr<Statistic<SOL>> statistic,
-    unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
+    std::unique_ptr<Statistic<SOL>> statistic,
+    std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
     shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
-    unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations,
-    unique_ptr<Selection<SOL>> selection,
+    std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations,
+    std::unique_ptr<Selection<SOL>> selection,
     unsigned int mu = 50,
     unsigned int lambda = 50) : 
     OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, move(statistic), move(stoppingCriteria), problem),
@@ -44,7 +44,7 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
     ~EvolutionaryAlgorithm() {
     }
     
-    unique_ptr<SOL> operator()(const SOL &s) {
+    std::unique_ptr<SOL> operator()(const SOL &s) {
         solution_star = s;
 
         if (!solution_star.fitnessIsValid()) {
@@ -117,9 +117,9 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
     }
     
     protected:
-        unique_ptr<uniform_int_distribution<unsigned int>> rid;
-        unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _atomicOperations;
-        unique_ptr<Selection<SOL>> _selection;
+        std::unique_ptr<uniform_int_distribution<unsigned int>> rid;
+        std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _atomicOperations;
+        std::unique_ptr<Selection<SOL>> _selection;
         SOL solution_star;
         Population<SOL> parents;
         Population<SOL> offsprings;

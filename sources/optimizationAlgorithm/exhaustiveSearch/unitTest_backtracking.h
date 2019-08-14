@@ -39,8 +39,8 @@ class UnitTest_backtraking : public CppUnit::TestFixture {
 	    std::mt19937 mt_rand;
 	    mt_rand.seed(0);
 
-        unique_ptr<StoppingCriteria<TYPESOL, unsigned int>> stoppingCriteria = make_unique<StoppingCriteria<TYPESOL, unsigned int>>();
-        unique_ptr<Statistic<TYPESOL>> statistic = make_unique<Statistic<TYPESOL>>();
+        std::unique_ptr<StoppingCriteria<TYPESOL, unsigned int>> stoppingCriteria = make_unique<StoppingCriteria<TYPESOL, unsigned int>>();
+        std::unique_ptr<Statistic<TYPESOL>> statistic = make_unique<Statistic<TYPESOL>>();
         shared_ptr<OneMax> oneMax = make_shared<OneMax>(100);
         TYPESOL s(4);
 

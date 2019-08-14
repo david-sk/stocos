@@ -16,11 +16,11 @@ template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class OnePlusLambda : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
     public:
     OnePlusLambda(std::mt19937 &mt_rand, 
-        unique_ptr<Statistic<SOL>> statistic,
-        unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
+        std::unique_ptr<Statistic<SOL>> statistic,
+        std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
         shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
-        unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations,
-        unique_ptr<Selection<SOL>> selection,
+        std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations,
+        std::unique_ptr<Selection<SOL>> selection,
         unsigned int lambda) : 
         OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, move(statistic), move(stoppingCriteria), problem),
         _atomicOperations(move(atomicOperations)),
@@ -32,7 +32,7 @@ class OnePlusLambda : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>
     ~OnePlusLambda() {
     }
     
-    unique_ptr<SOL> operator()(const SOL &s) {
+    std::unique_ptr<SOL> operator()(const SOL &s) {
         solution_star = s;
         if (!solution_star.fitnessIsValid()) {
             this->_problem->full_eval(solution_star);
@@ -64,8 +64,8 @@ class OnePlusLambda : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>
     }
 
     protected:
-        unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _atomicOperations;
-        unique_ptr<Selection<SOL>> _selection;
+        std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _atomicOperations;
+        std::unique_ptr<Selection<SOL>> _selection;
         unsigned int _lambda;
         SOL solution_star;
         SOL solution_alpha;

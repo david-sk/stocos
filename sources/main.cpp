@@ -43,8 +43,6 @@ void segfault_sigaction(int signal, siginfo_t *si, void *arg) {
 
 
 int main(int argc, char **argv, char **envp) {
-    DEBUG_TRACE("Start of the program")
-
 	// -> signal
     struct sigaction sa;
 
@@ -58,18 +56,12 @@ int main(int argc, char **argv, char **envp) {
 
 	// Paramètre du programme
     string configFile;
-    bool solve = false;
-    bool clientRPC = true;
-    bool initSolution = false;
 
 	boost::program_options::variables_map vm;
 	boost::program_options::options_description argements("[*] main option");
 	argements.add_options()
 						("help,h", "help message")
 						("version,v", "version")
-                        ("solve,s", boost::program_options::value<bool>(&solve), "solve the problem (default : false)")
-                        ("clientRPC", boost::program_options::value<bool>(&clientRPC), "clientRPC (default : true)")
-                        ("initSolution,i", boost::program_options::value<bool>(&initSolution), "give a initial solution (default : false)")
 						("config,c", boost::program_options::value<string>(&configFile), "file configuration json (default : null)");
 	try {
     	boost::program_options::store(boost::program_options::parse_command_line(argc, argv, argements), vm);
@@ -77,7 +69,7 @@ int main(int argc, char **argv, char **envp) {
 		boost::program_options::notify(vm);
 	} catch (const boost::program_options::error &ex) {
     	//std::cerr << __FILE__<<":"<<__LINE__ <<ex.what() << endl;
-        throw runtime_error("[-] error program_options");
+        throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] error program_options");
   	}
 
 	if (vm.count("version")) {
@@ -109,7 +101,7 @@ int main(int argc, char **argv, char **envp) {
 
     Solver *solver = nullptr;
 
-    if (solve) {
+    if (configuration["aposd"].empty()) {
         if (configuration["problem"]["name"].asString() == "OneMax")
             solver = new SolverGeneric<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>(configuration, eOneMax);
         else if (configuration["problem"]["name"].asString() == "Subsetsum")
@@ -118,25 +110,15 @@ int main(int argc, char **argv, char **envp) {
             solver = new SolverGeneric<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_KNAPSACK>(configuration, eKnapsack);
         else 
             throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] The optimization problem does not exist.");
-
-        solver->operator()();
-    } else if (clientRPC) {
-        solver = new SolverClientRPC<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>(configuration, eOneMax);
-        solver->operator()();
+    } else {
+        if (configuration["aposd"]["CommunicationModel"].asString() == "WEBAPPLICATION") 
+            solver = new SolverClientRPC<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>(configuration, eOneMax);
+        else if (configuration["aposd"]["CommunicationModel"].asString() == "MPI")
+            throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] The CommunicationModel \""+ configuration["aposd"][""].asString() +"\" does not implemented."); 
+        else
+            throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] The CommunicationModel \""+ configuration["aposd"][""].asString() +"\" does not exist.");
     }
 
-
-    // if (solve) {
-    //     solver->operator()();
-    // } else if (initSolution) {
-    //     solver->statisticQuiet();
-    //     solver->initializationSolution();
-    // } else {
-    //     solver->statisticQuiet();
-    //     solver->operator()(solution, parameter);
-    // }
-
-
-    DEBUG_TRACE("Stop program")
+    solver->operator()();
     return EXIT_SUCCESS;
 }

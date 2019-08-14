@@ -52,8 +52,8 @@ class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>
         _N = root["problem"]["N"].asUInt();
     }
 
-    unique_ptr<SOL_ONEMAX> new_solution() const {
-        unique_ptr<SOL_ONEMAX> s(make_unique<SOL_ONEMAX>(_N));
+    std::unique_ptr<SOL_ONEMAX> new_solution() const {
+        std::unique_ptr<SOL_ONEMAX> s(make_unique<SOL_ONEMAX>(_N));
         for (unsigned int i = 0; i < s->sizeArray(); i++) {
             s->operator()(i, 0);
         }
