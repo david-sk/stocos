@@ -35,7 +35,7 @@ class TabuSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
 
     virtual ~TabuSearch() {
     }
-
+    
     std::unique_ptr<SOL> operator()(const SOL &s) {
         solution_star = s;
         if (!solution_star.fitnessIsValid()) {

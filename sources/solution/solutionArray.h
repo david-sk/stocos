@@ -135,12 +135,10 @@ class SolutionArray : public Solution<TYPE_FITNESS> {
     void loadJson(const Json::Value &jsonValue) {
         Solution<TYPE_FITNESS>::loadJson(jsonValue);
         _sizeArray = jsonValue["solution"].size();
-
         if (array == nullptr)
             array = new TYPE_CELL[_sizeArray];
         else
             array = static_cast<TYPE_CELL *>(realloc(array, _sizeArray * sizeof(TYPE_CELL)));
-
         for (unsigned int i = 0; i < jsonValue["solution"].size(); i++) array[i] = jsonValue["solution"][i].asDouble();
     }
 

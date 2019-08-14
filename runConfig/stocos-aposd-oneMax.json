@@ -8,7 +8,7 @@
     "OptimizationAlgorithm": {
         "IteratedLocalSearch": {
             "StoppingCriteria": {
-                "budget": 100,
+                "budget": 10,
                 "fitnessObjectif": 50
             },
             "AtomicOperation": {
@@ -18,7 +18,7 @@
             "OptimizationAlgorithm": {
                 "className": "FirstImprovement",
                 "StoppingCriteria": {
-                    "budget": 100,
+                    "budget": 10,
                     "fitnessObjectif": 50
                 },
                 "AtomicOperation": {
@@ -31,7 +31,7 @@
         },
         "EvolutionaryAlgorithm": {
             "StoppingCriteria": {
-                "budget": 100,
+                "budget": 10,
                 "fitnessObjectif": 50
             },
             "AtomicOperation": {
@@ -44,7 +44,7 @@
         },
         "TabuSearch": {
             "StoppingCriteria": {
-                "budget": 100,
+                "budget": 10,
                 "fitnessObjectif": 50
             },
             "AtomicOperation": {
@@ -56,7 +56,7 @@
         },
         "OnePlusLambda": {
             "StoppingCriteria": {
-                "budget": 100,
+                "budget": 10,
                 "fitnessObjectif": 50
             },
             "AtomicOperation": {
@@ -68,7 +68,7 @@
         },
         "BestImprovement": {
             "StoppingCriteria": {
-                "budget": 100,
+                "budget": 10,
                 "fitnessObjectif": 50
             },
             "AtomicOperation": {

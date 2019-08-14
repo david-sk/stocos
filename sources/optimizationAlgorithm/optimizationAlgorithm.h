@@ -31,6 +31,9 @@ class OptimizationAlgorithm {
 
         }
     
+        virtual void reset() {
+            _stoppingCriteria->reset();
+        }
         virtual std::unique_ptr<SOL> operator()(const SOL &s) = 0;
         virtual string className() const = 0;
 
