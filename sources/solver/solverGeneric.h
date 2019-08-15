@@ -34,6 +34,7 @@ class SolverGeneric : public Solver {
 			Solver(),
 			_configuration(configuration),
 			_problem(problem) {
+				DEBUG_TRACE("CREATE SolverGeneric")
 				if (!configuration["seed"].empty())
 					mt_rand.seed(configuration["seed"].isInt());
 				else
@@ -48,12 +49,12 @@ class SolverGeneric : public Solver {
 					//oAlgo.push_back(algoBuilder(id, _configuration["OptimizationAlgorithm"][id]));			
 		}
 		virtual ~SolverGeneric() {
-			
+			DEBUG_TRACE("DELETE SolverGeneric")
 		}
 
 		void operator()() {
-			unique_ptr<SOL> s = _problem->new_solution();
-			unique_ptr<SOL> s_new = oAlgo[_configuration["numParameter"].asUInt()]->operator()(*s);
+			std::unique_ptr<SOL> s = _problem->new_solution();
+			std::unique_ptr<SOL> s_new = oAlgo[_configuration["numParameter"].asUInt()]->operator()(*s);
 			std::cout<<std::endl;
 			cout<<*s_new<<endl;
 
@@ -64,8 +65,8 @@ class SolverGeneric : public Solver {
 		const Json::Value &_configuration;
 		shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> _problem;
 		std::mt19937 mt_rand;
-		// map<string, unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>> oAlgo;
-		vector<unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> > oAlgo;
+		// map<string, std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>> oAlgo;
+		vector<std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> > oAlgo;
 		
 		
 };

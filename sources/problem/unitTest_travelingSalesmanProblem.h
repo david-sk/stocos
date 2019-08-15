@@ -37,7 +37,7 @@ class UnitTest_travelingSalesmanProblem : public CppUnit::TestFixture {
     void full_eval(void) {
         TravelingSalesmanProblem tsp;
         tsp.loadInstance("instances/TravelingSalesmanProblem/travelingSalesmanProblem-10-1.json");
-        unique_ptr<SOL_STP> s1 = tsp.new_solution();
+        std::unique_ptr<SOL_STP> s1 = tsp.new_solution();
 
         // cout<<(*s1)<<endl;
         tsp.full_eval((*s1));

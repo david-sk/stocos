@@ -87,8 +87,8 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
         }
     }
 
-    unique_ptr<SOL_KNAPSACK> new_solution() const {
-        unique_ptr<SOL_KNAPSACK> s(make_unique<SOL_KNAPSACK>(nbItems));
+    std::unique_ptr<SOL_KNAPSACK> new_solution() const {
+        std::unique_ptr<SOL_KNAPSACK> s(make_unique<SOL_KNAPSACK>(nbItems));
         for (unsigned int i = 0 ; i < s->sizeArray() ; i++) {
             s->operator()(i, 0);
         } 

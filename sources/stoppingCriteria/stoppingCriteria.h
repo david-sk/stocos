@@ -26,7 +26,6 @@ class StoppingCriteria {
     }
 
     virtual ~StoppingCriteria() {
-        cout<<__FILE__<<" : "<<__LINE__<<endl;
         for(unsigned int i = 0 ; i < criteria.size() ; i++)
             delete criteria[i];
 
@@ -43,6 +42,11 @@ class StoppingCriteria {
 
     void addCriteria(Criteria<SOL, TYPE_FITNESS> *c) {
         criteria.push_back(c);
+    }
+
+    void reset() {
+        for(unsigned int i = 0 ; i < criteria.size() ; i++)
+            criteria[i]->reset();
     }
     
     

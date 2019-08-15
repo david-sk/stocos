@@ -34,7 +34,7 @@ class KBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
 
     void operator()(SOL &s) {
         backup.clear();
-        unique_ptr<vector<pair<unsigned int, TYPE_CELL>>> list = listOfMutations(s);
+        std::unique_ptr<vector<pair<unsigned int, TYPE_CELL>>> list = listOfMutations(s);
         for (unsigned int i = 0 ; i < list->size() ; i++) {
             s((*list)[i].first, (*list)[i].second);
             backup.push_back((*list)[i].first);
@@ -52,10 +52,10 @@ class KBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
         }
     }
 
-    unique_ptr<vector<pair<unsigned int, TYPE_CELL>>> listOfMutations(const SOL &s) {
+    std::unique_ptr<vector<pair<unsigned int, TYPE_CELL>>> listOfMutations(const SOL &s) {
         assert(_k <= s.sizeArray());
 
-        unique_ptr<vector<pair<unsigned int, TYPE_CELL>>> list(make_unique<vector<pair<unsigned int, TYPE_CELL>>>());
+        std::unique_ptr<vector<pair<unsigned int, TYPE_CELL>>> list(make_unique<vector<pair<unsigned int, TYPE_CELL>>>());
         
         if (s.sizeArray() != N) {
             N = s.sizeArray();
@@ -92,7 +92,7 @@ class KBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
 
 
     private:
-        unique_ptr<uniform_int_distribution<unsigned int>> rid;
+        std::unique_ptr<uniform_int_distribution<unsigned int>> rid;
         vector<unsigned int> backup;
         unsigned int _k;
         unsigned int N;

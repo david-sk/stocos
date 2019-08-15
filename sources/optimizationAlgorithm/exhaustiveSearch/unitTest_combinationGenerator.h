@@ -31,28 +31,28 @@ class UnitTest_combinationGenerator : public CppUnit::TestFixture {
 
     void test(void) {
         typedef SolutionArray<unsigned int, bool> TYPESOL;
-        //CPPUNIT_ASSERT(o->operator()(s) == false);
+        // //CPPUNIT_ASSERT(o->operator()(s) == false);
     
 	    std::mt19937 mt_rand;
 	    mt_rand.seed(0);
 
-        unique_ptr<StoppingCriteria<TYPESOL, unsigned int>> stoppingCriteria = make_unique<StoppingCriteria<TYPESOL, unsigned int>>();
-        unique_ptr<Statistic<TYPESOL>> statistic = make_unique<Statistic<TYPESOL>>();
+        std::unique_ptr<StoppingCriteria<TYPESOL, unsigned int>> stoppingCriteria = make_unique<StoppingCriteria<TYPESOL, unsigned int>>();
+        std::unique_ptr<Statistic<TYPESOL>> statistic = make_unique<Statistic<TYPESOL>>();
         shared_ptr<OneMax> oneMax = make_shared<OneMax>(100);
         TYPESOL s(4);
 
         CombinationGenerator<TYPESOL, unsigned int, bool> cg(mt_rand, move(statistic), move(stoppingCriteria), oneMax, 2, 4);
 
-        //cg(s);
+        cg(s);
 
         //cg();
        
-        /*const unique_ptr<unsigned int []> &u = cg.reset();
+        /*const std::unique_ptr<unsigned int []> &u = cg.reset();
         for (unsigned int k = 0; k < 4; k++)
             cout<<u[k];
         cout<<endl;
         do {
-            const unique_ptr<unsigned int []> &y = cg.step();
+            const std::unique_ptr<unsigned int []> &y = cg.step();
             for (unsigned int k = 0; k < 4; k++)
                 cout<<y[k];
             cout<<endl;

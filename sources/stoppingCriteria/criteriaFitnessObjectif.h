@@ -51,6 +51,8 @@ class CriteriaFitnessObjectif : public Criteria<SOL, TYPE_FITNESS> {
         }
     }
 
+    void reset() {}
+
     protected:
     TYPE_FITNESS *_fitnessObjectif;
     unsigned int _numberOfObjective;

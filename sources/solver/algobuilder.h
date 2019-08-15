@@ -45,14 +45,14 @@ class AlgoBuilder {
         }
 
 
-        unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> operator()(const string &nameAlgo, const Json::Value &configuration) {
+        std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> operator()(const string &nameAlgo, const Json::Value &configuration) {
             
-            unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> optimizationAlgorithm = nullptr;
+            std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> optimizationAlgorithm = nullptr;
 
-            unique_ptr<Statistic<SOL>> _statistic = statistic(configuration);
-            unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _atomicOperation = atomicOperation(configuration["AtomicOperation"]);
-            unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> _stoppingCriteria = stoppingCriteria(configuration["StoppingCriteria"]);
-            unique_ptr<Selection<SOL>> _selection = selection(configuration["Selection"]);
+            std::unique_ptr<Statistic<SOL>> _statistic = statistic(configuration);
+            std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _atomicOperation = atomicOperation(configuration["AtomicOperation"]);
+            std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> _stoppingCriteria = stoppingCriteria(configuration["StoppingCriteria"]);
+            std::unique_ptr<Selection<SOL>> _selection = selection(configuration["Selection"]);
             
 
         
@@ -63,7 +63,7 @@ class AlgoBuilder {
             } else if (nameAlgo == "OnePlusLambda") {
                 optimizationAlgorithm = make_unique<OnePlusLambda<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, move(_statistic), move(_stoppingCriteria), _problem, move(_atomicOperation), move(_selection), configuration["lambda"].isInt());
             } else if (nameAlgo == "IteratedLocalSearch") {
-                unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> _optimizationAlgorithm_ils = this->operator()(configuration["OptimizationAlgorithm"]["className"].asString(), configuration["OptimizationAlgorithm"]);
+                std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> _optimizationAlgorithm_ils = this->operator()(configuration["OptimizationAlgorithm"]["className"].asString(), configuration["OptimizationAlgorithm"]);
                 optimizationAlgorithm = make_unique<IteratedLocalSearch<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, move(_statistic), move(_stoppingCriteria), _problem, move(_atomicOperation), move(_optimizationAlgorithm_ils), move(_selection));
             } else if (nameAlgo == "TabuSearch") {
                 optimizationAlgorithm = make_unique<TabuSearch<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, move(_statistic), move(_stoppingCriteria), _problem, move(_atomicOperation), move(_selection));
@@ -82,22 +82,22 @@ class AlgoBuilder {
         
 
 
-        unique_ptr<Statistic<SOL>> statistic(const Json::Value &configuration) {
-            unique_ptr<Statistic<SOL>> _statistic = make_unique<Statistic<SOL>>(true);
+        std::unique_ptr<Statistic<SOL>> statistic(const Json::Value &configuration) {
+            std::unique_ptr<Statistic<SOL>> _statistic = make_unique<Statistic<SOL>>(true);
             _statistic->addSensor(new SensorNumRound<SOL>);
             _statistic->addSensor(new SensorSolution<SOL>);
             _statistic->addSensor(new SensorStopwatch<SOL>);
             return move(_statistic);
         }
 
-        unique_ptr<StoppingCriteria<SOL,TYPE_FITNESS>> stoppingCriteria(const Json::Value &configuration) {
-            unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> _stoppingCriteria = make_unique<StoppingCriteria<SOL, TYPE_FITNESS>>();
+        std::unique_ptr<StoppingCriteria<SOL,TYPE_FITNESS>> stoppingCriteria(const Json::Value &configuration) {
+            std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> _stoppingCriteria = make_unique<StoppingCriteria<SOL, TYPE_FITNESS>>();
             _stoppingCriteria->addCriteria(new CriteriaBudget<SOL, TYPE_FITNESS>(configuration["budget"].asUInt()));
             _stoppingCriteria->addCriteria(new CriteriaFitnessObjectif<SOL, TYPE_FITNESS>(static_cast<TYPE_FITNESS>(configuration["fitnessObjectif"].asDouble())));
             return move(_stoppingCriteria);
         }
         
-        unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperation(const Json::Value &configuration) {
+        std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperation(const Json::Value &configuration) {
             if (configuration["className"].asString() == "FlipBit") {
                 return make_unique<FlipBit<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, configuration["c"].asInt());
             } else if (configuration["className"].asString() == "Neighborhood") {
@@ -108,8 +108,8 @@ class AlgoBuilder {
             return nullptr;
         }
 
-        unique_ptr<Selection<SOL>> selection(const Json::Value &configuration) {
-            unique_ptr<Selection<SOL>> _selection = nullptr;
+        std::unique_ptr<Selection<SOL>> selection(const Json::Value &configuration) {
+            std::unique_ptr<Selection<SOL>> _selection = nullptr;
 
             if (configuration.asString() == "max") {
                 _selection = make_unique<Selection_maximization<SOL>>();

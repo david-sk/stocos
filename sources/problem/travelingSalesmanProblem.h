@@ -29,8 +29,8 @@ class TravelingSalesmanProblem : public Problem<SOL_STP, TYPE_FITNESS_STP, TYPE_
 
     virtual ~TravelingSalesmanProblem() {}
 
-    unique_ptr<SOL_STP> new_solution() const {
-        unique_ptr<SOL_STP> s(make_unique<SOL_STP>(nodes.size()));
+    std::unique_ptr<SOL_STP> new_solution() const {
+        std::unique_ptr<SOL_STP> s(make_unique<SOL_STP>(nodes.size()));
         for (unsigned int i = 0; i < s->sizeArray(); i++) {
             s->operator()(i, i);
         }

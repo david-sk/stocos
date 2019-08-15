@@ -31,8 +31,8 @@ class Neighborhood : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
         exit(EXIT_FAILURE);
     }
 
-    virtual unique_ptr<vector<pair<unsigned int, TYPE_CELL>>> listOfMutations(const SOL &s) {
-        unique_ptr<vector<pair<unsigned int, TYPE_CELL>>> list(make_unique<vector<pair<unsigned int, TYPE_CELL>>>());
+    virtual std::unique_ptr<vector<pair<unsigned int, TYPE_CELL>>> listOfMutations(const SOL &s) {
+        std::unique_ptr<vector<pair<unsigned int, TYPE_CELL>>> list(make_unique<vector<pair<unsigned int, TYPE_CELL>>>());
         SOL s1 = s;
         for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
             if (s(i) == 1) {

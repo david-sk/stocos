@@ -47,7 +47,7 @@ class UnitTest_neighborhood : public CppUnit::TestFixture {
 	    std::mt19937 mt_rand;
 	    mt_rand.seed(10);
         AtomicOperation<SolutionArray<int, bool>, int, SolutionArray<int, bool>> *atomicOperations = new Neighborhood<SolutionArray<int, bool>, int, SolutionArray<int, bool>>(mt_rand);
-        unique_ptr<vector<pair<unsigned int, SolutionArray<int, bool>>>> l = atomicOperations->listOfMutations(s1);
+        std::unique_ptr<vector<pair<unsigned int, SolutionArray<int, bool>>>> l = atomicOperations->listOfMutations(s1);
 
         
         CPPUNIT_ASSERT((*l)[1].second == s2);

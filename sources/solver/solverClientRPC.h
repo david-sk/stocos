@@ -35,44 +35,99 @@ class SolverClientRPC : public Solver {
 
         for (string const &id : _configuration["OptimizationAlgorithm"].getMemberNames())
             oAlgo.insert(oAlgo.begin(), algoBuilder(id, _configuration["OptimizationAlgorithm"][id]));
+
+        solution_t0 = make_unique<SOL>();
+        solution_t1 = make_unique<SOL>();
     }
     virtual ~SolverClientRPC() {}
 
-    Json::Value initialization() {
-        Json::Value params;
-        params["method"] = "notify";
-        params["params"].append("msgxxxxxxxxxxxxxxxxxxxxxx");
-        params["id"] = 1;
-
-        string output;
-        string r;
-
-        Json::Value json = params;
+    string jsonAsString(const Json::Value &json) {
         Json::StreamWriterBuilder builder;
         builder["commentStyle"] = "None";
         builder["indentation"] = "";
-        // std::unique_ptr<Json::StreamWriter> writer(builder.newStreamWriter());
-        // writer->write(json, &std::cout);
-        output = Json::writeString(builder, json);
-        cout << output << endl;
+        return Json::writeString(builder, json);
+    }
+
+    Json::Value stringAsjson(const string &strJson) {
+        Json::Value root;
+        Json::Reader reader;
+        bool parsingSuccessful = reader.parse(strJson.c_str(), root);
+        if (!parsingSuccessful) throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " + reader.getFormattedErrorMessages());
+        return root;
+    }
+
+    Json::Value initialization(const Json::Value &configuration, unsigned int id = 0) {
+        Json::Value params;
+        params["method"] = "initialization";
+        params["params"].append(jsonAsString(configuration["aposd"]));
+        params["id"] = id;
+
+        string result;
 
         try {
-            client.SendRPCMessage(output, r);
-            cout << r << endl;
+            client.SendRPCMessage(jsonAsString(params), result);
         } catch (JsonRpcException &e) {
-            cerr << e.what() << endl;
+            throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " + e.what());
         }
+        return stringAsjson(result);
     }
 
-    Json::Value learning() {
+    Json::Value learningOnline(const Json::Value &msgSend, unsigned int id = 0) {
+        Json::Value params;
+        params["method"] = "learning";
+        params["params"].append(jsonAsString(msgSend));
+        params["id"] = id;
 
+        string result;
+
+        try {
+            client.SendRPCMessage(jsonAsString(params), result);
+        } catch (JsonRpcException &e) {
+            throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " + e.what());
+        }
+        return stringAsjson(result);
     }
-    Json::Value finish() {
 
+    Json::Value finish(const Json::Value &msgSend, unsigned int id = 0) {
+        Json::Value params;
+        params["method"] = "finish";
+        params["params"].append(jsonAsString(msgSend));
+        params["id"] = id;
+
+        string result;
+
+        try {
+            client.SendRPCMessage(jsonAsString(params), result);
+        } catch (JsonRpcException &e) {
+            throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " + e.what());
+        }
+        return stringAsjson(result);
     }
 
     void operator()() {
+        std::unique_ptr<SOL> initialSolution = _problem->new_solution();
+        Json::Value x = _configuration;
+        x["aposd"]["initialSolution"] = initialSolution->asJson();
+        received = initialization(x);
+        objectId = received["objectId"].asString();
 
+        unsigned int i = 0;
+        do {
+            assert(received["num_paramter"].asUInt() < oAlgo.size());
+            solution_t0->loadJson(received["Solution"]);
+            oAlgo[received["num_paramter"].asUInt()]->reset();
+			solution_t1 = oAlgo[received["num_paramter"].asUInt()]->operator()(*solution_t0);
+            Json::Value send;
+            send["Solution"] = solution_t1->asJson();
+            send["num_paramter"] = received["num_paramter"].asUInt();
+            send["objectId"] = objectId;
+            received = learningOnline(send);
+            cout<<"----> "<<received["num_paramter"].asUInt()<<endl;
+        } while(i++ < 100);
+
+        Json::Value msgSendFinish;
+        msgSendFinish["objectId"] = objectId;
+        received = finish(msgSendFinish);
     }
 
    private:
@@ -80,7 +135,11 @@ class SolverClientRPC : public Solver {
     shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> _problem;
     HttpClient client;
     std::mt19937 mt_rand;
-    vector<unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>> oAlgo;
+    vector<std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>> oAlgo;
+    string objectId;
+    Json::Value received;
+    std::unique_ptr<SOL> solution_t0;
+    std::unique_ptr<SOL> solution_t1;
 };
 
 #endif

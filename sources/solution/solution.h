@@ -63,8 +63,8 @@ class Solution {
     Solution &operator=(const Solution &s) {
         if (_numberOfObjective != s._numberOfObjective) {
             _numberOfObjective = s._numberOfObjective;
-            _fitness = unique_ptr<TYPE_FITNESS[]>(new TYPE_FITNESS[_numberOfObjective]);
-            _fitnessIsValid = unique_ptr<bool[]>(new bool[_numberOfObjective]);
+            _fitness = std::unique_ptr<TYPE_FITNESS[]>(new TYPE_FITNESS[_numberOfObjective]);
+            _fitnessIsValid = std::unique_ptr<bool[]>(new bool[_numberOfObjective]);
             for (unsigned int i = 0; i < _numberOfObjective; i++) _fitnessIsValid[i] = false;
         }
 
@@ -142,8 +142,8 @@ class Solution {
     void loadJson(const Json::Value &jsonValue) {
         _numberOfObjective = jsonValue["fitness"].size();
 		if (this->_fitness == nullptr) {
-			this->_fitness = unique_ptr<TYPE_FITNESS []>(new TYPE_FITNESS[this->_numberOfObjective]);
-			this->_fitnessIsValid = unique_ptr<bool []>(new bool[this->_numberOfObjective]);
+			this->_fitness = std::unique_ptr<TYPE_FITNESS []>(new TYPE_FITNESS[this->_numberOfObjective]);
+			this->_fitnessIsValid = std::unique_ptr<bool []>(new bool[this->_numberOfObjective]);
 		} else {
 			this->_fitness.reset(static_cast<TYPE_FITNESS *>(realloc(static_cast<void*>(this->_fitness.release()), this->_numberOfObjective * sizeof(TYPE_FITNESS))));
 			this->_fitnessIsValid.reset(static_cast<bool *>(realloc(static_cast<void*>(this->_fitnessIsValid.release()), this->_numberOfObjective * sizeof(bool))));
@@ -165,8 +165,8 @@ class Solution {
 
    protected:
     unsigned int _numberOfObjective;
-    unique_ptr<TYPE_FITNESS[]> _fitness;
-    unique_ptr<bool[]> _fitnessIsValid;
+    std::unique_ptr<TYPE_FITNESS[]> _fitness;
+    std::unique_ptr<bool[]> _fitnessIsValid;
 };
 
 #endif

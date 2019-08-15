@@ -61,7 +61,7 @@ class UnitTest_kBit : public CppUnit::TestFixture {
 	    std::mt19937 mt_rand;
 	    mt_rand.seed(10);
         KBit<SolutionArray<int, bool>, int, bool> kbit(mt_rand, 45);
-        // unique_ptr<vector<unsigned int>> list = kbit.listOfMutations(s1);
+        // std::unique_ptr<vector<unsigned int>> list = kbit.listOfMutations(s1);
 
         // for (unsigned int i = 0 ; i < list->size() ; i++) {
         //     CPPUNIT_ASSERT((*list)[i] == checklist[i]);

@@ -37,6 +37,10 @@ class CriteriaBudget : public Criteria<SOL, TYPE_FITNESS> {
         consumedBudget = 0;
     }
 
+    void reset() {
+        consumedBudget = 0;
+    }
+
     protected:
     unsigned int consumedBudget;
     unsigned int budget;

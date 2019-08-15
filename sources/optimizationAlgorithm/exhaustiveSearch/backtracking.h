@@ -20,8 +20,8 @@ template <typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class Backtraking : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
    public:
     Backtraking(std::mt19937 &mt_rand, 
-                unique_ptr<Statistic<SOL>> statistic, 
-				unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
+                std::unique_ptr<Statistic<SOL>> statistic, 
+				std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
                 shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem, 
                 const unsigned int nbDigit, 
 				const unsigned int len_string)
@@ -29,20 +29,17 @@ class Backtraking : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
           		_nbDigit(nbDigit),
                 _len_string(len_string) {
                 nbCall = 0;
-                _string = unique_ptr<unsigned int[]>(new unsigned int[_len_string]);
+                _string = std::unique_ptr<unsigned int[]>(new unsigned int[_len_string]);
     }
 
     virtual ~Backtraking() {}
+    
 
-
-
-    unique_ptr<SOL> operator()(const SOL &s) {
+    std::unique_ptr<SOL> operator()(const SOL &s) {
         //
-        unique_ptr<SOL> result;
+        std::unique_ptr<SOL> result;
         return move(result);
     }
-
-
 
 	void recursive(unsigned int currentCell) {
 		//current_sol.print();
@@ -78,7 +75,7 @@ class Backtraking : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
     const unsigned int _len_string;
 
     unsigned int nbCall;
-    unique_ptr<unsigned int[]> _string;
+    std::unique_ptr<unsigned int[]> _string;
 
     const vector<unsigned int> _bijection;
 };

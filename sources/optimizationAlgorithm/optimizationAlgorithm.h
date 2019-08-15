@@ -20,8 +20,8 @@ template<class SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class OptimizationAlgorithm {
     public:
         OptimizationAlgorithm(std::mt19937 &mt_rand,
-        unique_ptr<Statistic<SOL>> statistic,
-        unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
+        std::unique_ptr<Statistic<SOL>> statistic,
+        std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
         shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem) : 
             _mt_rand(mt_rand),
             _statistic(move(statistic)),
@@ -31,15 +31,17 @@ class OptimizationAlgorithm {
 
         }
     
-        virtual unique_ptr<SOL> operator()(const SOL &s) = 0;
+        virtual void reset() {
+            _stoppingCriteria->reset();
+        }
+        virtual std::unique_ptr<SOL> operator()(const SOL &s) = 0;
         virtual string className() const = 0;
 
     protected:
         std::mt19937 &_mt_rand;
-        unique_ptr<Statistic<SOL>> _statistic;
-        unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> _stoppingCriteria;
+        std::unique_ptr<Statistic<SOL>> _statistic;
+        std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> _stoppingCriteria;
         shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> _problem;
-
 };
 
 #endif

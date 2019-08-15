@@ -98,8 +98,8 @@ class Subsetsum : public Problem<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CEL
         }
     }
 
-    unique_ptr<SOL_SUBSETSUM> new_solution() const {
-        unique_ptr<SOL_SUBSETSUM> s(make_unique<SOL_SUBSETSUM>(setOfNumbers.size()));
+    std::unique_ptr<SOL_SUBSETSUM> new_solution() const {
+        std::unique_ptr<SOL_SUBSETSUM> s(make_unique<SOL_SUBSETSUM>(setOfNumbers.size()));
         for (unsigned int i = 0 ; i < s->sizeArray() ; i++) {
             s->operator()(i, 0);
         } 
