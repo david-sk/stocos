@@ -42,7 +42,6 @@ class OptimizationAlgorithm {
         std::unique_ptr<Statistic<SOL>> _statistic;
         std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> _stoppingCriteria;
         shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> _problem;
-
 };
 
 #endif

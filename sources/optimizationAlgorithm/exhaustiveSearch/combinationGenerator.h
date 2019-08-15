@@ -36,7 +36,7 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
 
     virtual ~CombinationGenerator() {}
 
-    const std::unique_ptr<unsigned int[]> &reset() {
+    void reset() {
         for (unsigned int j = 0; j < _len_string; j++) _string[j] = 0;
 
         x = false;
@@ -47,10 +47,9 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
             x = true;
         }
 
-        return _string;
     }
 
-    const std::unique_ptr<unsigned int[]> &step() {
+    void step() {
         _string[i]++;
 
         if (x) {
@@ -62,7 +61,6 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
             i++;
             x = true;
         }
-        return _string;
     }
 
     bool stop() { return i < (_len_string); }

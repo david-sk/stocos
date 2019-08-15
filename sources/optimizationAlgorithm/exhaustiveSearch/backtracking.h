@@ -33,16 +33,13 @@ class Backtraking : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
     }
 
     virtual ~Backtraking() {}
-
-
+    
 
     std::unique_ptr<SOL> operator()(const SOL &s) {
         //
         std::unique_ptr<SOL> result;
         return move(result);
     }
-
-
 
 	void recursive(unsigned int currentCell) {
 		//current_sol.print();

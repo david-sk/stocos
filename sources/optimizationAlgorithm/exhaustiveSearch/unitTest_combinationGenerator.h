@@ -31,7 +31,7 @@ class UnitTest_combinationGenerator : public CppUnit::TestFixture {
 
     void test(void) {
         typedef SolutionArray<unsigned int, bool> TYPESOL;
-        //CPPUNIT_ASSERT(o->operator()(s) == false);
+        // //CPPUNIT_ASSERT(o->operator()(s) == false);
     
 	    std::mt19937 mt_rand;
 	    mt_rand.seed(0);
@@ -43,7 +43,7 @@ class UnitTest_combinationGenerator : public CppUnit::TestFixture {
 
         CombinationGenerator<TYPESOL, unsigned int, bool> cg(mt_rand, move(statistic), move(stoppingCriteria), oneMax, 2, 4);
 
-        //cg(s);
+        cg(s);
 
         //cg();
        
