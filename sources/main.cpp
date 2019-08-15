@@ -1,9 +1,9 @@
 /// 
-/// \file main.cpp
-/// \author Jxtopher
-/// \brief 
-/// \version 0.1
-/// \date 2019-08-11
+/// @file main.cpp
+/// @author Jxtopher
+/// @brief 
+/// @version 0.1
+/// @date 2019-08-11
 /// 
 /// 
 

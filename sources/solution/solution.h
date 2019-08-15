@@ -1,10 +1,10 @@
 ///
-/// \file solution.h
-/// \author Jxtopher
-/// \version 1
-/// \copyright CC-BY-NC-SA
-/// \date 2018-10
-/// \brief
+/// @file solution.h
+/// @author Jxtopher
+/// @version 1
+/// @copyright CC-BY-NC-SA
+/// @date 2018-10
+/// @brief
 ///
 
 #ifndef SOLUTION_H
@@ -82,11 +82,11 @@ class Solution {
     }
 
     ///
-    /// \brief give for a numObjectif the state fitness
+    /// @brief give for a numObjectif the state fitness
     ///
-    /// \param numObjectif
-    /// \return true if the fitness is valide
-    /// \return false if the fitness is not valide
+    /// @param numObjectif
+    /// @return true if the fitness is valide
+    /// @return false if the fitness is not valide
     ///
     bool fitnessIsValid(unsigned int numObjectif) const {
         assert(numObjectif < _numberOfObjective);

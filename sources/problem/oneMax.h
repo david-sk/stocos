@@ -1,10 +1,10 @@
 ///
-/// \file evalOneMax.h
-/// \author Jxtopher
-/// \version 1
-/// \copyright CC-BY-NC-SA
-/// \date 2018-10
-/// \brief
+/// @file evalOneMax.h
+/// @author Jxtopher
+/// @version 1
+/// @copyright CC-BY-NC-SA
+/// @date 2018-10
+/// @brief
 ///
 
 #ifndef EVALONEMAX_H

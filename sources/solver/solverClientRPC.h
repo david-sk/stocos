@@ -1,9 +1,9 @@
 ///
-/// \file solverClientRPC.h
-/// \author your name (you@domain.com)
-/// \brief
-/// \version 0.1
-/// \date 2019-08-12
+/// @file solverClientRPC.h
+/// @author your name (you@domain.com)
+/// @brief
+/// @version 0.1
+/// @date 2019-08-12
 ///
 /// http://pooh.poly.asu.edu/Ser321/Resources/doc/json-api-docs/jsonrpc-cpp-api-html/index.html
 /// main.cpp -ljsoncpp -lcurl -ljsonrpccpp-common -ljsonrpccpp-client -o sampleclient

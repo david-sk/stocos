@@ -1,9 +1,9 @@
 ///
-/// \file combinationGenerator.h
-/// \author Jxtopher
-/// \version 1
-/// \date 2019
-/// \brief *
+/// @file combinationGenerator.h
+/// @author Jxtopher
+/// @version 1
+/// @date 2019
+/// @brief *
 ///
 
 #ifndef COMBINATIONGENERATOR_H

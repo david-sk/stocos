@@ -1,10 +1,10 @@
 ///
-/// \file swap.h
-/// \author Jxtopher
-/// \version 1
-/// \copyright CC-BY-NC-SA
-/// \date 2019-05
-/// \brief Echange N case distinc
+/// @file swap.h
+/// @author Jxtopher
+/// @version 1
+/// @copyright CC-BY-NC-SA
+/// @date 2019-05
+/// @brief Echange N case distinc
 ///
 
 #ifndef OPERATION_SWAP_H

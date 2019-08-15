@@ -1,10 +1,10 @@
 ///
-/// \file unitTest_evalQAP.h
-/// \author Jxtopher
-/// \version 1
-/// \copyright CC-BY-NC-SA
-/// \date 2018-10
-/// \brief 
+/// @file unitTest_evalQAP.h
+/// @author Jxtopher
+/// @version 1
+/// @copyright CC-BY-NC-SA
+/// @date 2018-10
+/// @brief 
 ///
 
 #ifndef UNITTEST_EVALQAP_H

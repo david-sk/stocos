@@ -1,10 +1,10 @@
 ///
-/// \file knapsackProblem.h
-/// \author Jxtopher
-/// \version 1
-/// \copyright CC-BY-NC-SA
-/// \date 2019-05
-/// \brief Knapsack Problem
+/// @file knapsackProblem.h
+/// @author Jxtopher
+/// @version 1
+/// @copyright CC-BY-NC-SA
+/// @date 2019-05
+/// @brief Knapsack Problem
 ///
 
 #ifndef KNAPSACK_H

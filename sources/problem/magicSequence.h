@@ -1,10 +1,10 @@
 ///
-/// \file magicSequence.h
-/// \author Jxtopher
-/// \version 1
-/// \copyright CC-BY-NC-SA
-/// \date 2019-05
-/// \brief magic sequence Problem
+/// @file magicSequence.h
+/// @author Jxtopher
+/// @version 1
+/// @copyright CC-BY-NC-SA
+/// @date 2019-05
+/// @brief magic sequence Problem
 ///
 
 #ifndef MAGICSEQUENCE_H

@@ -1,10 +1,10 @@
 ///
-/// \file kBit.h
-/// \author Jxtopher
-/// \version 1
-/// \copyright CC-BY-NC-SA
-/// \date 2019-05
-/// \brief exactly mute K bits distinct
+/// @file kBit.h
+/// @author Jxtopher
+/// @version 1
+/// @copyright CC-BY-NC-SA
+/// @date 2019-05
+/// @brief exactly mute K bits distinct
 ///
 
 #ifndef OPERATION_KBIT_H

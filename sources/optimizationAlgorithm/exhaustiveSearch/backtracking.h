@@ -1,9 +1,9 @@
 ///
-/// \file backtracking.h
-/// \author Jxtopher
-/// \version 1
-/// \date 2019
-/// \brief *
+/// @file backtracking.h
+/// @author Jxtopher
+/// @version 1
+/// @date 2019
+/// @brief *
 ///
 
 #ifndef BACKTRACKING_H

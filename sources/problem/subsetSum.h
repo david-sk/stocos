@@ -1,10 +1,10 @@
 ///
-/// \file evalSubsetSum.h
-/// \author Jxtopher
-/// \version 1
-/// \copyright CC-BY-NC-SA
-/// \date 2018-10
-/// \brief https://en.wikipedia.org/wiki/Subset_sum_problem
+/// @file evalSubsetSum.h
+/// @author Jxtopher
+/// @version 1
+/// @copyright CC-BY-NC-SA
+/// @date 2018-10
+/// @brief https://en.wikipedia.org/wiki/Subset_sum_problem
 ///
 
 #ifndef EVALSUBSETSUM_H

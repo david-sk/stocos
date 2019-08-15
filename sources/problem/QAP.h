@@ -1,10 +1,10 @@
 ///
-/// \file evalQAP.h
-/// \author Jxtopher
-/// \version 1
-/// \copyright CC-BY-NC-SA
-/// \date 2019-10
-/// \brief Quadratic Assignment Problem
+/// @file evalQAP.h
+/// @author Jxtopher
+/// @version 1
+/// @copyright CC-BY-NC-SA
+/// @date 2019-10
+/// @brief Quadratic Assignment Problem
 ///
 ///             ---  ---
 ///             |    |

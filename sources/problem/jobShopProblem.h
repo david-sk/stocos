@@ -1,10 +1,10 @@
 ///
-/// \file evalJobShopProblem.h
-/// \author Jxtopher
-/// \version 1
-/// \copyright CC-BY-NC-SA
-/// \date 2018-10
-/// \brief https://developers.google.com/optimization/scheduling/job_shop
+/// @file evalJobShopProblem.h
+/// @author Jxtopher
+/// @version 1
+/// @copyright CC-BY-NC-SA
+/// @date 2018-10
+/// @brief https://developers.google.com/optimization/scheduling/job_shop
 ///
 
 #ifndef EVALJOBSHOPPROBLEM_H
