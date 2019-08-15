@@ -146,11 +146,6 @@
                 "className": "PsAdaptivePursuit",
                 "nbParameter": 3
             },
-            "Launcher": {
-                "className": "LauncherExec",
-                "pathExecutable": "../stocos/build/stocos",
-                "string_args": ""
-            }
         }
     }
 }
