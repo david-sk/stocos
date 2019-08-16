@@ -1,5 +1,5 @@
 ///
-/// @file unitTest_knapsack.h
+/// @file unitTest_jobShopProblem.h
 /// @author Jxtopher
 /// @version 1
 /// @copyright CC-BY-NC-SA

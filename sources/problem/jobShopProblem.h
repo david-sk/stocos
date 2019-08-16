@@ -1,5 +1,5 @@
 ///
-/// @file evalJobShopProblem.h
+/// @file jobShopProblem.h
 /// @author Jxtopher
 /// @version 1
 /// @copyright CC-BY-NC-SA

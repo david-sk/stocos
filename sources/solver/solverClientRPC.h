@@ -118,7 +118,8 @@ class SolverClientRPC : public Solver {
             oAlgo[received["num_paramter"].asUInt()]->reset();
 			solution_t1 = oAlgo[received["num_paramter"].asUInt()]->operator()(*solution_t0);
             Json::Value send;
-            send["Solution"] = solution_t1->asJson();
+            send["Solution_t0"] = solution_t0->asJson();
+            send["Solution_t1"] = solution_t1->asJson();
             send["num_paramter"] = received["num_paramter"].asUInt();
             send["objectId"] = objectId;
             received = learningOnline(send);

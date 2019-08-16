@@ -1,5 +1,5 @@
 ///
-/// @file evalOneMax.h
+/// @file oneMax.h
 /// @author Jxtopher
 /// @version 1
 /// @copyright CC-BY-NC-SA

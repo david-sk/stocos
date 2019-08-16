@@ -1,5 +1,5 @@
 ///
-/// @file evalSubsetSum.h
+/// @file subsetSum.h
 /// @author Jxtopher
 /// @version 1
 /// @copyright CC-BY-NC-SA

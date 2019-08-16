@@ -1,5 +1,5 @@
 ///
-/// @file IteratedLocalSearch.h
+/// @file iteratedLocalSearch.h
 /// @author Jxtopher
 /// @version 1
 /// @copyright CC-BY-NC-SA

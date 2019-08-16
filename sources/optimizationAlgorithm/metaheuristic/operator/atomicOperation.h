@@ -1,5 +1,5 @@
 ///
-/// @file AtomicOperations.h
+/// @file atomicOperation.h
 /// @author Jxtopher
 /// @version 1
 /// @copyright CC-BY-NC-SA

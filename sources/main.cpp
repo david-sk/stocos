@@ -111,12 +111,12 @@ int main(int argc, char **argv, char **envp) {
         else 
             throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] The optimization problem does not exist.");
     } else {
-        if (configuration["aposd"]["CommunicationModel"].asString() == "WEBAPPLICATION") 
+        if (configuration["aposd"]["Interface"].asString() == "WEBAPPLICATION") 
             solver = new SolverClientRPC<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>(configuration, eOneMax);
-        else if (configuration["aposd"]["CommunicationModel"].asString() == "MPI")
-            throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] The CommunicationModel \""+ configuration["aposd"][""].asString() +"\" does not implemented."); 
+        else if (configuration["aposd"]["Interface"].asString() == "MPI")
+            throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] The interface \""+ configuration["aposd"][""].asString() +"\" does not implemented."); 
         else
-            throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] The CommunicationModel \""+ configuration["aposd"][""].asString() +"\" does not exist.");
+            throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] The interface \""+ configuration["aposd"][""].asString() +"\" does not exist.");
     }
 
     solver->operator()();
