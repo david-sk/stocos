@@ -11,6 +11,7 @@
 #include <cstdlib>
 #include <signal.h>
 #include <map>
+#include <string>
 #include <boost/program_options.hpp>
 
 #include "problem/oneMax.h"
@@ -69,7 +70,7 @@ int main(int argc, char **argv, char **envp) {
 		// boost::program_options::store(boost::program_options::command_line_parser(argc, argv).options(config).allow_unregistered().run(), vm);
 		boost::program_options::notify(vm);
 	} catch (const boost::program_options::error &ex) {
-    	//std::cerr << __FILE__<<":"<<__LINE__ <<ex.what() << endl;
+    	//std::cerr << __FILE__<<":"<<__LINE__ <<ex.what() << std::endl;
         throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] error program_options");
   	}
 
