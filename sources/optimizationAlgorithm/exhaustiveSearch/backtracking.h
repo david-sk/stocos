@@ -14,7 +14,7 @@
 #include "../../solution/solutionArray.h"
 #include "../optimizationAlgorithm.h"
 
-using namespace std;
+
 
 template <typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class Backtraking : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
@@ -22,10 +22,10 @@ class Backtraking : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
     Backtraking(std::mt19937 &mt_rand, 
                 std::unique_ptr<Statistic<SOL>> statistic, 
 				std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
-                shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem, 
+                std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem, 
                 const unsigned int nbDigit, 
 				const unsigned int len_string)
-        		: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, move(statistic), move(stoppingCriteria), problem),
+        		: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic), std::move(stoppingCriteria), problem),
           		_nbDigit(nbDigit),
                 _len_string(len_string) {
                 nbCall = 0;
@@ -38,7 +38,7 @@ class Backtraking : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
     std::unique_ptr<SOL> operator()(const SOL &s) {
         //
         std::unique_ptr<SOL> result;
-        return move(result);
+        return std::move(result);
     }
 
 	void recursive(unsigned int currentCell) {
@@ -46,7 +46,7 @@ class Backtraking : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
 		if (_len_string == currentCell) {
             // for(unsigned int j = 0 ; j < _len_string ; j++)
             //     cout<<string[j];
-            // cout<<endl;
+            // std::cout<<std::endl;
 			//cout<<"Wine : ";
 			//current_sol.print();
 		} else {
@@ -77,7 +77,7 @@ class Backtraking : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
     unsigned int nbCall;
     std::unique_ptr<unsigned int[]> _string;
 
-    const vector<unsigned int> _bijection;
+    const std::vector<unsigned int> _bijection;
 };
 
 #endif

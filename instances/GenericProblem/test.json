@@ -1,0 +1,16 @@
+{
+    "problem": {
+        "name": "test",
+        "numInstance": "0",
+        "objectif": [
+            {
+                "name": "objectif1",
+                "function": "(6 * x + 3)^5 * (x^2 - x + 1)^2 - 54 * x * (2 * x - 5)^2 (6* x^3 - 2 * x^2 + x/3 + 4)^2",
+                "variables": [
+                    "x"
+                ],
+                "maximization": true
+            }
+        ]
+    }
+}

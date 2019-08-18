@@ -32,6 +32,7 @@
 #include "problem/unitTest_OneMax.h"
 #include "problem/unitTest_QAP.h"
 #include "problem/unitTest_travelingSalesmanProblem.h"
+#include "problem/unitTest_genericProblem.h"
 #include "problem/unitTest_subsetsum.h"
 #include "solution/unitTest_population.h"
 #include "solution/unitTest_solution.h"
@@ -40,23 +41,30 @@
 
 
 
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_criteriaBudget);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solution);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solutionArray);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_population);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_OneMax);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_knapsack);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_magicSequence);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_QAP);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_combinationGenerator);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_backtraking);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_flipBit);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_kBit);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_swap);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_travelingSalesmanProblem);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_neighborhood);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_jobShopProblem);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_subsetsum);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_criteriaBudget);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solution);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solutionArray);
+
+
+// Problem
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_population);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_OneMax);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_knapsack);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_magicSequence);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_QAP);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_GenericProblem);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_jobShopProblem);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_subsetsum);
+
+// Algorithm d'optimisation
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_combinationGenerator);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_backtraking);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_flipBit);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_kBit);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_swap);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_travelingSalesmanProblem);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_neighborhood);
+
 
 
 int main(int argc, char* argv[])

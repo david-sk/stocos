@@ -18,7 +18,7 @@ class OnePlusLambda : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>
     OnePlusLambda(std::mt19937 &mt_rand, 
         std::unique_ptr<Statistic<SOL>> statistic,
         std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
-        shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
+        std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
         std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations,
         std::unique_ptr<Selection<SOL>> selection,
         unsigned int lambda) : 
@@ -56,10 +56,10 @@ class OnePlusLambda : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>
 
         this->_statistic->operator()(solution_star);
 
-        return move(make_unique<SOL>(solution_star));
+        return std::move(std::make_unique<SOL>(solution_star));
     }
     
-    string className() const {
+    std::string className() const {
         return "OnePlusLambda";
     }
 

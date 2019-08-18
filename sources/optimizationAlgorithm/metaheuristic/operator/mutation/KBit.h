@@ -1,5 +1,5 @@
 ///
-/// @file kBit.h
+/// @file KBit.h
 /// @author Jxtopher
 /// @version 1
 /// @copyright CC-BY-NC-SA
@@ -17,7 +17,7 @@
 
 #include "../atomicOperation.h"
 
-using namespace std;
+
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class KBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
@@ -26,7 +26,7 @@ class KBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
     AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand),
     _k(k) {
         N = 1;
-        rid = make_unique<uniform_int_distribution<unsigned int>>(0, 1);
+        rid = std::make_unique<std::uniform_int_distribution<unsigned int>>(0, 1);
     }
     virtual ~KBit() {
 
@@ -34,7 +34,7 @@ class KBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
 
     void operator()(SOL &s) {
         backup.clear();
-        std::unique_ptr<vector<pair<unsigned int, TYPE_CELL>>> list = listOfMutations(s);
+        std::unique_ptr<std::vector<std::pair<unsigned int, TYPE_CELL>>> list = listOfMutations(s);
         for (unsigned int i = 0 ; i < list->size() ; i++) {
             s((*list)[i].first, (*list)[i].second);
             backup.push_back((*list)[i].first);
@@ -52,14 +52,14 @@ class KBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
         }
     }
 
-    std::unique_ptr<vector<pair<unsigned int, TYPE_CELL>>> listOfMutations(const SOL &s) {
+    std::unique_ptr<std::vector<std::pair<unsigned int, TYPE_CELL>>> listOfMutations(const SOL &s) {
         assert(_k <= s.sizeArray());
 
-        std::unique_ptr<vector<pair<unsigned int, TYPE_CELL>>> list(make_unique<vector<pair<unsigned int, TYPE_CELL>>>());
+        std::unique_ptr<std::vector<std::pair<unsigned int, TYPE_CELL>>> list(make_unique<std::vector<std::pair<unsigned int, TYPE_CELL>>>());
         
         if (s.sizeArray() != N) {
             N = s.sizeArray();
-            rid = make_unique<uniform_int_distribution<unsigned int>>(0, N);
+            rid = std::make_unique<std::uniform_int_distribution<unsigned int>>(0, N);
         }
 
         while (list->size() != _k) {
@@ -79,10 +79,10 @@ class KBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
             }
         }
 
-        return move(list);
+        return std::move(list);
     }
 
-    void applyOperator(SOL &s, const vector<pair<unsigned int, TYPE_CELL>> &_listOfMutations) {
+    void applyOperator(SOL &s, const std::vector<std::pair<unsigned int, TYPE_CELL>> &_listOfMutations) {
         backup.clear();
         for (unsigned int i = 0 ; i < _listOfMutations.size() ; i++) {
             s(_listOfMutations[i].first, _listOfMutations[i].second);
@@ -92,7 +92,7 @@ class KBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
 
 
     private:
-        std::unique_ptr<uniform_int_distribution<unsigned int>> rid;
+        std::unique_ptr<std::uniform_int_distribution<unsigned int>> rid;
         vector<unsigned int> backup;
         unsigned int _k;
         unsigned int N;

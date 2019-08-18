@@ -1,5 +1,5 @@
 ///
-/// @file unitTest_evalQAP.h
+/// @file unitTest_travelingSalesmanProblem.h
 /// @author Jxtopher
 /// @version 1
 /// @copyright CC-BY-NC-SA
@@ -39,9 +39,9 @@ class UnitTest_travelingSalesmanProblem : public CppUnit::TestFixture {
         tsp.loadInstance("instances/TravelingSalesmanProblem/travelingSalesmanProblem-10-1.json");
         std::unique_ptr<SOL_STP> s1 = tsp.new_solution();
 
-        // cout<<(*s1)<<endl;
+        // std::cout<<(*s1)<<std::endl;
         tsp.full_eval((*s1));
-        // cout<<(*s1)<<endl;
+        // std::cout<<(*s1)<<std::endl;
     }
 
     /*void distance_euclidienne(void) {
@@ -50,7 +50,7 @@ class UnitTest_travelingSalesmanProblem : public CppUnit::TestFixture {
 
         TravelingSalesmanProblem tsp;
         double r = tsp.distance_euclidienne(A, B);
-        cout<<"**"<<r<<"**"<<endl;
+        std::cout<<"**"<<r<<"**"<<std::endl;
     }*/
 
 

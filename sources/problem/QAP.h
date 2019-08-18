@@ -1,5 +1,5 @@
 ///
-/// @file evalQAP.h
+/// @file QAP.h
 /// @author Jxtopher
 /// @version 1
 /// @copyright CC-BY-NC-SA
@@ -21,14 +21,14 @@
 #include <memory>
 #include <iostream>
 
-using namespace std;
+
 
 using TYPE_FITNESS_QAP = unsigned int;
 using TYPE_CELL_QAP = unsigned int;
 using SOL_QAP = SolutionArray<TYPE_FITNESS_QAP, TYPE_CELL_QAP>;
 class QAP : public Problem<SOL_QAP, TYPE_FITNESS_QAP, TYPE_CELL_QAP> {
 public:
-    QAP(string pathfile_instance) {
+    QAP(std::string pathfile_instance) {
         loadInstance(pathfile_instance);
     }
 
@@ -61,7 +61,7 @@ public:
         delete[] B;
     }
 
-    void loadInstance(const string &file) {
+    void loadInstance(const std::string &file) {
         std::fstream myfile(file, std::ios_base::in);
 
         unsigned int a;
@@ -100,7 +100,7 @@ public:
         }
     }
 
-    void full_eval(SOL_QAP &p) const {
+    void full_eval(SOL_QAP &p) {
         unsigned int sum = 0;
         for (unsigned int i = 0 ; i < n ; i++) {
             for (unsigned int j = 0 ; j < n ; j++)
@@ -116,14 +116,14 @@ public:
     void showA() const {
         for (unsigned int i = 0 ; i < n ; i++) {
             for (unsigned int j = 0 ; j < n ; j++)
-                cout<<A[i][j]<<"\t";
-            cout<<endl;
+                std::cout<<A[i][j]<<"\t";
+            std::cout<<std::endl;
         }
-        cout<<endl;
+        std::cout<<std::endl;
         for (unsigned int i = 0 ; i < n ; i++) {
             for (unsigned int j = 0 ; j < n ; j++)
-                cout<<B[i][j]<<"\t";
-            cout<<endl;
+                std::cout<<B[i][j]<<"\t";
+            std::cout<<std::endl;
         }
     }
 

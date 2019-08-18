@@ -17,7 +17,7 @@
 
 #include "../problem/problem.h"
 
-using namespace std;
+
 
 
 class Solver {

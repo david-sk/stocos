@@ -16,7 +16,7 @@
 
 #include "sensor.h"
 
-using namespace std;
+
 
 template<class SOL>
 class SensorStopwatch : public Sensor<SOL> {
@@ -30,22 +30,22 @@ public:
 	}
 	
 	void start() {
-		_start_minutes = chrono::duration_cast<chrono::minutes>(chrono::steady_clock::now().time_since_epoch());
-		_start_microseconds = chrono::duration_cast<chrono::microseconds>(chrono::steady_clock::now().time_since_epoch());
+		_start_minutes = std::chrono::duration_cast<std::chrono::minutes>(std::chrono::steady_clock::now().time_since_epoch());
+		_start_microseconds = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now().time_since_epoch());
 	}
 	
 	void stop() {
-        _end_microseconds = chrono::duration_cast<chrono::microseconds>(chrono::steady_clock::now().time_since_epoch());
-				_end_minutes = chrono::duration_cast<chrono::minutes>(chrono::steady_clock::now().time_since_epoch());
+        _end_microseconds = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now().time_since_epoch());
+				_end_minutes = std::chrono::duration_cast<std::chrono::minutes>(std::chrono::steady_clock::now().time_since_epoch());
 	}
 	
 	int diff_microseconds() {
-		chrono::microseconds ms = _end_microseconds - _start_microseconds;
+		std::chrono::microseconds ms = _end_microseconds - _start_microseconds;
 		return ms.count();
 	}
 
 	int diff_minutes() {
-		chrono::microseconds m = _end_minutes - _start_minutes;
+		std::chrono::microseconds m = _end_minutes - _start_minutes;
 		return m.count();
 	}
 
@@ -59,9 +59,9 @@ public:
     }
 	
 protected:
-	chrono::microseconds _start_microseconds;
-	chrono::microseconds _end_microseconds;
-	chrono::minutes _start_minutes;
-	chrono::minutes _end_minutes;
+	std::chrono::microseconds _start_microseconds;
+	std::chrono::microseconds _end_microseconds;
+	std::chrono::minutes _start_minutes;
+	std::chrono::minutes _end_minutes;
 };
 #endif	/* STOPWATCH_H */

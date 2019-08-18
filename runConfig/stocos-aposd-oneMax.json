@@ -139,13 +139,13 @@
     },
     "aposd": {
         "seed": 0,
-        "CommunicationModel": "WEBAPPLICATION",
+        "Interface": "WEBAPPLICATION",
         "CalculationModel": {
             "className": "Learning",
             "ParameterSelection": {
                 "className": "PsAdaptivePursuit",
                 "nbParameter": 3
-            },
+            }
         }
     }
 }

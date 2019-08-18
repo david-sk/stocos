@@ -14,7 +14,7 @@
 
 #include <memory>
 
-using namespace std;
+
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class TabuSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
@@ -22,7 +22,7 @@ class TabuSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
     TabuSearch(std::mt19937 &mt_rand, 
         std::unique_ptr<Statistic<SOL>> statistic,
         std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
-        shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
+        std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
         std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations,
         std::unique_ptr<Selection<SOL>> selection,
         unsigned int sizeOfTabuList = 7) : 
@@ -66,11 +66,11 @@ class TabuSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
             tabuList.push_back(solution_beta);
         }
         
-        return move(make_unique<SOL>(solution_star));
+        return std::move(std::make_unique<SOL>(solution_star));
     }
 
 
-    string className() const {
+    std::string className() const {
         return "TabuSearch";
     }
 

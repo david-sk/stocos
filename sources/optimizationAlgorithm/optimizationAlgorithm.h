@@ -22,10 +22,10 @@ class OptimizationAlgorithm {
         OptimizationAlgorithm(std::mt19937 &mt_rand,
         std::unique_ptr<Statistic<SOL>> statistic,
         std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
-        shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem) : 
+        std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem) : 
             _mt_rand(mt_rand),
-            _statistic(move(statistic)),
-            _stoppingCriteria(move(stoppingCriteria)),
+            _statistic(std::move(statistic)),
+            _stoppingCriteria(std::move(stoppingCriteria)),
             _problem(problem) { }
         virtual ~OptimizationAlgorithm() {
 
@@ -35,13 +35,13 @@ class OptimizationAlgorithm {
             _stoppingCriteria->reset();
         }
         virtual std::unique_ptr<SOL> operator()(const SOL &s) = 0;
-        virtual string className() const = 0;
+        virtual std::string className() const = 0;
 
     protected:
         std::mt19937 &_mt_rand;
         std::unique_ptr<Statistic<SOL>> _statistic;
         std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> _stoppingCriteria;
-        shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> _problem;
+        std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> _problem;
 };
 
 #endif

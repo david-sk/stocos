@@ -18,7 +18,7 @@
 
 #include "problem.h"
 
-using namespace std;
+
 
 using TYPE_FITNESS_STP = unsigned int;
 using TYPE_CELL_STP = unsigned int;
@@ -30,20 +30,20 @@ class TravelingSalesmanProblem : public Problem<SOL_STP, TYPE_FITNESS_STP, TYPE_
     virtual ~TravelingSalesmanProblem() {}
 
     std::unique_ptr<SOL_STP> new_solution() const {
-        std::unique_ptr<SOL_STP> s(make_unique<SOL_STP>(nodes.size()));
+        std::unique_ptr<SOL_STP> s(std::make_unique<SOL_STP>(nodes.size()));
         for (unsigned int i = 0; i < s->sizeArray(); i++) {
             s->operator()(i, i);
         }
-        return move(s);
+        return std::move(s);
     }
 
-    virtual void loadInstance(const string &file) {
+    virtual void loadInstance(const std::string &file) {
         Json::Value root;  // will contains the root value after parsing.
         Json::Reader reader;
         std::ifstream test(file, std::ifstream::binary);
         bool parsingSuccessful = reader.parse(test, root, false);
 
-        if (!parsingSuccessful) throw runtime_error(reader.getFormattedErrorMessages());
+        if (!parsingSuccessful) throw std::runtime_error(reader.getFormattedErrorMessages());
 
         std::string encoding = root.get("encoding", "UTF-8").asString();
         numInstance = root["problem"]["numInstance"].asString();
@@ -51,11 +51,11 @@ class TravelingSalesmanProblem : public Problem<SOL_STP, TYPE_FITNESS_STP, TYPE_
         for (unsigned int i = 0 ; i < root["problem"]["nodes"].size() ; i++) {
             double x = root["problem"]["nodes"][i]["x"].asDouble();
             double y = root["problem"]["nodes"][i]["y"].asDouble();
-            nodes.push_back(pair<double, double>(x, y));
+            nodes.push_back(std::pair<double, double>(x, y));
         }
     }
 
-    virtual void full_eval(SOL_STP &s) const {
+    virtual void full_eval(SOL_STP &s) {
         double distance_sum = 0;
         for (unsigned int i = 0; i < s.sizeArray() - 1; i++) {
             distance_sum += distance_euclidienne(nodes[s(i)], nodes[s(i + 1)]);
@@ -64,14 +64,14 @@ class TravelingSalesmanProblem : public Problem<SOL_STP, TYPE_FITNESS_STP, TYPE_
     }
 
    private:
-    double distance_euclidienne(const pair<double, double> &node_a, const pair<double, double> &node_b) const {
+    double distance_euclidienne(const std::pair<double, double> &node_a, const std::pair<double, double> &node_b) const {
         return sqrt(abs(node_b.second - node_a.second) * abs(node_b.second - node_a.second) +
                     abs(node_b.first - node_a.first) * abs(node_b.first - node_a.first));
     }
 
-    string numInstance;
+    std::string numInstance;
     unsigned int numberOfNodes;
-    vector<pair<double, double>> nodes;
+    std::vector<std::pair<double, double>> nodes;
 };
 
 #endif

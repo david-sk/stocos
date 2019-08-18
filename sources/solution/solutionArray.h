@@ -20,7 +20,7 @@
 
 #include "solution.h"
 
-using namespace std;
+
 
 template <typename TYPE_FITNESS, typename TYPE_CELL>
 class SolutionArray : public Solution<TYPE_FITNESS> {
@@ -63,7 +63,7 @@ class SolutionArray : public Solution<TYPE_FITNESS> {
         loadJson(jsonValue);
     }
 
-    SolutionArray(const string &solution) :
+    SolutionArray(const std::string &solution) :
         Solution<TYPE_FITNESS>(),
 		array(nullptr),
 		_sizeArray(0) {
@@ -128,7 +128,7 @@ class SolutionArray : public Solution<TYPE_FITNESS> {
         Json::Value root;
         Json::Reader reader;
         bool parsingSuccessful = reader.parse(strJson.c_str(), root);  // parse process
-        if (!parsingSuccessful) throw runtime_error(reader.getFormattedErrorMessages());
+        if (!parsingSuccessful) throw std::runtime_error(reader.getFormattedErrorMessages());
         loadJson(root);
     }
 

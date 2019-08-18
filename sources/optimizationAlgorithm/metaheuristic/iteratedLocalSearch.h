@@ -1,5 +1,5 @@
 ///
-/// @file IteratedLocalSearch.h
+/// @file iteratedLocalSearch.h
 /// @author Jxtopher
 /// @version 1
 /// @copyright CC-BY-NC-SA
@@ -18,7 +18,7 @@
 #include "../../problem/problem.h"
 #include "selection/selection.h"
 
-using namespace std;
+
 // Exploration-Exploitation
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class IteratedLocalSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
@@ -26,7 +26,7 @@ class IteratedLocalSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE
     IteratedLocalSearch(std::mt19937 &mt_rand, 
     std::unique_ptr<Statistic<SOL>> statistic,
     std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
-    shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
+    std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
     std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> exploration,
     std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> exploitation,
     std::unique_ptr<Selection<SOL>> selection) : 
@@ -63,10 +63,10 @@ class IteratedLocalSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE
         
         this->_statistic->operator()(solution_star);
 
-        return move(make_unique<SOL>(solution_star));
+        return std::move(std::make_unique<SOL>(solution_star));
     }
 
-    string className() const {
+    std::string className() const {
         return "IteratedLocalSearch";
     }
     protected:
