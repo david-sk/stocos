@@ -16,7 +16,7 @@
 #include "../optimizationAlgorithm.h"
 #include "../../problem/problem.h"
 
-using namespace std;
+
 
 template <typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
@@ -24,10 +24,10 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
     CombinationGenerator(std::mt19937 &mt_rand, 
                         std::unique_ptr<Statistic<SOL>> statistic, 
 						std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
-                        shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem, 
+                        std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem, 
                         const unsigned int nbDigit, 
 						const unsigned int len_string)
-        				: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, move(statistic), move(stoppingCriteria), problem),
+        				: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic), std::move(stoppingCriteria), problem),
           				_nbDigit(nbDigit),
                         _len_string(len_string) {
                         nbCall = 0;
@@ -75,10 +75,10 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
         } while (stop());
 
         std::unique_ptr<SOL> result;
-        return move(result);
+        return std::move(result);
     }
 
-    string className() const {
+    std::string className() const {
         return "CombinationGenerator";
     }
    private:
@@ -91,7 +91,7 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
     bool x;
     unsigned int i;
 
-    const vector<unsigned int> _bijection;
+    const std::vector<unsigned int> _bijection;
 };
 
 #endif

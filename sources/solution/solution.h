@@ -20,7 +20,7 @@
 
 #include "../macro.h"
 
-using namespace std;
+
 
 template <typename TYPE_FITNESS>
 class Solution {
@@ -28,8 +28,8 @@ class Solution {
     Solution(const Solution& s) : _numberOfObjective(s._numberOfObjective) {
         DEBUG_TRACE("Constructeur de copie Solution");
         assert(0 < _numberOfObjective);
-        _fitness = make_unique<TYPE_FITNESS[]>(_numberOfObjective);
-        _fitnessIsValid = make_unique<bool[]>(_numberOfObjective);
+        _fitness = std::make_unique<TYPE_FITNESS[]>(_numberOfObjective);
+        _fitnessIsValid = std::make_unique<bool[]>(_numberOfObjective);
             for(unsigned int i = 0; i < _numberOfObjective; i++) {
                 _fitness[i] = s._fitness[i];
                 _fitnessIsValid[i] = s._fitnessIsValid[i];
@@ -38,8 +38,8 @@ class Solution {
 
     Solution() : _numberOfObjective(1) {
         DEBUG_TRACE("Creation Solution");
-        _fitness = make_unique<TYPE_FITNESS[]>(_numberOfObjective);
-        _fitnessIsValid = make_unique<bool[]>(_numberOfObjective);
+        _fitness = std::make_unique<TYPE_FITNESS[]>(_numberOfObjective);
+        _fitnessIsValid = std::make_unique<bool[]>(_numberOfObjective);
         for(unsigned int i = 0; i < _numberOfObjective; i++)
             _fitnessIsValid[i] = false;
     }
@@ -47,8 +47,8 @@ class Solution {
     Solution(const unsigned int numberOfObjective) : _numberOfObjective(numberOfObjective) {
         DEBUG_TRACE("Creation Solution");
         assert(0 < _numberOfObjective);
-        _fitness = make_unique<TYPE_FITNESS[]>(_numberOfObjective);
-        _fitnessIsValid = make_unique<bool[]>(_numberOfObjective);
+        _fitness = std::make_unique<TYPE_FITNESS[]>(_numberOfObjective);
+        _fitnessIsValid = std::make_unique<bool[]>(_numberOfObjective);
         for(unsigned int i = 0; i < _numberOfObjective; i++)
             _fitnessIsValid[i] = false;
     }
@@ -138,7 +138,7 @@ class Solution {
         Json::Reader reader;
         bool parsingSuccessful = reader.parse(strJson.c_str(), root); // parse process
         if(!parsingSuccessful)
-            throw runtime_error(reader.getFormattedErrorMessages());
+            throw std::runtime_error(reader.getFormattedErrorMessages());
         loadJson(root);
     }
 

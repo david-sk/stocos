@@ -21,7 +21,7 @@
 #include "exprtk/exprtk.h"
 #include "problem.h"
 
-using namespace std;
+
 
 using TYPE_FITNESS_GENERICPROBLEM = double;
 using TYPE_CELL_GENERICPROBLEM = double;
@@ -47,10 +47,8 @@ class Objectif {
     }
 
     void setValue(SOL_GENERICPROBLEM& s, unsigned int offset) {
-            for(unsigned int i = 0; i < valueSize; i++) {
-                cout << i + offset << endl;
+            for(unsigned int i = 0 ; i < valueSize ; i++)
                 value[i] = s(i + offset);
-            }
     }
 
     unsigned int getValueSize() {
@@ -73,20 +71,20 @@ class GenericProblem : public Problem<SOL_GENERICPROBLEM, TYPE_FITNESS_GENERICPR
   public:
     GenericProblem() {}
 
-    GenericProblem(string fileInstance) {
+    GenericProblem(std::string fileInstance) {
         loadInstance(fileInstance);
     }
 
     ~GenericProblem() {}
 
-    void loadInstance(const string& file) {
+    void loadInstance(const std::string& file) {
         Json::Value root; // will contains the root value after parsing.
         Json::Reader reader;
         std::ifstream test(file, std::ifstream::binary);
         bool parsingSuccessful = reader.parse(test, root, false);
 
         if(!parsingSuccessful)
-            throw runtime_error(reader.getFormattedErrorMessages());
+            throw std::runtime_error(reader.getFormattedErrorMessages());
 
         std::string encoding = root.get("encoding", "UTF-8").asString();
         numInstance = root["problem"]["numInstance"].asString();
@@ -124,7 +122,7 @@ class GenericProblem : public Problem<SOL_GENERICPROBLEM, TYPE_FITNESS_GENERICPR
     void reset_solution(SOL_GENERICPROBLEM& s) const {}
 
   private:
-    string numInstance;
+    std::string numInstance;
     std::vector<Objectif> objectif; // ! variable modifier par full_eval
     unsigned int nomberOfVariable;
 };

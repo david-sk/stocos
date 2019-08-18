@@ -20,7 +20,7 @@
 #include "selection/selection.h"
 
 
-using namespace std;
+
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
@@ -28,7 +28,7 @@ class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CEL
     BestImprovement(std::mt19937 &mt_rand,
         std::unique_ptr<Statistic<SOL>> statistic,
         std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
-        shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
+        std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
         std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations,
         std::unique_ptr<Selection<SOL>> selection) :
         OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, move(statistic), move(stoppingCriteria), problem),
@@ -48,13 +48,13 @@ class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CEL
         // }
 
         // #ifdef DEBUG
-        // cerr<<s<<endl;
+        // std::cerr<<s<<std::endl;
         // #endif
         // this->_statistic.operator()(solution_star);
 
         // while (this->_stoppingCriteria.operator()(solution_star)) {
         //     //Best neighborhood
-        //     std::unique_ptr<vector<pair<unsigned int, SOL>>> listOfNeighborhood =  _atomicOperations.listOfMutations(solution_star);
+        //     std::unique_ptr<std::vector<std::pair<unsigned int, SOL>>> listOfNeighborhood =  _atomicOperations.listOfMutations(solution_star);
 
         //     unsigned int bestNeighbour = 0;
         //     this->_problem.full_eval((*listOfNeighborhood)[0].second);
@@ -72,16 +72,16 @@ class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CEL
             
             
         //     #ifdef DEBUG
-        //     cerr<<s<<endl;
+        //     std::cerr<<s<<std::endl;
         //     #endif
         //     this->_statistic.operator()(solution_star);
         // }
 
-        return move(make_unique<SOL>(solution_star));
+        return std::move(std::make_unique<SOL>(solution_star));
     }
 
 
-    string className() const {
+    std::string className() const {
         return "BestImprovement";
     }
     protected:

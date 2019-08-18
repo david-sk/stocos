@@ -19,7 +19,7 @@
 #include "../solution/solutionArray.h"
 #include "problem.h"
 
-using namespace std;
+
 
 using TYPE_FITNESS_SUBSETSUM =unsigned int;
 using TYPE_CELL_SUBSETSUM = bool;
@@ -34,7 +34,7 @@ class Subsetsum : public Problem<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CEL
         generateInstance(N);
     }
 
-    Subsetsum(const string &pathfile_instance) {
+    Subsetsum(const std::string &pathfile_instance) {
         loadInstance(pathfile_instance);
     }
 
@@ -51,14 +51,14 @@ class Subsetsum : public Problem<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CEL
 
     }
 
-    void loadInstance(const string &file) {
+    void loadInstance(const std::string &file) {
         Json::Value root;  // will contains the root value after parsing.
         Json::Reader reader;
         std::ifstream test(file, std::ifstream::binary);
         bool parsingSuccessful = reader.parse(test, root, false);
 
         if (!parsingSuccessful)
-            throw runtime_error(reader.getFormattedErrorMessages());
+            throw std::runtime_error(reader.getFormattedErrorMessages());
 
         std::string encoding = root.get("encoding", "UTF-8").asString();
 
@@ -99,15 +99,15 @@ class Subsetsum : public Problem<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CEL
     }
 
     std::unique_ptr<SOL_SUBSETSUM> new_solution() const {
-        std::unique_ptr<SOL_SUBSETSUM> s(make_unique<SOL_SUBSETSUM>(setOfNumbers.size()));
+        std::unique_ptr<SOL_SUBSETSUM> s(std::make_unique<SOL_SUBSETSUM>(setOfNumbers.size()));
         for (unsigned int i = 0 ; i < s->sizeArray() ; i++) {
             s->operator()(i, 0);
         } 
-        return move(s);
+        return std::move(s);
     }
 
     private:
-        vector<unsigned int> setOfNumbers;
+        std::vector<unsigned int> setOfNumbers;
         unsigned int fitnessObjectif;
 };
 

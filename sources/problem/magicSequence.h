@@ -23,7 +23,7 @@ class MagicSequence : public Problem<SOL, TYPE_FITNESS_MAGICSEQUENCE, TYPE_CELL_
 
     }
 
-    void loadInstance(const string &file) {
+    void loadInstance(const std::string &file) {
     }
 
     void full_eval(SOL &s) {

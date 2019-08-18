@@ -22,37 +22,37 @@ using namespace jsonrpc;
 template <typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class SolverClientRPC : public Solver {
    public:
-    SolverClientRPC(const Json::Value &configuration, shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem)
+    SolverClientRPC(const Json::Value &configuration, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem)
         : Solver(), _configuration(configuration), _problem(problem), client("http://localhost:8080") {
         if (!configuration["seed"].empty())
             mt_rand.seed(configuration["seed"].isInt());
         else
-            mt_rand.seed(static_cast<mt19937::result_type>(time(0)));
+            mt_rand.seed(static_cast<std::mt19937::result_type>(time(0)));
 
         problem->loadInstance(_configuration["problem"]["instance"].asString());
 
         AlgoBuilder<SOL, TYPE_FITNESS, TYPE_CELL> algoBuilder(mt_rand, _problem);
 
-        for (string const &id : _configuration["OptimizationAlgorithm"].getMemberNames())
+        for (std::string const &id : _configuration["OptimizationAlgorithm"].getMemberNames())
             oAlgo.insert(oAlgo.begin(), algoBuilder(id, _configuration["OptimizationAlgorithm"][id]));
 
-        solution_t0 = make_unique<SOL>();
-        solution_t1 = make_unique<SOL>();
+        solution_t0 = std::make_unique<SOL>();
+        solution_t1 = std::make_unique<SOL>();
     }
     virtual ~SolverClientRPC() {}
 
-    string jsonAsString(const Json::Value &json) {
+    std::string jsonAsString(const Json::Value &json) {
         Json::StreamWriterBuilder builder;
         builder["commentStyle"] = "None";
         builder["indentation"] = "";
         return Json::writeString(builder, json);
     }
 
-    Json::Value stringAsjson(const string &strJson) {
+    Json::Value stringAsjson(const std::string &strJson) {
         Json::Value root;
         Json::Reader reader;
         bool parsingSuccessful = reader.parse(strJson.c_str(), root);
-        if (!parsingSuccessful) throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " + reader.getFormattedErrorMessages());
+        if (!parsingSuccessful) throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " + reader.getFormattedErrorMessages());
         return root;
     }
 
@@ -62,12 +62,12 @@ class SolverClientRPC : public Solver {
         params["params"].append(jsonAsString(configuration["aposd"]));
         params["id"] = id;
 
-        string result;
+        std::string result;
 
         try {
             client.SendRPCMessage(jsonAsString(params), result);
         } catch (JsonRpcException &e) {
-            throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " + e.what());
+            throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " + e.what());
         }
         return stringAsjson(result);
     }
@@ -78,12 +78,12 @@ class SolverClientRPC : public Solver {
         params["params"].append(jsonAsString(msgSend));
         params["id"] = id;
 
-        string result;
+        std::string result;
 
         try {
             client.SendRPCMessage(jsonAsString(params), result);
         } catch (JsonRpcException &e) {
-            throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " + e.what());
+            throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " + e.what());
         }
         return stringAsjson(result);
     }
@@ -94,12 +94,12 @@ class SolverClientRPC : public Solver {
         params["params"].append(jsonAsString(msgSend));
         params["id"] = id;
 
-        string result;
+        std::string result;
 
         try {
             client.SendRPCMessage(jsonAsString(params), result);
         } catch (JsonRpcException &e) {
-            throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " + e.what());
+            throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " + e.what());
         }
         return stringAsjson(result);
     }
@@ -123,7 +123,7 @@ class SolverClientRPC : public Solver {
             send["num_paramter"] = received["num_paramter"].asUInt();
             send["objectId"] = objectId;
             received = learningOnline(send);
-            cout<<"----> "<<received["num_paramter"].asUInt()<<endl;
+            std::cout<<"----> "<<received["num_paramter"].asUInt()<<std::endl;
         } while(i++ < 100);
 
         Json::Value msgSendFinish;
@@ -133,11 +133,11 @@ class SolverClientRPC : public Solver {
 
    private:
     const Json::Value &_configuration;
-    shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> _problem;
+    std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> _problem;
     HttpClient client;
     std::mt19937 mt_rand;
-    vector<std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>> oAlgo;
-    string objectId;
+    std::vector<std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>> oAlgo;
+    std::string objectId;
     Json::Value received;
     std::unique_ptr<SOL> solution_t0;
     std::unique_ptr<SOL> solution_t1;

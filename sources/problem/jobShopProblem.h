@@ -23,30 +23,30 @@ using TYPE_CELL_JOBSHOPPROBLEM = bool;
 using SOL_JOBSHOPPROBLEM = SolutionArray<TYPE_FITNESS_JOBSHOPPROBLEM, TYPE_CELL_JOBSHOPPROBLEM>;
 class JobShopProblem : public Problem<SOL_JOBSHOPPROBLEM, TYPE_FITNESS_JOBSHOPPROBLEM, TYPE_CELL_JOBSHOPPROBLEM> {
    public:
-    JobShopProblem(string pathfile_instance) { loadInstance(pathfile_instance); }
+    JobShopProblem(std::string pathfile_instance) { loadInstance(pathfile_instance); }
 
     ~JobShopProblem() {}
 
-    void loadInstance(const string &file) {
+    void loadInstance(const std::string &file) {
         Json::Value root;  // will contains the root value after parsing.
         Json::Reader reader;
         std::ifstream test(file, std::ifstream::binary);
         bool parsingSuccessful = reader.parse(test, root, false);
 
-        if (!parsingSuccessful) throw runtime_error(reader.getFormattedErrorMessages());
+        if (!parsingSuccessful) throw std::runtime_error(reader.getFormattedErrorMessages());
 
         std::string encoding = root.get("encoding", "UTF-8").asString();
-        // cout<<root<<endl;
+        // std::cout<<root<<std::endl;
         // for (auto name : root["problem"].getMemberNames()) {
-        //     cout<<name<<endl;
+        //     std::cout<<name<<std::endl;
         // }
 
         // _N = root["problem"]["N"].asUInt();
     }
 
     friend std::ostream &operator<<(std::ostream &out, const JobShopProblem &e) {
-        cout << "job X : (machine_id, processing_time)";
-        vector<vector<pair<unsigned int, unsigned int>>> const _instance = e.getInstance();
+        std::cout << "job X : (machine_id, processing_time)";
+        std::vector<std::vector<std::pair<unsigned int, unsigned int>>> const _instance = e.getInstance();
         for (unsigned int i = 0; i < _instance.size(); i++) {
             out << endl << "job " << i << ":" << endl;
             for (unsigned int j = 0; j < _instance[i].size(); j++) {
@@ -56,7 +56,7 @@ class JobShopProblem : public Problem<SOL_JOBSHOPPROBLEM, TYPE_FITNESS_JOBSHOPPR
         return out;
     }
 
-    const vector<vector<pair<unsigned int, unsigned int>>> &getInstance() const { return instance; }
+    const std::vector<std::vector<std::pair<unsigned int, unsigned int>>> &getInstance() const { return instance; }
 
     void full_eval(SOL_JOBSHOPPROBLEM &s) {}
 
@@ -67,7 +67,7 @@ class JobShopProblem : public Problem<SOL_JOBSHOPPROBLEM, TYPE_FITNESS_JOBSHOPPR
     void reset_solution(SOL_JOBSHOPPROBLEM &s) const {}
 
    private:
-    vector<vector<pair<unsigned int, unsigned int>>> instance;
+    std::vector<std::vector<std::pair<unsigned int, unsigned int>>> instance;
 };
 
 #endif

@@ -16,7 +16,7 @@
 
 #include "sensor.h"
 
-using namespace std;
+
 
 template<class SOL>
 class Statistic {
@@ -29,7 +29,7 @@ class Statistic {
  
     }
 
-    Statistic(string namefile)  : 
+    Statistic(std::string namefile)  : 
         _namefile(namefile), 
         _standardOutput(false) {
         outFile.open (_namefile);
@@ -45,9 +45,9 @@ class Statistic {
         }
         
         if (_standardOutput)
-            cout<<ss.str()<<endl;
+            std::cout<<ss.str()<<std::endl;
         if(!_namefile.empty()) {
-            outFile<<ss.str()<<endl;
+            outFile<<ss.str()<<std::endl;
         }
         
         for(unsigned int i = 0 ; i < sensor.size() ; i++)
@@ -66,9 +66,9 @@ class Statistic {
         }
         
         if (_standardOutput)
-            cout<<ss.str()<<endl;
+            std::cout<<ss.str()<<std::endl;
         else if(!_namefile.empty()) {
-            outFile<<ss.str()<<endl;
+            outFile<<ss.str()<<std::endl;
         }
     }
 
@@ -76,15 +76,15 @@ class Statistic {
         sensor.push_back(s);
     }
 
-    void setPrint(bool standardOutput = false, string namefile = "") {
+    void setPrint(bool standardOutput = false, std::string namefile = "") {
         _namefile = namefile;
         _standardOutput = standardOutput;
     }
 
     protected:
-        ofstream outFile;
-        vector<Sensor<SOL> *> sensor;
-        string _namefile;
+        std::ofstream outFile;
+        std::vector<Sensor<SOL> *> sensor;
+        std::string _namefile;
         bool _standardOutput;
 };
 

@@ -21,7 +21,7 @@
 #include "problem.h"
 
 
-using namespace std;
+
 
 using TYPE_FITNESS_ONEMAX = unsigned int;
 using TYPE_CELL_ONEMAX = bool;
@@ -31,20 +31,20 @@ class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>
     OneMax() : _N(1) {}
     // OneMax(const OneMax &oneMax) : numInstance(oneMax.numInstance), _N(oneMax._N) {}
 
-    OneMax(string fileInstance) { loadInstance(fileInstance); }
+    OneMax(std::string fileInstance) { loadInstance(fileInstance); }
 
     OneMax(unsigned int N) : _N(N) {}
 
     ~OneMax() {}
 
-    void loadInstance(const string &file) {
+    void loadInstance(const std::string &file) {
         Json::Value root;  // will contains the root value after parsing.
         Json::Reader reader;
         std::ifstream test(file, std::ifstream::binary);
         bool parsingSuccessful = reader.parse(test, root, false);
 
         if (!parsingSuccessful)
-            throw runtime_error(reader.getFormattedErrorMessages());
+            throw std::runtime_error(reader.getFormattedErrorMessages());
 
         std::string encoding = root.get("encoding", "UTF-8").asString();
 
@@ -53,11 +53,11 @@ class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>
     }
 
     std::unique_ptr<SOL_ONEMAX> new_solution() const {
-        std::unique_ptr<SOL_ONEMAX> s(make_unique<SOL_ONEMAX>(_N));
+        std::unique_ptr<SOL_ONEMAX> s(std::make_unique<SOL_ONEMAX>(_N));
         for (unsigned int i = 0; i < s->sizeArray(); i++) {
             s->operator()(i, 0);
         }
-        return move(s);
+        return std::move(s);
     }
 
     void full_eval(SOL_ONEMAX &s) {
@@ -86,7 +86,7 @@ class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>
     }
 
    private:
-    string numInstance;
+    std::string numInstance;
     unsigned int _N;
 };
 

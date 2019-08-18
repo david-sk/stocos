@@ -13,10 +13,10 @@
 #include <vector>
 #include "solution.h"
 
-using namespace std;
+
 
 template<typename SOL>
-class Population : public Solution<bool>,  public vector<SOL> {
+class Population : public Solution<bool>,  public std::vector<SOL> {
     public:
     Population() {
 

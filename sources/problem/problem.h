@@ -26,36 +26,36 @@ public:
 	}
 	
 	// Loading an instance
-	virtual void loadInstance(const string &file) = 0;
+	virtual void loadInstance(const std::string &file) = 0;
 	
 	// Generating a solution
 	virtual void reset_solution(SOL &s) const {
-		cerr<<"[-] Not implemented : reset_solution()"<<endl;
+		std::cerr<<"[-] Not implemented : reset_solution()"<<std::endl;
 		exit(EXIT_FAILURE);
 	}
 	virtual std::unique_ptr<SOL> new_solution() const {
-		cerr<<"[-] Not implemented : new_solution()"<<endl;
+		std::cerr<<"[-] Not implemented : new_solution()"<<std::endl;
 		exit(EXIT_FAILURE);
 	}
 
 	// Evaluation of the solution
 	virtual void full_eval(SOL &s) = 0;
-	/*virtual void incremental_eval(const SOL &s, const vector<pair<unsigned int, TYPE_CELL>> &_listOfMutations) const {
-		cerr<<"[-] not implemented"<<endl;
+	/*virtual void incremental_eval(const SOL &s, const std::vector<std::pair<unsigned int, TYPE_CELL>> &_listOfMutations) const {
+		std::cerr<<"[-] not implemented"<<std::endl;
 		exit(EXIT_FAILURE);
 	};*/
 	virtual bool filtering(SOL &s) const {
-		cerr<<"[-] Not implemented : getFitnessObjectif()"<<endl;
+		std::cerr<<"[-] Not implemented : getFitnessObjectif()"<<std::endl;
 		exit(EXIT_FAILURE);
 		return true;
 	}
 	virtual TYPE_FITNESS getFitnessObjectif() const {
-		cerr<<"[-] Not implemented : getFitnessObjectif()"<<endl;
+		std::cerr<<"[-] Not implemented : getFitnessObjectif()"<<std::endl;
 		exit(EXIT_FAILURE);
 	}
 
 	virtual TYPE_FITNESS getFitnessObjectif(unsigned int numObjectif) const {
-		cerr<<"[-] Not implemented : getFitnessObjectif(unsigned int numObjectif)"<<endl;
+		std::cerr<<"[-] Not implemented : getFitnessObjectif(unsigned int numObjectif)"<<std::endl;
 		exit(EXIT_FAILURE);
 	}
 	

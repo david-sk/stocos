@@ -19,7 +19,6 @@
 #include "../solution/solutionArray.h"
 #include "problem.h"
 
-using namespace std;
 
 using TYPE_FITNESS_KNAPSACK = int;
 using TYPE_CELL_KNAPSACK = bool;
@@ -31,7 +30,7 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
         
     }
     
-    Knapsack(string pathfile_instance) {
+    Knapsack(std::string pathfile_instance) {
         loadInstance(pathfile_instance);
     }
     
@@ -39,14 +38,14 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
 
     }
 
-    void loadInstance(const string &file) {
+    void loadInstance(const std::string &file) {
         Json::Value root;  // will contains the root value after parsing.
         Json::Reader reader;
         std::ifstream test(file, std::ifstream::binary);
         bool parsingSuccessful = reader.parse(test, root, false);
 
         if (!parsingSuccessful)
-            throw runtime_error(reader.getFormattedErrorMessages());
+            throw std::runtime_error(reader.getFormattedErrorMessages());
 
         std::string encoding = root.get("encoding", "UTF-8").asString();
 
@@ -88,11 +87,11 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
     }
 
     std::unique_ptr<SOL_KNAPSACK> new_solution() const {
-        std::unique_ptr<SOL_KNAPSACK> s(make_unique<SOL_KNAPSACK>(nbItems));
+        std::unique_ptr<SOL_KNAPSACK> s(std::make_unique<SOL_KNAPSACK>(nbItems));
         for (unsigned int i = 0 ; i < s->sizeArray() ; i++) {
             s->operator()(i, 0);
         } 
-        return move(s);
+        return std::move(s);
     }
 
     unsigned int sizeArraySolution() const{
@@ -109,11 +108,11 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
 	}
 
     private:
-        string numInstance;
+        std::string numInstance;
         int capacity;
         unsigned int nbItems;
-        vector<int> weight;
-        vector<int> profit;
+        std::vector<int> weight;
+        std::vector<int> profit;
         int fitnessObjectif;
 };
 

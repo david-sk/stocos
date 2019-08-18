@@ -39,7 +39,7 @@ class UnitTest_GenericProblem : public CppUnit::TestFixture {
             s->operator()(i, i + (7 * i) + 1);
         }
         gProblem.full_eval(*s);
-        cout<<*s<<endl;
+        std::cout<<*s<<std::endl;
     }
 
     private:
