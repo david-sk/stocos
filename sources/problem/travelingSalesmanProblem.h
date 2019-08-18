@@ -55,7 +55,7 @@ class TravelingSalesmanProblem : public Problem<SOL_STP, TYPE_FITNESS_STP, TYPE_
         }
     }
 
-    virtual void full_eval(SOL_STP &s) const {
+    virtual void full_eval(SOL_STP &s) {
         double distance_sum = 0;
         for (unsigned int i = 0; i < s.sizeArray() - 1; i++) {
             distance_sum += distance_euclidienne(nodes[s(i)], nodes[s(i + 1)]);

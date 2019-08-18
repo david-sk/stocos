@@ -16,6 +16,7 @@
 #include "problem/oneMax.h"
 #include "problem/knapsack.h"
 #include "problem/subsetSum.h"
+#include "problem/genericProblem.h"
 
 
 #include "solver/solver.h"
@@ -98,6 +99,8 @@ int main(int argc, char **argv, char **envp) {
     shared_ptr<OneMax> eOneMax = make_shared<OneMax>();
     shared_ptr<Subsetsum> eSubsetsum = make_shared<Subsetsum>();
     shared_ptr<Knapsack> eKnapsack = make_shared<Knapsack>();
+    shared_ptr<GenericProblem> eGenericProblem = make_shared<GenericProblem>();
+
 
     Solver *solver = nullptr;
 
@@ -108,7 +111,9 @@ int main(int argc, char **argv, char **envp) {
             solver = new SolverGeneric<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CELL_SUBSETSUM>(configuration, eSubsetsum);
         else if (configuration["problem"]["name"].asString() == "Knapsack")
             solver = new SolverGeneric<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_KNAPSACK>(configuration, eKnapsack);
-        else 
+        else if (configuration["problem"]["name"].asString() == "GenericProblem")
+            solver = new SolverGeneric<SOL_GENERICPROBLEM, TYPE_FITNESS_GENERICPROBLEM, TYPE_CELL_GENERICPROBLEM>(configuration, eGenericProblem);
+        else
             throw runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] The optimization problem does not exist.");
     } else {
         if (configuration["aposd"]["Interface"].asString() == "WEBAPPLICATION") 

@@ -7,10 +7,10 @@
 #
 
 CC = g++
-CFLAGS = -std=c++1z -Wall -fopenmp -ljsoncpp -lcurl -ljsonrpccpp-common -ljsonrpccpp-client 	# c++17
+CFLAGS = -std=c++1z -Wall -fopenmp -ljsoncpp -lcurl -ljsonrpccpp-common -ljsonrpccpp-client -lboost_program_options	# c++17
 #CFLAGS = -std=c++14 -Wall -fopenmp
-OFLAGS = -Os # Optimization flags
-GFLAGS = -pedantic -Wall -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat=2 -Winit-self -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs -Wnoexcept -Wold-style-cast -Woverloaded-virtual -Wredundant-decls -Wshadow -Wsign-conversion -Wsign-promo -Wstrict-null-sentinel -Wstrict-overflow=5 -Wswitch-default -Wundef -Werror -Wno-unused
+OFLAGS = #-Os # Optimization flags
+GFLAGS = -pedantic -Wall -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat=2 -Winit-self -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs -Wnoexcept -Wold-style-cast -Woverloaded-virtual -Wredundant-decls -Wshadow -Wsign-conversion -Wsign-promo -Wstrict-null-sentinel -Wstrict-overflow=5 -Wundef -Werror -Wno-unused  #-Werror=switch-default   -Wswitch-default
 #DFLAGS = -DDEBUG
 FLAGS = $(CFLAGS) $(OFLAGS) $(GFLAGS) $(DFLAGS)
 EXEC_NAME = stocos
@@ -26,7 +26,7 @@ BUILD_DIR = ./build/
 
 #$(EXEC_NAME): $(SOURCES_DIR)main.cpp
 all : ./sources/main.cpp
-	$(CC) $(FLAGS) $< -o $(BUILD_DIR)$(EXEC_NAME) -lboost_program_options
+	$(CC) $(FLAGS) $< -o $(BUILD_DIR)$(EXEC_NAME)
 
 run:
 	$(BUILD_DIR)$(EXEC_NAME)
@@ -39,7 +39,7 @@ packagesDebain:
 	apt-get install g++ build-essential rapidjson-dev libboost-all-dev libcppunit-dev libjsoncpp-dev
 
 unittest : ./sources/unitTest.cpp
-	$(CC) $(FLAGS) $< -o $(BUILD_DIR)unittest_$(EXEC_NAME) -lcppunit -lboost_program_options
+	$(CC) $(FLAGS) $< -o $(BUILD_DIR)unittest_$(EXEC_NAME) -lcppunit
 
 doxygen:
 	doxygen doxygen.cfg
@@ -51,3 +51,9 @@ clean:
 
 mrproper:
 	rm $(EXEC_NAME) *.o
+
+format:
+	clang-format -i -style=file *.cpp *.h
+
+check:
+	cppcheck --enable=all sources/

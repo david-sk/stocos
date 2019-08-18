@@ -58,7 +58,7 @@ class JobShopProblem : public Problem<SOL_JOBSHOPPROBLEM, TYPE_FITNESS_JOBSHOPPR
 
     const vector<vector<pair<unsigned int, unsigned int>>> &getInstance() const { return instance; }
 
-    void full_eval(SOL_JOBSHOPPROBLEM &s) const {}
+    void full_eval(SOL_JOBSHOPPROBLEM &s) {}
 
     /*void incremental(SolutionArray const &s, unsigned int mutatedCell) const {
 

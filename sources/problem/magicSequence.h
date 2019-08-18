@@ -26,7 +26,7 @@ class MagicSequence : public Problem<SOL, TYPE_FITNESS_MAGICSEQUENCE, TYPE_CELL_
     void loadInstance(const string &file) {
     }
 
-    void full_eval(SOL &s) const {
+    void full_eval(SOL &s) {
         double resultat = 0;
         for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
 
