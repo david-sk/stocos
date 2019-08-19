@@ -41,10 +41,10 @@ class UnitTest_backtraking : public CppUnit::TestFixture {
 
         std::unique_ptr<StoppingCriteria<TYPESOL, unsigned int>> stoppingCriteria = std::make_unique<StoppingCriteria<TYPESOL, unsigned int>>();
         std::unique_ptr<Statistic<TYPESOL>> statistic = std::make_unique<Statistic<TYPESOL>>();
-        std::shared_ptr<OneMax> oneMax = make_shared<OneMax>(100);
+        std::shared_ptr<OneMax> oneMax = std::make_shared<OneMax>(100);
         TYPESOL s(4);
 
-        Backtraking<TYPESOL, unsigned int, bool> backtraking(mt_rand, move(statistic), move(stoppingCriteria), oneMax, 2, 4);
+        Backtraking<TYPESOL, unsigned int, bool> backtraking(mt_rand, std::move(statistic), std::move(stoppingCriteria), oneMax, 2, 4);
         backtraking.recursive(0);
     }
 

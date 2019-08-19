@@ -66,7 +66,7 @@ class Backtraking : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
 	}
 
 
-    string className() const {
+    std::string className() const {
         return "Backtraking";
     }
     

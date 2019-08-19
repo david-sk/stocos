@@ -48,7 +48,7 @@ class JobShopProblem : public Problem<SOL_JOBSHOPPROBLEM, TYPE_FITNESS_JOBSHOPPR
         std::cout << "job X : (machine_id, processing_time)";
         std::vector<std::vector<std::pair<unsigned int, unsigned int>>> const _instance = e.getInstance();
         for (unsigned int i = 0; i < _instance.size(); i++) {
-            out << endl << "job " << i << ":" << endl;
+            out << std::endl << "job " << i << ":" << std::endl;
             for (unsigned int j = 0; j < _instance[i].size(); j++) {
                 out << "(" << _instance[i][j].first << ", " << _instance[i][j].second << "), ";
             }

@@ -41,8 +41,6 @@ class KBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
         }
     }
 
-
-
     void cancelMutations(SOL &s) const {
         for (unsigned int i = 0 ; i < backup.size() ; i++) {
             if (s(backup[i]) == 1) 
@@ -55,7 +53,7 @@ class KBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
     std::unique_ptr<std::vector<std::pair<unsigned int, TYPE_CELL>>> listOfMutations(const SOL &s) {
         assert(_k <= s.sizeArray());
 
-        std::unique_ptr<std::vector<std::pair<unsigned int, TYPE_CELL>>> list(make_unique<std::vector<std::pair<unsigned int, TYPE_CELL>>>());
+        std::unique_ptr<std::vector<std::pair<unsigned int, TYPE_CELL>>> list(std::make_unique<std::vector<std::pair<unsigned int, TYPE_CELL>>>());
         
         if (s.sizeArray() != N) {
             N = s.sizeArray();
@@ -73,9 +71,9 @@ class KBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
             
             if (!findElement) {
                 if (s(element) == 1)
-                    list->push_back(pair<unsigned int, TYPE_CELL>(element, 0));
+                    list->push_back(std::pair<unsigned int, TYPE_CELL>(element, 0));
                  else
-                    list->push_back(pair<unsigned int, TYPE_CELL>(element, 1));
+                    list->push_back(std::pair<unsigned int, TYPE_CELL>(element, 1));
             }
         }
 
@@ -93,7 +91,7 @@ class KBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
 
     private:
         std::unique_ptr<std::uniform_int_distribution<unsigned int>> rid;
-        vector<unsigned int> backup;
+        std::vector<unsigned int> backup;
         unsigned int _k;
         unsigned int N;
 };
