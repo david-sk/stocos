@@ -4,7 +4,7 @@
         "name": "GenericProblem",
         "instance": "instances/GenericProblem/test.json"
     },
-    "numParameter": 1,
+    "parameter_id": 1,
     "OptimizationAlgorithm": {
         "IteratedLocalSearch": {
             "StoppingCriteria": {

@@ -59,10 +59,16 @@ class Statistic {
     void operator()(const SOL &s) {
         std::stringstream ss;
         if (_standardOutput || !_namefile.empty()) {
-            for(unsigned int i = 0 ; i < sensor.size() ; i++) {
-                sensor[i]->operator()(ss, s);
-                ss<<" ";
-            }
+            // for(unsigned int i = 0 ; i < sensor.size() ; i++) {
+            //     sensor[i]->operator()(ss, s);
+            //     ss<<" ";
+            // }
+            Json::StreamWriterBuilder builder;
+            builder["commentStyle"] = "None";
+            builder["indentation"] = ""; //The JSON document is written in a single line
+            std::unique_ptr<Json::StreamWriter> writer(builder.newStreamWriter());
+            writer->write(this->asJson(s), &std::cout);
+            
         }
         
         if (_standardOutput)
@@ -70,6 +76,14 @@ class Statistic {
         else if(!_namefile.empty()) {
             outFile<<ss.str()<<std::endl;
         }
+    }
+
+    Json::Value asJson(const SOL &s) {
+        Json::Value jsonValue;
+        for(unsigned int i = 0 ; i < sensor.size() ; i++) {
+            jsonValue[sensor[i]->name()] = sensor[i]->asJson(s);
+        }
+        return jsonValue;
     }
 
     void addSensor(Sensor<SOL> *s) {

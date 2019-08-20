@@ -142,10 +142,10 @@ class SolutionArray : public Solution<TYPE_FITNESS> {
         for (unsigned int i = 0; i < jsonValue["solution"].size(); i++) array[i] = jsonValue["solution"][i].asDouble();
     }
 
-    Json::Value asJson() {
+    Json::Value asJson() const {
         Json::Value jsonValue = Solution<TYPE_FITNESS>::asJson();
-        for (unsigned int i = 0; i < _sizeArray; i++) jsonValue["solution"].append(array[i]);
-
+        for (unsigned int i = 0; i < _sizeArray; i++) 
+            jsonValue["solution"].append(array[i]);
         return jsonValue;
     }
 

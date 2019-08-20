@@ -4,7 +4,7 @@
         "name": "OneMax",
         "instance": "instances/OneMax/onemax-50.json"
     },
-    "numParameter": 1,
+    "parameter_id": 1,
     "OptimizationAlgorithm": {
         "IteratedLocalSearch": {
             "StoppingCriteria": {
@@ -141,11 +141,11 @@
         "seed": 0,
         "Interface": "WEBAPPLICATION",
         "CalculationModel": {
-            "className": "Learning",
             "ParameterSelection": {
                 "className": "PsAdaptivePursuit",
                 "number_of_parameters": 3
-            }
+            },
+            "SolutionSelection" : "max"
         }
     }
 }

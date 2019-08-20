@@ -159,7 +159,7 @@ class Solution {
             }
     }
 
-    Json::Value asJson() {
+    Json::Value asJson() const {
         Json::Value jsonValue;
             for(unsigned int i = 0; i < _numberOfObjective; i++) {
                 jsonValue["fitness"].append(_fitness[i]);

@@ -18,11 +18,18 @@ public:
     void operator()(std::stringstream &out, const SOL &s) {
         out<<numRound++;
     }
+    
+    Json::Value asJson(const SOL &s) {
+        return Json::Value(numRound++);
+    }
 
     void finish(std::stringstream &out) {
         
     }
 
+    std::string name() const {
+        return std::string("round");
+    }
 
 private:
     unsigned int numRound;
