@@ -44,7 +44,6 @@ class AlgoBuilder {
             
         }
 
-
         std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> operator()(const std::string &nameAlgo, const Json::Value &configuration) {
             
             std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> optimizationAlgorithm = nullptr;
@@ -71,8 +70,8 @@ class AlgoBuilder {
                 optimizationAlgorithm = std::make_unique<EvolutionaryAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, move(_statistic), move(_stoppingCriteria), _problem, move(_atomicOperation), move(_selection), configuration["sizeOfTabuList"].isInt());
             } else if (nameAlgo == "OnePlusLambda") {
                 optimizationAlgorithm = std::make_unique<OnePlusLambda<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, move(_statistic), move(_stoppingCriteria), _problem, move(_atomicOperation), move(_selection), configuration["lambda"].isInt());
-            } else if (nameAlgo == "OnePlusLambda") {
-                optimizationAlgorithm = std::make_unique<BestImprovement<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, move(_statistic), move(_stoppingCriteria), _problem, move(_atomicOperation), move(_selection));
+            } else if (nameAlgo == "SimulatedAnnealing") {
+                optimizationAlgorithm = std::make_unique<SimulatedAnnealing<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, move(_statistic), move(_stoppingCriteria), _problem, move(_atomicOperation), move(_selection));
             } else {
                 throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " The algorithm "+ nameAlgo +" does not exist.");
             }
