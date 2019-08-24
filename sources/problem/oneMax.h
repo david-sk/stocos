@@ -20,16 +20,12 @@
 
 #include "problem.h"
 
-
-
-
 using TYPE_FITNESS_ONEMAX = unsigned int;
 using TYPE_CELL_ONEMAX = bool;
 using SOL_ONEMAX = SolutionArray<TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>;
 class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX> {
    public:
     OneMax() : _N(1) {}
-    // OneMax(const OneMax &oneMax) : numInstance(oneMax.numInstance), _N(oneMax._N) {}
 
     OneMax(std::string fileInstance) { loadInstance(fileInstance); }
 
@@ -44,7 +40,7 @@ class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>
         bool parsingSuccessful = reader.parse(test, root, false);
 
         if (!parsingSuccessful)
-            throw std::runtime_error(reader.getFormattedErrorMessages());
+            throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " +reader.getFormattedErrorMessages());
 
         std::string encoding = root.get("encoding", "UTF-8").asString();
 

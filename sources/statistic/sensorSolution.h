@@ -2,6 +2,7 @@
 #define SENSORSOLTUTION_H
 
 
+#include "../solution/solution.h"
 #include "sensor.h"
 
 template<class SOL>
@@ -15,15 +16,22 @@ public:
 
     }
 
-    void operator()(std::stringstream &out, const SOL &s) {
-        out<<s;
+    void apply(const SOL &s) {
+        solution = s;
     }
 
-    void finish(std::stringstream &out) {
-        
+    Json::Value asJson() const {
+        return solution.asJson();
     }
 
+    Json::Value finish() {
+        return Json::Value();
+    }
+    std::string name() const {
+        return std::string("Solution");
+    }
 private:
+    SOL solution;
 };
 
 #endif

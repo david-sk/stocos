@@ -33,7 +33,7 @@ class Swap : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
             }
 
             // Tirage aléatoire sans remise
-            std::unique_ptr<vector<unsigned int>> list(make_unique<vector<unsigned int>>());
+            std::unique_ptr<std::vector<unsigned int>> list(std::make_unique<std::vector<unsigned int>>());
 
             while (list->size() != (_nbSwap * 2)) {
                 unsigned int element = rid->operator()(this->_mt_rand);
@@ -53,8 +53,8 @@ class Swap : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
             backup.clear();
             TYPE_CELL temporay;
             for (unsigned int i = 0 ; i < list->size() ; i+=2) {
-                backup.push_back(pair<unsigned int, TYPE_CELL>((*list)[i], s((*list)[i])));
-                backup.push_back(pair<unsigned int, TYPE_CELL>((*list)[i+1], s((*list)[i+1])));
+                backup.push_back(std::pair<unsigned int, TYPE_CELL>((*list)[i], s((*list)[i])));
+                backup.push_back(std::pair<unsigned int, TYPE_CELL>((*list)[i+1], s((*list)[i+1])));
                 temporay = s((*list)[i]);
                 s((*list)[i], s((*list)[i+1]));
                 s((*list)[i + 1], temporay);

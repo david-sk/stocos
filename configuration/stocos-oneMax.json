@@ -1,0 +1,149 @@
+{
+    "seed": 0,
+    "problem": {
+        "name": "OneMax",
+        "instance": "instances/OneMax/onemax-50.json"
+    },
+    "parameter_id": 1,
+    "OptimizationAlgorithm": {
+        "0": {
+            "className":"IteratedLocalSearch",
+            "StoppingCriteria": {
+                "budget": 100,
+                "fitnessObjectif": 50
+            },
+            "AtomicOperation": {
+                "className": "FlipBit",
+                "c": 1
+            },
+            "OptimizationAlgorithm": {
+                "className": "FirstImprovement",
+                "StoppingCriteria": {
+                    "budget": 100,
+                    "fitnessObjectif": 50
+                },
+                "AtomicOperation": {
+                    "className": "FlipBit",
+                    "c": 1
+                },
+                "Selection": "max"
+            },
+            "Selection": "max"
+        },
+        "1": {
+            "className":"EvolutionaryAlgorithm",
+            "StoppingCriteria": {
+                "budget": 100,
+                "fitnessObjectif": 50
+            },
+            "AtomicOperation": {
+                "className": "FlipBit",
+                "c": 1
+            },
+            "Selection": "max",
+            "mu": 50,
+            "lambda": 50
+        },
+        "2": {
+            "className":"TabuSearch",
+            "StoppingCriteria": {
+                "budget": 100,
+                "fitnessObjectif": 50
+            },
+            "AtomicOperation": {
+                "className": "FlipBit",
+                "c": 1
+            },
+            "Selection": "max",
+            "sizeOfTabuList": 7
+        },
+        "3": {
+            "className":"OnePlusLambda",
+            "StoppingCriteria": {
+                "budget": 100,
+                "fitnessObjectif": 50
+            },
+            "AtomicOperation": {
+                "className": "FlipBit",
+                "c": 1
+            },
+            "Selection": "max",
+            "lambda": 50
+        },
+        "4": {
+            "className":"BestImprovement",
+            "StoppingCriteria": {
+                "budget": 100,
+                "fitnessObjectif": 50
+            },
+            "AtomicOperation": {
+                "className": "Neighborhood"
+            },
+            "Selection": "max"
+        }
+    },
+    "Statistic": {
+        // "recording":"none"
+        "recording":"stdout"
+    },
+    "Solution": {
+        "fitness": [
+            0
+        ],
+        "fitnessIsValid": [
+            true
+        ],
+        "solution": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+        ]
+    }
+}

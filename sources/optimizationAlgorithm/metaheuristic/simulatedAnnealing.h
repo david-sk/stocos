@@ -15,15 +15,15 @@ template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class SimulatedAnnealing : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
     public:
     SimulatedAnnealing(std::mt19937 &mt_rand, 
-        std::unique_ptr<Statistic<SOL>> statistic,
+        std::shared_ptr<Statistic<SOL>> statistic,
         std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
         std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
         std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations,
         std::unique_ptr<Selection<SOL>> selection) : 
-        OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, move(statistic), move(stoppingCriteria), problem),
-        _atomicOperations(move(atomicOperations)),
-        _selection(move(selection)) {
-        DEBUG_TRACE("Creation SimulatedAnnealing");
+        OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic), std::move(stoppingCriteria), problem),
+        _atomicOperations(std::move(atomicOperations)),
+        _selection(std::move(selection)) {
+        BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Creation SimulatedAnnealing";
     }
     virtual ~SimulatedAnnealing() {
         

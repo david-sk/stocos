@@ -45,7 +45,7 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
         bool parsingSuccessful = reader.parse(test, root, false);
 
         if (!parsingSuccessful)
-            throw std::runtime_error(reader.getFormattedErrorMessages());
+            throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " +reader.getFormattedErrorMessages());
 
         std::string encoding = root.get("encoding", "UTF-8").asString();
 

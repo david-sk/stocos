@@ -1,0 +1,180 @@
+{
+    "seed": 0,
+    "problem": {
+        "name": "OneMax",
+        "instance": "instances/OneMax/onemax-10.json"
+    },
+    "parameter_id": 5,
+    "OptimizationAlgorithm": {
+         "0": {
+            "className":"OnePlusLambda",
+            "StoppingCriteria": {
+                "budget": 10000,
+                "fitnessObjectif": 1000
+            },
+            "AtomicOperation": {
+                "className": "FlipBit",
+                "c": 1
+            },
+            "Selection": "max",
+            "lambda": 50
+        },
+        "1": {
+            "className":"OnePlusLambda",
+            "StoppingCriteria": {
+                "budget": 100,
+                "fitnessObjectif": 50
+            },
+            "AtomicOperation": {
+                "className": "FlipBit",
+                "c": 1
+            },
+            "Selection": "max",
+            "lambda": 50
+        },
+        "2": {
+            "className": "FirstImprovement",
+            "StoppingCriteria": {
+                "budget": 100,
+                "fitnessObjectif": 50
+            },
+            "AtomicOperation": {
+                "className": "FlipBit",
+                "c": 1
+            },
+            "Selection": "max"
+        },
+        "3": {
+            "className":"IteratedLocalSearch",
+            "StoppingCriteria": {
+                "budget": 100,
+                "fitnessObjectif": 50
+            },
+            "AtomicOperation": {
+                "className": "FlipBit",
+                "c": 1
+            },
+            "OptimizationAlgorithm": {
+                "className": "FirstImprovement",
+                "StoppingCriteria": {
+                    "budget": 100,
+                    "fitnessObjectif": 50
+                },
+                "AtomicOperation": {
+                    "className": "FlipBit",
+                    "c": 1
+                },
+                "Selection": "max"
+            },
+            "Selection": "max"
+        },
+        "4": {
+            "className":"TabuSearch",
+            "StoppingCriteria": {
+                "budget": 100,
+                "fitnessObjectif": 10
+            },
+            "AtomicOperation": {
+                "className": "FlipBit",
+                "c": 1
+            },
+            "Selection": "max",
+            "sizeOfTabuList": 7
+        },
+        "5": {
+            "className":"EvolutionaryAlgorithm",
+            "StoppingCriteria": {
+                "budget": 100,
+                "fitnessObjectif": 50
+            },
+            "AtomicOperation": {
+                "className": "FlipBit",
+                "c": 1
+            },
+            "Selection": "max",
+            "mu": 50,
+            "lambda": 50
+        }
+    },
+    "Statistic": {
+        "recording":"stdout",
+        // "recording":"none"
+        //"recording":"file",
+        //"namefile":"toto.txt"
+        // "recording":"mongodb",
+        // "hostname":"localhost",
+        // "database": "db",
+        // "collection": "c",
+        // "sensorExperience" : {
+        //     "name" : "oneMax",
+        //     "num" : 6
+        // },
+        "sensorNumRound" : false,
+        "sensorSolution" : true,
+        "sensorStopwatch" : false
+        // "sensorFinal" : {
+        //     "name" : "oneMax",
+        //     "num" : 6
+        // }
+    },
+    "Solutionx": {
+        "fitness": [
+            0
+        ],
+        "fitnessIsValid": [
+            true
+        ],
+        "solution": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+        ]
+    }
+}

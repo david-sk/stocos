@@ -20,16 +20,16 @@ template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class TabuSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
     public:
     TabuSearch(std::mt19937 &mt_rand, 
-        std::unique_ptr<Statistic<SOL>> statistic,
+        std::shared_ptr<Statistic<SOL>> statistic,
         std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
         std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
         std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations,
         std::unique_ptr<Selection<SOL>> selection,
         unsigned int sizeOfTabuList = 7) : 
-        OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, move(statistic), move(stoppingCriteria), problem),
-        _atomicOperations(move(atomicOperations)),
-        _selection(move(selection))  {
-        DEBUG_TRACE("Creation TabuSearch");
+        OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic), std::move(stoppingCriteria), problem),
+        _atomicOperations(std::move(atomicOperations)),
+        _selection(std::move(selection))  {
+        BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Creation TabuSearch";
         tabuList.set_capacity(sizeOfTabuList);
     }
 
@@ -65,6 +65,7 @@ class TabuSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
             }
             tabuList.push_back(solution_beta);
         }
+        this->_statistic->operator()(solution_star);
         
         return std::move(std::make_unique<SOL>(solution_star));
     }
