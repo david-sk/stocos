@@ -3,6 +3,7 @@
 /// @author Jxtopher
 /// @brief 
 /// @version 0.1
+/// @copyright CC-BY-NC-SA
 /// @date 2019-08-11
 /// 
 /// 

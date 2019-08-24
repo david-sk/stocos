@@ -36,14 +36,14 @@ if (NOT Boost_FOUND)
     message(FATAL_ERROR "apt-get install libboost-all-dev")
 endif(NOT Boost_FOUND)
 
-# ## Stocos
-# add_executable(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} sources/main.cpp)
-# target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${Boost_LIBRARIES})
-# target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${JSONCPP_LIBRARIES})
-# target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${JSONRPCCPPCLIENT_LIBRARIES})
-# target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC /usr/lib/x86_64-linux-gnu/libjsonrpccpp-client.so)
-# target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC /usr/lib/x86_64-linux-gnu/libjsonrpccpp-common.so.0)
-# target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC /usr/lib/x86_64-linux-gnu/libmongoclient.so.0)
+## Stocos
+add_executable(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} sources/main.cpp)
+target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${Boost_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${JSONCPP_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${JSONRPCCPPCLIENT_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC /usr/lib/x86_64-linux-gnu/libjsonrpccpp-client.so)
+target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC /usr/lib/x86_64-linux-gnu/libjsonrpccpp-common.so.0)
+target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC /usr/lib/x86_64-linux-gnu/libmongoclient.so.0)
 
 ## Cppunit
 pkg_check_modules(CPPUNIT cppunit)
@@ -57,9 +57,14 @@ target_link_libraries(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} LINK_PUBLIC $
 target_link_libraries(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${CPPUNIT_LIBRARIES})
 target_link_libraries(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} LINK_PUBLIC /usr/lib/x86_64-linux-gnu/libmongoclient.so.0)
 
-## Test unitaire
+## Test unitaire -> make test ARGS="-V"
 enable_testing()
-add_test(NAME ${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} COMMAND "${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE}")
+add_test(NAME "oneMax-FirstImprovement-FlipBit" COMMAND /usr/local/bin/python3.7 ./tests-solver/oneMax-FirstImprovement-FlipBit.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+add_test(NAME "oneMax-OnePlusLambda-FlipBit" COMMAND /usr/local/bin/python3.7 ./tests-solver/oneMax-OnePlusLambda-FlipBit.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+add_test(NAME "oneMax-TabuSearch-FlipBit.py" COMMAND /usr/local/bin/python3.7 ./tests-solver/oneMax-TabuSearch-FlipBit.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+add_test(NAME "oneMax-IteratedLocalSearch-FI-FlipBit" COMMAND /usr/local/bin/python3.7 ./tests-solver/oneMax-IteratedLocalSearch-FI-FlipBit.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+add_test(NAME "oneMax-EvolutionaryAlgo-FlipBit" COMMAND /usr/local/bin/python3.7 ./tests-solver/oneMax-EvolutionaryAlgo-FlipBit.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+add_test(NAME "oneMax-BestImprovement-Neighborhood" COMMAND /usr/local/bin/python3.7 ./tests-solver/oneMax-BestImprovement-Neighborhood.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 
 
 # ## > Doxygen ##################################################################
