@@ -10,8 +10,8 @@
 #ifndef UNITTEST_KBIT_H
 #define UNITTEST_KBIT_H
 
-#include "../../../../solution/solutionArray.h"
-#include "KBit.h"
+#include "solution/solutionArray.h"
+#include "optimizationAlgorithm/metaheuristic/operator/mutation/KBit.h"
 
 using namespace CppUnit;
 

@@ -12,9 +12,9 @@
 
 using namespace CppUnit;
 
-#include "../../problem/problem.h"
-#include "../../solution/solution.h"
-#include "combinationGenerator.h"
+#include "problem/problem.h"
+#include "solution/solution.h"
+#include "optimizationAlgorithm/exhaustiveSearch/combinationGenerator.h"
 
 class UnitTest_combinationGenerator : public CppUnit::TestFixture {
 

@@ -165,9 +165,9 @@ class Solution {
     }
 
   protected:
-    unsigned int _numberOfObjective; ///< number of objectif
-    std::unique_ptr<TYPE_FITNESS[]> _fitness; ///< list of fitness
-    std::unique_ptr<bool[]> _fitnessIsValid; ///< list of the fitness state
+    unsigned int _numberOfObjective;            ///< number of objectif
+    std::unique_ptr<TYPE_FITNESS[]> _fitness;   ///< list of fitness
+    std::unique_ptr<bool[]> _fitnessIsValid;    ///< list of the fitness state
 };
 
 #endif

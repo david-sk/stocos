@@ -12,9 +12,9 @@
 
 using namespace CppUnit;
 
-#include "solution.h"
-#include "solutionArray.h"
-#include "population.h"
+#include "solution/solution.h"
+#include "solution/solutionArray.h"
+#include "solution/population.h"
 
 class UnitTest_population : public CppUnit::TestFixture {
 

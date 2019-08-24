@@ -10,9 +10,9 @@
 #ifndef UNITTEST_EVALONEMAX_H
 #define UNITTEST_EVALONEMAX_H
 
-#include "../solution/solutionArray.h"
+#include "solution/solutionArray.h"
 
-#include "oneMax.h"
+#include "problem/oneMax.h"
 
 using namespace CppUnit;
 
@@ -31,20 +31,18 @@ class UnitTest_OneMax : public CppUnit::TestFixture {
 
     void full_eval(void) {
         unsigned int n = 10, fitness = 0;
+        OneMax eOneMax(n);
         SolutionArray<unsigned int, bool> s(1, n);
         for (unsigned int i = 0 ; i < n ; i++) {
-            if (i % 2)
+            if (i % 2) {
                 s(i, 0);
-            else {
+            } else {
                 s(i, 1);
                 fitness++;
             }
         }
-
-        OneMax eOneMax(n);
-
+        
         eOneMax.full_eval(s);
-
         CPPUNIT_ASSERT(s.getFitness() == fitness);
     }
 

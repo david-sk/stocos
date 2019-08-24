@@ -10,8 +10,8 @@
 #ifndef UNITTEST_FLIPBIT_H
 #define UNITTEST_FLIPBIT_H
 
-#include "../../../../solution/solutionArray.h"
-#include "flipBit.h"
+#include "solution/solutionArray.h"
+#include "optimizationAlgorithm/metaheuristic/operator/mutation/flipBit.h"
 
 using namespace CppUnit;
 

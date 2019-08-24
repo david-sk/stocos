@@ -10,8 +10,8 @@
 #ifndef UNITTEST_SWAP_H
 #define UNITTEST_SWAP_H
 
-#include "../../../solution/solutionArray.h"
-#include "swap.h"
+#include "solution/solutionArray.h"
+#include "optimizationAlgorithm/metaheuristic/operator/swap.h"
 
 using namespace CppUnit;
 

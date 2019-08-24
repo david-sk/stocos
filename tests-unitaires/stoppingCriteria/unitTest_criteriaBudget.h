@@ -12,8 +12,8 @@
 
 using namespace CppUnit;
 
-#include "../solution/solution.h"
-#include "criteriaBudget.h"
+#include "solution/solution.h"
+#include "stoppingCriteria/criteriaBudget.h"
 
 class UnitTest_criteriaBudget : public CppUnit::TestFixture {
 

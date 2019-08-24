@@ -10,9 +10,9 @@
 #ifndef UNITTEST_SUBSETSUM_H
 #define UNITTEST_SUBSETSUM_H
 
-#include "../solution/solutionArray.h"
+#include "solution/solutionArray.h"
 
-#include "subsetSum.h"
+#include "problem/subsetSum.h"
 
 using namespace CppUnit;
 

@@ -10,9 +10,9 @@
 #ifndef UNITTEST_KNAPSACK_H
 #define UNITTEST_KNAPSACK_H
 
-#include "../solution/solutionArray.h"
+#include "solution/solutionArray.h"
 
-#include "knapsack.h"
+#include "problem/knapsack.h"
 
 using namespace CppUnit;
 

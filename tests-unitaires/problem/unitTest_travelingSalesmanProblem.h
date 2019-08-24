@@ -12,7 +12,7 @@
 
 using namespace CppUnit;
 
-#include "travelingSalesmanProblem.h"
+#include "problem/travelingSalesmanProblem.h"
 
 class UnitTest_travelingSalesmanProblem : public CppUnit::TestFixture {
     CPPUNIT_TEST_SUITE(UnitTest_travelingSalesmanProblem);

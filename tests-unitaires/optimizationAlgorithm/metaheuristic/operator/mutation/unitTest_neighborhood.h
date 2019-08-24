@@ -10,9 +10,9 @@
 #ifndef UNITTEST_NEIGHBORHOOD_H
 #define UNITTEST_NEIGHBORHOOD_H
 
-#include "../../../../solution/solutionArray.h"
-#include "../atomicOperation.h"
-#include "neighborhood.h"
+#include "solution/solutionArray.h"
+#include "optimizationAlgorithm/metaheuristic/operator/atomicOperation.h"
+#include "optimizationAlgorithm/metaheuristic/operator/mutation/neighborhood.h"
 
 using namespace CppUnit;
 

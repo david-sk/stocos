@@ -15,6 +15,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <memory>
 
 #include <jsoncpp/json/json.h>
 
@@ -29,28 +30,28 @@ class SolutionArray : public Solution<TYPE_FITNESS> {
 		Solution<TYPE_FITNESS>(1), 
 		_sizeArray(1) {
         BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Creation SolutionArray";
-        array = new TYPE_CELL[_sizeArray];
+        array = std::make_unique<TYPE_CELL[]>(_sizeArray);
     }
 
     SolutionArray(const unsigned int sizeArray) : 
 		Solution<TYPE_FITNESS>(1), 
 		_sizeArray(sizeArray) {
         BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Creation SolutionArray";
-        array = new TYPE_CELL[sizeArray];
+        array = std::make_unique<TYPE_CELL[]>(_sizeArray);
     }
 
     SolutionArray(const unsigned int numberOfObjective, const unsigned int sizeArray)
         : Solution<TYPE_FITNESS>(numberOfObjective), 
 		_sizeArray(sizeArray) {
         BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Creation SolutionArray";
-        array = new TYPE_CELL[sizeArray];
+        array = std::make_unique<TYPE_CELL[]>(_sizeArray);
     }
 
     SolutionArray(const SolutionArray &s) : 
 		Solution<TYPE_FITNESS>(s), 
 		_sizeArray(s._sizeArray) {
         BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Creation SolutionArray";
-        array = new TYPE_CELL[_sizeArray];
+        array = std::make_unique<TYPE_CELL[]>(_sizeArray);
 
         for (unsigned int i = 0; i < _sizeArray; i++) {
             array[i] = s.array[i];
@@ -73,20 +74,17 @@ class SolutionArray : public Solution<TYPE_FITNESS> {
 
     ~SolutionArray() {
         BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Delete SolutionArray";
-        delete[] array;
     }
 
     SolutionArray &operator=(const SolutionArray &s) {
         Solution<TYPE_FITNESS>::operator=(s);
         if (_sizeArray != s._sizeArray) {
-            // this->~SolutionArray();
             _sizeArray = s._sizeArray;
-            array = new TYPE_CELL[_sizeArray];
+            array = std::make_unique<TYPE_CELL[]>(_sizeArray);
         }
 
-        for (unsigned int i = 0; i < _sizeArray; i++) {
+        for (unsigned int i = 0; i < _sizeArray; i++)
             array[i] = s.array[i];
-        }
 
         return *this;
     }
@@ -137,9 +135,9 @@ class SolutionArray : public Solution<TYPE_FITNESS> {
         Solution<TYPE_FITNESS>::loadJson(jsonValue);
         _sizeArray = jsonValue["solution"].size();
         if (array == nullptr)
-            array = new TYPE_CELL[_sizeArray];
+            array = std::make_unique<TYPE_CELL[]>(_sizeArray);
         else
-            array = static_cast<TYPE_CELL *>(realloc(array, _sizeArray * sizeof(TYPE_CELL)));
+            this->array.reset(static_cast<TYPE_CELL*>(realloc(static_cast<void*>(this->array.release()), this->_sizeArray * sizeof(TYPE_CELL))));
         for (unsigned int i = 0; i < jsonValue["solution"].size(); i++) array[i] = jsonValue["solution"][i].asDouble();
     }
 
@@ -151,7 +149,7 @@ class SolutionArray : public Solution<TYPE_FITNESS> {
     }
 
    private:
-    TYPE_CELL *array;
+    std::unique_ptr<TYPE_CELL[]> array;
     unsigned int _sizeArray;
 };
 

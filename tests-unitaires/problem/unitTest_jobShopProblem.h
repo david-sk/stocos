@@ -10,9 +10,9 @@
 #ifndef UNITTEST_JOBSHOPPROBLEM_H
 #define UNITTEST_JOBSHOPPROBLEM_H
 
-#include "../solution/solutionArray.h"
+#include "solution/solutionArray.h"
 
-#include "jobShopProblem.h"
+#include "problem/jobShopProblem.h"
 
 using namespace CppUnit;
 

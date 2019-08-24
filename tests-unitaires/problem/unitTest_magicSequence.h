@@ -10,9 +10,9 @@
 #ifndef UNITTEST_MAGICSEQUENCE_H
 #define UNITTEST_MAGICSEQUENCE_H
 
-#include "../solution/solutionArray.h"
+#include "solution/solutionArray.h"
 
-#include "magicSequence.h"
+#include "problem/magicSequence.h"
 
 using namespace CppUnit;
 

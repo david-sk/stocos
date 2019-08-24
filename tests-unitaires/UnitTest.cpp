@@ -6,7 +6,7 @@
 /// @brief http://www.yolinux.com/TUTORIALS/CppUnit.html
 ///
 
-#define BOOST_LOG_DYN_LINK 1
+#define BOOST_LOG_DYN_LINK 0
 
 #include <boost/log/core.hpp>
 #include <boost/log/trivial.hpp>
@@ -24,6 +24,10 @@
 #include <cppunit/XmlOutputter.h>
 #include <netinet/in.h>
 
+#include "stoppingCriteria/unitTest_criteriaBudget.h"
+#include "solution/unitTest_population.h"
+#include "solution/unitTest_solution.h"
+#include "solution/unitTest_solutionArray.h"
 
 #include "optimizationAlgorithm/exhaustiveSearch/unitTest_backtracking.h"
 #include "optimizationAlgorithm/exhaustiveSearch/unitTest_combinationGenerator.h"
@@ -31,18 +35,17 @@
 #include "optimizationAlgorithm/metaheuristic/operator/mutation/unitTest_kBit.h"
 #include "optimizationAlgorithm/metaheuristic/operator/mutation/unitTest_neighborhood.h"
 #include "optimizationAlgorithm/metaheuristic/operator/unitTest_swap.h"
+
 #include "problem/unitTest_jobShopProblem.h"
 #include "problem/unitTest_knapsack.h"
 #include "problem/unitTest_magicSequence.h"
 #include "problem/unitTest_OneMax.h"
 #include "problem/unitTest_QAP.h"
 #include "problem/unitTest_travelingSalesmanProblem.h"
-#include "problem/unitTest_genericProblem.h"
+// #include "problem/unitTest_genericProblem.h"
 #include "problem/unitTest_subsetsum.h"
-#include "solution/unitTest_population.h"
-#include "solution/unitTest_solution.h"
-#include "solution/unitTest_solutionArray.h"
-#include "stoppingCriteria/unitTest_criteriaBudget.h"
+
+
 
 
 
@@ -51,29 +54,31 @@ CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solution);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solutionArray);
 
 
-// Problem
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_population);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_OneMax);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_knapsack);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_magicSequence);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_QAP);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_GenericProblem);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_jobShopProblem);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_subsetsum);
-
-// Algorithm d'optimisation
+// // Algorithm d'optimisation
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_combinationGenerator);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_backtraking);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_flipBit);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_kBit);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_swap);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_travelingSalesmanProblem);
+
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_neighborhood);
 
 
+// // Problem
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_population);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_OneMax);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_knapsack);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_magicSequence);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_QAP);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_GenericProblem);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_jobShopProblem);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_subsetsum);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_travelingSalesmanProblem);
 
-int main(int argc, char* argv[])
-{
+
+int main(int argc, char* argv[]) {
+    boost::log::core::get()->set_logging_enabled(false);
+
     // informs test-listener about testresults
     CPPUNIT_NS::TestResult testresult;
 

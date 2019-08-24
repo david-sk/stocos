@@ -10,9 +10,9 @@
 #ifndef UNITTEST_GENERICPROBLEM_H
 #define UNITTEST_GENERICPROBLEM_H
 
-#include "../solution/solutionArray.h"
+#include "solution/solutionArray.h"
 
-#include "genericProblem.h"
+#include "problem/genericProblem.h"
 
 using namespace CppUnit;
 

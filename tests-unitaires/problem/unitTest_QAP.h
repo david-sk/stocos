@@ -12,7 +12,7 @@
 
 using namespace CppUnit;
 
-#include "QAP.h"
+#include "problem/QAP.h"
 
 class UnitTest_QAP : public CppUnit::TestFixture {
     CPPUNIT_TEST_SUITE(UnitTest_QAP);

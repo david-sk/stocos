@@ -12,8 +12,8 @@
 
 using namespace CppUnit;
 
-#include "solution.h"
-#include "solutionArray.h"
+#include "solution/solution.h"
+#include "solution/solutionArray.h"
 
 class UnitTest_solutionArray : public CppUnit::TestFixture {
 

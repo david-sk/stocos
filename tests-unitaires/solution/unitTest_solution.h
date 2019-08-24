@@ -12,7 +12,7 @@
 
 using namespace CppUnit;
 
-#include "solution.h"
+#include "solution/solution.h"
 
 class UnitTest_solution : public CppUnit::TestFixture {
 
