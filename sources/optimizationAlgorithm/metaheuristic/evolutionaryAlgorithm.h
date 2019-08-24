@@ -38,6 +38,7 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
     _mu(mu),
     _lambda(lambda) {
         BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Creation EvolutionaryAlgorithm";
+        assert(_mu != 0);
         rid = std::make_unique<std::uniform_int_distribution<unsigned int>>(0, _mu-1);
     }
 
@@ -50,14 +51,14 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
         if (!solution_star.fitnessIsValid()) {
             this->_problem->full_eval(solution_star);
         }
-
+        
         // Initialisation de la population à partir d'une solution
         for (SOL &p : parents)
             p = solution_star;
         
         while (parents.size() < _mu)
             parents.push_back(solution_star);
-
+        
         for (SOL &p : parents)
             _atomicOperations->operator()(p);
         
@@ -70,12 +71,14 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
         
         // 
         while (this->_stoppingCriteria->operator()(solution_star)) {
+            
             this->_statistic->operator()(solution_star);
+            
             // selection de deux parents aléatoire et différent pour construire la population enfants
             for (auto it=offsprings.begin(); it != offsprings.end(); ++it) {
                 unsigned int e1 = rid->operator()(this->_mt_rand);
                 unsigned int e2 = rid->operator()(this->_mt_rand);
-
+                
                 while (e1 == e2) 
                     e2 = rid->operator()(this->_mt_rand);
                 
@@ -97,16 +100,17 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
             // Evaluation des parents
             for (SOL &p : parents)
                 this->_problem->full_eval(p);
-
+            
             // Find best
             for (SOL &p : parents) {
                 if (_selection->operator()(p, solution_star))
                     solution_star = p;
             }
+            
         }
-
+        
         this->_statistic->operator()(solution_star);
-
+        
         return std::move(std::make_unique<SOL>(solution_star));
     }
 

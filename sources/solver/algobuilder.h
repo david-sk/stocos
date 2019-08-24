@@ -57,16 +57,16 @@ class AlgoBuilder {
             } else if (configuration["className"] == "BestImprovement") {
                 // optimizationAlgorithm = std::make_unique<BestImprovement<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, *_statistic, *_stoppingCriteria, _problem, *_atomicOperation, *_selection);
             } else if (configuration["className"] == "OnePlusLambda") {
-                optimizationAlgorithm = std::make_unique<OnePlusLambda<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation), std::move(_selection), configuration["lambda"].isInt());
+                optimizationAlgorithm = std::make_unique<OnePlusLambda<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation), std::move(_selection), configuration["lambda"].asUInt());
             } else if (configuration["className"] == "IteratedLocalSearch") {
                 std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> _optimizationAlgorithm_ils = this->operator()(configuration["OptimizationAlgorithm"]);
                 optimizationAlgorithm = std::make_unique<IteratedLocalSearch<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation), std::move(_optimizationAlgorithm_ils), std::move(_selection));
             } else if (configuration["className"] == "TabuSearch") {
                 optimizationAlgorithm = std::make_unique<TabuSearch<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation), std::move(_selection));
             } else if (configuration["className"] == "EvolutionaryAlgorithm") {
-                optimizationAlgorithm = std::make_unique<EvolutionaryAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation), std::move(_selection), configuration["sizeOfTabuList"].isInt());
+                optimizationAlgorithm = std::make_unique<EvolutionaryAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation), std::move(_selection), configuration["mu"].asUInt(), configuration["lambda"].asUInt());
             } else if (configuration["className"] == "OnePlusLambda") {
-                optimizationAlgorithm = std::make_unique<OnePlusLambda<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation), std::move(_selection), configuration["lambda"].isInt());
+                optimizationAlgorithm = std::make_unique<OnePlusLambda<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation), std::move(_selection), configuration["lambda"].asInt());
             } else if (configuration["className"] == "SimulatedAnnealing") {
                 optimizationAlgorithm = std::make_unique<SimulatedAnnealing<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation), std::move(_selection));
             } else {

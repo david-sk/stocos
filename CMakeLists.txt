@@ -59,12 +59,13 @@ target_link_libraries(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} LINK_PUBLIC /
 
 ## Test unitaire -> make test ARGS="-V"
 enable_testing()
+add_test(NAME "tests-unitaires" COMMAND ./build/stocos-unittest-Release WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 add_test(NAME "oneMax-FirstImprovement-FlipBit" COMMAND /usr/local/bin/python3.7 ./tests-solver/oneMax-FirstImprovement-FlipBit.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 add_test(NAME "oneMax-OnePlusLambda-FlipBit" COMMAND /usr/local/bin/python3.7 ./tests-solver/oneMax-OnePlusLambda-FlipBit.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 add_test(NAME "oneMax-TabuSearch-FlipBit.py" COMMAND /usr/local/bin/python3.7 ./tests-solver/oneMax-TabuSearch-FlipBit.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 add_test(NAME "oneMax-IteratedLocalSearch-FI-FlipBit" COMMAND /usr/local/bin/python3.7 ./tests-solver/oneMax-IteratedLocalSearch-FI-FlipBit.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 add_test(NAME "oneMax-EvolutionaryAlgo-FlipBit" COMMAND /usr/local/bin/python3.7 ./tests-solver/oneMax-EvolutionaryAlgo-FlipBit.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
-add_test(NAME "oneMax-BestImprovement-Neighborhood" COMMAND /usr/local/bin/python3.7 ./tests-solver/oneMax-BestImprovement-Neighborhood.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+# add_test(NAME "oneMax-BestImprovement-Neighborhood" COMMAND /usr/local/bin/python3.7 ./tests-solver/oneMax-BestImprovement-Neighborhood.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 
 
 # ## > Doxygen ##################################################################

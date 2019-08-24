@@ -25,7 +25,7 @@ if __name__ == '__main__':
             "0": {
                 "className":"TabuSearch",
                 "StoppingCriteria": {
-                    "budget": 100,
+                    "budget": 100000,
                     "fitnessObjectif": 10
                 },
                 "AtomicOperation": {
@@ -47,7 +47,7 @@ if __name__ == '__main__':
             }
         }
     }
-
+    print(OneMax)
     result = subprocess.run(["build/stocos-Release", "-j", json.dumps(OneMax)], capture_output=True)
     result_data = json.loads(result.stdout)
     assert result_data["Solution"]["fitness"][0] == 10

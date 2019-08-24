@@ -2,9 +2,9 @@
     "seed": 0,
     "problem": {
         "name": "OneMax",
-        "instance": "instances/OneMax/onemax-1000.json"
+        "instance": "instances/OneMax/onemax-10.json"
     },
-    "parameter_id": 0,
+    "parameter_id": 5,
     "OptimizationAlgorithm": {
          "0": {
             "className":"OnePlusLambda",
@@ -72,7 +72,7 @@
             "className":"TabuSearch",
             "StoppingCriteria": {
                 "budget": 100,
-                "fitnessObjectif": 50
+                "fitnessObjectif": 10
             },
             "AtomicOperation": {
                 "className": "FlipBit",
@@ -80,6 +80,20 @@
             },
             "Selection": "max",
             "sizeOfTabuList": 7
+        },
+        "5": {
+            "className":"EvolutionaryAlgorithm",
+            "StoppingCriteria": {
+                "budget": 100,
+                "fitnessObjectif": 50
+            },
+            "AtomicOperation": {
+                "className": "FlipBit",
+                "c": 1
+            },
+            "Selection": "max",
+            "mu": 50,
+            "lambda": 50
         }
     },
     "Statistic": {
@@ -96,12 +110,12 @@
         //     "num" : 6
         // },
         "sensorNumRound" : false,
-        "sensorSolution" : false,
-        "sensorStopwatch" : false,
-        "sensorFinal" : {
-            "name" : "oneMax",
-            "num" : 6
-        }
+        "sensorSolution" : true,
+        "sensorStopwatch" : false
+        // "sensorFinal" : {
+        //     "name" : "oneMax",
+        //     "num" : 6
+        // }
     },
     "Solutionx": {
         "fitness": [
