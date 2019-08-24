@@ -15,16 +15,16 @@ public:
 
     }
 
-    void operator()(std::stringstream &out, const SOL &s) {
-        out<<numRound++;
+    void apply(const SOL &s) {
+        numRound++;
     }
     
-    Json::Value asJson(const SOL &s) {
-        return Json::Value(numRound++);
+    Json::Value asJson() const {
+        return Json::Value(numRound);
     }
 
-    void finish(std::stringstream &out) {
-        
+    Json::Value finish() {
+        return Json::Value();
     }
 
     std::string name() const {

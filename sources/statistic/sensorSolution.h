@@ -16,21 +16,22 @@ public:
 
     }
 
-    void operator()(std::stringstream &out, const SOL &s) {
-        out<<s;
+    void apply(const SOL &s) {
+        solution = s;
     }
 
-    Json::Value asJson(const SOL &s) {
-        return s.asJson();
+    Json::Value asJson() const {
+        return solution.asJson();
     }
 
-    void finish(std::stringstream &out) {
-        
+    Json::Value finish() {
+        return Json::Value();
     }
     std::string name() const {
         return std::string("Solution");
     }
 private:
+    SOL solution;
 };
 
 #endif

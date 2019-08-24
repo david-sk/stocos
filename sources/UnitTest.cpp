@@ -6,6 +6,11 @@
 /// @brief http://www.yolinux.com/TUTORIALS/CppUnit.html
 ///
 
+#define BOOST_LOG_DYN_LINK 1
+
+#include <boost/log/core.hpp>
+#include <boost/log/trivial.hpp>
+#include <boost/log/expressions.hpp>
 #include <cppunit/TestCase.h>
 #include <cppunit/TestFixture.h>
 #include <cppunit/ui/text/TextTestRunner.h>

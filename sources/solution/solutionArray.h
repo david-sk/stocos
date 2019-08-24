@@ -28,27 +28,28 @@ class SolutionArray : public Solution<TYPE_FITNESS> {
     SolutionArray() : 
 		Solution<TYPE_FITNESS>(1), 
 		_sizeArray(1) {
-        DEBUG_TRACE("Creation SolutionArray");
+        BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Creation SolutionArray";
         array = new TYPE_CELL[_sizeArray];
     }
 
     SolutionArray(const unsigned int sizeArray) : 
 		Solution<TYPE_FITNESS>(1), 
 		_sizeArray(sizeArray) {
-        DEBUG_TRACE("Creation SolutionArray");
+        BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Creation SolutionArray";
         array = new TYPE_CELL[sizeArray];
     }
 
     SolutionArray(const unsigned int numberOfObjective, const unsigned int sizeArray)
         : Solution<TYPE_FITNESS>(numberOfObjective), 
 		_sizeArray(sizeArray) {
-        DEBUG_TRACE("Creation SolutionArray");
+        BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Creation SolutionArray";
         array = new TYPE_CELL[sizeArray];
     }
 
     SolutionArray(const SolutionArray &s) : 
 		Solution<TYPE_FITNESS>(s), 
 		_sizeArray(s._sizeArray) {
+        BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Creation SolutionArray";
         array = new TYPE_CELL[_sizeArray];
 
         for (unsigned int i = 0; i < _sizeArray; i++) {
@@ -71,7 +72,7 @@ class SolutionArray : public Solution<TYPE_FITNESS> {
     }
 
     ~SolutionArray() {
-        DEBUG_TRACE("Delete SolutionArray");
+        BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Delete SolutionArray";
         delete[] array;
     }
 
@@ -128,7 +129,7 @@ class SolutionArray : public Solution<TYPE_FITNESS> {
         Json::Value root;
         Json::Reader reader;
         bool parsingSuccessful = reader.parse(strJson.c_str(), root);  // parse process
-        if (!parsingSuccessful) throw std::runtime_error(reader.getFormattedErrorMessages());
+        if (!parsingSuccessful) throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " +reader.getFormattedErrorMessages());
         loadJson(root);
     }
 

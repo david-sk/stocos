@@ -29,10 +29,14 @@ find_package(PkgConfig REQUIRED)
 pkg_check_modules(JSONCPP jsoncpp)
 link_libraries(${JSONCPP_LIBRARIES})
 
-## Boost - program_options
-find_package(Boost 1.40 COMPONENTS program_options REQUIRED)
+## Boost - program_options + log
+find_package(Boost 1.40 COMPONENTS program_options log REQUIRED)
 include_directories(${Boost_INCLUDE_DIR})
+if (NOT Boost_FOUND )
+    message(FATAL_ERROR "apt-get install libboost-all-dev")
+endif(NOT Boost_FOUND)
 
+## MONGOCXX
 
 ## Stocos
 add_executable(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} sources/main.cpp)

@@ -14,9 +14,9 @@ public:
 
     }
     
-    virtual void operator()(std::stringstream &out, const SOL &s) = 0;
-    virtual Json::Value asJson(const SOL &s) = 0;
-    virtual void finish(std::stringstream &out) = 0;
+    virtual void apply(const SOL &s) = 0;
+    virtual Json::Value asJson() const = 0;
+    virtual Json::Value finish() = 0;
     virtual std::string name() const = 0;
 
 private:

@@ -26,14 +26,14 @@ template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
     public:
     BestImprovement(std::mt19937 &mt_rand,
-        std::unique_ptr<Statistic<SOL>> statistic,
+        std::shared_ptr<Statistic<SOL>> statistic,
         std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
         std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
         std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations,
         std::unique_ptr<Selection<SOL>> selection) :
-        OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, move(statistic), move(stoppingCriteria), problem),
-        _selection(move(selection)) {
-        DEBUG_TRACE("Creation BestImprovement");
+        OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic), std::move(stoppingCriteria), problem),
+        _selection(std::move(selection)) {
+        BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Creation of BestImprovement class";
         //_atomicOperations = new Neighborhood<SOL, TYPE_FITNESS, SOL>(mt_rand);
     }
 

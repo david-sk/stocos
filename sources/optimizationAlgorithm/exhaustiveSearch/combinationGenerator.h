@@ -22,7 +22,7 @@ template <typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
    public:
     CombinationGenerator(std::mt19937 &mt_rand, 
-                        std::unique_ptr<Statistic<SOL>> statistic, 
+                        std::shared_ptr<Statistic<SOL>> statistic, 
 						std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
                         std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem, 
                         const unsigned int nbDigit, 

@@ -24,7 +24,7 @@ template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class FirstImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
     public:
     FirstImprovement(std::mt19937 &mt_rand, 
-    std::unique_ptr<Statistic<SOL>> statistic,
+    std::shared_ptr<Statistic<SOL>> statistic,
     std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
     std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
     std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations,
@@ -32,7 +32,7 @@ class FirstImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CE
     OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic), std::move(stoppingCriteria), problem),
     _atomicOperations(std::move(atomicOperations)),
     _selection(std::move(selection)) {
-        DEBUG_TRACE("Creation FirstImprovement");
+        BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Creation FirstImprovement";
     }
 
     ~FirstImprovement() {

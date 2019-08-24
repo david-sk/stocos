@@ -20,7 +20,7 @@ template<class SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class OptimizationAlgorithm {
     public:
         OptimizationAlgorithm(std::mt19937 &mt_rand,
-        std::unique_ptr<Statistic<SOL>> statistic,
+        std::shared_ptr<Statistic<SOL>> statistic,
         std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
         std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem) : 
             _mt_rand(mt_rand),
@@ -39,7 +39,7 @@ class OptimizationAlgorithm {
 
     protected:
         std::mt19937 &_mt_rand;
-        std::unique_ptr<Statistic<SOL>> _statistic;
+        std::shared_ptr<Statistic<SOL>> _statistic;
         std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> _stoppingCriteria;
         std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> _problem;
 };

@@ -24,9 +24,6 @@
 #include "algobuilder.h"
 #include "../problem/problem.h"
 
-
-
-
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class SolverGeneric : public Solver {
 	public:
@@ -34,39 +31,48 @@ class SolverGeneric : public Solver {
 			Solver(),
 			_configuration(configuration),
 			_problem(problem) {
-				DEBUG_TRACE("CREATE SolverGeneric")
+				BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" CREATE SolverGeneric";
 				if (!configuration["seed"].empty())
 					mt_rand.seed(configuration["seed"].isInt());
 				else
 					mt_rand.seed(static_cast<std::mt19937::result_type>(time(0)));
 
+				if (access(_configuration["problem"]["instance"].asString().c_str(), F_OK ) == -1) {
+					throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] the file does not exist : "+ _configuration["problem"]["instance"].asString());
+				}
 				problem->loadInstance(_configuration["problem"]["instance"].asString());
 
-				AlgoBuilder<SOL, TYPE_FITNESS, TYPE_CELL> algoBuilder(mt_rand, _problem);
+				AlgoBuilder<SOL, TYPE_FITNESS, TYPE_CELL> algoBuilder(mt_rand, _problem, _configuration);
 
-				for (std::string const& id : _configuration["OptimizationAlgorithm"].getMemberNames())
-					oAlgo.insert(oAlgo.begin(), algoBuilder(id, _configuration["OptimizationAlgorithm"][id]));
-					//oAlgo.push_back(algoBuilder(id, _configuration["OptimizationAlgorithm"][id]));			
+				for (std::string const &id : _configuration["OptimizationAlgorithm"].getMemberNames())
+					optimizationAlgorithm[stoul(id)] = algoBuilder(std::move(_configuration["OptimizationAlgorithm"][id]));
+				//optimizationAlgorithm.insert(optimizationAlgorithm.begin(), algoBuilder(_configuration["OptimizationAlgorithm"][id]));
+
+				// Create the initial solution
+				if (_configuration["Solution"].empty())
+					initial_solution = _problem->new_solution();
+				else
+					initial_solution = std::make_unique<SOL>(_configuration["Solution"]);
 		}
 		virtual ~SolverGeneric() {
-			DEBUG_TRACE("DELETE SolverGeneric")
+			BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" DELETE SolverGeneric";
 		}
 
 		void operator()() {
-			std::unique_ptr<SOL> s = _problem->new_solution();
-			std::unique_ptr<SOL> s_new = oAlgo[_configuration["parameter_id"].asUInt()]->operator()(*s);
-			std::cout<<std::endl;
-			std::cout<<*s_new<<std::endl;
-
-			std::cout<<oAlgo[_configuration["parameter_id"].asUInt()]->className()<<std::endl;
+			if (optimizationAlgorithm.size() <= _configuration["parameter_id"].asUInt())
+				throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] parameter_id "+ std::to_string(_configuration["parameter_id"].asUInt()) +" does not exist.");
+			
+			BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Launch optimisation "<< optimizationAlgorithm[_configuration["parameter_id"].asUInt()]->className();
+			std::unique_ptr<SOL> s_new = optimizationAlgorithm[_configuration["parameter_id"].asUInt()]->operator()(*initial_solution);
 		}
 		
 	protected:
 		const Json::Value &_configuration;
 		std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> _problem;
 		std::mt19937 mt_rand;
-		// map<string, std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>> oAlgo;
-		std::vector<std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> > oAlgo;
+		std::unique_ptr<SOL> initial_solution;
+		//std::vector<std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> > optimizationAlgorithm;
+		std::map<unsigned int, std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>> optimizationAlgorithm;
 		
 		
 };

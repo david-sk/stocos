@@ -10,6 +10,8 @@
 #include "../statistic/sensorNumRound.h"
 #include "../statistic/sensorSolution.h"
 #include "../statistic/sensorStopwatch.h"
+#include "../statistic/sensorFinal.h"
+#include "../statistic/sensorExperience.h"
 #include "../stoppingCriteria/stoppingCriteria.h"
 #include "../stoppingCriteria/criteriaBudget.h"
 #include "../stoppingCriteria/criteriaFitnessObjectif.h"
@@ -34,46 +36,41 @@
 template<typename SOL, typename TYPE_FITNESS,typename TYPE_CELL>
 class AlgoBuilder {
     public:
-        AlgoBuilder(std::mt19937 &mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem) :
+        AlgoBuilder(std::mt19937 &mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem, const Json::Value &configuration) :
         _mt_rand(mt_rand),
         _problem(problem) {
-
+            _statistic = statistic(configuration["Statistic"]);
         }
 
         virtual ~AlgoBuilder() {
             
         }
 
-        std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> operator()(const std::string &nameAlgo, const Json::Value &configuration) {
-            
+        std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> operator()(const Json::Value &configuration) {
             std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> optimizationAlgorithm = nullptr;
-
-            std::unique_ptr<Statistic<SOL>> _statistic = statistic(configuration);
             std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _atomicOperation = atomicOperation(configuration["AtomicOperation"]);
             std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> _stoppingCriteria = stoppingCriteria(configuration["StoppingCriteria"]);
             std::unique_ptr<Selection<SOL>> _selection = selection(configuration["Selection"]);
             
-
-        
-            if (nameAlgo == "FirstImprovement") {
-                optimizationAlgorithm = std::make_unique<FirstImprovement<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, move(_statistic), move(_stoppingCriteria), _problem, move(_atomicOperation), move(_selection));
-            } else if (nameAlgo == "BestImprovement") {
+            if (configuration["className"] == "FirstImprovement") {
+                optimizationAlgorithm = std::make_unique<FirstImprovement<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation), std::move(_selection));
+            } else if (configuration["className"] == "BestImprovement") {
                 // optimizationAlgorithm = std::make_unique<BestImprovement<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, *_statistic, *_stoppingCriteria, _problem, *_atomicOperation, *_selection);
-            } else if (nameAlgo == "OnePlusLambda") {
-                optimizationAlgorithm = std::make_unique<OnePlusLambda<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, move(_statistic), move(_stoppingCriteria), _problem, move(_atomicOperation), move(_selection), configuration["lambda"].isInt());
-            } else if (nameAlgo == "IteratedLocalSearch") {
-                std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> _optimizationAlgorithm_ils = this->operator()(configuration["OptimizationAlgorithm"]["className"].asString(), configuration["OptimizationAlgorithm"]);
-                optimizationAlgorithm = std::make_unique<IteratedLocalSearch<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, move(_statistic), move(_stoppingCriteria), _problem, move(_atomicOperation), move(_optimizationAlgorithm_ils), move(_selection));
-            } else if (nameAlgo == "TabuSearch") {
-                optimizationAlgorithm = std::make_unique<TabuSearch<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, move(_statistic), move(_stoppingCriteria), _problem, move(_atomicOperation), move(_selection));
-            } else if (nameAlgo == "EvolutionaryAlgorithm") {
-                optimizationAlgorithm = std::make_unique<EvolutionaryAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, move(_statistic), move(_stoppingCriteria), _problem, move(_atomicOperation), move(_selection), configuration["sizeOfTabuList"].isInt());
-            } else if (nameAlgo == "OnePlusLambda") {
-                optimizationAlgorithm = std::make_unique<OnePlusLambda<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, move(_statistic), move(_stoppingCriteria), _problem, move(_atomicOperation), move(_selection), configuration["lambda"].isInt());
-            } else if (nameAlgo == "SimulatedAnnealing") {
-                optimizationAlgorithm = std::make_unique<SimulatedAnnealing<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, move(_statistic), move(_stoppingCriteria), _problem, move(_atomicOperation), move(_selection));
+            } else if (configuration["className"] == "OnePlusLambda") {
+                optimizationAlgorithm = std::make_unique<OnePlusLambda<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation), std::move(_selection), configuration["lambda"].isInt());
+            } else if (configuration["className"] == "IteratedLocalSearch") {
+                std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> _optimizationAlgorithm_ils = this->operator()(configuration["OptimizationAlgorithm"]);
+                optimizationAlgorithm = std::make_unique<IteratedLocalSearch<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation), std::move(_optimizationAlgorithm_ils), std::move(_selection));
+            } else if (configuration["className"] == "TabuSearch") {
+                optimizationAlgorithm = std::make_unique<TabuSearch<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation), std::move(_selection));
+            } else if (configuration["className"] == "EvolutionaryAlgorithm") {
+                optimizationAlgorithm = std::make_unique<EvolutionaryAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation), std::move(_selection), configuration["sizeOfTabuList"].isInt());
+            } else if (configuration["className"] == "OnePlusLambda") {
+                optimizationAlgorithm = std::make_unique<OnePlusLambda<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation), std::move(_selection), configuration["lambda"].isInt());
+            } else if (configuration["className"] == "SimulatedAnnealing") {
+                optimizationAlgorithm = std::make_unique<SimulatedAnnealing<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation), std::move(_selection));
             } else {
-                throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " The algorithm "+ nameAlgo +" does not exist.");
+                throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " The algorithm "+ configuration["className"].asString() +" does not exist.");
             }
 
             return std::move(optimizationAlgorithm);
@@ -81,12 +78,50 @@ class AlgoBuilder {
         
 
 
-        std::unique_ptr<Statistic<SOL>> statistic(const Json::Value &configuration) {
-            std::unique_ptr<Statistic<SOL>> _statistic = std::make_unique<Statistic<SOL>>(true);
-            _statistic->addSensor(new SensorNumRound<SOL>);
-            _statistic->addSensor(new SensorSolution<SOL>);
-            _statistic->addSensor(new SensorStopwatch<SOL>);
-            return std::move(_statistic);
+        void sensor(const Json::Value &configuration, std::shared_ptr<Statistic<SOL>> __statistic) {
+            if (!configuration["sensorExperience"].empty()) {
+                __statistic->addSensor(new SensorExperience<SOL>(configuration["sensorExperience"]["num"].asUInt(), configuration["sensorExperience"]["name"].asString()));
+            }
+            if (!configuration["sensorNumRound"].empty()) {
+                if (configuration["sensorNumRound"] == true) {
+                    __statistic->addSensor(new SensorNumRound<SOL>);
+                }
+            }
+            if (!configuration["sensorSolution"].empty()) {
+                if (configuration["sensorSolution"] == true) {
+                    __statistic->addSensor(new SensorSolution<SOL>);
+                }
+            }
+            if (!configuration["sensorStopwatch"].empty()) {
+                if (configuration["sensorStopwatch"] == true) {
+                    __statistic->addSensor(new SensorStopwatch<SOL>);
+                }
+            }
+            if (!configuration["sensorFinal"].empty()) {
+                __statistic->addSensor(new SensorFinal<SOL>(configuration["sensorFinal"]["num"].asUInt(), configuration["sensorFinal"]["name"].asString()));
+            }
+        }
+
+        std::shared_ptr<Statistic<SOL>> statistic(const Json::Value &configuration) {
+            std::shared_ptr<Statistic<SOL>> __statistic;
+            if (Statistic<SOL>::NONE == configuration["recording"].asString()) {
+                __statistic = std::make_shared<Statistic<SOL>>(true);
+            } else if (Statistic<SOL>::STDOUT == configuration["recording"].asString()) {
+                __statistic = std::make_shared<Statistic<SOL>>(false);
+                sensor(configuration, __statistic);
+            } else if (Statistic<SOL>::FILE == configuration["recording"].asString()) {
+                __statistic = std::make_shared<Statistic<SOL>>(configuration["namefile"].asString());
+                sensor(configuration, __statistic);
+            } else if (Statistic<SOL>::MONGODB == configuration["recording"].asString()) {
+                __statistic = std::make_shared<Statistic<SOL>>(
+                        configuration["hostname"].asString(),
+                        configuration["database"].asString(),
+                        configuration["collection"].asString());
+                sensor(configuration, __statistic);
+            } else {
+                throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " The recording statistic "+ configuration["recording"].asString() +" does not exist.");
+            }
+            return std::move(__statistic);
         }
 
         std::unique_ptr<StoppingCriteria<SOL,TYPE_FITNESS>> stoppingCriteria(const Json::Value &configuration) {
@@ -126,9 +161,9 @@ class AlgoBuilder {
     private:
         std::mt19937 &_mt_rand;
         std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> _problem;
+        std::shared_ptr<Statistic<SOL>> _statistic;
         
 };
 
 
 #endif
-

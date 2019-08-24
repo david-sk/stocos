@@ -25,19 +25,19 @@ template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
     public:
     EvolutionaryAlgorithm(std::mt19937 &mt_rand, 
-    std::unique_ptr<Statistic<SOL>> statistic,
+    std::shared_ptr<Statistic<SOL>> statistic,
     std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
     std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
     std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations,
     std::unique_ptr<Selection<SOL>> selection,
     unsigned int mu = 50,
     unsigned int lambda = 50) : 
-    OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, move(statistic), move(stoppingCriteria), problem),
+    OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic), move(stoppingCriteria), problem),
     _atomicOperations(move(atomicOperations)),
     _selection(move(selection)),
     _mu(mu),
     _lambda(lambda) {
-        DEBUG_TRACE("Creation EvolutionaryAlgorithm");
+        BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Creation EvolutionaryAlgorithm";
         rid = std::make_unique<std::uniform_int_distribution<unsigned int>>(0, _mu-1);
     }
 
@@ -71,7 +71,6 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
         // 
         while (this->_stoppingCriteria->operator()(solution_star)) {
             this->_statistic->operator()(solution_star);
-
             // selection de deux parents aléatoire et différent pour construire la population enfants
             for (auto it=offsprings.begin(); it != offsprings.end(); ++it) {
                 unsigned int e1 = rid->operator()(this->_mt_rand);

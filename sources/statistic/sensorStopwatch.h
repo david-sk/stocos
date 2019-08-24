@@ -49,11 +49,11 @@ public:
 		return m.count();
 	}
 
-    void operator()(std::stringstream &out, const SOL &s) {
+    void apply(const SOL &s) {
 		stop();
     }
 
-    Json::Value asJson(const SOL &s) {
+    Json::Value asJson() const {
 		std::chrono::microseconds microseconds = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now().time_since_epoch());
 		std::chrono::microseconds minutes = std::chrono::duration_cast<std::chrono::minutes>(std::chrono::steady_clock::now().time_since_epoch());
 
@@ -61,8 +61,9 @@ public:
         return Json::Value(static_cast<int>(ms.count()));
     }
 		
-    void finish(std::stringstream &out) {
+    Json::Value finish() {
         //out<<"Time: " <<diff_minutes()<<"m "<<diff_microseconds()<<"μs";
+		return Json::Value();
     }
 
     std::string name() const {
