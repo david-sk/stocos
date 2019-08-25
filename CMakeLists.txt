@@ -23,7 +23,7 @@ set(CMAKE_CXX_FLAGS_DEBUG "-g3 -DDEBUG")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 ## PkgConfig
-find_package(PkgConfig REQUIRED)
+find_package(PkgConfig)
 if (NOT PKG_CONFIG_FOUND)
     message(FATAL_ERROR "apt install pkg-config")
 endif(NOT PKG_CONFIG_FOUND)
