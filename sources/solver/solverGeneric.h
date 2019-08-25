@@ -37,10 +37,15 @@ class SolverGeneric : public Solver {
 				else
 					mt_rand.seed(static_cast<std::mt19937::result_type>(time(0)));
 
-				if (access(_configuration["problem"]["instance"].asString().c_str(), F_OK ) == -1) {
-					throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] the file does not exist : "+ _configuration["problem"]["instance"].asString());
-				}
-				problem->loadInstance(_configuration["problem"]["instance"].asString());
+
+
+				if (!_configuration["problem"]["instance"].empty()) {
+					problem->loadInstance(_configuration["problem"]["instance"].asString());
+				} else if (!_configuration["problem"]["numInstance"].empty()) {
+					problem->loadInstance(_configuration);
+				} else
+					throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] Problem does not exist.");
+
 
 				AlgoBuilder<SOL, TYPE_FITNESS, TYPE_CELL> algoBuilder(mt_rand, _problem, _configuration);
 

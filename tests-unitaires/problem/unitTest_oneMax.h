@@ -10,6 +10,8 @@
 #ifndef UNITTEST_EVALONEMAX_H
 #define UNITTEST_EVALONEMAX_H
 
+#include <string>
+
 #include "solution/solutionArray.h"
 
 #include "problem/oneMax.h"
@@ -47,7 +49,8 @@ class UnitTest_OneMax : public CppUnit::TestFixture {
     }
 
     void loadInstance(void) {
-        OneMax eOneMax("instances/OneMax/onemax-50.json");
+        std::string file = "instances/OneMax/onemax-50.json";
+        OneMax eOneMax(file);
     }
 
     private:

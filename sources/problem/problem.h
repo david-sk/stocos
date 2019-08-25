@@ -26,7 +26,11 @@ public:
 	}
 	
 	// Loading an instance
-    void loadInstance(const std::string &file) {
+    virtual Json::Value loadInstance(const std::string &file) const {
+		std::cout<<"** "<<__FILE__<<":"<<__LINE__<<std::endl;
+		if (access(file.c_str(), F_OK ) == -1) {
+			throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] the file does not exist : "+ file);
+		}
         Json::Value root;  // will contains the root value after parsing.
         Json::Reader reader;
         std::ifstream test(file, std::ifstream::binary);
@@ -36,11 +40,10 @@ public:
             throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " +reader.getFormattedErrorMessages());
 
         std::string encoding = root.get("encoding", "UTF-8").asString();
-
-        this->loadInstance(root);
+		return root;
     }
 
-	virtual void loadInstance(const Json::Value &config) = 0;
+	virtual void loadJson(const Json::Value &config) = 0;
 	
 	// Generating a solution
 	virtual void reset_solution(SOL &s) const {

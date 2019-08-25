@@ -72,12 +72,13 @@ class GenericProblem : public Problem<SOL_GENERICPROBLEM, TYPE_FITNESS_GENERICPR
     GenericProblem() {}
 
     GenericProblem(std::string fileInstance) {
-        loadInstance(fileInstance);
+        Json::Value config = loadInstance(fileInstance); 
+        loadJson(config);
     }
 
     ~GenericProblem() {}
 
-    virtual void loadInstance(const Json::Value &config) {
+    void loadJson(const Json::Value &config) {
         numInstance = config["problem"]["numInstance"].asString();
 
         for(unsigned int i = 0; i < config["problem"]["objectif"].size(); i++) {

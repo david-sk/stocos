@@ -34,8 +34,9 @@ class Subsetsum : public Problem<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CEL
         generateInstance(N);
     }
 
-    Subsetsum(const std::string &pathfile_instance) {
-        loadInstance(pathfile_instance);
+    Subsetsum(const std::string &fileInstance) {
+        Json::Value config = loadInstance(fileInstance); 
+        loadJson(config);
     }
 
     void generateInstance(const unsigned int N) {
@@ -51,7 +52,7 @@ class Subsetsum : public Problem<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CEL
 
     }
 
-    virtual void loadInstance(const Json::Value &config) {
+    void loadJson(const Json::Value &config) {
         std::string encoding = config.get("encoding", "UTF-8").asString();
 
         fitnessObjectif = config["problem"]["fitnessObjectif"].asUInt();

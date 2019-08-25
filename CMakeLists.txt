@@ -8,6 +8,7 @@
 
 cmake_minimum_required(VERSION 3.0)
 
+# Load modul
 set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmaketools")
 include(doxygen)        # Create le doc
 include(cppcheck)       # 
@@ -40,7 +41,6 @@ if (NOT PKG_CONFIG_FOUND)
     find_package(PkgConfig REQUIRED)
 endif(NOT PKG_CONFIG_FOUND)
 
-
 ## jsoncpp
 pkg_check_modules(JSONCPP jsoncpp)
 link_libraries(${JSONCPP_LIBRARIES})
@@ -59,14 +59,14 @@ endif(NOT Boost_FOUND)
 #find_library(FOO_LIB /usr/lib/x86_64-linux-gnu/libmongoclxient.so.0)
 
 
-## Stocos
-add_executable(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} sources/main.cpp)
-target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${Boost_LIBRARIES})
-target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${JSONCPP_LIBRARIES})
-target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${JSONRPCCPPCLIENT_LIBRARIES})
-target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC /usr/lib/x86_64-linux-gnu/libjsonrpccpp-client.so)
-target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC /usr/lib/x86_64-linux-gnu/libjsonrpccpp-common.so.0)
-target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC /usr/lib/x86_64-linux-gnu/libmongoclient.so.0)
+# ## Stocos
+# add_executable(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} sources/main.cpp)
+# target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${Boost_LIBRARIES})
+# target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${JSONCPP_LIBRARIES})
+# target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${JSONRPCCPPCLIENT_LIBRARIES})
+# target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC /usr/lib/x86_64-linux-gnu/libjsonrpccpp-client.so)
+# target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC /usr/lib/x86_64-linux-gnu/libjsonrpccpp-common.so.0)
+# target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC /usr/lib/x86_64-linux-gnu/libmongoclient.so.0)
 
 #set_target_properties(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "sources/problem/exprtk/exprtk.h")
 #get_target_property(_precompiledHeader "sources/problem/exprtk/exprtk.h" COTIRE_CXX_PRECOMPILED_HEADER)
@@ -96,6 +96,8 @@ add_test(NAME "oneMax-OnePlusLambda-FlipBit" COMMAND /usr/local/bin/python3.7 ./
 add_test(NAME "oneMax-TabuSearch-FlipBit.py" COMMAND /usr/local/bin/python3.7 ./tests-solver/oneMax-TabuSearch-FlipBit.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 add_test(NAME "oneMax-IteratedLocalSearch-FI-FlipBit" COMMAND /usr/local/bin/python3.7 ./tests-solver/oneMax-IteratedLocalSearch-FI-FlipBit.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 add_test(NAME "oneMax-EvolutionaryAlgo-FlipBit" COMMAND /usr/local/bin/python3.7 ./tests-solver/oneMax-EvolutionaryAlgo-FlipBit.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+add_test(NAME "genericProblem-eq1-FirstImprovement-FlipBit" COMMAND /usr/local/bin/python3.7 ./tests-solver/genericProblem-eq1-FirstImprovement-FlipBit.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+add_test(NAME "genericProblem-eq2-FirstImprovement-FlipBit" COMMAND /usr/local/bin/python3.7 ./tests-solver/genericProblem-eq1-FirstImprovement-FlipBit.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 # add_test(NAME "oneMax-BestImprovement-Neighborhood" COMMAND /usr/local/bin/python3.7 ./tests-solver/oneMax-BestImprovement-Neighborhood.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 
 

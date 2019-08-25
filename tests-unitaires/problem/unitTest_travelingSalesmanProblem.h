@@ -30,14 +30,14 @@ class UnitTest_travelingSalesmanProblem : public CppUnit::TestFixture {
     }
 
     void loadInstance(void) {
-        TravelingSalesmanProblem tsp;
-        tsp.loadInstance(std::string("instances/TravelingSalesmanProblem/travelingSalesmanProblem-10-1.json"));
-
+        if (access(std::string("instances/TravelingSalesmanProblem/travelingSalesmanProblem-10-1.json").c_str(), F_OK ) == -1) {
+            throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] the file does not exist.");
+        }
+        TravelingSalesmanProblem tsp(std::string("instances/TravelingSalesmanProblem/travelingSalesmanProblem-10-1.json"));
     }
 
     void full_eval(void) {
-        TravelingSalesmanProblem tsp;
-        tsp.loadInstance(std::string("instances/TravelingSalesmanProblem/travelingSalesmanProblem-10-1.json"));
+        TravelingSalesmanProblem tsp(std::string("instances/TravelingSalesmanProblem/travelingSalesmanProblem-10-1.json"));
         std::unique_ptr<SOL_STP> s1 = tsp.new_solution();
 
         // std::cout<<(*s1)<<std::endl;

@@ -30,15 +30,16 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
         
     }
     
-    Knapsack(std::string pathfile_instance) {
-        loadInstance(pathfile_instance);
+    Knapsack(std::string fileInstance) {
+        Json::Value config = loadInstance(fileInstance); 
+        loadJson(config);
     }
     
     ~Knapsack() {
 
     }
 
-    virtual void loadInstance(const Json::Value &config) {
+    void loadJson(const Json::Value &config) {
         numInstance = config["problem"]["numInstance"].asString();
         capacity = config["problem"]["capacity"].asInt();
         nbItems =  config["problem"]["#items"].asUInt();

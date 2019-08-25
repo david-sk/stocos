@@ -27,13 +27,17 @@ class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>
    public:
     OneMax() : _N(1) {}
 
-    OneMax(std::string fileInstance) { loadInstance(fileInstance); }
+    OneMax(std::string &fileInstance) { 
+        Json::Value config = loadInstance(fileInstance); 
+        loadJson(config);
+    }
 
     OneMax(unsigned int N) : _N(N) {}
 
     ~OneMax() {}
 
-    virtual void loadInstance(const Json::Value &config) {
+    virtual void loadJson(const Json::Value &config) {
+        std::cout<<"** "<<__FILE__<<":"<<__LINE__<<std::endl;
         numInstance = config["problem"]["numInstance"].asString();
         _N = config["problem"]["N"].asUInt();
     }

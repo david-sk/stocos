@@ -23,11 +23,14 @@ using TYPE_CELL_JOBSHOPPROBLEM = bool;
 using SOL_JOBSHOPPROBLEM = SolutionArray<TYPE_FITNESS_JOBSHOPPROBLEM, TYPE_CELL_JOBSHOPPROBLEM>;
 class JobShopProblem : public Problem<SOL_JOBSHOPPROBLEM, TYPE_FITNESS_JOBSHOPPROBLEM, TYPE_CELL_JOBSHOPPROBLEM> {
    public:
-    JobShopProblem(std::string pathfile_instance) { loadInstance(pathfile_instance); }
+    JobShopProblem(std::string fileInstance) { 
+        Json::Value config = loadInstance(fileInstance); 
+        loadJson(config);
+    }
 
     ~JobShopProblem() {}
 
-    virtual void loadInstance(const Json::Value &config) {
+    void loadJson(const Json::Value &config) {
         // std::cout<<root<<std::endl;
         // for (auto name : root["problem"].getMemberNames()) {
         //     std::cout<<name<<std::endl;

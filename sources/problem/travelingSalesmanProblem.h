@@ -27,6 +27,11 @@ class TravelingSalesmanProblem : public Problem<SOL_STP, TYPE_FITNESS_STP, TYPE_
    public:
     TravelingSalesmanProblem() {}
 
+    TravelingSalesmanProblem(const std::string &fileInstance) { 
+        Json::Value config = loadInstance(fileInstance); 
+        loadJson(config);
+    }
+
     virtual ~TravelingSalesmanProblem() {}
 
     std::unique_ptr<SOL_STP> new_solution() const {
@@ -37,7 +42,7 @@ class TravelingSalesmanProblem : public Problem<SOL_STP, TYPE_FITNESS_STP, TYPE_
         return std::move(s);
     }
 
-    virtual void loadInstance(const Json::Value &config) {
+    void loadJson(const Json::Value &config) {
         numInstance = config["problem"]["numInstance"].asString();
         numberOfNodes = config["problem"]["numberOfNodes"].asUInt();
         for (unsigned int i = 0 ; i < config["problem"]["nodes"].size() ; i++) {

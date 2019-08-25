@@ -14,11 +14,21 @@ import json
 import subprocess
 
 if __name__ == '__main__':
-    OneMax : dict = {
+    configuration : dict = {
         "seed": 0,
         "problem": {
             "name": "GenericProblem",
-            "instance": "instances/GenericProblem/quadratic-function-1.json"
+            "numInstance": "0",
+            "objectif": [
+                {
+                    "name": "objectif1",
+                    "function": "x^2 + 5 *x",
+                    "variables": [
+                        "x"
+                    ],
+                    "maximization": True
+                }
+            ]
         },
         "parameter_id": 0,
         "OptimizationAlgorithm": {
@@ -48,7 +58,7 @@ if __name__ == '__main__':
         }
     }
 
-    result = subprocess.run(["build/stocos-Release", "-j", json.dumps(OneMax)], capture_output=True)
+    result = subprocess.run(["build/stocos-Release", "-j", json.dumps(configuration)], capture_output=True)
     result_data = json.loads(result.stdout)
     assert (-6.25 - result_data["Solution"]["fitness"][0]) < 0.01
     exit(result.returncode)
