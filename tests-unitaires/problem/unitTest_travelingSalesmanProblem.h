@@ -12,6 +12,7 @@
 
 using namespace CppUnit;
 
+#include <string>
 #include "problem/travelingSalesmanProblem.h"
 
 class UnitTest_travelingSalesmanProblem : public CppUnit::TestFixture {
@@ -30,13 +31,13 @@ class UnitTest_travelingSalesmanProblem : public CppUnit::TestFixture {
 
     void loadInstance(void) {
         TravelingSalesmanProblem tsp;
-        tsp.loadInstance("instances/TravelingSalesmanProblem/travelingSalesmanProblem-10-1.json");
+        tsp.loadInstance(std::string("instances/TravelingSalesmanProblem/travelingSalesmanProblem-10-1.json"));
 
     }
 
     void full_eval(void) {
         TravelingSalesmanProblem tsp;
-        tsp.loadInstance("instances/TravelingSalesmanProblem/travelingSalesmanProblem-10-1.json");
+        tsp.loadInstance(std::string("instances/TravelingSalesmanProblem/travelingSalesmanProblem-10-1.json"));
         std::unique_ptr<SOL_STP> s1 = tsp.new_solution();
 
         // std::cout<<(*s1)<<std::endl;

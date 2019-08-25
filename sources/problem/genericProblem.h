@@ -77,21 +77,12 @@ class GenericProblem : public Problem<SOL_GENERICPROBLEM, TYPE_FITNESS_GENERICPR
 
     ~GenericProblem() {}
 
-    void loadInstance(const std::string& file) {
-        Json::Value root; // will contains the root value after parsing.
-        Json::Reader reader;
-        std::ifstream test(file, std::ifstream::binary);
-        bool parsingSuccessful = reader.parse(test, root, false);
+    virtual void loadInstance(const Json::Value &config) {
+        numInstance = config["problem"]["numInstance"].asString();
 
-        if(!parsingSuccessful)
-            throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " + reader.getFormattedErrorMessages());
-
-        std::string encoding = root.get("encoding", "UTF-8").asString();
-        numInstance = root["problem"]["numInstance"].asString();
-
-        for(unsigned int i = 0; i < root["problem"]["objectif"].size(); i++) {
-            objectif.push_back(Objectif(root["problem"]["objectif"][i]["function"].asString(),
-                                        root["problem"]["objectif"][i]["variables"]));
+        for(unsigned int i = 0; i < config["problem"]["objectif"].size(); i++) {
+            objectif.push_back(Objectif(config["problem"]["objectif"][i]["function"].asString(),
+                                        config["problem"]["objectif"][i]["variables"]));
         }
 
         nomberOfVariable = 0;

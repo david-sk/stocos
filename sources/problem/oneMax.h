@@ -33,19 +33,9 @@ class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>
 
     ~OneMax() {}
 
-    void loadInstance(const std::string &file) {
-        Json::Value root;  // will contains the root value after parsing.
-        Json::Reader reader;
-        std::ifstream test(file, std::ifstream::binary);
-        bool parsingSuccessful = reader.parse(test, root, false);
-
-        if (!parsingSuccessful)
-            throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " +reader.getFormattedErrorMessages());
-
-        std::string encoding = root.get("encoding", "UTF-8").asString();
-
-        numInstance = root["problem"]["numInstance"].asString();
-        _N = root["problem"]["N"].asUInt();
+    virtual void loadInstance(const Json::Value &config) {
+        numInstance = config["problem"]["numInstance"].asString();
+        _N = config["problem"]["N"].asUInt();
     }
 
     std::unique_ptr<SOL_ONEMAX> new_solution() const {

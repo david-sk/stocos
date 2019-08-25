@@ -71,7 +71,6 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
         
         // 
         while (this->_stoppingCriteria->operator()(solution_star)) {
-            
             this->_statistic->operator()(solution_star);
             
             // selection de deux parents aléatoire et différent pour construire la population enfants
@@ -106,7 +105,6 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
                 if (_selection->operator()(p, solution_star))
                     solution_star = p;
             }
-            
         }
         
         this->_statistic->operator()(solution_star);

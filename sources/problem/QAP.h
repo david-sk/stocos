@@ -99,6 +99,8 @@ public:
                 j++;
         }
     }
+    virtual void loadInstance(const Json::Value &config) {
+    }
 
     void full_eval(SOL_QAP &p) {
         unsigned int sum = 0;

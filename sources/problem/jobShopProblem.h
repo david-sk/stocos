@@ -27,15 +27,7 @@ class JobShopProblem : public Problem<SOL_JOBSHOPPROBLEM, TYPE_FITNESS_JOBSHOPPR
 
     ~JobShopProblem() {}
 
-    void loadInstance(const std::string &file) {
-        Json::Value root;  // will contains the root value after parsing.
-        Json::Reader reader;
-        std::ifstream test(file, std::ifstream::binary);
-        bool parsingSuccessful = reader.parse(test, root, false);
-
-        if (!parsingSuccessful) throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " +reader.getFormattedErrorMessages());
-
-        std::string encoding = root.get("encoding", "UTF-8").asString();
+    virtual void loadInstance(const Json::Value &config) {
         // std::cout<<root<<std::endl;
         // for (auto name : root["problem"].getMemberNames()) {
         //     std::cout<<name<<std::endl;

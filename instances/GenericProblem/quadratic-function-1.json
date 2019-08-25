@@ -1,0 +1,16 @@
+{
+    "problem": {
+        "name": "quadratic-function-1",
+        "numInstance": "0",
+        "objectif": [
+            {
+                "name": "objectif1",
+                "function": "x^2 + 5 *x",
+                "variables": [
+                    "x"
+                ],
+                "maximization": true
+            }
+        ]
+    }
+}
