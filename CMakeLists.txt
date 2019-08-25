@@ -13,7 +13,7 @@ set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmaketools")
 include(auto-install)   # auto install package
 include(cppcheck)       # 
 include(clang-format)   #
-include(doxygen)        # Create le doc
+#include(doxygen)        # Create le doc
 include(cotire)         # CMake module to speed up builds
 
 project(stocos)
@@ -56,7 +56,27 @@ if (NOT Boost_FOUND)
     packageManager("libboost-all-dev")
 endif(NOT Boost_FOUND)
 
-#find_library(FOO_LIB /usr/lib/x86_64-linux-gnu/libmongoclxient.so.0)
+## Mongo
+find_library(MongoDB_LIBRARIES NAMES mongoclient)
+if (NOT MongoDB_LIBRARIES)
+    packageManager("libmongoclient-dev")
+endif(NOT MongoDB_LIBRARIES)
+
+find_path(MongoDB_INCLUDE_DIR NAMES mongo/client/dbclient.h)
+if (NOT MongoDB_INCLUDE_DIR)
+    packageManager("libmongoclient0")
+endif(NOT MongoDB_INCLUDE_DIR)
+
+## Jsonrpccpp
+find_library(JSONRPCCPPCOMMON_LIBRARIES NAMES jsonrpccpp-common)
+if (NOT JSONRPCCPPCOMMON_LIBRARIES)
+    packageManager("libjsonrpccpp-common0")
+endif(NOT JSONRPCCPPCOMMON_LIBRARIES)
+
+find_library(JSONRPCCPPCLIENT_LIBRARIES NAMES jsonrpccpp-client)
+if (NOT JSONRPCCPPCLIENT_LIBRARIES)
+    packageManager("libjsonrpccpp-client0")
+endif(NOT JSONRPCCPPCLIENT_LIBRARIES)
 
 
 # ## Stocos
@@ -64,9 +84,8 @@ add_executable(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} sources/main.cpp)
 target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${Boost_LIBRARIES})
 target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${JSONCPP_LIBRARIES})
 target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${JSONRPCCPPCLIENT_LIBRARIES})
-target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC /usr/lib/x86_64-linux-gnu/libjsonrpccpp-client.so)
-target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC /usr/lib/x86_64-linux-gnu/libjsonrpccpp-common.so.0)
-target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC /usr/lib/x86_64-linux-gnu/libmongoclient.so.0)
+target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${JSONRPCCPPCOMMON_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${MongoDB_LIBRARIES})
 
 #set_target_properties(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "sources/problem/exprtk/exprtk.h")
 #get_target_property(_precompiledHeader "sources/problem/exprtk/exprtk.h" COTIRE_CXX_PRECOMPILED_HEADER)
@@ -86,7 +105,7 @@ target_include_directories(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} PUBLIC s
 target_link_libraries(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${Boost_LIBRARIES})
 target_link_libraries(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${JSONCPP_LIBRARIES})
 target_link_libraries(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${CPPUNIT_LIBRARIES})
-target_link_libraries(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} LINK_PUBLIC /usr/lib/x86_64-linux-gnu/libmongoclient.so.0)
+target_link_libraries(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${MongoDB_LIBRARIES})
 
 ## Test unitaire -> make test ARGS="-V"
 enable_testing()
