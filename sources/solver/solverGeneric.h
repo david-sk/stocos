@@ -32,18 +32,18 @@ class SolverGeneric : public Solver {
 			_configuration(configuration),
 			_problem(problem) {
 				BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" CREATE SolverGeneric";
+
 				if (!configuration["seed"].empty())
 					mt_rand.seed(configuration["seed"].isInt());
 				else
 					mt_rand.seed(static_cast<std::mt19937::result_type>(time(0)));
 
-
-
 				if (!_configuration["problem"]["instance"].empty()) {
-					problem->loadInstance(_configuration["problem"]["instance"].asString());
-				} else if (!_configuration["problem"]["numInstance"].empty()) {
-					problem->loadInstance(_configuration);
-				} else
+					Json::Value tmp = problem->loadInstance(_configuration["problem"]["instance"].asString());
+					problem->loadJson(tmp);
+				} else if (!_configuration["problem"]["numInstance"].empty())
+					problem->loadJson(_configuration);
+				else
 					throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] Problem does not exist.");
 
 
@@ -51,7 +51,6 @@ class SolverGeneric : public Solver {
 
 				for (std::string const &id : _configuration["OptimizationAlgorithm"].getMemberNames())
 					optimizationAlgorithm[stoul(id)] = algoBuilder(std::move(_configuration["OptimizationAlgorithm"][id]));
-				//optimizationAlgorithm.insert(optimizationAlgorithm.begin(), algoBuilder(_configuration["OptimizationAlgorithm"][id]));
 
 				// Create the initial solution
 				if (_configuration["Solution"].empty())
@@ -76,7 +75,6 @@ class SolverGeneric : public Solver {
 		std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> _problem;
 		std::mt19937 mt_rand;
 		std::unique_ptr<SOL> initial_solution;
-		//std::vector<std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> > optimizationAlgorithm;
 		std::map<unsigned int, std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>> optimizationAlgorithm;
 		
 		

@@ -37,7 +37,6 @@ class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>
     ~OneMax() {}
 
     virtual void loadJson(const Json::Value &config) {
-        std::cout<<"** "<<__FILE__<<":"<<__LINE__<<std::endl;
         numInstance = config["problem"]["numInstance"].asString();
         _N = config["problem"]["N"].asUInt();
     }

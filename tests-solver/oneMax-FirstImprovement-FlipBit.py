@@ -48,6 +48,7 @@ if __name__ == '__main__':
     }
 
     result = subprocess.run(["build/stocos-Release", "-j", json.dumps(OneMax)], capture_output=True)
+    print(result)
     result_data = json.loads(result.stdout)
     assert result_data["Solution"]["fitness"][0] == 10
     exit(result.returncode)

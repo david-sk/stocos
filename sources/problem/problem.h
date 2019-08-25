@@ -27,7 +27,6 @@ public:
 	
 	// Loading an instance
     virtual Json::Value loadInstance(const std::string &file) const {
-		std::cout<<"** "<<__FILE__<<":"<<__LINE__<<std::endl;
 		if (access(file.c_str(), F_OK ) == -1) {
 			throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] the file does not exist : "+ file);
 		}
