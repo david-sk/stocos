@@ -70,14 +70,16 @@ endif(NOT MongoDB_INCLUDE_DIR)
 ## Jsonrpccpp
 find_library(JSONRPCCPPCOMMON_LIBRARIES NAMES jsonrpccpp-common)
 if (NOT JSONRPCCPPCOMMON_LIBRARIES)
-    packageManager("libjsonrpccpp-common0")
+    packageManager("libjsonrpccpp-dev")
 endif(NOT JSONRPCCPPCOMMON_LIBRARIES)
 
 find_library(JSONRPCCPPCLIENT_LIBRARIES NAMES jsonrpccpp-client)
 if (NOT JSONRPCCPPCLIENT_LIBRARIES)
-    packageManager("libjsonrpccpp-client0")
+    packageManager("libjsonrpccpp-dev")
 endif(NOT JSONRPCCPPCLIENT_LIBRARIES)
 
+message(STATUS ${JSONRPCCPPCLIENT_LIBRARIES})
+message(STATUS ${JSONRPCCPPCOMMON_LIBRARIES})
 
 # ## Stocos
 add_executable(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} sources/main.cpp)
