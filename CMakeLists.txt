@@ -9,7 +9,7 @@
 cmake_minimum_required(VERSION 3.0)
 
 # Load modul
-set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmaketools")
+set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 include(auto-install)   # auto install package
 include(cppcheck)       # 
 include(clang-format)   #
@@ -17,8 +17,6 @@ include(clang-format)   #
 include(cotire)         # CMake module to speed up builds
 
 project(stocos)
-
-
 
 set(CMAKE_BUILD_TYPE Release)
 #set(CMAKE_BUILD_TYPE Debug)
@@ -31,6 +29,8 @@ set(CMAKE_CXX_FLAGS "-std=c++17 -pedantic -Wall -Wextra -Wcast-align -Wctor-dtor
                                 -Wno-unused") # -Wswitch-default -Wsign-conversion -Wshadow  -Wcast-qual -Wold-style-cast
 set(CMAKE_CXX_FLAGS_DEBUG "-g3 -DDEBUG")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+
+
 
 
 
@@ -54,39 +54,45 @@ find_package(Boost 1.40 COMPONENTS program_options log REQUIRED)
 include_directories(${Boost_INCLUDE_DIR})
 if (NOT Boost_FOUND)
     packageManager("libboost-all-dev")
+    find_package(Boost 1.40 COMPONENTS program_options log REQUIRED)
 endif(NOT Boost_FOUND)
 
 ## Mongo
 find_library(MongoDB_LIBRARIES NAMES mongoclient)
 if (NOT MongoDB_LIBRARIES)
     packageManager("libmongoclient-dev")
+    find_library(MongoDB_LIBRARIES NAMES mongoclient)
 endif(NOT MongoDB_LIBRARIES)
 
 find_path(MongoDB_INCLUDE_DIR NAMES mongo/client/dbclient.h)
 if (NOT MongoDB_INCLUDE_DIR)
     packageManager("libmongoclient0")
+    find_path(MongoDB_INCLUDE_DIR NAMES mongo/client/dbclient.h)
 endif(NOT MongoDB_INCLUDE_DIR)
 
-## Jsonrpccpp
-find_library(JSONRPCCPPCOMMON_LIBRARIES NAMES jsonrpccpp-common)
-if (NOT JSONRPCCPPCOMMON_LIBRARIES)
-    packageManager("libjsonrpccpp-dev")
-endif(NOT JSONRPCCPPCOMMON_LIBRARIES)
+# ## Jsonrpccpp
+# find_library(JSONRPCCPPCOMMON_LIBRARIES NAMES jsonrpccpp-common)
+# if (NOT JSONRPCCPPCOMMON_LIBRARIES)
+#     #packageManager("libjsonrpccpp-dev")
+#     find_library(JSONRPCCPPCOMMON_LIBRARIES NAMES jsonrpccpp-common)
+# endif(NOT JSONRPCCPPCOMMON_LIBRARIES)
 
-find_library(JSONRPCCPPCLIENT_LIBRARIES NAMES jsonrpccpp-client)
-if (NOT JSONRPCCPPCLIENT_LIBRARIES)
-    packageManager("libjsonrpccpp-dev")
-endif(NOT JSONRPCCPPCLIENT_LIBRARIES)
+# find_library(JSONRPCCPPCLIENT_LIBRARIES NAMES jsonrpccpp-client)
+# if (NOT JSONRPCCPPCLIENT_LIBRARIES)
+#     #packageManager("libjsonrpccpp-dev")
+#     find_library(JSONRPCCPPCLIENT_LIBRARIES NAMES jsonrpccpp-client)
+# endif(NOT JSONRPCCPPCLIENT_LIBRARIES)
 
-message(STATUS ${JSONRPCCPPCLIENT_LIBRARIES})
-message(STATUS ${JSONRPCCPPCOMMON_LIBRARIES})
+
+# message(STATUS "${JSONRPCCPPCLIENT_LIBRARIES}")
+# message(STATUS "${JSONRPCCPPCOMMON_LIBRARIES}")
 
 # ## Stocos
 add_executable(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} sources/main.cpp)
 target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${Boost_LIBRARIES})
 target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${JSONCPP_LIBRARIES})
-target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${JSONRPCCPPCLIENT_LIBRARIES})
-target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${JSONRPCCPPCOMMON_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC "/usr/local/lib/libjsonrpccpp-client.so")
+target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC "/usr/local/lib/libjsonrpccpp-common.so")
 target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${MongoDB_LIBRARIES})
 
 #set_target_properties(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "sources/problem/exprtk/exprtk.h")
@@ -110,17 +116,30 @@ target_link_libraries(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} LINK_PUBLIC $
 target_link_libraries(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${MongoDB_LIBRARIES})
 
 ## Test unitaire -> make test ARGS="-V"
+#find_package(Python3 COMPONENTS Interpreter Development)
+
 enable_testing()
 add_test(NAME "tests-unitaires" COMMAND ./build/stocos-unittest-Release WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
-add_test(NAME "oneMax-FirstImprovement-FlipBit" COMMAND /usr/local/bin/python3.7 ./tests-solver/oneMax-FirstImprovement-FlipBit.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
-add_test(NAME "oneMax-OnePlusLambda-FlipBit" COMMAND /usr/local/bin/python3.7 ./tests-solver/oneMax-OnePlusLambda-FlipBit.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
-add_test(NAME "oneMax-TabuSearch-FlipBit.py" COMMAND /usr/local/bin/python3.7 ./tests-solver/oneMax-TabuSearch-FlipBit.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
-add_test(NAME "oneMax-IteratedLocalSearch-FI-FlipBit" COMMAND /usr/local/bin/python3.7 ./tests-solver/oneMax-IteratedLocalSearch-FI-FlipBit.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
-add_test(NAME "oneMax-EvolutionaryAlgo-FlipBit" COMMAND /usr/local/bin/python3.7 ./tests-solver/oneMax-EvolutionaryAlgo-FlipBit.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
-add_test(NAME "genericProblem-eq1-FirstImprovement-FlipBit" COMMAND /usr/local/bin/python3.7 ./tests-solver/genericProblem-eq1-FirstImprovement-FlipBit.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
-add_test(NAME "genericProblem-eq2-FirstImprovement-FlipBit" COMMAND /usr/local/bin/python3.7 ./tests-solver/genericProblem-eq1-FirstImprovement-FlipBit.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
-# add_test(NAME "oneMax-BestImprovement-Neighborhood" COMMAND /usr/local/bin/python3.7 ./tests-solver/oneMax-BestImprovement-Neighborhood.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+
+set(LIST_OF_FILES 
+oneMax-FirstImprovement-FlipBit
+oneMax-OnePlusLambda-FlipBit
+oneMax-TabuSearch-FlipBit
+oneMax-IteratedLocalSearch-FI-FlipBit
+oneMax-EvolutionaryAlgo-FlipBit
+genericProblem-eq1-FirstImprovement-FlipBit
+genericProblem-eq2-FirstImprovement-FlipBit
+# oneMax-BestImprovement-Neighborhood
+)
+foreach(FILE  ${LIST_OF_FILES})
+    add_test(NAME ${FILE} COMMAND /usr/bin/python3.7 ./tests-solver/${FILE}.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+endforeach()
 
 
 
 
+##############
+# find_package(GIT git)
+# if (NOT GIT_FOUND)
+#     packageManager("git")
+# endif(NOT GIT_FOUND)

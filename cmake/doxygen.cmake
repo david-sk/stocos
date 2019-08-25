@@ -15,6 +15,6 @@ if (DOXYGEN_FOUND)
     install(DIRECTORY ${CMAKE_BINARY_DIR}/doc/html 
         DESTINATION share/doc/${CMAKE_PROJECT_NAME})
 else (DOXYGEN_FOUND)
-    message("Doxygen need to be installed to generate the doxygen documentation")
+    packageManager("doxygen")
 endif (DOXYGEN_FOUND)
 ## < Doxygen
