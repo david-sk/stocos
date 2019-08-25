@@ -147,6 +147,6 @@ int main(int argc, char **argv, char **envp) {
 
     solver->operator()();
     delete solver;
-    
+
     return EXIT_SUCCESS;
 }
