@@ -16,8 +16,6 @@
 #include "../stoppingCriteria/criteriaBudget.h"
 #include "../stoppingCriteria/criteriaFitnessObjectif.h"
 #include "../problem/problem.h"
-#include "../problem/SubsetSum.h"
-#include "../problem/oneMax.h"
 #include "../optimizationAlgorithm/metaheuristic/firstImprovement.h"
 #include "../optimizationAlgorithm/metaheuristic/bestImprovement.h"
 #include "../optimizationAlgorithm/metaheuristic/onePlusLambda.h"
