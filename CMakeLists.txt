@@ -11,7 +11,6 @@ cmake_minimum_required(VERSION 3.0)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmaketools/doxygen.txt)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmaketools/cppcheck.txt)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmaketools/clang-format.txt)
-
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmaketools/auto-install.txt)
 
 project(stocos)
@@ -31,6 +30,7 @@ set(CMAKE_CXX_FLAGS_DEBUG "-g3 -DDEBUG")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 
+
 ## PkgConfig
 find_package(PkgConfig)
 if (NOT PKG_CONFIG_FOUND)
@@ -43,7 +43,8 @@ endif(NOT PKG_CONFIG_FOUND)
 pkg_check_modules(JSONCPP jsoncpp)
 link_libraries(${JSONCPP_LIBRARIES})
 if (NOT JSONCPP_FOUND)
-    packageManager("libjsoncpp-dev libjsoncpp1")
+    packageManager("libjsoncpp-dev")
+    packageManager("libjsoncpp1")
 endif(NOT JSONCPP_FOUND)
 
 ## Boost - program_options + log
@@ -52,6 +53,8 @@ include_directories(${Boost_INCLUDE_DIR})
 if (NOT Boost_FOUND)
     packageManager("libboost-all-dev")
 endif(NOT Boost_FOUND)
+
+#find_library(FOO_LIB /usr/lib/x86_64-linux-gnu/libmongoclxient.so.0)
 
 
 ## Stocos
