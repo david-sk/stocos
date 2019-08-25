@@ -24,9 +24,9 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 ## PkgConfig
 find_package(PkgConfig REQUIRED)
-if (NOT Boost_FOUND)
+if (NOT PkgConfig_FOUND)
     message(FATAL_ERROR "apt install pkg-config")
-endif(NOT Boost_FOUND)
+endif(NOT PkgConfig_FOUND)
 
 ## jsoncpp
 pkg_check_modules(JSONCPP jsoncpp)
