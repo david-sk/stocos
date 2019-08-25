@@ -24,6 +24,9 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 ## PkgConfig
 find_package(PkgConfig REQUIRED)
+if (NOT Boost_FOUND)
+    message(FATAL_ERROR "apt install pkg-config")
+endif(NOT Boost_FOUND)
 
 ## jsoncpp
 pkg_check_modules(JSONCPP jsoncpp)
@@ -35,6 +38,10 @@ include_directories(${Boost_INCLUDE_DIR})
 if (NOT Boost_FOUND)
     message(FATAL_ERROR "apt-get install libboost-all-dev")
 endif(NOT Boost_FOUND)
+
+if(BUILD_WITH_BAR)
+  hunter_add_package(bar)
+endif()
 
 ## Stocos
 add_executable(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} sources/main.cpp)
