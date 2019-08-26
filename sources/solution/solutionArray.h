@@ -103,7 +103,7 @@ class SolutionArray : public Solution<TYPE_FITNESS> {
     void operator()(const unsigned int index, const TYPE_CELL value) {
         assert(index < _sizeArray);
         if (array[index] != value) {
-            for (unsigned int i = 0; i < this->_numberOfObjective; i++) this->_fitnessIsValid[i] = false;
+            for (unsigned int i = 0; i < this->_number_of_objective; i++) this->_fitness_is_valid[i] = false;
             array[index] = value;
         }
     }

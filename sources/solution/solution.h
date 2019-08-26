@@ -23,51 +23,51 @@
 template <typename TYPE_FITNESS>
 class Solution {
   public:
-    Solution(const Solution& s) : _numberOfObjective(s._numberOfObjective) {
+    Solution(const Solution& s) : _number_of_objective(s._number_of_objective) {
         BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Constructeur de copie Solution";
-        assert(0 < _numberOfObjective);
-        _fitness = std::make_unique<TYPE_FITNESS[]>(_numberOfObjective);
-        _fitnessIsValid = std::make_unique<bool[]>(_numberOfObjective);
-            for(unsigned int i = 0; i < _numberOfObjective; i++) {
+        assert(0 < _number_of_objective);
+        _fitness = std::make_unique<TYPE_FITNESS[]>(_number_of_objective);
+        _fitness_is_valid = std::make_unique<bool[]>(_number_of_objective);
+            for(unsigned int i = 0; i < _number_of_objective; i++) {
                 _fitness[i] = s._fitness[i];
-                _fitnessIsValid[i] = s._fitnessIsValid[i];
+                _fitness_is_valid[i] = s._fitness_is_valid[i];
             }
     }
 
-    Solution() : _numberOfObjective(1) {
+    Solution() : _number_of_objective(1) {
         BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Creation Solution";
-        _fitness = std::make_unique<TYPE_FITNESS[]>(_numberOfObjective);
-        _fitnessIsValid = std::make_unique<bool[]>(_numberOfObjective);
-        for(unsigned int i = 0; i < _numberOfObjective; i++)
-            _fitnessIsValid[i] = false;
+        _fitness = std::make_unique<TYPE_FITNESS[]>(_number_of_objective);
+        _fitness_is_valid = std::make_unique<bool[]>(_number_of_objective);
+        for(unsigned int i = 0; i < _number_of_objective; i++)
+            _fitness_is_valid[i] = false;
     }
 
-    Solution(const unsigned int numberOfObjective) : _numberOfObjective(numberOfObjective) {
+    Solution(const unsigned int number_of_objective) : _number_of_objective(number_of_objective) {
         BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Creation Solution";
-        assert(0 < _numberOfObjective);
-        _fitness = std::make_unique<TYPE_FITNESS[]>(_numberOfObjective);
-        _fitnessIsValid = std::make_unique<bool[]>(_numberOfObjective);
-        for(unsigned int i = 0; i < _numberOfObjective; i++)
-            _fitnessIsValid[i] = false;
+        assert(0 < _number_of_objective);
+        _fitness = std::make_unique<TYPE_FITNESS[]>(_number_of_objective);
+        _fitness_is_valid = std::make_unique<bool[]>(_number_of_objective);
+        for(unsigned int i = 0; i < _number_of_objective; i++)
+            _fitness_is_valid[i] = false;
     }
 
-    Solution(const Json::Value& jsonValue) : _numberOfObjective(0), _fitness(nullptr), _fitnessIsValid(nullptr) {
+    Solution(const Json::Value& jsonValue) : _number_of_objective(0), _fitness(nullptr), _fitness_is_valid(nullptr) {
         BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Creation Solution";
         loadJson(jsonValue);
     }
 
     Solution& operator=(const Solution& s) {
-            if(_numberOfObjective != s._numberOfObjective) {
-                _numberOfObjective = s._numberOfObjective;
-                _fitness = std::unique_ptr<TYPE_FITNESS[]>(new TYPE_FITNESS[_numberOfObjective]);
-                _fitnessIsValid = std::unique_ptr<bool[]>(new bool[_numberOfObjective]);
-                for(unsigned int i = 0; i < _numberOfObjective; i++)
-                    _fitnessIsValid[i] = false;
+            if(_number_of_objective != s._number_of_objective) {
+                _number_of_objective = s._number_of_objective;
+                _fitness = std::unique_ptr<TYPE_FITNESS[]>(new TYPE_FITNESS[_number_of_objective]);
+                _fitness_is_valid = std::unique_ptr<bool[]>(new bool[_number_of_objective]);
+                for(unsigned int i = 0; i < _number_of_objective; i++)
+                    _fitness_is_valid[i] = false;
         }
 
-            for(unsigned int i = 0; i < _numberOfObjective; i++) {
+            for(unsigned int i = 0; i < _number_of_objective; i++) {
                 _fitness[i] = s._fitness[i];
-                _fitnessIsValid[i] = s._fitnessIsValid[i];
+                _fitness_is_valid[i] = s._fitness_is_valid[i];
             }
         return *this;
     }
@@ -83,43 +83,31 @@ class Solution {
     /// @return true if the fitness is valide
     /// @return false if the fitness is not valide
     ///
-    bool fitnessIsValid(unsigned int numObjectif) const {
-        assert(numObjectif < _numberOfObjective);
-        return _fitnessIsValid[numObjectif];
-    }
-
-    bool fitnessIsValid() const {
-        unsigned int numObjectif = 0;
-        assert(numObjectif < _numberOfObjective);
-        return _fitnessIsValid[numObjectif];
+    bool fitnessIsValid(unsigned int numObjectif = 0) const {
+        assert(numObjectif < _number_of_objective);
+        return _fitness_is_valid[numObjectif];
     }
 
     void setFitness(unsigned int numObjectif, TYPE_FITNESS value) {
-        assert(numObjectif < _numberOfObjective);
+        assert(numObjectif < _number_of_objective);
         _fitness[numObjectif] = value;
-        _fitnessIsValid[numObjectif] = true;
+        _fitness_is_valid[numObjectif] = true;
     }
 
     void setFitness(TYPE_FITNESS value) {
         unsigned int numObjectif = 0;
-        assert(numObjectif < _numberOfObjective);
+        assert(numObjectif < _number_of_objective);
         _fitness[numObjectif] = value;
-        _fitnessIsValid[numObjectif] = true;
+        _fitness_is_valid[numObjectif] = true;
     }
 
-    TYPE_FITNESS getFitness() const {
-        unsigned int numObjectif = 0;
-        assert(numObjectif < _numberOfObjective);
-        return _fitness[numObjectif];
-    }
-
-    TYPE_FITNESS getFitness(unsigned int numObjectif) const {
-        assert(numObjectif < _numberOfObjective);
+    TYPE_FITNESS getFitness(unsigned int numObjectif = 0) const {
+        assert(numObjectif < _number_of_objective);
         return _fitness[numObjectif];
     }
 
     unsigned int numberOfObjective() const {
-        return _numberOfObjective;
+        return _number_of_objective;
     }
 
     // --------------------------------------------------------------------
@@ -139,35 +127,35 @@ class Solution {
     }
 
     void loadJson(const Json::Value& jsonValue) {
-        _numberOfObjective = jsonValue["fitness"].size();
+        _number_of_objective = jsonValue["fitness"].size();
             if(this->_fitness == nullptr) {
-                this->_fitness = std::unique_ptr<TYPE_FITNESS[]>(new TYPE_FITNESS[this->_numberOfObjective]);
-                this->_fitnessIsValid = std::unique_ptr<bool[]>(new bool[this->_numberOfObjective]);
+                this->_fitness = std::unique_ptr<TYPE_FITNESS[]>(new TYPE_FITNESS[this->_number_of_objective]);
+                this->_fitness_is_valid = std::unique_ptr<bool[]>(new bool[this->_number_of_objective]);
             } else {
                 this->_fitness.reset(static_cast<TYPE_FITNESS*>(realloc(
-                    static_cast<void*>(this->_fitness.release()), this->_numberOfObjective * sizeof(TYPE_FITNESS))));
-                this->_fitnessIsValid.reset(static_cast<bool*>(realloc(
-                    static_cast<void*>(this->_fitnessIsValid.release()), this->_numberOfObjective * sizeof(bool))));
+                    static_cast<void*>(this->_fitness.release()), this->_number_of_objective * sizeof(TYPE_FITNESS))));
+                this->_fitness_is_valid.reset(static_cast<bool*>(realloc(
+                    static_cast<void*>(this->_fitness_is_valid.release()), this->_number_of_objective * sizeof(bool))));
             }
             for(unsigned int i = 0; i < jsonValue["fitness"].size(); i++) {
                 _fitness[i] = static_cast<TYPE_FITNESS>(jsonValue["fitness"][i].asDouble());
-                _fitnessIsValid[i] = jsonValue["fitnessIsValid"][i].asBool();
+                _fitness_is_valid[i] = jsonValue["fitnessIsValid"][i].asBool();
             }
     }
 
     Json::Value asJson() const {
         Json::Value jsonValue;
-            for(unsigned int i = 0; i < _numberOfObjective; i++) {
+            for(unsigned int i = 0; i < _number_of_objective; i++) {
                 jsonValue["fitness"].append(_fitness[i]);
-                jsonValue["fitnessIsValid"].append(_fitnessIsValid[i]);
+                jsonValue["fitnessIsValid"].append(_fitness_is_valid[i]);
             }
         return jsonValue;
     }
 
   protected:
-    unsigned int _numberOfObjective;            ///< number of objectif
+    unsigned int _number_of_objective;            ///< number of objectif
     std::unique_ptr<TYPE_FITNESS[]> _fitness;   ///< list of fitness
-    std::unique_ptr<bool[]> _fitnessIsValid;    ///< list of the fitness state
+    std::unique_ptr<bool[]> _fitness_is_valid;    ///< list of the fitness state
 };
 
 #endif

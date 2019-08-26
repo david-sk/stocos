@@ -89,11 +89,7 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
         return nbItems;
     }
 
-    TYPE_FITNESS_KNAPSACK getFitnessObjectif() const {
-        return fitnessObjectif;
-    }
-
-	TYPE_FITNESS_KNAPSACK getFitnessObjectif(unsigned int numObjectif) const {
+	TYPE_FITNESS_KNAPSACK getFitnessObjectif(unsigned int numObjectif = 0) const {
 		assert(numObjectif = 0);
 		return fitnessObjectif;
 	}

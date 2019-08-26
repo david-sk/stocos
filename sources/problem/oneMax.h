@@ -66,10 +66,8 @@ class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>
             s(i, 0);
         }
     }
-
-    TYPE_FITNESS_ONEMAX getFitnessObjectif() const { return _N; }
-
-    TYPE_FITNESS_ONEMAX getFitnessObjectif(unsigned int numObjectif) const {
+    
+    TYPE_FITNESS_ONEMAX getFitnessObjectif(unsigned int numObjectif = 0) const {
         assert(numObjectif = 0);
         return _N;
     }

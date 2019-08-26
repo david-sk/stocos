@@ -134,9 +134,9 @@ class AlgoBuilder {
         
         std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperation(const Json::Value &configuration) {
             if (configuration["className"].asString() == "FlipBit") {
-                return std::make_unique<FlipBit<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, configuration["c"].asInt());
+                return std::make_unique<FlipBit<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _problem, configuration["c"].asInt());
             } else if (configuration["className"].asString() == "IntervalReal") {
-                return std::make_unique<IntervalReal<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, configuration["c"].asInt(), configuration["a"].asInt(), configuration["b"].asInt());
+                return std::make_unique<IntervalReal<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _problem, configuration["c"].asInt(), configuration["a"].asInt(), configuration["b"].asInt());
             } else if (configuration["className"].asString() == "Neighborhood") {
                 //return std::make_unique<Neighborhood<SOL, TYPE_FITNESS, SOL>>(this->_mt_rand);
                 //throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " Not implemented : "+configuration["className"].asString());

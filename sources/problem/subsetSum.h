@@ -61,11 +61,7 @@ class Subsetsum : public Problem<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CEL
         }
     }
 
-    TYPE_FITNESS_SUBSETSUM getFitnessObjectif() const {
-        return fitnessObjectif;
-    }
-
-	TYPE_FITNESS_SUBSETSUM getFitnessObjectif(unsigned int numObjectif) const {
+	TYPE_FITNESS_SUBSETSUM getFitnessObjectif(unsigned int numObjectif = 0) const {
 		assert(numObjectif = 0);
 		return fitnessObjectif;
 	}

@@ -95,9 +95,10 @@ target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC "/usr/loca
 target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC "/usr/local/lib/libjsonrpccpp-common.so")
 target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${MongoDB_LIBRARIES})
 
-#set_target_properties(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "sources/problem/exprtk/exprtk.h")
-#get_target_property(_precompiledHeader "sources/problem/exprtk/exprtk.h" COTIRE_CXX_PRECOMPILED_HEADER)
-#cotire(${PROJECT_NAME}-${CMAKE_BUILD_TYPE})
+# set_target_properties(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "stdafx.h")
+# get_target_property(_precompiledHeader "sources/problem/exprtk/exprtk.h" COTIRE_CXX_PRECOMPILED_HEADER)
+# get_target_property(_precompiledHeader ${PROJECT_NAME}-${CMAKE_BUILD_TYPE} COTIRE_CXX_PRECOMPILED_HEADER)
+# cotire(${PROJECT_NAME}-${CMAKE_BUILD_TYPE})
 
 ## Cppunit
 pkg_check_modules(CPPUNIT cppunit)

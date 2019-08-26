@@ -12,7 +12,8 @@
 
 #include <random>
 #include <vector>
-#include <memory>
+#include <memory>       // std::shared_ptr std::unique_ptr
+
 #include "../../../../solution/solutionArray.h"
 
 #include "../atomicOperation.h"
@@ -20,8 +21,8 @@
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class IntervalReal : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
     public:
-    IntervalReal(std::mt19937 &mt_rand, unsigned int c, double a, double b) :
-    AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand),
+    IntervalReal(std::mt19937 &mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem, unsigned int c, double a, double b) :
+    AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, problem),
     _c(c),
     _a(a),
     _b(b) {
@@ -42,7 +43,18 @@ class IntervalReal : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
 
         for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
             if (urd_0_1->operator()(this->_mt_rand) < mutation_rate) {
-                s(i, s(i) + urd->operator()(this->_mt_rand));
+                try {
+                    TYPE_CELL new_value_of_the_cell = s(i) + urd->operator()(this->_mt_rand);
+                    std::pair<TYPE_CELL, TYPE_CELL> dom = this->_problem->domain(i);
+                    if (new_value_of_the_cell < dom.first)
+                        new_value_of_the_cell = dom.first;
+                    else if (dom.second < new_value_of_the_cell)
+                         new_value_of_the_cell = dom.second;
+                    
+                    s(i, new_value_of_the_cell);
+                }  catch (...) {
+                    s(i, s(i) + urd->operator()(this->_mt_rand));
+                }            
             }
         }
     }
