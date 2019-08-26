@@ -130,6 +130,8 @@ oneMax-IteratedLocalSearch-FI-FlipBit
 oneMax-EvolutionaryAlgo-FlipBit
 genericProblem-eq1-FirstImprovement-FlipBit
 genericProblem-eq2-FirstImprovement-FlipBit
+genericProblem-brent-function-FirstImprovement
+genericProblem-ackleyFunction-N2-FirstImprovement-FlipBit
 # oneMax-BestImprovement-Neighborhood
 )
 foreach(FILE  ${LIST_OF_FILES})

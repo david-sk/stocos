@@ -2,20 +2,47 @@
     "seed": 0,
     "problem": {
         "name": "GenericProblem",
-        "instance": "instances/GenericProblem/test.json"
+        "instance": "instances/ContinuousProblem/brent-function.json"
     },
-    "parameter_id": 0,
+    "parameter_id": 1,
     "OptimizationAlgorithm": {
         "0" :{
             "className": "FirstImprovement",
             "StoppingCriteria": {
-                "budget": 100000
+                "budget": 1000
             },
             "AtomicOperation": {
                 "className": "IntervalReal",
-                "c": 1,
+                "c": 2,
                 "a": -1,
                 "b": 1
+            },
+            "Selection": "min"
+        },
+        "1": {
+            "className":"IteratedLocalSearch",
+            "StoppingCriteria": {
+                "budget": 100
+            },
+            "AtomicOperation": {
+                "className": "IntervalReal",
+                "c": 2,
+                "a": -1,
+                "b": 1
+            },
+            "OptimizationAlgorithm": {
+                "className": "FirstImprovement",
+                "StoppingCriteria": {
+                    "budget": 100,
+                    "fitnessObjectif": 50
+                },
+                "AtomicOperation": {
+                    "className": "FlipBit",
+                    "c": 2,
+                    "a": -1,
+                    "b": 1
+                },
+                "Selection": "min"
             },
             "Selection": "min"
         }
@@ -41,5 +68,4 @@
         //     "num" : 6
         // }
     }
-
 }

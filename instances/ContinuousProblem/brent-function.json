@@ -1,0 +1,22 @@
+{
+    "problem": {
+        "name": "GenericProblem",
+        "numInstance": "0",
+        "objectif": [
+            {
+                "name": "objectif1",
+                "function": "(x + 10)^2 + (y + 10)^2 + exp(-x^2 - y^2)",
+                "variables": [
+                    "x", 
+                    "y"
+                ],
+                "domain" : [
+                    [-20,0],
+                    [-20,0]
+                ],
+                "maximization": false
+            }
+        ]
+    }
+}
+

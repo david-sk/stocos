@@ -9,9 +9,15 @@
 # @Purpose: tests-solver
 # @copyright CC-BY-NC-SA
 #
+# @brief http://benchmarkfcns.xyz/benchmarkfcns/ackleyn2fcn.html
+# The function has a global minimum at f(x*) = -200 located at x* = (0,0)
+#
 
 import json
 import subprocess
+import math
+import numpy as np
+
 
 if __name__ == '__main__':
     configuration : dict = {
@@ -22,14 +28,16 @@ if __name__ == '__main__':
             "objectif": [
                 {
                     "name": "objectif1",
-                    "function": "sin(2 * pi * x) + cos(x / 2 * pi) + 1.0",
+                    "function": "-200 * exp(-0.02 * sqrt(( x^ 2) + (y^ 2)))",
                     "variables": [
-                        "x"
+                        "x", 
+                        "y"
                     ],
                     "domain" : [
-                        [-64,64],
+                        [-32, 32], # Domain of x
+                        [-32, 32]  # Domain of y
                     ],
-                    "maximization": True
+                    "maximization": False
                 }
             ]
         },
@@ -38,15 +46,15 @@ if __name__ == '__main__':
             "0": {
                 "className": "FirstImprovement",
                 "StoppingCriteria": {
-                    "budget": 1000,
+                    "budget": 4000,
                 },
                 "AtomicOperation": {
                     "className": "IntervalReal",
                     "c": 1,
-                    "a": -10,
-                    "b": 10
+                    "a": -1,
+                    "b": 1
                 },
-                "Selection": "max"
+                "Selection": "min"
             }
         },            
         "Statistic": {
@@ -55,14 +63,22 @@ if __name__ == '__main__':
             "sensorSolution" : False,
             "sensorStopwatch" : False,
             "sensorFinal" : {
-                "name" : "eq2",
+                "name" : "ackley function",
                 "num" : 6
             }
         }
     }
+#
+    def f(x : float, y : float) -> float:
+        return  -200 * math.exp(-0.02 * math.sqrt(( math.pow(x, 2)) + (math.pow(y,2))))
 
     result = subprocess.run(["build/stocos-Release", "-j", json.dumps(configuration)], capture_output=True)
     result_data = json.loads(result.stdout)
     print(result_data)
-    assert (2.9282 - result_data["Solution"]["fitness"][0]) < 0.01
+    result_stocos = result_data["Solution"]["fitness"][0]
+    restat_f = np.around(f(result_data["Solution"]["solution"][0], result_data["Solution"]["solution"][1]))
+    objectif_fitness = -200
+
+    assert abs(result_stocos - objectif_fitness) < 0.01
+    assert abs(result_stocos - restat_f) < 0.01
     exit(result.returncode)

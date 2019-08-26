@@ -9,10 +9,8 @@
 # @Purpose: tests-solver
 # @copyright CC-BY-NC-SA
 # 
-# \see : https://en.wikipedia.org/wiki/Ackley_function
-# \see : https://en.wikipedia.org/wiki/Test_functions_for_optimization
-# \see : https://github.com/kthohr/optim/tree/master/tests
-# \see : http://benchmarkfcns.xyz/fcns
+# @brief http://benchmarkfcns.xyz/benchmarkfcns/wolfefcn.html
+# The global minima f(x*) = 0 located at x* = (0, 0, 0)
 #
 
 import json
@@ -30,9 +28,9 @@ if __name__ == '__main__':
             "objectif": [
                 {
                     "name": "objectif1",
-                    "function": "-200 * exp(-0.02 * sqrt(( x^ 2) + (y^ 2)))",
+                    "function": "(4/3)*(((x^2 + y^2) - (x * y))^(0.75)) + z",
                     "variables": [
-                        "x", "y"
+                        "x", "y", "z"
                     ],
                     "maximization": False
                 }
@@ -43,7 +41,7 @@ if __name__ == '__main__':
             "0": {
                 "className": "FirstImprovement",
                 "StoppingCriteria": {
-                    "budget": 4000,
+                    "budget": 1000,
                 },
                 "AtomicOperation": {
                     "className": "IntervalReal",
@@ -51,7 +49,7 @@ if __name__ == '__main__':
                     "a": -1,
                     "b": 1
                 },
-                "Selection": "max"
+                "Selection": "min"
             }
         },            
         "Statistic": {
@@ -66,16 +64,19 @@ if __name__ == '__main__':
         }
     }
 #
-    def f(x : float, y : float) -> float:
-        return  -200 * math.exp(-0.02 * math.sqrt(( math.pow(x, 2)) + (math.pow(y,2))))
+    def f(x : float, y : float, z : float) -> float:
+        return  (4/3)*( math.pow((( math.pow(x,2) + math.pow(y,2)) - (x * y)),(0.75))) + z
 
     result = subprocess.run(["build/stocos-Release", "-j", json.dumps(configuration)], capture_output=True)
     result_data = json.loads(result.stdout)
 
-    print(result_data)
+    result_stocos = result_data["Solution"]["fitness"][0]
+    restat_f = np.around(f(result_data["Solution"]["solution"][0], result_data["Solution"]["solution"][1], result_data["Solution"]["solution"][2]))
 
-    # print(f(0.0, 0.0))
-    print(np.around(f(result_data["Solution"]["solution"][0], result_data["Solution"]["solution"][1])))
-    # result_data = json.loads(result.stdout)
-    # assert (-6.25 - result_data["Solution"]["fitness"][0]) < 0.01
+    print(result_data)
+    print(f(0,0,0))
+    print(result_stocos)
+    print(restat_f)
+    # assert abs(result_stocos - 0) < 0.01
+    # assert abs(result_stocos - restat_f) < 0.01
     # exit(result.returncode)

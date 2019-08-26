@@ -64,7 +64,6 @@ public:
 	};*/
 	virtual bool filtering(SOL &s) const {
 		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + "[-] Not implemented : filtering(SOL &s)");
-		return true;
 	}
 
 	/// 
@@ -75,7 +74,6 @@ public:
 	///
 	virtual std::pair<TYPE_CELL, TYPE_CELL> domain(unsigned index) const {
 		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + "[-] Not implemented : domain()");
-		return std::pair<TYPE_CELL, TYPE_CELL>(0,0);
 	}
 
 	virtual TYPE_FITNESS getFitnessObjectif(unsigned int numObjectif = 0) const {
