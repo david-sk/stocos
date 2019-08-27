@@ -117,12 +117,12 @@
         //     "num" : 6
         // }
     },
-    "Solutionx": {
+    "initial_solution": {
         "fitness": [
             0
         ],
         "fitnessIsValid": [
-            true
+            false
         ],
         "solution": [
             false,

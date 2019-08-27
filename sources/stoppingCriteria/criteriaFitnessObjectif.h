@@ -17,35 +17,36 @@
 template<typename SOL, typename TYPE_FITNESS>
 class CriteriaFitnessObjectif : public Criteria<SOL, TYPE_FITNESS> {
     public:
-    CriteriaFitnessObjectif(TYPE_FITNESS fitnessObjectif) : 
+    CriteriaFitnessObjectif(TYPE_FITNESS fitness_objectif) : 
         Criteria<SOL, TYPE_FITNESS>() {
-            _numberOfObjective = 1;
-            _fitnessObjectif = new TYPE_FITNESS[_numberOfObjective];
-            _fitnessObjectif[0] = fitnessObjectif;
+            _number_of_objective = 1;
+            _fitness_objectif = new TYPE_FITNESS[_number_of_objective];
+            _fitness_objectif[0] = fitness_objectif;
     }
 
-    CriteriaFitnessObjectif(TYPE_FITNESS *fitnessObjectif, unsigned int numberOfObjective) : 
+    CriteriaFitnessObjectif(TYPE_FITNESS *fitness_objectif, unsigned int number_of_objective) : 
         Criteria<SOL, TYPE_FITNESS>() {
-            _numberOfObjective = numberOfObjective;
-            _fitnessObjectif = new TYPE_FITNESS[_numberOfObjective];
-            for (unsigned int i = 0 ; i < numberOfObjective ; i++) {
-                _fitnessObjectif[0] = fitnessObjectif;
+            _number_of_objective = number_of_objective;
+            _fitness_objectif = new TYPE_FITNESS[_number_of_objective];
+            for (unsigned int i = 0 ; i < number_of_objective ; i++) {
+                _fitness_objectif[i] = fitness_objectif[i];
             }
     }
 
     virtual ~CriteriaFitnessObjectif(){
-        delete[] _fitnessObjectif;
+        delete[] _fitness_objectif;
     }
 
     virtual bool operator()(const SOL &s) {
-        assert(s.numberOfObjective() == _numberOfObjective);
-        // Besion de la définir pour le multi-objectifs
+        assert(s.numberOfObjective() == _number_of_objective);
+
         if (s.fitnessIsValid()) {
-            if ((_fitnessObjectif[0] - s.getFitness()) == 0) {
-                return false;
-            } else {
-                return true;
+            for (unsigned int i = 0 ; i < _number_of_objective ; i++) {
+                if ((_fitness_objectif[i] - s.getFitness(i)) != 0) {
+                    return true;
+                }
             }
+            return false;
         } else {
             return true;
         }
@@ -54,8 +55,8 @@ class CriteriaFitnessObjectif : public Criteria<SOL, TYPE_FITNESS> {
     void reset() {}
 
     protected:
-    TYPE_FITNESS *_fitnessObjectif;
-    unsigned int _numberOfObjective;
+    TYPE_FITNESS *_fitness_objectif;
+    unsigned int _number_of_objective;
 };
 
 #endif

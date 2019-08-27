@@ -53,10 +53,14 @@ class SolverGeneric : public Solver {
 					optimizationAlgorithm[stoul(id)] = algoBuilder(std::move(_configuration["OptimizationAlgorithm"][id]));
 
 				// Create the initial solution
-				if (_configuration["Solution"].empty())
+				if (_configuration["initial_solution"].empty())
 					initial_solution = _problem->new_solution();
 				else
-					initial_solution = std::make_unique<SOL>(_configuration["Solution"]);
+					initial_solution = std::make_unique<SOL>(_configuration["initial_solution"]);
+
+				if (!initial_solution->fitnessIsValid()) {
+					_problem->full_eval(*initial_solution);
+				}
 		}
 		virtual ~SolverGeneric() {
 			BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" DELETE SolverGeneric";

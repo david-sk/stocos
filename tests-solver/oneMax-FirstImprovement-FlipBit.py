@@ -47,8 +47,38 @@ if __name__ == '__main__':
         }
     }
 
+    ## TEST 1
     result = subprocess.run(["build/stocos-Release", "-j", json.dumps(OneMax)], capture_output=True)
-    print(result)
+    #print(result)
     result_data = json.loads(result.stdout)
     assert result_data["Solution"]["fitness"][0] == 10
+
+    if result.returncode != 0 :
+        exit(result.returncode)
+
+
+    ## TEST 2
+    OneMax["initial_solution"] = {
+        "fitness": [
+            10
+        ],
+        "fitnessIsValid": [
+            True
+        ],
+        "solution": [
+            True,
+            True,
+            True,
+            True,
+            True,
+            True,
+            True,
+            True,
+            True,
+            True,
+        ]
+    }
+    result = subprocess.run(["build/stocos-Release", "-j", json.dumps(OneMax)], capture_output=True)
+    result_data = json.loads(result.stdout)
+    assert result_data["round"] == 1
     exit(result.returncode)

@@ -66,6 +66,18 @@ if __name__ == '__main__':
                 "name" : "ackley function",
                 "num" : 6
             }
+        },
+        "initial_solution" : {
+            "fitness": [
+                0
+            ],
+            "fitnessIsValid": [
+                False
+            ],
+            "solution": [
+                32,
+                32
+            ]
         }
     }
 #
@@ -73,12 +85,13 @@ if __name__ == '__main__':
         return  -200 * math.exp(-0.02 * math.sqrt(( math.pow(x, 2)) + (math.pow(y,2))))
 
     result = subprocess.run(["build/stocos-Release", "-j", json.dumps(configuration)], capture_output=True)
+    # print(result)
     result_data = json.loads(result.stdout)
-    print(result_data)
+    # print(result_data)
     result_stocos = result_data["Solution"]["fitness"][0]
     restat_f = np.around(f(result_data["Solution"]["solution"][0], result_data["Solution"]["solution"][1]))
     objectif_fitness = -200
-
-    assert abs(result_stocos - objectif_fitness) < 0.01
-    assert abs(result_stocos - restat_f) < 0.01
+    
+    assert abs(result_stocos - objectif_fitness) < 0.05
+    assert abs(result_stocos - restat_f) < 0.05
     exit(result.returncode)

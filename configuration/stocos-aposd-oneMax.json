@@ -77,7 +77,7 @@
             "Selection": "max"
         }
     },
-    "Solution": {
+    "initial_solution": {
         "fitness": [
             0
         ],

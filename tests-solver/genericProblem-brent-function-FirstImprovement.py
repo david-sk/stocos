@@ -65,6 +65,18 @@ if __name__ == '__main__':
                 "name" : "ackley function",
                 "num" : 6
             }
+        },
+        "initial_solution" : {
+            "fitness": [
+                0
+            ],
+            "fitnessIsValid": [
+                False
+            ],
+            "solution": [
+                0,
+                0
+            ]
         }
     }
 #

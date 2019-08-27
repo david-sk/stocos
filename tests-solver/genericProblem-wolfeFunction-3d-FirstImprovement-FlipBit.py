@@ -32,6 +32,11 @@ if __name__ == '__main__':
                     "variables": [
                         "x", "y", "z"
                     ],
+                    "domain" : [
+                        [0, 2], # Domain of x
+                        [0, 2], # Domain of y
+                        [0, 2]  # Domain of z
+                    ],
                     "maximization": False
                 }
             ]
@@ -61,6 +66,19 @@ if __name__ == '__main__':
                 "name" : "ackley function",
                 "num" : 6
             }
+        },
+        "initial_solution" : {
+            "fitness": [
+                0
+            ],
+            "fitnessIsValid": [
+                False
+            ],
+            "solution": [
+                2,
+                2,
+                2
+            ]
         }
     }
 #
@@ -73,10 +91,6 @@ if __name__ == '__main__':
     result_stocos = result_data["Solution"]["fitness"][0]
     restat_f = np.around(f(result_data["Solution"]["solution"][0], result_data["Solution"]["solution"][1], result_data["Solution"]["solution"][2]))
 
-    print(result_data)
-    print(f(0,0,0))
-    print(result_stocos)
-    print(restat_f)
-    # assert abs(result_stocos - 0) < 0.01
-    # assert abs(result_stocos - restat_f) < 0.01
-    # exit(result.returncode)
+    assert abs(result_stocos - 0) < 0.01
+    assert abs(result_stocos - restat_f) < 0.01
+    exit(result.returncode)

@@ -58,6 +58,17 @@ if __name__ == '__main__':
                 "name" : "eq2",
                 "num" : 6
             }
+        },
+        "initial_solution" : {
+            "fitness": [
+                0
+            ],
+            "fitnessIsValid": [
+                False
+            ],
+            "solution": [
+                64
+            ]
         }
     }
 
