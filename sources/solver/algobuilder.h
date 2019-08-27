@@ -16,8 +16,6 @@
 #include "../stoppingCriteria/criteriaBudget.h"
 #include "../stoppingCriteria/criteriaFitnessObjectif.h"
 #include "../problem/problem.h"
-#include "../problem/SubsetSum.h"
-#include "../problem/oneMax.h"
 #include "../optimizationAlgorithm/metaheuristic/firstImprovement.h"
 #include "../optimizationAlgorithm/metaheuristic/bestImprovement.h"
 #include "../optimizationAlgorithm/metaheuristic/onePlusLambda.h"
@@ -27,6 +25,7 @@
 #include "../optimizationAlgorithm/metaheuristic/evolutionaryAlgorithm.h"
 #include "../optimizationAlgorithm/metaheuristic/operator/mutation/flipBit.h"
 #include "../optimizationAlgorithm/metaheuristic/operator/mutation/neighborhood.h"
+#include "../optimizationAlgorithm/metaheuristic/operator/mutation/intervalReal.h"
 #include "../optimizationAlgorithm/metaheuristic/selection/selection.h"
 #include "../optimizationAlgorithm/metaheuristic/selection/selection_maximization.h"
 #include "../optimizationAlgorithm/metaheuristic/selection/selection_minimization.h"
@@ -126,14 +125,18 @@ class AlgoBuilder {
 
         std::unique_ptr<StoppingCriteria<SOL,TYPE_FITNESS>> stoppingCriteria(const Json::Value &configuration) {
             std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> _stoppingCriteria = std::make_unique<StoppingCriteria<SOL, TYPE_FITNESS>>();
-            _stoppingCriteria->addCriteria(new CriteriaBudget<SOL, TYPE_FITNESS>(configuration["budget"].asUInt()));
-            _stoppingCriteria->addCriteria(new CriteriaFitnessObjectif<SOL, TYPE_FITNESS>(static_cast<TYPE_FITNESS>(configuration["fitnessObjectif"].asDouble())));
+            if (!configuration["budget"].empty())
+                _stoppingCriteria->addCriteria(new CriteriaBudget<SOL, TYPE_FITNESS>(configuration["budget"].asUInt()));
+            if (!configuration["fitnessObjectif"].empty())
+                _stoppingCriteria->addCriteria(new CriteriaFitnessObjectif<SOL, TYPE_FITNESS>(static_cast<TYPE_FITNESS>(configuration["fitnessObjectif"].asDouble())));
             return std::move(_stoppingCriteria);
         }
         
         std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperation(const Json::Value &configuration) {
             if (configuration["className"].asString() == "FlipBit") {
-                return std::make_unique<FlipBit<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, configuration["c"].asInt());
+                return std::make_unique<FlipBit<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _problem, configuration["c"].asInt());
+            } else if (configuration["className"].asString() == "IntervalReal") {
+                return std::make_unique<IntervalReal<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _problem, configuration["c"].asInt(), configuration["a"].asInt(), configuration["b"].asInt());
             } else if (configuration["className"].asString() == "Neighborhood") {
                 //return std::make_unique<Neighborhood<SOL, TYPE_FITNESS, SOL>>(this->_mt_rand);
                 //throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " Not implemented : "+configuration["className"].asString());

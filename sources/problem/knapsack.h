@@ -30,32 +30,23 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
         
     }
     
-    Knapsack(std::string pathfile_instance) {
-        loadInstance(pathfile_instance);
+    Knapsack(std::string fileInstance) {
+        Json::Value config = loadInstance(fileInstance); 
+        loadJson(config);
     }
     
     ~Knapsack() {
 
     }
 
-    void loadInstance(const std::string &file) {
-        Json::Value root;  // will contains the root value after parsing.
-        Json::Reader reader;
-        std::ifstream test(file, std::ifstream::binary);
-        bool parsingSuccessful = reader.parse(test, root, false);
-
-        if (!parsingSuccessful)
-            throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " +reader.getFormattedErrorMessages());
-
-        std::string encoding = root.get("encoding", "UTF-8").asString();
-
-        numInstance = root["problem"]["numInstance"].asString();
-        capacity = root["problem"]["capacity"].asInt();
-        nbItems =  root["problem"]["#items"].asUInt();
+    void loadJson(const Json::Value &config) {
+        numInstance = config["problem"]["numInstance"].asString();
+        capacity = config["problem"]["capacity"].asInt();
+        nbItems =  config["problem"]["#items"].asUInt();
 
         for (unsigned int i = 0; i < nbItems ; i++) {
-            weight.push_back(root["problem"]["weight"][i].asInt());
-            profit.push_back(root["problem"]["profit"][i].asInt());
+            weight.push_back(config["problem"]["weight"][i].asInt());
+            profit.push_back(config["problem"]["profit"][i].asInt());
         }
 
         assert(nbItems == weight.size());
@@ -98,11 +89,7 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
         return nbItems;
     }
 
-    TYPE_FITNESS_KNAPSACK getFitnessObjectif() const {
-        return fitnessObjectif;
-    }
-
-	TYPE_FITNESS_KNAPSACK getFitnessObjectif(unsigned int numObjectif) const {
+	TYPE_FITNESS_KNAPSACK getFitnessObjectif(unsigned int numObjectif = 0) const {
 		assert(numObjectif = 0);
 		return fitnessObjectif;
 	}

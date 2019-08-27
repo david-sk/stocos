@@ -23,19 +23,14 @@ using TYPE_CELL_JOBSHOPPROBLEM = bool;
 using SOL_JOBSHOPPROBLEM = SolutionArray<TYPE_FITNESS_JOBSHOPPROBLEM, TYPE_CELL_JOBSHOPPROBLEM>;
 class JobShopProblem : public Problem<SOL_JOBSHOPPROBLEM, TYPE_FITNESS_JOBSHOPPROBLEM, TYPE_CELL_JOBSHOPPROBLEM> {
    public:
-    JobShopProblem(std::string pathfile_instance) { loadInstance(pathfile_instance); }
+    JobShopProblem(std::string fileInstance) { 
+        Json::Value config = loadInstance(fileInstance); 
+        loadJson(config);
+    }
 
     ~JobShopProblem() {}
 
-    void loadInstance(const std::string &file) {
-        Json::Value root;  // will contains the root value after parsing.
-        Json::Reader reader;
-        std::ifstream test(file, std::ifstream::binary);
-        bool parsingSuccessful = reader.parse(test, root, false);
-
-        if (!parsingSuccessful) throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " +reader.getFormattedErrorMessages());
-
-        std::string encoding = root.get("encoding", "UTF-8").asString();
+    void loadJson(const Json::Value &config) {
         // std::cout<<root<<std::endl;
         // for (auto name : root["problem"].getMemberNames()) {
         //     std::cout<<name<<std::endl;

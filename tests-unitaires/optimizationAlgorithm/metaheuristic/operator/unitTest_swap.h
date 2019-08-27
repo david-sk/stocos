@@ -10,6 +10,9 @@
 #ifndef UNITTEST_SWAP_H
 #define UNITTEST_SWAP_H
 
+#include <memory>       // std::shared_ptr std::unique_ptr
+
+#include "problem/oneMax.h"
 #include "solution/solutionArray.h"
 #include "optimizationAlgorithm/metaheuristic/operator/swap.h"
 
@@ -34,14 +37,15 @@ class UnitTest_swap : public CppUnit::TestFixture {
 	    mt_rand.seed(0);
 
         unsigned int N = 50;
-        SolutionArray<int, int> s1(1, N);
+        std::shared_ptr<OneMax> oneMax = std::make_shared<OneMax>(N);
+        SOL_ONEMAX s1(1, N);
         for(unsigned int i = 0 ; i < N ; i++) {
             s1(i,static_cast<int>(i));
         }
-        SolutionArray<int, int> s2(s1);
-        Swap<SolutionArray<int, int>, int, int> swap(mt_rand, 5);
-        swap(s1);
-        swap.cancelMutations(s1);
+        SOL_ONEMAX s2(s1);
+        // Swap<SOL_ONEMAX, int, int> swap(mt_rand, oneMax, 5);
+        // swap(s1);
+        // swap.cancelMutations(s1);
 
         CPPUNIT_ASSERT(s1 == s2);   
     }

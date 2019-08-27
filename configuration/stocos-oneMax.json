@@ -86,7 +86,7 @@
         // "recording":"none"
         "recording":"stdout"
     },
-    "Solution": {
+    "initial_solution": {
         "fitness": [
             0
         ],

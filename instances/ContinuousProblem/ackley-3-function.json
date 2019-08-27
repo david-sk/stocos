@@ -1,0 +1,22 @@
+{
+    "problem": {
+        "name": "GenericProblem",
+        "numInstance": "0",
+        "objectif": [
+            {
+                "name": "objectif1",
+                "function": "-200 * exp(-0.2 * sqrt(x^2 + y^2)) + 5 * exp(cos(3 * x) + sin(3 * y))",
+                "variables": [
+                    "x", 
+                    "y"
+                ],
+                "domain" : [
+                    [-32, 32],
+                    [-32, 32]
+                ],
+                "maximization": false
+            }
+        ]
+    }
+}
+

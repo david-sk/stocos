@@ -13,7 +13,8 @@
 
 #include <random>
 #include <vector>
-#include <memory>
+#include <memory>       // std::shared_ptr std::unique_ptr
+
 #include "../../../../solution/solutionArray.h"
 
 #include "../atomicOperation.h"
@@ -21,8 +22,8 @@
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class FlipBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
     public:
-    FlipBit(std::mt19937 &mt_rand, unsigned int c) :
-    AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand),
+    FlipBit(std::mt19937 &mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem, unsigned int c) :
+    AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, problem),
     _c(c) {
         urd = std::make_unique<std::uniform_real_distribution<>>(0, 1);
         

@@ -11,14 +11,15 @@
 #define NEIGHBORHOOD_H
 
 #include <random>
+#include <memory>       // std::shared_ptr std::unique_ptr
 
 #include "../atomicOperation.h"
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class Neighborhood : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
     public:
-    Neighborhood(std::mt19937 &mt_rand) :
-        AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand) {
+    Neighborhood(std::mt19937 &mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem) :
+        AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, problem) {
 
     }
 

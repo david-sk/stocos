@@ -2,18 +2,33 @@
     "seed": 0,
     "problem": {
         "name": "GenericProblem",
-        "instance": "instances/GenericProblem/test.json"
+        "instance": "instances/ContinuousProblem/brent-function.json"
     },
     "parameter_id": 1,
     "OptimizationAlgorithm": {
-        "IteratedLocalSearch": {
+        "0" :{
+            "className": "FirstImprovement",
             "StoppingCriteria": {
-                "budget": 100,
-                "fitnessObjectif": 50
+                "budget": 1000
             },
             "AtomicOperation": {
-                "className": "FlipBit",
-                "c": 1
+                "className": "IntervalReal",
+                "c": 2,
+                "a": -1,
+                "b": 1
+            },
+            "Selection": "min"
+        },
+        "1": {
+            "className":"IteratedLocalSearch",
+            "StoppingCriteria": {
+                "budget": 100
+            },
+            "AtomicOperation": {
+                "className": "IntervalReal",
+                "c": 2,
+                "a": -1,
+                "b": 1
             },
             "OptimizationAlgorithm": {
                 "className": "FirstImprovement",
@@ -23,58 +38,34 @@
                 },
                 "AtomicOperation": {
                     "className": "FlipBit",
-                    "c": 1
+                    "c": 2,
+                    "a": -1,
+                    "b": 1
                 },
                 "Selection": "min"
             },
             "Selection": "min"
-        },
-        "EvolutionaryAlgorithm": {
-            "StoppingCriteria": {
-                "budget": 100,
-                "fitnessObjectif": 50
-            },
-            "AtomicOperation": {
-                "className": "FlipBit",
-                "c": 1
-            },
-            "Selection": "min",
-            "mu": 50,
-            "lambda": 50
-        },
-        "TabuSearch": {
-            "StoppingCriteria": {
-                "budget": 100,
-                "fitnessObjectif": 50
-            },
-            "AtomicOperation": {
-                "className": "FlipBit",
-                "c": 1
-            },
-            "Selection": "min",
-            "sizeOfTabuList": 7
-        },
-        "OnePlusLambda": {
-            "StoppingCriteria": {
-                "budget": 100,
-                "fitnessObjectif": 50
-            },
-            "AtomicOperation": {
-                "className": "FlipBit",
-                "c": 1
-            },
-            "Selection": "min",
-            "lambda": 50
-        },
-        "BestImprovement": {
-            "StoppingCriteria": {
-                "budget": 100,
-                "fitnessObjectif": 50
-            },
-            "AtomicOperation": {
-                "className": "Neighborhood"
-            },
-            "Selection": "min"
         }
+    },
+    "Statistic": {
+        "recording":"stdout",
+        // "recording":"none"
+        //"recording":"file",
+        //"namefile":"toto.txt"
+        // "recording":"mongodb",
+        // "hostname":"localhost",
+        // "database": "db",
+        // "collection": "c",
+        // "sensorExperience" : {
+        //     "name" : "oneMax",
+        //     "num" : 6
+        // },
+        "sensorNumRound" : true,
+        "sensorSolution" : true,
+        "sensorStopwatch" : false
+        // "sensorFinal" : {
+        //     "name" : "oneMax",
+        //     "num" : 6
+        // }
     }
 }

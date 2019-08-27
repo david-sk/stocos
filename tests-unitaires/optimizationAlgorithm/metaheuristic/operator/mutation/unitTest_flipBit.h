@@ -10,8 +10,12 @@
 #ifndef UNITTEST_FLIPBIT_H
 #define UNITTEST_FLIPBIT_H
 
+#include <memory>       // std::shared_ptr std::unique_ptr
+
+#include "problem/oneMax.h"
 #include "solution/solutionArray.h"
 #include "optimizationAlgorithm/metaheuristic/operator/mutation/flipBit.h"
+
 
 using namespace CppUnit;
 
@@ -34,7 +38,8 @@ class UnitTest_flipBit : public CppUnit::TestFixture {
 
     void operator()(void) {
         unsigned int N = 50;
-        SolutionArray<int, bool> s(N);
+        std::shared_ptr<OneMax> oneMax = std::make_shared<OneMax>(N);
+        SOL_ONEMAX s(N);
         
         for (unsigned int i = 0 ; i < N ; i++) {
             s(i, 0);
@@ -43,15 +48,16 @@ class UnitTest_flipBit : public CppUnit::TestFixture {
 	    std::mt19937 mt_rand;
 	    mt_rand.seed(0);
 
-        FlipBit<SolutionArray<int, bool>, int, bool> flipbit(mt_rand, 0);
+        FlipBit<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX> flipbit(mt_rand, oneMax, 0);
         flipbit(s);
     }
 
 
     void cancelMutations(void) {
         unsigned int N = 50;
-        SolutionArray<int, bool> s1(1, N);
-        SolutionArray<int, bool> s2(1, N);
+        std::shared_ptr<OneMax> oneMax = std::make_shared<OneMax>(N);
+        SOL_ONEMAX s1(1, N);
+        SOL_ONEMAX s2(1, N);
 
         for (unsigned int i = 0 ; i < N ; i++) {
             s1(i, 0);
@@ -61,7 +67,7 @@ class UnitTest_flipBit : public CppUnit::TestFixture {
 	    std::mt19937 mt_rand;
 	    mt_rand.seed(0);
         
-        FlipBit<SolutionArray<int, bool>, int, bool> flipbit(mt_rand, 0);
+        FlipBit<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX> flipbit(mt_rand, oneMax, 0);
         flipbit(s1);
         flipbit.cancelMutations(s1);
         CPPUNIT_ASSERT(s1 == s2);   
@@ -69,26 +75,28 @@ class UnitTest_flipBit : public CppUnit::TestFixture {
 
     void listOfMutations(void) {
         unsigned int N = 50;
-        SolutionArray<int, bool> s1(1, N);
+        std::shared_ptr<OneMax> oneMax = std::make_shared<OneMax>(N);
+        SOL_ONEMAX s1(1, N);
 	    
         std::mt19937 mt_rand;
 	    mt_rand.seed(0);
 
-        FlipBit<SolutionArray<int, bool>, int, bool> flipbit(mt_rand, 5);
-        std::unique_ptr<std::vector<std::pair<unsigned int, bool>>> mutations = flipbit.listOfMutations(s1);
+        FlipBit<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX> flipbit(mt_rand, oneMax, 5);
+        std::unique_ptr<std::vector<std::pair<unsigned int, TYPE_CELL_ONEMAX>>> mutations = flipbit.listOfMutations(s1);
         
     }
 
     void applyOperator(void) {
         unsigned int N = 50;
-        SolutionArray<int, bool> s1(1, N);
-        SolutionArray<int, bool> s2(s1);
+        SOL_ONEMAX s1(1, N);
+        SOL_ONEMAX s2(s1);
+        std::shared_ptr<OneMax> oneMax = std::make_shared<OneMax>(N);
 	    
         std::mt19937 mt_rand;
 	    mt_rand.seed(0);
 
-        FlipBit<SolutionArray<int, bool>, int, bool> flipbit(mt_rand, 5);
-        std::unique_ptr<std::vector<std::pair<unsigned int, bool>>> mutations = flipbit.listOfMutations(s1);
+        FlipBit<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX> flipbit(mt_rand, oneMax, 5);
+        std::unique_ptr<std::vector<std::pair<unsigned int, TYPE_CELL_ONEMAX>>> mutations = flipbit.listOfMutations(s1);
         flipbit.applyOperator(s1, *mutations);
 
         CPPUNIT_ASSERT(!(s1 == s2));

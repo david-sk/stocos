@@ -11,6 +11,10 @@
 #ifndef PROBLEM_H
 #define PROBLEM_H
 
+#include <iostream>
+#include <utility>
+#include <stdexcept>
+
 #include "../solution/solution.h"
 
 
@@ -26,16 +30,30 @@ public:
 	}
 	
 	// Loading an instance
-	virtual void loadInstance(const std::string &file) = 0;
+    virtual Json::Value loadInstance(const std::string &file) const {
+		if (access(file.c_str(), F_OK ) == -1) {
+			throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] the file does not exist : "+ file);
+		}
+        Json::Value root;  // will contains the root value after parsing.
+        Json::Reader reader;
+        std::ifstream test(file, std::ifstream::binary);
+        bool parsingSuccessful = reader.parse(test, root, false);
+
+        if (!parsingSuccessful)
+            throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " +reader.getFormattedErrorMessages());
+
+        std::string encoding = root.get("encoding", "UTF-8").asString();
+		return root;
+    }
+
+	virtual void loadJson(const Json::Value &config) = 0;
 	
 	// Generating a solution
 	virtual void reset_solution(SOL &s) const {
-		std::cerr<<"[-] Not implemented : reset_solution()"<<std::endl;
-		exit(EXIT_FAILURE);
+		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + "[-] Not implemented : reset_solution(SOL &s)");
 	}
 	virtual std::unique_ptr<SOL> new_solution() const {
-		std::cerr<<"[-] Not implemented : new_solution()"<<std::endl;
-		exit(EXIT_FAILURE);
+		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + "[-] Not implemented : new_solution(SOL &s)");
 	}
 
 	// Evaluation of the solution
@@ -45,18 +63,21 @@ public:
 		exit(EXIT_FAILURE);
 	};*/
 	virtual bool filtering(SOL &s) const {
-		std::cerr<<"[-] Not implemented : getFitnessObjectif()"<<std::endl;
-		exit(EXIT_FAILURE);
-		return true;
-	}
-	virtual TYPE_FITNESS getFitnessObjectif() const {
-		std::cerr<<"[-] Not implemented : getFitnessObjectif()"<<std::endl;
-		exit(EXIT_FAILURE);
+		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + "[-] Not implemented : filtering(SOL &s)");
 	}
 
-	virtual TYPE_FITNESS getFitnessObjectif(unsigned int numObjectif) const {
-		std::cerr<<"[-] Not implemented : getFitnessObjectif(unsigned int numObjectif)"<<std::endl;
-		exit(EXIT_FAILURE);
+	/// 
+	/// @brief Give the area of validity of the variables 
+	/// 
+	/// @param index 
+	/// @return std::pair<TYPE_CELL, TYPE_CELL> <upper bound, low bound>
+	///
+	virtual std::pair<TYPE_CELL, TYPE_CELL> domain(unsigned index) const {
+		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + "[-] Not implemented : domain()");
+	}
+
+	virtual TYPE_FITNESS getFitnessObjectif(unsigned int numObjectif = 0) const {
+		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + "[-] Not implemented : getFitnessObjectif(unsigned int numObjectif)");
 	}
 	
 	

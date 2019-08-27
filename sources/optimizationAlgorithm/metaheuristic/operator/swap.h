@@ -12,13 +12,15 @@
 
 #include <cassert>
 #include <algorithm>
+#include <memory>       // std::shared_ptr std::unique_ptr
+
 #include "atomicOperation.h"
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class Swap : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
     public:
-        Swap(std::mt19937 &mt_rand, unsigned int nbSwap): 
-        AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand), 
+        Swap(std::mt19937 &mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem, unsigned int nbSwap): 
+        AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, problem), 
         _nbSwap(nbSwap) {
             N = 1;
             rid = std::make_unique<std::uniform_int_distribution<unsigned int>>(0, N);

@@ -11,14 +11,16 @@
 #define ATOMICOPERATOR_H
 
 #include <random>
+#include <memory>       // std::shared_ptr std::unique_ptr
 
 #include "../../optimizationAlgorithm.h"
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class AtomicOperation  {
     public:
-    AtomicOperation(std::mt19937 &mt_rand) : 
-        _mt_rand(mt_rand) {
+    AtomicOperation(std::mt19937 &mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem) : 
+        _mt_rand(mt_rand),
+        _problem(problem) {
 
     }
 
@@ -39,6 +41,7 @@ class AtomicOperation  {
 
     protected:
         std::mt19937 &_mt_rand;
+        std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> _problem;
 };
 
 #endif

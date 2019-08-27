@@ -14,6 +14,7 @@
 #include <iostream>
 #include <jsoncpp/json/json.h>
 #include <memory>
+#include <utility>
 #include <unistd.h>
 
 #include "../solution/solutionArray.h"
@@ -37,9 +38,9 @@ class Objectif {
         parser_t parser;
         value = std::make_unique<double[]>(variables.size());
         valueSize = variables.size();
-            for(unsigned int j = 0; j < valueSize; j++) {
-                symbol_table.add_variable(variables[j].asString(), value[j]);
-            }
+        for(unsigned int j = 0; j < valueSize; j++) {
+            symbol_table.add_variable(variables[j].asString(), value[j]);
+        }
         symbol_table.add_constants();
 
         expression.register_symbol_table(symbol_table);
@@ -69,34 +70,37 @@ class Objectif {
 
 class GenericProblem : public Problem<SOL_GENERICPROBLEM, TYPE_FITNESS_GENERICPROBLEM, TYPE_CELL_GENERICPROBLEM> {
   public:
-    GenericProblem() {}
+    GenericProblem() : _domain(nullptr) {
+    }
 
-    GenericProblem(std::string fileInstance) {
-        loadInstance(fileInstance);
+    GenericProblem(std::string fileInstance) : _domain(nullptr) {
+        Json::Value config = loadInstance(fileInstance); 
+        loadJson(config);
     }
 
     ~GenericProblem() {}
 
-    void loadInstance(const std::string& file) {
-        Json::Value root; // will contains the root value after parsing.
-        Json::Reader reader;
-        std::ifstream test(file, std::ifstream::binary);
-        bool parsingSuccessful = reader.parse(test, root, false);
+    void loadJson(const Json::Value &config) {
+        numInstance = config["problem"]["numInstance"].asString();
 
-        if(!parsingSuccessful)
-            throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " + reader.getFormattedErrorMessages());
-
-        std::string encoding = root.get("encoding", "UTF-8").asString();
-        numInstance = root["problem"]["numInstance"].asString();
-
-        for(unsigned int i = 0; i < root["problem"]["objectif"].size(); i++) {
-            objectif.push_back(Objectif(root["problem"]["objectif"][i]["function"].asString(),
-                                        root["problem"]["objectif"][i]["variables"]));
+        for(unsigned int i = 0; i < config["problem"]["objectif"].size(); i++) {
+            objectif.push_back(Objectif(config["problem"]["objectif"][i]["function"].asString(),
+                                        config["problem"]["objectif"][i]["variables"]));
         }
 
+        // Définition du nombre de varaibles
         nomberOfVariable = 0;
         for(unsigned int i = 0 ; i < objectif.size() ; i++) {
             nomberOfVariable += objectif[i].getValueSize();
+        }
+
+        // Définie pour chaque variables son domaine
+        _domain = std::make_unique<std::pair<TYPE_CELL_GENERICPROBLEM, TYPE_CELL_GENERICPROBLEM> []>(nomberOfVariable);
+        for(unsigned int i = 0; i < config["problem"]["objectif"].size(); i++) {
+            unsigned int domainSize = config["problem"]["objectif"][i]["domain"].size();
+            for(unsigned int j = 0; j < domainSize; j++) {
+                _domain[j] = std::pair<TYPE_CELL_GENERICPROBLEM, TYPE_CELL_GENERICPROBLEM>(config["problem"]["objectif"][i]["domain"][j][0].asDouble(),config["problem"]["objectif"][i]["domain"][j][1].asDouble());
+            }
         }
     }
 
@@ -115,16 +119,19 @@ class GenericProblem : public Problem<SOL_GENERICPROBLEM, TYPE_FITNESS_GENERICPR
         }
     }
 
-    /*void incremental(const SolutionArray &s, unsigned int mutatedCell) const {
+	std::pair<TYPE_CELL_GENERICPROBLEM, TYPE_CELL_GENERICPROBLEM> domain(unsigned index) const {
+        assert(index < nomberOfVariable); 
 
-    }*/
-
-    void reset_solution(SOL_GENERICPROBLEM& s) const {}
+        if (_domain == nullptr)
+		    throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + "[-] Not implemented : domain()");
+        return _domain[index];
+	}
 
   private:
     std::string numInstance;
     std::vector<Objectif> objectif; // ! variable modifier par full_eval
     unsigned int nomberOfVariable;
+    std::unique_ptr<std::pair<TYPE_CELL_GENERICPROBLEM, TYPE_CELL_GENERICPROBLEM> []> _domain;
 };
 
 #endif

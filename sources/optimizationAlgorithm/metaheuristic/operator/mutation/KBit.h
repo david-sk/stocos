@@ -13,6 +13,7 @@
 #include <algorithm>    // std::find
 #include <vector>       // std::vector
 #include <random>
+#include <memory>       // std::shared_ptr std::unique_ptr
 #include "../../../../solution/solutionArray.h"
 
 #include "../atomicOperation.h"
@@ -22,8 +23,8 @@
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class KBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
     public:
-    KBit(std::mt19937 &mt_rand, unsigned int k) :
-    AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand),
+    KBit(std::mt19937 &mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem, unsigned int k) :
+    AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, problem),
     _k(k) {
         N = 1;
         rid = std::make_unique<std::uniform_int_distribution<unsigned int>>(0, 1);

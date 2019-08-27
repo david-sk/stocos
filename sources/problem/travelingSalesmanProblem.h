@@ -27,6 +27,11 @@ class TravelingSalesmanProblem : public Problem<SOL_STP, TYPE_FITNESS_STP, TYPE_
    public:
     TravelingSalesmanProblem() {}
 
+    TravelingSalesmanProblem(const std::string &fileInstance) { 
+        Json::Value config = loadInstance(fileInstance); 
+        loadJson(config);
+    }
+
     virtual ~TravelingSalesmanProblem() {}
 
     std::unique_ptr<SOL_STP> new_solution() const {
@@ -37,20 +42,12 @@ class TravelingSalesmanProblem : public Problem<SOL_STP, TYPE_FITNESS_STP, TYPE_
         return std::move(s);
     }
 
-    virtual void loadInstance(const std::string &file) {
-        Json::Value root;  // will contains the root value after parsing.
-        Json::Reader reader;
-        std::ifstream test(file, std::ifstream::binary);
-        bool parsingSuccessful = reader.parse(test, root, false);
-
-        if (!parsingSuccessful) throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " +reader.getFormattedErrorMessages());
-
-        std::string encoding = root.get("encoding", "UTF-8").asString();
-        numInstance = root["problem"]["numInstance"].asString();
-        numberOfNodes = root["problem"]["numberOfNodes"].asUInt();
-        for (unsigned int i = 0 ; i < root["problem"]["nodes"].size() ; i++) {
-            double x = root["problem"]["nodes"][i]["x"].asDouble();
-            double y = root["problem"]["nodes"][i]["y"].asDouble();
+    void loadJson(const Json::Value &config) {
+        numInstance = config["problem"]["numInstance"].asString();
+        numberOfNodes = config["problem"]["numberOfNodes"].asUInt();
+        for (unsigned int i = 0 ; i < config["problem"]["nodes"].size() ; i++) {
+            double x = config["problem"]["nodes"][i]["x"].asDouble();
+            double y = config["problem"]["nodes"][i]["y"].asDouble();
             nodes.push_back(std::pair<double, double>(x, y));
         }
     }

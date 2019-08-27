@@ -28,8 +28,9 @@ using TYPE_CELL_QAP = unsigned int;
 using SOL_QAP = SolutionArray<TYPE_FITNESS_QAP, TYPE_CELL_QAP>;
 class QAP : public Problem<SOL_QAP, TYPE_FITNESS_QAP, TYPE_CELL_QAP> {
 public:
-    QAP(std::string pathfile_instance) {
-        loadInstance(pathfile_instance);
+    QAP(std::string fileInstance) {
+        Json::Value config = loadInstance(fileInstance); 
+        loadJson(config);
     }
 
     QAP(unsigned int _n, unsigned int **_A, unsigned int **_B) :
@@ -61,7 +62,7 @@ public:
         delete[] B;
     }
 
-    void loadInstance(const std::string &file) {
+    /*void loadInstance(const std::string &file) {
         std::fstream myfile(file, std::ios_base::in);
 
         unsigned int a;
@@ -98,6 +99,8 @@ public:
             } else
                 j++;
         }
+    }*/
+    void loadJson(const Json::Value &config) {
     }
 
     void full_eval(SOL_QAP &p) {

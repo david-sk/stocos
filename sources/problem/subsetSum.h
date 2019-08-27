@@ -34,8 +34,9 @@ class Subsetsum : public Problem<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CEL
         generateInstance(N);
     }
 
-    Subsetsum(const std::string &pathfile_instance) {
-        loadInstance(pathfile_instance);
+    Subsetsum(const std::string &fileInstance) {
+        Json::Value config = loadInstance(fileInstance); 
+        loadJson(config);
     }
 
     void generateInstance(const unsigned int N) {
@@ -51,28 +52,16 @@ class Subsetsum : public Problem<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CEL
 
     }
 
-    void loadInstance(const std::string &file) {
-        Json::Value root;  // will contains the root value after parsing.
-        Json::Reader reader;
-        std::ifstream test(file, std::ifstream::binary);
-        bool parsingSuccessful = reader.parse(test, root, false);
+    void loadJson(const Json::Value &config) {
+        std::string encoding = config.get("encoding", "UTF-8").asString();
 
-        if (!parsingSuccessful)
-            throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " +reader.getFormattedErrorMessages());
-
-        std::string encoding = root.get("encoding", "UTF-8").asString();
-
-        fitnessObjectif = root["problem"]["fitnessObjectif"].asUInt();
-        for (unsigned int i = 0; i < root["problem"]["set"].size() ; i++) {
-            setOfNumbers.push_back(root["problem"]["set"][i].asUInt());
+        fitnessObjectif = config["problem"]["fitnessObjectif"].asUInt();
+        for (unsigned int i = 0; i < config["problem"]["set"].size() ; i++) {
+            setOfNumbers.push_back(config["problem"]["set"][i].asUInt());
         }
     }
 
-    TYPE_FITNESS_SUBSETSUM getFitnessObjectif() const {
-        return fitnessObjectif;
-    }
-
-	TYPE_FITNESS_SUBSETSUM getFitnessObjectif(unsigned int numObjectif) const {
+	TYPE_FITNESS_SUBSETSUM getFitnessObjectif(unsigned int numObjectif = 0) const {
 		assert(numObjectif = 0);
 		return fitnessObjectif;
 	}

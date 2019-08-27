@@ -39,7 +39,7 @@
 #include "problem/unitTest_jobShopProblem.h"
 #include "problem/unitTest_knapsack.h"
 #include "problem/unitTest_magicSequence.h"
-#include "problem/unitTest_OneMax.h"
+#include "problem/unitTest_oneMax.h"
 #include "problem/unitTest_QAP.h"
 #include "problem/unitTest_travelingSalesmanProblem.h"
 // #include "problem/unitTest_genericProblem.h"
