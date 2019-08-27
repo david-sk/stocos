@@ -36,6 +36,7 @@ class OptimizationAlgorithm {
         }
         virtual std::unique_ptr<SOL> operator()(const SOL &s) = 0;
         virtual std::string className() const = 0;
+        virtual void className(const std::string &class_name) = 0;
 
     protected:
         std::mt19937 &_mt_rand;

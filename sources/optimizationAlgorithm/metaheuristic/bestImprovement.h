@@ -82,12 +82,21 @@ class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CEL
 
 
     std::string className() const {
-        return "BestImprovement";
+        if (_class_name.empty())
+            return "BestImprovement";
+        else 
+            return _class_name;
     }
+
+    void className(const std::string &class_name) {
+        _class_name = class_name;
+    }
+
     protected:
     SOL solution_star;
     std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, SOL>> _atomicOperations;
     std::unique_ptr<Selection<SOL>> _selection;
+    std::string _class_name;
 };
 
 #endif

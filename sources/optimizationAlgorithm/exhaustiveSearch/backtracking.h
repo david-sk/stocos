@@ -10,6 +10,7 @@
 #define BACKTRACKING_H
 
 #include <iostream>
+#include <string>
 
 #include "../../solution/solutionArray.h"
 #include "../optimizationAlgorithm.h"
@@ -67,17 +68,27 @@ class Backtraking : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
 
 
     std::string className() const {
-        return "Backtraking";
+        if (_class_name.empty())
+            return "Backtraking";
+        else 
+            return _class_name;
     }
-    
+
+    void className(const std::string &class_name) {
+        _class_name = class_name;
+    }
+
    private:
     const unsigned int _nbDigit;
     const unsigned int _len_string;
+    
 
     unsigned int nbCall;
     std::unique_ptr<unsigned int[]> _string;
 
     const std::vector<unsigned int> _bijection;
+
+    std::string _class_name;
 };
 
 #endif

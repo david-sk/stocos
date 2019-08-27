@@ -35,6 +35,7 @@ class IteratedLocalSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE
     _exploitation(std::move(exploitation)),
     _selection(std::move(selection)) {
         BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Creation IteratedLocalSearch";
+        _exploitation->className("ILS>"+_exploitation->className());
     }
 
     ~IteratedLocalSearch() {
@@ -48,7 +49,7 @@ class IteratedLocalSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE
         
         while (this->_stoppingCriteria->operator()(solution_star)) {
             
-            this->_statistic->operator()(solution_star);
+            this->_statistic->operator()(solution_star, className());
 
             solution_beta = solution_star;
             
@@ -61,15 +62,24 @@ class IteratedLocalSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE
             }
         }
         
-        this->_statistic->operator()(solution_star);
+        this->_statistic->operator()(solution_star, className());
 
         return std::move(std::make_unique<SOL>(solution_star));
     }
 
     std::string className() const {
-        return "IteratedLocalSearch";
+        if (_class_name.empty())
+            return "IteratedLocalSearch";
+        else 
+            return _class_name;
     }
+
+    void className(const std::string &class_name) {
+        _class_name = class_name;
+    }
+    
     protected:
+        std::string _class_name;
         std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _exploration;
         std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> _exploitation;
         std::unique_ptr<Selection<SOL>> _selection;

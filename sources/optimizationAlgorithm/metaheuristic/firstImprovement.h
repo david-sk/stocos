@@ -45,7 +45,7 @@ class FirstImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CE
         }
         
         while (this->_stoppingCriteria->operator()(solution_star)) {
-            this->_statistic->operator()(solution_star);
+            this->_statistic->operator()(solution_star, className());
             
             solution_beta = solution_star;
             
@@ -56,17 +56,25 @@ class FirstImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CE
             }
         }
         
-        this->_statistic->operator()(solution_star);
+        this->_statistic->operator()(solution_star, className());
         return std::move(std::make_unique<SOL>(solution_star));
     }
 
+
     std::string className() const {
-        return "FirstImprovement";
+        if (_class_name.empty())
+            return "FirstImprovement";
+        else 
+            return _class_name;
     }
 
+    void className(const std::string &class_name) {
+        _class_name = class_name;
+    }
     protected:
         std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _atomicOperations;
         std::unique_ptr<Selection<SOL>> _selection;
+        std::string _class_name;
         SOL solution_star;
         SOL solution_beta;
 };

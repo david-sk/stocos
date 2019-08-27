@@ -12,6 +12,7 @@
 #include "../statistic/sensorStopwatch.h"
 #include "../statistic/sensorFinal.h"
 #include "../statistic/sensorExperience.h"
+#include "../statistic/sensorNameCallingClass.h"
 #include "../stoppingCriteria/stoppingCriteria.h"
 #include "../stoppingCriteria/criteriaBudget.h"
 #include "../stoppingCriteria/criteriaFitnessObjectif.h"
@@ -94,6 +95,11 @@ class AlgoBuilder {
             if (!configuration["sensorStopwatch"].empty()) {
                 if (configuration["sensorStopwatch"] == true) {
                     __statistic->addSensor(new SensorStopwatch<SOL>);
+                }
+            }
+            if (!configuration["sensorNameCallingClass"].empty()) {
+                if (configuration["sensorNameCallingClass"] == true) {
+                    __statistic->addSensor(new SensorNameCallingClass<SOL>);
                 }
             }
             if (!configuration["sensorFinal"].empty()) {

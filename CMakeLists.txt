@@ -122,6 +122,13 @@ target_link_libraries(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} LINK_PUBLIC $
 enable_testing()
 add_test(NAME "tests-unitaires" COMMAND ./build/stocos-unittest-Release WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 
+## Detection du programme python3.7
+FIND_PROGRAM(PYTHON3.7_EXECUTABLE python3.7)
+if (NOT PYTHON3.7_EXECUTABLE)
+    packageManager("python3.7")
+    FIND_PROGRAM(PYTHON3.7_EXECUTABLE python3.7)
+endif(NOT PYTHON3.7_EXECUTABLE)
+
 set(LIST_OF_FILES 
 oneMax-FirstImprovement-FlipBit
 oneMax-OnePlusLambda-FlipBit
@@ -136,14 +143,5 @@ genericProblem-wolfeFunction-3d-FirstImprovement-FlipBit
 # oneMax-BestImprovement-Neighborhood
 )
 foreach(FILE  ${LIST_OF_FILES})
-    add_test(NAME ${FILE} COMMAND /usr/bin/python3.7 ./tests-solver/${FILE}.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+    add_test(NAME ${FILE} COMMAND ${PYTHON3.7_EXECUTABLE} ./tests-solver/${FILE}.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 endforeach()
-
-
-
-
-##############
-# find_package(GIT git)
-# if (NOT GIT_FOUND)
-#     packageManager("git")
-# endif(NOT GIT_FOUND)

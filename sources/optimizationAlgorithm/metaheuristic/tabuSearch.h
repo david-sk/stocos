@@ -43,7 +43,7 @@ class TabuSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
         }
 
         while (this->_stoppingCriteria->operator()(solution_star)) {
-            this->_statistic->operator()(solution_star);
+            this->_statistic->operator()(solution_star, className());
 
             solution_beta = solution_star;
             _atomicOperations->operator()(solution_beta);
@@ -65,19 +65,27 @@ class TabuSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
             }
             tabuList.push_back(solution_beta);
         }
-        this->_statistic->operator()(solution_star);
+        this->_statistic->operator()(solution_star, className());
         
         return std::move(std::make_unique<SOL>(solution_star));
     }
 
 
     std::string className() const {
-        return "TabuSearch";
+        if (_class_name.empty())
+            return "TabuSearch";
+        else 
+            return _class_name;
+    }
+
+    void className(const std::string &class_name) {
+        _class_name = class_name;
     }
 
     protected:
     std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _atomicOperations;
     std::unique_ptr<Selection<SOL>> _selection;
+    std::string _class_name;
 
     SOL solution_star;
     SOL solution_beta;

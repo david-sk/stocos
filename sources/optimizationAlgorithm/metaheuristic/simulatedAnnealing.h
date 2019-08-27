@@ -39,13 +39,22 @@ class SimulatedAnnealing : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_
     }
 
 
+
     std::string className() const {
-        return "SimulatedAnnealing";
+        if (_class_name.empty())
+            return "SimulatedAnnealing";
+        else 
+            return _class_name;
+    }
+
+    void className(const std::string &class_name) {
+        _class_name = class_name;
     }
 
     protected:
     std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _atomicOperations;
     std::unique_ptr<Selection<SOL>> _selection;
+    std::string _class_name;
 
     SOL solution_star;
 };

@@ -71,7 +71,7 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
         
         // 
         while (this->_stoppingCriteria->operator()(solution_star)) {
-            this->_statistic->operator()(solution_star);
+            this->_statistic->operator()(solution_star, className());
             
             // selection de deux parents aléatoire et différent pour construire la population enfants
             for (auto it=offsprings.begin(); it != offsprings.end(); ++it) {
@@ -107,20 +107,27 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
             }
         }
         
-        this->_statistic->operator()(solution_star);
+        this->_statistic->operator()(solution_star,  className());
         
         return std::move(std::make_unique<SOL>(solution_star));
     }
 
 
     std::string className() const {
-        return "EvolutionaryAlgorithm";
+        if (_class_name.empty())
+            return "EvolutionaryAlgorithm";
+        else 
+            return _class_name;
     }
-    
+
+    void className(const std::string &class_name) {
+        _class_name = class_name;
+    }
     protected:
         std::unique_ptr<std::uniform_int_distribution<unsigned int>> rid;
         std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _atomicOperations;
         std::unique_ptr<Selection<SOL>> _selection;
+        std::string _class_name;
         SOL solution_star;
         Population<SOL> parents;
         Population<SOL> offsprings;
