@@ -27,7 +27,19 @@ class Maximization : public SolutionSelection<SOL> {
         assert(s1.fitnessIsValid(numObjectif));
         assert(s2.fitnessIsValid(numObjectif));
 
-        return s2.getFitness(numObjectif) < s1.getFitness(numObjectif);
+        unsigned int count = 0;
+        unsigned int count_equal = 0;
+        for (unsigned int i = 0 ; i < s1.numberOfObjective() ; i++) {
+            if (s2.getFitness(i) < s1.getFitness(i))
+                count++;
+            else if (s2.getFitness(i) == s1.getFitness(i)) {
+                count++;
+                count_equal++;
+            }
+                
+        }
+        
+        return count == s1.numberOfObjective() && count_equal != s1.numberOfObjective();
     }
 
 

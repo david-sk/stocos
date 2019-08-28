@@ -28,7 +28,8 @@ class IntervalReal : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
     _b(b) {
         urd_0_1 = std::make_unique<std::uniform_real_distribution<>>(0, 1);
         urd = std::make_unique<std::uniform_real_distribution<>>(a, b);
-
+        mutation_rate = 0.5;
+        N = 0;
         
         
     }

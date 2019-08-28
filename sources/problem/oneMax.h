@@ -30,7 +30,7 @@ class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>
     OneMax() : _N(1) {
     }
 
-    OneMax(std::string &fileInstance) { 
+    OneMax(const std::string &fileInstance) { 
         Json::Value config = loadInstance(fileInstance); 
         loadJson(config);
     }

@@ -35,7 +35,7 @@ class Objectif {
     typedef exprtk::parser<double> parser_t;
 
   public:
-    Objectif(std::string function, const Json::Value& variables) {
+    Objectif(const std::string &function, const Json::Value& variables) {
         parser_t parser;
         value = std::make_unique<double[]>(variables.size());
         valueSize = variables.size();

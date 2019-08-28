@@ -45,7 +45,6 @@ class IteratedLocalSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE
         }
         
         while (this->_stoppingCriteria->operator()(solution_star)) {
-            
             this->_statistic->operator()(solution_star, className());
 
             solution_beta = solution_star;
@@ -53,9 +52,9 @@ class IteratedLocalSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE
             _exploration->operator()(solution_beta);
             std::unique_ptr<SOL> solution_beta_beta = _exploitation->operator()(solution_beta);
 
-            this->_problem->full_eval(solution_beta);
+            this->_problem->full_eval(*solution_beta_beta);
             if (this->_problem->solutionSelection(*solution_beta_beta, solution_star)) {
-                solution_star = solution_beta;
+                solution_star = *solution_beta_beta;
             }
         }
         

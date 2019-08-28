@@ -31,7 +31,7 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
         
     }
     
-    Knapsack(std::string fileInstance) {
+    Knapsack(const std::string &fileInstance) {
         Json::Value config = loadInstance(fileInstance); 
         loadJson(config);
     }

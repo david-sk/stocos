@@ -44,7 +44,7 @@ class Statistic {
     /// 
     /// @param namefile name of the output file
     ///
-    Statistic(std::string namefile) : _namefile(namefile) {
+    Statistic(const std::string &namefile) : _namefile(namefile) {
         recording = FILE;
         _none = false;
         outFile.open(_namefile);
@@ -53,7 +53,7 @@ class Statistic {
         builder["indentation"] = "";
     }
 
-    Statistic(std::string mongo_hostname, std::string mongo_database, std::string mongo_collection, std::string mongo_username = "", std::string mongo_pwd = "") :
+    Statistic(const std::string &mongo_hostname, const std::string &mongo_database, const std::string &mongo_collection, const std::string &mongo_username = "", const std::string & mongo_pwd = "") :
         _mongo_hostname(mongo_hostname),
         _mongo_database(mongo_database),
         _mongo_collection(mongo_collection),
