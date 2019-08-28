@@ -34,7 +34,7 @@ class SolverGeneric : public Solver {
 				BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" CREATE SolverGeneric";
 
 				if (!configuration["seed"].empty())
-					mt_rand.seed(configuration["seed"].isInt());
+					mt_rand.seed(configuration["seed"].asInt());
 				else
 					mt_rand.seed(static_cast<std::mt19937::result_type>(time(0)));
 

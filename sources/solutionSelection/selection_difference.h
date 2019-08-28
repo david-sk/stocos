@@ -13,7 +13,7 @@
 #include<cmath>
 
 template<class SOL>
-class Selection_difference : public Selection<SOL> {
+class Selection_difference : public SolutionSelection<SOL> {
     public:
     Selection_difference(const double fitnessObjectif) : 
         _fitnessObjectif(fitnessObjectif) {
@@ -24,18 +24,15 @@ class Selection_difference : public Selection<SOL> {
 
     }
 
-    bool operator()(const SOL &s1, const SOL &s2) {
-        assert(s1.fitnessIsValid());
-        assert(s2.fitnessIsValid());
-        return abs(_fitnessObjectif - s1.getFitness()) < abs(_fitnessObjectif - s2.getFitness());
-    }
-    
-    bool operator()(const SOL &s1, const SOL &s2, const unsigned int numObjectif) {
+    inline bool operator()(const SOL &s1, const SOL &s2, const unsigned int numObjectif = 0) const {
         assert(s1.fitnessIsValid(numObjectif));
         assert(s2.fitnessIsValid(numObjectif));
         return abs(_fitnessObjectif - s1.getFitness(numObjectif)) < abs(_fitnessObjectif - s2.getFitness(numObjectif));
     }
 
+    inline unsigned int operator()(const Population<SOL> &p) const {
+        return 0;
+    }
     
     private:
     const double _fitnessObjectif;

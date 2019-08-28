@@ -42,7 +42,7 @@
 #include "problem/unitTest_oneMax.h"
 #include "problem/unitTest_QAP.h"
 #include "problem/unitTest_travelingSalesmanProblem.h"
-// #include "problem/unitTest_genericProblem.h"
+#include "problem/unitTest_continuousProblem.h"
 #include "problem/unitTest_subsetsum.h"
 
 
@@ -70,7 +70,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_OneMax);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_knapsack);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_magicSequence);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_QAP);
-// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_GenericProblem);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_ContinuousProblem);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_jobShopProblem);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_subsetsum);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_travelingSalesmanProblem);

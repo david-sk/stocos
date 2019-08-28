@@ -17,6 +17,8 @@
 #include <unistd.h>
 
 #include "../solution/solutionArray.h"
+#include "../solutionSelection/solutionSelection.h"
+#include "../solutionSelection/maximization.h"
 
 #include "problem.h"
 
@@ -25,7 +27,8 @@ using TYPE_CELL_ONEMAX = bool;
 using SOL_ONEMAX = SolutionArray<TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>;
 class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX> {
    public:
-    OneMax() : _N(1) {}
+    OneMax() : _N(1) {
+    }
 
     OneMax(std::string &fileInstance) { 
         Json::Value config = loadInstance(fileInstance); 
@@ -47,6 +50,13 @@ class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>
             s->operator()(i, 0);
         }
         return std::move(s);
+    }
+
+    bool check_solution(const SOL_ONEMAX &s) const {
+        if (s.sizeArray() != _N || s.numberOfObjective() != 1) {
+            return false;
+        }
+        return true;
     }
 
     void full_eval(SOL_ONEMAX &s) {
@@ -72,7 +82,17 @@ class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>
         return _N;
     }
 
+
+	virtual bool solutionSelection(const SOL_ONEMAX &s_worst, const SOL_ONEMAX &s_best) {
+        return solution_selection(s_worst, s_best);
+	}
+
+	virtual unsigned int solutionSelection(const Population<SOL_ONEMAX> &p) {
+        return solution_selection(p);
+	}
+
    private:
+    Maximization<SOL_ONEMAX> solution_selection;
     std::string numInstance;
     unsigned int _N;
 };

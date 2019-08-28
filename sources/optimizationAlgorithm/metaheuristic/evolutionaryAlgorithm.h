@@ -17,7 +17,6 @@
 #include "operator/atomicOperation.h"
 #include "../optimizationAlgorithm.h"
 #include "../../problem/problem.h"
-#include "selection/selection.h"
 
 
 
@@ -29,12 +28,10 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
     std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
     std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
     std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations,
-    std::unique_ptr<Selection<SOL>> selection,
     unsigned int mu = 50,
     unsigned int lambda = 50) : 
     OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic), move(stoppingCriteria), problem),
     _atomicOperations(move(atomicOperations)),
-    _selection(move(selection)),
     _mu(mu),
     _lambda(lambda) {
         BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Creation EvolutionaryAlgorithm";
@@ -81,7 +78,7 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
                 while (e1 == e2) 
                     e2 = rid->operator()(this->_mt_rand);
                 
-                if (_selection->operator()(parents[e1], parents[e2]))
+                if (this->_problem->solutionSelection(parents[e1], parents[e2]))
                     *it = parents[e1];
                 else 
                     *it = parents[e2];
@@ -102,7 +99,7 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
             
             // Find best
             for (SOL &p : parents) {
-                if (_selection->operator()(p, solution_star))
+                if (this->_problem->solutionSelection(p, solution_star))
                     solution_star = p;
             }
         }
@@ -126,7 +123,6 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
     protected:
         std::unique_ptr<std::uniform_int_distribution<unsigned int>> rid;
         std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _atomicOperations;
-        std::unique_ptr<Selection<SOL>> _selection;
         std::string _class_name;
         SOL solution_star;
         Population<SOL> parents;

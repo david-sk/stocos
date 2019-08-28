@@ -27,10 +27,6 @@
 #include "../optimizationAlgorithm/metaheuristic/operator/mutation/flipBit.h"
 #include "../optimizationAlgorithm/metaheuristic/operator/mutation/neighborhood.h"
 #include "../optimizationAlgorithm/metaheuristic/operator/mutation/intervalReal.h"
-#include "../optimizationAlgorithm/metaheuristic/selection/selection.h"
-#include "../optimizationAlgorithm/metaheuristic/selection/selection_maximization.h"
-#include "../optimizationAlgorithm/metaheuristic/selection/selection_minimization.h"
-#include "../optimizationAlgorithm/metaheuristic/selection/selection_difference.h"
 
 
 template<typename SOL, typename TYPE_FITNESS,typename TYPE_CELL>
@@ -50,25 +46,24 @@ class AlgoBuilder {
             std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> optimizationAlgorithm = nullptr;
             std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _atomicOperation = atomicOperation(configuration["AtomicOperation"]);
             std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> _stoppingCriteria = stoppingCriteria(configuration["StoppingCriteria"]);
-            std::unique_ptr<Selection<SOL>> _selection = selection(configuration["Selection"]);
             
             if (configuration["className"] == "FirstImprovement") {
-                optimizationAlgorithm = std::make_unique<FirstImprovement<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation), std::move(_selection));
+                optimizationAlgorithm = std::make_unique<FirstImprovement<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation));
             } else if (configuration["className"] == "BestImprovement") {
                 // optimizationAlgorithm = std::make_unique<BestImprovement<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, *_statistic, *_stoppingCriteria, _problem, *_atomicOperation, *_selection);
             } else if (configuration["className"] == "OnePlusLambda") {
-                optimizationAlgorithm = std::make_unique<OnePlusLambda<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation), std::move(_selection), configuration["lambda"].asUInt());
+                optimizationAlgorithm = std::make_unique<OnePlusLambda<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation), configuration["lambda"].asUInt());
             } else if (configuration["className"] == "IteratedLocalSearch") {
                 std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> _optimizationAlgorithm_ils = this->operator()(configuration["OptimizationAlgorithm"]);
-                optimizationAlgorithm = std::make_unique<IteratedLocalSearch<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation), std::move(_optimizationAlgorithm_ils), std::move(_selection));
+                optimizationAlgorithm = std::make_unique<IteratedLocalSearch<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation), std::move(_optimizationAlgorithm_ils));
             } else if (configuration["className"] == "TabuSearch") {
-                optimizationAlgorithm = std::make_unique<TabuSearch<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation), std::move(_selection));
+                optimizationAlgorithm = std::make_unique<TabuSearch<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation));
             } else if (configuration["className"] == "EvolutionaryAlgorithm") {
-                optimizationAlgorithm = std::make_unique<EvolutionaryAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation), std::move(_selection), configuration["mu"].asUInt(), configuration["lambda"].asUInt());
+                optimizationAlgorithm = std::make_unique<EvolutionaryAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation), configuration["mu"].asUInt(), configuration["lambda"].asUInt());
             } else if (configuration["className"] == "OnePlusLambda") {
-                optimizationAlgorithm = std::make_unique<OnePlusLambda<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation), std::move(_selection), configuration["lambda"].asInt());
+                optimizationAlgorithm = std::make_unique<OnePlusLambda<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation), configuration["lambda"].asInt());
             } else if (configuration["className"] == "SimulatedAnnealing") {
-                optimizationAlgorithm = std::make_unique<SimulatedAnnealing<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation), std::move(_selection));
+                optimizationAlgorithm = std::make_unique<SimulatedAnnealing<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation));
             } else {
                 throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " The algorithm "+ configuration["className"].asString() +" does not exist.");
             }
@@ -150,22 +145,6 @@ class AlgoBuilder {
             }
             return nullptr;
         }
-
-        std::unique_ptr<Selection<SOL>> selection(const Json::Value &configuration) {
-            std::unique_ptr<Selection<SOL>> _selection = nullptr;
-
-            if (configuration.asString() == "max") {
-                _selection = std::make_unique<Selection_maximization<SOL>>();
-            } else if (configuration.asString() == "min") {
-                _selection = std::make_unique<Selection_minimization<SOL>>();
-            } else if (configuration.asString() == "diff") { 
-                _selection = std::make_unique<Selection_difference<SOL>>(_problem->getFitnessObjectif());
-            } else {
-                _selection = std::make_unique<Selection_difference<SOL>>(_problem->getFitnessObjectif());
-            }
-            return std::move(_selection);
-        }
-
 
     private:
         std::mt19937 &_mt_rand;

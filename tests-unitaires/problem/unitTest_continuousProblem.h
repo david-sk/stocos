@@ -7,17 +7,17 @@
 /// @brief 
 ///
 
-#ifndef UNITTEST_GENERICPROBLEM_H
-#define UNITTEST_GENERICPROBLEM_H
+#ifndef UNITTEST_CONTINUOUSPROBLEM_H
+#define UNITTEST_CONTINUOUSPROBLEM_H
 
 #include "solution/solutionArray.h"
 
-#include "problem/genericProblem.h"
+#include "problem/continuousProblem.h"
 
 using namespace CppUnit;
 
-class UnitTest_GenericProblem : public CppUnit::TestFixture {
-    CPPUNIT_TEST_SUITE(UnitTest_GenericProblem);
+class UnitTest_ContinuousProblem: public CppUnit::TestFixture {
+    CPPUNIT_TEST_SUITE(UnitTest_ContinuousProblem);
     CPPUNIT_TEST(full_eval);
     CPPUNIT_TEST(loadInstance);
     CPPUNIT_TEST_SUITE_END();
@@ -33,8 +33,8 @@ class UnitTest_GenericProblem : public CppUnit::TestFixture {
     }
 
     void loadInstance(void) {
-        GenericProblem gProblem("instances/GenericProblem/test.json");
-        std::unique_ptr<SOL_GENERICPROBLEM> s = gProblem.new_solution();
+        ContinuousProblem gProblem("instances/ContinuousProblem/test.json");
+        std::unique_ptr<SOL_CONTINUOUSPROBLEM> s = gProblem.new_solution();
         for (unsigned int i = 0 ; i < s->sizeArray() ; i++) {
             s->operator()(i, i + (7 * i) + 1);
         }

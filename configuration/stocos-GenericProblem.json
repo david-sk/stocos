@@ -1,7 +1,7 @@
 {
     "seed": 0,
     "problem": {
-        "name": "GenericProblem",
+        "name": "ContinuousProblem",
         "instance": "instances/ContinuousProblem/brent-function.json"
     },
     "parameter_id": 1,
@@ -16,8 +16,7 @@
                 "c": 2,
                 "a": -1,
                 "b": 1
-            },
-            "Selection": "min"
+            }
         },
         "1": {
             "className":"IteratedLocalSearch",
@@ -41,10 +40,8 @@
                     "c": 2,
                     "a": -1,
                     "b": 1
-                },
-                "Selection": "min"
-            },
-            "Selection": "min"
+                }
+            }
         }
     },
     "Statistic": {

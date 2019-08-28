@@ -1,5 +1,5 @@
 ///
-/// @file genericProblem.h
+/// @file continuousProblem.h
 /// @author Jxtopher
 /// @version 1
 /// @copyright CC-BY-NC-SA
@@ -7,8 +7,8 @@
 /// @brief
 ///
 
-#ifndef GENERICPROBLEM_H
-#define GENERICPROBLEM_H
+#ifndef CONTINUOUSPROBLEM_H
+#define CONTINUOUSPROBLEM_H
 
 #include <fstream>
 #include <iostream>
@@ -19,14 +19,13 @@
 
 #include "../solution/solutionArray.h"
 
-#include "exprtk/exprtk.h"
+#include "exprtk/exprtk.hpp"
 #include "problem.h"
 
 
-
-using TYPE_FITNESS_GENERICPROBLEM = double;
-using TYPE_CELL_GENERICPROBLEM = double;
-using SOL_GENERICPROBLEM = SolutionArray<TYPE_FITNESS_GENERICPROBLEM, TYPE_CELL_GENERICPROBLEM>;
+using TYPE_FITNESS_CONTINUOUSPROBLEM = double;
+using TYPE_CELL_CONTINUOUSPROBLEM = double;
+using SOL_CONTINUOUSPROBLEM = SolutionArray<TYPE_FITNESS_CONTINUOUSPROBLEM, TYPE_CELL_CONTINUOUSPROBLEM>;
 
 class Objectif {
     typedef exprtk::symbol_table<double> symbol_table_t;
@@ -47,7 +46,7 @@ class Objectif {
         parser.compile(function, expression);
     }
 
-    void setValue(SOL_GENERICPROBLEM& s, unsigned int offset) {
+    void setValue(SOL_CONTINUOUSPROBLEM& s, unsigned int offset) {
             for(unsigned int i = 0 ; i < valueSize ; i++)
                 value[i] = s(i + offset);
     }
@@ -68,17 +67,17 @@ class Objectif {
     symbol_table_t symbol_table;
 };
 
-class GenericProblem : public Problem<SOL_GENERICPROBLEM, TYPE_FITNESS_GENERICPROBLEM, TYPE_CELL_GENERICPROBLEM> {
+class ContinuousProblem : public Problem<SOL_CONTINUOUSPROBLEM, TYPE_FITNESS_CONTINUOUSPROBLEM, TYPE_CELL_CONTINUOUSPROBLEM> {
   public:
-    GenericProblem() : _domain(nullptr) {
+    ContinuousProblem() : _domain(nullptr) {
     }
 
-    GenericProblem(std::string fileInstance) : _domain(nullptr) {
+    ContinuousProblem(std::string fileInstance) : _domain(nullptr) {
         Json::Value config = loadInstance(fileInstance); 
         loadJson(config);
     }
 
-    ~GenericProblem() {}
+    ~ContinuousProblem() {}
 
     void loadJson(const Json::Value &config) {
         numInstance = config["problem"]["numInstance"].asString();
@@ -95,21 +94,21 @@ class GenericProblem : public Problem<SOL_GENERICPROBLEM, TYPE_FITNESS_GENERICPR
         }
 
         // Définie pour chaque variables son domaine
-        _domain = std::make_unique<std::pair<TYPE_CELL_GENERICPROBLEM, TYPE_CELL_GENERICPROBLEM> []>(nomberOfVariable);
+        _domain = std::make_unique<std::pair<TYPE_CELL_CONTINUOUSPROBLEM, TYPE_CELL_CONTINUOUSPROBLEM> []>(nomberOfVariable);
         for(unsigned int i = 0; i < config["problem"]["objectif"].size(); i++) {
             unsigned int domainSize = config["problem"]["objectif"][i]["domain"].size();
             for(unsigned int j = 0; j < domainSize; j++) {
-                _domain[j] = std::pair<TYPE_CELL_GENERICPROBLEM, TYPE_CELL_GENERICPROBLEM>(config["problem"]["objectif"][i]["domain"][j][0].asDouble(),config["problem"]["objectif"][i]["domain"][j][1].asDouble());
+                _domain[j] = std::pair<TYPE_CELL_CONTINUOUSPROBLEM, TYPE_CELL_CONTINUOUSPROBLEM>(config["problem"]["objectif"][i]["domain"][j][0].asDouble(),config["problem"]["objectif"][i]["domain"][j][1].asDouble());
             }
         }
     }
 
-    std::unique_ptr<SOL_GENERICPROBLEM> new_solution() const {
-        std::unique_ptr<SOL_GENERICPROBLEM> s = std::make_unique<SOL_GENERICPROBLEM>(objectif.size(), nomberOfVariable);
+    std::unique_ptr<SOL_CONTINUOUSPROBLEM> new_solution() const {
+        std::unique_ptr<SOL_CONTINUOUSPROBLEM> s = std::make_unique<SOL_CONTINUOUSPROBLEM>(objectif.size(), nomberOfVariable);
         return std::move(s);
     }
 
-    void full_eval(SOL_GENERICPROBLEM& s) {
+    void full_eval(SOL_CONTINUOUSPROBLEM& s) {
         unsigned int offset = 0;
         for(unsigned int i = 0; i < objectif.size(); i++) {
             objectif[i].setValue(s, i + offset);
@@ -119,7 +118,7 @@ class GenericProblem : public Problem<SOL_GENERICPROBLEM, TYPE_FITNESS_GENERICPR
         }
     }
 
-	std::pair<TYPE_CELL_GENERICPROBLEM, TYPE_CELL_GENERICPROBLEM> domain(unsigned index) const {
+	std::pair<TYPE_CELL_CONTINUOUSPROBLEM, TYPE_CELL_CONTINUOUSPROBLEM> domain(unsigned index) const {
         assert(index < nomberOfVariable); 
 
         if (_domain == nullptr)
@@ -131,7 +130,7 @@ class GenericProblem : public Problem<SOL_GENERICPROBLEM, TYPE_FITNESS_GENERICPR
     std::string numInstance;
     std::vector<Objectif> objectif; // ! variable modifier par full_eval
     unsigned int nomberOfVariable;
-    std::unique_ptr<std::pair<TYPE_CELL_GENERICPROBLEM, TYPE_CELL_GENERICPROBLEM> []> _domain;
+    std::unique_ptr<std::pair<TYPE_CELL_CONTINUOUSPROBLEM, TYPE_CELL_CONTINUOUSPROBLEM> []> _domain;
 };
 
 #endif

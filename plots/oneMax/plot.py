@@ -105,6 +105,7 @@ class Linesplot(Plot):
 				e.append(d[name_e])
 		if len(e) == 0:
 			e = None
+			
 		self.add_curve(x, y, e, label, line, marker, size)
 
 	# x : liste du jeu de donnees en x

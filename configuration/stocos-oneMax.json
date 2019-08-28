@@ -4,7 +4,7 @@
         "name": "OneMax",
         "instance": "instances/OneMax/onemax-50.json"
     },
-    "parameter_id": 1,
+    "parameter_id": 0,
     "OptimizationAlgorithm": {
         "0": {
             "className":"IteratedLocalSearch",
@@ -26,9 +26,9 @@
                     "className": "FlipBit",
                     "c": 1
                 },
-                "Selection": "max"
+                
             },
-            "Selection": "max"
+            
         },
         "1": {
             "className":"EvolutionaryAlgorithm",
@@ -40,7 +40,7 @@
                 "className": "FlipBit",
                 "c": 1
             },
-            "Selection": "max",
+            
             "mu": 50,
             "lambda": 50
         },
@@ -54,7 +54,7 @@
                 "className": "FlipBit",
                 "c": 1
             },
-            "Selection": "max",
+            
             "sizeOfTabuList": 7
         },
         "3": {
@@ -67,7 +67,7 @@
                 "className": "FlipBit",
                 "c": 1
             },
-            "Selection": "max",
+            
             "lambda": 50
         },
         "4": {
@@ -78,13 +78,30 @@
             },
             "AtomicOperation": {
                 "className": "Neighborhood"
-            },
-            "Selection": "max"
+            }
         }
     },
     "Statistic": {
+        "recording":"stdout",
         // "recording":"none"
-        "recording":"stdout"
+        //"recording":"file",
+        //"namefile":"toto.txt"
+        // "recording":"mongodb",
+        // "hostname":"localhost",
+        // "database": "db",
+        // "collection": "c",
+        // "sensorExperience" : {
+        //     "name" : "oneMax",
+        //     "num" : 6
+        // },
+        // "sensorNameCallingClass": true,
+        // "sensorNumRound" : false,
+        // "sensorSolution" : true,
+        // "sensorStopwatch" : false
+        "sensorFinal" : {
+            "name" : "oneMax",
+            "num" : 6
+        }
     },
     "initial_solution": {
         "fitness": [

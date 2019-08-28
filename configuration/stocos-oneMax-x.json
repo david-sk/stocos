@@ -16,7 +16,6 @@
                 "className": "FlipBit",
                 "c": 1
             },
-            "Selection": "max",
             "lambda": 50
         },
         "1": {
@@ -29,7 +28,6 @@
                 "className": "FlipBit",
                 "c": 1
             },
-            "Selection": "max",
             "lambda": 50
         },
         "2": {
@@ -41,8 +39,7 @@
             "AtomicOperation": {
                 "className": "FlipBit",
                 "c": 1
-            },
-            "Selection": "max"
+            }
         },
         "3": {
             "className":"IteratedLocalSearch",
@@ -63,10 +60,8 @@
                 "AtomicOperation": {
                     "className": "FlipBit",
                     "c": 1
-                },
-                "Selection": "max"
-            },
-            "Selection": "max"
+                }
+            }
         },
         "4": {
             "className":"TabuSearch",
@@ -78,7 +73,7 @@
                 "className": "FlipBit",
                 "c": 1
             },
-            "Selection": "max",
+            
             "sizeOfTabuList": 7
         },
         "5": {
@@ -91,7 +86,7 @@
                 "className": "FlipBit",
                 "c": 1
             },
-            "Selection": "max",
+            
             "mu": 50,
             "lambda": 50
         }

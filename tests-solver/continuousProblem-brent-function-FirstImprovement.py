@@ -10,7 +10,7 @@
 # @copyright CC-BY-NC-SA
 # 
 # @brief http://benchmarkfcns.xyz/benchmarkfcns/wolfefcn.html
-# The global minima f(x*) = 0 located at x* = (0, 0, 0)
+# The global minima f(x*) = exp(-200) located at x* = (-10, -10)
 #
 
 import json
@@ -23,19 +23,18 @@ if __name__ == '__main__':
     configuration : dict = {
         "seed": 0,
         "problem": {
-            "name": "GenericProblem",
+            "name": "ContinuousProblem",
             "numInstance": "0",
             "objectif": [
                 {
                     "name": "objectif1",
-                    "function": "(4/3)*(((x^2 + y^2) - (x * y))^(0.75)) + z",
+                    "function": "(x + 10)^2 + (y + 10)^2 + exp(-x^2 - y^2)",
                     "variables": [
-                        "x", "y", "z"
+                        "x", "y"
                     ],
                     "domain" : [
-                        [0, 2], # Domain of x
-                        [0, 2], # Domain of y
-                        [0, 2]  # Domain of z
+                        [-20,0],
+                        [-20,0]
                     ],
                     "maximization": False
                 }
@@ -75,22 +74,23 @@ if __name__ == '__main__':
                 False
             ],
             "solution": [
-                2,
-                2,
-                2
+                0,
+                0
             ]
         }
     }
 #
-    def f(x : float, y : float, z : float) -> float:
-        return  (4/3)*( math.pow((( math.pow(x,2) + math.pow(y,2)) - (x * y)),(0.75))) + z
+    def f(x : float, y : float) -> float:
+        return (x + 10)**2 + (y + 10)**2 + math.exp(-x**2 - y**2)
 
     result = subprocess.run(["build/stocos-Release", "-j", json.dumps(configuration)], capture_output=True)
+    # print(result)
     result_data = json.loads(result.stdout)
 
     result_stocos = result_data["Solution"]["fitness"][0]
-    restat_f = np.around(f(result_data["Solution"]["solution"][0], result_data["Solution"]["solution"][1], result_data["Solution"]["solution"][2]))
+    restat_f = np.around(f(result_data["Solution"]["solution"][0], result_data["Solution"]["solution"][1]))
+    objectif_fitness = math.exp(-200)
 
-    assert abs(result_stocos - 0) < 0.01
+    assert abs(result_stocos - objectif_fitness) < 0.01
     assert abs(result_stocos - restat_f) < 0.01
     exit(result.returncode)

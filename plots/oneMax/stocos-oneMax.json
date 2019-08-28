@@ -1,0 +1,107 @@
+{
+    "seed": 0,
+    "problem": {
+        "name": "OneMax",
+        "instance": "../../instances/OneMax/onemax-1000.json"
+    },
+    "parameter_id": 3,
+    "OptimizationAlgorithm": {
+        "0": {
+            "className":"IteratedLocalSearch",
+            "StoppingCriteria": {
+                "budget": 400000,
+                "fitnessObjectif": 1000
+            },
+            "AtomicOperation": {
+                "className": "FlipBit",
+                "c": 1
+            },
+            "OptimizationAlgorithm": {
+                "className": "FirstImprovement",
+                "StoppingCriteria": {
+                    "budget": 1,
+                    "fitnessObjectif": 1000
+                },
+                "AtomicOperation": {
+                    "className": "FlipBit",
+                    "c": 1
+                },
+                "Selection": "max"
+            },
+            "Selection": "max"
+        },
+        "1": {
+            "className":"EvolutionaryAlgorithm",
+            "StoppingCriteria": {
+                "budget": 400000,
+                "fitnessObjectif": 1000
+            },
+            "AtomicOperation": {
+                "className": "FlipBit",
+                "c": 1
+            },
+            "Selection": "max",
+            "mu": 50,
+            "lambda": 50
+        },
+        "2": {
+            "className":"TabuSearch",
+            "StoppingCriteria": {
+                "budget": 400000,
+                "fitnessObjectif": 1000
+            },
+            "AtomicOperation": {
+                "className": "FlipBit",
+                "c": 1
+            },
+            "Selection": "max",
+            "sizeOfTabuList": 7
+        },
+        "3": {
+            "className":"OnePlusLambda",
+            "StoppingCriteria": {
+                "budget": 400000,
+                "fitnessObjectif": 1000
+            },
+            "AtomicOperation": {
+                "className": "FlipBit",
+                "c": 1
+            },
+            "Selection": "max",
+            "lambda": 1
+        },
+        "4": {
+            "className":"BestImprovement",
+            "StoppingCriteria": {
+                "budget": 400000,
+                "fitnessObjectif": 1000
+            },
+            "AtomicOperation": {
+                "className": "Neighborhood"
+            },
+            "Selection": "max"
+        },
+        "5": {
+            "className": "FirstImprovement",
+            "StoppingCriteria": {
+                "budget": 400000,
+                "fitnessObjectif": 1000
+            },
+            "AtomicOperation": {
+                "className": "FlipBit",
+                "c": 1
+            },
+            "Selection": "max"
+        }
+    },
+    "Statistic": {
+        "recording":"mongodb",
+        "hostname":"localhost",
+        "database": "db",
+        "collection": "c",
+        "sensorFinal" : {
+            "name" : "oneMax",
+            "num" : 6
+        }
+    }
+}

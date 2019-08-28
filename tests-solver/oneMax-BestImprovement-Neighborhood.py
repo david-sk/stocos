@@ -30,8 +30,7 @@ if __name__ == '__main__':
                 },
                 "AtomicOperation": {
                     "className": "Neighborhood"
-                },
-                "Selection": "max"
+                }
             }
         },            
         "Statistic": {

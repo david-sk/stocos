@@ -1,6 +1,6 @@
 {
     "problem": {
-        "name": "GenericProblem",
+        "name": "ContinuousProblem",
         "numInstance": "0",
         "objectif": [
             {

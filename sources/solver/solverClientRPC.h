@@ -25,7 +25,7 @@ class SolverClientRPC : public Solver {
     SolverClientRPC(const Json::Value &configuration, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem)
         : Solver(), _configuration(configuration), _problem(problem), client("http://localhost:8080") {
         if (!configuration["seed"].empty())
-            mt_rand.seed(configuration["seed"].isInt());
+            mt_rand.seed(configuration["seed"].asInt());
         else
             mt_rand.seed(static_cast<std::mt19937::result_type>(time(0)));
 

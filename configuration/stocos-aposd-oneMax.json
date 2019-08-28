@@ -27,13 +27,45 @@
                 "className": "FlipBit",
                 "c": 1
             },
-            "Selection": "max",
             "lambda": 2
         }
     },
     "StoppingCriteria" : {
         "budget": 50
     },
+    "Statistic": {
+        "recording":"stdout",
+        // "recording":"none"
+        //"recording":"file",
+        //"namefile":"toto.txt"
+        // "recording":"mongodb",
+        // "hostname":"localhost",
+        // "database": "db",
+        // "collection": "c",
+        // "sensorExperience" : {
+        //     "name" : "oneMax",
+        //     "num" : 6
+        // },
+        "sensorNameCallingClass": true,
+        "sensorNumRound" : false,
+        "sensorSolution" : false,
+        "sensorStopwatch" : false,
+        "sensorFinal" : {
+            "name" : "oneMax",
+            "num" : 6
+        }
+    },
+    "aposd": {
+        "seed": 0,
+        "Interface": "WEBAPPLICATION",
+        "CalculationModel": {
+            "ParameterSelection": {
+                "className": "PsAdaptivePursuit",
+                "number_of_parameters": 2
+            },
+            "SolutionSelection" : "max"
+        }
+    }
     // "initial_solution": {
     //     "fitness": [
     //         0
@@ -93,38 +125,5 @@
     //         false,
     //         false
     //     ]
-    // },
-    "Statistic": {
-        "recording":"stdout",
-        // "recording":"none"
-        //"recording":"file",
-        //"namefile":"toto.txt"
-        // "recording":"mongodb",
-        // "hostname":"localhost",
-        // "database": "db",
-        // "collection": "c",
-        // "sensorExperience" : {
-        //     "name" : "oneMax",
-        //     "num" : 6
-        // },
-        "sensorNameCallingClass": true,
-        "sensorNumRound" : false,
-        "sensorSolution" : false,
-        "sensorStopwatch" : false,
-        "sensorFinal" : {
-            "name" : "oneMax",
-            "num" : 6
-        }
-    },
-    "aposd": {
-        "seed": 0,
-        "Interface": "WEBAPPLICATION",
-        "CalculationModel": {
-            "ParameterSelection": {
-                "className": "PsAdaptivePursuit",
-                "number_of_parameters": 2
-            },
-            "SolutionSelection" : "max"
-        }
-    }
+    // }
 }

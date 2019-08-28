@@ -108,13 +108,13 @@ endif(NOT CPPUNIT_FOUND)
 
 link_libraries(${CPPUNIT_LIBRARIES})
 
-## Stocos unit test
-add_executable(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} tests-unitaires/unitTest.cpp)
-target_include_directories(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} PUBLIC sources/)
-target_link_libraries(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${Boost_LIBRARIES})
-target_link_libraries(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${JSONCPP_LIBRARIES})
-target_link_libraries(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${CPPUNIT_LIBRARIES})
-target_link_libraries(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${MongoDB_LIBRARIES})
+# ## Stocos unit test
+# add_executable(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} tests-unitaires/unitTest.cpp)
+# target_include_directories(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} PUBLIC sources/)
+# target_link_libraries(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${Boost_LIBRARIES})
+# target_link_libraries(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${JSONCPP_LIBRARIES})
+# target_link_libraries(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${CPPUNIT_LIBRARIES})
+# target_link_libraries(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${MongoDB_LIBRARIES})
 
 ## Test unitaire -> make test ARGS="-V"
 #find_package(Python3 COMPONENTS Interpreter Development)
@@ -135,11 +135,11 @@ oneMax-OnePlusLambda-FlipBit
 oneMax-TabuSearch-FlipBit
 oneMax-IteratedLocalSearch-FI-FlipBit
 oneMax-EvolutionaryAlgo-FlipBit
-genericProblem-eq1-FirstImprovement-FlipBit
-genericProblem-eq2-FirstImprovement-FlipBit
-genericProblem-brent-function-FirstImprovement
-genericProblem-ackleyFunction-N2-FirstImprovement-FlipBit
-genericProblem-wolfeFunction-3d-FirstImprovement-FlipBit
+continuousProblem-eq1-FirstImprovement-FlipBit
+continuousProblem-eq2-FirstImprovement-FlipBit
+continuousProblem-brent-function-FirstImprovement
+continuousProblem-ackleyFunction-N2-FirstImprovement-FlipBit
+continuousProblem-wolfeFunction-3d-FirstImprovement-FlipBit
 # oneMax-BestImprovement-Neighborhood
 )
 foreach(FILE  ${LIST_OF_FILES})

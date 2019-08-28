@@ -23,7 +23,7 @@ if __name__ == '__main__':
     configuration : dict = {
         "seed": 0,
         "problem": {
-            "name": "GenericProblem",
+            "name": "ContinuousProblem",
             "numInstance": "0",
             "objectif": [
                 {
