@@ -26,7 +26,7 @@ if __name__ == '__main__':
                     "variables": [
                         "x"
                     ],
-                    "maximization": True
+                    "solutionSelection": "max"
                 }
             ]
         },
@@ -42,8 +42,7 @@ if __name__ == '__main__':
                     "c": 1,
                     "a": -1,
                     "b": 1
-                },
-                "Selection": "min"
+                }
             }
         },            
         "Statistic": {

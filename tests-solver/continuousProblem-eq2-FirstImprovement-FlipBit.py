@@ -29,7 +29,7 @@ if __name__ == '__main__':
                     "domain" : [
                         [-64,64],
                     ],
-                    "maximization": True
+                    "solutionSelection": "max"
                 }
             ]
         },
@@ -43,10 +43,9 @@ if __name__ == '__main__':
                 "AtomicOperation": {
                     "className": "IntervalReal",
                     "c": 1,
-                    "a": -10,
-                    "b": 10
-                },
-                "Selection": "max"
+                    "a": -1,
+                    "b": 1
+                }
             }
         },            
         "Statistic": {

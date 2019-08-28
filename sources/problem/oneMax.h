@@ -83,11 +83,11 @@ class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>
     }
 
 
-	virtual bool solutionSelection(const SOL_ONEMAX &s_worst, const SOL_ONEMAX &s_best) {
+	bool solutionSelection(const SOL_ONEMAX &s_worst, const SOL_ONEMAX &s_best) {
         return solution_selection(s_worst, s_best);
 	}
 
-	virtual unsigned int solutionSelection(const Population<SOL_ONEMAX> &p) {
+	unsigned int solutionSelection(const Population<SOL_ONEMAX> &p) {
         return solution_selection(p);
 	}
 

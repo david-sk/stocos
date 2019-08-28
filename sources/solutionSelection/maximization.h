@@ -23,7 +23,7 @@ class Maximization : public SolutionSelection<SOL> {
 
     }
 
-    inline bool operator()(const SOL &s1, const SOL &s2, const unsigned int numObjectif = 0) const {
+    bool operator()(const SOL &s1, const SOL &s2, const unsigned int numObjectif = 0) const {
         assert(s1.fitnessIsValid(numObjectif));
         assert(s2.fitnessIsValid(numObjectif));
 
@@ -31,7 +31,7 @@ class Maximization : public SolutionSelection<SOL> {
     }
 
 
-    inline unsigned int operator()(const Population<SOL> &p) const {
+    unsigned int operator()(const Population<SOL> &p) const {
         assert(0 < p.size());
         
         double fitness = p[0].getFitness();

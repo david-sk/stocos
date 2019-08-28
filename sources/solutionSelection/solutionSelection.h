@@ -15,6 +15,10 @@
 template<class SOL>
 class SolutionSelection {
     public:
+
+    static constexpr const char* MAXIMIZATION = "max";
+	static constexpr const char* MINIMIZATION = "min";
+
     SolutionSelection() {
 
     }
@@ -23,8 +27,11 @@ class SolutionSelection {
 
     }
 
-    virtual inline bool operator()(const SOL &s1, const SOL &s2, const unsigned int numObjectif = 0) const = 0;
-    virtual inline unsigned int operator()(const Population<SOL> &p) const = 0;
+    virtual bool operator()(const SOL &s1, const SOL &s2, const unsigned int numObjectif = 0) const = 0;
+    virtual unsigned int operator()(const Population<SOL> &p) const = 0;
 };
+
+
+
 
 #endif

@@ -14,7 +14,7 @@
                     [-32, 32],
                     [-32, 32]
                 ],
-                "maximization": false
+                "solutionSelection": "max"
             }
         ]
     }

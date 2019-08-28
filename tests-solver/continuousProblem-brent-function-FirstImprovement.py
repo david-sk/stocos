@@ -36,7 +36,7 @@ if __name__ == '__main__':
                         [-20,0],
                         [-20,0]
                     ],
-                    "maximization": False
+                    "solutionSelection": "min"
                 }
             ]
         },
@@ -52,8 +52,7 @@ if __name__ == '__main__':
                     "c": 1,
                     "a": -1,
                     "b": 1
-                },
-                "Selection": "min"
+                }
             }
         },            
         "Statistic": {

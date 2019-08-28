@@ -18,9 +18,11 @@
 #include <unistd.h>
 
 #include "../solution/solutionArray.h"
+#include "../solutionSelection/solutionSelection.h"
 
 #include "exprtk/exprtk.hpp"
 #include "problem.h"
+#include "../solutionSelection/solutionSelectionBuilder.h"
 
 
 using TYPE_FITNESS_CONTINUOUSPROBLEM = double;
@@ -95,11 +97,13 @@ class ContinuousProblem : public Problem<SOL_CONTINUOUSPROBLEM, TYPE_FITNESS_CON
 
         // Définie pour chaque variables son domaine
         _domain = std::make_unique<std::pair<TYPE_CELL_CONTINUOUSPROBLEM, TYPE_CELL_CONTINUOUSPROBLEM> []>(nomberOfVariable);
+        // solution_selection = std::make_unique<SolutionSelection<SOL_CONTINUOUSPROBLEM> []>(objectif.size());
         for(unsigned int i = 0; i < config["problem"]["objectif"].size(); i++) {
             unsigned int domainSize = config["problem"]["objectif"][i]["domain"].size();
             for(unsigned int j = 0; j < domainSize; j++) {
                 _domain[j] = std::pair<TYPE_CELL_CONTINUOUSPROBLEM, TYPE_CELL_CONTINUOUSPROBLEM>(config["problem"]["objectif"][i]["domain"][j][0].asDouble(),config["problem"]["objectif"][i]["domain"][j][1].asDouble());
             }
+            solution_selection.push_back(solutionSelectionBuilder<SOL_CONTINUOUSPROBLEM, TYPE_FITNESS_CONTINUOUSPROBLEM, TYPE_CELL_CONTINUOUSPROBLEM>::build(*this, config["problem"]["objectif"][i]["solutionSelection"]));
         }
     }
 
@@ -126,7 +130,18 @@ class ContinuousProblem : public Problem<SOL_CONTINUOUSPROBLEM, TYPE_FITNESS_CON
         return _domain[index];
 	}
 
-  private:
+	bool solutionSelection(const SOL_CONTINUOUSPROBLEM &s_worst, const SOL_CONTINUOUSPROBLEM &s_best) {
+        // ! Need to implement multi-objectif !
+        return solution_selection[0]->operator()(s_worst, s_best);
+	}
+
+	unsigned int solutionSelection(const Population<SOL_CONTINUOUSPROBLEM> &p) {
+        // ! Need to implement multi-objectif !
+        return solution_selection[0]->operator()(p);
+	}
+
+   private:
+    std::vector<std::unique_ptr<SolutionSelection<SOL_CONTINUOUSPROBLEM>>> solution_selection;
     std::string numInstance;
     std::vector<Objectif> objectif; // ! variable modifier par full_eval
     unsigned int nomberOfVariable;

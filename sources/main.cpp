@@ -21,9 +21,9 @@
 #include <boost/program_options.hpp>
 
 #include "problem/oneMax.h"
-// #include "problem/knapsack.h"
+#include "problem/knapsack.h"
 // #include "problem/subsetSum.h"
-// #include "problem/continuousProblem.h"
+#include "problem/continuousProblem.h"
 
 
 #include "solver/solver.h"
@@ -119,8 +119,8 @@ int main(int argc, char **argv, char **envp) {
     // Definition des problems
     std::shared_ptr<OneMax> eOneMax = std::make_shared<OneMax>();
     // std::shared_ptr<Subsetsum> eSubsetsum = std::make_shared<Subsetsum>();
-    // std::shared_ptr<Knapsack> eKnapsack = std::make_shared<Knapsack>();
-    // std::shared_ptr<ContinuousProblem> eContinuousProblem = std::make_shared<ContinuousProblem>();
+    std::shared_ptr<Knapsack> eKnapsack = std::make_shared<Knapsack>();
+    std::shared_ptr<ContinuousProblem> eContinuousProblem = std::make_shared<ContinuousProblem>();
 
 
     Solver *solver = nullptr;
@@ -130,10 +130,10 @@ int main(int argc, char **argv, char **envp) {
             solver = new SolverGeneric<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>(configuration, eOneMax);
         // else if (configuration["problem"]["name"].asString() == "Subsetsum")
         //     solver = new SolverGeneric<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CELL_SUBSETSUM>(configuration, eSubsetsum);
-        // else if (configuration["problem"]["name"].asString() == "Knapsack")
-        //     solver = new SolverGeneric<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_KNAPSACK>(configuration, eKnapsack);
-        // else if (configuration["problem"]["name"].asString() == "ContinuousProblem")
-        //     solver = new SolverGeneric<SOL_CONTINUOUSPROBLEM, TYPE_FITNESS_CONTINUOUSPROBLEM, TYPE_CELL_CONTINUOUSPROBLEM>(configuration, eContinuousProblem);
+        else if (configuration["problem"]["name"].asString() == "Knapsack")
+            solver = new SolverGeneric<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_KNAPSACK>(configuration, eKnapsack);
+        else if (configuration["problem"]["name"].asString() == "ContinuousProblem")
+            solver = new SolverGeneric<SOL_CONTINUOUSPROBLEM, TYPE_FITNESS_CONTINUOUSPROBLEM, TYPE_CELL_CONTINUOUSPROBLEM>(configuration, eContinuousProblem);
         else
             throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] The optimization problem does not exist.");
     } else {

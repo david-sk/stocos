@@ -31,7 +31,7 @@ if __name__ == '__main__':
                 "AtomicOperation": {
                     "className": "FlipBit",
                     "c": 1
-                }
+                },
                 "mu": 50,
                 "lambda": 50
             },

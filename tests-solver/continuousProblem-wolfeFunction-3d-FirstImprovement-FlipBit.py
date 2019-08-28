@@ -37,7 +37,7 @@ if __name__ == '__main__':
                         [0, 2], # Domain of y
                         [0, 2]  # Domain of z
                     ],
-                    "maximization": False
+                    "solutionSelection": "min"
                 }
             ]
         },
@@ -53,8 +53,7 @@ if __name__ == '__main__':
                     "c": 1,
                     "a": -1,
                     "b": 1
-                },
-                "Selection": "min"
+                }
             }
         },            
         "Statistic": {
