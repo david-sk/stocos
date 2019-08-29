@@ -24,9 +24,8 @@ class FlipBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
     public:
     FlipBit(std::mt19937 &mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem, unsigned int c) :
     AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, problem),
-    _c(c) {
-        urd = std::make_unique<std::uniform_real_distribution<>>(0, 1);
-        
+    _c(c), N(0) {
+        urd = std::make_unique<std::uniform_real_distribution<>>(0, 1);        
     }
     virtual ~FlipBit() {
 
@@ -90,10 +89,11 @@ class FlipBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
 
     
     private:
+        const unsigned int _c; // < parameter c
+        unsigned int N;
         std::unique_ptr<std::uniform_real_distribution<>> urd;
         double mutation_rate;
-        unsigned int N;
-        const unsigned int _c;                     // < parameter c
+        
         std::vector<unsigned int> backup;
 };
 

@@ -17,7 +17,6 @@
 #include "../../problem/problem.h"
 #include "operator/atomicOperation.h"
 #include "operator/mutation/neighborhood.h"
-#include "selection/selection.h"
 
 
 
@@ -29,10 +28,8 @@ class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CEL
         std::shared_ptr<Statistic<SOL>> statistic,
         std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
         std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
-        std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations,
-        std::unique_ptr<Selection<SOL>> selection) :
-        OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic), std::move(stoppingCriteria), problem),
-        _selection(std::move(selection)) {
+        std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations) :
+        OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic), std::move(stoppingCriteria), problem) {
         BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Creation of BestImprovement class";
         //_atomicOperations = new Neighborhood<SOL, TYPE_FITNESS, SOL>(mt_rand);
     }
@@ -61,12 +58,12 @@ class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CEL
 
         //     for (unsigned int i = 1 ; i < listOfNeighborhood->size() ; i++) {
         //         this->_problem.full_eval((*listOfNeighborhood)[i].second);
-        //         if (_selection((*listOfNeighborhood)[i].second, (*listOfNeighborhood)[bestNeighbour].second)) {
+        //         if (this->_problem->solutionSelection((*listOfNeighborhood)[i].second, (*listOfNeighborhood)[bestNeighbour].second)) {
         //             bestNeighbour = i;
         //         }
         //     }
 
-        //     if (_selection((*listOfNeighborhood)[bestNeighbour].second, solution_star)) {
+        //     if (this->_problem->solutionSelection((*listOfNeighborhood)[bestNeighbour].second, solution_star)) {
         //         solution_star = (*listOfNeighborhood)[bestNeighbour].second;
         //     }
             
@@ -82,12 +79,20 @@ class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CEL
 
 
     std::string className() const {
-        return "BestImprovement";
+        if (_class_name.empty())
+            return "BestImprovement";
+        else 
+            return _class_name;
     }
+
+    void className(const std::string &class_name) {
+        _class_name = class_name;
+    }
+
     protected:
     SOL solution_star;
     std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, SOL>> _atomicOperations;
-    std::unique_ptr<Selection<SOL>> _selection;
+    std::string _class_name;
 };
 
 #endif

@@ -41,10 +41,8 @@ if __name__ == '__main__':
                     "AtomicOperation": {
                         "className": "FlipBit",
                         "c": 1
-                    },
-                    "Selection": "max"
-                },
-                "Selection": "max"
+                    }
+                }
             },
         },            
         "Statistic": {

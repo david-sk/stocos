@@ -17,16 +17,19 @@ if __name__ == '__main__':
     configuration : dict = {
         "seed": 0,
         "problem": {
-            "name": "GenericProblem",
+            "name": "ContinuousProblem",
             "numInstance": "0",
             "objectif": [
                 {
                     "name": "objectif1",
-                    "function": "x^2 + 5 *x",
+                    "function": "sin(2 * pi * x) + cos(x / 2 * pi) + 1.0",
                     "variables": [
                         "x"
                     ],
-                    "maximization": True
+                    "domain" : [
+                        [-64,64],
+                    ],
+                    "solutionSelection": "max"
                 }
             ]
         },
@@ -42,8 +45,7 @@ if __name__ == '__main__':
                     "c": 1,
                     "a": -1,
                     "b": 1
-                },
-                "Selection": "min"
+                }
             }
         },            
         "Statistic": {
@@ -52,13 +54,25 @@ if __name__ == '__main__':
             "sensorSolution" : False,
             "sensorStopwatch" : False,
             "sensorFinal" : {
-                "name" : "oneMax",
+                "name" : "eq2",
                 "num" : 6
             }
+        },
+        "initial_solution" : {
+            "fitness": [
+                0
+            ],
+            "fitnessIsValid": [
+                False
+            ],
+            "solution": [
+                64
+            ]
         }
     }
 
     result = subprocess.run(["build/stocos-Release", "-j", json.dumps(configuration)], capture_output=True)
     result_data = json.loads(result.stdout)
-    assert (-6.25 - result_data["Solution"]["fitness"][0]) < 0.01
+    print(result_data)
+    assert (2.9282 - result_data["Solution"]["fitness"][0]) < 0.01
     exit(result.returncode)

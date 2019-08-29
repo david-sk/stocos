@@ -20,11 +20,9 @@ class OnePlusLambda : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>
         std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
         std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
         std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations,
-        std::unique_ptr<Selection<SOL>> selection,
         unsigned int lambda) : 
         OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic), std::move(stoppingCriteria), problem),
         _atomicOperations(std::move(atomicOperations)),
-        _selection(std::move(selection)),
         _lambda(lambda) {
         BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Creation OnePlusLambda";
     }
@@ -39,7 +37,7 @@ class OnePlusLambda : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>
         }
         
         while (this->_stoppingCriteria->operator()(solution_star)) {
-            this->_statistic->operator()(solution_star);
+            this->_statistic->operator()(solution_star, className());
 
             solution_beta = solution_star;
             for (unsigned int i = 0 ; i < _lambda ; i++) {
@@ -47,26 +45,32 @@ class OnePlusLambda : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>
                 
                 _atomicOperations->operator()(solution_alpha);
                 this->_problem->full_eval(solution_alpha);
-                if (_selection->operator()(solution_alpha, solution_beta)) {
+                if (this->_problem->solutionSelection(solution_alpha, solution_beta)) {
                     solution_beta = solution_alpha;
                 }
             }
              solution_star = solution_beta;
         }
 
-        this->_statistic->operator()(solution_star);
-
         return std::move(std::make_unique<SOL>(solution_star));
     }
     
+
     std::string className() const {
-        return "OnePlusLambda";
+        if (_class_name.empty())
+            return "OnePlusLambda";
+        else 
+            return _class_name;
+    }
+
+    void className(const std::string &class_name) {
+        _class_name = class_name;
     }
 
     protected:
         std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _atomicOperations;
-        std::unique_ptr<Selection<SOL>> _selection;
         unsigned int _lambda;
+        std::string _class_name;
         SOL solution_star;
         SOL solution_alpha;
         SOL solution_beta;

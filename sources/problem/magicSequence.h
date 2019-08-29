@@ -12,12 +12,12 @@
 
 #include "problem.h"
 #include "../solution/solutionArray.h"
-
+#include "../solutionSelection/maximization.h"
 
 using TYPE_FITNESS_MAGICSEQUENCE = double;
 using TYPE_CELL_MAGICSEQUENCE = unsigned int;
-using SOL = SolutionArray<TYPE_FITNESS_MAGICSEQUENCE, TYPE_CELL_MAGICSEQUENCE>;
-class MagicSequence : public Problem<SOL, TYPE_FITNESS_MAGICSEQUENCE, TYPE_CELL_MAGICSEQUENCE> {
+using SOL_MAGICSEQUENCE = SolutionArray<TYPE_FITNESS_MAGICSEQUENCE, TYPE_CELL_MAGICSEQUENCE>;
+class MagicSequence : public Problem<SOL_MAGICSEQUENCE, TYPE_FITNESS_MAGICSEQUENCE, TYPE_CELL_MAGICSEQUENCE> {
     public:
     MagicSequence() {
 
@@ -26,7 +26,7 @@ class MagicSequence : public Problem<SOL, TYPE_FITNESS_MAGICSEQUENCE, TYPE_CELL_
     void loadJson(const Json::Value &config) {
     }
 
-    void full_eval(SOL &s) {
+    void full_eval(SOL_MAGICSEQUENCE &s) {
         double resultat = 0;
         for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
 
@@ -49,11 +49,20 @@ class MagicSequence : public Problem<SOL, TYPE_FITNESS_MAGICSEQUENCE, TYPE_CELL_
 
     }*/
 
-    void reset_solution(SOL &s) const {
+    void reset_solution(SOL_MAGICSEQUENCE &s) const {
         
     }
 
-    protected:
+	bool solutionSelection(const SOL_MAGICSEQUENCE &s_worst, const SOL_MAGICSEQUENCE &s_best) {
+        return solution_selection(s_worst, s_best);
+	}
+
+	unsigned int solutionSelection(const Population<SOL_MAGICSEQUENCE> &p) {
+        return solution_selection(p);
+	}
+
+   private:
+    Maximization<SOL_MAGICSEQUENCE> solution_selection;
 };
 
 #endif

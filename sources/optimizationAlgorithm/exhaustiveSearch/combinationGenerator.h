@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <random>
+#include <string>
 
 #include "../../solution/solutionArray.h"
 #include "../optimizationAlgorithm.h"
@@ -79,11 +80,20 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
     }
 
     std::string className() const {
-        return "CombinationGenerator";
+        if (_class_name.empty())
+            return "CombinationGenerator";
+        else 
+            return _class_name;
     }
+
+    void className(const std::string &class_name) {
+        _class_name = class_name;
+    }
+
    private:
     const unsigned int _nbDigit;
     const unsigned int _len_string;
+    std::string _class_name;
 
     unsigned int nbCall;
     std::unique_ptr<unsigned int[]> _string;

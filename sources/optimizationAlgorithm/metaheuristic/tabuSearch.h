@@ -24,11 +24,9 @@ class TabuSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
         std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
         std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
         std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations,
-        std::unique_ptr<Selection<SOL>> selection,
         unsigned int sizeOfTabuList = 7) : 
         OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic), std::move(stoppingCriteria), problem),
-        _atomicOperations(std::move(atomicOperations)),
-        _selection(std::move(selection))  {
+        _atomicOperations(std::move(atomicOperations)) {
         BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Creation TabuSearch";
         tabuList.set_capacity(sizeOfTabuList);
     }
@@ -43,7 +41,7 @@ class TabuSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
         }
 
         while (this->_stoppingCriteria->operator()(solution_star)) {
-            this->_statistic->operator()(solution_star);
+            this->_statistic->operator()(solution_star, className());
 
             solution_beta = solution_star;
             _atomicOperations->operator()(solution_beta);
@@ -59,25 +57,31 @@ class TabuSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
 
             if (!inTheTabooList) {
                 this->_problem->full_eval(solution_beta);
-                if (_selection->operator()(solution_beta, solution_star)) {
+                if (this->_problem->solutionSelection(solution_beta, solution_star)) {
                     solution_star = solution_beta;
                 }
             }
             tabuList.push_back(solution_beta);
         }
-        this->_statistic->operator()(solution_star);
         
         return std::move(std::make_unique<SOL>(solution_star));
     }
 
 
     std::string className() const {
-        return "TabuSearch";
+        if (_class_name.empty())
+            return "TabuSearch";
+        else 
+            return _class_name;
+    }
+
+    void className(const std::string &class_name) {
+        _class_name = class_name;
     }
 
     protected:
     std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _atomicOperations;
-    std::unique_ptr<Selection<SOL>> _selection;
+    std::string _class_name;
 
     SOL solution_star;
     SOL solution_beta;

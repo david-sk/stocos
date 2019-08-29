@@ -32,7 +32,6 @@ if __name__ == '__main__':
                     "className": "FlipBit",
                     "c": 1
                 },
-                "Selection": "max",
                 "mu": 50,
                 "lambda": 50
             },

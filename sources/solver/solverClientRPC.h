@@ -25,17 +25,41 @@ class SolverClientRPC : public Solver {
     SolverClientRPC(const Json::Value &configuration, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem)
         : Solver(), _configuration(configuration), _problem(problem), client("http://localhost:8080") {
         if (!configuration["seed"].empty())
-            mt_rand.seed(configuration["seed"].isInt());
+            mt_rand.seed(configuration["seed"].asInt());
         else
             mt_rand.seed(static_cast<std::mt19937::result_type>(time(0)));
 
-        problem->loadInstance(_configuration["problem"]["instance"].asString());
+        // Definition of the optimization problem
+        if (!_configuration["problem"]["instance"].empty()) {
+            Json::Value tmp = problem->loadInstance(_configuration["problem"]["instance"].asString());
+            problem->loadJson(tmp);
+        } else if (!_configuration["problem"]["numInstance"].empty())
+            problem->loadJson(_configuration);
+        else
+            throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] Problem does not exist.");
 
+
+        // Definition of optimization algorithms
         AlgoBuilder<SOL, TYPE_FITNESS, TYPE_CELL> algoBuilder(mt_rand, _problem, _configuration);
 
         for (std::string const & id : _configuration["OptimizationAlgorithm"].getMemberNames())
             optimizationAlgorithm[stoul(id)] = algoBuilder(_configuration["OptimizationAlgorithm"][id]);
 
+        // Create the initial solution
+        if (_configuration["initial_solution"].empty())
+            initial_solution = _problem->new_solution();
+        else
+            initial_solution = std::make_unique<SOL>(_configuration["initial_solution"]);
+
+        if (!initial_solution->fitnessIsValid()) {
+            _problem->full_eval(*initial_solution);
+        }
+
+        // Construction du global criterea
+        global_stopping_criteria = algoBuilder.stoppingCriteria(_configuration["StoppingCriteria"]);
+
+
+        // Allocation 
         solution_t0 = std::make_unique<SOL>();
         solution_t1 = std::make_unique<SOL>();
     }
@@ -105,30 +129,35 @@ class SolverClientRPC : public Solver {
     }
 
     void operator()() {
-        std::unique_ptr<SOL> initial_solution = _problem->new_solution();
-        _problem->full_eval(*initial_solution);
-        Json::Value x = _configuration;
-        x["aposd"]["initial_solution"] = initial_solution->asJson();
-        std::cout<<x["aposd"]["initial_solution"]<<std::endl;
-        received = initialization(x);
+        // Ajout à la configuration une solution initial à envoyer au serveur
+        Json::Value aposd_configuration = _configuration;
+        aposd_configuration["aposd"]["initial_solution"] = initial_solution->asJson();
+        std::cout<<aposd_configuration["aposd"]["initial_solution"]<<std::endl;
+        
+        received = initialization(aposd_configuration);
         object_id = received["object_id"].asString();
         
         unsigned int i = 0;
         do {
-            if (!received["error"].empty()) {
+            // Si le message reçu est une erreur
+            if (!received["error"].empty())
                 throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " received from aposd" + received["error_msg"].asString());
-            }
+            
+            // Check du numero du paramètre reçus
             assert(received["num_paramter"].asUInt() < optimizationAlgorithm.size());
+
+            //
             solution_t0->loadJson(received["Solution"]);
             optimizationAlgorithm[received["num_paramter"].asUInt()]->reset();
 			solution_t1 = optimizationAlgorithm[received["num_paramter"].asUInt()]->operator()(*solution_t0);
+
             Json::Value send;
             send["Solution_t0"] = solution_t0->asJson();
             send["Solution_t1"] = solution_t1->asJson();
             send["num_paramter"] = received["num_paramter"].asUInt();
             send["object_id"] = object_id;
             received = learningOnline(send);
-        } while(i++ < 100);
+        } while(global_stopping_criteria->operator()(*solution_t1));
 
         Json::Value msgSendFinish;
         msgSendFinish["object_id"] = object_id;
@@ -140,10 +169,11 @@ class SolverClientRPC : public Solver {
     std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> _problem;
     HttpClient client;
     std::mt19937 mt_rand;
-    //std::vector<std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>> oAlgo;
     std::map<unsigned int, std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>> optimizationAlgorithm;
+    std::unique_ptr<StoppingCriteria<SOL,TYPE_FITNESS>> global_stopping_criteria;
     std::string object_id;
     Json::Value received;
+    std::unique_ptr<SOL> initial_solution;
     std::unique_ptr<SOL> solution_t0;
     std::unique_ptr<SOL> solution_t1;
 };

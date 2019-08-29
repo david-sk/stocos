@@ -1,6 +1,6 @@
 {
     "problem": {
-        "name": "GenericProblem",
+        "name": "ContinuousProblem",
         "numInstance": "0",
         "objectif": [
             {
@@ -14,7 +14,7 @@
                     [-20,0],
                     [-20,0]
                 ],
-                "maximization": false
+                "solutionSelection": "max"
             }
         ]
     }

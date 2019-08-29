@@ -18,6 +18,7 @@
 #include <jsoncpp/json/json.h>
 #include "../solution/solutionArray.h"
 #include "problem.h"
+#include "../solutionSelection/maximization.h"
 
 
 using TYPE_FITNESS_KNAPSACK = int;
@@ -30,7 +31,7 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
         
     }
     
-    Knapsack(std::string fileInstance) {
+    Knapsack(const std::string &fileInstance) {
         Json::Value config = loadInstance(fileInstance); 
         loadJson(config);
     }
@@ -94,7 +95,16 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
 		return fitnessObjectif;
 	}
 
-    private:
+	bool solutionSelection(const SOL_KNAPSACK &s_worst, const SOL_KNAPSACK &s_best) {
+        return solution_selection(s_worst, s_best);
+	}
+
+	unsigned int solutionSelection(const Population<SOL_KNAPSACK> &p) {
+        return solution_selection(p);
+	}
+
+   private:
+        Maximization<SOL_KNAPSACK> solution_selection;
         std::string numInstance;
         int capacity;
         unsigned int nbItems;

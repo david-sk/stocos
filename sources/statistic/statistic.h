@@ -44,7 +44,7 @@ class Statistic {
     /// 
     /// @param namefile name of the output file
     ///
-    Statistic(std::string namefile) : _namefile(namefile) {
+    Statistic(const std::string &namefile) : _namefile(namefile) {
         recording = FILE;
         _none = false;
         outFile.open(_namefile);
@@ -53,7 +53,7 @@ class Statistic {
         builder["indentation"] = "";
     }
 
-    Statistic(std::string mongo_hostname, std::string mongo_database, std::string mongo_collection, std::string mongo_username = "", std::string mongo_pwd = "") :
+    Statistic(const std::string &mongo_hostname, const std::string &mongo_database, const std::string &mongo_collection, const std::string &mongo_username = "", const std::string & mongo_pwd = "") :
         _mongo_hostname(mongo_hostname),
         _mongo_database(mongo_database),
         _mongo_collection(mongo_collection),
@@ -84,6 +84,12 @@ class Statistic {
             Json::Value tmp = sensor[i]->finish();
             if (!tmp.empty())
                 show_end[sensor[i]->name()] = tmp;
+            if (sensor[i]->name() == "final") {
+                if (_name_calling_class.empty())
+                    show_end["final"]["nameCallingClass"] = "unknown";
+                else 
+                    show_end["final"]["nameCallingClass"] = _name_calling_class;
+            }
         }
 
         if (!show_end.empty()) {
@@ -110,8 +116,9 @@ class Statistic {
         sensor.clear();
     }
 
-    void operator()(const SOL &s) {
+    void operator()(const SOL &s, std::string name_calling_class = "") {
         Json::Value tmp = this->asJson(s);
+        _name_calling_class = name_calling_class;
         if (!tmp.empty()) {
             if (recording == NONE) {
                 return ;
@@ -131,25 +138,6 @@ class Statistic {
                 throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " The output Statistic does not exist.");
             }
         }
-        // std::stringstream ss;
-        // if (_standardOutput || !_namefile.empty()) {
-        //     // for(unsigned int i = 0 ; i < sensor.size() ; i++) {
-        //     //     sensor[i]->operator()(ss, s);
-        //     //     ss<<" ";
-        //     // }
-        //     Json::StreamWriterBuilder builder;
-        //     builder["commentStyle"] = "None";
-        //     builder["indentation"] = ""; //The JSON document is written in a single line
-        //     std::unique_ptr<Json::StreamWriter> writer(builder.newStreamWriter());
-        //     writer->write(this->asJson(s), &std::cout);
-            
-        // }
-        
-        // if (_standardOutput)
-        //     std::cout<<ss.str()<<std::endl;
-        // else if(!_namefile.empty()) {
-        //     outFile<<ss.str()<<std::endl;
-        // }
     }
 
     Json::Value asJson(const SOL &s) {
@@ -159,6 +147,12 @@ class Statistic {
             Json::Value tmp = sensor[i]->asJson();
             if (!tmp.empty())
                 jsonValue[sensor[i]->name()] = tmp;
+            if (sensor[i]->name() == "nameCallingClass") {
+                if (_name_calling_class.empty())
+                    jsonValue[sensor[i]->name()] = "unknown";
+                else 
+                    jsonValue[sensor[i]->name()] = _name_calling_class;
+            }
         }
         return jsonValue;
     }
@@ -170,6 +164,7 @@ class Statistic {
     protected:
         
         std::vector<Sensor<SOL> *> sensor;
+        std::string _name_calling_class;
 
         const char* recording;
         bool _none;

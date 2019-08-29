@@ -4,138 +4,56 @@
         "name": "OneMax",
         "instance": "instances/OneMax/onemax-50.json"
     },
-    "parameter_id": 1,
+    "parameter_id": 0,
     "OptimizationAlgorithm": {
-        "IteratedLocalSearch": {
+        "0" :{
+            "className": "FirstImprovement",
             "StoppingCriteria": {
-                "budget": 10,
-                "fitnessObjectif": 50
+                "budget": 1
             },
             "AtomicOperation": {
                 "className": "FlipBit",
                 "c": 1
-            },
-            "OptimizationAlgorithm": {
-                "className": "FirstImprovement",
-                "StoppingCriteria": {
-                    "budget": 10,
-                    "fitnessObjectif": 50
-                },
-                "AtomicOperation": {
-                    "className": "FlipBit",
-                    "c": 1
-                },
-                "Selection": "max"
             },
             "Selection": "max"
         },
-        "EvolutionaryAlgorithm": {
+        "1": {
+            "className":"OnePlusLambda",
             "StoppingCriteria": {
-                "budget": 10,
+                "budget": 1,
                 "fitnessObjectif": 50
             },
             "AtomicOperation": {
                 "className": "FlipBit",
                 "c": 1
             },
-            "Selection": "max",
-            "mu": 50,
-            "lambda": 50
-        },
-        "TabuSearch": {
-            "StoppingCriteria": {
-                "budget": 10,
-                "fitnessObjectif": 50
-            },
-            "AtomicOperation": {
-                "className": "FlipBit",
-                "c": 1
-            },
-            "Selection": "max",
-            "sizeOfTabuList": 7
-        },
-        "OnePlusLambda": {
-            "StoppingCriteria": {
-                "budget": 10,
-                "fitnessObjectif": 50
-            },
-            "AtomicOperation": {
-                "className": "FlipBit",
-                "c": 1
-            },
-            "Selection": "max",
-            "lambda": 50
-        },
-        "BestImprovement": {
-            "StoppingCriteria": {
-                "budget": 10,
-                "fitnessObjectif": 50
-            },
-            "AtomicOperation": {
-                "className": "Neighborhood"
-            },
-            "Selection": "max"
+            "lambda": 2
         }
     },
-    "initial_solution": {
-        "fitness": [
-            0
-        ],
-        "fitnessIsValid": [
-            true
-        ],
-        "solution": [
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false
-        ]
+    "StoppingCriteria" : {
+        "budget": 50
+    },
+    "Statistic": {
+        "recording":"stdout",
+        // "recording":"none"
+        //"recording":"file",
+        //"namefile":"toto.txt"
+        // "recording":"mongodb",
+        // "hostname":"localhost",
+        // "database": "db",
+        // "collection": "c",
+        // "sensorExperience" : {
+        //     "name" : "oneMax",
+        //     "num" : 6
+        // },
+        "sensorNameCallingClass": true,
+        "sensorNumRound" : false,
+        "sensorSolution" : false,
+        "sensorStopwatch" : false,
+        "sensorFinal" : {
+            "name" : "oneMax",
+            "num" : 6
+        }
     },
     "aposd": {
         "seed": 0,
@@ -143,9 +61,69 @@
         "CalculationModel": {
             "ParameterSelection": {
                 "className": "PsAdaptivePursuit",
-                "number_of_parameters": 3
+                "number_of_parameters": 2
             },
             "SolutionSelection" : "max"
         }
     }
+    // "initial_solution": {
+    //     "fitness": [
+    //         0
+    //     ],
+    //     "fitnessIsValid": [
+    //         true
+    //     ],
+    //     "solution": [
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false,
+    //         false
+    //     ]
+    // }
 }

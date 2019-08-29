@@ -1,4 +1,12 @@
 ## > cppcheck ##################################################################
+## Detection du programme cppcheck
+FIND_PROGRAM(CPPCHECK_EXECUTABLE cppcheck)
+if (NOT CPPCHECK_EXECUTABLE)
+    packageManager("cppcheck")
+    FIND_PROGRAM(CPPCHECK_EXECUTABLE cppcheck)
+endif(NOT CPPCHECK_EXECUTABLE)
+
+## 
 SET(PROJECT_TRDPARTY_DIR third-party)
 
 file(GLOB_RECURSE ALL_SOURCE_FILES *.cpp *.h)
@@ -11,7 +19,7 @@ endforeach ()
 
 add_custom_target(
         cppcheck
-        COMMAND /usr/bin/cppcheck
+        COMMAND ${CPPCHECK_EXECUTABLE}
         --enable=warning,performance,portability,information,missingInclude
         --std=c++11
         --library=qt.cfg
