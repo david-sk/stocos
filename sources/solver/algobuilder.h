@@ -102,26 +102,8 @@ class AlgoBuilder {
             }
         }
 
-        std::shared_ptr<Statistic<SOL>> statistic(const Json::Value &configuration) {
-            std::shared_ptr<Statistic<SOL>> __statistic;
-            if (Statistic<SOL>::NONE == configuration["recording"].asString()) {
-                __statistic = std::make_shared<Statistic<SOL>>(true);
-            } else if (Statistic<SOL>::STDOUT == configuration["recording"].asString()) {
-                __statistic = std::make_shared<Statistic<SOL>>(false);
-                sensor(configuration, __statistic);
-            } else if (Statistic<SOL>::FILE == configuration["recording"].asString()) {
-                __statistic = std::make_shared<Statistic<SOL>>(configuration["namefile"].asString());
-                sensor(configuration, __statistic);
-            } else if (Statistic<SOL>::MONGODB == configuration["recording"].asString()) {
-                __statistic = std::make_shared<Statistic<SOL>>(
-                        configuration["hostname"].asString(),
-                        configuration["database"].asString(),
-                        configuration["collection"].asString());
-                sensor(configuration, __statistic);
-            } else {
-                throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " The recording statistic "+ configuration["recording"].asString() +" does not exist.");
-            }
-            return std::move(__statistic);
+        std::shared_ptr<Statistic<SOL>> getStatistic() {
+            return _statistic;
         }
 
         std::unique_ptr<StoppingCriteria<SOL,TYPE_FITNESS>> stoppingCriteria(const Json::Value &configuration) {
@@ -150,7 +132,30 @@ class AlgoBuilder {
         std::mt19937 &_mt_rand;
         std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> _problem;
         std::shared_ptr<Statistic<SOL>> _statistic;
-        
+
+
+
+        std::shared_ptr<Statistic<SOL>> statistic(const Json::Value &configuration) {
+            std::shared_ptr<Statistic<SOL>> __statistic;
+            if (Statistic<SOL>::NONE == configuration["recording"].asString()) {
+                __statistic = std::make_shared<Statistic<SOL>>(true);
+            } else if (Statistic<SOL>::STDOUT == configuration["recording"].asString()) {
+                __statistic = std::make_shared<Statistic<SOL>>(false);
+                sensor(configuration, __statistic);
+            } else if (Statistic<SOL>::FILE == configuration["recording"].asString()) {
+                __statistic = std::make_shared<Statistic<SOL>>(configuration["namefile"].asString());
+                sensor(configuration, __statistic);
+            } else if (Statistic<SOL>::MONGODB == configuration["recording"].asString()) {
+                __statistic = std::make_shared<Statistic<SOL>>(
+                        configuration["hostname"].asString(),
+                        configuration["database"].asString(),
+                        configuration["collection"].asString());
+                sensor(configuration, __statistic);
+            } else {
+                throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " The recording statistic "+ configuration["recording"].asString() +" does not exist.");
+            }
+            return std::move(__statistic);
+        }
 };
 
 

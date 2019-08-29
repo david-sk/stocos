@@ -57,8 +57,6 @@ class IteratedLocalSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE
                 solution_star = *solution_beta_beta;
             }
         }
-        
-        this->_statistic->operator()(solution_star, className());
 
         return std::move(std::make_unique<SOL>(solution_star));
     }

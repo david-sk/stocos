@@ -52,6 +52,9 @@ class SolverGeneric : public Solver {
 				for (std::string const &id : _configuration["OptimizationAlgorithm"].getMemberNames())
 					optimizationAlgorithm[stoul(id)] = algoBuilder(std::move(_configuration["OptimizationAlgorithm"][id]));
 
+				//
+				_statistic = algoBuilder.getStatistic();
+
 				// Create the initial solution
 				if (_configuration["initial_solution"].empty())
 					initial_solution = _problem->new_solution();
@@ -72,14 +75,30 @@ class SolverGeneric : public Solver {
 			
 			BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Launch optimisation "<< optimizationAlgorithm[_configuration["parameter_id"].asUInt()]->className();
 			std::unique_ptr<SOL> s_new = optimizationAlgorithm[_configuration["parameter_id"].asUInt()]->operator()(*initial_solution);
+
+			className(optimizationAlgorithm[_configuration["parameter_id"].asUInt()]->className());
+			_statistic->operator()(*s_new, className());
 		}
-		
+
+
+		std::string className() const {
+			if (_class_name.empty())
+				return "SolverGeneric";
+			else 
+				return _class_name;
+		}
+
+		void className(const std::string &class_name) {
+			_class_name = class_name;
+		}
 	protected:
 		const Json::Value &_configuration;
 		std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> _problem;
+		std::shared_ptr<Statistic<SOL>> _statistic;
 		std::mt19937 mt_rand;
 		std::unique_ptr<SOL> initial_solution;
 		std::map<unsigned int, std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>> optimizationAlgorithm;
+		std::string _class_name;
 		
 		
 };

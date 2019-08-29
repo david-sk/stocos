@@ -63,7 +63,6 @@ class TabuSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
             }
             tabuList.push_back(solution_beta);
         }
-        this->_statistic->operator()(solution_star, className());
         
         return std::move(std::make_unique<SOL>(solution_star));
     }

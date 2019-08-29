@@ -52,8 +52,6 @@ class OnePlusLambda : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>
              solution_star = solution_beta;
         }
 
-        this->_statistic->operator()(solution_star, className());
-
         return std::move(std::make_unique<SOL>(solution_star));
     }
     

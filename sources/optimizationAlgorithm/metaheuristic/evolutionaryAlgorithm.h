@@ -78,10 +78,16 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
                 while (e1 == e2) 
                     e2 = rid->operator()(this->_mt_rand);
                 
-                if (this->_problem->solutionSelection(parents[e1], parents[e2]))
-                    *it = parents[e1];
-                else 
-                    *it = parents[e2];
+                if (it == offsprings.begin()) {
+                    *it = solution_star; // * Ré-introduction de la meilleurs solution dans la population
+                } else {
+                    if (this->_problem->solutionSelection(parents[e1], parents[e2]))
+                        *it = parents[e1];
+                    else 
+                        *it = parents[e2];
+                }
+
+
             }
             
             // Mutation des enfants et construction la population parents.
@@ -103,8 +109,6 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
                     solution_star = p;
             }
         }
-        
-        this->_statistic->operator()(solution_star,  className());
         
         return std::move(std::make_unique<SOL>(solution_star));
     }
