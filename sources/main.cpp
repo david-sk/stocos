@@ -20,15 +20,15 @@
 #include <boost/log/expressions.hpp>
 #include <boost/program_options.hpp>
 
-#include "problem/oneMax.h"
-#include "problem/knapsack.h"
-// #include "problem/subsetSum.h"
-// #include "problem/continuousProblem.h"
+#include "problem/oneMax.hpp"
+#include "problem/knapsack.hpp"
+// #include "problem/subsetSum.hpp"
+// #include "problem/continuousProblem.hpp"
 
 
-#include "solver/solver.h"
-#include "solver/solverGeneric.h"
-#include "solver/solverClientRPC.h"
+#include "solver/solver.hpp"
+#include "solver/solverGeneric.hpp"
+#include "solver/solverClientRPC.hpp"
 
 
 void version(std::string name_software, std::string num_version);

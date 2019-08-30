@@ -24,26 +24,26 @@
 #include <cppunit/XmlOutputter.h>
 #include <netinet/in.h>
 
-#include "stoppingCriteria/unitTest_criteriaBudget.h"
-#include "solution/unitTest_population.h"
-#include "solution/unitTest_solution.h"
-#include "solution/unitTest_solutionArray.h"
+#include "stoppingCriteria/unitTest_criteriaBudget.hpp"
+#include "solution/unitTest_population.hpp"
+#include "solution/unitTest_solution.hpp"
+#include "solution/unitTest_solutionArray.hpp"
 
-#include "optimizationAlgorithm/exhaustiveSearch/unitTest_backtracking.h"
-#include "optimizationAlgorithm/exhaustiveSearch/unitTest_combinationGenerator.h"
-#include "optimizationAlgorithm/metaheuristic/operator/mutation/unitTest_flipBit.h"
-#include "optimizationAlgorithm/metaheuristic/operator/mutation/unitTest_kBit.h"
-#include "optimizationAlgorithm/metaheuristic/operator/mutation/unitTest_neighborhood.h"
-#include "optimizationAlgorithm/metaheuristic/operator/unitTest_swap.h"
+#include "optimizationAlgorithm/exhaustiveSearch/unitTest_backtracking.hpp"
+#include "optimizationAlgorithm/exhaustiveSearch/unitTest_combinationGenerator.hpp"
+#include "optimizationAlgorithm/metaheuristic/operator/mutation/unitTest_flipBit.hpp"
+#include "optimizationAlgorithm/metaheuristic/operator/mutation/unitTest_kBit.hpp"
+#include "optimizationAlgorithm/metaheuristic/operator/mutation/unitTest_neighborhood.hpp"
+#include "optimizationAlgorithm/metaheuristic/operator/unitTest_swap.hpp"
 
-#include "problem/unitTest_jobShopProblem.h"
-#include "problem/unitTest_knapsack.h"
-#include "problem/unitTest_magicSequence.h"
-#include "problem/unitTest_oneMax.h"
-#include "problem/unitTest_QAP.h"
-#include "problem/unitTest_travelingSalesmanProblem.h"
-#include "problem/unitTest_continuousProblem.h"
-#include "problem/unitTest_subsetsum.h"
+#include "problem/unitTest_jobShopProblem.hpp"
+#include "problem/unitTest_knapsack.hpp"
+#include "problem/unitTest_magicSequence.hpp"
+#include "problem/unitTest_oneMax.hpp"
+#include "problem/unitTest_QAP.hpp"
+#include "problem/unitTest_travelingSalesmanProblem.hpp"
+#include "problem/unitTest_continuousProblem.hpp"
+#include "problem/unitTest_subsetsum.hpp"
 
 
 
