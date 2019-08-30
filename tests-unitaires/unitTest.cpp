@@ -46,15 +46,12 @@
 #include "problem/unitTest_subsetsum.hpp"
 
 
-
-
-
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_criteriaBudget);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solution);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solutionArray);
 
 
-// // Algorithm d'optimisation
+// Algorithm d'optimisation
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_combinationGenerator);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_backtraking);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_flipBit);
@@ -64,7 +61,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_swap);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_neighborhood);
 
 
-// // Problem
+// Problem
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_population);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_OneMax);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_knapsack);

@@ -97,8 +97,7 @@ target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${MongoDB_
 
 # set_target_properties(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "stdafx.h")
 # get_target_property(_precompiledHeader "sources/problem/exprtk/exprtk.h" COTIRE_CXX_PRECOMPILED_HEADER)
-# get_target_property(_precompiledHeader ${PROJECT_NAME}-${CMAKE_BUILD_TYPE} COTIRE_CXX_PRECOMPILED_HEADER)
-# cotire(${PROJECT_NAME}-${CMAKE_BUILD_TYPE})
+cotire(${PROJECT_NAME}-${CMAKE_BUILD_TYPE})
 
 ## Cppunit
 pkg_check_modules(CPPUNIT cppunit)

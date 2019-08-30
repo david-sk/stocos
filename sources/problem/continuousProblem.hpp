@@ -17,13 +17,12 @@
 #include <utility>
 #include <unistd.h>
 
+
 #include "../solution/solutionArray.hpp"
 #include "../solutionSelection/solutionSelection.hpp"
-
+#include "../solutionSelection/solutionSelectionBuilder.hpp"
 #include "exprtk/exprtk.hpp"
 #include "problem.hpp"
-#include "../solutionSelection/solutionSelectionBuilder.hpp"
-
 
 using TYPE_FITNESS_CONTINUOUSPROBLEM = double;
 using TYPE_CELL_CONTINUOUSPROBLEM = double;

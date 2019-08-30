@@ -59,12 +59,11 @@ int main(int argc, char **argv, char **envp) {
 
     sigaction(SIGINT, &sa, NULL);
    // <- signal
-
 	// Paramètre du programme
     std::string configFile;
     std::string configJson;
     std::string loggin;
-
+    
 	boost::program_options::variables_map vm;
 	boost::program_options::options_description argements("[*] main option");
 	argements.add_options()
