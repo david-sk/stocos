@@ -37,7 +37,7 @@
 #include "../optimizationAlgorithm/metaheuristic/operator/mutation/neighborhood.hpp"
 #include "../optimizationAlgorithm/metaheuristic/operator/mutation/intervalReal.hpp"
 #include "../optimizationAlgorithm/metaheuristic/operator/swap.hpp"
-
+#include "../optimizationAlgorithm/metaheuristic/operator/shuffle.hpp"
 
 template<typename SOL, typename TYPE_FITNESS,typename TYPE_CELL>
 class AlgoBuilder {
@@ -136,7 +136,10 @@ class AlgoBuilder {
                 return nullptr;
             } else if (configuration["className"].asString() == "Swap") {
                 return std::make_unique<Swap<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _problem, configuration["number_of_swap"].asInt());
-            }
+            } else if (configuration["className"].asString() == "Shuffle") {
+                return std::make_unique<Shuffle<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _problem);
+            } else 
+                throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " The atomicOperation "+ configuration["className"].asString() +" does not exist.");
             return nullptr;
         }
 
