@@ -82,6 +82,10 @@
     },
     "Statistic": {
         "recording":"stdout",
+        // "sensorNameCallingClass": true,
+        // "sensorNumRound" : false,
+        // "sensorSolution" : true,
+        // "sensorStopwatch" : false
         // "recording":"none"
         //"recording":"file",
         //"namefile":"toto.txt"
@@ -93,10 +97,6 @@
         //     "name" : "oneMax",
         //     "num" : 6
         // },
-        // "sensorNameCallingClass": true,
-        // "sensorNumRound" : false,
-        // "sensorSolution" : true,
-        // "sensorStopwatch" : false
         "sensorFinal" : {
             "name" : "oneMax",
             "num" : 6

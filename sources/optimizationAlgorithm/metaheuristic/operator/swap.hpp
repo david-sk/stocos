@@ -19,25 +19,25 @@
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class Swap : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
     public:
-        Swap(std::mt19937 &mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem, unsigned int nbSwap): 
+        Swap(std::mt19937 &mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem, unsigned int number_of_swap): 
         AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, problem), 
-        _nbSwap(nbSwap) {
+        _number_of_swap(number_of_swap) {
             N = 1;
-            rid = std::make_unique<std::uniform_int_distribution<unsigned int>>(0, N);
+            rid = std::make_unique<std::uniform_int_distribution<unsigned int>>(0, N-1);
         }
         
         virtual void operator()(SOL &s) {
             // Random
             if (s.sizeArray() != N) {
-                N = s.sizeArray();
-                assert(_nbSwap < N / 2);
+                N = s.sizeArray() -1;
+                assert(_number_of_swap < N / 2);
                 rid = std::make_unique<std::uniform_int_distribution<unsigned int>>(0, N);
             }
 
             // Tirage aléatoire sans remise
             std::unique_ptr<std::vector<unsigned int>> list(std::make_unique<std::vector<unsigned int>>());
 
-            while (list->size() != (_nbSwap * 2)) {
+            while (list->size() != (_number_of_swap * 2)) {
                 unsigned int element = rid->operator()(this->_mt_rand);
 
                 bool findElement = false;
@@ -73,7 +73,7 @@ class Swap : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
     private:
         std::unique_ptr<std::uniform_int_distribution<unsigned int>> rid;
         std::vector<std::pair<unsigned int, TYPE_CELL>> backup;
-        unsigned int _nbSwap;
+        unsigned int _number_of_swap;
         unsigned int N;
 };
 

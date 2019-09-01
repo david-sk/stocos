@@ -4,7 +4,8 @@
 /// @version 1
 /// @copyright CC-BY-NC-SA
 /// @date 2019-07
-/// @brief
+/// @brief 
+///         instances : http://elib.zib.de/pub/mp-testdata/tsp/tsplib/tsplib.html
 ///
 
 #ifndef EVALTRAVELINGSALESMANPROBLEM_H
@@ -17,11 +18,12 @@
 #include <jsoncpp/json/json.h>
 
 #include "problem.hpp"
+#include "../solutionSelection/minimization.hpp"
 
 
 
-using TYPE_FITNESS_STP = unsigned int;
-using TYPE_CELL_STP = unsigned int;
+using TYPE_FITNESS_STP = double;
+using TYPE_CELL_STP = double;
 using SOL_STP = SolutionArray<TYPE_FITNESS_STP, TYPE_CELL_STP>;
 class TravelingSalesmanProblem : public Problem<SOL_STP, TYPE_FITNESS_STP, TYPE_CELL_STP> {
    public:
@@ -34,6 +36,17 @@ class TravelingSalesmanProblem : public Problem<SOL_STP, TYPE_FITNESS_STP, TYPE_
 
     virtual ~TravelingSalesmanProblem() {}
 
+    void loadJson(const Json::Value &config) {
+        numInstance = config["problem"]["numInstance"].asString();
+        numberOfNodes = config["problem"]["numberOfNodes"].asUInt();
+
+        for (unsigned int i = 0 ; i < config["problem"]["nodes"].size() ; i++) {
+            double x = config["problem"]["nodes"][i]["x"].asDouble();
+            double y = config["problem"]["nodes"][i]["y"].asDouble();
+            nodes.push_back(std::pair<double, double>(x, y));
+        }
+    }
+
     std::unique_ptr<SOL_STP> new_solution() const {
         std::unique_ptr<SOL_STP> s(std::make_unique<SOL_STP>(nodes.size()));
         for (unsigned int i = 0; i < s->sizeArray(); i++) {
@@ -42,14 +55,11 @@ class TravelingSalesmanProblem : public Problem<SOL_STP, TYPE_FITNESS_STP, TYPE_
         return std::move(s);
     }
 
-    void loadJson(const Json::Value &config) {
-        numInstance = config["problem"]["numInstance"].asString();
-        numberOfNodes = config["problem"]["numberOfNodes"].asUInt();
-        for (unsigned int i = 0 ; i < config["problem"]["nodes"].size() ; i++) {
-            double x = config["problem"]["nodes"][i]["x"].asDouble();
-            double y = config["problem"]["nodes"][i]["y"].asDouble();
-            nodes.push_back(std::pair<double, double>(x, y));
+    bool check_solution(const SOL_STP &s) const {
+        if (s.sizeArray() != nodes.size() || s.numberOfObjective() != 1) {
+            return false;
         }
+        return true;
     }
 
     virtual void full_eval(SOL_STP &s) {
@@ -60,12 +70,22 @@ class TravelingSalesmanProblem : public Problem<SOL_STP, TYPE_FITNESS_STP, TYPE_
         s.setFitness(distance_sum);
     }
 
+	bool solutionSelection(const SOL_STP &s_worst, const SOL_STP &s_best) {
+        return solution_selection(s_worst, s_best);
+	}
+
+	unsigned int solutionSelection(const Population<SOL_STP> &p) {
+        return solution_selection(p);
+	}
+
    private:
+    
     double distance_euclidienne(const std::pair<double, double> &node_a, const std::pair<double, double> &node_b) const {
         return sqrt(abs(node_b.second - node_a.second) * abs(node_b.second - node_a.second) +
                     abs(node_b.first - node_a.first) * abs(node_b.first - node_a.first));
     }
 
+    Minimization<SOL_STP> solution_selection;
     std::string numInstance;
     unsigned int numberOfNodes;
     std::vector<std::pair<double, double>> nodes;

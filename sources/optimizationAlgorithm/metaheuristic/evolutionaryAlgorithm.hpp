@@ -36,7 +36,8 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
     _lambda(lambda) {
         BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Creation EvolutionaryAlgorithm";
         assert(_mu != 0);
-        rid = std::make_unique<std::uniform_int_distribution<unsigned int>>(0, _mu-1);
+        rid_parents = std::make_unique<std::uniform_int_distribution<unsigned int>>(0, _mu-1);
+        rid_offsprings = std::make_unique<std::uniform_int_distribution<unsigned int>>(0, _lambda-1);
     }
 
     ~EvolutionaryAlgorithm() {
@@ -72,11 +73,12 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
             
             // selection de deux parents aléatoire et différent pour construire la population enfants
             for (auto it=offsprings.begin(); it != offsprings.end(); ++it) {
-                unsigned int e1 = rid->operator()(this->_mt_rand);
-                unsigned int e2 = rid->operator()(this->_mt_rand);
+                unsigned int e1 = rid_parents->operator()(this->_mt_rand);
+                unsigned int e2 = rid_parents->operator()(this->_mt_rand);
                 
-                while (e1 == e2) 
-                    e2 = rid->operator()(this->_mt_rand);
+                if (_mu != 1)
+                    while (e1 == e2) 
+                        e2 = rid_parents->operator()(this->_mt_rand);
                 
                 if (it == offsprings.begin()) {
                     *it = solution_star; // * Ré-introduction de la meilleurs solution dans la population
@@ -86,8 +88,6 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
                     else 
                         *it = parents[e2];
                 }
-
-
             }
             
             // Mutation des enfants et construction la population parents.
@@ -95,9 +95,14 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
                 _atomicOperations->operator()(o);
             
             // Remplacement
-            for (unsigned int i = 0 ; i < _mu ; i++) {
-                parents[i] = offsprings[i];
+            if (_mu == _lambda) {
+                for (unsigned int i = 0 ; i < _mu ; i++)
+                    parents[i] = offsprings[i];
+            } else {
+                for (unsigned int i = 0 ; i < _mu ; i++)
+                    parents[i] = offsprings[rid_offsprings->operator()(this->_mt_rand)];
             }
+
             
             // Evaluation des parents
             for (SOL &p : parents)
@@ -125,7 +130,8 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
         _class_name = class_name;
     }
     protected:
-        std::unique_ptr<std::uniform_int_distribution<unsigned int>> rid;
+        std::unique_ptr<std::uniform_int_distribution<unsigned int>> rid_parents;
+        std::unique_ptr<std::uniform_int_distribution<unsigned int>> rid_offsprings;
         std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _atomicOperations;
         std::string _class_name;
         SOL solution_star;

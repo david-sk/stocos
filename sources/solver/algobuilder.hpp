@@ -36,6 +36,7 @@
 #include "../optimizationAlgorithm/metaheuristic/operator/mutation/flipBit.hpp"
 #include "../optimizationAlgorithm/metaheuristic/operator/mutation/neighborhood.hpp"
 #include "../optimizationAlgorithm/metaheuristic/operator/mutation/intervalReal.hpp"
+#include "../optimizationAlgorithm/metaheuristic/operator/swap.hpp"
 
 
 template<typename SOL, typename TYPE_FITNESS,typename TYPE_CELL>
@@ -133,6 +134,8 @@ class AlgoBuilder {
                 //return std::make_unique<Neighborhood<SOL, TYPE_FITNESS, SOL>>(this->_mt_rand);
                 //throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " Not implemented : "+configuration["className"].asString());
                 return nullptr;
+            } else if (configuration["className"].asString() == "Swap") {
+                return std::make_unique<Swap<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _problem, configuration["number_of_swap"].asInt());
             }
             return nullptr;
         }

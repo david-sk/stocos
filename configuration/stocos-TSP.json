@@ -1,0 +1,94 @@
+{
+    "seed": 0,
+    "problem": {
+        "name": "TravelingSalesmanProblem",
+        "instance": "instances/TravelingSalesmanProblem/travelingSalesmanProblem-10-1.json"
+    },
+    "parameter_id": 2,
+    "OptimizationAlgorithm": {
+        "0": {
+            "className":"IteratedLocalSearch",
+            "StoppingCriteria": {
+                "budget": 100,
+                "fitnessObjectif": 50
+            },
+            "AtomicOperation": {
+                "className": "Swap",
+                "number_of_swap": 1
+            },
+            "OptimizationAlgorithm": {
+                "className": "FirstImprovement",
+                "StoppingCriteria": {
+                    "budget": 100,
+                    "fitnessObjectif": 50
+                },
+                "AtomicOperation": {
+                    "className": "Swap",
+                    "number_of_swap": 1
+                }
+            }
+        },
+        "1": {
+            "className":"EvolutionaryAlgorithm",
+            "StoppingCriteria": {
+                "budget": 100,
+                "fitnessObjectif": 50
+            },
+            "AtomicOperation": {
+                "className": "Swap",
+                "number_of_swap": 1
+            },
+            
+            "mu": 50,
+            "lambda": 50
+        },
+        "2": {
+            "className":"TabuSearch",
+            "StoppingCriteria": {
+                "budget": 1000000,
+                "fitnessObjectif": 0
+            },
+            "AtomicOperation": {
+                "className": "Swap",
+                "number_of_swap": 1
+            },
+            
+            "sizeOfTabuList": 7
+        },
+        "3": {
+            "className":"OnePlusLambda",
+            "StoppingCriteria": {
+                "budget": 100,
+                "fitnessObjectif": 50
+            },
+            "AtomicOperation": {
+                "className": "Swap",
+                "number_of_swap": 1
+            },
+            
+            "lambda": 50
+        }
+    },
+    "Statistic": {
+        "recording":"stdout",
+        // "sensorNameCallingClass": true,
+        "sensorNumRound" : true,
+        "sensorSolution" : true,
+        "sensorStopwatch" : false
+        // "recording":"none"
+        //"recording":"file",
+        //"namefile":"toto.txt"
+        // "recording":"mongodb",
+        // "hostname":"localhost",
+        // "database": "db",
+        // "collection": "c",
+        // "sensorExperience" : {
+        //     "name" : "oneMax",
+        //     "num" : 6
+        // },
+        // "sensorFinal" : {
+        //     "name" : "oneMax",
+        //     "num" : 6
+        // }
+    }
+}
