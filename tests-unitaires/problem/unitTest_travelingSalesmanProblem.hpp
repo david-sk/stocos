@@ -12,6 +12,7 @@
 
 using namespace CppUnit;
 
+#include <fstream>		// ifstream
 #include <string>
 #include "problem/travelingSalesmanProblem.hpp"
 
@@ -30,9 +31,9 @@ class UnitTest_travelingSalesmanProblem : public CppUnit::TestFixture {
     }
 
     void loadInstance(void) {
-        if (access(std::string("instances/TravelingSalesmanProblem/travelingSalesmanProblem-10-1.json").c_str(), F_OK ) == -1) {
-            throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] the file does not exist.");
-        }
+		if (!std::ifstream(std::string("instances/TravelingSalesmanProblem/travelingSalesmanProblem-10-1.json").c_str()).good()) {
+			throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] the file does not exist");
+		}
         TravelingSalesmanProblem tsp(std::string("instances/TravelingSalesmanProblem/travelingSalesmanProblem-10-1.json"));
     }
 
