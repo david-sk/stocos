@@ -2,7 +2,7 @@
     // "seed": 0,
     "problem": {
         "name": "TravelingSalesmanProblem",
-        "instance": "instances/TravelingSalesmanProblem/travelingSalesmanProblem-a280.json"
+        "instance": "instances/TravelingSalesmanProblem/TSP-a280.json.gz"
     },
     "parameter_id": 2,
     "OptimizationAlgorithm": {

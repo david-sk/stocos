@@ -7,19 +7,18 @@
 /// @brief 
 ///
 
-#ifndef UNITTEST_SWAP_H
-#define UNITTEST_SWAP_H
+#ifndef UNITTEST_SHUFFLE_H
+#define UNITTEST_SHUFFLE_H
 
 #include <memory>       // std::shared_ptr std::unique_ptr
 
 #include "problem/oneMax.hpp"
 #include "solution/solutionArray.hpp"
-#include "optimizationAlgorithm/metaheuristic/operator/swap.hpp"
-
+#include "optimizationAlgorithm/metaheuristic/operator/shuffle.hpp"
 using namespace CppUnit;
 
-class UnitTest_swap : public CppUnit::TestFixture {
-    CPPUNIT_TEST_SUITE(UnitTest_swap);
+class UnitTest_shuffle : public CppUnit::TestFixture {
+    CPPUNIT_TEST_SUITE(UnitTest_shuffle);
     CPPUNIT_TEST(operator());
     CPPUNIT_TEST_SUITE_END();
 
@@ -43,8 +42,9 @@ class UnitTest_swap : public CppUnit::TestFixture {
             s1(i,static_cast<int>(i%2));
         }
         SOL_ONEMAX s2(s1);
-        Swap<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX> swap(mt_rand, oneMax, 5);
-        swap(s1);
+
+        Shuffle<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX> s(mt_rand, oneMax);
+        s(s2);
 
         CPPUNIT_ASSERT(!(s1 == s2));   
     }

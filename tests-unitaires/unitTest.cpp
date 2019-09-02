@@ -35,6 +35,7 @@
 #include "optimizationAlgorithm/metaheuristic/operator/mutation/unitTest_kBit.hpp"
 #include "optimizationAlgorithm/metaheuristic/operator/mutation/unitTest_neighborhood.hpp"
 #include "optimizationAlgorithm/metaheuristic/operator/unitTest_swap.hpp"
+#include "optimizationAlgorithm/metaheuristic/operator/unitTest_shuffle.hpp"
 
 #include "problem/unitTest_jobShopProblem.hpp"
 #include "problem/unitTest_knapsack.hpp"
@@ -57,6 +58,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_backtraking);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_flipBit);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_kBit);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_swap);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_shuffle);
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_neighborhood);
 
