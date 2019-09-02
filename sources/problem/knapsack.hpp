@@ -41,7 +41,7 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
     }
 
     void loadJson(const Json::Value &config) {
-        numInstance = config["problem"]["numInstance"].asString();
+        instance_number = config["problem"]["instance_number"].asString();
         capacity = config["problem"]["capacity"].asInt();
         nbItems =  config["problem"]["#items"].asUInt();
 
@@ -105,7 +105,7 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
 
    private:
         Maximization<SOL_KNAPSACK> solution_selection;
-        std::string numInstance;
+        std::string instance_number;
         int capacity;
         unsigned int nbItems;
         std::vector<int> weight;

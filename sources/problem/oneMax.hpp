@@ -40,7 +40,7 @@ class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>
     ~OneMax() {}
 
     virtual void loadJson(const Json::Value &config) {
-        numInstance = config["problem"]["numInstance"].asString();
+        instance_number = config["problem"]["instance_number"].asString();
         _N = config["problem"]["N"].asUInt();
     }
 
@@ -93,7 +93,7 @@ class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>
 
    private:
     Maximization<SOL_ONEMAX> solution_selection;
-    std::string numInstance;
+    std::string instance_number;
     unsigned int _N;
 };
 

@@ -1,30 +1,30 @@
 {
-    "seed": 0,
+    // "seed": 0,
     "problem": {
         "name": "TravelingSalesmanProblem",
-        "instance": "instances/TravelingSalesmanProblem/travelingSalesmanProblem-10-1.json"
+        "instance": "instances/TravelingSalesmanProblem/travelingSalesmanProblem-a280.json"
     },
     "parameter_id": 2,
     "OptimizationAlgorithm": {
         "0": {
             "className":"IteratedLocalSearch",
             "StoppingCriteria": {
-                "budget": 100,
-                "fitnessObjectif": 50
+                "budget": 5000000,
+                "fitnessObjectif": 0
             },
             "AtomicOperation": {
                 "className": "Swap",
-                "number_of_swap": 1
+                "number_of_swap": 40
             },
             "OptimizationAlgorithm": {
                 "className": "FirstImprovement",
                 "StoppingCriteria": {
-                    "budget": 100,
-                    "fitnessObjectif": 50
+                    "budget": 1000,
+                    "fitnessObjectif": 0
                 },
                 "AtomicOperation": {
                     "className": "Swap",
-                    "number_of_swap": 1
+                    "number_of_swap": 5
                 }
             }
         },
@@ -45,25 +45,25 @@
         "2": {
             "className":"TabuSearch",
             "StoppingCriteria": {
-                "budget": 1000000,
+                "budget": 5,
                 "fitnessObjectif": 0
             },
             "AtomicOperation": {
                 "className": "Swap",
-                "number_of_swap": 1
+                "number_of_swap": 120
             },
             
-            "sizeOfTabuList": 7
+            "sizeOfTabuList": 500
         },
         "3": {
             "className":"OnePlusLambda",
             "StoppingCriteria": {
-                "budget": 100,
-                "fitnessObjectif": 50
+                "budget": 5000000,
+                "fitnessObjectif": 0
             },
             "AtomicOperation": {
                 "className": "Swap",
-                "number_of_swap": 1
+                "number_of_swap": 2
             },
             
             "lambda": 50
@@ -71,7 +71,7 @@
     },
     "Statistic": {
         "recording":"stdout",
-        // "sensorNameCallingClass": true,
+        "sensorNameCallingClass": true,
         "sensorNumRound" : true,
         "sensorSolution" : true,
         "sensorStopwatch" : false
@@ -87,8 +87,8 @@
         //     "num" : 6
         // },
         // "sensorFinal" : {
-        //     "name" : "oneMax",
-        //     "num" : 6
+        //     "name" : "TSP",
+        //     "num" : 0
         // }
     }
 }

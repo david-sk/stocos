@@ -81,7 +81,7 @@ class ContinuousProblem : public Problem<SOL_CONTINUOUSPROBLEM, TYPE_FITNESS_CON
     ~ContinuousProblem() {}
 
     void loadJson(const Json::Value &config) {
-        numInstance = config["problem"]["numInstance"].asString();
+        instance_number = config["problem"]["instance_number"].asString();
 
         for(unsigned int i = 0; i < config["problem"]["objectif"].size(); i++) {
             objectif.push_back(Objectif(config["problem"]["objectif"][i]["function"].asString(),
@@ -141,7 +141,7 @@ class ContinuousProblem : public Problem<SOL_CONTINUOUSPROBLEM, TYPE_FITNESS_CON
 
    private:
     std::vector<std::unique_ptr<SolutionSelection<SOL_CONTINUOUSPROBLEM>>> solution_selection;
-    std::string numInstance;
+    std::string instance_number;
     std::vector<Objectif> objectif; // ! variable modifier par full_eval
     unsigned int nomberOfVariable;
     std::unique_ptr<std::pair<TYPE_CELL_CONTINUOUSPROBLEM, TYPE_CELL_CONTINUOUSPROBLEM> []> _domain;

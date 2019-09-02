@@ -33,7 +33,7 @@ class SolverClientRPC : public Solver {
         if (!_configuration["problem"]["instance"].empty()) {
             Json::Value tmp = problem->loadInstance(_configuration["problem"]["instance"].asString());
             problem->loadJson(tmp);
-        } else if (!_configuration["problem"]["numInstance"].empty())
+        } else if (!_configuration["problem"]["instance_number"].empty())
             problem->loadJson(_configuration);
         else
             throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] Problem does not exist.");

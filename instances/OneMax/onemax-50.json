@@ -1,7 +1,7 @@
 {
     "problem": {
 		"name" : "OneMax",
-        "numInstance": "50",
+        "instance_number": "50",
         "N": 50,
         "fitnessObjectif": 50
     }

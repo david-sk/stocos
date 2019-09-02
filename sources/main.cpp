@@ -24,7 +24,7 @@
 #include "problem/knapsack.hpp"
 #include "problem/travelingSalesmanProblem.hpp"
 // #include "problem/subsetSum.hpp"
-// #include "problem/continuousProblem.hpp"
+#include "problem/continuousProblem.hpp"
 
 
 #include "solver/solver.hpp"
@@ -61,8 +61,8 @@ int main(int argc, char **argv, char **envp) {
     sigaction(SIGINT, &sa, NULL);
    // <- signal
 	// Paramètre du programme
-    std::string configFile;
-    std::string configJson;
+    std::string config_pathfile;
+    std::string config_json;
     std::string loggin;
     
 	boost::program_options::variables_map vm;
@@ -70,8 +70,8 @@ int main(int argc, char **argv, char **envp) {
 	argements.add_options()
 						("help,h", "help message")
 						("version,v", "version")
-						("config,c", boost::program_options::value<std::string>(&configFile), "file configuration json (default : null)")
-                        ("json,j", boost::program_options::value<std::string>(&configJson), "in string json (default : null)")
+						("config,c", boost::program_options::value<std::string>(&config_pathfile), "file configuration json (default : null)")
+                        ("json,j", boost::program_options::value<std::string>(&config_json), "in string json (default : null)")
                         ("loggin,l", boost::program_options::value<std::string>(&loggin), "loggin (default : null)");
 	try {
     	boost::program_options::store(boost::program_options::parse_command_line(argc, argv, argements), vm);
@@ -93,7 +93,7 @@ int main(int argc, char **argv, char **envp) {
 	else
 		boost::log::core::get()->set_filter(boost::log::trivial::severity >= boost::log::trivial::info);
 
-    if (configFile.empty() && configJson.empty()) {
+    if (config_pathfile.empty() && config_json.empty()) {
         std::cerr<<"./xx -c config.json"<<std::endl;
         std::cerr<<"./xx -j \"{\"JSON\" : \"ON\"}\""<<std::endl;
         exit(EXIT_FAILURE);
@@ -102,13 +102,16 @@ int main(int argc, char **argv, char **envp) {
     // Read json file
     Json::Value configuration;
     Json::Reader reader;
-    std::ifstream test(configFile, std::ifstream::binary);
+    std::ifstream test(config_pathfile, std::ifstream::binary);
     bool parsingSuccessful = false;
 
-    if (!configFile.empty()) {
+    if (!config_pathfile.empty()) {
+		if (!std::ifstream(config_pathfile.c_str()).good()) {
+			throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] the file does not exist : "+ config_pathfile);
+		}
         parsingSuccessful = reader.parse(test, configuration, false);
-    } else if (!configJson.empty()) {
-        parsingSuccessful = reader.parse(configJson, configuration);
+    } else if (!config_json.empty()) {
+        parsingSuccessful = reader.parse(config_json, configuration);
     }
 
     if (!parsingSuccessful)
@@ -121,7 +124,7 @@ int main(int argc, char **argv, char **envp) {
     // std::shared_ptr<Subsetsum> eSubsetsum = std::make_shared<Subsetsum>();
     std::shared_ptr<Knapsack> eKnapsack = std::make_shared<Knapsack>();
     std::shared_ptr<TravelingSalesmanProblem> eTravelingSalesmanProblem = std::make_shared<TravelingSalesmanProblem>();
-    // std::shared_ptr<ContinuousProblem> eContinuousProblem = std::make_shared<ContinuousProblem>();
+    std::shared_ptr<ContinuousProblem> eContinuousProblem = std::make_shared<ContinuousProblem>();
 
 
     Solver *solver = nullptr;
@@ -133,8 +136,8 @@ int main(int argc, char **argv, char **envp) {
         //     solver = new SolverGeneric<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CELL_SUBSETSUM>(configuration, eSubsetsum);
         else if (configuration["problem"]["name"].asString() == "Knapsack")
             solver = new SolverGeneric<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_KNAPSACK>(configuration, eKnapsack);
-        // else if (configuration["problem"]["name"].asString() == "ContinuousProblem")
-        //     solver = new SolverGeneric<SOL_CONTINUOUSPROBLEM, TYPE_FITNESS_CONTINUOUSPROBLEM, TYPE_CELL_CONTINUOUSPROBLEM>(configuration, eContinuousProblem);
+        else if (configuration["problem"]["name"].asString() == "ContinuousProblem")
+            solver = new SolverGeneric<SOL_CONTINUOUSPROBLEM, TYPE_FITNESS_CONTINUOUSPROBLEM, TYPE_CELL_CONTINUOUSPROBLEM>(configuration, eContinuousProblem);
         else if (configuration["problem"]["name"].asString() == "TravelingSalesmanProblem")
             solver = new SolverGeneric<SOL_STP, TYPE_FITNESS_STP, TYPE_CELL_STP>(configuration, eTravelingSalesmanProblem);
         else

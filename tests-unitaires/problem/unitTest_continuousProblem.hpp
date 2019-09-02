@@ -39,7 +39,6 @@ class UnitTest_ContinuousProblem: public CppUnit::TestFixture {
             s->operator()(i, i + (7 * i) + 1);
         }
         gProblem.full_eval(*s);
-        std::cout<<*s<<std::endl;
     }
 
     private:

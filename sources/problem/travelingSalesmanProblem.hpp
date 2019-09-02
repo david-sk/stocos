@@ -37,12 +37,12 @@ class TravelingSalesmanProblem : public Problem<SOL_STP, TYPE_FITNESS_STP, TYPE_
     virtual ~TravelingSalesmanProblem() {}
 
     void loadJson(const Json::Value &config) {
-        numInstance = config["problem"]["numInstance"].asString();
-        numberOfNodes = config["problem"]["numberOfNodes"].asUInt();
+        instance_number = config["problem"]["instance_number"].asString();
+        numberOfNodes = config["problem"]["number_of_nodes"].asUInt();
 
-        for (unsigned int i = 0 ; i < config["problem"]["nodes"].size() ; i++) {
-            double x = config["problem"]["nodes"][i]["x"].asDouble();
-            double y = config["problem"]["nodes"][i]["y"].asDouble();
+        for (unsigned int i = 0 ; i < config["problem"]["node_coord_section"].size() ; i++) {
+            double x = config["problem"]["node_coord_section"][i]["x"].asDouble();
+            double y = config["problem"]["node_coord_section"][i]["y"].asDouble();
             nodes.push_back(std::pair<double, double>(x, y));
         }
     }
@@ -86,7 +86,7 @@ class TravelingSalesmanProblem : public Problem<SOL_STP, TYPE_FITNESS_STP, TYPE_
     }
 
     Minimization<SOL_STP> solution_selection;
-    std::string numInstance;
+    std::string instance_number;
     unsigned int numberOfNodes;
     std::vector<std::pair<double, double>> nodes;
 };
