@@ -103,7 +103,7 @@ public:
     void loadJson(const Json::Value &config) {
     }
 
-    void full_eval(SOL_QAP &p) {
+    void evaluation(SOL_QAP &p) {
         unsigned int sum = 0;
         for (unsigned int i = 0 ; i < n ; i++) {
             for (unsigned int j = 0 ; j < n ; j++)
@@ -112,7 +112,7 @@ public:
         p.setFitness(0, sum);
     }
 
-    void reset_solution(SOL_QAP &s) const {
+    void resetSolution(SOL_QAP &s) const {
         
     }
 

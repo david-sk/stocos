@@ -17,6 +17,9 @@ test: check
 	@cd build && make
 	@cd build && make test
 
+run:
+	./build/stocos-Release -c ./configuration/stocos-TSP.json
+
 check:
 	@#build-essential
 	@hash cmake 2> /dev/null || sudo apt-get install -y cmake 2> /dev/null || ( echo >&2 "Please install cmake" ; exit -1)

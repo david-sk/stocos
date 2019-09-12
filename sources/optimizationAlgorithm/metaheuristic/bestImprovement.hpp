@@ -41,7 +41,7 @@ class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CEL
         solution_star = s;
 
         // if (!solution_star.fitnessIsValid()) {
-        //    this-> _problem.full_eval(solution_star);
+        //    this-> _problem.evaluation(solution_star);
         // }
 
         // #ifdef DEBUG
@@ -54,10 +54,10 @@ class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CEL
         //     std::unique_ptr<std::vector<std::pair<unsigned int, SOL>>> listOfNeighborhood =  _atomicOperations.listOfMutations(solution_star);
 
         //     unsigned int bestNeighbour = 0;
-        //     this->_problem.full_eval((*listOfNeighborhood)[0].second);
+        //     this->_problem.evaluation((*listOfNeighborhood)[0].second);
 
         //     for (unsigned int i = 1 ; i < listOfNeighborhood->size() ; i++) {
-        //         this->_problem.full_eval((*listOfNeighborhood)[i].second);
+        //         this->_problem.evaluation((*listOfNeighborhood)[i].second);
         //         if (this->_problem->solutionSelection((*listOfNeighborhood)[i].second, (*listOfNeighborhood)[bestNeighbour].second)) {
         //             bestNeighbour = i;
         //         }

@@ -13,6 +13,7 @@
 #include <random>
 #include <string>
 
+#include "../../solution/population.hpp"
 #include "../../solution/solutionArray.hpp"
 #include "../optimizationAlgorithm.hpp"
 #include "../../problem/problem.hpp"
@@ -67,12 +68,31 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
     bool stop() { return i < (_len_string); }
 
     std::unique_ptr<SOL> operator()(const SOL &s) {
+        solution = std::make_unique<SOL>(s);
         reset();
 
+        //Convert
+        for(unsigned int i = 0 ; i < _len_string  ; i++) {
+            solution->operator()(i, _string[i]);
+        }
+
+        std::cout<<*solution<<std::endl;
+
+        // applay filtering
+        
         do {
             step();
-            // this-> _problem.filtering(s);
+            
+            //Convert
+            for(unsigned int i = 0 ; i < _len_string  ; i++) {
+                solution->operator()(i, _string[i]);
+            }
+            std::cout<<*solution<<std::endl;
 
+            // applay filtering
+            // if (this->_problem->filtering(*solution)) {
+
+            // }
         } while (stop());
 
         std::unique_ptr<SOL> result;
@@ -97,6 +117,7 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
 
     unsigned int nbCall;
     std::unique_ptr<unsigned int[]> _string;
+    std::unique_ptr<SOL> solution;
 
     bool x;
     unsigned int i;

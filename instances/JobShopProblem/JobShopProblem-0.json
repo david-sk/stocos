@@ -1,7 +1,7 @@
 {
     "problem": {
         "name": "Job Shop Problem",
-        "numInstance": "0",
+        "instance_number": "0",
         "jobs": ["job1", "job2", "job3"],
 		"job1": [ {"machine_id" : 0, "processing_time" : 3},
 				  {"machine_id" : 1, "processing_time" : 2},

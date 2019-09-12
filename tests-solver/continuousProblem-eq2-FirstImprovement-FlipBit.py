@@ -18,7 +18,7 @@ if __name__ == '__main__':
         "seed": 0,
         "problem": {
             "name": "ContinuousProblem",
-            "numInstance": "0",
+            "instance_number": "0",
             "objectif": [
                 {
                     "name": "objectif1",

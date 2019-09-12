@@ -17,13 +17,12 @@
 #include <utility>
 #include <unistd.h>
 
+
 #include "../solution/solutionArray.hpp"
 #include "../solutionSelection/solutionSelection.hpp"
-
+#include "../solutionSelection/solutionSelectionBuilder.hpp"
 #include "exprtk/exprtk.hpp"
 #include "problem.hpp"
-#include "../solutionSelection/solutionSelectionBuilder.hpp"
-
 
 using TYPE_FITNESS_CONTINUOUSPROBLEM = double;
 using TYPE_CELL_CONTINUOUSPROBLEM = double;
@@ -82,7 +81,7 @@ class ContinuousProblem : public Problem<SOL_CONTINUOUSPROBLEM, TYPE_FITNESS_CON
     ~ContinuousProblem() {}
 
     void loadJson(const Json::Value &config) {
-        numInstance = config["problem"]["numInstance"].asString();
+        instance_number = config["problem"]["instance_number"].asString();
 
         for(unsigned int i = 0; i < config["problem"]["objectif"].size(); i++) {
             objectif.push_back(Objectif(config["problem"]["objectif"][i]["function"].asString(),
@@ -112,7 +111,7 @@ class ContinuousProblem : public Problem<SOL_CONTINUOUSPROBLEM, TYPE_FITNESS_CON
         return std::move(s);
     }
 
-    void full_eval(SOL_CONTINUOUSPROBLEM& s) {
+    void evaluation(SOL_CONTINUOUSPROBLEM& s) {
         unsigned int offset = 0;
         for(unsigned int i = 0; i < objectif.size(); i++) {
             objectif[i].setValue(s, i + offset);
@@ -142,8 +141,8 @@ class ContinuousProblem : public Problem<SOL_CONTINUOUSPROBLEM, TYPE_FITNESS_CON
 
    private:
     std::vector<std::unique_ptr<SolutionSelection<SOL_CONTINUOUSPROBLEM>>> solution_selection;
-    std::string numInstance;
-    std::vector<Objectif> objectif; // ! variable modifier par full_eval
+    std::string instance_number;
+    std::vector<Objectif> objectif; // ! variable modifier par evaluation
     unsigned int nomberOfVariable;
     std::unique_ptr<std::pair<TYPE_CELL_CONTINUOUSPROBLEM, TYPE_CELL_CONTINUOUSPROBLEM> []> _domain;
 };

@@ -20,12 +20,15 @@
 #include "../statistic/sensorSolution.hpp"
 #include "../statistic/sensorStopwatch.hpp"
 #include "../statistic/sensorFinal.hpp"
+#include "../statistic/sensorFitness.hpp"
 #include "../statistic/sensorExperience.hpp"
 #include "../statistic/sensorNameCallingClass.hpp"
 #include "../stoppingCriteria/stoppingCriteria.hpp"
 #include "../stoppingCriteria/criteriaBudget.hpp"
 #include "../stoppingCriteria/criteriaFitnessObjectif.hpp"
 #include "../problem/problem.hpp"
+#include "../optimizationAlgorithm/exhaustiveSearch/backtracking.hpp"
+#include "../optimizationAlgorithm/exhaustiveSearch/combinationGenerator.hpp"
 #include "../optimizationAlgorithm/metaheuristic/firstImprovement.hpp"
 #include "../optimizationAlgorithm/metaheuristic/bestImprovement.hpp"
 #include "../optimizationAlgorithm/metaheuristic/onePlusLambda.hpp"
@@ -33,10 +36,12 @@
 #include "../optimizationAlgorithm/metaheuristic/simulatedAnnealing.hpp"
 #include "../optimizationAlgorithm/metaheuristic/tabuSearch.hpp"
 #include "../optimizationAlgorithm/metaheuristic/evolutionaryAlgorithm.hpp"
+#include "../optimizationAlgorithm/nearestNeighbourAlgorithm.hpp"
 #include "../optimizationAlgorithm/metaheuristic/operator/mutation/flipBit.hpp"
 #include "../optimizationAlgorithm/metaheuristic/operator/mutation/neighborhood.hpp"
 #include "../optimizationAlgorithm/metaheuristic/operator/mutation/intervalReal.hpp"
-
+#include "../optimizationAlgorithm/metaheuristic/operator/swap.hpp"
+#include "../optimizationAlgorithm/metaheuristic/operator/shuffle.hpp"
 
 template<typename SOL, typename TYPE_FITNESS,typename TYPE_CELL>
 class AlgoBuilder {
@@ -53,8 +58,10 @@ class AlgoBuilder {
 
         std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> operator()(const Json::Value &configuration) {
             std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> optimizationAlgorithm = nullptr;
-            std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _atomicOperation = atomicOperation(configuration["AtomicOperation"]);
             std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> _stoppingCriteria = stoppingCriteria(configuration["StoppingCriteria"]);
+            std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _atomicOperation = nullptr;
+            if (configuration["className"] != "NearestNeighbourAlgorithm")
+                _atomicOperation = atomicOperation(configuration["AtomicOperation"]);
             
             if (configuration["className"] == "FirstImprovement") {
                 optimizationAlgorithm = std::make_unique<FirstImprovement<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation));
@@ -73,6 +80,12 @@ class AlgoBuilder {
                 optimizationAlgorithm = std::make_unique<OnePlusLambda<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation), configuration["lambda"].asInt());
             } else if (configuration["className"] == "SimulatedAnnealing") {
                 optimizationAlgorithm = std::make_unique<SimulatedAnnealing<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem, std::move(_atomicOperation));
+            } else if (configuration["className"] == "Backtraking") {
+
+            } else if (configuration["className"] == "CombinationGenerator") {
+
+            } else if (configuration["className"] == "NearestNeighbourAlgorithm") {
+                optimizationAlgorithm = std::make_unique<NearestNeighbourAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem);
             } else {
                 throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " The algorithm "+ configuration["className"].asString() +" does not exist.");
             }
@@ -94,6 +107,11 @@ class AlgoBuilder {
             if (!configuration["sensorSolution"].empty()) {
                 if (configuration["sensorSolution"] == true) {
                     __statistic->addSensor(new SensorSolution<SOL>);
+                }
+            }
+            if (!configuration["sensorFitness"].empty()) {
+                if (configuration["sensorFitness"] == true) {
+                    __statistic->addSensor(new SensorFitness<SOL>);
                 }
             }
             if (!configuration["sensorStopwatch"].empty()) {
@@ -133,7 +151,12 @@ class AlgoBuilder {
                 //return std::make_unique<Neighborhood<SOL, TYPE_FITNESS, SOL>>(this->_mt_rand);
                 //throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " Not implemented : "+configuration["className"].asString());
                 return nullptr;
-            }
+            } else if (configuration["className"].asString() == "Swap") {
+                return std::make_unique<Swap<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _problem, configuration["number_of_swap"].asInt());
+            } else if (configuration["className"].asString() == "Shuffle") {
+                return std::make_unique<Shuffle<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _problem);
+            } else 
+                throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " The atomicOperation "+ configuration["className"].asString() +" does not exist.");
             return nullptr;
         }
 

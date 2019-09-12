@@ -1,9 +1,9 @@
 {
     "problem": {
         "name": "TravelingSalesmanProblem",
-        "numInstance": "1",
-		"numberOfNodes" : 10,
-        "nodes": [
+        "instance_number": "1",
+		"number_of_nodes" : 10,
+        "node_coord_section": [
 			{"id" : 0, "x" : 34.1, "y" : 4.3},
 			{"id" : 1, "x" : 2.5,  "y" : 15.6},
 			{"id" : 2, "x" : 3.1,  "y" : 5.3},

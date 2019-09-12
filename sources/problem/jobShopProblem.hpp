@@ -53,13 +53,13 @@ class JobShopProblem : public Problem<SOL_JOBSHOPPROBLEM, TYPE_FITNESS_JOBSHOPPR
 
     const std::vector<std::vector<std::pair<unsigned int, unsigned int>>> &getInstance() const { return instance; }
 
-    void full_eval(SOL_JOBSHOPPROBLEM &s) {}
+    void evaluation(SOL_JOBSHOPPROBLEM &s) {}
 
     /*void incremental(SolutionArray const &s, unsigned int mutatedCell) const {
 
     }*/
 
-    void reset_solution(SOL_JOBSHOPPROBLEM &s) const {}
+    void resetSolution(SOL_JOBSHOPPROBLEM &s) const {}
 
    private:
     std::vector<std::vector<std::pair<unsigned int, unsigned int>>> instance;

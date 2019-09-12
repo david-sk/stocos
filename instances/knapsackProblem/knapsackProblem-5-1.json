@@ -1,7 +1,7 @@
 {
     "problem": {
 		"name" : "knapsackProblem",
-        "numInstance": "5-1",
+        "instance_number": "5-1",
         "capacity": 6,
         "#items" : 5,
         "weight" : [3, 1, 4, 2, 5],

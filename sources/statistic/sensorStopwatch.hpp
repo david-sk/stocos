@@ -1,5 +1,5 @@
 ///
-/// @file criteria.hpp
+/// @file sensorStopwatch.hpp
 /// @author Jxtopher
 /// @version 1
 /// @copyright CC-BY-NC-SA

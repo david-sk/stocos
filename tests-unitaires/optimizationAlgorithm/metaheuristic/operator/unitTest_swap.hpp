@@ -40,14 +40,13 @@ class UnitTest_swap : public CppUnit::TestFixture {
         std::shared_ptr<OneMax> oneMax = std::make_shared<OneMax>(N);
         SOL_ONEMAX s1(1, N);
         for(unsigned int i = 0 ; i < N ; i++) {
-            s1(i,static_cast<int>(i));
+            s1(i,static_cast<int>(i%2));
         }
         SOL_ONEMAX s2(s1);
-        // Swap<SOL_ONEMAX, int, int> swap(mt_rand, oneMax, 5);
-        // swap(s1);
-        // swap.cancelMutations(s1);
+        Swap<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX> swap(mt_rand, oneMax, 5);
+        swap(s1);
 
-        CPPUNIT_ASSERT(s1 == s2);   
+        CPPUNIT_ASSERT(!(s1 == s2));   
     }
     
     private:

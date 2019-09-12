@@ -12,13 +12,14 @@
 
 using namespace CppUnit;
 
+#include <fstream>		// ifstream
 #include <string>
 #include "problem/travelingSalesmanProblem.hpp"
 
 class UnitTest_travelingSalesmanProblem : public CppUnit::TestFixture {
     CPPUNIT_TEST_SUITE(UnitTest_travelingSalesmanProblem);
     CPPUNIT_TEST(loadInstance);
-    CPPUNIT_TEST(full_eval);
+    CPPUNIT_TEST(evaluation);
     //CPPUNIT_TEST(distance_euclidienne);
     CPPUNIT_TEST_SUITE_END();
 
@@ -30,18 +31,18 @@ class UnitTest_travelingSalesmanProblem : public CppUnit::TestFixture {
     }
 
     void loadInstance(void) {
-        if (access(std::string("instances/TravelingSalesmanProblem/travelingSalesmanProblem-10-1.json").c_str(), F_OK ) == -1) {
-            throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] the file does not exist.");
-        }
-        TravelingSalesmanProblem tsp(std::string("instances/TravelingSalesmanProblem/travelingSalesmanProblem-10-1.json"));
+		if (!std::ifstream(std::string("instances/TravelingSalesmanProblem/TSP-10-1.json").c_str()).good()) {
+			throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] the file does not exist");
+		}
+        TravelingSalesmanProblem tsp(std::string("instances/TravelingSalesmanProblem/TSP-10-1.json"));
     }
 
-    void full_eval(void) {
-        TravelingSalesmanProblem tsp(std::string("instances/TravelingSalesmanProblem/travelingSalesmanProblem-10-1.json"));
+    void evaluation(void) {
+        TravelingSalesmanProblem tsp(std::string("instances/TravelingSalesmanProblem/TSP-10-1.json"));
         std::unique_ptr<SOL_STP> s1 = tsp.new_solution();
 
         // std::cout<<(*s1)<<std::endl;
-        tsp.full_eval((*s1));
+        tsp.evaluation((*s1));
         // std::cout<<(*s1)<<std::endl;
     }
 

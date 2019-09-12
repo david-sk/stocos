@@ -37,7 +37,7 @@ class TabuSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
     std::unique_ptr<SOL> operator()(const SOL &s) {
         solution_star = s;
         if (!solution_star.fitnessIsValid()) {
-            this->_problem->full_eval(solution_star);
+            this->_problem->evaluation(solution_star);
         }
 
         while (this->_stoppingCriteria->operator()(solution_star)) {
@@ -56,7 +56,7 @@ class TabuSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
             }
 
             if (!inTheTabooList) {
-                this->_problem->full_eval(solution_beta);
+                this->_problem->evaluation(solution_beta);
                 if (this->_problem->solutionSelection(solution_beta, solution_star)) {
                     solution_star = solution_beta;
                 }

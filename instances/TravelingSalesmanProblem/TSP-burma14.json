@@ -1,0 +1,25 @@
+{
+    "problem": {
+        "name": "TravelingSalesmanProblem",
+        "instance_number": "burma14",
+        "comment" : "14-Staedte in Burma (Zaw Win) - EDGE_WEIGHT_TYPE: GEO - EDGE_WEIGHT_FORMAT: FUNCTION ",
+        "number_of_nodes" : 14,
+        "fitness*": 3323,
+        "node_coord_section": [
+            {"id" : 1, "x" : 16.47, "y" : 96.10},
+            {"id" : 2, "x" : 16.47, "y" : 94.44},
+            {"id" : 3, "x" : 20.09, "y" : 92.54},
+            {"id" : 4, "x" : 22.39, "y" : 93.37},
+            {"id" : 5, "x" : 25.23, "y" : 97.24},
+            {"id" : 6, "x" : 22.00, "y" : 96.05},
+            {"id" : 7, "x" : 20.47, "y" : 97.02},
+            {"id" : 8, "x" : 17.20, "y" : 96.29},
+            {"id" : 9, "x" : 16.30, "y" : 97.38},
+            {"id" : 10, "x" : 14.05, "y" : 98.12},
+            {"id" : 11, "x" : 16.53, "y" : 97.38},
+            {"id" : 12, "x" : 21.52, "y" : 95.59},
+            {"id" : 13, "x" : 19.41, "y" : 97.13},
+            {"id" : 14, "x" : 20.09, "y" : 94.55}
+        ]
+    }
+}

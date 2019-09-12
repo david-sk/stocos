@@ -11,9 +11,15 @@
 #ifndef PROBLEM_H
 #define PROBLEM_H
 
-#include <iostream>
-#include <utility>
-#include <stdexcept>
+#include <fstream>		// std::ifstream
+#include <iostream>		// std::cout, std::endl
+#include <utility>		// std::pair
+#include <stdexcept>	// std::runtime_error
+#include <vector>		// std::vector
+#include <sstream>      // std::stringstream
+#include <boost/iostreams/filtering_streambuf.hpp>
+#include <boost/iostreams/copy.hpp>
+#include <boost/iostreams/filter/gzip.hpp>
 
 #include "../solution/solution.hpp"
 #include "../solution/population.hpp"
@@ -36,17 +42,39 @@ public:
 	/// @param file 		path of the json file
 	/// @return Json::Value give aconfiguration of the problem in Json format
 	///
-    virtual Json::Value loadInstance(const std::string &file) const {
-		if (access(file.c_str(), F_OK ) == -1) {
-			throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] the file does not exist : "+ file);
+    virtual Json::Value loadInstance(const std::string &pathfile) const {
+		if (!std::ifstream(pathfile.c_str()).good()) {
+			throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] the file does not exist : "+ pathfile);
 		}
-        Json::Value root;  // will contains the root value after parsing.
-        Json::Reader reader;
-        std::ifstream test(file, std::ifstream::binary);
-        bool parsingSuccessful = reader.parse(test, root, false);
 
-        if (!parsingSuccessful)
-            throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " +reader.getFormattedErrorMessages());
+		Json::Value root;  // will contains the root value after parsing.
+        Json::Reader reader;
+		bool parsingSuccessful;
+
+		std::ifstream file(pathfile.c_str(),std::ios_base::binary );
+		if (file.is_open()) {
+			char buffer[2];
+			unsigned char magic_number_gzip[2] = {0x1F, 0x8B};
+			file.read (buffer, 2);
+			file.seekg(0);
+			if (static_cast<unsigned char>(buffer[0]) == magic_number_gzip[0] &&
+				static_cast<unsigned char>(buffer[1]) == magic_number_gzip[1] ) { // gzip
+				
+				boost::iostreams::filtering_streambuf<boost::iostreams::input> in;
+				in.push(boost::iostreams::gzip_decompressor());
+				in.push(file);
+				std::stringstream dst;
+				boost::iostreams::filtering_streambuf<boost::iostreams::output> out(dst);
+				boost::iostreams::copy(in, out);
+				parsingSuccessful = reader.parse(dst.str(), root);
+			} else // json file
+				parsingSuccessful = reader.parse(file, root, false);
+		}
+		else
+			throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] Error opening file : "+ pathfile);
+
+		if (!parsingSuccessful)
+			throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " +reader.getFormattedErrorMessages());
 
         std::string encoding = root.get("encoding", "UTF-8").asString();
 		return root;
@@ -64,8 +92,8 @@ public:
 	/// 
 	/// @param s 
 	///
-	virtual void reset_solution(SOL &s) const {
-		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + "[-] Not implemented : reset_solution(SOL &s)");
+	virtual void resetSolution(SOL &s) const {
+		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + "[-] Not implemented : resetSolution(SOL &s)");
 	}
 
 	/// 
@@ -84,7 +112,7 @@ public:
 	/// @return true 	if the solution structure is valid
 	/// @return false 	if the solution structure is not valid
 	///
-	virtual bool check_solution(const SOL &s) const {
+	virtual bool checkSolutionStructure(const SOL &s) const {
 		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + "[-] Not implemented : new_solution(SOL &s)");
 	}
 
@@ -95,10 +123,17 @@ public:
 	/// 
 	/// @param s solution with the update fitness 
 	///
-	virtual void full_eval(SOL &s) = 0;
+	virtual void evaluation(SOL &s) = 0;
 	
-	virtual void incremental_eval(const SOL &s, const std::vector<std::pair<unsigned int, TYPE_CELL>> &_listOfMutations) const {
-		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + "[-] Not implemented : incremental_eval(...)");
+
+	/// 
+	/// @brief Evaluation incremetal of the solution
+	/// 
+	/// @param s 
+	/// @param _listOfMutations 
+	///
+	virtual void evaluationIncremental(const SOL &s, const std::vector<std::pair<unsigned int, TYPE_CELL>> &_listOfMutations) const {
+		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + "[-] Not implemented : evaluationIncremental(...)");
 	}
 	
 
@@ -109,8 +144,8 @@ public:
 	/// @return true 	si une sous-solution valid
 	/// @return false 	si une sous-solution **non** valid
 	///
-	virtual bool filtering(SOL &s) const {
-		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + "[-] Not implemented : filtering(SOL &s)");
+	virtual bool evaluationSubSolution(SOL &s) const {
+		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + "[-] Not implemented : evaluationSubSolution(SOL &s)");
 	}
 
 	/// 

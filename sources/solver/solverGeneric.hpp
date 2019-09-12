@@ -41,7 +41,7 @@ class SolverGeneric : public Solver {
 				if (!_configuration["problem"]["instance"].empty()) {
 					Json::Value tmp = problem->loadInstance(_configuration["problem"]["instance"].asString());
 					problem->loadJson(tmp);
-				} else if (!_configuration["problem"]["numInstance"].empty())
+				} else if (!_configuration["problem"]["instance_number"].empty())
 					problem->loadJson(_configuration);
 				else
 					throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] Problem does not exist.");
@@ -62,7 +62,7 @@ class SolverGeneric : public Solver {
 					initial_solution = std::make_unique<SOL>(_configuration["initial_solution"]);
 
 				if (!initial_solution->fitnessIsValid()) {
-					_problem->full_eval(*initial_solution);
+					_problem->evaluation(*initial_solution);
 				}
 		}
 		virtual ~SolverGeneric() {
