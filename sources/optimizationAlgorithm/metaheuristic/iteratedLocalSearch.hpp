@@ -41,7 +41,7 @@ class IteratedLocalSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE
     std::unique_ptr<SOL> operator()(const SOL &s) {
         solution_star = s;
         if (!solution_star.fitnessIsValid()) {
-            this->_problem->full_eval(solution_star);
+            this->_problem->evaluation(solution_star);
         }
         
         while (this->_stoppingCriteria->operator()(solution_star)) {
@@ -52,7 +52,7 @@ class IteratedLocalSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE
             _exploration->operator()(solution_beta);
             std::unique_ptr<SOL> solution_beta_beta = _exploitation->operator()(solution_beta);
 
-            this->_problem->full_eval(*solution_beta_beta);
+            this->_problem->evaluation(*solution_beta_beta);
             if (this->_problem->solutionSelection(*solution_beta_beta, solution_star)) {
                 solution_star = *solution_beta_beta;
             }

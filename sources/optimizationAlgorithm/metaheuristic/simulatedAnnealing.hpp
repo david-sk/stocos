@@ -30,7 +30,7 @@ class SimulatedAnnealing : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_
     std::unique_ptr<SOL> operator()(const SOL &s) {
         solution_star = s;
         // if (!solution_star.fitnessIsValid()) {
-        //     this->_problem.full_eval(solution_star);
+        //     this->_problem.evaluation(solution_star);
         // }
 
         return std::move(std::make_unique<SOL>(solution_star));

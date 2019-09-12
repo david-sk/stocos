@@ -18,10 +18,10 @@ template <typename TYPE_CELL>
 class Domain {
     public:
     /// 
-    /// @brief Pour tout les cases, give a range [a, b]
+    /// @brief Pour tout les cases, give a range [a, b], pas
     /// 
     ///
-    Domain(std::pair<TYPE_CELL, TYPE_CELL>) {
+    Domain(std::tuple<TYPE_CELL, TYPE_CELL, TYPE_CELL> range) {
 
     }
 
@@ -29,7 +29,7 @@ class Domain {
     /// @brief Pour toutes les cases, give exhautive list
     /// 
     ///
-    Domain(std::vector<TYPE_CELL>) {
+    Domain(std::vector<TYPE_CELL> exhaustive_list) {
 
     }
 
@@ -37,7 +37,7 @@ class Domain {
     /// @brief Pour chaque cases
     /// 
     ///
-    Domain(std::vector<std::pair<TYPE_CELL, TYPE_CELL>>) {
+    Domain(std::vector<std::tuple<TYPE_CELL, TYPE_CELL, TYPE_CELL>> range) {
 
     }
 
@@ -45,7 +45,7 @@ class Domain {
     /// @brief Pour chaque cases
     /// 
     ///
-    Domain(std::vector<std::vector<TYPE_CELL>>) {
+    Domain(std::vector<std::vector<TYPE_CELL>> exhaustive_list) {
 
     }
 

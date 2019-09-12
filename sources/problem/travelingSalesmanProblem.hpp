@@ -55,14 +55,14 @@ class TravelingSalesmanProblem : public Problem<SOL_STP, TYPE_FITNESS_STP, TYPE_
         return std::move(s);
     }
 
-    bool check_solution(const SOL_STP &s) const {
+    bool checkSolutionStructure(const SOL_STP &s) const {
         if (s.sizeArray() != nodes.size() || s.numberOfObjective() != 1) {
             return false;
         }
         return true;
     }
 
-    virtual void full_eval(SOL_STP &s) {
+    virtual void evaluation(SOL_STP &s) {
         double distance_sum = 0;
         for (unsigned int i = 0; i < s.sizeArray() - 1; i++) {
             distance_sum += distance_euclidienne(nodes[s(i)], nodes[s(i + 1)]);

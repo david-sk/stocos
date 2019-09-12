@@ -33,7 +33,7 @@
             "className":"EvolutionaryAlgorithm",
             "StoppingCriteria": {
                 "budget": 100,
-                "fitnessObjectif": 50
+                "fitnessObjectif": 60
             },
             "AtomicOperation": {
                 "className": "FlipBit",
@@ -83,9 +83,9 @@
     "Statistic": {
         "recording":"stdout",
         // "sensorNameCallingClass": true,
-        // "sensorNumRound" : false,
-        // "sensorSolution" : true,
-        // "sensorStopwatch" : false
+        "sensorNumRound" : true,
+        "sensorSolution" : true,
+        "sensorStopwatch" : false,
         // "recording":"none"
         //"recording":"file",
         //"namefile":"toto.txt"

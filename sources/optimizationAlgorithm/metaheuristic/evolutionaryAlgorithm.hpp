@@ -47,7 +47,7 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
         solution_star = s;
 
         if (!solution_star.fitnessIsValid()) {
-            this->_problem->full_eval(solution_star);
+            this->_problem->evaluation(solution_star);
         }
         
         // Initialisation de la population à partir d'une solution
@@ -62,7 +62,7 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
         
         // Evaluation des parents
         for (SOL &p : parents)
-            this->_problem->full_eval(p);
+            this->_problem->evaluation(p);
         
         while (offsprings.size() < _lambda)
             offsprings.push_back(solution_star);
@@ -106,7 +106,7 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
             
             // Evaluation des parents
             for (SOL &p : parents)
-                this->_problem->full_eval(p);
+                this->_problem->evaluation(p);
             
             // Find best
             for (SOL &p : parents) {

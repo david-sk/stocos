@@ -2,19 +2,19 @@
     // "seed": 0,
     "problem": {
         "name": "TravelingSalesmanProblem",
-        "instance": "instances/TravelingSalesmanProblem/TSP-a280.json.gz"
+        "instance": "instances/TravelingSalesmanProblem/TSP-brd14051.json"
     },
-    "parameter_id": 2,
+    "parameter_id": 4,
     "OptimizationAlgorithm": {
         "0": {
             "className":"IteratedLocalSearch",
             "StoppingCriteria": {
-                "budget": 5000000,
+                "budget": 1000000,
                 "fitnessObjectif": 0
             },
             "AtomicOperation": {
                 "className": "Swap",
-                "number_of_swap": 40
+                "number_of_swap": 6000
             },
             "OptimizationAlgorithm": {
                 "className": "FirstImprovement",
@@ -24,7 +24,7 @@
                 },
                 "AtomicOperation": {
                     "className": "Swap",
-                    "number_of_swap": 5
+                    "number_of_swap": 3000
                 }
             }
         },
@@ -45,7 +45,7 @@
         "2": {
             "className":"TabuSearch",
             "StoppingCriteria": {
-                "budget": 5,
+                "budget": 1000000,
                 "fitnessObjectif": 0
             },
             "AtomicOperation": {
@@ -67,14 +67,22 @@
             },
             
             "lambda": 50
+        },
+        "4" : {
+            "className":"NearestNeighbourAlgorithm",
+            "StoppingCriteria": {
+                "budget": 5000000,
+                "fitnessObjectif": 0
+            }
         }
     },
     "Statistic": {
         "recording":"stdout",
         "sensorNameCallingClass": true,
         "sensorNumRound" : true,
-        "sensorSolution" : true,
-        "sensorStopwatch" : false
+        // "sensorSolution" : true,
+        "sensorFitness": true,
+        "sensorStopwatch" : false,
         // "recording":"none"
         //"recording":"file",
         //"namefile":"toto.txt"
@@ -86,9 +94,9 @@
         //     "name" : "oneMax",
         //     "num" : 6
         // },
-        // "sensorFinal" : {
-        //     "name" : "TSP",
-        //     "num" : 0
-        // }
+        "sensorFinal" : {
+            "name" : "TSP",
+            "num" : 0
+        }
     }
 }

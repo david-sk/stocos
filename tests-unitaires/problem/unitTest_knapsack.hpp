@@ -38,7 +38,7 @@ class UnitTest_knapsack : public CppUnit::TestFixture {
         s(2, 0);
         s(3, 1);
         s(4, 0);
-        eknapsack.full_eval(s);
+        eknapsack.evaluation(s);
         CPPUNIT_ASSERT(s.getFitness() == fitness);
     }
 

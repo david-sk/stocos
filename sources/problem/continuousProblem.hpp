@@ -111,7 +111,7 @@ class ContinuousProblem : public Problem<SOL_CONTINUOUSPROBLEM, TYPE_FITNESS_CON
         return std::move(s);
     }
 
-    void full_eval(SOL_CONTINUOUSPROBLEM& s) {
+    void evaluation(SOL_CONTINUOUSPROBLEM& s) {
         unsigned int offset = 0;
         for(unsigned int i = 0; i < objectif.size(); i++) {
             objectif[i].setValue(s, i + offset);
@@ -142,7 +142,7 @@ class ContinuousProblem : public Problem<SOL_CONTINUOUSPROBLEM, TYPE_FITNESS_CON
    private:
     std::vector<std::unique_ptr<SolutionSelection<SOL_CONTINUOUSPROBLEM>>> solution_selection;
     std::string instance_number;
-    std::vector<Objectif> objectif; // ! variable modifier par full_eval
+    std::vector<Objectif> objectif; // ! variable modifier par evaluation
     unsigned int nomberOfVariable;
     std::unique_ptr<std::pair<TYPE_CELL_CONTINUOUSPROBLEM, TYPE_CELL_CONTINUOUSPROBLEM> []> _domain;
 };

@@ -1,5 +1,5 @@
 ///
-/// @file criteria.hpp
+/// @file statistic.hpp
 /// @author Jxtopher
 /// @version 1
 /// @copyright CC-BY-NC-SA
@@ -17,8 +17,6 @@
 #include <mongo/client/dbclient.h>
 
 #include "sensor.hpp"
-
-
 
 template<class SOL>
 class Statistic {
@@ -118,24 +116,36 @@ class Statistic {
 
     void operator()(const SOL &s, std::string name_calling_class = "") {
         Json::Value tmp = this->asJson(s);
-        _name_calling_class = name_calling_class;
-        if (!tmp.empty()) {
-            if (recording == NONE) {
-                return ;
-            } else if (recording == STDOUT) {
-                std::unique_ptr<Json::StreamWriter> writer(builder.newStreamWriter());
-                writer->write(tmp, &std::cout);
-                std::cout<<std::endl;
-            } else if (recording == FILE) {
-                std::stringstream ss;
-                std::unique_ptr<Json::StreamWriter> writer(builder.newStreamWriter());
-                writer->write(tmp, &outFile);
-                outFile<<std::endl;
-            } else if (recording == MONGODB) {
-                mongo::BSONObj bson = mongo::fromjson(Json::writeString(builder, tmp));
-                _mongo_client.insert(_mongo_db_c, bson);
-            } else {
-                throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " The output Statistic does not exist.");
+        if (!tmp["round"].empty())
+            show_before["round"] = tmp["round"];
+        else
+            tmp.removeMember("round");
+        if (show_before != tmp) {
+            _name_calling_class = name_calling_class;
+            if (!tmp.empty()) {
+                if (recording == NONE) {
+                    return ;
+                } else if (recording == STDOUT) {
+                    std::unique_ptr<Json::StreamWriter> writer(builder.newStreamWriter());
+                    writer->write(tmp, &std::cout);
+                    std::cout<<std::endl;
+                } else if (recording == FILE) {
+                    std::stringstream ss;
+                    std::unique_ptr<Json::StreamWriter> writer(builder.newStreamWriter());
+                    writer->write(tmp, &outFile);
+                    outFile<<std::endl;
+                } else if (recording == MONGODB) {
+                    mongo::BSONObj bson = mongo::fromjson(Json::writeString(builder, tmp));
+                    _mongo_client.insert(_mongo_db_c, bson);
+                } else {
+                    throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " The output Statistic does not exist.");
+                }
+            }
+            show_before = tmp;
+        } else {
+            if (recording == STDOUT && !tmp["round"].empty()) {
+                std::cout<<"round:"<<tmp["round"]<<"\r";
+                std::cout.flush();
             }
         }
     }
@@ -162,7 +172,6 @@ class Statistic {
     }
 
     protected:
-        
         std::vector<Sensor<SOL> *> sensor;
         std::string _name_calling_class;
 
@@ -170,6 +179,7 @@ class Statistic {
         bool _none;
 
         Json::StreamWriterBuilder builder;
+        Json::Value show_before;
 
         // file
         std::string _namefile;

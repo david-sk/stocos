@@ -66,7 +66,7 @@ class Subsetsum : public Problem<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CEL
 		return fitnessObjectif;
 	}
 
-    void full_eval(SOL_SUBSETSUM &s) {
+    void evaluation(SOL_SUBSETSUM &s) {
         assert(setOfNumbers.size() == s.sizeArray());
         unsigned int sum = 0;
         for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
@@ -81,7 +81,7 @@ class Subsetsum : public Problem<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CEL
 
     }*/
 
-    void reset_solution(SOL_SUBSETSUM &s) const {
+    void resetSolution(SOL_SUBSETSUM &s) const {
         for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
             s(i, 0);
         }

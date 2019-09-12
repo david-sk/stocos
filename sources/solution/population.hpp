@@ -16,7 +16,7 @@
 
 
 template<typename SOL>
-class Population : public Solution<bool>,  public std::vector<SOL> {
+class Population : public Solution<double>,  public std::vector<SOL> {
     public:
     Population() {
 

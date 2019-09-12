@@ -54,7 +54,7 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
         assert(weight.size() == profit.size());
     }
 
-    void full_eval(SOL_KNAPSACK &s) {
+    void evaluation(SOL_KNAPSACK &s) {
         int fitness = 0;
         int W = 0;
 
@@ -72,7 +72,7 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
 
     }*/
 
-    void reset_solution(SOL_KNAPSACK &s) const {
+    void resetSolution(SOL_KNAPSACK &s) const {
         for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
             s(i, 0);
         }

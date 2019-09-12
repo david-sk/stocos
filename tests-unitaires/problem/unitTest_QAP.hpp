@@ -16,7 +16,7 @@ using namespace CppUnit;
 
 class UnitTest_QAP : public CppUnit::TestFixture {
     CPPUNIT_TEST_SUITE(UnitTest_QAP);
-    CPPUNIT_TEST(full_eval);
+    CPPUNIT_TEST(evaluation);
     CPPUNIT_TEST_SUITE_END();
 
     public:
@@ -26,7 +26,7 @@ class UnitTest_QAP : public CppUnit::TestFixture {
     void tearDown(void) {
     }
 
-    void full_eval(void) {
+    void evaluation(void) {
         // DATA
         unsigned int n = 12;
         unsigned int A[12][12] = {{0, 90, 10, 23, 43, 0, 0, 0, 0, 0, 0, 0}, 
@@ -86,7 +86,7 @@ class UnitTest_QAP : public CppUnit::TestFixture {
         delete[] _A;
         delete[] _B;
         
-        eQAP.full_eval(s);
+        eQAP.evaluation(s);
 
 
 

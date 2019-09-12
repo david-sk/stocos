@@ -33,7 +33,7 @@ class OnePlusLambda : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>
     std::unique_ptr<SOL> operator()(const SOL &s) {
         solution_star = s;
         if (!solution_star.fitnessIsValid()) {
-            this->_problem->full_eval(solution_star);
+            this->_problem->evaluation(solution_star);
         }
         
         while (this->_stoppingCriteria->operator()(solution_star)) {
@@ -44,7 +44,7 @@ class OnePlusLambda : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>
                 solution_alpha = solution_star;
                 
                 _atomicOperations->operator()(solution_alpha);
-                this->_problem->full_eval(solution_alpha);
+                this->_problem->evaluation(solution_alpha);
                 if (this->_problem->solutionSelection(solution_alpha, solution_beta)) {
                     solution_beta = solution_alpha;
                 }

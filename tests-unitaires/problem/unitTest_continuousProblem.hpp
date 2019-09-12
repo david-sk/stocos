@@ -18,7 +18,7 @@ using namespace CppUnit;
 
 class UnitTest_ContinuousProblem: public CppUnit::TestFixture {
     CPPUNIT_TEST_SUITE(UnitTest_ContinuousProblem);
-    CPPUNIT_TEST(full_eval);
+    CPPUNIT_TEST(evaluation);
     CPPUNIT_TEST(loadInstance);
     CPPUNIT_TEST_SUITE_END();
 
@@ -29,7 +29,7 @@ class UnitTest_ContinuousProblem: public CppUnit::TestFixture {
     void tearDown(void) {
     }
 
-    void full_eval(void) {
+    void evaluation(void) {
     }
 
     void loadInstance(void) {
@@ -38,7 +38,7 @@ class UnitTest_ContinuousProblem: public CppUnit::TestFixture {
         for (unsigned int i = 0 ; i < s->sizeArray() ; i++) {
             s->operator()(i, i + (7 * i) + 1);
         }
-        gProblem.full_eval(*s);
+        gProblem.evaluation(*s);
     }
 
     private:

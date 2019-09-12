@@ -52,7 +52,7 @@ class SolverClientRPC : public Solver {
             initial_solution = std::make_unique<SOL>(_configuration["initial_solution"]);
 
         if (!initial_solution->fitnessIsValid()) {
-            _problem->full_eval(*initial_solution);
+            _problem->evaluation(*initial_solution);
         }
 
         // Construction du global criterea

@@ -52,14 +52,14 @@ class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>
         return std::move(s);
     }
 
-    bool check_solution(const SOL_ONEMAX &s) const {
+    bool checkSolutionStructure(const SOL_ONEMAX &s) const {
         if (s.sizeArray() != _N || s.numberOfObjective() != 1) {
             return false;
         }
         return true;
     }
 
-    void full_eval(SOL_ONEMAX &s) {
+    void evaluation(SOL_ONEMAX &s) {
         unsigned int sum = 0;
         for (unsigned int i = 0; i < s.sizeArray(); i++) {
             sum += s(i);
@@ -71,7 +71,7 @@ class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>
 
     }*/
 
-    void reset_solution(SOL_ONEMAX &s) const {
+    void resetSolution(SOL_ONEMAX &s) const {
         for (unsigned int i = 0; i < s.sizeArray(); i++) {
             s(i, 0);
         }

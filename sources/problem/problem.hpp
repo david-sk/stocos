@@ -92,8 +92,8 @@ public:
 	/// 
 	/// @param s 
 	///
-	virtual void reset_solution(SOL &s) const {
-		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + "[-] Not implemented : reset_solution(SOL &s)");
+	virtual void resetSolution(SOL &s) const {
+		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + "[-] Not implemented : resetSolution(SOL &s)");
 	}
 
 	/// 
@@ -112,7 +112,7 @@ public:
 	/// @return true 	if the solution structure is valid
 	/// @return false 	if the solution structure is not valid
 	///
-	virtual bool check_solution(const SOL &s) const {
+	virtual bool checkSolutionStructure(const SOL &s) const {
 		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + "[-] Not implemented : new_solution(SOL &s)");
 	}
 
@@ -123,10 +123,17 @@ public:
 	/// 
 	/// @param s solution with the update fitness 
 	///
-	virtual void full_eval(SOL &s) = 0;
+	virtual void evaluation(SOL &s) = 0;
 	
-	virtual void incremental_eval(const SOL &s, const std::vector<std::pair<unsigned int, TYPE_CELL>> &_listOfMutations) const {
-		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + "[-] Not implemented : incremental_eval(...)");
+
+	/// 
+	/// @brief Evaluation incremetal of the solution
+	/// 
+	/// @param s 
+	/// @param _listOfMutations 
+	///
+	virtual void evaluationIncremental(const SOL &s, const std::vector<std::pair<unsigned int, TYPE_CELL>> &_listOfMutations) const {
+		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + "[-] Not implemented : evaluationIncremental(...)");
 	}
 	
 
@@ -137,8 +144,8 @@ public:
 	/// @return true 	si une sous-solution valid
 	/// @return false 	si une sous-solution **non** valid
 	///
-	virtual bool filtering(SOL &s) const {
-		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + "[-] Not implemented : filtering(SOL &s)");
+	virtual bool evaluationSubSolution(SOL &s) const {
+		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + "[-] Not implemented : evaluationSubSolution(SOL &s)");
 	}
 
 	/// 

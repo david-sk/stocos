@@ -26,7 +26,7 @@ class MagicSequence : public Problem<SOL_MAGICSEQUENCE, TYPE_FITNESS_MAGICSEQUEN
     void loadJson(const Json::Value &config) {
     }
 
-    void full_eval(SOL_MAGICSEQUENCE &s) {
+    void evaluation(SOL_MAGICSEQUENCE &s) {
         double resultat = 0;
         for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
 
@@ -49,7 +49,7 @@ class MagicSequence : public Problem<SOL_MAGICSEQUENCE, TYPE_FITNESS_MAGICSEQUEN
 
     }*/
 
-    void reset_solution(SOL_MAGICSEQUENCE &s) const {
+    void resetSolution(SOL_MAGICSEQUENCE &s) const {
         
     }
 

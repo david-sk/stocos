@@ -1,5 +1,5 @@
 /// 
-/// @file sensorFinal.hpp
+/// @file sensorNameCallingClass.hpp
 /// @author Jxtopher
 /// @brief Show statistics summary at a final optimisation
 /// @version 0.1
