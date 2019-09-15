@@ -10,6 +10,9 @@
 #ifndef SENSOREXPERIENCE_H
 #define SENSOREXPERIENCE_H
 
+#include <string>   // std::string
+
+#include <jsoncpp/json/json.h>
 
 #include "sensor.hpp"
 

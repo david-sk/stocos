@@ -10,6 +10,10 @@
 #ifndef SENSORNAMECALLINGCLASS_H
 #define SENSORNAMECALLINGCLASS_H
 
+#include <string>
+
+#include <jsoncpp/json/json.h>
+
 #include "sensorStopwatch.hpp"
 #include "sensorNumRound.hpp"
 #include "sensor.hpp"

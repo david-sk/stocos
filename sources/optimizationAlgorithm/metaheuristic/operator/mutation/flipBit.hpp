@@ -11,8 +11,8 @@
 #define OPERATION_FLIPBIT_H
 
 
-#include <random>
-#include <vector>
+#include <random>       // std::mt19937
+#include <vector>       // std::vector
 #include <memory>       // std::shared_ptr std::unique_ptr
 
 #include "../../../../solution/solutionArray.hpp"

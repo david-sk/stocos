@@ -12,13 +12,15 @@
 #ifndef NEARESTNEIGHOURALGORITHM_H
 #define NEARESTNEIGHOURALGORITHM_H
 
-#include <random>
-#include <algorithm>
-#include <vector>
-#include <utility>
+#include <algorithm>    // std::shuffle
+#include <memory>       // std::shared_ptr std::unique_ptr
+#include <random>       // std::mt19937
+#include <string>       // std::string
+#include <utility>      // std::pair
+#include <vector>       // std::vector
 
-#include "optimizationAlgorithm.hpp"
 #include "../problem/problem.hpp"
+#include "optimizationAlgorithm.hpp"
 
 namespace stocos 
 {

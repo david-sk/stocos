@@ -10,6 +10,9 @@
 #ifndef SENSORNUMROUND_H
 #define SENSORNUMROUND_H
 
+#include <string>
+
+#include <jsoncpp/json/json.h>
 
 #include "sensor.hpp"
 namespace stocos 

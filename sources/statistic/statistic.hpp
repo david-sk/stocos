@@ -14,9 +14,11 @@
 #include <string>
 #include <fstream>
 
+#include <jsoncpp/json/json.h>
 #include <mongo/client/dbclient.h>
 
 #include "sensor.hpp"
+
 namespace stocos 
 {
 

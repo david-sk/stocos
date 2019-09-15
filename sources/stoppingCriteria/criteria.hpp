@@ -26,7 +26,6 @@ class Criteria {
 
     virtual bool operator()(const SOL &s) = 0;
     virtual void reset() = 0;
-    protected:
 };
 
 }

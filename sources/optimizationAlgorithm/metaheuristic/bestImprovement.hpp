@@ -11,6 +11,8 @@
 #define BESTIMPROVEMENT_H
 
 #include <random>
+#include <memory>
+#include <string>
 
 #include "../optimizationAlgorithm.hpp"
 #include "../../stoppingCriteria/stoppingCriteria.hpp"

@@ -10,6 +10,10 @@
 #ifndef SENSORFINAL_H
 #define SENSORFINAL_H
 
+#include <string>
+
+#include <jsoncpp/json/json.h>
+
 #include "sensorStopwatch.hpp"
 #include "sensorNumRound.hpp"
 #include "sensor.hpp"

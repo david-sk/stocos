@@ -11,7 +11,9 @@
 #ifndef FIRSTIMPROVEMENT_H
 #define FIRSTIMPROVEMENT_H
 
+#include <memory>
 #include <random>
+#include <string>
 
 #include "operator/atomicOperation.hpp"
 #include "../optimizationAlgorithm.hpp"

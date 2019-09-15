@@ -11,6 +11,7 @@
 #define CRITERIAFITNESSOBJECTIF_H
 
 #include <cassert>
+
 #include "criteria.hpp"
 
 namespace stocos 

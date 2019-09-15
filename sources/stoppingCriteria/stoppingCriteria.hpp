@@ -10,9 +10,7 @@
 #ifndef STOPPINGCRITERIA_H
 #define STOPPINGCRITERIA_H
 
-#include <iostream>
-#include <list>
-#include <memory>
+#include <vector>
 
 #include "criteria.hpp"
 

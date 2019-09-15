@@ -14,8 +14,8 @@
 #include <vector>       // std::vector
 #include <random>
 #include <memory>       // std::shared_ptr std::unique_ptr
-#include "../../../../solution/solutionArray.hpp"
 
+#include "../../../../solution/solutionArray.hpp"
 #include "../atomicOperation.hpp"
 
 namespace stocos 

@@ -10,6 +10,10 @@
 #ifndef ONEPLUSLAMBDA_H
 #define ONEPLUSLAMBDA_H
 
+#include <memory>
+#include <random>
+#include <string>
+
 #include "../optimizationAlgorithm.hpp"
 
 namespace stocos 

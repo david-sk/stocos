@@ -10,10 +10,8 @@
 #ifndef OPERATION_SHUFFLE_H
 #define OPERATION_SHUFFLE_H
 
-#include <cassert>
-#include <algorithm>    
-#include <memory>       // std::shared_ptr std::unique_ptr
 #include <algorithm>    // std::random_shuffle
+#include <memory>       // std::shared_ptr std::unique_ptr
 
 #include "atomicOperation.hpp"
 

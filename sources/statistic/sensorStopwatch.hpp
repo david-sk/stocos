@@ -14,6 +14,8 @@
 #include <chrono>
 #include <ctime>
 
+#include <jsoncpp/json/json.h>
+
 #include "sensor.hpp"
 
 namespace stocos 

@@ -10,8 +10,8 @@
 #ifndef UNITTEST_DOMEXTENSION_H
 #define UNITTEST_DOMEXTENSION_H
 
-#include <unordered_set>
 #include <memory>
+#include <unordered_set>
 
 #include "solution/domExtension.hpp"
 

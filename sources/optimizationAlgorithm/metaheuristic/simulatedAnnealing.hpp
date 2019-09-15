@@ -10,6 +10,10 @@
 #ifndef SIMULATEDANNELING_H
 #define SIMULATEDANNELING_H
 
+#include <memory>
+#include <random>
+#include <string>
+
 namespace stocos 
 {
 

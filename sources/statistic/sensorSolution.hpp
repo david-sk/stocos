@@ -10,9 +10,13 @@
 #ifndef SENSORSOLTUTION_H
 #define SENSORSOLTUTION_H
 
+#include <string>
+
+#include <jsoncpp/json/json.h>
 
 #include "../solution/solution.hpp"
 #include "sensor.hpp"
+
 namespace stocos 
 {
 

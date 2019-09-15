@@ -10,9 +10,9 @@
 #ifndef OPERATION_INTERVALREAL_H
 #define OPERATION_INTERVALREAL_H
 
+#include <memory>       // std::shared_ptr std::unique_ptr
 #include <random>
 #include <vector>
-#include <memory>       // std::shared_ptr std::unique_ptr
 
 #include "../../../../solution/solutionArray.hpp"
 

@@ -11,7 +11,9 @@
 #ifndef EVOLUTIONARYALGORITHM_H
 #define EVOLUTIONARYALGORITHM_H
 
+#include <memory>
 #include <random>
+#include <string>
 
 #include "../../solution/population.hpp"
 #include "operator/atomicOperation.hpp"

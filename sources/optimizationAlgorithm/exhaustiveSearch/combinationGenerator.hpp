@@ -12,6 +12,7 @@
 #include <iostream>
 #include <random>
 #include <string>
+#include <vector>
 
 #include "../../solution/population.hpp"
 #include "../../solution/solutionArray.hpp"
@@ -49,7 +50,6 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
             i++;
             x = true;
         }
-
     }
 
     void step() {

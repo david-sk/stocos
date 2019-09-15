@@ -10,7 +10,9 @@
 #ifndef OPTIMIZATIONALGORITHM_H
 #define OPTIMIZATIONALGORITHM_H
 
+#include <memory>
 #include <random>
+#include <string>
 
 #include "../stoppingCriteria/stoppingCriteria.hpp"
 #include "../problem/problem.hpp"

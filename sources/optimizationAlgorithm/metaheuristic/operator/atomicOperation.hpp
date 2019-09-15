@@ -10,8 +10,8 @@
 #ifndef ATOMICOPERATOR_H
 #define ATOMICOPERATOR_H
 
-#include <random>
 #include <memory>       // std::shared_ptr std::unique_ptr
+#include <random>
 
 #include "../../optimizationAlgorithm.hpp"
 

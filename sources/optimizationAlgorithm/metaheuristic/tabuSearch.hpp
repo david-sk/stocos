@@ -13,6 +13,8 @@
 #include <boost/circular_buffer.hpp>
 
 #include <memory>
+#include <random>
+#include <string>
 
 namespace stocos 
 {

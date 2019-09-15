@@ -10,7 +10,9 @@
 #define BACKTRACKING_H
 
 #include <iostream>
+#include <memory>
 #include <string>
+#include <vector>
 
 #include "../../solution/solutionArray.hpp"
 #include "../optimizationAlgorithm.hpp"

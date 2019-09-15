@@ -12,6 +12,7 @@
 
 #include <cassert>
 #include <algorithm>
+#include <vector>
 #include <memory>       // std::shared_ptr std::unique_ptr
 
 #include "atomicOperation.hpp"
