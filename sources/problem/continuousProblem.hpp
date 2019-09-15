@@ -24,6 +24,9 @@
 #include "exprtk/exprtk.hpp"
 #include "problem.hpp"
 
+namespace stocos 
+{
+
 using TYPE_FITNESS_CONTINUOUSPROBLEM = double;
 using TYPE_CELL_CONTINUOUSPROBLEM = double;
 using SOL_CONTINUOUSPROBLEM = SolutionArray<TYPE_FITNESS_CONTINUOUSPROBLEM, TYPE_CELL_CONTINUOUSPROBLEM>;
@@ -146,5 +149,7 @@ class ContinuousProblem : public Problem<SOL_CONTINUOUSPROBLEM, TYPE_FITNESS_CON
     unsigned int nomberOfVariable;
     std::unique_ptr<std::pair<TYPE_CELL_CONTINUOUSPROBLEM, TYPE_CELL_CONTINUOUSPROBLEM> []> _domain;
 };
+
+}
 
 #endif

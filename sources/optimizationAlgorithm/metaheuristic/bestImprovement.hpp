@@ -20,6 +20,8 @@
 
 
 
+namespace stocos 
+{
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
@@ -95,4 +97,5 @@ class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CEL
     std::string _class_name;
 };
 
+}
 #endif

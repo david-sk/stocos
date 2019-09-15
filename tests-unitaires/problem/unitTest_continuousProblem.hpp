@@ -15,6 +15,7 @@
 #include "problem/continuousProblem.hpp"
 
 using namespace CppUnit;
+using namespace stocos;
 
 class UnitTest_ContinuousProblem: public CppUnit::TestFixture {
     CPPUNIT_TEST_SUITE(UnitTest_ContinuousProblem);

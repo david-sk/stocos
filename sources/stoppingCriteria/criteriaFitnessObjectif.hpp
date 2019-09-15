@@ -13,6 +13,8 @@
 #include <cassert>
 #include "criteria.hpp"
 
+namespace stocos 
+{
 
 template<typename SOL, typename TYPE_FITNESS>
 class CriteriaFitnessObjectif : public Criteria<SOL, TYPE_FITNESS> {
@@ -59,4 +61,5 @@ class CriteriaFitnessObjectif : public Criteria<SOL, TYPE_FITNESS> {
     unsigned int _number_of_objective;
 };
 
+}
 #endif

@@ -24,6 +24,9 @@
 #include "algobuilder.hpp"
 #include "../problem/problem.hpp"
 
+namespace stocos 
+{
+
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class SolverGeneric : public Solver {
 	public:
@@ -103,4 +106,5 @@ class SolverGeneric : public Solver {
 		
 };
 
+}
 #endif

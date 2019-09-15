@@ -18,7 +18,8 @@
 
 #include <jsoncpp/json/json.h>
 
-
+namespace stocos 
+{
 
 template <typename TYPE_FITNESS>
 class Solution {
@@ -154,8 +155,9 @@ class Solution {
 
   protected:
     unsigned int _number_of_objective;            ///< number of objectif
-    std::unique_ptr<TYPE_FITNESS[]> _fitness;   ///< list of fitness
+    std::unique_ptr<TYPE_FITNESS[]> _fitness;     ///< list of fitness
     std::unique_ptr<bool[]> _fitness_is_valid;    ///< list of the fitness state
 };
 
+}
 #endif

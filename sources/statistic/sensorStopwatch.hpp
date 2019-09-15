@@ -16,7 +16,8 @@
 
 #include "sensor.hpp"
 
-
+namespace stocos 
+{
 
 template<class SOL>
 class SensorStopwatch : public Sensor<SOL> {
@@ -76,4 +77,6 @@ protected:
 	std::chrono::minutes _start_minutes;
 	std::chrono::minutes _end_minutes;
 };
+
+}
 #endif	/* STOPWATCH_H */

@@ -19,6 +19,9 @@
 
 using namespace jsonrpc;
 
+namespace stocos 
+{
+
 template <typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class SolverClientRPC : public Solver {
    public:
@@ -178,4 +181,5 @@ class SolverClientRPC : public Solver {
     std::unique_ptr<SOL> solution_t1;
 };
 
+}
 #endif

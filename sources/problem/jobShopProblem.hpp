@@ -18,6 +18,9 @@
 #include "../solution/solutionArray.hpp"
 #include "problem.hpp"
 
+namespace stocos 
+{
+
 using TYPE_FITNESS_JOBSHOPPROBLEM = double;
 using TYPE_CELL_JOBSHOPPROBLEM = bool;
 using SOL_JOBSHOPPROBLEM = SolutionArray<TYPE_FITNESS_JOBSHOPPROBLEM, TYPE_CELL_JOBSHOPPROBLEM>;
@@ -65,4 +68,5 @@ class JobShopProblem : public Problem<SOL_JOBSHOPPROBLEM, TYPE_FITNESS_JOBSHOPPR
     std::vector<std::vector<std::pair<unsigned int, unsigned int>>> instance;
 };
 
+}
 #endif

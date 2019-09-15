@@ -10,9 +10,10 @@
 #ifndef UNITTEST_EVALQAP_H
 #define UNITTEST_EVALQAP_H
 
-using namespace CppUnit;
-
 #include "problem/QAP.hpp"
+
+using namespace CppUnit;
+using namespace stocos;
 
 class UnitTest_QAP : public CppUnit::TestFixture {
     CPPUNIT_TEST_SUITE(UnitTest_QAP);

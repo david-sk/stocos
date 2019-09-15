@@ -19,6 +19,8 @@ using namespace CppUnit;
 #include "problem/oneMax.hpp"
 #include "optimizationAlgorithm/exhaustiveSearch/backtracking.hpp"
 
+using namespace stocos;
+
 class UnitTest_backtraking : public CppUnit::TestFixture {
 
     CPPUNIT_TEST_SUITE(UnitTest_backtraking);

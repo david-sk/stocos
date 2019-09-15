@@ -17,7 +17,8 @@
 #include "../optimizationAlgorithm.hpp"
 #include "../../problem/problem.hpp"
 
-
+namespace stocos 
+{
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class FirstImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
@@ -73,4 +74,5 @@ class FirstImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CE
         SOL solution_beta;
 };
 
+}
 #endif

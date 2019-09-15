@@ -12,6 +12,9 @@
 
 #include <jsoncpp/json/json.h>
 
+namespace stocos 
+{
+
 template<class SOL>
 class Sensor {
 public:
@@ -30,5 +33,7 @@ public:
 
 private:
 };
+
+}
 
 #endif

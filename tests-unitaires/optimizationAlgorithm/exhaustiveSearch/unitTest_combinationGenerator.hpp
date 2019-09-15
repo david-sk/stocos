@@ -10,11 +10,12 @@
 #ifndef UNITTEST_COMBINATIONGENERATOR_H
 #define UNITTEST_COMBINATIONGENERATOR_H
 
-using namespace CppUnit;
-
 #include "problem/problem.hpp"
 #include "solution/solution.hpp"
 #include "optimizationAlgorithm/exhaustiveSearch/combinationGenerator.hpp"
+
+using namespace CppUnit;
+using namespace stocos;
 
 class UnitTest_combinationGenerator : public CppUnit::TestFixture {
 

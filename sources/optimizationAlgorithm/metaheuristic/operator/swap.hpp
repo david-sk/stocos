@@ -16,6 +16,9 @@
 
 #include "atomicOperation.hpp"
 
+namespace stocos 
+{
+
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class Swap : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
     public:
@@ -76,5 +79,7 @@ class Swap : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
         unsigned int _number_of_swap;
         unsigned int N;
 };
+
+}
 
 #endif

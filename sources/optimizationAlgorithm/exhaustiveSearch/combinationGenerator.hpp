@@ -18,7 +18,8 @@
 #include "../optimizationAlgorithm.hpp"
 #include "../../problem/problem.hpp"
 
-
+namespace stocos 
+{
 
 template <typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
@@ -125,9 +126,5 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
     const std::vector<unsigned int> _bijection;
 };
 
+}
 #endif
-
-/*int main() {
-        CombinationGenerator cg;
-        cg(2, 28, CombinationGenerator::f);
-}*/

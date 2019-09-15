@@ -17,6 +17,8 @@
 #include <mongo/client/dbclient.h>
 
 #include "sensor.hpp"
+namespace stocos 
+{
 
 template<class SOL>
 class Statistic {
@@ -196,4 +198,5 @@ class Statistic {
 
 };
 
+}
 #endif

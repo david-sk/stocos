@@ -10,6 +10,8 @@
 #ifndef SIMULATEDANNELING_H
 #define SIMULATEDANNELING_H
 
+namespace stocos 
+{
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class SimulatedAnnealing : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
@@ -56,4 +58,5 @@ class SimulatedAnnealing : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_
     SOL solution_star;
 };
 
+}
 #endif

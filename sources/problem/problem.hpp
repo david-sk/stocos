@@ -24,6 +24,8 @@
 #include "../solution/solution.hpp"
 #include "../solution/population.hpp"
 
+namespace stocos 
+{
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class Problem {
@@ -178,5 +180,7 @@ public:
 		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + "[-] Not implemented : solutionSelection(...)");
 	}
 };
+
+}
 
 #endif

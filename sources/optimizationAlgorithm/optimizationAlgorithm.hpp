@@ -16,6 +16,9 @@
 #include "../problem/problem.hpp"
 #include "../statistic/statistic.hpp"
 
+namespace stocos 
+{
+
 template<class SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class OptimizationAlgorithm {
     public:
@@ -45,4 +48,5 @@ class OptimizationAlgorithm {
         std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> _problem;
 };
 
+}
 #endif

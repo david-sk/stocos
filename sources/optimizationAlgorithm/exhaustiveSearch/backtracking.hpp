@@ -15,7 +15,8 @@
 #include "../../solution/solutionArray.hpp"
 #include "../optimizationAlgorithm.hpp"
 
-
+namespace stocos 
+{
 
 template <typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class Backtraking : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
@@ -90,5 +91,7 @@ class Backtraking : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
 
     std::string _class_name;
 };
+
+}
 
 #endif

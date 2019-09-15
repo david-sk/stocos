@@ -14,7 +14,8 @@
 
 #include <memory>
 
-
+namespace stocos 
+{
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class TabuSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
@@ -88,7 +89,7 @@ class TabuSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
     boost::circular_buffer<SOL> tabuList;
 };
 
-
+}
 #endif
 
 

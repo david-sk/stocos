@@ -19,7 +19,8 @@
 #include "../solution/solutionArray.hpp"
 #include "problem.hpp"
 
-
+namespace stocos 
+{
 
 using TYPE_FITNESS_SUBSETSUM =unsigned int;
 using TYPE_CELL_SUBSETSUM = bool;
@@ -99,5 +100,7 @@ class Subsetsum : public Problem<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CEL
         std::vector<unsigned int> setOfNumbers;
         unsigned int fitnessObjectif;
 };
+
+}
 
 #endif

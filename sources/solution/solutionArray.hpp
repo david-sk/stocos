@@ -21,7 +21,8 @@
 
 #include "solution.hpp"
 
-
+namespace stocos 
+{
 
 template <typename TYPE_FITNESS, typename TYPE_CELL>
 class SolutionArray : public Solution<TYPE_FITNESS> {
@@ -153,4 +154,5 @@ class SolutionArray : public Solution<TYPE_FITNESS> {
     unsigned int _sizeArray;
 };
 
+}
 #endif

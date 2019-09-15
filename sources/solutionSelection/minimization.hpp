@@ -12,6 +12,9 @@
 
 #include "solutionSelection.hpp"
 
+namespace stocos 
+{
+
 template<class SOL>
 class Minimization : public SolutionSelection<SOL> {
     public:
@@ -56,5 +59,7 @@ class Minimization : public SolutionSelection<SOL> {
         return index;
     }
 };
+
+}
 
 #endif

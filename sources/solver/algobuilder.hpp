@@ -43,6 +43,9 @@
 #include "../optimizationAlgorithm/metaheuristic/operator/swap.hpp"
 #include "../optimizationAlgorithm/metaheuristic/operator/shuffle.hpp"
 
+namespace stocos 
+{
+
 template<typename SOL, typename TYPE_FITNESS,typename TYPE_CELL>
 class AlgoBuilder {
     public:
@@ -190,5 +193,6 @@ class AlgoBuilder {
         }
 };
 
+}
 
 #endif

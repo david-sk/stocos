@@ -14,6 +14,9 @@
 #include "sensorNumRound.hpp"
 #include "sensor.hpp"
 
+namespace stocos 
+{
+
 template<class SOL>
 class SensorNameCallingClass : public Sensor<SOL> {
 public:
@@ -44,4 +47,5 @@ private:
     SOL solution_best;
 };
 
+}
 #endif

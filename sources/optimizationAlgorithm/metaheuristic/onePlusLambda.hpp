@@ -12,6 +12,9 @@
 
 #include "../optimizationAlgorithm.hpp"
 
+namespace stocos 
+{
+
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class OnePlusLambda : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
     public:
@@ -76,4 +79,5 @@ class OnePlusLambda : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>
         SOL solution_beta;
 };
 
+}
 #endif

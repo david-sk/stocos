@@ -18,7 +18,8 @@
 #include "../optimizationAlgorithm.hpp"
 #include "../../problem/problem.hpp"
 
-
+namespace stocos 
+{
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
@@ -141,5 +142,6 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
         unsigned int _lambda;
 };
 
+}
 #endif
 

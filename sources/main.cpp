@@ -31,6 +31,7 @@
 #include "solver/solverGeneric.hpp"
 #include "solver/solverClientRPC.hpp"
 
+using namespace stocos;
 
 void version(std::string name_software, std::string num_version);
 void segfault_sigaction(int signal, siginfo_t *si, void *arg);

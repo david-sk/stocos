@@ -17,6 +17,9 @@
 
 #include "atomicOperation.hpp"
 
+namespace stocos 
+{
+
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class Shuffle : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
     public:
@@ -48,4 +51,5 @@ class Shuffle : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
         std::vector<TYPE_CELL> index;
 };
 
+}
 #endif

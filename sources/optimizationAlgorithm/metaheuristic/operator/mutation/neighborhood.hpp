@@ -15,6 +15,9 @@
 
 #include "../atomicOperation.hpp"
 
+namespace stocos 
+{
+
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class Neighborhood : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
     public:
@@ -58,5 +61,7 @@ class Neighborhood : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
 
     protected:
 };
+
+}
 
 #endif

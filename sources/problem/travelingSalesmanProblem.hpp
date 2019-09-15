@@ -20,7 +20,8 @@
 #include "problem.hpp"
 #include "../solutionSelection/minimization.hpp"
 
-
+namespace stocos 
+{
 
 using TYPE_FITNESS_STP = double;
 using TYPE_CELL_STP = double;
@@ -91,4 +92,5 @@ class TravelingSalesmanProblem : public Problem<SOL_STP, TYPE_FITNESS_STP, TYPE_
     std::vector<std::pair<double, double>> nodes;
 };
 
+}
 #endif

@@ -10,9 +10,10 @@
 #ifndef UNITTEST_SOLUTION_H
 #define UNITTEST_SOLUTION_H
 
-using namespace CppUnit;
-
 #include "solution/solution.hpp"
+
+using namespace CppUnit;
+using namespace stocos;
 
 class UnitTest_solution : public CppUnit::TestFixture {
 

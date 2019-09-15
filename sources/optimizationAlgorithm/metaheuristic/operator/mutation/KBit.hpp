@@ -18,7 +18,8 @@
 
 #include "../atomicOperation.hpp"
 
-
+namespace stocos 
+{
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class KBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
@@ -97,4 +98,5 @@ class KBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
         unsigned int N;
 };
 
+}
 #endif

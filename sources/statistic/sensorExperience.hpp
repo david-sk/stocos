@@ -13,6 +13,9 @@
 
 #include "sensor.hpp"
 
+namespace stocos 
+{
+
 template<class SOL>
 class SensorExperience : public Sensor<SOL> {
 public:
@@ -47,4 +50,5 @@ private:
     std::string _name;
 };
 
+}
 #endif

@@ -13,6 +13,8 @@
 
 #include "../solution/solution.hpp"
 #include "sensor.hpp"
+namespace stocos 
+{
 
 template<class SOL>
 class SensorFitness : public Sensor<SOL> {
@@ -44,4 +46,5 @@ private:
     SOL solution;
 };
 
+}
 #endif

@@ -17,6 +17,8 @@
 #include "../optimizationAlgorithm.hpp"
 #include "../../problem/problem.hpp"
 
+namespace stocos 
+{
 
 // Exploration-Exploitation
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
@@ -80,4 +82,5 @@ class IteratedLocalSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE
         SOL solution_beta;
 };
 
+}
 #endif

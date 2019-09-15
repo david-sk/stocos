@@ -12,6 +12,8 @@
 
 
 #include "sensor.hpp"
+namespace stocos 
+{
 
 template<class SOL>
 class SensorNumRound : public Sensor<SOL> {
@@ -43,5 +45,7 @@ public:
 private:
     unsigned int numRound;
 };
+
+}
 
 #endif
