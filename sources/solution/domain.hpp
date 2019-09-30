@@ -15,19 +15,25 @@ namespace stocos
 
 #include <unordered_set>
 
-template <typename TYPE_CELL>
-class Domain {
-    /*public:
+#include "solutionArray.hpp"
+
+template <typename TYPE_FITNESS, typename TYPE_CELL>
+class Domain : public SolutionArray<TYPE_FITNESS, TYPE_CELL> {
+    public:
     /// 
     /// @brief Pour tout les cases, give a range [a, b], avec un pas de n,  intension
     /// 
     ///
-    Domain(std::tuple<TYPE_CELL, TYPE_CELL, TYPE_CELL> range) {
+    Domain(const unsigned int numberOfObjective, const unsigned int sizeArray) :
+        SolutionArray<TYPE_FITNESS, TYPE_CELL>(numberOfObjective, sizeArray) {
 
     }
 
+    Domain(const Domain &dom) : 
+		SolutionArray<TYPE_FITNESS, TYPE_CELL>(dom) {
+    }
 
-    /// 
+    /*/// 
     /// @brief Pour chaque cases definition d'un range,  intension
     /// 
     ///

@@ -21,6 +21,7 @@
 #include <boost/program_options.hpp>
 
 #include "problem/oneMax.hpp"
+#include "problem/latinSquare.hpp"
 // #include "problem/knapsack.hpp"
 #include "problem/travelingSalesmanProblem.hpp"
 // #include "problem/subsetSum.hpp"
@@ -99,7 +100,7 @@ int main(int argc, char **argv, char **envp) {
         std::cerr<<"./xx -j \"{\"JSON\" : \"ON\"}\""<<std::endl;
         exit(EXIT_FAILURE);
     }
-
+    
     // Read json file
     Json::Value configuration;
     Json::Reader reader;

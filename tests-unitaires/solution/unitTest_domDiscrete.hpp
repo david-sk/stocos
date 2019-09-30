@@ -7,20 +7,20 @@
 /// @brief 
 ///
 
-#ifndef UNITTEST_DOMEXTENSION_H
-#define UNITTEST_DOMEXTENSION_H
+#ifndef UNITTEST_DOMDISCRETE_H
+#define UNITTEST_DOMDISCRETE_H
 
 #include <memory>
 #include <unordered_set>
 
-#include "solution/domExtension.hpp"
+#include "solution/domDiscrete.hpp"
 
 using namespace CppUnit;
 using namespace stocos;
 
-class UnitTest_domExtension : public CppUnit::TestFixture {
+class UnitTest_domDiscrete : public CppUnit::TestFixture {
 
-    CPPUNIT_TEST_SUITE(UnitTest_domExtension);
+    CPPUNIT_TEST_SUITE(UnitTest_domDiscrete);
     CPPUNIT_TEST(constructor);
     CPPUNIT_TEST_SUITE_END();
 
@@ -36,17 +36,17 @@ class UnitTest_domExtension : public CppUnit::TestFixture {
         definition_dom->insert(5.5);
         definition_dom->insert(7.2);
         definition_dom->insert(9.2);
-        DomExtension<double> dom(definition_dom);
+        DomDiscrete<double, double> sol(definition_dom);
 
-        dom.remove_element(5, 5.5);
-        const std::shared_ptr<const std::unordered_set<double>> x = dom.get_domain(5);
-        const std::shared_ptr<const std::unordered_set<double>> x1 = dom.get_domain(5);
+        sol.remove_element(5, 5.5);
+        const std::shared_ptr<const std::unordered_set<double>> x = sol.get_domain(5);
+        const std::shared_ptr<const std::unordered_set<double>> x1 = sol.get_domain(5);
         
         for (auto it = x->begin(); it!= x->end(); ++it) {
             std::cout<<(*it)<<std::endl;
         }
 
-        double v = dom.pick(5, 1);
+        double v = sol.pick(5, 1);
         std::cout<<v<<std::endl;
     }
 
