@@ -19,6 +19,7 @@
 
 #include "problem.hpp"
 #include "../solutionSelection/minimization.hpp"
+#include "../solution/domDiscrete.hpp"
 
 namespace stocos 
 {

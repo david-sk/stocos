@@ -63,6 +63,10 @@ class DomDiscrete : public Domain<TYPE_FITNESS, TYPE_CELL>  {
             return dom_each_cell[variable_index].size();
     }
 
+    void add_element(unsigned int variable_index, TYPE_CELL element) {
+        /// ! A définir
+    }
+
     void remove_element(unsigned int variable_index, TYPE_CELL element) {
         if (dom_each_cell[variable_index] == nullptr)
             dom_each_cell[variable_index] = std::make_shared<std::unordered_set<TYPE_CELL>>(*_dom);
