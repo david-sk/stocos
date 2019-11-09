@@ -36,9 +36,13 @@ class UnitTest_domDiscrete : public CppUnit::TestFixture {
         definition_dom->insert(5.5);
         definition_dom->insert(7.2);
         definition_dom->insert(9.2);
+
+        // <TYPE_FITNESS, TYPE_CELL>
         DomDiscrete<double, double> sol(definition_dom);
 
         sol.remove_element(5, 5.5);
+        sol.add_element(2, 42);
+        sol.show();
         const std::shared_ptr<const std::unordered_set<double>> x = sol.get_domain(5);
         const std::shared_ptr<const std::unordered_set<double>> x1 = sol.get_domain(5);
         
@@ -47,7 +51,10 @@ class UnitTest_domDiscrete : public CppUnit::TestFixture {
         }
 
         double v = sol.pick(5, 1);
-        std::cout<<v<<std::endl;
+        for (unsigned int i = 0 ; i < sol.size_domain(2) ; i++) {
+            std::cout<<sol.pick(2, i)<<std::endl;
+        }
+        
     }
 
     private:

@@ -26,7 +26,6 @@ class DomDiscrete : public Domain<TYPE_FITNESS, TYPE_CELL>  {
     /// 
     /// @brief Pour chaque cases, extension
     /// 
-    ///
     DomDiscrete(std::map<unsigned int, std::shared_ptr<std::unordered_set<TYPE_CELL>>> exhaustive_list, std::shared_ptr<std::unordered_set<TYPE_CELL>> dom = nullptr) :
         Domain<TYPE_FITNESS, TYPE_CELL>(1,1),
         dom_each_cell(exhaustive_list), _dom(dom) {
@@ -35,7 +34,6 @@ class DomDiscrete : public Domain<TYPE_FITNESS, TYPE_CELL>  {
     /// 
     /// @brief Pour toutes les cases, give exhautive list, extension
     /// 
-    ///
     DomDiscrete(const std::shared_ptr<std::unordered_set<TYPE_CELL>> dom) :
         Domain<TYPE_FITNESS, TYPE_CELL>(1,1),
         _dom(dom) {
@@ -56,28 +54,52 @@ class DomDiscrete : public Domain<TYPE_FITNESS, TYPE_CELL>  {
         }
     }
 
+    /// 
+    /// @brief taille du domain pour une variable
+    /// 
     unsigned int size_domain(const unsigned int variable_index) {
         if (dom_each_cell[variable_index] == nullptr)
-            return 0;
+            return _dom->size();
         else
-            return dom_each_cell[variable_index].size();
+            return dom_each_cell[variable_index]->size();
     }
 
+    /// 
+    /// @brief Ajouter une element au domaine d'une variable
+    /// 
     void add_element(unsigned int variable_index, TYPE_CELL element) {
-        /// ! A définir
+        if (dom_each_cell[variable_index] == nullptr)
+            dom_each_cell[variable_index] = std::make_shared<std::unordered_set<TYPE_CELL>>(*_dom);
+        dom_each_cell[variable_index]->insert(element);
     }
 
+    /// 
+    /// @brief Retirer un element au domaine d'une variable
+    /// 
     void remove_element(unsigned int variable_index, TYPE_CELL element) {
         if (dom_each_cell[variable_index] == nullptr)
             dom_each_cell[variable_index] = std::make_shared<std::unordered_set<TYPE_CELL>>(*_dom);
         dom_each_cell[variable_index]->erase(element);            
     }
 
+    /// 
+    /// @brief Retourner l'element à l'index pour une variable
+    /// 
     TYPE_CELL pick(unsigned int variable_index, unsigned int element_index) {
         //std::unordered_set<TYPE_CELL>::iterator
         auto it = dom_each_cell[variable_index]->begin();
         std::advance(it, element_index);
         return (*it);
+    }
+
+    void show() {
+        for (typename std::map<unsigned int, std::shared_ptr<std::unordered_set<TYPE_CELL>>>::const_iterator it = dom_each_cell.begin(); it != dom_each_cell.end(); ++it) {
+            std::cout<<it->first<<" =>";
+            for (typename std::unordered_set<TYPE_CELL>::const_iterator it2 = it->second->begin(); it2 != it->second->end(); ++it2) {
+                std::cout<<" "<<*it2;
+            }
+            std::cout<<std::endl;
+        }
     }
 
     private:
