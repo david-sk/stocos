@@ -16,6 +16,10 @@
 #include <memory>
 #include <string>
 
+#include <boost/log/core.hpp>
+#include <boost/log/trivial.hpp>
+#include <boost/log/expressions.hpp>
+
 #include <jsoncpp/json/json.h>
 
 namespace stocos 
