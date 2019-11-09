@@ -20,14 +20,13 @@
 namespace stocos 
 {
 
-template <typename TYPE_FITNESS, typename TYPE_CELL>
-class DomDiscrete : public Domain<TYPE_FITNESS, TYPE_CELL>  {
+template <typename TYPE_CELL>
+class DomDiscrete : public Domain<TYPE_CELL>  {
     public:
     /// 
     /// @brief Pour chaque cases, extension
     /// 
     DomDiscrete(std::map<unsigned int, std::shared_ptr<std::unordered_set<TYPE_CELL>>> exhaustive_list, std::shared_ptr<std::unordered_set<TYPE_CELL>> dom = nullptr) :
-        Domain<TYPE_FITNESS, TYPE_CELL>(1,1),
         dom_each_cell(exhaustive_list), _dom(dom) {
     }
 
@@ -35,13 +34,25 @@ class DomDiscrete : public Domain<TYPE_FITNESS, TYPE_CELL>  {
     /// @brief Pour toutes les cases, give exhautive list, extension
     /// 
     DomDiscrete(const std::shared_ptr<std::unordered_set<TYPE_CELL>> dom) :
-        Domain<TYPE_FITNESS, TYPE_CELL>(1,1),
         _dom(dom) {
         
     }
 
+    /// 
+    /// @brief Pour toutes les cases, intension
+    ///
+    /// @param a : Starting point of the sequence. 
+    /// @param b : Endpoint of the sequence. This item will not be included in the sequence.
+    /// @param step : Step size of the sequence. It defaults to 1.
+    ///
+    DomDiscrete(const TYPE_CELL a, const TYPE_CELL b, const TYPE_CELL step = 1) {
+        _dom = std::make_shared<std::unordered_set<TYPE_CELL>>();
+        for (TYPE_CELL i = a ; i < b ; i+=step)
+            _dom->insert(i);
+    }
+
     DomDiscrete(const DomDiscrete &dom) : 
-		Domain<TYPE_FITNESS, TYPE_CELL>(dom) {
+		Domain<TYPE_CELL>(dom) {
             // ! copie _dom, dom_each_cell
     }
     // ! operator=

@@ -17,21 +17,11 @@ namespace stocos
 
 #include "solutionArray.hpp"
 
-template <typename TYPE_FITNESS, typename TYPE_CELL>
-class Domain : public SolutionArray<TYPE_FITNESS, TYPE_CELL> {
+template <typename TYPE_CELL>
+class Domain {
     public:
-    /// 
-    /// @brief Pour tout les cases, give a range [a, b], avec un pas de n,  intension
-    /// 
-    ///
-    Domain(const unsigned int numberOfObjective, const unsigned int sizeArray) :
-        SolutionArray<TYPE_FITNESS, TYPE_CELL>(numberOfObjective, sizeArray) {
-
-    }
-
-    Domain(const Domain &dom) : 
-		SolutionArray<TYPE_FITNESS, TYPE_CELL>(dom) {
-    }
+    // Domain(const Domain &dom) {
+    // }
 
     /*/// 
     /// @brief Pour chaque cases definition d'un range,  intension

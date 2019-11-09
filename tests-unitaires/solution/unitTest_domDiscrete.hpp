@@ -37,8 +37,8 @@ class UnitTest_domDiscrete : public CppUnit::TestFixture {
         definition_dom->insert(7.2);
         definition_dom->insert(9.2);
 
-        // <TYPE_FITNESS, TYPE_CELL>
-        DomDiscrete<double, double> sol(definition_dom);
+        // <TYPE_CELL>
+        DomDiscrete<double> sol(definition_dom);
 
         sol.remove_element(5, 5.5);
         sol.add_element(2, 42);

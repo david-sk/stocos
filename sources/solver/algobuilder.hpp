@@ -103,29 +103,24 @@ class AlgoBuilder {
                 __statistic->addSensor(new SensorExperience<SOL>(configuration["sensorExperience"]["num"].asUInt(), configuration["sensorExperience"]["name"].asString()));
             }
             if (!configuration["sensorNumRound"].empty()) {
-                if (configuration["sensorNumRound"] == true) {
+                if (configuration["sensorNumRound"] == true)
                     __statistic->addSensor(new SensorNumRound<SOL>);
-                }
             }
             if (!configuration["sensorSolution"].empty()) {
-                if (configuration["sensorSolution"] == true) {
+                if (configuration["sensorSolution"] == true)
                     __statistic->addSensor(new SensorSolution<SOL>);
-                }
             }
             if (!configuration["sensorFitness"].empty()) {
-                if (configuration["sensorFitness"] == true) {
+                if (configuration["sensorFitness"] == true)
                     __statistic->addSensor(new SensorFitness<SOL>);
-                }
             }
             if (!configuration["sensorStopwatch"].empty()) {
-                if (configuration["sensorStopwatch"] == true) {
+                if (configuration["sensorStopwatch"] == true)
                     __statistic->addSensor(new SensorStopwatch<SOL>);
-                }
             }
             if (!configuration["sensorNameCallingClass"].empty()) {
-                if (configuration["sensorNameCallingClass"] == true) {
+                if (configuration["sensorNameCallingClass"] == true)
                     __statistic->addSensor(new SensorNameCallingClass<SOL>);
-                }
             }
             if (!configuration["sensorFinal"].empty()) {
                 __statistic->addSensor(new SensorFinal<SOL>(configuration["sensorFinal"]["num"].asUInt(), configuration["sensorFinal"]["name"].asString()));
