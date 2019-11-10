@@ -5,6 +5,9 @@
         "instance": "instances/TravelingSalesmanProblem/TSP-brd14051.json"
     },
     "parameter_id": 4,
+    "discreteDomains": {
+        "extension" : [1, 2, 3, 4]
+    },
     "OptimizationAlgorithm": {
         "0": {
             "className":"IteratedLocalSearch",

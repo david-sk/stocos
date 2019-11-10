@@ -114,8 +114,8 @@ class DomDiscrete : public Domain<TYPE_CELL>  {
     }
 
     private:
-    std::shared_ptr<std::unordered_set<TYPE_CELL>> _dom;
-    std::map<unsigned int, std::shared_ptr<std::unordered_set<TYPE_CELL>>> dom_each_cell;
+    std::shared_ptr<std::unordered_set<TYPE_CELL>> _dom; ///< definition du domaine pour toutes les variables
+    std::map<unsigned int, std::shared_ptr<std::unordered_set<TYPE_CELL>>> dom_each_cell; ///< definition du domaine pour chaque case
 };
 
 }
