@@ -28,7 +28,7 @@
 #include "solution/unitTest_population.hpp"
 #include "solution/unitTest_solution.hpp"
 #include "solution/unitTest_solutionArray.hpp"
-#include "solution/unitTest_domDiscrete.hpp"
+#include "solution/unitTest_domain.hpp"
 
 // #include "optimizationAlgorithm/exhaustiveSearch/unitTest_backtracking.hpp"
 // #include "optimizationAlgorithm/exhaustiveSearch/unitTest_combinationGenerator.hpp"
@@ -51,7 +51,7 @@
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_criteriaBudget);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solution);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solutionArray);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_domDiscrete);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_domain);
 
 // // Algorithm d'optimisation
 // CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_combinationGenerator);

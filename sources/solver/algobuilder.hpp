@@ -63,7 +63,8 @@ class AlgoBuilder {
             std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> optimizationAlgorithm = nullptr;
             std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> _stoppingCriteria = stoppingCriteria(configuration["StoppingCriteria"]);
             std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _atomicOperation = nullptr;
-            if (configuration["className"] != "NearestNeighbourAlgorithm")
+            
+            if (configuration["className"] != "NearestNeighbourAlgorithm" && configuration["className"] != "CombinationGenerator")
                 _atomicOperation = atomicOperation(configuration["AtomicOperation"]);
             
             if (configuration["className"] == "FirstImprovement") {
@@ -86,7 +87,7 @@ class AlgoBuilder {
             } else if (configuration["className"] == "Backtraking") {
 
             } else if (configuration["className"] == "CombinationGenerator") {
-
+                optimizationAlgorithm = std::make_unique<CombinationGenerator<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem);
             } else if (configuration["className"] == "NearestNeighbourAlgorithm") {
                 optimizationAlgorithm = std::make_unique<NearestNeighbourAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem);
             } else {

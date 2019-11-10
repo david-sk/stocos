@@ -1,5 +1,5 @@
 ///
-/// @file unitTest_domExtension.hpp
+/// @file unitTest_domain.hpp
 /// @author Jxtopher
 /// @version 1
 /// @copyright CC-BY-NC-SA
@@ -7,20 +7,20 @@
 /// @brief 
 ///
 
-#ifndef UNITTEST_DOMDISCRETE_H
-#define UNITTEST_DOMDISCRETE_H
+#ifndef UNITTEST_DOMAIN_H
+#define UNITTEST_DOMAIN_H
 
 #include <memory>
 #include <unordered_set>
 
-#include "solution/domDiscrete.hpp"
+#include "solution/domain.hpp"
 
 using namespace CppUnit;
 using namespace stocos;
 
-class UnitTest_domDiscrete : public CppUnit::TestFixture {
+class UnitTest_domain : public CppUnit::TestFixture {
 
-    CPPUNIT_TEST_SUITE(UnitTest_domDiscrete);
+    CPPUNIT_TEST_SUITE(UnitTest_domain);
     CPPUNIT_TEST(constructor);
     CPPUNIT_TEST_SUITE_END();
 
@@ -38,7 +38,7 @@ class UnitTest_domDiscrete : public CppUnit::TestFixture {
         definition_dom->insert(9.2);
 
         // <TYPE_CELL>
-        DomDiscrete<double> sol(definition_dom);
+        Domain<double> sol(definition_dom);
 
         sol.remove_element(5, 5.5);
         sol.add_element(2, 42);

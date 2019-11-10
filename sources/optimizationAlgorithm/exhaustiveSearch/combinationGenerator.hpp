@@ -28,14 +28,9 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
     CombinationGenerator(std::mt19937 &mt_rand, 
                         std::shared_ptr<Statistic<SOL>> statistic, 
 						std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
-                        std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem, 
-                        const unsigned int nbDigit, 
-						const unsigned int len_string)
-        				: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic), std::move(stoppingCriteria), problem),
-          				_nbDigit(nbDigit),
-                        _len_string(len_string) {
+                        std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem)
+        				: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic), std::move(stoppingCriteria), problem) {
                         nbCall = 0;
-                        _string = std::unique_ptr<unsigned int[]>(new unsigned int[_len_string]);
     }
 
     virtual ~CombinationGenerator() {}
@@ -69,6 +64,14 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
     bool stop() { return i < (_len_string); }
 
     std::unique_ptr<SOL> operator()(const SOL &s) {
+        if (s.domain == nullptr) throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] domain == nullptr)");
+        
+        // initialization
+        _nbDigit = 3;
+        _len_string = s.sizeArray();
+        _string = std::unique_ptr<unsigned int[]>(new unsigned int[_len_string]);
+
+
         solution = std::make_unique<SOL>(s);
         reset();
 
@@ -80,7 +83,6 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
         std::cout<<*solution<<std::endl;
 
         // applay filtering
-        
         do {
             step();
             
@@ -112,8 +114,8 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
     }
 
    private:
-    const unsigned int _nbDigit;
-    const unsigned int _len_string;
+    unsigned int _nbDigit;
+    unsigned int _len_string;
     std::string _class_name;
 
     unsigned int nbCall;
@@ -122,8 +124,6 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
 
     bool x;
     unsigned int i;
-
-    const std::vector<unsigned int> _bijection;
 };
 
 }

@@ -17,7 +17,6 @@
 #include <unistd.h>
 
 #include "../solution/solutionArray.hpp"
-#include "../solution/domDiscrete.hpp"
 #include "../solutionSelection/solutionSelection.hpp"
 #include "../solutionSelection/maximization.hpp"
 

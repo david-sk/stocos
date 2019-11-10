@@ -93,6 +93,12 @@ class Solution {
         return _fitness_is_valid[numObjectif];
     }
 
+    /// 
+    /// @brief Set the value fitness for a objectif
+    /// 
+    /// @param numObjectif objectif id
+    /// @param value new value
+    ///
     void setFitness(unsigned int numObjectif, TYPE_FITNESS value) {
         assert(numObjectif < _number_of_objective);
         _fitness[numObjectif] = value;

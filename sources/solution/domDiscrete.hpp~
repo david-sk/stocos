@@ -15,6 +15,8 @@
 #include <unordered_set>
 #include <memory>
 
+#include <jsoncpp/json/json.h>
+
 #include "domain.hpp"
 
 namespace stocos 
@@ -113,7 +115,17 @@ class DomDiscrete : public Domain<TYPE_CELL>  {
         }
     }
 
+
+    void loadJson(const Json::Value &jsonValue) {
+
+    }
+
+    Json::Value asJson() const {
+
+    }
+
     private:
+
     std::shared_ptr<std::unordered_set<TYPE_CELL>> _dom; ///< definition du domaine pour toutes les variables
     std::map<unsigned int, std::shared_ptr<std::unordered_set<TYPE_CELL>>> dom_each_cell; ///< definition du domaine pour chaque case
 };
