@@ -64,9 +64,14 @@ class SolverGeneric : public Solver {
 				else
 					initial_solution = std::make_unique<SOL>(_configuration["initial_solution"]);
 
-				if (!initial_solution->fitnessIsValid()) {
+				if (!initial_solution->fitnessIsValid())
 					_problem->evaluation(*initial_solution);
+				
+				if (!_configuration["domain"].empty()) {
+					domain = std::make_shared<Domain<TYPE_CELL>>(_configuration["domain"]);
+					initial_solution->domain = domain;
 				}
+
 		}
 		virtual ~SolverGeneric() {
 			BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" DELETE SolverGeneric";
@@ -102,6 +107,7 @@ class SolverGeneric : public Solver {
 		std::unique_ptr<SOL> initial_solution;
 		std::map<unsigned int, std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>> optimizationAlgorithm;
 		std::string _class_name;
+		std::shared_ptr<Domain<TYPE_CELL>> domain;
 		
 		
 };

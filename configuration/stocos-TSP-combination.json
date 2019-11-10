@@ -5,9 +5,7 @@
         "instance": "instances/TravelingSalesmanProblem/TSP-10-1.json"
     },
     "domain": { 
-        "discrete" : {
-            "exhaustive_list" : [1, 2, 3, 4]
-        }
+        "exhaustive_list" : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     },
     "parameter_id": 5,
     "OptimizationAlgorithm": {

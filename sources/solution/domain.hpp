@@ -59,6 +59,10 @@ class Domain {
     }
     // ! operator=
 
+    Domain(const Json::Value& jsonValue) {
+        loadJson(jsonValue);
+    }
+
     const std::shared_ptr<const std::unordered_set<TYPE_CELL>> get_domain(const unsigned int variable_index) {
         if (dom_each_cell[variable_index] == nullptr) {
             return _dom;
@@ -70,11 +74,19 @@ class Domain {
     /// 
     /// @brief taille du domain pour une variable
     /// 
-    unsigned int size_domain(const unsigned int variable_index) {
-        if (dom_each_cell[variable_index] == nullptr)
+    unsigned int size_domain(const unsigned int variable_index) const {
+        try {
+            if (dom_each_cell.at(variable_index) != nullptr)
+                return dom_each_cell.at(variable_index)->size();
+            else
+                return _dom->size();
+        } catch (const std::out_of_range& oor) {
             return _dom->size();
-        else
-            return dom_each_cell[variable_index]->size();
+        }
+        // if (dom_each_cell[variable_index] == nullptr)
+        //     return _dom->size();
+        // else
+        //     return dom_each_cell[variable_index]->size();
     }
 
 
@@ -141,9 +153,15 @@ class Domain {
     }
 
 
-    // void loadJson(const Json::Value &jsonValue) {
+    void loadJson(const Json::Value &jsonValue) {
+        if (!jsonValue["exhaustive_list"].empty()) {
+            _dom = std::make_shared<std::unordered_set<TYPE_CELL>>();
+            for (unsigned int i = 0; i < jsonValue["exhaustive_list"].size(); i++) _dom->insert( jsonValue["exhaustive_list"][i].asDouble());
+        } else if (!jsonValue["interval"].empty()) {
 
-    // }
+        } else
+            throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] option does not exist.");
+    }
 
     // Json::Value asJson() const {
 

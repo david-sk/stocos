@@ -3,7 +3,7 @@
 /// @author Jxtopher
 /// @version 1
 /// @date 2019
-/// @brief *
+/// @brief https://fr.wikipedia.org/wiki/Recherche_exhaustive
 ///
 
 #ifndef COMBINATIONGENERATOR_H
@@ -65,24 +65,28 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
 
     std::unique_ptr<SOL> operator()(const SOL &s) {
         if (s.domain == nullptr) throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] domain == nullptr)");
-        
         // initialization
-        _nbDigit = 3;
+        _nbDigit = s.domain->size_domain(0);
         _len_string = s.sizeArray();
         _string = std::unique_ptr<unsigned int[]>(new unsigned int[_len_string]);
 
 
-        solution = std::make_unique<SOL>(s);
+        solution = std::make_unique<SOL>(s);        
         reset();
 
-        //Convert
+        // Convert
         for(unsigned int i = 0 ; i < _len_string  ; i++) {
             solution->operator()(i, _string[i]);
         }
 
-        std::cout<<*solution<<std::endl;
-
         // applay filtering
+        this->_problem->evaluation(*solution);
+        solution_star = std::make_unique<SOL>(*solution);
+        if (this->_problem->solutionSelection(*solution, *solution_star)) {
+            solution_star.reset(new SOL(*solution));
+            std::cout<<*solution_star<<std::endl;
+        }
+        
         do {
             step();
             
@@ -90,16 +94,17 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
             for(unsigned int i = 0 ; i < _len_string  ; i++) {
                 solution->operator()(i, _string[i]);
             }
-            std::cout<<*solution<<std::endl;
-
+            
             // applay filtering
-            // if (this->_problem->filtering(*solution)) {
+            this->_problem->evaluation(*solution);
+            if (this->_problem->solutionSelection(*solution, *solution_star)) {
+                solution_star.reset(new SOL(*solution));
+                std::cout<<*solution_star<<std::endl;
+            }
 
-            // }
         } while (stop());
 
-        std::unique_ptr<SOL> result;
-        return std::move(result);
+        return std::move(solution_star);
     }
 
     std::string className() const {
@@ -121,6 +126,7 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
     unsigned int nbCall;
     std::unique_ptr<unsigned int[]> _string;
     std::unique_ptr<SOL> solution;
+    std::unique_ptr<SOL> solution_star;
 
     bool x;
     unsigned int i;

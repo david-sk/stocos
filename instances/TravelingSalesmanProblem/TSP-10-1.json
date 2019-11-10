@@ -3,6 +3,8 @@
         "name": "TravelingSalesmanProblem",
         "instance_number": "1",
 		"number_of_nodes" : 10,
+        "fitness*": 95.16,
+        "x*" : [8, 0, 3, 4, 6, 7, 5, 2, 9, 1],
         "node_coord_section": [
 			{"id" : 0, "x" : 34.1, "y" : 4.3},
 			{"id" : 1, "x" : 2.5,  "y" : 15.6},

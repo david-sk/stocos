@@ -41,30 +41,31 @@ class IntervalReal : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
     }
 
     void operator()(SOL &s) {
-        if (s.sizeArray() != N) {
-            N = s.sizeArray();
-            mutation_rate = static_cast<double>(_c) / static_cast<double>(N);
-            backup.reserve(N); 
-        }
+        //! use domain.hpp
+        // if (s.sizeArray() != N) {
+        //     N = s.sizeArray();
+        //     mutation_rate = static_cast<double>(_c) / static_cast<double>(N);
+        //     backup.reserve(N); 
+        // }
 
-        for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
-            if (urd_0_1->operator()(this->_mt_rand) < mutation_rate) {
+        // for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
+        //     if (urd_0_1->operator()(this->_mt_rand) < mutation_rate) {
                 
-                try {
-                    TYPE_CELL new_value_of_the_cell = s(i) + urd->operator()(this->_mt_rand);
-                    std::pair<TYPE_CELL, TYPE_CELL> dom = this->_problem->domain(i);
+        //         try {
+        //             TYPE_CELL new_value_of_the_cell = s(i) + urd->operator()(this->_mt_rand);
+        //             std::pair<TYPE_CELL, TYPE_CELL> dom = this->_problem->domain(i);
                     
-                    if (new_value_of_the_cell < dom.first)
-                        new_value_of_the_cell = dom.first;
-                    else if (dom.second < new_value_of_the_cell)
-                         new_value_of_the_cell = dom.second;
+        //             if (new_value_of_the_cell < dom.first)
+        //                 new_value_of_the_cell = dom.first;
+        //             else if (dom.second < new_value_of_the_cell)
+        //                  new_value_of_the_cell = dom.second;
                     
-                    s(i, new_value_of_the_cell);
-                }  catch (...) {
-                    s(i, s(i) + urd->operator()(this->_mt_rand));
-                }            
-            }
-        }
+        //             s(i, new_value_of_the_cell);
+        //         }  catch (...) {
+        //             s(i, s(i) + urd->operator()(this->_mt_rand));
+        //         }            
+        //     }
+        // }
     }
 
     
