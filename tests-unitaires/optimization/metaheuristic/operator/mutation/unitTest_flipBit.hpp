@@ -14,7 +14,7 @@
 
 #include "problem/oneMax.hpp"
 #include "solution/solutionArray.hpp"
-#include "optimizationAlgorithm/metaheuristic/operator/mutation/flipBit.hpp"
+#include "optimization/metaheuristic/operator/mutation/flipBit.hpp"
 
 
 using namespace CppUnit;

@@ -15,8 +15,8 @@
 
 #include "problem/oneMax.hpp"
 #include "solution/solutionArray.hpp"
-#include "optimizationAlgorithm/metaheuristic/operator/atomicOperation.hpp"
-#include "optimizationAlgorithm/metaheuristic/operator/mutation/neighborhood.hpp"
+#include "optimization/metaheuristic/operator/atomicOperation.hpp"
+#include "optimization/metaheuristic/operator/mutation/neighborhood.hpp"
 
 using namespace CppUnit;
 

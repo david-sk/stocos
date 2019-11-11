@@ -17,7 +17,7 @@ using namespace CppUnit;
 #include "problem/problem.hpp"
 #include "solution/solution.hpp"
 #include "problem/oneMax.hpp"
-#include "optimizationAlgorithm/exhaustiveSearch/backtracking.hpp"
+#include "optimization/exhaustiveSearch/backtracking.hpp"
 
 using namespace stocos;
 
