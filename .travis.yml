@@ -1,0 +1,31 @@
+#########################
+# project configuration #
+#########################
+language: cpp
+
+dist: trusty
+#sudo: required
+#group: edge
+
+###################
+# global settings #
+###################
+
+################
+# build matrix #
+################
+
+matrix:
+  - os: linux
+    compiler: gcc
+    env:
+      - COMPILER=g++-8
+
+################
+# build script #
+################
+
+script:
+  - cd build
+  - cmake .. 
+  - make
