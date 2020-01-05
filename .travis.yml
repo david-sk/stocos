@@ -19,10 +19,15 @@ before_install:
 ################
 
 matrix:
-  - os: linux
-    compiler: gcc
-    env:
-      - COMPILER=g++-8
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-8
+      env:
+        - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
 
 ################
 # build script #
