@@ -3,7 +3,7 @@
 #########################
 language: cpp
 
-dist: trusty
+dist: bionic  #trusty
 #sudo: required
 #group: edge
 
