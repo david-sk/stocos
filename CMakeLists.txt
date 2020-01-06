@@ -27,8 +27,8 @@ set(CMAKE_CXX_FLAGS "-std=c++2a -pedantic -Wall -Wextra -Wcast-align -Wctor-dtor
                                 -Woverloaded-virtual -Wredundant-decls  -Wsign-promo        \
                                 -Wstrict-null-sentinel -Wstrict-overflow=5 -Wundef -Werror  \
                                 -Wno-unused") # -Wswitch-default -Wsign-conversion -Wshadow  -Wcast-qual -Wold-style-cast
-set(CMAKE_CXX_FLAGS_DEBUG "-g3 -DDEBUG")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+set(CMAKE_CXX_FLAGS_DEBUG "-g3 -DDEBUG -lpthread")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -lpthread")
 
 
 
