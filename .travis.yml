@@ -34,6 +34,13 @@ matrix:
 ################
 
 script:
+  - cd /opt/
+  - git clone git://github.com/cinemast/libjson-rpc-cpp.git
+  - mkdir -p libjson-rpc-cpp/build
+  - cd libjson-rpc-cpp/build
+  - cmake .. && make
+  - sudo make install
+  - sudo ldconfig
   - sudo rm /usr/bin/g++
   - sudo ln -s /usr/bin/g++-8 /usr/bin/g++
   - cd build
