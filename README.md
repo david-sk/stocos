@@ -1,5 +1,6 @@
 # STOChastic Optimization Solver (stocos)
 
+## Master 
 - **Linux Build Status** : [![Build Status](https://travis-ci.org/Jxtopher/stocos.svg?branch=master)](https://travis-ci.org/Jxtopher/stocos)
 - **lgtm** : --
 - **Doc** : --
