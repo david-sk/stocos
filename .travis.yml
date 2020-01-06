@@ -12,7 +12,7 @@ dist: bionic  #trusty
 ###################
 before_install:
   - travis_retry sudo apt-get update -qq
-  - travis_retry sudo apt-get install -qq libjsoncpp-dev libjsoncpp1 libboost-all-dev libmongoclient-dev libmongoclient0 g++-8 libpthread-stubs0-dev
+  - travis_retry sudo apt-get install -qq libjsoncpp-dev libjsoncpp1 libboost-all-dev libmongoclient-dev libmongoclient0 g++-8
 
 ################
 # build matrix #
