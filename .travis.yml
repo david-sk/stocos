@@ -34,6 +34,8 @@ matrix:
 ################
 
 script:
+  - rm /usr/bin/g++
+  - ln -s /usr/bin/g++-8 /usr/bin/g++
   - cd build
   - cmake .. 
   - make
