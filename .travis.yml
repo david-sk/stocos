@@ -34,7 +34,7 @@ matrix:
 ################
 
 script:
-  - cd /opt/
+  - cd /tmp
   - git clone git://github.com/cinemast/libjson-rpc-cpp.git
   - mkdir -p libjson-rpc-cpp/build
   - cd libjson-rpc-cpp/build
