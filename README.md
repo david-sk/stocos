@@ -9,4 +9,12 @@
 - **lgtm** : --
 - **Doc** : --
 
+## Exemple
+
+-> Solve the oneMax problem :
+
+```bash
+$ ./build/stocos-Release -c configuration/stocos-oneMax.json
+'''
+
 
