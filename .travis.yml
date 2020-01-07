@@ -1,3 +1,10 @@
+#
+# @Author: Jxtopher
+# @Date: 2020-01-07
+# @Purpose: Travis !
+# @copyright CC-BY-NC-SA
+# @see : https://devhints.io/travis
+#
 #########################
 # project configuration #
 #########################
@@ -7,24 +14,11 @@ dist: bionic  #trusty
 #sudo: required
 #group: edge
 
-###################
-# global settings #
-###################
 before_install:
   - travis_retry sudo apt-get update -qq
   - travis_retry sudo apt-get install -qq libcppunit-dev libjsoncpp-dev libjsoncpp1 libboost-all-dev libmongoclient-dev libmongoclient0 g++-8  doxygen
   # -> libjson-rpc-cpp
   - travis_retry sudo apt-get install -qq libargtable2-dev libmicrohttpd-dev libjsoncpp-dev libhiredis-dev
-################
-# build matrix #
-################
-
-matrix:
-    - os: linux
-
-################
-# build script #
-################
 
 script:
   - pushd .
