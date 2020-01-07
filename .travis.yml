@@ -45,5 +45,5 @@ script:
   - sudo ln -s /usr/bin/g++-8 /usr/bin/g++
   - mkdir build
   - cd build
-  - cmake .. 
+  - cmake
   - make
