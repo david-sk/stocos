@@ -8,7 +8,7 @@
 
 cmake_minimum_required(VERSION 3.0)
 
-# Load modul
+# Load module
 set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 include(auto-install)   # auto install package
 include(cppcheck)       # 
@@ -27,6 +27,7 @@ set(CMAKE_CXX_FLAGS "-std=c++2a -pedantic -Wall -Wextra -Wcast-align -Wctor-dtor
                                 -Woverloaded-virtual -Wredundant-decls  -Wsign-promo        \
                                 -Wstrict-null-sentinel -Wstrict-overflow=5 -Wundef -Werror  \
                                 -Wno-unused") # -Wswitch-default -Wsign-conversion -Wshadow  -Wcast-qual -Wold-style-cast
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 set(CMAKE_CXX_FLAGS_DEBUG "-g3 -DDEBUG")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
