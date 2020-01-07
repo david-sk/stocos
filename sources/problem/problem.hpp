@@ -24,6 +24,8 @@
 #include "../solution/solution.hpp"
 #include "../solution/population.hpp"
 
+namespace stocos 
+{
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class Problem {
@@ -149,16 +151,6 @@ public:
 	}
 
 	/// 
-	/// @brief Give the area of validity of the variables 
-	/// 
-	/// @param index 
-	/// @return std::pair<TYPE_CELL, TYPE_CELL> <upper bound, low bound>
-	///
-	virtual std::pair<TYPE_CELL, TYPE_CELL> domain(unsigned index) const {
-		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + "[-] Not implemented : domain()");
-	}
-
-	/// 
 	/// @brief Get the Fitness Objectif object
 	/// 
 	/// @param numObjectif 
@@ -178,5 +170,7 @@ public:
 		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + "[-] Not implemented : solutionSelection(...)");
 	}
 };
+
+}
 
 #endif

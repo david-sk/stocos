@@ -12,9 +12,10 @@
 
 #include <fstream>
 #include <iostream>
-#include <jsoncpp/json/json.h>
 #include <memory>
-#include <utility>
+#include <utility>  // std::pair
+
+#include <jsoncpp/json/json.h>
 #include <unistd.h>
 
 
@@ -23,6 +24,9 @@
 #include "../solutionSelection/solutionSelectionBuilder.hpp"
 #include "exprtk/exprtk.hpp"
 #include "problem.hpp"
+
+namespace stocos 
+{
 
 using TYPE_FITNESS_CONTINUOUSPROBLEM = double;
 using TYPE_CELL_CONTINUOUSPROBLEM = double;
@@ -146,5 +150,7 @@ class ContinuousProblem : public Problem<SOL_CONTINUOUSPROBLEM, TYPE_FITNESS_CON
     unsigned int nomberOfVariable;
     std::unique_ptr<std::pair<TYPE_CELL_CONTINUOUSPROBLEM, TYPE_CELL_CONTINUOUSPROBLEM> []> _domain;
 };
+
+}
 
 #endif

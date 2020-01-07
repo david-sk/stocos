@@ -4,6 +4,11 @@
         "name": "TravelingSalesmanProblem",
         "instance": "instances/TravelingSalesmanProblem/TSP-brd14051.json"
     },
+    "domain": { 
+        "discrete" : {
+            "extension" : [1, 2, 3, 4]
+        }
+    },
     "parameter_id": 4,
     "OptimizationAlgorithm": {
         "0": {

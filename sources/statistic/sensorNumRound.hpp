@@ -10,8 +10,13 @@
 #ifndef SENSORNUMROUND_H
 #define SENSORNUMROUND_H
 
+#include <string>
+
+#include <jsoncpp/json/json.h>
 
 #include "sensor.hpp"
+namespace stocos 
+{
 
 template<class SOL>
 class SensorNumRound : public Sensor<SOL> {
@@ -43,5 +48,7 @@ public:
 private:
     unsigned int numRound;
 };
+
+}
 
 #endif

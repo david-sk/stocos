@@ -10,11 +10,12 @@
 #ifndef UNITTEST_POPULATION_H
 #define UNITTEST_POPULATION_H
 
-using namespace CppUnit;
-
 #include "solution/solution.hpp"
 #include "solution/solutionArray.hpp"
 #include "solution/population.hpp"
+
+using namespace CppUnit;
+using namespace stocos;
 
 class UnitTest_population : public CppUnit::TestFixture {
 

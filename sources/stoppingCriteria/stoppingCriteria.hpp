@@ -10,13 +10,12 @@
 #ifndef STOPPINGCRITERIA_H
 #define STOPPINGCRITERIA_H
 
-#include <iostream>
-#include <list>
-#include <memory>
+#include <vector>
 
 #include "criteria.hpp"
 
-
+namespace stocos 
+{
 
 template<typename SOL, typename TYPE_FITNESS>
 class StoppingCriteria {
@@ -54,4 +53,5 @@ class StoppingCriteria {
     std::vector<Criteria<SOL, TYPE_FITNESS> *> criteria;
 };
 
+}
 #endif

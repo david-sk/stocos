@@ -16,9 +16,14 @@
 #include <memory>
 #include <string>
 
+#include <boost/log/core.hpp>
+#include <boost/log/trivial.hpp>
+#include <boost/log/expressions.hpp>
+
 #include <jsoncpp/json/json.h>
 
-
+namespace stocos 
+{
 
 template <typename TYPE_FITNESS>
 class Solution {
@@ -88,6 +93,12 @@ class Solution {
         return _fitness_is_valid[numObjectif];
     }
 
+    /// 
+    /// @brief Set the value fitness for a objectif
+    /// 
+    /// @param numObjectif objectif id
+    /// @param value new value
+    ///
     void setFitness(unsigned int numObjectif, TYPE_FITNESS value) {
         assert(numObjectif < _number_of_objective);
         _fitness[numObjectif] = value;
@@ -154,8 +165,9 @@ class Solution {
 
   protected:
     unsigned int _number_of_objective;            ///< number of objectif
-    std::unique_ptr<TYPE_FITNESS[]> _fitness;   ///< list of fitness
+    std::unique_ptr<TYPE_FITNESS[]> _fitness;     ///< list of fitness
     std::unique_ptr<bool[]> _fitness_is_valid;    ///< list of the fitness state
 };
 
+}
 #endif

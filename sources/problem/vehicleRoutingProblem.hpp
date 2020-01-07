@@ -6,3 +6,9 @@
 /// @brief 
 ///         see : http://vrp.galgos.inf.puc-rio.br/index.php/en/
 ///
+
+namespace stocos 
+{
+
+
+}

@@ -15,6 +15,7 @@
 #include "problem/knapsack.hpp"
 
 using namespace CppUnit;
+using namespace stocos;
 
 class UnitTest_knapsack : public CppUnit::TestFixture {
     CPPUNIT_TEST_SUITE(UnitTest_knapsack);

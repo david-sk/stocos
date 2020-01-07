@@ -10,9 +10,15 @@
 #ifndef SENSORSOLTUTION_H
 #define SENSORSOLTUTION_H
 
+#include <string>
+
+#include <jsoncpp/json/json.h>
 
 #include "../solution/solution.hpp"
 #include "sensor.hpp"
+
+namespace stocos 
+{
 
 template<class SOL>
 class SensorSolution : public Sensor<SOL> {
@@ -43,4 +49,5 @@ private:
     SOL solution;
 };
 
+}
 #endif

@@ -11,10 +11,10 @@
 #define UNITTEST_SUBSETSUM_H
 
 #include "solution/solutionArray.hpp"
-
 #include "problem/subsetSum.hpp"
 
 using namespace CppUnit;
+using namespace stocos;
 
 class UnitTest_subsetsum : public CppUnit::TestFixture {
     CPPUNIT_TEST_SUITE(UnitTest_subsetsum);

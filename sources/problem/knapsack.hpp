@@ -20,6 +20,8 @@
 #include "problem.hpp"
 #include "../solutionSelection/maximization.hpp"
 
+namespace stocos 
+{
 
 using TYPE_FITNESS_KNAPSACK = int;
 using TYPE_CELL_KNAPSACK = bool;
@@ -112,5 +114,7 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
         std::vector<int> profit;
         int fitnessObjectif;
 };
+
+}
 
 #endif

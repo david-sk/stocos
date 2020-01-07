@@ -21,7 +21,8 @@
 #include <memory>
 #include <iostream>
 
-
+namespace stocos 
+{
 
 using TYPE_FITNESS_QAP = unsigned int;
 using TYPE_CELL_QAP = unsigned int;
@@ -136,4 +137,5 @@ private:
     unsigned int **B;   // the flow between facilities r and s
 };
 
+}
 #endif

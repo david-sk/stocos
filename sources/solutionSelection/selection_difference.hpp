@@ -12,6 +12,9 @@
 
 #include<cmath>
 
+namespace stocos 
+{
+
 template<class SOL>
 class Selection_difference : public SolutionSelection<SOL> {
     public:
@@ -38,4 +41,5 @@ class Selection_difference : public SolutionSelection<SOL> {
     const double _fitnessObjectif;
 };
 
+}
 #endif

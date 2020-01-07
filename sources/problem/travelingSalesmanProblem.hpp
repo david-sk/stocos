@@ -20,7 +20,8 @@
 #include "problem.hpp"
 #include "../solutionSelection/minimization.hpp"
 
-
+namespace stocos 
+{
 
 using TYPE_FITNESS_STP = double;
 using TYPE_CELL_STP = double;
@@ -62,7 +63,22 @@ class TravelingSalesmanProblem : public Problem<SOL_STP, TYPE_FITNESS_STP, TYPE_
         return true;
     }
 
-    virtual void evaluation(SOL_STP &s) {
+    void evaluation(SOL_STP &s) {
+        // Validation de la solution
+        std::map<TYPE_CELL_STP, unsigned int> count; // <id, count>
+        
+        for (unsigned int i = 0; i < s.sizeArray(); i++) {
+            if (count.find(s(i)) != count.end()) { // Key found
+                count[s(i)] += 1;
+                s.setFitness(std::numeric_limits<double>::max());
+                //s.setFitness(std::numeric_limits<double>::infinity());
+                return ;
+            } else {// Key not found
+                count[s(i)] = 1;
+            }
+        }
+
+        // Calcul de la fitness
         double distance_sum = 0;
         for (unsigned int i = 0; i < s.sizeArray() - 1; i++) {
             distance_sum += distance_euclidienne(nodes[s(i)], nodes[s(i + 1)]);
@@ -91,4 +107,5 @@ class TravelingSalesmanProblem : public Problem<SOL_STP, TYPE_FITNESS_STP, TYPE_
     std::vector<std::pair<double, double>> nodes;
 };
 
+}
 #endif

@@ -19,6 +19,9 @@
 #include "minimization.hpp"
 #include "selection_difference.hpp"
 
+namespace stocos 
+{
+
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class solutionSelectionBuilder {
     public:
@@ -37,5 +40,5 @@ class solutionSelectionBuilder {
         }
 };
 
-
+}
 #endif

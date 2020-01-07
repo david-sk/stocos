@@ -15,6 +15,7 @@
 #include "problem/jobShopProblem.hpp"
 
 using namespace CppUnit;
+using namespace stocos;
 
 class UnitTest_jobShopProblem : public CppUnit::TestFixture {
     CPPUNIT_TEST_SUITE(UnitTest_jobShopProblem);

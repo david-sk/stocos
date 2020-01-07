@@ -10,10 +10,11 @@
 #ifndef UNITTEST_SOLUTIONARRAY_H
 #define UNITTEST_SOLUTIONARRAY_H
 
-using namespace CppUnit;
-
 #include "solution/solution.hpp"
 #include "solution/solutionArray.hpp"
+
+using namespace CppUnit;
+using namespace stocos;
 
 class UnitTest_solutionArray : public CppUnit::TestFixture {
 

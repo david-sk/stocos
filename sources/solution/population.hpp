@@ -14,6 +14,8 @@
 #include "solution.hpp"
 
 
+namespace stocos 
+{
 
 template<typename SOL>
 class Population : public Solution<double>,  public std::vector<SOL> {
@@ -29,4 +31,5 @@ class Population : public Solution<double>,  public std::vector<SOL> {
     private:
 };
 
+}
 #endif

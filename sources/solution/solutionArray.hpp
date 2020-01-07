@@ -19,9 +19,11 @@
 
 #include <jsoncpp/json/json.h>
 
+#include "domain.hpp"
 #include "solution.hpp"
 
-
+namespace stocos 
+{
 
 template <typename TYPE_FITNESS, typename TYPE_CELL>
 class SolutionArray : public Solution<TYPE_FITNESS> {
@@ -31,6 +33,7 @@ class SolutionArray : public Solution<TYPE_FITNESS> {
 		_sizeArray(1) {
         BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Creation SolutionArray";
         array = std::make_unique<TYPE_CELL[]>(_sizeArray);
+        domain = nullptr;
     }
 
     SolutionArray(const unsigned int sizeArray) : 
@@ -38,6 +41,7 @@ class SolutionArray : public Solution<TYPE_FITNESS> {
 		_sizeArray(sizeArray) {
         BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Creation SolutionArray";
         array = std::make_unique<TYPE_CELL[]>(_sizeArray);
+        domain = nullptr;
     }
 
     SolutionArray(const unsigned int numberOfObjective, const unsigned int sizeArray)
@@ -45,17 +49,18 @@ class SolutionArray : public Solution<TYPE_FITNESS> {
 		_sizeArray(sizeArray) {
         BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Creation SolutionArray";
         array = std::make_unique<TYPE_CELL[]>(_sizeArray);
+        domain = nullptr;
     }
 
     SolutionArray(const SolutionArray &s) : 
 		Solution<TYPE_FITNESS>(s), 
 		_sizeArray(s._sizeArray) {
         BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" Creation SolutionArray";
+        
         array = std::make_unique<TYPE_CELL[]>(_sizeArray);
+        for (unsigned int i = 0; i < _sizeArray; i++) array[i] = s.array[i];
 
-        for (unsigned int i = 0; i < _sizeArray; i++) {
-            array[i] = s.array[i];
-        }
+        domain = s.domain;
     }
 
     SolutionArray(const Json::Value &jsonValue) : 
@@ -63,6 +68,7 @@ class SolutionArray : public Solution<TYPE_FITNESS> {
 		array(nullptr),
 		_sizeArray(0) {
         loadJson(jsonValue);
+        // ! loadJson for dom ?
     }
 
     SolutionArray(const std::string &solution) :
@@ -70,6 +76,7 @@ class SolutionArray : public Solution<TYPE_FITNESS> {
 		array(nullptr),
 		_sizeArray(0) {
 			loadJson(solution);
+            // ! loadJson for dom ?
     }
 
     ~SolutionArray() {
@@ -141,6 +148,10 @@ class SolutionArray : public Solution<TYPE_FITNESS> {
         for (unsigned int i = 0; i < jsonValue["solution"].size(); i++) array[i] = jsonValue["solution"][i].asDouble();
     }
 
+
+    /// 
+    /// @return the solution in JSON format
+    ///
     Json::Value asJson() const {
         Json::Value jsonValue = Solution<TYPE_FITNESS>::asJson();
         for (unsigned int i = 0; i < _sizeArray; i++) 
@@ -148,9 +159,13 @@ class SolutionArray : public Solution<TYPE_FITNESS> {
         return jsonValue;
     }
 
+    std::shared_ptr<Domain<TYPE_CELL>> domain;
+
    private:
     std::unique_ptr<TYPE_CELL[]> array;
     unsigned int _sizeArray;
+    
 };
 
+}
 #endif

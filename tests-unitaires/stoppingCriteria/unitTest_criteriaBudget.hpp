@@ -10,10 +10,11 @@
 #ifndef UNITTEST_CRITERIABUDGET_H
 #define UNITTEST_CRITERIABUDGET_H
 
-using namespace CppUnit;
-
 #include "solution/solution.hpp"
 #include "stoppingCriteria/criteriaBudget.hpp"
+
+using namespace CppUnit;
+using namespace stocos;
 
 class UnitTest_criteriaBudget : public CppUnit::TestFixture {
 

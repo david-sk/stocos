@@ -21,8 +21,11 @@
 #include <jsoncpp/json/json.h>
 
 #include "solver.hpp"
-#include "algobuilder.hpp"
+#include "factory.hpp"
 #include "../problem/problem.hpp"
+
+namespace stocos 
+{
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class SolverGeneric : public Solver {
@@ -47,13 +50,13 @@ class SolverGeneric : public Solver {
 					throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] Problem does not exist.");
 
 
-				AlgoBuilder<SOL, TYPE_FITNESS, TYPE_CELL> algoBuilder(mt_rand, _problem, _configuration);
+				Factory<SOL, TYPE_FITNESS, TYPE_CELL> factory(mt_rand, _problem, _configuration);
 
 				for (std::string const &id : _configuration["OptimizationAlgorithm"].getMemberNames())
-					optimizationAlgorithm[stoul(id)] = algoBuilder(std::move(_configuration["OptimizationAlgorithm"][id]));
+					optimizationAlgorithm[stoul(id)] = factory(std::move(_configuration["OptimizationAlgorithm"][id]));
 
 				//
-				_statistic = algoBuilder.getStatistic();
+				_statistic = factory.getStatistic();
 
 				// Create the initial solution
 				if (_configuration["initial_solution"].empty())
@@ -61,9 +64,14 @@ class SolverGeneric : public Solver {
 				else
 					initial_solution = std::make_unique<SOL>(_configuration["initial_solution"]);
 
-				if (!initial_solution->fitnessIsValid()) {
+				if (!initial_solution->fitnessIsValid())
 					_problem->evaluation(*initial_solution);
+				
+				if (!_configuration["domain"].empty()) {
+					domain = std::make_shared<Domain<TYPE_CELL>>(_configuration["domain"]);
+					initial_solution->domain = domain;
 				}
+
 		}
 		virtual ~SolverGeneric() {
 			BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":"<<__LINE__<<" DELETE SolverGeneric";
@@ -99,8 +107,10 @@ class SolverGeneric : public Solver {
 		std::unique_ptr<SOL> initial_solution;
 		std::map<unsigned int, std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>> optimizationAlgorithm;
 		std::string _class_name;
+		std::shared_ptr<Domain<TYPE_CELL>> domain;
 		
 		
 };
 
+}
 #endif

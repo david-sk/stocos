@@ -12,6 +12,9 @@
 
 #include "../solution/population.hpp"
 
+namespace stocos 
+{
+
 template<class SOL>
 class SolutionSelection {
     public:
@@ -31,7 +34,7 @@ class SolutionSelection {
     virtual unsigned int operator()(const Population<SOL> &p) const = 0;
 };
 
-
+}
 
 
 #endif

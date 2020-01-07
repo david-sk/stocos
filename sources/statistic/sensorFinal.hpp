@@ -10,9 +10,16 @@
 #ifndef SENSORFINAL_H
 #define SENSORFINAL_H
 
+#include <string>
+
+#include <jsoncpp/json/json.h>
+
 #include "sensorStopwatch.hpp"
 #include "sensorNumRound.hpp"
 #include "sensor.hpp"
+
+namespace stocos 
+{
 
 template<class SOL>
 class SensorFinal : public Sensor<SOL> {
@@ -60,4 +67,5 @@ private:
     SOL solution_best;
 };
 
+}
 #endif

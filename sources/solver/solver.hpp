@@ -18,7 +18,8 @@
 #include "../problem/problem.hpp"
 
 
-
+namespace stocos 
+{
 
 class Solver {
 	public:
@@ -33,5 +34,7 @@ class Solver {
 
 	protected:
 };
+
+}
 
 #endif

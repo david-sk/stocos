@@ -10,11 +10,12 @@
 #ifndef UNITTEST_EVALTRAVELINGSALESMANPROBLEM__H
 #define UNITTEST_EVALTRAVELINGSALESMANPROBLEM__H
 
-using namespace CppUnit;
-
 #include <fstream>		// ifstream
 #include <string>
 #include "problem/travelingSalesmanProblem.hpp"
+
+using namespace CppUnit;
+using namespace stocos;
 
 class UnitTest_travelingSalesmanProblem : public CppUnit::TestFixture {
     CPPUNIT_TEST_SUITE(UnitTest_travelingSalesmanProblem);

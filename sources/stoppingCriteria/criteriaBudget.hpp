@@ -12,6 +12,9 @@
 
 #include "criteria.hpp"
 
+namespace stocos 
+{
+
 template<typename SOL, typename TYPE_FITNESS>
 class CriteriaBudget : public Criteria<SOL, TYPE_FITNESS> {
     public:
@@ -46,4 +49,5 @@ class CriteriaBudget : public Criteria<SOL, TYPE_FITNESS> {
     unsigned int budget;
 };
 
+}
 #endif

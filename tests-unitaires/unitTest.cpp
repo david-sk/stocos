@@ -28,14 +28,15 @@
 #include "solution/unitTest_population.hpp"
 #include "solution/unitTest_solution.hpp"
 #include "solution/unitTest_solutionArray.hpp"
+#include "solution/unitTest_domain.hpp"
 
-#include "optimizationAlgorithm/exhaustiveSearch/unitTest_backtracking.hpp"
-#include "optimizationAlgorithm/exhaustiveSearch/unitTest_combinationGenerator.hpp"
-#include "optimizationAlgorithm/metaheuristic/operator/mutation/unitTest_flipBit.hpp"
-#include "optimizationAlgorithm/metaheuristic/operator/mutation/unitTest_kBit.hpp"
-#include "optimizationAlgorithm/metaheuristic/operator/mutation/unitTest_neighborhood.hpp"
-#include "optimizationAlgorithm/metaheuristic/operator/unitTest_swap.hpp"
-#include "optimizationAlgorithm/metaheuristic/operator/unitTest_shuffle.hpp"
+#include "optimization/exhaustiveSearch/unitTest_backtracking.hpp"
+#include "optimization/exhaustiveSearch/unitTest_combinationGenerator.hpp"
+#include "optimization/metaheuristic/operator/mutation/unitTest_flipBit.hpp"
+#include "optimization/metaheuristic/operator/mutation/unitTest_kBit.hpp"
+#include "optimization/metaheuristic/operator/mutation/unitTest_neighborhood.hpp"
+#include "optimization/metaheuristic/operator/unitTest_swap.hpp"
+#include "optimization/metaheuristic/operator/unitTest_shuffle.hpp"
 
 #include "problem/unitTest_jobShopProblem.hpp"
 #include "problem/unitTest_knapsack.hpp"
@@ -50,7 +51,7 @@
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_criteriaBudget);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solution);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solutionArray);
-
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_domain);
 
 // Algorithm d'optimisation
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_combinationGenerator);
@@ -59,7 +60,6 @@ CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_flipBit);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_kBit);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_swap);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_shuffle);
-
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_neighborhood);
 
 

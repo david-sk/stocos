@@ -21,7 +21,8 @@ project(stocos)
 set(CMAKE_BUILD_TYPE Release)
 #set(CMAKE_BUILD_TYPE Debug)
 
-set(CMAKE_CXX_FLAGS "-std=c++2a -pedantic -Wall -Wextra -Wcast-align -Wctor-dtor-privacy    \
+set(CMAKE_CXX_FLAGS "-std=c++2a -fopenmp\
+                                -pedantic -Wall -Wextra -Wcast-align -Wctor-dtor-privacy    \
                                 -Wdisabled-optimization -Wformat=2 -Winit-self -Wlogical-op \
                                 -Wmissing-declarations -Wmissing-include-dirs -Wnoexcept    \
                                 -Woverloaded-virtual -Wredundant-decls  -Wsign-promo        \

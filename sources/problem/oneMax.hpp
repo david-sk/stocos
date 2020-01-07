@@ -22,6 +22,9 @@
 
 #include "problem.hpp"
 
+namespace stocos 
+{
+
 using TYPE_FITNESS_ONEMAX = unsigned int;
 using TYPE_CELL_ONEMAX = bool;
 using SOL_ONEMAX = SolutionArray<TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>;
@@ -97,4 +100,5 @@ class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>
     unsigned int _N;
 };
 
+}
 #endif

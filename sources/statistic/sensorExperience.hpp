@@ -10,8 +10,14 @@
 #ifndef SENSOREXPERIENCE_H
 #define SENSOREXPERIENCE_H
 
+#include <string>   // std::string
+
+#include <jsoncpp/json/json.h>
 
 #include "sensor.hpp"
+
+namespace stocos 
+{
 
 template<class SOL>
 class SensorExperience : public Sensor<SOL> {
@@ -47,4 +53,5 @@ private:
     std::string _name;
 };
 
+}
 #endif
