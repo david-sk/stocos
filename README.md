@@ -15,6 +15,6 @@
 
 ```bash
 $ ./build/stocos-Release -c configuration/stocos-oneMax.json
-'''
+```
 
 
