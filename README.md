@@ -1,4 +1,5 @@
 # STOChastic Optimization Solver (stocos)
+
 - C++20
 - Json like
 - Keep data in mongodb
@@ -11,7 +12,7 @@
 
 ## Exemple
 
--> Solve the oneMax problem :
+* Solve the oneMax problem :
 
 ```bash
 $ ./build/stocos-Release -c configuration/stocos-oneMax.json
