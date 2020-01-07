@@ -43,10 +43,10 @@ class SolverClientRPC : public Solver {
 
 
         // Definition of optimization algorithms
-        AlgoBuilder<SOL, TYPE_FITNESS, TYPE_CELL> algoBuilder(mt_rand, _problem, _configuration);
+        Factory<SOL, TYPE_FITNESS, TYPE_CELL> factory(mt_rand, _problem, _configuration);
 
         for (std::string const & id : _configuration["OptimizationAlgorithm"].getMemberNames())
-            optimizationAlgorithm[stoul(id)] = algoBuilder(_configuration["OptimizationAlgorithm"][id]);
+            optimizationAlgorithm[stoul(id)] = factory(_configuration["OptimizationAlgorithm"][id]);
 
         // Create the initial solution
         if (_configuration["initial_solution"].empty())
@@ -59,7 +59,7 @@ class SolverClientRPC : public Solver {
         }
 
         // Construction du global criterea
-        global_stopping_criteria = algoBuilder.stoppingCriteria(_configuration["StoppingCriteria"]);
+        global_stopping_criteria = factory.stoppingCriteria(_configuration["StoppingCriteria"]);
 
 
         // Allocation 

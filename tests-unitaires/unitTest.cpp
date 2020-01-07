@@ -30,22 +30,22 @@
 #include "solution/unitTest_solutionArray.hpp"
 #include "solution/unitTest_domain.hpp"
 
-// #include "optimization/exhaustiveSearch/unitTest_backtracking.hpp"
-// #include "optimization/exhaustiveSearch/unitTest_combinationGenerator.hpp"
-// #include "optimization/metaheuristic/operator/mutation/unitTest_flipBit.hpp"
-// #include "optimization/metaheuristic/operator/mutation/unitTest_kBit.hpp"
-// #include "optimization/metaheuristic/operator/mutation/unitTest_neighborhood.hpp"
-// #include "optimization/metaheuristic/operator/unitTest_swap.hpp"
-// #include "optimization/metaheuristic/operator/unitTest_shuffle.hpp"
+#include "optimization/exhaustiveSearch/unitTest_backtracking.hpp"
+#include "optimization/exhaustiveSearch/unitTest_combinationGenerator.hpp"
+#include "optimization/metaheuristic/operator/mutation/unitTest_flipBit.hpp"
+#include "optimization/metaheuristic/operator/mutation/unitTest_kBit.hpp"
+#include "optimization/metaheuristic/operator/mutation/unitTest_neighborhood.hpp"
+#include "optimization/metaheuristic/operator/unitTest_swap.hpp"
+#include "optimization/metaheuristic/operator/unitTest_shuffle.hpp"
 
-// #include "problem/unitTest_jobShopProblem.hpp"
-// #include "problem/unitTest_knapsack.hpp"
-// #include "problem/unitTest_magicSequence.hpp"
-// #include "problem/unitTest_oneMax.hpp"
-// #include "problem/unitTest_QAP.hpp"
-// #include "problem/unitTest_travelingSalesmanProblem.hpp"
-// #include "problem/unitTest_continuousProblem.hpp"
-// #include "problem/unitTest_subsetsum.hpp"
+#include "problem/unitTest_jobShopProblem.hpp"
+#include "problem/unitTest_knapsack.hpp"
+#include "problem/unitTest_magicSequence.hpp"
+#include "problem/unitTest_oneMax.hpp"
+#include "problem/unitTest_QAP.hpp"
+#include "problem/unitTest_travelingSalesmanProblem.hpp"
+#include "problem/unitTest_continuousProblem.hpp"
+#include "problem/unitTest_subsetsum.hpp"
 
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_criteriaBudget);
@@ -53,26 +53,26 @@ CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solution);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solutionArray);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_domain);
 
-// // Algorithm d'optimisation
-// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_combinationGenerator);
-// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_backtraking);
-// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_flipBit);
-// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_kBit);
-// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_swap);
-// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_shuffle);
-// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_neighborhood);
+// Algorithm d'optimisation
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_combinationGenerator);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_backtraking);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_flipBit);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_kBit);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_swap);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_shuffle);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_neighborhood);
 
 
-// // Problem
-// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_population);
-// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_OneMax);
-// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_knapsack);
-// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_magicSequence);
-// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_QAP);
-// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_ContinuousProblem);
-// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_jobShopProblem);
-// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_subsetsum);
-// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_travelingSalesmanProblem);
+// Problem
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_population);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_OneMax);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_knapsack);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_magicSequence);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_QAP);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_ContinuousProblem);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_jobShopProblem);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_subsetsum);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_travelingSalesmanProblem);
 
 
 int main(int argc, char* argv[]) {

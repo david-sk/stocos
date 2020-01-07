@@ -1,5 +1,5 @@
 /// 
-/// @file algobuilder.hpp
+/// @file factory.hpp
 /// @author Jxtopher
 /// @brief 
 /// @version 0.1
@@ -47,15 +47,15 @@ namespace stocos
 {
 
 template<typename SOL, typename TYPE_FITNESS,typename TYPE_CELL>
-class AlgoBuilder {
+class Factory {
     public:
-        AlgoBuilder(std::mt19937 &mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem, const Json::Value &configuration) :
+        Factory(std::mt19937 &mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem, const Json::Value &configuration) :
         _mt_rand(mt_rand),
         _problem(problem) {
             _statistic = statistic(configuration["Statistic"]);
         }
 
-        virtual ~AlgoBuilder() {
+        virtual ~Factory() {
             
         }
 

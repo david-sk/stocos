@@ -21,7 +21,7 @@
 #include <jsoncpp/json/json.h>
 
 #include "solver.hpp"
-#include "algobuilder.hpp"
+#include "factory.hpp"
 #include "../problem/problem.hpp"
 
 namespace stocos 
@@ -50,13 +50,13 @@ class SolverGeneric : public Solver {
 					throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] Problem does not exist.");
 
 
-				AlgoBuilder<SOL, TYPE_FITNESS, TYPE_CELL> algoBuilder(mt_rand, _problem, _configuration);
+				Factory<SOL, TYPE_FITNESS, TYPE_CELL> factory(mt_rand, _problem, _configuration);
 
 				for (std::string const &id : _configuration["OptimizationAlgorithm"].getMemberNames())
-					optimizationAlgorithm[stoul(id)] = algoBuilder(std::move(_configuration["OptimizationAlgorithm"][id]));
+					optimizationAlgorithm[stoul(id)] = factory(std::move(_configuration["OptimizationAlgorithm"][id]));
 
 				//
-				_statistic = algoBuilder.getStatistic();
+				_statistic = factory.getStatistic();
 
 				// Create the initial solution
 				if (_configuration["initial_solution"].empty())

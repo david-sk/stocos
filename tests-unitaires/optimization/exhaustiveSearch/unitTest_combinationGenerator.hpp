@@ -42,9 +42,9 @@ class UnitTest_combinationGenerator : public CppUnit::TestFixture {
         std::shared_ptr<OneMax> oneMax = std::make_shared<OneMax>(100);
         TYPESOL s(4);
 
-        CombinationGenerator<TYPESOL, unsigned int, bool> cg(mt_rand, move(statistic), move(stoppingCriteria), oneMax, 2, 4);
+        // CombinationGenerator<TYPESOL, unsigned int, bool> cg(mt_rand, move(statistic), move(stoppingCriteria), oneMax, 2, 4);
 
-        cg(s);
+        // cg(s);
 
         //cg();
        

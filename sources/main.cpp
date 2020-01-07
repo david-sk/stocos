@@ -22,10 +22,10 @@
 
 #include "problem/oneMax.hpp"
 #include "problem/latinSquare.hpp"
-// #include "problem/knapsack.hpp"
+#include "problem/knapsack.hpp"
 #include "problem/travelingSalesmanProblem.hpp"
-// #include "problem/subsetSum.hpp"
-// #include "problem/continuousProblem.hpp"
+#include "problem/subsetSum.hpp"
+#include "problem/continuousProblem.hpp"
 
 
 #include "solver/solver.hpp"
@@ -123,10 +123,10 @@ int main(int argc, char **argv, char **envp) {
 
     // Definition des problems
     std::shared_ptr<OneMax> eOneMax = std::make_shared<OneMax>();
-    // std::shared_ptr<Subsetsum> eSubsetsum = std::make_shared<Subsetsum>();
-    // std::shared_ptr<Knapsack> eKnapsack = std::make_shared<Knapsack>();
+    std::shared_ptr<Subsetsum> eSubsetsum = std::make_shared<Subsetsum>();
+    std::shared_ptr<Knapsack> eKnapsack = std::make_shared<Knapsack>();
     std::shared_ptr<TravelingSalesmanProblem> eTravelingSalesmanProblem = std::make_shared<TravelingSalesmanProblem>();
-    // std::shared_ptr<ContinuousProblem> eContinuousProblem = std::make_shared<ContinuousProblem>();
+    std::shared_ptr<ContinuousProblem> eContinuousProblem = std::make_shared<ContinuousProblem>();
 
 
     Solver *solver = nullptr;
@@ -134,12 +134,12 @@ int main(int argc, char **argv, char **envp) {
     if (configuration["aposd"].empty()) {
         if (configuration["problem"]["name"].asString() == "OneMax")
             solver = new SolverGeneric<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>(configuration, eOneMax);
-        // else if (configuration["problem"]["name"].asString() == "Subsetsum")
-        //     solver = new SolverGeneric<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CELL_SUBSETSUM>(configuration, eSubsetsum);
-        // else if (configuration["problem"]["name"].asString() == "Knapsack")
-        //     solver = new SolverGeneric<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_KNAPSACK>(configuration, eKnapsack);
-        // else if (configuration["problem"]["name"].asString() == "ContinuousProblem")
-        //     solver = new SolverGeneric<SOL_CONTINUOUSPROBLEM, TYPE_FITNESS_CONTINUOUSPROBLEM, TYPE_CELL_CONTINUOUSPROBLEM>(configuration, eContinuousProblem);
+        else if (configuration["problem"]["name"].asString() == "Subsetsum")
+            solver = new SolverGeneric<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CELL_SUBSETSUM>(configuration, eSubsetsum);
+        else if (configuration["problem"]["name"].asString() == "Knapsack")
+            solver = new SolverGeneric<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_KNAPSACK>(configuration, eKnapsack);
+        else if (configuration["problem"]["name"].asString() == "ContinuousProblem")
+            solver = new SolverGeneric<SOL_CONTINUOUSPROBLEM, TYPE_FITNESS_CONTINUOUSPROBLEM, TYPE_CELL_CONTINUOUSPROBLEM>(configuration, eContinuousProblem);
         else if (configuration["problem"]["name"].asString() == "TravelingSalesmanProblem")
             solver = new SolverGeneric<SOL_STP, TYPE_FITNESS_STP, TYPE_CELL_STP>(configuration, eTravelingSalesmanProblem);
         else
