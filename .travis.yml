@@ -40,5 +40,4 @@ jobs:
         - cd build
         - cmake ..
         - make
-      - script: build/stocos-unittest-Release
-        name: "Unit Tests" 
+        - build/stocos-unittest-Release
