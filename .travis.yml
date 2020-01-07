@@ -40,7 +40,6 @@ jobs:
         - cd build
         - cmake ..
         - make
-    - stage: "Tests"
       name: "Unit Tests" 
       script: 
         - build/stocos-unittest-Release
