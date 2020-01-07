@@ -40,4 +40,4 @@ jobs:
         - cd build
         - cmake ..
         - make
-        - cd .. & build/stocos-unittest-Release
+        - cd .. && build/stocos-unittest-Release
