@@ -37,7 +37,7 @@ script:
   - cd /tmp
   - git clone https://github.com/catchorg/Catch2.git
   - mkdir -p Catch2/build
-  - cd libjson-rpc-cpp/build
+  - cd Catch2/build
   - cmake .. && make
   - sudo make install
   - cd /tmp
