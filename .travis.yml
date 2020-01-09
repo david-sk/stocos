@@ -15,8 +15,11 @@ dist: bionic  #trusty
 #sudo: required
 #group: edge
 
-
-
+ignore:
+  - docs/*
+  - configuration/*
+  - instances/*
+  - interface-python/*
 
 before_install:
   - travis_retry sudo apt-get update -qq
