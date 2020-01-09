@@ -1,0 +1,46 @@
+#
+# @Author: Jxtopher
+# @Date: 2020-01-07
+# @Purpose: Travis !
+# @copyright CC-BY-NC-SA
+# @see : https://devhints.io/travis
+#
+#########################
+# project configuration #
+#########################
+language: cpp
+#install: make cmake get-deps
+
+dist: bionic  #trusty
+#sudo: required
+#group: edge
+
+ignore:
+  - docs/*
+  - configuration/*
+  - instances/*
+  - interface-python/*
+
+before_install:
+  - travis_retry sudo apt-get update -qq
+  - travis_retry sudo apt-get install -qq libcppunit-dev libjsoncpp-dev libjsoncpp1 libboost-all-dev libmongoclient-dev libmongoclient0 g++-8  doxygen
+  # -> libjson-rpc-cpp
+  - travis_retry sudo apt-get install -qq libargtable2-dev libmicrohttpd-dev libjsoncpp-dev libhiredis-dev
+
+script:
+  - pushd .
+  - cd /tmp
+  - git clone git://github.com/cinemast/libjson-rpc-cpp.git
+  - mkdir -p libjson-rpc-cpp/build
+  - cd libjson-rpc-cpp/build
+  - cmake .. && make 
+  - sudo make install
+  - sudo ldconfig
+  - sudo rm /usr/bin/g++
+  - sudo ln -s /usr/bin/g++-8 /usr/bin/g++
+  - popd
+  - cd build
+  - cmake ..
+  - make
+  #- make test
+  - cd .. && build/stocos-unittest-Release
