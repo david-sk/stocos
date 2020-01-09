@@ -1,0 +1,23 @@
+<map id="/mnt/c/Dev/GitHub/stocos/sources/main.cpp" name="/mnt/c/Dev/GitHub/stocos/sources/main.cpp">
+<area shape="rect" id="node11" href="$oneMax_8hpp.html" title="problem/oneMax.hpp" alt="" coords="1023,177,1182,203"/>
+<area shape="rect" id="node31" href="$latinSquare_8hpp.html" title="problem/latinSquare.hpp" alt="" coords="1323,177,1506,203"/>
+<area shape="rect" id="node32" href="$knapsack_8hpp.html" title="Knapsack Problem. " alt="" coords="1531,177,1701,203"/>
+<area shape="rect" id="node33" href="$travelingSalesmanProblem_8hpp.html" title="instances : http://elib.zib.de/pub/mp&#45;testdata/tsp/tsplib/tsplib.html " alt="" coords="3335,169,3537,211"/>
+<area shape="rect" id="node36" href="$subsetSum_8hpp.html" title="https://en.wikipedia.org/wiki/Subset_sum_problem " alt="" coords="767,177,947,203"/>
+<area shape="rect" id="node37" href="$continuousProblem_8hpp.html" title="problem/continuousProblem.hpp" alt="" coords="1883,95,2117,121"/>
+<area shape="rect" id="node44" href="$solver_8hpp.html" title="solver/solver.hpp" alt="" coords="3935,177,4068,203"/>
+<area shape="rect" id="node46" href="$solverGeneric_8hpp.html" title="solver/solverGeneric.hpp" alt="" coords="3755,95,3939,121"/>
+<area shape="rect" id="node48" href="$solverClientRPC_8hpp.html" title="solver/solverClientRPC.hpp" alt="" coords="397,266,595,293"/>
+<area shape="rect" id="node16" href="$solutionArray_8hpp.html" title="../solution/solutionArray.hpp" alt="" coords="771,266,973,293"/>
+<area shape="rect" id="node22" href="$solutionSelection_8hpp.html" title="../solutionSelection\l/solutionSelection.hpp" alt="" coords="2459,348,2626,389"/>
+<area shape="rect" id="node24" href="$maximization_8hpp.html" title="../solutionSelection\l/maximization.hpp" alt="" coords="1653,259,1800,300"/>
+<area shape="rect" id="node25" href="$problem_8hpp.html" title="description of the optimization problem " alt="" coords="2028,266,2132,293"/>
+<area shape="rect" id="node20" href="$domain_8hpp.html" title="domain.hpp" alt="" coords="851,355,949,382"/>
+<area shape="rect" id="node21" href="$solution_8hpp.html" title="Definition of the number of goals, fitness, and fitnessIsValid. " alt="" coords="2358,512,2461,539"/>
+<area shape="rect" id="node23" href="$population_8hpp.html" title="../solution/population.hpp" alt="" coords="2479,437,2665,464"/>
+<area shape="rect" id="node35" href="$minimization_8hpp.html" title="../solutionSelection\l/minimization.hpp" alt="" coords="2712,259,2859,300"/>
+<area shape="rect" id="node38" href="$solutionSelectionBuilder_8hpp.html" title="../solutionSelection\l/solutionSelectionBuilder.hpp" alt="" coords="2437,169,2648,211"/>
+<area shape="rect" id="node40" href="$exprtk_8hpp.html" title="exprtk/exprtk.hpp" alt="" coords="2993,266,3132,293"/>
+<area shape="rect" id="node39" href="$selection__difference_8hpp.html" title="selection_difference.hpp" alt="" coords="3177,266,3359,293"/>
+<area shape="rect" id="node47" href="$factory_8hpp.html" title="factory.hpp" alt="" coords="3562,177,3657,203"/>
+</map>

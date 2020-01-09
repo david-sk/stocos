@@ -1,0 +1,5 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classstocos_1_1Criteria.html" title="stocos::Criteria\&lt; SOL,\l TYPE_FITNESS \&gt;" alt="" coords="5,39,169,80"/>
+<area shape="rect" id="node2" href="$classstocos_1_1CriteriaBudget.html" title="stocos::CriteriaBudget\l\&lt; SOL, TYPE_FITNESS \&gt;" alt="" coords="237,5,414,47"/>
+<area shape="rect" id="node3" href="$classstocos_1_1CriteriaFitnessObjectif.html" title="stocos::CriteriaFitnessObjectif\l\&lt; SOL, TYPE_FITNESS \&gt;" alt="" coords="217,71,433,112"/>
+</map>

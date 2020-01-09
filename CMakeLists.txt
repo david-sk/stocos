@@ -13,7 +13,7 @@ set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 include(auto-install)   # auto install package
 include(cppcheck)       # 
 include(clang-format)   #
-#include(doxygen)        # Create le doc
+include(doxygen)        # Create le doc
 include(cotire)         # CMake module to speed up builds
 
 project(stocos)

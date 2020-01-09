@@ -1,0 +1,9 @@
+<map id="/mnt/c/Dev/GitHub/stocos/sources/problem/knapsack.hpp" name="/mnt/c/Dev/GitHub/stocos/sources/problem/knapsack.hpp">
+<area shape="rect" id="node7" href="$solutionArray_8hpp.html" title="../solution/solutionArray.hpp" alt="" coords="225,266,428,293"/>
+<area shape="rect" id="node21" href="$problem_8hpp.html" title="description of the optimization problem " alt="" coords="976,184,1080,211"/>
+<area shape="rect" id="node28" href="$maximization_8hpp.html" title="../solutionSelection\l/maximization.hpp" alt="" coords="1041,95,1188,136"/>
+<area shape="rect" id="node13" href="$domain_8hpp.html" title="domain.hpp" alt="" coords="256,348,355,375"/>
+<area shape="rect" id="node15" href="$solution_8hpp.html" title="Definition of the number of goals, fitness, and fitnessIsValid. " alt="" coords="837,348,939,375"/>
+<area shape="rect" id="node27" href="$population_8hpp.html" title="../solution/population.hpp" alt="" coords="1553,266,1740,293"/>
+<area shape="rect" id="node29" href="$solutionSelection_8hpp.html" title="solutionSelection.hpp" alt="" coords="1388,184,1551,211"/>
+</map>

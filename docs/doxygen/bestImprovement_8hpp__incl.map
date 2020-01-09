@@ -1,0 +1,12 @@
+<map id="/mnt/c/Dev/GitHub/stocos/sources/optimization/metaheuristic/bestImprovement.hpp" name="/mnt/c/Dev/GitHub/stocos/sources/optimization/metaheuristic/bestImprovement.hpp">
+<area shape="rect" id="node5" href="$optimizationAlgorithm_8hpp.html" title="../optimizationAlgorithm.hpp" alt="" coords="372,259,580,285"/>
+<area shape="rect" id="node6" href="$stoppingCriteria_8hpp.html" title="../stoppingCriteria\l/stoppingCriteria.hpp" alt="" coords="1955,333,2114,375"/>
+<area shape="rect" id="node9" href="$problem_8hpp.html" title="description of the optimization problem " alt="" coords="1490,341,1665,367"/>
+<area shape="rect" id="node30" href="$atomicOperation_8hpp.html" title="operator/atomicOperation.hpp" alt="" coords="187,184,405,211"/>
+<area shape="rect" id="node31" href="$neighborhood_8hpp.html" title="operator/mutation/neighborhood.hpp" alt="" coords="93,109,355,136"/>
+<area shape="rect" id="node27" href="$statistic_8hpp.html" title="../statistic/statistic.hpp" alt="" coords="703,341,873,367"/>
+<area shape="rect" id="node8" href="$criteria_8hpp.html" title="criteria.hpp" alt="" coords="2340,430,2436,457"/>
+<area shape="rect" id="node18" href="$solution_8hpp.html" title="Definition of the number of goals, fitness, and fitnessIsValid. " alt="" coords="1253,512,1424,539"/>
+<area shape="rect" id="node26" href="$population_8hpp.html" title="../solution/population.hpp" alt="" coords="1733,430,1920,457"/>
+<area shape="rect" id="node29" href="$sensor_8hpp.html" title="sensor.hpp" alt="" coords="726,512,818,539"/>
+</map>

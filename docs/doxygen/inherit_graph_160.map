@@ -1,0 +1,9 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classstocos_1_1AtomicOperation.html" title="stocos::AtomicOperation\l\&lt; SOL, TYPE_FITNESS, TYPE\l_CELL \&gt;" alt="" coords="5,191,208,247"/>
+<area shape="rect" id="node2" href="$classstocos_1_1FlipBit.html" title="stocos::FlipBit\&lt; SOL,\l TYPE_FITNESS, TYPE_CELL \&gt;" alt="" coords="256,5,467,47"/>
+<area shape="rect" id="node3" href="$classstocos_1_1IntervalReal.html" title="stocos::IntervalReal\l\&lt; SOL, TYPE_FITNESS,\l TYPE_CELL \&gt;" alt="" coords="278,71,445,127"/>
+<area shape="rect" id="node4" href="$classstocos_1_1KBit.html" title="stocos::KBit\&lt; SOL,\l TYPE_FITNESS, TYPE\l_CELL \&gt;" alt="" coords="282,151,441,207"/>
+<area shape="rect" id="node5" href="$classstocos_1_1Neighborhood.html" title="stocos::Neighborhood\l\&lt; SOL, TYPE_FITNESS,\l TYPE_CELL \&gt;" alt="" coords="278,231,445,287"/>
+<area shape="rect" id="node6" href="$classstocos_1_1Shuffle.html" title="stocos::Shuffle\&lt; SOL,\l TYPE_FITNESS, TYPE_CELL \&gt;" alt="" coords="256,312,467,353"/>
+<area shape="rect" id="node7" href="$classstocos_1_1Swap.html" title="stocos::Swap\&lt; SOL,\l TYPE_FITNESS, TYPE\l_CELL \&gt;" alt="" coords="282,378,441,434"/>
+</map>
