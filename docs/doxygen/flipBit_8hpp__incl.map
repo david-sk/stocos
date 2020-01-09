@@ -1,0 +1,13 @@
+<map id="/mnt/c/Dev/GitHub/stocos/sources/optimization/metaheuristic/operator/mutation/flipBit.hpp" name="/mnt/c/Dev/GitHub/stocos/sources/optimization/metaheuristic/operator/mutation/flipBit.hpp">
+<area shape="rect" id="node5" href="$solutionArray_8hpp.html" title="../../../../solution\l/solutionArray.hpp" alt="" coords="1832,348,1971,389"/>
+<area shape="rect" id="node20" href="$atomicOperation_8hpp.html" title="../atomicOperation.hpp" alt="" coords="163,109,333,136"/>
+<area shape="rect" id="node11" href="$domain_8hpp.html" title="domain.hpp" alt="" coords="1939,437,2037,464"/>
+<area shape="rect" id="node14" href="$solution_8hpp.html" title="Definition of the number of goals, fitness, and fitnessIsValid. " alt="" coords="942,437,1045,464"/>
+<area shape="rect" id="node21" href="$optimizationAlgorithm_8hpp.html" title="../../optimizationAlgorithm.hpp" alt="" coords="126,184,346,211"/>
+<area shape="rect" id="node22" href="$stoppingCriteria_8hpp.html" title="../stoppingCriteria\l/stoppingCriteria.hpp" alt="" coords="157,259,315,300"/>
+<area shape="rect" id="node24" href="$problem_8hpp.html" title="description of the optimization problem " alt="" coords="771,266,946,293"/>
+<area shape="rect" id="node32" href="$statistic_8hpp.html" title="../statistic/statistic.hpp" alt="" coords="1536,355,1707,382"/>
+<area shape="rect" id="node23" href="$criteria_8hpp.html" title="criteria.hpp" alt="" coords="152,355,248,382"/>
+<area shape="rect" id="node31" href="$population_8hpp.html" title="../solution/population.hpp" alt="" coords="424,355,611,382"/>
+<area shape="rect" id="node34" href="$sensor_8hpp.html" title="sensor.hpp" alt="" coords="1417,437,1509,464"/>
+</map>

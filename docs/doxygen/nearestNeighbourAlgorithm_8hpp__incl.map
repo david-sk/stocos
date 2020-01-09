@@ -1,0 +1,10 @@
+<map id="/mnt/c/Dev/GitHub/stocos/sources/optimization/nearestNeighbourAlgorithm.hpp" name="/mnt/c/Dev/GitHub/stocos/sources/optimization/nearestNeighbourAlgorithm.hpp">
+<area shape="rect" id="node8" href="$problem_8hpp.html" title="description of the optimization problem " alt="" coords="1311,191,1486,218"/>
+<area shape="rect" id="node25" href="$optimizationAlgorithm_8hpp.html" title="optimizationAlgorithm.hpp" alt="" coords="673,109,869,136"/>
+<area shape="rect" id="node16" href="$solution_8hpp.html" title="Definition of the number of goals, fitness, and fitnessIsValid. " alt="" coords="920,363,1091,389"/>
+<area shape="rect" id="node24" href="$population_8hpp.html" title="../solution/population.hpp" alt="" coords="1093,281,1280,307"/>
+<area shape="rect" id="node26" href="$stoppingCriteria_8hpp.html" title="../stoppingCriteria\l/stoppingCriteria.hpp" alt="" coords="691,184,850,225"/>
+<area shape="rect" id="node28" href="$statistic_8hpp.html" title="../statistic/statistic.hpp" alt="" coords="496,191,667,218"/>
+<area shape="rect" id="node27" href="$criteria_8hpp.html" title="criteria.hpp" alt="" coords="669,281,765,307"/>
+<area shape="rect" id="node30" href="$sensor_8hpp.html" title="sensor.hpp" alt="" coords="502,363,594,389"/>
+</map>

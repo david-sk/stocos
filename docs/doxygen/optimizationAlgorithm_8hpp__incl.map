@@ -1,0 +1,9 @@
+<map id="/mnt/c/Dev/GitHub/stocos/sources/optimization/optimizationAlgorithm.hpp" name="/mnt/c/Dev/GitHub/stocos/sources/optimization/optimizationAlgorithm.hpp">
+<area shape="rect" id="node5" href="$stoppingCriteria_8hpp.html" title="../stoppingCriteria\l/stoppingCriteria.hpp" alt="" coords="232,109,391,151"/>
+<area shape="rect" id="node8" href="$problem_8hpp.html" title="description of the optimization problem " alt="" coords="651,117,825,143"/>
+<area shape="rect" id="node26" href="$statistic_8hpp.html" title="../statistic/statistic.hpp" alt="" coords="1539,117,1710,143"/>
+<area shape="rect" id="node7" href="$criteria_8hpp.html" title="criteria.hpp" alt="" coords="27,206,123,233"/>
+<area shape="rect" id="node17" href="$solution_8hpp.html" title="Definition of the number of goals, fitness, and fitnessIsValid. " alt="" coords="1286,288,1457,315"/>
+<area shape="rect" id="node25" href="$population_8hpp.html" title="../solution/population.hpp" alt="" coords="1147,206,1334,233"/>
+<area shape="rect" id="node28" href="$sensor_8hpp.html" title="sensor.hpp" alt="" coords="1785,288,1877,315"/>
+</map>
