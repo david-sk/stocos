@@ -1,5 +1,7 @@
 # STOChastic Optimization Solver (stocos)
 
+Stocos est un solvers clé en main. Il intègre en particule les algorithmes évolutionnaires. La description du plan d'optimisation s'écrite dans le format JSON : les algorithmes utilisés, le problème à résoudre et la façon d’enregistrer les résultats de l'optimisation.
+
 - C++20
 - Json like
 - Keep data in mongodb
