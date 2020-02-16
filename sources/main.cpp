@@ -20,14 +20,28 @@
 #include <boost/log/expressions.hpp>
 #include <boost/program_options.hpp>
 
-#include "problem/oneMax.hpp"
-#include "problem/latinSquare.hpp"
-#include "problem/knapsack.hpp"
-#include "problem/travelingSalesmanProblem.hpp"
+
+// Include problem
+#if MODULE_PROBLEM_ONEMAX
+	#include "problem/oneMax.hpp"
+#endif
+#if MODULE_PROBLEM_LATINSQUARE
+    #include "problem/latinSquare.hpp"
+#endif
+#if MODULE_PROBLEM_KNAPSACK
+    #include "problem/knapsack.hpp"
+#endif
+#if MODULE_PROBLEM_TSP
+    #include "problem/travelingSalesmanProblem.hpp"
+#endif
+#if MODULE_PROBLEM_SUBSETSUM
 #include "problem/subsetSum.hpp"
+#endif
+#if MODULE_PROBLEM_CONTINOUSPROBLEM
 #include "problem/continuousProblem.hpp"
+#endif
 
-
+// Include solver
 #include "solver/solver.hpp"
 #include "solver/solverGeneric.hpp"
 #include "solver/solverClientRPC.hpp"
@@ -122,32 +136,65 @@ int main(int argc, char **argv, char **envp) {
     std::string encoding = configuration.get("encoding", "UTF-8").asString();
 
     // Definition des problems
-    std::shared_ptr<OneMax> eOneMax = std::make_shared<OneMax>();
-    std::shared_ptr<Subsetsum> eSubsetsum = std::make_shared<Subsetsum>();
-    std::shared_ptr<Knapsack> eKnapsack = std::make_shared<Knapsack>();
-    std::shared_ptr<TravelingSalesmanProblem> eTravelingSalesmanProblem = std::make_shared<TravelingSalesmanProblem>();
-    std::shared_ptr<ContinuousProblem> eContinuousProblem = std::make_shared<ContinuousProblem>();
+    #if MODULE_PROBLEM_ONEMAX
+        std::shared_ptr<OneMax> eOneMax = std::make_shared<OneMax>();
+    #else
+        throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] The oneMax problem is not include of the binary. Please turn true of MODULE_PROBLEM_ONEMAX in complilation.");
+	#endif
+    #if MODULE_PROBLEM_SUBSETSUM
+        std::shared_ptr<Subsetsum> eSubsetsum = std::make_shared<Subsetsum>();
+    #else
+        throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] The oneMax problem is not include of the binary. Please turn true of MODULE_PROBLEM_SUBSETSUM in complilation.");
+	#endif
+    #if MODULE_PROBLEM_KNAPSACK
+        std::shared_ptr<Knapsack> eKnapsack = std::make_shared<Knapsack>();
+    #else
+        throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] The oneMax problem is not include of the binary. Please turn true of MODULE_PROBLEM_KNAPSACK in complilation.");
+	#endif
+    #if MODULE_PROBLEM_TSP
+        std::shared_ptr<TravelingSalesmanProblem> eTravelingSalesmanProblem = std::make_shared<TravelingSalesmanProblem>();
+    #else
+        throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] The oneMax problem is not include of the binary. Please turn true of MODULE_PROBLEM_TSP in complilation.");
+	#endif
+    #if MODULE_PROBLEM_CONTINOUSPROBLEM
+        std::shared_ptr<ContinuousProblem> eContinuousProblem = std::make_shared<ContinuousProblem>();
+    #else
+        throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] The oneMax problem is not include of the binary. Please turn true of MODULE_PROBLEM_CONTINOUSPROBLEM in complilation.");
+	#endif
+    
 
 
     Solver *solver = nullptr;
 
     if (configuration["aposd"].empty()) {
-        if (configuration["problem"]["name"].asString() == "OneMax")
-            solver = new SolverGeneric<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>(configuration, eOneMax);
-        else if (configuration["problem"]["name"].asString() == "Subsetsum")
-            solver = new SolverGeneric<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CELL_SUBSETSUM>(configuration, eSubsetsum);
-        else if (configuration["problem"]["name"].asString() == "Knapsack")
-            solver = new SolverGeneric<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_KNAPSACK>(configuration, eKnapsack);
-        else if (configuration["problem"]["name"].asString() == "ContinuousProblem")
+        if (configuration["problem"]["name"].asString() == "OneMax") {
+            #if MODULE_PROBLEM_ONEMAX
+                solver = new SolverGeneric<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>(configuration, eOneMax);
+            #endif
+        } else if (configuration["problem"]["name"].asString() == "Subsetsum") {
+            #if MODULE_PROBLEM_SUBSETSUM
+                solver = new SolverGeneric<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CELL_SUBSETSUM>(configuration, eSubsetsum);
+            #endif
+        } else if (configuration["problem"]["name"].asString() == "Knapsack") {
+            #if MODULE_PROBLEM_KNAPSACK
+                solver = new SolverGeneric<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_KNAPSACK>(configuration, eKnapsack);
+            #endif
+        } else if (configuration["problem"]["name"].asString() == "ContinuousProblem") {
+            #if MODULE_PROBLEM_CONTINOUSPROBLEM
             solver = new SolverGeneric<SOL_CONTINUOUSPROBLEM, TYPE_FITNESS_CONTINUOUSPROBLEM, TYPE_CELL_CONTINUOUSPROBLEM>(configuration, eContinuousProblem);
-        else if (configuration["problem"]["name"].asString() == "TravelingSalesmanProblem")
+            #endif
+        } else if (configuration["problem"]["name"].asString() == "TravelingSalesmanProblem") {
+            #if MODULE_PROBLEM_TSP
             solver = new SolverGeneric<SOL_STP, TYPE_FITNESS_STP, TYPE_CELL_STP>(configuration, eTravelingSalesmanProblem);
-        else
+            #endif
+        } else
             throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] The optimization problem does not exist.");
     } else {
-        if (configuration["aposd"]["Interface"].asString() == "WEBAPPLICATION") 
-            solver = new SolverClientRPC<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>(configuration, eOneMax);
-        else if (configuration["aposd"]["Interface"].asString() == "MPI")
+        if (configuration["aposd"]["Interface"].asString() == "WEBAPPLICATION") {
+            #if MODULE_PROBLEM_ONEMAX
+                solver = new SolverClientRPC<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>(configuration, eOneMax);
+            #endif
+        } else if (configuration["aposd"]["Interface"].asString() == "MPI")
             throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] The interface \""+ configuration["aposd"][""].asString() +"\" does not implemented."); 
         else
             throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] The interface \""+ configuration["aposd"][""].asString() +"\" does not exist.");

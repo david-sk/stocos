@@ -17,6 +17,12 @@ include(clang-format)   #
 include(cotire)         # CMake module to speed up builds
 
 project(stocos)
+set(MODULE_PROBLEM_ONEMAX true)
+set(MODULE_PROBLEM_LATINSQUARE true)
+set(MODULE_PROBLEM_KNAPSACK true)
+set(MODULE_PROBLEM_TSP true)
+set(MODULE_PROBLEM_SUBSETSUM true)
+set(MODULE_PROBLEM_CONTINOUSPROBLEM true)
 
 set(CMAKE_BUILD_TYPE Release)
 #set(CMAKE_BUILD_TYPE Debug)
@@ -96,6 +102,9 @@ target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${JSONCPP_
 target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC "/usr/local/lib/libjsonrpccpp-client.so")
 target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC "/usr/local/lib/libjsonrpccpp-common.so")
 target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${MongoDB_LIBRARIES})
+
+
+target_compile_definitions(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} PRIVATE MODULE_PROBLEM_ONEMAX=${MODULE_PROBLEM_ONEMAX} MODULE_PROBLEM_LATINSQUARE=${MODULE_PROBLEM_LATINSQUARE} MODULE_PROBLEM_KNAPSACK=${MODULE_PROBLEM_KNAPSACK} MODULE_PROBLEM_TSP=${MODULE_PROBLEM_TSP} MODULE_PROBLEM_SUBSETSUM=${MODULE_PROBLEM_SUBSETSUM} MODULE_PROBLEM_CONTINOUSPROBLEM=${MODULE_PROBLEM_CONTINOUSPROBLEM})
 
 # set_target_properties(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "stdafx.h")
 # get_target_property(_precompiledHeader "sources/problem/exprtk/exprtk.h" COTIRE_CXX_PRECOMPILED_HEADER)
