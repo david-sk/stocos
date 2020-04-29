@@ -4,7 +4,10 @@
 /// @version 1
 /// @copyright CC-BY-NC-SA
 /// @date 2018-10
-/// @brief 
+/// @brief Iterated local search Ramalhinho-Lourenço, Helena, Martin, Olivier C. and Stützle, Thomas, (2000)
+///        Iterated local search, Economics Working Papers, Department of Economics and Business,
+///        Universitat Pompeu Fabra, https://EconPapers.repec.org/RePEc:upf:upfgen:513.
+///        (https://econ-papers.upf.edu/papers/513.pdf)
 ///
  
 
