@@ -4,7 +4,7 @@
 /// @version 1
 /// @copyright CC-BY-NC-SA
 /// @date 2019-05
-/// @brief 
+/// @brief
 ///
 
 #ifndef UNITTEST_DOMAIN_H
@@ -19,46 +19,39 @@ using namespace CppUnit;
 using namespace stocos;
 
 class UnitTest_domain : public CppUnit::TestFixture {
+	CPPUNIT_TEST_SUITE(UnitTest_domain);
+	CPPUNIT_TEST(constructor);
+	CPPUNIT_TEST_SUITE_END();
 
-    CPPUNIT_TEST_SUITE(UnitTest_domain);
-    CPPUNIT_TEST(constructor);
-    CPPUNIT_TEST_SUITE_END();
+  public:
+	void setUp(void) {}
+	void tearDown(void) {}
 
-    public:
+	void constructor(void) {
+		std::shared_ptr<std::unordered_set<double>> definition_dom =
+			std::make_shared<std::unordered_set<double>>();
+		definition_dom->insert(5.5);
+		definition_dom->insert(7.2);
+		definition_dom->insert(9.2);
 
-    void setUp(void) {
-    }
-    void tearDown(void) {
-    }
+		// <TYPE_CELL>
+		Domain<double> sol(definition_dom);
 
-    void constructor(void) {
-        std::shared_ptr<std::unordered_set<double>> definition_dom = std::make_shared<std::unordered_set<double>>();
-        definition_dom->insert(5.5);
-        definition_dom->insert(7.2);
-        definition_dom->insert(9.2);
+		sol.remove_element(5, 5.5);
+		sol.add_element(2, 42);
+		sol.show();
+		const std::shared_ptr<const std::unordered_set<double>> x = sol.get_domain(5);
+		const std::shared_ptr<const std::unordered_set<double>> x1 = sol.get_domain(5);
 
-        // <TYPE_CELL>
-        Domain<double> sol(definition_dom);
+		for(auto it = x->begin(); it != x->end(); ++it) { std::cout << (*it) << std::endl; }
 
-        sol.remove_element(5, 5.5);
-        sol.add_element(2, 42);
-        sol.show();
-        const std::shared_ptr<const std::unordered_set<double>> x = sol.get_domain(5);
-        const std::shared_ptr<const std::unordered_set<double>> x1 = sol.get_domain(5);
-        
-        for (auto it = x->begin(); it!= x->end(); ++it) {
-            std::cout<<(*it)<<std::endl;
-        }
+		double v = sol.pick(5, 1);
+		for(unsigned int i = 0; i < sol.size_domain(2); i++) {
+			std::cout << sol.pick(2, i) << std::endl;
+		}
+	}
 
-        double v = sol.pick(5, 1);
-        for (unsigned int i = 0 ; i < sol.size_domain(2) ; i++) {
-            std::cout<<sol.pick(2, i)<<std::endl;
-        }
-        
-    }
-
-    private:
-
+  private:
 };
 
 #endif

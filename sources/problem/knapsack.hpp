@@ -11,110 +11,98 @@
 #define KNAPSACK_H
 
 #include <map>
-#include <utility>
 #include <unistd.h>
+#include <utility>
 #include <vector>
 
-#include <jsoncpp/json/json.h>
 #include "../solution/solutionArray.hpp"
-#include "problem.hpp"
 #include "../solutionSelection/maximization.hpp"
+#include "problem.hpp"
+#include <jsoncpp/json/json.h>
 
-namespace stocos 
-{
+namespace stocos {
 
 using TYPE_FITNESS_KNAPSACK = int;
 using TYPE_CELL_KNAPSACK = bool;
 using SOL_KNAPSACK = SolutionArray<TYPE_FITNESS_KNAPSACK, TYPE_CELL_KNAPSACK>;
 
 class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_KNAPSACK> {
-    public:
-    Knapsack() {
-        
-    }
-    
-    Knapsack(const std::string &fileInstance) {
-        Json::Value config = loadInstance(fileInstance); 
-        loadJson(config);
-    }
-    
-    ~Knapsack() {
+  public:
+	Knapsack() {}
 
-    }
+	Knapsack(const std::string& fileInstance) {
+		Json::Value config = loadInstance(fileInstance);
+		loadJson(config);
+	}
 
-    void loadJson(const Json::Value &config) {
-        instance_number = config["problem"]["instance_number"].asString();
-        capacity = config["problem"]["capacity"].asInt();
-        nbItems =  config["problem"]["#items"].asUInt();
+	~Knapsack() {}
 
-        for (unsigned int i = 0; i < nbItems ; i++) {
-            weight.push_back(config["problem"]["weight"][i].asInt());
-            profit.push_back(config["problem"]["profit"][i].asInt());
-        }
+	void loadJson(const Json::Value& config) {
+		instance_number = config["problem"]["instance_number"].asString();
+		capacity = config["problem"]["capacity"].asInt();
+		nbItems = config["problem"]["#items"].asUInt();
 
-        assert(nbItems == weight.size());
-        assert(weight.size() == profit.size());
-    }
+		for(unsigned int i = 0; i < nbItems; i++) {
+			weight.push_back(config["problem"]["weight"][i].asInt());
+			profit.push_back(config["problem"]["profit"][i].asInt());
+		}
 
-    void evaluation(SOL_KNAPSACK &s) {
-        int fitness = 0;
-        int W = 0;
+		assert(nbItems == weight.size());
+		assert(weight.size() == profit.size());
+	}
 
-        for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
-            fitness += profit[i] * s(i);
-            W += weight[i] * s(i);
-        }
-        
-		if (capacity < W)
-			fitness = -1;
+	void evaluation(SOL_KNAPSACK& s) {
+		int fitness = 0;
+		int W = 0;
+
+		for(unsigned int i = 0; i < s.sizeArray(); i++) {
+			fitness += profit[i] * s(i);
+			W += weight[i] * s(i);
+		}
+
+		if(capacity < W) fitness = -1;
 		s.setFitness(fitness);
-    }
+	}
 
-    /*void incremental(const SolutionArray &s, unsigned int mutatedCell) const {
+	/*void incremental(const SolutionArray &s, unsigned int mutatedCell) const {
 
-    }*/
+	}*/
 
-    void resetSolution(SOL_KNAPSACK &s) const {
-        for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
-            s(i, 0);
-        }
-    }
+	void resetSolution(SOL_KNAPSACK& s) const {
+		for(unsigned int i = 0; i < s.sizeArray(); i++) { s(i, 0); }
+	}
 
-    std::unique_ptr<SOL_KNAPSACK> new_solution() const {
-        std::unique_ptr<SOL_KNAPSACK> s(std::make_unique<SOL_KNAPSACK>(nbItems));
-        for (unsigned int i = 0 ; i < s->sizeArray() ; i++) {
-            s->operator()(i, 0);
-        } 
-        return std::move(s);
-    }
+	std::unique_ptr<SOL_KNAPSACK> new_solution() const {
+		std::unique_ptr<SOL_KNAPSACK> s(std::make_unique<SOL_KNAPSACK>(nbItems));
+		for(unsigned int i = 0; i < s->sizeArray(); i++) { s->operator()(i, 0); }
+		return std::move(s);
+	}
 
-    unsigned int sizeArraySolution() const{
-        return nbItems;
-    }
+	unsigned int sizeArraySolution() const { return nbItems; }
 
 	TYPE_FITNESS_KNAPSACK getFitnessObjectif(unsigned int numObjectif = 0) const {
 		assert(numObjectif = 0);
 		return fitnessObjectif;
 	}
 
-	bool solutionSelection(const SOL_KNAPSACK &s_worst, const SOL_KNAPSACK &s_best) {
-        return solution_selection(s_worst, s_best);
+	bool solutionSelection(const SOL_KNAPSACK& s_worst, const SOL_KNAPSACK& s_best) {
+		return solution_selection(s_worst, s_best);
 	}
 
-	unsigned int solutionSelection(const Population<SOL_KNAPSACK> &p) {
-        return solution_selection(p);
+	unsigned int solutionSelection(const Population<SOL_KNAPSACK>& p) {
+		return solution_selection(p);
 	}
 
-   private:
-        Maximization<SOL_KNAPSACK> solution_selection;
-        std::string instance_number;
-        int capacity;
-        unsigned int nbItems;
-        std::vector<int> weight;
-        std::vector<int> profit;
-        int fitnessObjectif;
+  private:
+	Maximization<SOL_KNAPSACK> solution_selection;
+	std::string instance_number;
+	int capacity;
+	unsigned int nbItems;
+	std::vector<int> weight;
+	std::vector<int> profit;
+	int fitnessObjectif;
 };
 
-}
+} // namespace stocos
 
 #endif

@@ -4,37 +4,29 @@
 /// @version 1
 /// @copyright CC-BY-NC-SA
 /// @date 2018-10
-/// @brief 
+/// @brief
 ///
 
 #ifndef SOLVER_H
-#define	SOLVER_H
+#define SOLVER_H
 
 #include <random>
 #include <string>
 
-
-
 #include "../problem/problem.hpp"
 
-
-namespace stocos 
-{
+namespace stocos {
 
 class Solver {
-	public:
-		Solver() {
-			
-		}
-		virtual ~Solver() {
-			
-		}
+  public:
+	Solver() {}
+	virtual ~Solver() {}
 
-		virtual void operator()() = 0;
+	virtual void operator()() = 0;
 
-	protected:
+  protected:
 };
 
-}
+} // namespace stocos
 
 #endif

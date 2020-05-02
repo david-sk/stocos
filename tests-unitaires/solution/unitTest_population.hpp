@@ -4,40 +4,35 @@
 /// @version 1
 /// @copyright CC-BY-NC-SA
 /// @date 2019-05
-/// @brief 
+/// @brief
 ///
 
 #ifndef UNITTEST_POPULATION_H
 #define UNITTEST_POPULATION_H
 
+#include "solution/population.hpp"
 #include "solution/solution.hpp"
 #include "solution/solutionArray.hpp"
-#include "solution/population.hpp"
 
 using namespace CppUnit;
 using namespace stocos;
 
 class UnitTest_population : public CppUnit::TestFixture {
+	CPPUNIT_TEST_SUITE(UnitTest_population);
+	CPPUNIT_TEST(constructor);
+	CPPUNIT_TEST_SUITE_END();
 
-    CPPUNIT_TEST_SUITE(UnitTest_population);
-    CPPUNIT_TEST(constructor);
-    CPPUNIT_TEST_SUITE_END();
+  public:
+	void setUp(void) {}
+	void tearDown(void) {}
 
-    public:
+	void constructor(void) {
+		SolutionArray<double, bool> s(1, 22);
+		Population<SolutionArray<double, bool>> p;
+		p.push_back(s);
+	}
 
-    void setUp(void) {
-    }
-    void tearDown(void) {
-    }
-
-    void constructor(void) {
-        SolutionArray<double, bool> s(1, 22);
-        Population<SolutionArray<double, bool>> p;
-        p.push_back(s);
-    }
-
-    private:
-
+  private:
 };
 
 #endif

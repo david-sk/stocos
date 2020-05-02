@@ -4,7 +4,7 @@
 /// @version 1
 /// @copyright CC-BY-NC-SA
 /// @date 2018-10
-/// @brief 
+/// @brief
 ///
 
 #ifndef UNITTEST_JOBSHOPPROBLEM_H
@@ -18,22 +18,17 @@ using namespace CppUnit;
 using namespace stocos;
 
 class UnitTest_jobShopProblem : public CppUnit::TestFixture {
-    CPPUNIT_TEST_SUITE(UnitTest_jobShopProblem);
-    CPPUNIT_TEST(loadInstance);
-    CPPUNIT_TEST_SUITE_END();
+	CPPUNIT_TEST_SUITE(UnitTest_jobShopProblem);
+	CPPUNIT_TEST(loadInstance);
+	CPPUNIT_TEST_SUITE_END();
 
-    public:
+  public:
+	void setUp(void) {}
+	void tearDown(void) {}
 
-    void setUp(void) {
-    }
-    void tearDown(void) {
-    }
+	void loadInstance(void) { JobShopProblem("instances/JobShopProblem/JobShopProblem-0.json"); }
 
-    void loadInstance(void) {
-        JobShopProblem("instances/JobShopProblem/JobShopProblem-0.json");
-    }
-
-    private:
+  private:
 };
 
 #endif

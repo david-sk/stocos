@@ -8,40 +8,38 @@
 ///
 
 #ifndef STOPWATCH_H
-#define	STOPWATCH_H
+#define STOPWATCH_H
 
-#include <iostream>
 #include <chrono>
 #include <ctime>
+#include <iostream>
 
 #include <jsoncpp/json/json.h>
 
 #include "sensor.hpp"
 
-namespace stocos 
-{
+namespace stocos {
 
-template<class SOL>
-class SensorStopwatch : public Sensor<SOL> {
-public:
-	SensorStopwatch() : Sensor<SOL>() {
-		start();
-	}
-	
-	virtual ~SensorStopwatch() {
+template<class SOL> class SensorStopwatch : public Sensor<SOL> {
+  public:
+	SensorStopwatch() : Sensor<SOL>() { start(); }
 
-	}
-	
+	virtual ~SensorStopwatch() {}
+
 	void start() {
-		_start_minutes = std::chrono::duration_cast<std::chrono::minutes>(std::chrono::steady_clock::now().time_since_epoch());
-		_start_microseconds = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now().time_since_epoch());
+		_start_minutes = std::chrono::duration_cast<std::chrono::minutes>(
+			std::chrono::steady_clock::now().time_since_epoch());
+		_start_microseconds = std::chrono::duration_cast<std::chrono::microseconds>(
+			std::chrono::steady_clock::now().time_since_epoch());
 	}
-	
+
 	void stop() {
-        _end_microseconds = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now().time_since_epoch());
-		_end_minutes = std::chrono::duration_cast<std::chrono::minutes>(std::chrono::steady_clock::now().time_since_epoch());
+		_end_microseconds = std::chrono::duration_cast<std::chrono::microseconds>(
+			std::chrono::steady_clock::now().time_since_epoch());
+		_end_minutes = std::chrono::duration_cast<std::chrono::minutes>(
+			std::chrono::steady_clock::now().time_since_epoch());
 	}
-	
+
 	int diff_microseconds() {
 		std::chrono::microseconds ms = _end_microseconds - _start_microseconds;
 		return ms.count();
@@ -52,33 +50,32 @@ public:
 		return m.count();
 	}
 
-    void apply(const SOL &s) {
-		stop();
-    }
+	void apply(const SOL& s) { stop(); }
 
-    Json::Value asJson() const {
-		std::chrono::microseconds microseconds = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now().time_since_epoch());
-		std::chrono::microseconds minutes = std::chrono::duration_cast<std::chrono::minutes>(std::chrono::steady_clock::now().time_since_epoch());
+	Json::Value asJson() const {
+		std::chrono::microseconds microseconds =
+			std::chrono::duration_cast<std::chrono::microseconds>(
+				std::chrono::steady_clock::now().time_since_epoch());
+		std::chrono::microseconds minutes = std::chrono::duration_cast<std::chrono::minutes>(
+			std::chrono::steady_clock::now().time_since_epoch());
 
 		std::chrono::microseconds ms = microseconds - _start_microseconds;
-        return Json::Value(static_cast<int>(ms.count()));
-    }
-		
-    Json::Value finish() {
-        //out<<"Time: " <<diff_minutes()<<"m "<<diff_microseconds()<<"μs";
-		return Json::Value();
-    }
+		return Json::Value(static_cast<int>(ms.count()));
+	}
 
-    std::string name() const {
-        return std::string("time_μs");
-    }
-	
-protected:
+	Json::Value finish() {
+		// out<<"Time: " <<diff_minutes()<<"m "<<diff_microseconds()<<"μs";
+		return Json::Value();
+	}
+
+	std::string name() const { return std::string("time_μs"); }
+
+  protected:
 	std::chrono::microseconds _start_microseconds;
 	std::chrono::microseconds _end_microseconds;
 	std::chrono::minutes _start_minutes;
 	std::chrono::minutes _end_minutes;
 };
 
-}
-#endif	/* STOPWATCH_H */
+} // namespace stocos
+#endif /* STOPWATCH_H */

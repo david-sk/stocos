@@ -4,7 +4,7 @@
 /// @version 1
 /// @copyright CC-BY-NC-SA
 /// @date 2019-03
-/// @brief 
+/// @brief
 ///
 
 #ifndef STOPPINGCRITERIA_H
@@ -14,44 +14,35 @@
 
 #include "criteria.hpp"
 
-namespace stocos 
-{
+namespace stocos {
 
-template<typename SOL, typename TYPE_FITNESS>
-class StoppingCriteria {
-    public:
-    StoppingCriteria() {
+template<typename SOL, typename TYPE_FITNESS> class StoppingCriteria {
+  public:
+	StoppingCriteria() {}
 
-    }
+	virtual ~StoppingCriteria() {
+		for(unsigned int i = 0; i < criteria.size(); i++) delete criteria[i];
 
-    virtual ~StoppingCriteria() {
-        for(unsigned int i = 0 ; i < criteria.size() ; i++)
-            delete criteria[i];
+		criteria.clear();
+	}
 
-        criteria.clear();
-    }
+	bool operator()(const SOL& s) {
+		bool total = 1;
 
-    bool operator()(const SOL &s) {
-        bool total = 1;
+		for(unsigned int i = 0; i < criteria.size(); i++)
+			total = total & criteria[i]->operator()(s);
+		return total;
+	}
 
-        for(unsigned int i = 0 ; i < criteria.size() ; i++)
-            total = total & criteria[i]->operator()(s);
-        return total;
-    }
+	void addCriteria(Criteria<SOL, TYPE_FITNESS>* c) { criteria.push_back(c); }
 
-    void addCriteria(Criteria<SOL, TYPE_FITNESS> *c) {
-        criteria.push_back(c);
-    }
+	void reset() {
+		for(unsigned int i = 0; i < criteria.size(); i++) criteria[i]->reset();
+	}
 
-    void reset() {
-        for(unsigned int i = 0 ; i < criteria.size() ; i++)
-            criteria[i]->reset();
-    }
-    
-    
-    protected:
-    std::vector<Criteria<SOL, TYPE_FITNESS> *> criteria;
+  protected:
+	std::vector<Criteria<SOL, TYPE_FITNESS>*> criteria;
 };
 
-}
+} // namespace stocos
 #endif
