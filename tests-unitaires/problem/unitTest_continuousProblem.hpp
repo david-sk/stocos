@@ -4,7 +4,7 @@
 /// @version 1
 /// @copyright CC-BY-NC-SA
 /// @date 2018-10
-/// @brief 
+/// @brief
 ///
 
 #ifndef UNITTEST_CONTINUOUSPROBLEM_H
@@ -17,32 +17,26 @@
 using namespace CppUnit;
 using namespace stocos;
 
-class UnitTest_ContinuousProblem: public CppUnit::TestFixture {
-    CPPUNIT_TEST_SUITE(UnitTest_ContinuousProblem);
-    CPPUNIT_TEST(evaluation);
-    CPPUNIT_TEST(loadInstance);
-    CPPUNIT_TEST_SUITE_END();
+class UnitTest_ContinuousProblem : public CppUnit::TestFixture {
+	CPPUNIT_TEST_SUITE(UnitTest_ContinuousProblem);
+	CPPUNIT_TEST(evaluation);
+	CPPUNIT_TEST(loadInstance);
+	CPPUNIT_TEST_SUITE_END();
 
-    public:
+  public:
+	void setUp(void) {}
+	void tearDown(void) {}
 
-    void setUp(void) {
-    }
-    void tearDown(void) {
-    }
+	void evaluation(void) {}
 
-    void evaluation(void) {
-    }
+	void loadInstance(void) {
+		ContinuousProblem gProblem("instances/ContinuousProblem/test.json");
+		std::unique_ptr<SOL_CONTINUOUSPROBLEM> s = gProblem.new_solution();
+		for(unsigned int i = 0; i < s->sizeArray(); i++) { s->operator()(i, i + (7 * i) + 1); }
+		gProblem.evaluation(*s);
+	}
 
-    void loadInstance(void) {
-        ContinuousProblem gProblem("instances/ContinuousProblem/test.json");
-        std::unique_ptr<SOL_CONTINUOUSPROBLEM> s = gProblem.new_solution();
-        for (unsigned int i = 0 ; i < s->sizeArray() ; i++) {
-            s->operator()(i, i + (7 * i) + 1);
-        }
-        gProblem.evaluation(*s);
-    }
-
-    private:
+  private:
 };
 
 #endif

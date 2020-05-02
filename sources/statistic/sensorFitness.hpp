@@ -1,7 +1,7 @@
-/// 
+///
 /// @file sensorFitness.hpp
 /// @author Jxtopher
-/// @brief 
+/// @brief
 /// @version 0.1
 /// @copyright CC-BY-NC-SA
 /// @date 2019-08-30
@@ -16,38 +16,27 @@
 
 #include "../solution/solution.hpp"
 #include "sensor.hpp"
-namespace stocos 
-{
+namespace stocos {
 
-template<class SOL>
-class SensorFitness : public Sensor<SOL> {
-public:
-    SensorFitness() : Sensor<SOL>() {
-        
-    }
+template<class SOL> class SensorFitness : public Sensor<SOL> {
+  public:
+	SensorFitness() : Sensor<SOL>() {}
 
-    virtual ~SensorFitness() {
+	virtual ~SensorFitness() {}
 
-    }
+	void apply(const SOL& s) { solution = s; }
 
-    void apply(const SOL &s) {
-        solution = s;
-    }
+	Json::Value asJson() const {
+		Json::Value x = solution.asJson();
+		return x["fitness"];
+	}
 
-    Json::Value asJson() const {
-        Json::Value x = solution.asJson();
-        return x["fitness"];
-    }
+	Json::Value finish() { return Json::Value(); }
+	std::string name() const { return std::string("Fitness"); }
 
-    Json::Value finish() {
-        return Json::Value();
-    }
-    std::string name() const {
-        return std::string("Fitness");
-    }
-private:
-    SOL solution;
+  private:
+	SOL solution;
 };
 
-}
+} // namespace stocos
 #endif

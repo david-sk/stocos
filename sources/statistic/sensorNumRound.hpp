@@ -1,7 +1,7 @@
-/// 
+///
 /// @file sensorNumRound.hpp
 /// @author Jxtopher
-/// @brief 
+/// @brief
 /// @version 0.1
 /// @copyright CC-BY-NC-SA
 /// @date 2019-08-30
@@ -15,40 +15,26 @@
 #include <jsoncpp/json/json.h>
 
 #include "sensor.hpp"
-namespace stocos 
-{
+namespace stocos {
 
-template<class SOL>
-class SensorNumRound : public Sensor<SOL> {
-public:
-    SensorNumRound() : Sensor<SOL>() {
-        numRound = 0;
-    }
+template<class SOL> class SensorNumRound : public Sensor<SOL> {
+  public:
+	SensorNumRound() : Sensor<SOL>() { numRound = 0; }
 
-    virtual ~SensorNumRound() {
+	virtual ~SensorNumRound() {}
 
-    }
+	void apply(const SOL& s) { numRound++; }
 
-    void apply(const SOL &s) {
-        numRound++;
-    }
-    
-    Json::Value asJson() const {
-        return Json::Value(numRound);
-    }
+	Json::Value asJson() const { return Json::Value(numRound); }
 
-    Json::Value finish() {
-        return Json::Value();
-    }
+	Json::Value finish() { return Json::Value(); }
 
-    std::string name() const {
-        return std::string("round");
-    }
+	std::string name() const { return std::string("round"); }
 
-private:
-    unsigned int numRound;
+  private:
+	unsigned int numRound;
 };
 
-}
+} // namespace stocos
 
 #endif

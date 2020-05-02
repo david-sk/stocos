@@ -4,7 +4,7 @@
 /// @version 1
 /// @copyright CC-BY-NC-SA
 /// @date 2018-10
-/// @brief 
+/// @brief
 ///
 
 #ifndef UNITTEST_MAGICSEQUENCE_H
@@ -18,23 +18,17 @@ using namespace CppUnit;
 using namespace stocos;
 
 class UnitTest_magicSequence : public CppUnit::TestFixture {
-    CPPUNIT_TEST_SUITE(UnitTest_magicSequence);
-    CPPUNIT_TEST(test_loadInstance);
-    CPPUNIT_TEST_SUITE_END();
+	CPPUNIT_TEST_SUITE(UnitTest_magicSequence);
+	CPPUNIT_TEST(test_loadInstance);
+	CPPUNIT_TEST_SUITE_END();
 
-    public:
+  public:
+	void setUp(void) {}
+	void tearDown(void) {}
 
-    void setUp(void) {
-    }
-    void tearDown(void) {
-    }
+	void test_loadInstance(void) {}
 
-
-    void test_loadInstance(void) {
-    }
-
-
-    private:
+  private:
 };
 
 #endif
