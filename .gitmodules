@@ -1,0 +1,6 @@
+[submodule "modules/libjson-rpc-cpp"]
+	path = modules/libjson-rpc-cpp
+	url = https://github.com/cinemast/libjson-rpc-cpp.git
+[submodule "modules/Catch2"]
+	path = modules/Catch2
+	url = https://github.com/catchorg/Catch2.git
