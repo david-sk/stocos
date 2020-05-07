@@ -6,7 +6,7 @@
 # @Description: Makefile
 #
 
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.13)
 
 # Load module
 set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
@@ -97,6 +97,8 @@ endif(NOT MongoDB_INCLUDE_DIR)
 
 # ## Stocos
 add_executable(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} sources/main.cpp)
+target_include_directories(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} PRIVATE "modules")
+# target_precompile_headers(main PRIVATE sources/main.cpp)
 target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${Boost_LIBRARIES})
 target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${JSONCPP_LIBRARIES})
 target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC "/usr/local/lib/libjsonrpccpp-client.so")
@@ -120,6 +122,7 @@ link_libraries(${CPPUNIT_LIBRARIES})
 
 ## Stocos unit test
 add_executable(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} tests-unitaires/unitTest.cpp)
+target_include_directories(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} PRIVATE "modules")
 target_include_directories(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} PUBLIC sources/)
 target_link_libraries(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${Boost_LIBRARIES})
 target_link_libraries(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${JSONCPP_LIBRARIES})

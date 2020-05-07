@@ -4,3 +4,6 @@
 [submodule "modules/Catch2"]
 	path = modules/Catch2
 	url = https://github.com/catchorg/Catch2.git
+[submodule "modules/exprtk"]
+	path = modules/exprtk
+	url = https://github.com/ArashPartow/exprtk
