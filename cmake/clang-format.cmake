@@ -1,4 +1,11 @@
 ## > clang-format ##################################################################
+set(CLANG_FORMAT_TO_APPLY "sources/*.cpp" 
+                          "sources/*.h" 
+                          "sources/*.hpp" 
+                          "tests-unitaires/*.cpp" 
+                          "tests-unitaires/*.h" 
+                          "tests-unitaires/*.hpp") 
+
 FIND_PROGRAM(CLANGFORMAT_EXECUTABLE clang-format)
 if (NOT CLANGFORMAT_EXECUTABLE)
     packageManager("clang-format")

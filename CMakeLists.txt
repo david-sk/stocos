@@ -14,7 +14,6 @@ cmake_minimum_required(VERSION 3.13)
 set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 include(auto-install)   # auto install package
 include(cppcheck)       #
-set(CLANG_FORMAT_TO_APPLY "sources/*.cpp" "sources/*.h" "sources/*.hpp" "tests-unitaires/*.cpp" "tests-unitaires/*.h" "tests-unitaires/*.hpp") 
 include(clang-format)   #
 include(version)        # Version name generator form git branch, hash
 #include(doxygen)       # Create le documentation
