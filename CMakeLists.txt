@@ -13,10 +13,11 @@ cmake_minimum_required(VERSION 3.13)
 ###############################################################################
 set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 include(auto-install)   # auto install package
-include(cppcheck)       # 
+include(cppcheck)       #
+set(CLANG_FORMAT_TO_APPLY "sources/*.cpp" "sources/*.h" "sources/*.hpp" "tests-unitaires/*.cpp" "tests-unitaires/*.h" "tests-unitaires/*.hpp") 
 include(clang-format)   #
 include(version)        # Version name generator form git branch, hash
-#include(doxygen)       # Create le doc
+#include(doxygen)       # Create le documentation
 include(cotire)         # CMake module to speed up builds
 
 
@@ -79,10 +80,6 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 set(CMAKE_CXX_FLAGS_DEBUG "-g3 -DDEBUG")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
-
-
-
-
 ## PkgConfig
 find_package(PkgConfig)
 if (NOT PKG_CONFIG_FOUND)
@@ -136,16 +133,18 @@ endif(NOT MongoDB_INCLUDE_DIR)
 # message(STATUS "${JSONRPCCPPCLIENT_LIBRARIES}")
 # message(STATUS "${JSONRPCCPPCOMMON_LIBRARIES}")
 
-# ## Stocos
+###############################################################################
+# Stocos
+###############################################################################
 add_executable(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} sources/main.cpp)
 target_include_directories(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} PRIVATE "modules")
 # target_precompile_headers(main PRIVATE sources/main.cpp)
-target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${Boost_LIBRARIES})
-target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${JSONCPP_LIBRARIES})
-target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC "/usr/local/lib/libjsonrpccpp-client.so")
-target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC "/usr/local/lib/libjsonrpccpp-common.so")
-target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${MongoDB_LIBRARIES})
-
+set(item ${Boost_LIBRARIES} 
+         ${JSONCPP_LIBRARIES}
+         "/usr/local/lib/libjsonrpccpp-client.so"
+         "/usr/local/lib/libjsonrpccpp-common.so"
+         ${MongoDB_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} ${item})
 
 target_compile_definitions(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} PRIVATE MODULE_PROBLEM_ONEMAX=${MODULE_PROBLEM_ONEMAX} MODULE_PROBLEM_LATINSQUARE=${MODULE_PROBLEM_LATINSQUARE} MODULE_PROBLEM_KNAPSACK=${MODULE_PROBLEM_KNAPSACK} MODULE_PROBLEM_TSP=${MODULE_PROBLEM_TSP} MODULE_PROBLEM_SUBSETSUM=${MODULE_PROBLEM_SUBSETSUM} MODULE_PROBLEM_CONTINOUSPROBLEM=${MODULE_PROBLEM_CONTINOUSPROBLEM})
 
@@ -161,7 +160,9 @@ endif(NOT CPPUNIT_FOUND)
 
 link_libraries(${CPPUNIT_LIBRARIES})
 
-## Stocos unit test
+###############################################################################
+# Stocos unit test
+###############################################################################
 add_executable(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} tests-unitaires/unitTest.cpp)
 target_include_directories(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} PRIVATE "modules")
 target_include_directories(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} PUBLIC sources/)
