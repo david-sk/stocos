@@ -56,7 +56,7 @@ void version(std::string name_software, std::string num_version) {
 	std::cout << "******************************************" << std::endl;
 	std::cout << "[+] *** " << name_software << " ***" << std::endl;
 	std::cout << "[+] Day compilation : " << __DATE__ << " " << __TIME__ << std::endl;
-	std::cout << "[+] Version : " << num_version << std::endl;
+	std::cout << "[+] Version ("<< CMAKE_BUILD_TYPE <<") : " << num_version << std::endl;
 	std::cout << "[+] Git branch : " << GIT_BRANCH << std::endl;
 	std::cout << "[+] Git commit hash : " << GIT_COMMIT_HASH << std::endl;
 	std::cout << "******************************************" << std::endl;

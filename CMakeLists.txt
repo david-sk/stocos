@@ -9,6 +9,23 @@
 cmake_minimum_required(VERSION 3.13)
 
 ###############################################################################
+# Set of compilator parameters
+###############################################################################
+set(CMAKE_BUILD_TYPE Release)
+#set(CMAKE_BUILD_TYPE Debug)
+
+set(CMAKE_CXX_FLAGS "-std=c++2a -fopenmp\
+                                -pedantic -Wall -Wextra -Wcast-align -Wctor-dtor-privacy    \
+                                -Wdisabled-optimization -Wformat=2 -Winit-self -Wlogical-op \
+                                -Wmissing-declarations -Wmissing-include-dirs -Wnoexcept    \
+                                -Woverloaded-virtual -Wredundant-decls  -Wsign-promo        \
+                                -Wstrict-null-sentinel -Wstrict-overflow=5 -Wundef -Werror  \
+                                -Wno-unused") # -Wswitch-default -Wsign-conversion -Wshadow  -Wcast-qual -Wold-style-cast
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
+set(CMAKE_CXX_FLAGS_DEBUG "-g3 -DDEBUG")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+
+###############################################################################
 # Load modules cmake
 ###############################################################################
 set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
@@ -60,24 +77,6 @@ endif()
 #     #GIT_TAG           origin/master/v2.12.1
 #     BUILD_COMMAND     make
 # )
-
-
-###############################################################################
-# Set of parameters
-###############################################################################
-set(CMAKE_BUILD_TYPE Release)
-#set(CMAKE_BUILD_TYPE Debug)
-
-set(CMAKE_CXX_FLAGS "-std=c++2a -fopenmp\
-                                -pedantic -Wall -Wextra -Wcast-align -Wctor-dtor-privacy    \
-                                -Wdisabled-optimization -Wformat=2 -Winit-self -Wlogical-op \
-                                -Wmissing-declarations -Wmissing-include-dirs -Wnoexcept    \
-                                -Woverloaded-virtual -Wredundant-decls  -Wsign-promo        \
-                                -Wstrict-null-sentinel -Wstrict-overflow=5 -Wundef -Werror  \
-                                -Wno-unused") # -Wswitch-default -Wsign-conversion -Wshadow  -Wcast-qual -Wold-style-cast
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
-set(CMAKE_CXX_FLAGS_DEBUG "-g3 -DDEBUG")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 ## PkgConfig
 find_package(PkgConfig)
