@@ -51,53 +51,52 @@ class QAP : public Problem<SOL_QAP, TYPE_FITNESS_QAP, TYPE_CELL_QAP> {
 		}
 	}
 
-	virtual ~QAP() {
-		for(unsigned int i = 0; i < n; i++) {
-			delete[] A[i];
-			delete[] B[i];
-		}
-		delete[] A;
-		delete[] B;
-	}
+	// virtual ~QAP() {
+	// 	for(unsigned int i = 0; i < n; i++) {
+	// 		delete[] A[i];
+	// 		delete[] B[i];
+	// 	}
+	// 	delete[] A;
+	// 	delete[] B;
+	// }
 
-	/*void loadInstance(const std::string &file) {
-		std::fstream myfile(file, std::ios_base::in);
+	// void loadInstance(const std::string &file) {
+	// 	std::fstream myfile(file, std::ios_base::in);
 
-		unsigned int a;
-		
-		myfile >> n;
-		// Allocation of A and B
-		A = new unsigned int *[n];
-		B = new unsigned int *[n];
-		for (unsigned int i=0; i < n; i++){
-			A[i] = new unsigned int[n];
-			B[i] = new unsigned int[n];
-		}
+	// 	unsigned int a;
+	// 	myfile >> n;
+	// 	// Allocation of A and B
+	// 	A = new unsigned int *[n];
+	// 	B = new unsigned int *[n];
+	// 	for (unsigned int i=0; i < n; i++){
+	// 		A[i] = new unsigned int[n];
+	// 		B[i] = new unsigned int[n];
+	// 	}
 
-		unsigned int i = 0, j = 0;
-		while (myfile >> a) {
-			A[i][j] = a;
-			if (n - 1 <= i && n - 1 <= j)
-				break;
-			else if (n - 1 <= j) {
-				i++;
-				j = 0;
-			} else
-				j++;
-		}
+	// 	unsigned int i = 0, j = 0;
+	// 	while (myfile >> a) {
+	// 		A[i][j] = a;
+	// 		if (n - 1 <= i && n - 1 <= j)
+	// 			break;
+	// 		else if (n - 1 <= j) {
+	// 			i++;
+	// 			j = 0;
+	// 		} else
+	// 			j++;
+	// 	}
 
-		i = 0, j = 0;
-		while (myfile >> a) {
-			B[i][j] = a;
-			if (n - 1 <= i && n - 1 <= j)
-				break;
-			else if (n - 1 <= j) {
-				i++;
-				j = 0;
-			} else
-				j++;
-		}
-	}*/
+	// 	i = 0, j = 0;
+	// 	while (myfile >> a) {
+	// 		B[i][j] = a;
+	// 		if (n - 1 <= i && n - 1 <= j)
+	// 			break;
+	// 		else if (n - 1 <= j) {
+	// 			i++;
+	// 			j = 0;
+	// 		} else
+	// 			j++;
+	// 	}
+	// }
 	void loadJson(const Json::Value& config) {}
 
 	void evaluation(SOL_QAP& p) {
