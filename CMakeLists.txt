@@ -6,16 +6,24 @@
 # @Description: Makefile
 #
 
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.13)
 
-# Load module
+###############################################################################
+# Load modules cmake
+###############################################################################
 set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 include(auto-install)   # auto install package
-include(cppcheck)       # 
+include(cppcheck)       #
+set(CLANG_FORMAT_TO_APPLY "sources/*.cpp" "sources/*.h" "sources/*.hpp" "tests-unitaires/*.cpp" "tests-unitaires/*.h" "tests-unitaires/*.hpp") 
 include(clang-format)   #
-#include(doxygen)        # Create doc
+include(version)        # Version name generator form git branch, hash
+#include(doxygen)       # Create le documentation
 include(cotire)         # CMake module to speed up builds
 
+
+###############################################################################
+# Load modules of the projet
+###############################################################################
 project(stocos)
 set(MODULE_PROBLEM_ONEMAX true)
 set(MODULE_PROBLEM_LATINSQUARE true)
@@ -24,6 +32,40 @@ set(MODULE_PROBLEM_TSP true)
 set(MODULE_PROBLEM_SUBSETSUM true)
 set(MODULE_PROBLEM_CONTINOUSPROBLEM true)
 
+###############################################################################
+# Load modules of external libs
+###############################################################################
+find_package(Git QUIET)
+if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
+# Update submodules as needed
+    option(GIT_SUBMODULE "Check submodules during build" ON)
+    if(GIT_SUBMODULE)
+        message(STATUS "Submodule update")
+        execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive
+                        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                        RESULT_VARIABLE GIT_SUBMOD_RESULT)
+        if(NOT GIT_SUBMOD_RESULT EQUAL "0")
+            message(FATAL_ERROR "git submodule update --init failed with ${GIT_SUBMOD_RESULT}, please checkout submodules")
+        endif()
+    endif()
+endif()
+
+# add_subdirectory(modules)
+
+###############################################################################
+# Get external libs
+###############################################################################
+# include(ExternalProject)
+# ExternalProject_Add(Catch2
+#     GIT_REPOSITORY    https://github.com/catchorg/Catch2.git
+#     #GIT_TAG           origin/master/v2.12.1
+#     BUILD_COMMAND     make
+# )
+
+
+###############################################################################
+# Set of parameters
+###############################################################################
 set(CMAKE_BUILD_TYPE Release)
 #set(CMAKE_BUILD_TYPE Debug)
 
@@ -37,10 +79,6 @@ set(CMAKE_CXX_FLAGS "-std=c++2a -fopenmp\
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 set(CMAKE_CXX_FLAGS_DEBUG "-g3 -DDEBUG")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
-
-
-
-
 
 ## PkgConfig
 find_package(PkgConfig)
@@ -95,14 +133,18 @@ endif(NOT MongoDB_INCLUDE_DIR)
 # message(STATUS "${JSONRPCCPPCLIENT_LIBRARIES}")
 # message(STATUS "${JSONRPCCPPCOMMON_LIBRARIES}")
 
-# ## Stocos
+###############################################################################
+# Stocos
+###############################################################################
 add_executable(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} sources/main.cpp)
-target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${Boost_LIBRARIES})
-target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${JSONCPP_LIBRARIES})
-target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC "/usr/local/lib/libjsonrpccpp-client.so")
-target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC "/usr/local/lib/libjsonrpccpp-common.so")
-target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${MongoDB_LIBRARIES})
-
+target_include_directories(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} PRIVATE "modules")
+# target_precompile_headers(main PRIVATE sources/main.cpp)
+set(item ${Boost_LIBRARIES} 
+         ${JSONCPP_LIBRARIES}
+         "/usr/local/lib/libjsonrpccpp-client.so"
+         "/usr/local/lib/libjsonrpccpp-common.so"
+         ${MongoDB_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} ${item})
 
 target_compile_definitions(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} PRIVATE MODULE_PROBLEM_ONEMAX=${MODULE_PROBLEM_ONEMAX} MODULE_PROBLEM_LATINSQUARE=${MODULE_PROBLEM_LATINSQUARE} MODULE_PROBLEM_KNAPSACK=${MODULE_PROBLEM_KNAPSACK} MODULE_PROBLEM_TSP=${MODULE_PROBLEM_TSP} MODULE_PROBLEM_SUBSETSUM=${MODULE_PROBLEM_SUBSETSUM} MODULE_PROBLEM_CONTINOUSPROBLEM=${MODULE_PROBLEM_CONTINOUSPROBLEM})
 
@@ -118,8 +160,11 @@ endif(NOT CPPUNIT_FOUND)
 
 link_libraries(${CPPUNIT_LIBRARIES})
 
-## Stocos unit test
+###############################################################################
+# Stocos unit test
+###############################################################################
 add_executable(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} tests-unitaires/unitTest.cpp)
+target_include_directories(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} PRIVATE "modules")
 target_include_directories(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} PUBLIC sources/)
 target_link_libraries(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${Boost_LIBRARIES})
 target_link_libraries(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${JSONCPP_LIBRARIES})
