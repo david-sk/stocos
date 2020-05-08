@@ -49,14 +49,14 @@
 
 using namespace stocos;
 
-void version(std::string name_software, std::string num_version);
+void version(std::string name_software);
 void segfault_sigaction(int signal, siginfo_t* si, void* arg);
 
-void version(std::string name_software, std::string num_version) {
+void version(std::string name_software) {
 	std::cout << "******************************************" << std::endl;
 	std::cout << "[+] *** " << name_software << " ***" << std::endl;
 	std::cout << "[+] Day compilation : " << __DATE__ << " " << __TIME__ << std::endl;
-	std::cout << "[+] Version ("<< CMAKE_BUILD_TYPE <<") : " << num_version << std::endl;
+	std::cout << "[+] Version ("<< CMAKE_BUILD_TYPE <<") : " << VERSION_PROJECT << std::endl;
 	std::cout << "[+] Git branch : " << GIT_BRANCH << std::endl;
 	std::cout << "[+] Git commit hash : " << GIT_COMMIT_HASH << std::endl;
 	std::cout << "******************************************" << std::endl;
@@ -104,7 +104,7 @@ int main(int argc, char** argv, char** envp) {
 	}
 
 	if(vm.count("version")) {
-		version("STOChastic Optimization Solver", "1");
+		version("STOChastic Optimization Solver");
 		exit(EXIT_SUCCESS);
 	}
 
