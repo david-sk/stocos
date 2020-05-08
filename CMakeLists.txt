@@ -134,21 +134,21 @@ endif(NOT MongoDB_INCLUDE_DIR)
 ###############################################################################
 # Stocos
 ###############################################################################
-add_executable(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} sources/main.cpp)
-target_include_directories(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} PRIVATE "modules")
+add_executable(${PROJECT_NAME} sources/main.cpp)
+target_include_directories(${PROJECT_NAME} PRIVATE "modules")
 # target_precompile_headers(main PRIVATE sources/main.cpp)
 set(item ${Boost_LIBRARIES} 
          ${JSONCPP_LIBRARIES}
          "/usr/local/lib/libjsonrpccpp-client.so"
          "/usr/local/lib/libjsonrpccpp-common.so"
          ${MongoDB_LIBRARIES})
-target_link_libraries(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} ${item})
+target_link_libraries(${PROJECT_NAME} ${item})
 
-target_compile_definitions(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} PRIVATE MODULE_PROBLEM_ONEMAX=${MODULE_PROBLEM_ONEMAX} MODULE_PROBLEM_LATINSQUARE=${MODULE_PROBLEM_LATINSQUARE} MODULE_PROBLEM_KNAPSACK=${MODULE_PROBLEM_KNAPSACK} MODULE_PROBLEM_TSP=${MODULE_PROBLEM_TSP} MODULE_PROBLEM_SUBSETSUM=${MODULE_PROBLEM_SUBSETSUM} MODULE_PROBLEM_CONTINOUSPROBLEM=${MODULE_PROBLEM_CONTINOUSPROBLEM})
+target_compile_definitions(${PROJECT_NAME} PRIVATE MODULE_PROBLEM_ONEMAX=${MODULE_PROBLEM_ONEMAX} MODULE_PROBLEM_LATINSQUARE=${MODULE_PROBLEM_LATINSQUARE} MODULE_PROBLEM_KNAPSACK=${MODULE_PROBLEM_KNAPSACK} MODULE_PROBLEM_TSP=${MODULE_PROBLEM_TSP} MODULE_PROBLEM_SUBSETSUM=${MODULE_PROBLEM_SUBSETSUM} MODULE_PROBLEM_CONTINOUSPROBLEM=${MODULE_PROBLEM_CONTINOUSPROBLEM})
 
-# set_target_properties(${PROJECT_NAME}-${CMAKE_BUILD_TYPE} PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "stdafx.h")
+# set_target_properties(${PROJECT_NAME} PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "stdafx.h")
 # get_target_property(_precompiledHeader "sources/problem/exprtk/exprtk.h" COTIRE_CXX_PRECOMPILED_HEADER)
-cotire(${PROJECT_NAME}-${CMAKE_BUILD_TYPE})
+cotire(${PROJECT_NAME})
 
 ## Cppunit
 pkg_check_modules(CPPUNIT cppunit)
@@ -161,13 +161,13 @@ link_libraries(${CPPUNIT_LIBRARIES})
 ###############################################################################
 # Stocos unit test
 ###############################################################################
-add_executable(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} tests-unitaires/unitTest.cpp)
-target_include_directories(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} PRIVATE "modules")
-target_include_directories(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} PUBLIC sources/)
-target_link_libraries(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${Boost_LIBRARIES})
-target_link_libraries(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${JSONCPP_LIBRARIES})
-target_link_libraries(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${CPPUNIT_LIBRARIES})
-target_link_libraries(${PROJECT_NAME}-unittest-${CMAKE_BUILD_TYPE} LINK_PUBLIC ${MongoDB_LIBRARIES})
+add_executable(${PROJECT_NAME}-unittest tests-unitaires/unitTest.cpp)
+target_include_directories(${PROJECT_NAME}-unittest PRIVATE "modules")
+target_include_directories(${PROJECT_NAME}-unittest PUBLIC sources/)
+target_link_libraries(${PROJECT_NAME}-unittest LINK_PUBLIC ${Boost_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}-unittest LINK_PUBLIC ${JSONCPP_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}-unittest LINK_PUBLIC ${CPPUNIT_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}-unittest LINK_PUBLIC ${MongoDB_LIBRARIES})
 
 ## Test unitaire -> make test ARGS="-V"
 #find_package(Python3 COMPONENTS Interpreter Development)

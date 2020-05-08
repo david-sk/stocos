@@ -18,7 +18,7 @@ test: check
 	@cd build && make test
 
 run:
-	./build/stocos-Release -c ./configuration/stocos-TSP.json
+	./build/stocos -c ./configuration/stocos-TSP.json
 
 check:
 	@#build-essential
