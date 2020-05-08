@@ -8,14 +8,21 @@
 
 cmake_minimum_required(VERSION 3.13)
 
-# Load module
+###############################################################################
+# Load modules cmake
+###############################################################################
 set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 include(auto-install)   # auto install package
 include(cppcheck)       # 
 include(clang-format)   #
-#include(doxygen)        # Create doc
+include(version)        # Version name generator form git branch, hash
+#include(doxygen)       # Create le doc
 include(cotire)         # CMake module to speed up builds
 
+
+###############################################################################
+# Load modules of the projet
+###############################################################################
 project(stocos)
 set(MODULE_PROBLEM_ONEMAX true)
 set(MODULE_PROBLEM_LATINSQUARE true)
@@ -24,6 +31,40 @@ set(MODULE_PROBLEM_TSP true)
 set(MODULE_PROBLEM_SUBSETSUM true)
 set(MODULE_PROBLEM_CONTINOUSPROBLEM true)
 
+###############################################################################
+# Load modules of external libs
+###############################################################################
+find_package(Git QUIET)
+if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
+# Update submodules as needed
+    option(GIT_SUBMODULE "Check submodules during build" ON)
+    if(GIT_SUBMODULE)
+        message(STATUS "Submodule update")
+        execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive
+                        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                        RESULT_VARIABLE GIT_SUBMOD_RESULT)
+        if(NOT GIT_SUBMOD_RESULT EQUAL "0")
+            message(FATAL_ERROR "git submodule update --init failed with ${GIT_SUBMOD_RESULT}, please checkout submodules")
+        endif()
+    endif()
+endif()
+
+# add_subdirectory(modules)
+
+###############################################################################
+# Get external libs
+###############################################################################
+# include(ExternalProject)
+# ExternalProject_Add(Catch2
+#     GIT_REPOSITORY    https://github.com/catchorg/Catch2.git
+#     #GIT_TAG           origin/master/v2.12.1
+#     BUILD_COMMAND     make
+# )
+
+
+###############################################################################
+# Set of parameters
+###############################################################################
 set(CMAKE_BUILD_TYPE Release)
 #set(CMAKE_BUILD_TYPE Debug)
 
