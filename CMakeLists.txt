@@ -6,7 +6,7 @@
 # @Description: Makefile
 #
 
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.12)
 
 ###############################################################################
 # Set of compilator parameters
@@ -137,14 +137,20 @@ endif(NOT MongoDB_INCLUDE_DIR)
 add_executable(${PROJECT_NAME} sources/main.cpp)
 target_include_directories(${PROJECT_NAME} PRIVATE "modules")
 # target_precompile_headers(main PRIVATE sources/main.cpp)
-set(item ${Boost_LIBRARIES} 
-         ${JSONCPP_LIBRARIES}
-         "/usr/local/lib/libjsonrpccpp-client.so"
-         "/usr/local/lib/libjsonrpccpp-common.so"
-         ${MongoDB_LIBRARIES})
-target_link_libraries(${PROJECT_NAME} ${item})
+target_link_libraries(${PROJECT_NAME}  
+    ${Boost_LIBRARIES} 
+    ${JSONCPP_LIBRARIES}
+    "/usr/local/lib/libjsonrpccpp-client.so"
+    "/usr/local/lib/libjsonrpccpp-common.so"
+    ${MongoDB_LIBRARIES})
 
-target_compile_definitions(${PROJECT_NAME} PRIVATE MODULE_PROBLEM_ONEMAX=${MODULE_PROBLEM_ONEMAX} MODULE_PROBLEM_LATINSQUARE=${MODULE_PROBLEM_LATINSQUARE} MODULE_PROBLEM_KNAPSACK=${MODULE_PROBLEM_KNAPSACK} MODULE_PROBLEM_TSP=${MODULE_PROBLEM_TSP} MODULE_PROBLEM_SUBSETSUM=${MODULE_PROBLEM_SUBSETSUM} MODULE_PROBLEM_CONTINOUSPROBLEM=${MODULE_PROBLEM_CONTINOUSPROBLEM})
+target_compile_definitions(${PROJECT_NAME} PRIVATE 
+    MODULE_PROBLEM_ONEMAX=${MODULE_PROBLEM_ONEMAX} 
+    MODULE_PROBLEM_LATINSQUARE=${MODULE_PROBLEM_LATINSQUARE} 
+    MODULE_PROBLEM_KNAPSACK=${MODULE_PROBLEM_KNAPSACK} 
+    MODULE_PROBLEM_TSP=${MODULE_PROBLEM_TSP} 
+    MODULE_PROBLEM_SUBSETSUM=${MODULE_PROBLEM_SUBSETSUM} 
+    MODULE_PROBLEM_CONTINOUSPROBLEM=${MODULE_PROBLEM_CONTINOUSPROBLEM})
 
 # set_target_properties(${PROJECT_NAME} PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "stdafx.h")
 # get_target_property(_precompiledHeader "sources/problem/exprtk/exprtk.h" COTIRE_CXX_PRECOMPILED_HEADER)
@@ -169,11 +175,8 @@ target_link_libraries(${PROJECT_NAME}-unittest LINK_PUBLIC ${JSONCPP_LIBRARIES})
 target_link_libraries(${PROJECT_NAME}-unittest LINK_PUBLIC ${CPPUNIT_LIBRARIES})
 target_link_libraries(${PROJECT_NAME}-unittest LINK_PUBLIC ${MongoDB_LIBRARIES})
 
-## Test unitaire -> make test ARGS="-V"
-#find_package(Python3 COMPONENTS Interpreter Development)
-
 enable_testing()
-add_test(NAME "tests-unitaires" COMMAND ./build/stocos-unittest-Release WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+add_test(NAME "tests-unitaires" COMMAND ./build/${PROJECT_NAME}-unittest WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 
 ## Detection du programme python3.7
 FIND_PROGRAM(PYTHON3.7_EXECUTABLE python3.7)
@@ -183,17 +186,17 @@ if (NOT PYTHON3.7_EXECUTABLE)
 endif(NOT PYTHON3.7_EXECUTABLE)
 
 set(LIST_OF_FILES 
-oneMax-FirstImprovement-FlipBit
-oneMax-OnePlusLambda-FlipBit
-oneMax-TabuSearch-FlipBit
-oneMax-IteratedLocalSearch-FI-FlipBit
-oneMax-EvolutionaryAlgo-FlipBit
-continuousProblem-eq1-FirstImprovement-FlipBit
-continuousProblem-eq2-FirstImprovement-FlipBit
-continuousProblem-brent-function-FirstImprovement
-continuousProblem-ackleyFunction-N2-FirstImprovement-FlipBit
-continuousProblem-wolfeFunction-3d-FirstImprovement-FlipBit
-# oneMax-BestImprovement-Neighborhood
+    oneMax-FirstImprovement-FlipBit
+    oneMax-OnePlusLambda-FlipBit
+    oneMax-TabuSearch-FlipBit
+    oneMax-IteratedLocalSearch-FI-FlipBit
+    oneMax-EvolutionaryAlgo-FlipBit
+    continuousProblem-eq1-FirstImprovement-FlipBit
+    continuousProblem-eq2-FirstImprovement-FlipBit
+    continuousProblem-brent-function-FirstImprovement
+    continuousProblem-ackleyFunction-N2-FirstImprovement-FlipBit
+    continuousProblem-wolfeFunction-3d-FirstImprovement-FlipBit
+    # oneMax-BestImprovement-Neighborhood
 )
 foreach(FILE  ${LIST_OF_FILES})
     add_test(NAME ${FILE} COMMAND ${PYTHON3.7_EXECUTABLE} ./tests-solver/${FILE}.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
