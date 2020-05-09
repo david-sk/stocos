@@ -71,14 +71,18 @@ endif()
 ###############################################################################
 # Get external libs
 ###############################################################################
-# include(ExternalProject)
-# ExternalProject_Add(Catch2
-#     GIT_REPOSITORY    https://github.com/catchorg/Catch2.git
-#     #GIT_TAG           origin/master/v2.12.1
-#     BUILD_COMMAND     make
-# )
+include(ExternalProject)
 
-## PkgConfig
+ExternalProject_Add(LIBJSON_RPC_CPP
+    PREFIX ${CMAKE_BINARY_DIR}/libjson-rpc-cpp
+    GIT_REPOSITORY https://github.com/cinemast/libjson-rpc-cpp.git
+    GIT_TAG c696f69
+    CONFIGURE_COMMAND ""
+    BUILD_COMMAND ""
+    INSTALL_COMMAND ""
+)
+
+## PkgConfigmr
 find_package(PkgConfig)
 if (NOT PKG_CONFIG_FOUND)
     packageManager("pkg-config")
@@ -130,18 +134,21 @@ endif(NOT MongoDB_INCLUDE_DIR)
 
 # message(STATUS "${JSONRPCCPPCLIENT_LIBRARIES}")
 # message(STATUS "${JSONRPCCPPCOMMON_LIBRARIES}")
-
 ###############################################################################
 # Stocos
 ###############################################################################
 add_executable(${PROJECT_NAME} sources/main.cpp)
 target_include_directories(${PROJECT_NAME} PRIVATE "modules")
 # target_precompile_headers(main PRIVATE sources/main.cpp)
+
+
+link_directories(${LIBJSON_RPC_CPP}/lib)
+
 target_link_libraries(${PROJECT_NAME}  
     ${Boost_LIBRARIES} 
     ${JSONCPP_LIBRARIES}
-    "/usr/local/lib/libjsonrpccpp-client.so"
-    "/usr/local/lib/libjsonrpccpp-common.so"
+    libjsonrpccpp-client.so
+    libjsonrpccpp-common.so
     ${MongoDB_LIBRARIES})
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE 
@@ -154,7 +161,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 
 # set_target_properties(${PROJECT_NAME} PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "stdafx.h")
 # get_target_property(_precompiledHeader "sources/problem/exprtk/exprtk.h" COTIRE_CXX_PRECOMPILED_HEADER)
-cotire(${PROJECT_NAME})
+# cotire(${PROJECT_NAME})
 
 ## Cppunit
 pkg_check_modules(CPPUNIT cppunit)
