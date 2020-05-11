@@ -192,8 +192,6 @@ set(LIST_OF_FILES
     continuousProblem-eq2-FirstImprovement-FlipBit
     continuousProblem-brent-function-FirstImprovement
     continuousProblem-ackleyFunction-N2-FirstImprovement-FlipBit
-    continuousProblem-wolfeFunction-3d-FirstImprovement-FlipBit
-    # oneMax-BestImprovement-Neighborhood
 )
 foreach(FILE  ${LIST_OF_FILES})
     add_test(NAME ${FILE} COMMAND ${PYTHON3.7_EXECUTABLE} ./tests-solver/${FILE}.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
