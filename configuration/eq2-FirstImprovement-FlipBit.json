@@ -1,0 +1,56 @@
+ {
+    "seed": 0,
+    "problem": {
+        "name": "ContinuousProblem",
+        "instance_number": "0",
+        "objectif": [
+            {
+                "name": "objectif1",
+                "function": "sin(2 * pi * x) + cos(x / 2 * pi) + 1.0",
+                "variables": [
+                    "x"
+                ],
+                "domain" : [
+                    [-64,64]
+                ],
+                "solutionSelection": "max"
+            }
+        ]
+    },
+    "parameter_id": 0,
+    "OptimizationAlgorithm": {
+        "0": {
+            "className": "FirstImprovement",
+            "StoppingCriteria": {
+                "budget": 1000
+            },
+            "AtomicOperation": {
+                "className": "IntervalReal",
+                "c": 1,
+                "a": -1,
+                "b": 1
+            }
+        }
+    },            
+    "Statistic": {
+        "recording":"stdout",
+        "sensorNumRound" : true,
+        "sensorSolution" : true,
+        "sensorStopwatch" : true,
+        "sensorFinal" : {
+            "name" : "eq2",
+            "num" : 6
+        }
+    },
+    "initial_solution" : {
+        "fitness": [
+            0
+        ],
+        "fitnessIsValid": [
+            false
+        ],
+        "solution": [
+            64
+        ]
+    }
+}

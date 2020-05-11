@@ -18,10 +18,11 @@
 #include <jsoncpp/json/json.h>
 #include <unistd.h>
 
+#include <exprtk/exprtk.hpp>
+
 #include "../solution/solutionArray.hpp"
 #include "../solutionSelection/solutionSelection.hpp"
 #include "../solutionSelection/solutionSelectionBuilder.hpp"
-#include "exprtk/exprtk.hpp"
 #include "problem.hpp"
 
 namespace stocos {

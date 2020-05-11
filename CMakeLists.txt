@@ -71,16 +71,13 @@ endif()
 ###############################################################################
 # Get external libs
 ###############################################################################
-include(ExternalProject)
-
-ExternalProject_Add(LIBJSON_RPC_CPP
-    PREFIX ${CMAKE_BINARY_DIR}/libjson-rpc-cpp
-    GIT_REPOSITORY https://github.com/cinemast/libjson-rpc-cpp.git
-    GIT_TAG c696f69
-    CONFIGURE_COMMAND ""
-    BUILD_COMMAND ""
-    INSTALL_COMMAND ""
-)
+# include(ExternalProject)
+# ExternalProject_Add(LIBJSON_RPC_CPP
+#     PREFIX ${CMAKE_BINARY_DIR}/libjson-rpc-cpp
+#     GIT_REPOSITORY https://github.com/cinemast/libjson-rpc-cpp.git
+#     GIT_TAG c696f69
+#     INSTALL_COMMAND ""
+# )
 
 ## PkgConfigmr
 find_package(PkgConfig)
@@ -131,24 +128,17 @@ endif(NOT MongoDB_INCLUDE_DIR)
 #     find_library(JSONRPCCPPCLIENT_LIBRARIES NAMES jsonrpccpp-client)
 # endif(NOT JSONRPCCPPCLIENT_LIBRARIES)
 
-
-# message(STATUS "${JSONRPCCPPCLIENT_LIBRARIES}")
-# message(STATUS "${JSONRPCCPPCOMMON_LIBRARIES}")
 ###############################################################################
 # Stocos
 ###############################################################################
 add_executable(${PROJECT_NAME} sources/main.cpp)
 target_include_directories(${PROJECT_NAME} PRIVATE "modules")
-# target_precompile_headers(main PRIVATE sources/main.cpp)
-
-
-link_directories(${LIBJSON_RPC_CPP}/lib)
 
 target_link_libraries(${PROJECT_NAME}  
     ${Boost_LIBRARIES} 
     ${JSONCPP_LIBRARIES}
-    libjsonrpccpp-client.so
-    libjsonrpccpp-common.so
+    "/usr/local/lib/libjsonrpccpp-client.so"
+    "/usr/local/lib/libjsonrpccpp-common.so"
     ${MongoDB_LIBRARIES})
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE 

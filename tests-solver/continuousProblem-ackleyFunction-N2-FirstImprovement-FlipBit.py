@@ -83,7 +83,7 @@ if __name__ == '__main__':
     def f(x : float, y : float) -> float:
         return  -200 * math.exp(-0.02 * math.sqrt(( math.pow(x, 2)) + (math.pow(y,2))))
 
-    result = subprocess.run(["build/stocos-Release", "-j", json.dumps(configuration)], capture_output=True)
+    result = subprocess.run(["build/stocos", "-j", json.dumps(configuration)], capture_output=True)
     # print(result)
     result_data = json.loads(result.stdout)
     # print(result_data)

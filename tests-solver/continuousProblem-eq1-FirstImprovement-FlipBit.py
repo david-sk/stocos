@@ -57,7 +57,7 @@ if __name__ == '__main__':
         }
     }
 
-    result = subprocess.run(["build/stocos-Release", "-j", json.dumps(configuration)], capture_output=True)
+    result = subprocess.run(["build/stocos", "-j", json.dumps(configuration)], capture_output=True)
     result_data = json.loads(result.stdout)
     assert (-6.25 - result_data["Solution"]["fitness"][0]) < 0.01
     exit(result.returncode)
