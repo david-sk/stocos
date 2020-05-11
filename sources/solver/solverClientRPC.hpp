@@ -17,7 +17,7 @@
 #include <jsonrpccpp/client/connectors/httpclient.h>
 #include <memory>
 
-#include "../optimization/OptimizationAlgorithm.hpp"
+#include "../optimization/optimizationAlgorithm.hpp"
 #include "factory.hpp"
 
 using namespace jsonrpc;
