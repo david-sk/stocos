@@ -33,7 +33,7 @@ include(auto-install)   # auto install package
 include(cppcheck)       #
 include(clang-format)   #
 include(version)        # Version name generator form git branch, hash
-#include(doxygen)       # Create le documentation
+include(doxygen)       # Create le documentation
 include(cotire)         # CMake module to speed up builds
 
 

@@ -5,14 +5,14 @@
 # @Version: 1
 # @Description: Makefile
 #
-.PHONY: all test check
+.PHONY: all test tools-required
 MAKEFLAGS += --no-print-directory
 
-all : check
+all : tools-required
 	@cd build && cmake ..
 	@cd build && make
 
-test: check
+test: tools-required
 	@cd build && cmake ..
 	@cd build && make
 	@cd build && make test
@@ -20,6 +20,9 @@ test: check
 run:
 	./build/stocos -c ./configuration/stocos-TSP.json
 
-check:
+checks:
+	@cd build && make cppcheck
+
+tools-required:
 	@#build-essential
 	@hash cmake 2> /dev/null || sudo apt-get install -y cmake 2> /dev/null || ( echo >&2 "Please install cmake" ; exit -1)

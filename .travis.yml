@@ -43,4 +43,4 @@ script:
   - cmake ..
   - make
   #- make test
-  - cd .. && build/stocos-unittest-Release
+  - cd .. && build/stocos-unittest
