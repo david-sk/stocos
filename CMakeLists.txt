@@ -11,8 +11,7 @@ cmake_minimum_required(VERSION 3.12)
 ###############################################################################
 # Set of compilator parameters
 ###############################################################################
-set(CMAKE_BUILD_TYPE Release)
-#set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE Release) # (Release|Debug)
 
 set(CMAKE_CXX_FLAGS "-std=c++2a -fopenmp\
                                 -pedantic -Wall -Wextra -Wcast-align -Wctor-dtor-privacy    \
@@ -34,7 +33,7 @@ include(cppcheck)       #
 include(clang-format)   #
 include(version)        # Version name generator form git branch, hash
 include(doxygen)       # Create le documentation
-include(cotire)         # CMake module to speed up builds
+# include(cotire)         # CMake module to speed up builds
 
 
 ###############################################################################
@@ -65,8 +64,6 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
         endif()
     endif()
 endif()
-
-# add_subdirectory(modules)
 
 ###############################################################################
 # Get external libs
@@ -149,10 +146,6 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
     MODULE_PROBLEM_SUBSETSUM=${MODULE_PROBLEM_SUBSETSUM} 
     MODULE_PROBLEM_CONTINOUSPROBLEM=${MODULE_PROBLEM_CONTINOUSPROBLEM})
 
-# set_target_properties(${PROJECT_NAME} PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "stdafx.h")
-# get_target_property(_precompiledHeader "sources/problem/exprtk/exprtk.h" COTIRE_CXX_PRECOMPILED_HEADER)
-# cotire(${PROJECT_NAME})
-
 ## Cppunit
 pkg_check_modules(CPPUNIT cppunit)
 if (NOT CPPUNIT_FOUND)
@@ -164,6 +157,7 @@ link_libraries(${CPPUNIT_LIBRARIES})
 ###############################################################################
 # Stocos unit test
 ###############################################################################
+add_custom_target(unit-test COMMAND ${PROJECT_NAME}-unittest DEPENDS ${PROJECT_NAME}-unittest)
 add_executable(${PROJECT_NAME}-unittest tests-unitaires/unitTest.cpp)
 target_include_directories(${PROJECT_NAME}-unittest PRIVATE "modules")
 target_include_directories(${PROJECT_NAME}-unittest PUBLIC sources/)

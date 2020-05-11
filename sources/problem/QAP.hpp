@@ -28,7 +28,7 @@ using TYPE_CELL_QAP = unsigned int;
 using SOL_QAP = SolutionArray<TYPE_FITNESS_QAP, TYPE_CELL_QAP>;
 class QAP : public Problem<SOL_QAP, TYPE_FITNESS_QAP, TYPE_CELL_QAP> {
   public:
-	QAP(std::string fileInstance) {
+	QAP(const std::string &fileInstance) {
 		Json::Value config = loadInstance(fileInstance);
 		loadJson(config);
 	}

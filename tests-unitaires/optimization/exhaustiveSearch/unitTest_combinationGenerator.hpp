@@ -12,6 +12,7 @@
 
 #include "optimization/exhaustiveSearch/combinationGenerator.hpp"
 #include "problem/problem.hpp"
+#include "problem/oneMax.hpp"
 #include "solution/solution.hpp"
 
 using namespace CppUnit;
@@ -39,12 +40,8 @@ class UnitTest_combinationGenerator : public CppUnit::TestFixture {
 		std::shared_ptr<OneMax> oneMax = std::make_shared<OneMax>(100);
 		TYPESOL s(4);
 
-		// CombinationGenerator<TYPESOL, unsigned int, bool> cg(mt_rand, move(statistic),
-		// move(stoppingCriteria), oneMax, 2, 4);
-
+		CombinationGenerator<TYPESOL, unsigned int, bool> cg(mt_rand, move(statistic), move(stoppingCriteria), oneMax);
 		// cg(s);
-
-		// cg();
 
 		/*const std::unique_ptr<unsigned int []> &u = cg.reset();
 		for (unsigned int k = 0; k < 4; k++)
