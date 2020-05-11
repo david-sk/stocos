@@ -6,8 +6,8 @@
 /// @copyright CC-BY-NC-SA
 /// @date 2019-08-11
 ///
-///
 
+#define NAME_SOFTWARE "STOChastic Optimization Solver"
 #define BOOST_LOG_DYN_LINK 1
 
 #include <boost/log/core.hpp>
@@ -78,14 +78,15 @@ int main(int argc, char** argv, char** envp) {
 
 	sigaction(SIGINT, &sa, NULL);
 	// <- signal
+
 	// Paramètre du programme
 	std::string config_pathfile;
 	std::string config_json;
 	std::string loggin;
 
 	boost::program_options::variables_map vm;
-	boost::program_options::options_description argements("[*] main option");
-	argements.add_options()("help,h", "help message")("version,v", "version")(
+	boost::program_options::options_description args("**" + std::string(NAME_SOFTWARE) +"**" + " options");
+	args.add_options()("help,h", "help message")("version,v", "version")(
 		"config,c", boost::program_options::value<std::string>(&config_pathfile),
 		"file configuration json (default : null)")(
 		"json,j", boost::program_options::value<std::string>(&config_json),
@@ -93,19 +94,21 @@ int main(int argc, char** argv, char** envp) {
 		"loggin,l", boost::program_options::value<std::string>(&loggin), "loggin (default : null)");
 	try {
 		boost::program_options::store(
-			boost::program_options::parse_command_line(argc, argv, argements), vm);
-		// boost::program_options::store(boost::program_options::command_line_parser(argc,
-		// argv).options(config).allow_unregistered().run(), vm);
+			boost::program_options::parse_command_line(argc, argv, args), vm);
 		boost::program_options::notify(vm);
 	} catch(const boost::program_options::error& ex) {
-		// std::cerr << __FILE__<<":"<<__LINE__ <<ex.what() << std::endl;
 		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) +
-								 " [-] error program_options");
+								 " [-] error program_options " + ex.what());
 	}
 
 	if(vm.count("version")) {
-		version("STOChastic Optimization Solver");
-		exit(EXIT_SUCCESS);
+		version(NAME_SOFTWARE);
+		return EXIT_SUCCESS;
+	}
+
+	if (vm.count("help")) {
+		std::cout << args <<std::endl;
+		return EXIT_SUCCESS;
 	}
 
 	// Defined the show log siverity level
@@ -117,9 +120,8 @@ int main(int argc, char** argv, char** envp) {
 											boost::log::trivial::info);
 
 	if(config_pathfile.empty() && config_json.empty()) {
-		std::cerr << "./xx -c config.json" << std::endl;
-		std::cerr << "./xx -j \"{\"JSON\" : \"ON\"}\"" << std::endl;
-		exit(EXIT_FAILURE);
+		std::cout << args <<std::endl;
+		return EXIT_SUCCESS;
 	}
 
 	// Read json file
