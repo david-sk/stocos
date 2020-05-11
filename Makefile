@@ -12,6 +12,10 @@ all : tools-required
 	@cd build && cmake ..
 	@cd build && make
 
+
+unit-test: tools-required
+	@cd build && make unit-test
+
 test: tools-required
 	@cd build && cmake ..
 	@cd build && make
@@ -21,6 +25,7 @@ run:
 	./build/stocos -c ./configuration/stocos-TSP.json
 
 checks:
+	@cd build && make clang-format
 	@cd build && make cppcheck
 
 tools-required:

@@ -1,9 +1,9 @@
 ///
 /// @file combinationGenerator.hpp
-/// @author Jxtopher
+/// @author J_xtopher
 /// @version 1
 /// @date 2019
-/// @brief https://fr.wikipedia.org/wiki/Recherche_exhaustive
+/// @brief https://fr.wikipedia.org/wiki/Recherche_e_xhaustive
 ///
 
 #ifndef COMBINATIONGENERATOR_H
@@ -29,7 +29,11 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
 						 std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem)
 		: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(
 			  mt_rand, std::move(statistic), std::move(stoppingCriteria), problem) {
-		nbCall = 0;
+		_nb_call = 0;
+		_nb_digit = 0;
+		_len_string = 0;
+		_x = false;
+		_cpt = false;
 	}
 
 	virtual ~CombinationGenerator() {}
@@ -37,37 +41,37 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
 	void reset() {
 		for(unsigned int j = 0; j < _len_string; j++) _string[j] = 0;
 
-		x = false;
-		i = 0;
+		_x = false;
+		_cpt = 0;
 
-		while(_string[i] == (_nbDigit - 1)) {
-			i++;
-			x = true;
+		while(_string[_cpt] == (_nb_digit - 1)) {
+			_cpt++;
+			_x = true;
 		}
 	}
 
 	void step() {
-		_string[i]++;
+		_string[_cpt]++;
 
-		if(x) {
-			for(unsigned int j = 0; j < i; j++) _string[j] = 0;
-			i = 0;
+		if(_x) {
+			for(unsigned int j = 0; j < _cpt; j++) _string[j] = 0;
+			_cpt = 0;
 		}
 
-		while(_string[i] == (_nbDigit - 1)) {
-			i++;
-			x = true;
+		while(_string[_cpt] == (_nb_digit - 1)) {
+			_cpt++;
+			_x = true;
 		}
 	}
 
-	bool stop() { return i < (_len_string); }
+	bool stop() { return _cpt < (_len_string); }
 
 	std::unique_ptr<SOL> operator()(const SOL& s) {
 		if(s.domain == nullptr)
 			throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) +
 									 " [-] domain == nullptr)");
 		// initialization
-		_nbDigit = s.domain->size_domain(0);
+		_nb_digit = s.domain->size_domain(0);
 		_len_string = s.sizeArray();
 		_string = std::unique_ptr<unsigned int[]>(new unsigned int[_len_string]);
 
@@ -91,7 +95,7 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
 			// Convert
 			for(unsigned int i = 0; i < _len_string; i++) { solution->operator()(i, _string[i]); }
 
-			// applay filtering
+			// apply filtering
 			this->_problem->evaluation(*solution);
 			if(this->_problem->solutionSelection(*solution, *solution_star)) {
 				solution_star.reset(new SOL(*solution));
@@ -113,17 +117,17 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
 	void className(const std::string& class_name) { _class_name = class_name; }
 
   private:
-	unsigned int _nbDigit;
+	unsigned int _nb_digit;
 	unsigned int _len_string;
 	std::string _class_name;
 
-	unsigned int nbCall;
+	unsigned int _nb_call;
 	std::unique_ptr<unsigned int[]> _string;
 	std::unique_ptr<SOL> solution;
 	std::unique_ptr<SOL> solution_star;
 
-	bool x;
-	unsigned int i;
+	bool _x;
+	unsigned int _cpt;
 };
 
 } // namespace stocos
