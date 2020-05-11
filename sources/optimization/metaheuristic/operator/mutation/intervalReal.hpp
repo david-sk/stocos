@@ -35,6 +35,17 @@ class IntervalReal : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
 	virtual ~IntervalReal() {}
 
 	void operator()(SOL& s) {
+		if (s.sizeArray() != N) {
+		    N = s.sizeArray();
+		    mutation_rate = static_cast<double>(_c) / static_cast<double>(N);
+		    backup.reserve(N);
+		}
+
+		for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
+		    if (urd_0_1->operator()(this->_mt_rand) < mutation_rate) {
+		        s(i, s(i) + urd->operator()(this->_mt_rand));
+		    }
+		}
 		//! use domain.hpp
 		// if (s.sizeArray() != N) {
 		//     N = s.sizeArray();
