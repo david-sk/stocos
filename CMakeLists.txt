@@ -32,9 +32,7 @@ include(auto-install)   # auto install package
 include(cppcheck)       #
 include(clang-format)   #
 include(version)        # Version name generator form git branch, hash
-include(doxygen)       # Create le documentation
-# include(cotire)         # CMake module to speed up builds
-
+include(doxygen)        # Create le documentation
 
 ###############################################################################
 # Load modules of the projet
@@ -176,17 +174,8 @@ if (NOT PYTHON3.7_EXECUTABLE)
     FIND_PROGRAM(PYTHON3.7_EXECUTABLE python3.7)
 endif(NOT PYTHON3.7_EXECUTABLE)
 
-set(LIST_OF_FILES 
-    oneMax-FirstImprovement-FlipBit
-    oneMax-OnePlusLambda-FlipBit
-    oneMax-TabuSearch-FlipBit
-    oneMax-IteratedLocalSearch-FI-FlipBit
-    oneMax-EvolutionaryAlgo-FlipBit
-    continuousProblem-eq1-FirstImprovement-FlipBit
-    continuousProblem-eq2-FirstImprovement-FlipBit
-    continuousProblem-brent-function-FirstImprovement
-    continuousProblem-ackleyFunction-N2-FirstImprovement-FlipBit
-)
-foreach(FILE  ${LIST_OF_FILES})
-    add_test(NAME ${FILE} COMMAND ${PYTHON3.7_EXECUTABLE} ./tests-solver/${FILE}.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+file(GLOB LIST_OF_FILES  tests-solver/*.py)
+foreach(PATH_FILE  ${LIST_OF_FILES})
+    get_filename_component(FILE ${PATH_FILE} NAME)
+    add_test(NAME ${FILE} COMMAND ${PYTHON3.7_EXECUTABLE} ${PATH_FILE} WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 endforeach()
