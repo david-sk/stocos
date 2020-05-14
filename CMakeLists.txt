@@ -127,7 +127,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE "modules")
 
 target_link_libraries(${PROJECT_NAME}  
     ${Boost_LIBRARIES} 
-    ${JSONCPP_LIBRARIES}
+    # ${JSONCPP_LIBRARIES}
     "${CMAKE_CURRENT_BINARY_DIR}/deps/libjson-rpc-cpp-install/lib/libjsonrpccpp-client.so"
     "${CMAKE_CURRENT_BINARY_DIR}/deps/libjson-rpc-cpp-install/lib/libjsonrpccpp-common.so"
     ${MongoDB_LIBRARIES})
@@ -158,7 +158,7 @@ target_include_directories(${PROJECT_NAME}-unittest PRIVATE
     sources/)
 target_link_libraries(${PROJECT_NAME}-unittest LINK_PRIVATE
     ${Boost_LIBRARIES}
-    ${JSONCPP_LIBRARIES}
+    # ${JSONCPP_LIBRARIES}
     ${CPPUNIT_LIBRARIES}
     ${MongoDB_LIBRARIES})
 

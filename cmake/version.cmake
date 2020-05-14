@@ -30,7 +30,7 @@ if(EXISTS "${CMAKE_SOURCE_DIR}/.git")
   )
 
   execute_process(
-    COMMAND git describe --exact-match --tags ${GIT_COMMIT_HASH}
+    COMMAND git describe --tags
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
     OUTPUT_VARIABLE VERSION_PROJECT
     OUTPUT_STRIP_TRAILING_WHITESPACE
