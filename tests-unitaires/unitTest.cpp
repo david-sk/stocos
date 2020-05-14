@@ -47,30 +47,30 @@
 #include "problem/unitTest_subsetsum.hpp"
 #include "problem/unitTest_travelingSalesmanProblem.hpp"
 
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_criteriaBudget);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solution);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solutionArray);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_criteriaBudget);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solution);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solutionArray);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_domain);
 
-// Algorithm d'optimisation
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_combinationGenerator);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_backtraking);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_flipBit);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_kBit);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_swap);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_shuffle);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_neighborhood);
+// // Algorithm d'optimisation
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_combinationGenerator);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_backtraking);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_flipBit);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_kBit);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_swap);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_shuffle);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_neighborhood);
 
-// Problem
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_population);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_OneMax);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_knapsack);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_magicSequence);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_QAP);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_ContinuousProblem);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_jobShopProblem);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_subsetsum);
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_travelingSalesmanProblem);
+// // Problem
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_population);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_OneMax);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_knapsack);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_magicSequence);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_QAP);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_ContinuousProblem);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_jobShopProblem);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_subsetsum);
+// CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_travelingSalesmanProblem);
 
 int main(int argc, char* argv[]) {
 	boost::log::core::get()->set_logging_enabled(false);

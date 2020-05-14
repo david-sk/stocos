@@ -18,7 +18,7 @@ unit-test: tools-required
 
 test: tools-required
 	@cd build && cmake ..
-	@cd build && make
+	@cd build && make -j 2
 	@cd build && make test
 
 run:
