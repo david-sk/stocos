@@ -30,4 +30,4 @@ checks:
 
 tools-required:
 	@#build-essential
-	@hash cmake 2> /dev/null || sudo apt-get install -y cmake 2> /dev/null || ( echo >&2 "Please install cmake" ; exit -1)
+	@hash cmake 2> /dev/null || sudo apt-get install -y cmake g++ 2> /dev/null || ( echo >&2 "Please install cmake" ; exit -1)
