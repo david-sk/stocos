@@ -1,5 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classstocos_1_1Solver.html" title="stocos::Solver" alt="" coords="5,60,119,87"/>
-<area shape="rect" id="node2" href="$classstocos_1_1SolverClientRPC.html" title="stocos::SolverClientRPC\l\&lt; SOL, TYPE_FITNESS, TYPE\l_CELL \&gt;" alt="" coords="167,5,369,61"/>
-<area shape="rect" id="node3" href="$classstocos_1_1SolverGeneric.html" title="stocos::SolverGeneric\l\&lt; SOL, TYPE_FITNESS,\l TYPE_CELL \&gt;" alt="" coords="185,85,351,141"/>
-</map>

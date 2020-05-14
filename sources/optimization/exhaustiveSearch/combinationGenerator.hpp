@@ -67,11 +67,12 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
 	bool stop() { return _cpt < (_len_string); }
 
 	std::unique_ptr<SOL> operator()(const SOL& s) {
-		if(s.domain == nullptr)
-			throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) +
-									 " [-] domain == nullptr)");
-		// initialization
-		_nb_digit = s.domain->size_domain(0);
+		// if(s.domain == nullptr)
+		// 	throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) +
+		// 							 " [-] domain == nullptr)");
+		// // initialization
+		// _nb_digit = s.domain->size_domain(0);
+		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] domain == nullptr)");
 		_len_string = s.sizeArray();
 		_string = std::unique_ptr<unsigned int[]>(new unsigned int[_len_string]);
 

@@ -1,9 +1,0 @@
-<map id="/mnt/c/Dev/GitHub/stocos/sources/problem/magicSequence.hpp" name="/mnt/c/Dev/GitHub/stocos/sources/problem/magicSequence.hpp">
-<area shape="rect" id="node2" href="$problem_8hpp.html" title="description of the optimization problem " alt="" coords="674,184,778,211"/>
-<area shape="rect" id="node23" href="$solutionArray_8hpp.html" title="../solution/solutionArray.hpp" alt="" coords="1249,266,1452,293"/>
-<area shape="rect" id="node27" href="$maximization_8hpp.html" title="../solutionSelection\l/maximization.hpp" alt="" coords="957,95,1104,136"/>
-<area shape="rect" id="node12" href="$solution_8hpp.html" title="Definition of the number of goals, fitness, and fitnessIsValid. " alt="" coords="988,348,1158,375"/>
-<area shape="rect" id="node22" href="$population_8hpp.html" title="../solution/population.hpp" alt="" coords="937,266,1124,293"/>
-<area shape="rect" id="node24" href="$domain_8hpp.html" title="domain.hpp" alt="" coords="1446,348,1545,375"/>
-<area shape="rect" id="node28" href="$solutionSelection_8hpp.html" title="solutionSelection.hpp" alt="" coords="949,184,1112,211"/>
-</map>

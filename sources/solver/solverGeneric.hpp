@@ -68,7 +68,7 @@ class SolverGeneric : public Solver {
 
 		if(!_configuration["domain"].empty()) {
 			domain = std::make_shared<Domain<TYPE_CELL>>(_configuration["domain"]);
-			initial_solution->domain = domain;
+			// initial_solution->domain = domain;
 		}
 	}
 	virtual ~SolverGeneric() {

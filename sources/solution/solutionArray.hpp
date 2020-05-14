@@ -30,20 +30,20 @@ class SolutionArray : public Solution<TYPE_FITNESS> {
 	SolutionArray() : Solution<TYPE_FITNESS>(1), _sizeArray(1) {
 		BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation SolutionArray";
 		array = std::make_unique<TYPE_CELL[]>(_sizeArray);
-		domain = nullptr;
+		// domain = nullptr;
 	}
 
 	SolutionArray(const unsigned int sizeArray) : Solution<TYPE_FITNESS>(1), _sizeArray(sizeArray) {
 		BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation SolutionArray";
 		array = std::make_unique<TYPE_CELL[]>(_sizeArray);
-		domain = nullptr;
+		// domain = nullptr;
 	}
 
 	SolutionArray(const unsigned int numberOfObjective, const unsigned int sizeArray)
 		: Solution<TYPE_FITNESS>(numberOfObjective), _sizeArray(sizeArray) {
 		BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation SolutionArray";
 		array = std::make_unique<TYPE_CELL[]>(_sizeArray);
-		domain = nullptr;
+		// domain = nullptr;
 	}
 
 	SolutionArray(const SolutionArray& s) : Solution<TYPE_FITNESS>(s), _sizeArray(s._sizeArray) {
@@ -52,7 +52,7 @@ class SolutionArray : public Solution<TYPE_FITNESS> {
 		array = std::make_unique<TYPE_CELL[]>(_sizeArray);
 		for(unsigned int i = 0; i < _sizeArray; i++) array[i] = s.array[i];
 
-		domain = s.domain;
+		// domain = s.domain;
 	}
 
 	SolutionArray(const Json::Value& jsonValue)
@@ -150,7 +150,7 @@ class SolutionArray : public Solution<TYPE_FITNESS> {
 		return jsonValue;
 	}
 
-	std::shared_ptr<Domain<TYPE_CELL>> domain;
+	// std::shared_ptr<Domain<TYPE_CELL>> domain;
 
   private:
 	std::unique_ptr<TYPE_CELL[]> array;

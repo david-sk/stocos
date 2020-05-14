@@ -66,13 +66,17 @@ endif()
 ###############################################################################
 # Get external libs
 ###############################################################################
-# include(ExternalProject)
-# ExternalProject_Add(LIBJSON_RPC_CPP
-#     PREFIX ${CMAKE_BINARY_DIR}/libjson-rpc-cpp
-#     GIT_REPOSITORY https://github.com/cinemast/libjson-rpc-cpp.git
-#     GIT_TAG c696f69
-#     INSTALL_COMMAND ""
-# )
+include(ExternalProject)
+
+ExternalProject_Add(LIBJSON_RPC_CPP
+    SOURCE_DIR "${PROJECT_BINARY_DIR}/deps/libjson-rpc-cpp"
+    BINARY_DIR "${PROJECT_BINARY_DIR}/deps/libjson-rpc-cpp-build"
+    INSTALL_DIR "${PROJECT_BINARY_DIR}/deps/install"
+    GIT_REPOSITORY https://github.com/cinemast/libjson-rpc-cpp.git
+    GIT_TAG c696f69
+    CMAKE_ARGS
+    -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+)
 
 ## PkgConfigmr
 find_package(PkgConfig)
@@ -110,30 +114,22 @@ if (NOT MongoDB_INCLUDE_DIR)
     find_path(MongoDB_INCLUDE_DIR NAMES mongo/client/dbclient.h)
 endif(NOT MongoDB_INCLUDE_DIR)
 
-# ## Jsonrpccpp
-# find_library(JSONRPCCPPCOMMON_LIBRARIES NAMES jsonrpccpp-common)
-# if (NOT JSONRPCCPPCOMMON_LIBRARIES)
-#     #packageManager("libjsonrpccpp-dev")
-#     find_library(JSONRPCCPPCOMMON_LIBRARIES NAMES jsonrpccpp-common)
-# endif(NOT JSONRPCCPPCOMMON_LIBRARIES)
-
-# find_library(JSONRPCCPPCLIENT_LIBRARIES NAMES jsonrpccpp-client)
-# if (NOT JSONRPCCPPCLIENT_LIBRARIES)
-#     #packageManager("libjsonrpccpp-dev")
-#     find_library(JSONRPCCPPCLIENT_LIBRARIES NAMES jsonrpccpp-client)
-# endif(NOT JSONRPCCPPCLIENT_LIBRARIES)
-
 ###############################################################################
 # Stocos
 ###############################################################################
 add_executable(${PROJECT_NAME} sources/main.cpp)
+file(GLOB_RECURSE ALL_SOURCE_FILES  sources/*.hpp)
+foreach(PATH_FILE  ${LIST_OF_FILES})
+    target_precompile_headers(${PROJECT_NAME} PRIVATE ${PATH_FILE})
+endforeach()
+
 target_include_directories(${PROJECT_NAME} PRIVATE "modules")
 
 target_link_libraries(${PROJECT_NAME}  
     ${Boost_LIBRARIES} 
     ${JSONCPP_LIBRARIES}
-    "/usr/local/lib/libjsonrpccpp-client.so"
-    "/usr/local/lib/libjsonrpccpp-common.so"
+    "${CMAKE_CURRENT_BINARY_DIR}/deps/install/lib/libjsonrpccpp-client.so"
+    "${CMAKE_CURRENT_BINARY_DIR}/deps/install/lib/libjsonrpccpp-common.so"
     ${MongoDB_LIBRARIES})
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE 
@@ -157,12 +153,14 @@ link_libraries(${CPPUNIT_LIBRARIES})
 ###############################################################################
 add_custom_target(unit-test COMMAND ${PROJECT_NAME}-unittest DEPENDS ${PROJECT_NAME}-unittest)
 add_executable(${PROJECT_NAME}-unittest tests-unitaires/unitTest.cpp)
-target_include_directories(${PROJECT_NAME}-unittest PRIVATE "modules")
-target_include_directories(${PROJECT_NAME}-unittest PUBLIC sources/)
-target_link_libraries(${PROJECT_NAME}-unittest LINK_PUBLIC ${Boost_LIBRARIES})
-target_link_libraries(${PROJECT_NAME}-unittest LINK_PUBLIC ${JSONCPP_LIBRARIES})
-target_link_libraries(${PROJECT_NAME}-unittest LINK_PUBLIC ${CPPUNIT_LIBRARIES})
-target_link_libraries(${PROJECT_NAME}-unittest LINK_PUBLIC ${MongoDB_LIBRARIES})
+target_include_directories(${PROJECT_NAME}-unittest PRIVATE 
+    modules/
+    sources/)
+target_link_libraries(${PROJECT_NAME}-unittest LINK_PRIVATE
+    ${Boost_LIBRARIES}
+    ${JSONCPP_LIBRARIES}
+    ${CPPUNIT_LIBRARIES}
+    ${MongoDB_LIBRARIES})
 
 enable_testing()
 add_test(NAME "tests-unitaires" COMMAND ./build/${PROJECT_NAME}-unittest WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
