@@ -163,7 +163,7 @@ target_link_libraries(${PROJECT_NAME}-unittest LINK_PRIVATE
     ${MongoDB_LIBRARIES})
 
 enable_testing()
-add_test(NAME "tests-unitaires" COMMAND ${PROJECT_NAME}-unittest WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+add_test(NAME "tests-unitaires" COMMAND ./build/${PROJECT_NAME}-unittest WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 
 ## Detection du programme python3.7
 FIND_PROGRAM(PYTHON3.7_EXECUTABLE python3.7)
