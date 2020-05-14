@@ -71,7 +71,7 @@ include(ExternalProject)
 ExternalProject_Add(LIBJSON_RPC_CPP
     SOURCE_DIR "${PROJECT_BINARY_DIR}/deps/libjson-rpc-cpp"
     BINARY_DIR "${PROJECT_BINARY_DIR}/deps/libjson-rpc-cpp-build"
-    INSTALL_DIR "${PROJECT_BINARY_DIR}/deps/libjson-rpc-cpp-install"
+    INSTALL_DIR "${PROJECT_BINARY_DIR}/deps/install"
     GIT_REPOSITORY https://github.com/cinemast/libjson-rpc-cpp.git
     GIT_TAG c696f69
     CMAKE_ARGS
@@ -127,9 +127,9 @@ target_include_directories(${PROJECT_NAME} PRIVATE "modules")
 
 target_link_libraries(${PROJECT_NAME}  
     ${Boost_LIBRARIES} 
-    # ${JSONCPP_LIBRARIES}
-    "${CMAKE_CURRENT_BINARY_DIR}/deps/libjson-rpc-cpp-install/lib/libjsonrpccpp-client.so"
-    "${CMAKE_CURRENT_BINARY_DIR}/deps/libjson-rpc-cpp-install/lib/libjsonrpccpp-common.so"
+    ${JSONCPP_LIBRARIES}
+    "${CMAKE_CURRENT_BINARY_DIR}/deps/install/lib/libjsonrpccpp-client.so"
+    "${CMAKE_CURRENT_BINARY_DIR}/deps/install/lib/libjsonrpccpp-common.so"
     ${MongoDB_LIBRARIES})
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE 
@@ -158,7 +158,7 @@ target_include_directories(${PROJECT_NAME}-unittest PRIVATE
     sources/)
 target_link_libraries(${PROJECT_NAME}-unittest LINK_PRIVATE
     ${Boost_LIBRARIES}
-    # ${JSONCPP_LIBRARIES}
+    ${JSONCPP_LIBRARIES}
     ${CPPUNIT_LIBRARIES}
     ${MongoDB_LIBRARIES})
 
