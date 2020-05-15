@@ -94,11 +94,12 @@ if (NOT JSONCPP_FOUND)
 endif(NOT JSONCPP_FOUND)
 
 ## Boost - program_options + log
-find_package(Boost 1.40 COMPONENTS program_options log iostreams REQUIRED)
-include_directories(${Boost_INCLUDE_DIR})
+find_package(Boost 1.67 COMPONENTS program_options log iostreams REQUIRED)
+include_directories(${BOOST_INCLUDE_DIR})
 if (NOT Boost_FOUND)
     packageManager("libboost-all-dev")
-    find_package(Boost 1.40 COMPONENTS program_options log iostreams REQUIRED)
+    find_package(Boost 1.67 COMPONENTS program_options log iostreams REQUIRED)
+    include_directories(${BOOST_INCLUDE_DIR})
 endif(NOT Boost_FOUND)
 
 ## Mongo
@@ -157,7 +158,7 @@ target_include_directories(${PROJECT_NAME}-unittest PRIVATE
     modules/
     sources/)
 target_link_libraries(${PROJECT_NAME}-unittest LINK_PRIVATE
-    ${Boost_LIBRARIES}
+    ${BOOST_LIBRARIES}
     ${JSONCPP_LIBRARIES}
     ${CPPUNIT_LIBRARIES}
     ${MongoDB_LIBRARIES})
