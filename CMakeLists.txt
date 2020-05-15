@@ -94,11 +94,11 @@ if (NOT JSONCPP_FOUND)
 endif(NOT JSONCPP_FOUND)
 
 ## Boost - program_options + log
-find_package(Boost 1.67 COMPONENTS program_options log iostreams REQUIRED)
+find_package(Boost 1.40 COMPONENTS program_options log iostreams REQUIRED)
 include_directories(${BOOST_INCLUDE_DIR})
 if (NOT Boost_FOUND)
     packageManager("libboost-all-dev")
-    find_package(Boost 1.67 COMPONENTS program_options log iostreams REQUIRED)
+    find_package(Boost 1.40 COMPONENTS program_options log iostreams REQUIRED)
     include_directories(${BOOST_INCLUDE_DIR})
 endif(NOT Boost_FOUND)
 
