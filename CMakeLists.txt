@@ -127,7 +127,7 @@ endforeach()
 target_include_directories(${PROJECT_NAME} PRIVATE "modules")
 
 target_link_libraries(${PROJECT_NAME}  
-    ${Boost_LIBRARIES} 
+    ${BOOST_LIBRARIES} 
     ${JSONCPP_LIBRARIES}
     "${CMAKE_CURRENT_BINARY_DIR}/deps/install/lib/libjsonrpccpp-client.so"
     "${CMAKE_CURRENT_BINARY_DIR}/deps/install/lib/libjsonrpccpp-common.so"
