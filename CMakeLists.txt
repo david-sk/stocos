@@ -95,11 +95,11 @@ endif(NOT JSONCPP_FOUND)
 
 ## Boost - program_options + log
 find_package(Boost 1.40 COMPONENTS program_options log iostreams REQUIRED)
-include_directories(${BOOST_INCLUDE_DIR})
+include_directories(${Boost_INCLUDE_DIR})
 if (NOT Boost_FOUND)
     packageManager("libboost-all-dev")
-    find_package(Boost 1.40 COMPONENTS program_options log iostreams REQUIRED)
-    include_directories(${BOOST_INCLUDE_DIR})
+    find_package(boost 1.40 COMPONENTS program_options log iostreams REQUIRED)
+    include_directories(${Boost_INCLUDE_DIR})
 endif(NOT Boost_FOUND)
 
 ## Mongo
@@ -127,7 +127,7 @@ endforeach()
 target_include_directories(${PROJECT_NAME} PRIVATE "modules")
 
 target_link_libraries(${PROJECT_NAME}  
-    ${BOOST_LIBRARIES} 
+    ${Boost_LIBRARIES} 
     ${JSONCPP_LIBRARIES}
     "${CMAKE_CURRENT_BINARY_DIR}/deps/install/lib/libjsonrpccpp-client.so"
     "${CMAKE_CURRENT_BINARY_DIR}/deps/install/lib/libjsonrpccpp-common.so"
@@ -158,7 +158,7 @@ target_include_directories(${PROJECT_NAME}-unittest PRIVATE
     modules/
     sources/)
 target_link_libraries(${PROJECT_NAME}-unittest LINK_PRIVATE
-    ${BOOST_LIBRARIES}
+    ${Boost_LIBRARIES}
     ${JSONCPP_LIBRARIES}
     ${CPPUNIT_LIBRARIES}
     ${MongoDB_LIBRARIES})
