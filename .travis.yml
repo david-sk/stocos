@@ -29,4 +29,3 @@ script:
   - cmake ..
   - make
   - ./stocos-unittest
-  - make test
