@@ -23,7 +23,7 @@ ignore:
 
 before_install:
   - travis_retry sudo apt-get update -qq
-  - travis_retry sudo apt-get install -qq libcppunit-dev libjsoncpp-dev libjsoncpp1 libboost-all-dev libmongoclient-dev libmongoclient0 g++-8  doxygen
+  - travis_retry sudo apt-get install -qq libcppunit-dev libjsoncpp-dev libjsoncpp1 libboost-log-dev libboost-program-options-dev libboost-iostreams-dev libmongoclient-dev libmongoclient0 g++-8  doxygen
   # -> libjson-rpc-cpp
   - travis_retry sudo apt-get install -qq libargtable2-dev libmicrohttpd-dev libjsoncpp-dev libhiredis-dev
 
