@@ -9,11 +9,7 @@
 # project configuration #
 #########################
 language: cpp
-#install: make cmake get-deps
-
-dist: bionic  #trusty
-#sudo: required
-#group: edge
+dist: bionic
 
 ignore:
   - docs/*
@@ -32,4 +28,5 @@ script:
   - cd build
   - cmake ..
   - make
-  - cd .. && build/stocos-unittest
+  - ./stocos-unittest
+  - make test

@@ -10,7 +10,7 @@ MAKEFLAGS += --no-print-directory
 
 all : tools-required
 	@cd build && cmake ..
-	@cd build && make
+	@cd build && make -j 2
 
 
 unit-test: tools-required
