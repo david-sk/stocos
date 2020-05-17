@@ -126,7 +126,10 @@ foreach(PATH_FILE  ${LIST_OF_FILES})
     target_precompile_headers(${PROJECT_NAME} PRIVATE ${PATH_FILE})
 endforeach()
 
-target_include_directories(${PROJECT_NAME} PRIVATE "modules")
+target_include_directories(${PROJECT_NAME} PRIVATE 
+    modules/
+    ${CMAKE_CURRENT_BINARY_DIR}/deps/install/include/
+)
 
 target_link_libraries(${PROJECT_NAME}  
     ${Boost_LIBRARIES} 
