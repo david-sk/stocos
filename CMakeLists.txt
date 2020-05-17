@@ -95,11 +95,13 @@ endif(NOT JSONCPP_FOUND)
 
 ## Boost - program_options + log
 find_package(Boost 1.40 COMPONENTS program_options log iostreams REQUIRED)
-include_directories(${Boost_INCLUDE_DIR})
+# include_directories(${Boost_INCLUDE_DIRS})
 if (NOT Boost_FOUND)
-    packageManager("libboost-all-dev")
-    find_package(boost 1.40 COMPONENTS program_options log iostreams REQUIRED)
-    include_directories(${Boost_INCLUDE_DIR})
+    packageManager("libboost-log-dev")
+    packageManager("libboost-program-options-dev")
+    packageManager("libboost-iostreams-dev")
+    find_package(Boost 1.40 COMPONENTS program_options log iostreams REQUIRED)
+    # include_directories(${Boost_INCLUDE_DIRS})
 endif(NOT Boost_FOUND)
 
 ## Mongo
