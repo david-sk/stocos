@@ -28,4 +28,4 @@ script:
   - cd build
   - cmake ..
   - make
-  - ./stocos-unittest
+  - cd .. && build/stocos-unittest
