@@ -30,7 +30,8 @@ jobs:
             libmongoclient0
             doxygen
             git
-            
+            libcurl4
+            libcurl4-gnutls-dev
       - run: 
           name: make
           command: cmake .. && make
