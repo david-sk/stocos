@@ -11,7 +11,7 @@ Stocos est un solvers clé en main. Il intègre en particuler les algorithmes é
 
 | Intergration  |        Status |
 | ------------- | ------------- |
-| **Build Status**  | [![CircleCI](https://circleci.com/gh/Jxtopher/stocos.svg?style=svg)](https://circleci.com/gh/Jxtopher/stocos) |
+| **Build Status**  | [![CircleCI](https://circleci.com/gh/Jxtopher/stocos.svg?style=svg)](https://circleci.com/gh/Jxtopher/stocos)] |
 | **CodeFactor**    | [![CodeFactor](https://www.codefactor.io/repository/github/jxtopher/stocos/badge)] |
 
 
