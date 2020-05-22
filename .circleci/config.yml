@@ -13,22 +13,16 @@ jobs:
             build-essential
             cmake
             pkg-config
-            libpcre3-dev 
-            zlib1g-dev
-            libicu-dev
             python3.7
             libcppunit-dev
             libjsoncpp-dev
             libjsoncpp1
-            openmpi-bin
-            libboost-iostreams-dev
             libboost-program-options-dev
             libboost-log-dev
             libc6
             libc6-dev
             libmongoclient-dev 
             libmongoclient0
-            doxygen
             git
             libcurl4
             libcurl4-gnutls-dev
@@ -36,6 +30,10 @@ jobs:
             libmicrohttpd-dev
             libhiredis-dev
       - run: 
-          name: make
-          command: cmake .. && make
+          name: Compilation of the project
+          command: cmake .. && make -j 2
           working_directory: ~/project/build
+      - run:
+        name: Test
+        command: make test
+        working_directory: ~/project/build
