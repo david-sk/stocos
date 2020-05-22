@@ -55,7 +55,6 @@ template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL> class Problem 
 			file.seekg(0);
 			if(static_cast<unsigned char>(buffer[0]) == magic_number_gzip[0] &&
 			   static_cast<unsigned char>(buffer[1]) == magic_number_gzip[1]) { // gzip
-
 				boost::iostreams::filtering_streambuf<boost::iostreams::input> in;
 				in.push(boost::iostreams::gzip_decompressor());
 				in.push(file);

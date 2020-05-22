@@ -102,7 +102,6 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
 				solution_star.reset(new SOL(*solution));
 				std::cout << *solution_star << std::endl;
 			}
-
 		} while(stop());
 
 		return std::move(solution_star);

@@ -34,7 +34,7 @@ jobs:
             pkg-config
             python3.7
             zlib1g-dev
-      - run: 
+      - run:
           name: Compilation of the project
           command: cmake .. && make -j 2
           working_directory: ~/project/build
