@@ -33,6 +33,7 @@ jobs:
             libpcre3-dev 
             zlib1g-dev
             libicu-dev
+            openmpi-bin
       - run: 
           name: Compilation of the project
           command: cmake .. && make -j 2
