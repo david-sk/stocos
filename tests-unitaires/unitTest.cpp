@@ -1,6 +1,6 @@
 ///
-/// @file UnitTest.cpp
-/// @author *
+/// @file unitTest.cpp
+/// @author Jxtopher
 /// @version *
 /// @date *
 /// @brief http://www.yolinux.com/TUTORIALS/CppUnit.html

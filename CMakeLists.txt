@@ -11,8 +11,7 @@ cmake_minimum_required(VERSION 3.12)
 ###############################################################################
 # Set of compilator parameters
 ###############################################################################
-set(CMAKE_BUILD_TYPE Release)
-#set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE Release) # (Release|Debug)
 
 set(CMAKE_CXX_FLAGS "-std=c++2a -fopenmp\
                                 -pedantic -Wall -Wextra -Wcast-align -Wctor-dtor-privacy    \
@@ -33,9 +32,7 @@ include(auto-install)   # auto install package
 include(cppcheck)       #
 include(clang-format)   #
 include(version)        # Version name generator form git branch, hash
-#include(doxygen)       # Create le documentation
-include(cotire)         # CMake module to speed up builds
-
+include(doxygen)        # Create le documentation
 
 ###############################################################################
 # Load modules of the projet
@@ -66,18 +63,20 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
     endif()
 endif()
 
-# add_subdirectory(modules)
-
 ###############################################################################
 # Get external libs
 ###############################################################################
-# include(ExternalProject)
-# ExternalProject_Add(LIBJSON_RPC_CPP
-#     PREFIX ${CMAKE_BINARY_DIR}/libjson-rpc-cpp
-#     GIT_REPOSITORY https://github.com/cinemast/libjson-rpc-cpp.git
-#     GIT_TAG c696f69
-#     INSTALL_COMMAND ""
-# )
+include(ExternalProject)
+
+ExternalProject_Add(LIBJSON_RPC_CPP
+    SOURCE_DIR "${PROJECT_BINARY_DIR}/deps/libjson-rpc-cpp"
+    BINARY_DIR "${PROJECT_BINARY_DIR}/deps/libjson-rpc-cpp-build"
+    INSTALL_DIR "${PROJECT_BINARY_DIR}/deps/install"
+    GIT_REPOSITORY https://github.com/cinemast/libjson-rpc-cpp.git
+    GIT_TAG c696f69
+    CMAKE_ARGS
+    -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+)
 
 ## PkgConfigmr
 find_package(PkgConfig)
@@ -96,10 +95,13 @@ endif(NOT JSONCPP_FOUND)
 
 ## Boost - program_options + log
 find_package(Boost 1.40 COMPONENTS program_options log iostreams REQUIRED)
-include_directories(${Boost_INCLUDE_DIR})
+# include_directories(${Boost_INCLUDE_DIRS})
 if (NOT Boost_FOUND)
-    packageManager("libboost-all-dev")
+    packageManager("libboost-log-dev")
+    packageManager("libboost-program-options-dev")
+    packageManager("libboost-iostreams-dev")
     find_package(Boost 1.40 COMPONENTS program_options log iostreams REQUIRED)
+    # include_directories(${Boost_INCLUDE_DIRS})
 endif(NOT Boost_FOUND)
 
 ## Mongo
@@ -115,30 +117,25 @@ if (NOT MongoDB_INCLUDE_DIR)
     find_path(MongoDB_INCLUDE_DIR NAMES mongo/client/dbclient.h)
 endif(NOT MongoDB_INCLUDE_DIR)
 
-# ## Jsonrpccpp
-# find_library(JSONRPCCPPCOMMON_LIBRARIES NAMES jsonrpccpp-common)
-# if (NOT JSONRPCCPPCOMMON_LIBRARIES)
-#     #packageManager("libjsonrpccpp-dev")
-#     find_library(JSONRPCCPPCOMMON_LIBRARIES NAMES jsonrpccpp-common)
-# endif(NOT JSONRPCCPPCOMMON_LIBRARIES)
-
-# find_library(JSONRPCCPPCLIENT_LIBRARIES NAMES jsonrpccpp-client)
-# if (NOT JSONRPCCPPCLIENT_LIBRARIES)
-#     #packageManager("libjsonrpccpp-dev")
-#     find_library(JSONRPCCPPCLIENT_LIBRARIES NAMES jsonrpccpp-client)
-# endif(NOT JSONRPCCPPCLIENT_LIBRARIES)
-
 ###############################################################################
 # Stocos
 ###############################################################################
 add_executable(${PROJECT_NAME} sources/main.cpp)
-target_include_directories(${PROJECT_NAME} PRIVATE "modules")
+file(GLOB_RECURSE ALL_SOURCE_FILES  sources/*.hpp)
+foreach(PATH_FILE  ${LIST_OF_FILES})
+    target_precompile_headers(${PROJECT_NAME} PRIVATE ${PATH_FILE})
+endforeach()
+
+target_include_directories(${PROJECT_NAME} PRIVATE 
+    modules/
+    ${CMAKE_CURRENT_BINARY_DIR}/deps/install/include/
+)
 
 target_link_libraries(${PROJECT_NAME}  
     ${Boost_LIBRARIES} 
     ${JSONCPP_LIBRARIES}
-    "/usr/local/lib/libjsonrpccpp-client.so"
-    "/usr/local/lib/libjsonrpccpp-common.so"
+    "${CMAKE_CURRENT_BINARY_DIR}/deps/install/lib/libjsonrpccpp-client.so"
+    "${CMAKE_CURRENT_BINARY_DIR}/deps/install/lib/libjsonrpccpp-common.so"
     ${MongoDB_LIBRARIES})
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE 
@@ -148,10 +145,6 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
     MODULE_PROBLEM_TSP=${MODULE_PROBLEM_TSP} 
     MODULE_PROBLEM_SUBSETSUM=${MODULE_PROBLEM_SUBSETSUM} 
     MODULE_PROBLEM_CONTINOUSPROBLEM=${MODULE_PROBLEM_CONTINOUSPROBLEM})
-
-# set_target_properties(${PROJECT_NAME} PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "stdafx.h")
-# get_target_property(_precompiledHeader "sources/problem/exprtk/exprtk.h" COTIRE_CXX_PRECOMPILED_HEADER)
-# cotire(${PROJECT_NAME})
 
 ## Cppunit
 pkg_check_modules(CPPUNIT cppunit)
@@ -164,13 +157,16 @@ link_libraries(${CPPUNIT_LIBRARIES})
 ###############################################################################
 # Stocos unit test
 ###############################################################################
+add_custom_target(unit-test COMMAND ${PROJECT_NAME}-unittest DEPENDS ${PROJECT_NAME}-unittest)
 add_executable(${PROJECT_NAME}-unittest tests-unitaires/unitTest.cpp)
-target_include_directories(${PROJECT_NAME}-unittest PRIVATE "modules")
-target_include_directories(${PROJECT_NAME}-unittest PUBLIC sources/)
-target_link_libraries(${PROJECT_NAME}-unittest LINK_PUBLIC ${Boost_LIBRARIES})
-target_link_libraries(${PROJECT_NAME}-unittest LINK_PUBLIC ${JSONCPP_LIBRARIES})
-target_link_libraries(${PROJECT_NAME}-unittest LINK_PUBLIC ${CPPUNIT_LIBRARIES})
-target_link_libraries(${PROJECT_NAME}-unittest LINK_PUBLIC ${MongoDB_LIBRARIES})
+target_include_directories(${PROJECT_NAME}-unittest PRIVATE 
+    modules/
+    sources/)
+target_link_libraries(${PROJECT_NAME}-unittest LINK_PRIVATE
+    ${Boost_LIBRARIES}
+    ${JSONCPP_LIBRARIES}
+    ${CPPUNIT_LIBRARIES}
+    ${MongoDB_LIBRARIES})
 
 enable_testing()
 add_test(NAME "tests-unitaires" COMMAND ./build/${PROJECT_NAME}-unittest WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
@@ -182,17 +178,8 @@ if (NOT PYTHON3.7_EXECUTABLE)
     FIND_PROGRAM(PYTHON3.7_EXECUTABLE python3.7)
 endif(NOT PYTHON3.7_EXECUTABLE)
 
-set(LIST_OF_FILES 
-    oneMax-FirstImprovement-FlipBit
-    oneMax-OnePlusLambda-FlipBit
-    oneMax-TabuSearch-FlipBit
-    oneMax-IteratedLocalSearch-FI-FlipBit
-    oneMax-EvolutionaryAlgo-FlipBit
-    continuousProblem-eq1-FirstImprovement-FlipBit
-    continuousProblem-eq2-FirstImprovement-FlipBit
-    continuousProblem-brent-function-FirstImprovement
-    continuousProblem-ackleyFunction-N2-FirstImprovement-FlipBit
-)
-foreach(FILE  ${LIST_OF_FILES})
-    add_test(NAME ${FILE} COMMAND ${PYTHON3.7_EXECUTABLE} ./tests-solver/${FILE}.py WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+file(GLOB LIST_OF_FILES  tests-solver/*.py)
+foreach(PATH_FILE  ${LIST_OF_FILES})
+    get_filename_component(FILE ${PATH_FILE} NAME)
+    add_test(NAME ${FILE} COMMAND ${PYTHON3.7_EXECUTABLE} ${PATH_FILE} WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 endforeach()

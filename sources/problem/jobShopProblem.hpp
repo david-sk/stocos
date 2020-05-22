@@ -26,7 +26,7 @@ using SOL_JOBSHOPPROBLEM = SolutionArray<TYPE_FITNESS_JOBSHOPPROBLEM, TYPE_CELL_
 class JobShopProblem
 	: public Problem<SOL_JOBSHOPPROBLEM, TYPE_FITNESS_JOBSHOPPROBLEM, TYPE_CELL_JOBSHOPPROBLEM> {
   public:
-	JobShopProblem(std::string fileInstance) {
+	JobShopProblem(const std::string &fileInstance) {
 		Json::Value config = loadInstance(fileInstance);
 		loadJson(config);
 	}
