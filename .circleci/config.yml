@@ -27,7 +27,7 @@ jobs:
             libc6
             libc6-dev
             libmongoclient-dev 
-            ibmongoclient0
+            libmongoclient0
             doxygen
             git
             
