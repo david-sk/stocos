@@ -12,8 +12,13 @@
 
 import json
 import subprocess
+import argparse
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('path', type=str,  help='Path stocos executable')
+    args = parser.parse_args()
+
     configuration : dict = {
         "seed": 0,
         "problem": {
@@ -57,7 +62,7 @@ if __name__ == '__main__':
         }
     }
 
-    result = subprocess.run(["build/stocos", "-j", json.dumps(configuration)], capture_output=True)
+    result = subprocess.run([args.path, "-j", json.dumps(configuration)], capture_output=True)
     result_data = json.loads(result.stdout)
     assert (-6.25 - result_data["Solution"]["fitness"][0]) < 0.01
     exit(result.returncode)
