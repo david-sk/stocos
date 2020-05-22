@@ -54,7 +54,6 @@ if __name__ == '__main__':
     }
 
     result = subprocess.run([args.path, "-j", json.dumps(OneMax)], capture_output=True)
-    print(result)
-    # result_data = json.loads(result.stdout)
-    # assert result_data["Solution"]["fitness"][0] == 10
-    # exit(result.returncode)
+    result_data = json.loads(result.stdout)
+    assert result_data["Solution"]["fitness"][0] == 10
+    exit(result.returncode)

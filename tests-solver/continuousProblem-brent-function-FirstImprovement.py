@@ -88,7 +88,6 @@ if __name__ == '__main__':
         return (x + 10)**2 + (y + 10)**2 + math.exp(-x**2 - y**2)
 
     result = subprocess.run([args.path, "-j", json.dumps(configuration)], capture_output=True)
-    # print(result)
     result_data = json.loads(result.stdout)
 
     result_stocos = result_data["Solution"]["fitness"][0]

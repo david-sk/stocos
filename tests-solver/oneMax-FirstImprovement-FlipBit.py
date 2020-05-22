@@ -82,7 +82,7 @@ if __name__ == '__main__':
             True,
         ]
     }
-    result = subprocess.run(["build/stocos", "-j", json.dumps(OneMax)], capture_output=True)
+    result = subprocess.run([args.path, "-j", json.dumps(OneMax)], capture_output=True)
     result_data = json.loads(result.stdout)
     assert result_data["round"] == 1
     exit(result.returncode)

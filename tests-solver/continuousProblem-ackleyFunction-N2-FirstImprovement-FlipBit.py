@@ -89,9 +89,7 @@ if __name__ == '__main__':
         return  -200 * math.exp(-0.02 * math.sqrt(( math.pow(x, 2)) + (math.pow(y,2))))
 
     result = subprocess.run([args.path, "-j", json.dumps(configuration)], capture_output=True)
-    # print(result)
     result_data = json.loads(result.stdout)
-    # print(result_data)
     result_stocos = result_data["Solution"]["fitness"][0]
     restat_f = np.around(f(result_data["Solution"]["solution"][0], result_data["Solution"]["solution"][1]))
     objectif_fitness = -200
