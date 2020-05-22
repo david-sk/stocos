@@ -9,7 +9,7 @@ Stocos est un solvers clé en main. Il intègre en particuler les algorithmes é
 
 #### Branch Master 
 - **Build Status** (CircleCI) : [![CircleCI](https://circleci.com/gh/Jxtopher/stocos.svg?style=svg)](https://circleci.com/gh/Jxtopher/stocos)
-- **lgtm** : --
+- **CodeFactor** : [![CodeFactor](https://www.codefactor.io/repository/github/jxtopher/stocos/badge)](https://www.codefactor.io/repository/github/jxtopher/stocos)
 - **Doc** : --
 
 ## Exemple
