@@ -34,6 +34,6 @@ jobs:
           command: cmake .. && make -j 2
           working_directory: ~/project/build
       - run:
-        name: Test
-        command: make test
-        working_directory: ~/project/build
+          name: Test
+          command: make test
+          working_directory: ~/project/build
