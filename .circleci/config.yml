@@ -16,7 +16,7 @@ jobs:
             libpcre3-dev 
             zlib1g-dev
             libicu-dev
-            python
+            python3.7
             libcppunit-dev
             libjsoncpp-dev
             libjsoncpp1
@@ -32,6 +32,9 @@ jobs:
             git
             libcurl4
             libcurl4-gnutls-dev
+            libargtable2-dev
+            libmicrohttpd-dev
+            libhiredis-dev
       - run: 
           name: make
           command: cmake .. && make

@@ -2,11 +2,11 @@ FROM debian:buster
 
 ## Install dependances
 RUN apt-get update -y
+RUN apt-get install -y build-essential
 RUN apt-get install -y apt-utils
 RUN apt-get install -y dialog
 RUN apt-get install -y sudo
 RUN apt-get install -y cmake
-RUN apt-get install -y make
 RUN apt-get install -y git
 RUN apt-get install -y libcppunit-dev
 RUN apt-get install -y libjsoncpp-dev
@@ -20,7 +20,6 @@ RUN apt-get install -y g++-8
 RUN apt-get install -y doxygen
 RUN apt-get install -y libargtable2-dev
 RUN apt-get install -y libmicrohttpd-dev
-RUN apt-get install -y libjsoncpp-dev
 RUN apt-get install -y libhiredis-dev
 RUN apt-get install -y python3.7
 RUN apt-get install -y clang-format
