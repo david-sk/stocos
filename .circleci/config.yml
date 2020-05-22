@@ -12,28 +12,29 @@ jobs:
             apt-get update && apt-get install -y
             build-essential
             cmake
-            pkg-config
-            python3.7
-            libcppunit-dev
-            libjsoncpp-dev
-            libjsoncpp1
+            doxygen
+            git
+            libargtable2-dev
             libboost-iostreams-dev
-            libboost-program-options-dev
             libboost-log-dev
+            libboost-program-options-dev
             libc6
             libc6-dev
-            libmongoclient-dev 
-            libmongoclient0
-            git
+            libcppunit-dev
             libcurl4
             libcurl4-gnutls-dev
-            libargtable2-dev
-            libmicrohttpd-dev
             libhiredis-dev
-            libpcre3-dev 
-            zlib1g-dev
             libicu-dev
+            libjsoncpp-dev
+            libjsoncpp1
+            libmicrohttpd-dev
+            libmongoclient-dev
+            libmongoclient0
+            libpcre3-dev
             openmpi-bin
+            pkg-config
+            python3.7
+            zlib1g-dev
       - run: 
           name: Compilation of the project
           command: cmake .. && make -j 2
