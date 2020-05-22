@@ -8,7 +8,7 @@ Stocos est un solvers clé en main. Il intègre en particuler les algorithmes é
 
 
 #### Branch Master 
-- **Linux Build Status** : [![Build Status](https://travis-ci.org/Jxtopher/stocos.svg?branch=master)](https://travis-ci.org/Jxtopher/stocos)
+- **Build Status** (CircleCI) : [![CircleCI](https://circleci.com/gh/Jxtopher/stocos.svg?style=svg)](https://circleci.com/gh/Jxtopher/stocos)
 - **lgtm** : --
 - **Doc** : --
 
