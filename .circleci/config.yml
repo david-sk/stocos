@@ -30,6 +30,9 @@ jobs:
             libargtable2-dev
             libmicrohttpd-dev
             libhiredis-dev
+            libpcre3-dev 
+            zlib1g-dev
+            libicu-dev
       - run: 
           name: Compilation of the project
           command: cmake .. && make -j 2
