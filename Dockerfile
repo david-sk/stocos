@@ -26,6 +26,7 @@ RUN apt-get install -y --no-install-recommends clang-format
 RUN apt-get install -y --no-install-recommends pkg-config
 RUN apt-get install -y --no-install-recommends libcurl4
 RUN apt-get install -y --no-install-recommends libcurl4-gnutls-dev
+RUN apt-get install -y --no-install-recommends cppcheck
 
 RUN rm -rf /var/cache/apk/*
 
