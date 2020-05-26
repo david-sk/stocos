@@ -29,7 +29,7 @@ if __name__ == '__main__':
         "OptimizationAlgorithm": {
             "0": {
                 "className":"IteratedLocalSearch",
-                "StoppingCriteria": {
+                "StoppingCriterias": {
                     "budget": 100,
                     "fitnessObjectif": 10
                 },
@@ -39,7 +39,7 @@ if __name__ == '__main__':
                 },
                 "OptimizationAlgorithm": {
                     "className": "FirstImprovement",
-                    "StoppingCriteria": {
+                    "StoppingCriterias": {
                         "budget": 100,
                         "fitnessObjectif": 10
                     },

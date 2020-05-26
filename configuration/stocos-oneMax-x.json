@@ -8,7 +8,7 @@
     "OptimizationAlgorithm": {
          "0": {
             "className":"OnePlusLambda",
-            "StoppingCriteria": {
+            "StoppingCriterias": {
                 "budget": 10000,
                 "fitnessObjectif": 1000
             },
@@ -20,7 +20,7 @@
         },
         "1": {
             "className":"OnePlusLambda",
-            "StoppingCriteria": {
+            "StoppingCriterias": {
                 "budget": 100,
                 "fitnessObjectif": 50
             },
@@ -32,7 +32,7 @@
         },
         "2": {
             "className": "FirstImprovement",
-            "StoppingCriteria": {
+            "StoppingCriterias": {
                 "budget": 100,
                 "fitnessObjectif": 50
             },
@@ -43,7 +43,7 @@
         },
         "3": {
             "className":"IteratedLocalSearch",
-            "StoppingCriteria": {
+            "StoppingCriterias": {
                 "budget": 100,
                 "fitnessObjectif": 50
             },
@@ -53,7 +53,7 @@
             },
             "OptimizationAlgorithm": {
                 "className": "FirstImprovement",
-                "StoppingCriteria": {
+                "StoppingCriterias": {
                     "budget": 100,
                     "fitnessObjectif": 50
                 },
@@ -65,7 +65,7 @@
         },
         "4": {
             "className":"TabuSearch",
-            "StoppingCriteria": {
+            "StoppingCriterias": {
                 "budget": 100,
                 "fitnessObjectif": 10
             },
@@ -78,7 +78,7 @@
         },
         "5": {
             "className":"EvolutionaryAlgorithm",
-            "StoppingCriteria": {
+            "StoppingCriterias": {
                 "budget": 100,
                 "fitnessObjectif": 50
             },

@@ -50,7 +50,7 @@ if __name__ == '__main__':
         "OptimizationAlgorithm": {
             "0": {
                 "className": "FirstImprovement",
-                "StoppingCriteria": {
+                "StoppingCriterias": {
                     "budget": 4000,
                 },
                 "AtomicOperation": {

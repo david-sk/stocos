@@ -41,7 +41,7 @@
 #include "../statistic/statistic.hpp"
 #include "../stoppingCriteria/criteriaBudget.hpp"
 #include "../stoppingCriteria/criteriaFitnessObjectif.hpp"
-#include "../stoppingCriteria/stoppingCriteria.hpp"
+#include "../stoppingCriteria/stoppingCriterias.hpp"
 
 namespace stocos {
 
@@ -59,8 +59,8 @@ template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL> class Factory 
 		operator()(const Json::Value& configuration) {
 		std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> optimizationAlgorithm =
 			nullptr;
-		std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> _stoppingCriteria =
-			stoppingCriteria(configuration["StoppingCriteria"]);
+		std::unique_ptr<StoppingCriterias<SOL, TYPE_FITNESS>> _stoppingCriterias =
+			stoppingCriterias(configuration["StoppingCriterias"]);
 		std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _atomicOperation = nullptr;
 
 		if(configuration["className"] != "NearestNeighbourAlgorithm" &&
@@ -70,15 +70,15 @@ template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL> class Factory 
 		if(configuration["className"] == "FirstImprovement") {
 			optimizationAlgorithm =
 				std::make_unique<FirstImprovement<SOL, TYPE_FITNESS, TYPE_CELL>>(
-					this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem,
+					this->_mt_rand, _statistic, std::move(_stoppingCriterias), _problem,
 					std::move(_atomicOperation));
 		} else if(configuration["className"] == "BestImprovement") {
 			// optimizationAlgorithm = std::make_unique<BestImprovement<SOL, TYPE_FITNESS,
-			// TYPE_CELL>>(this->_mt_rand, *_statistic, *_stoppingCriteria, _problem,
+			// TYPE_CELL>>(this->_mt_rand, *_statistic, *_stoppingCriterias, _problem,
 			// *_atomicOperation, *_selection);
 		} else if(configuration["className"] == "OnePlusLambda") {
 			optimizationAlgorithm = std::make_unique<OnePlusLambda<SOL, TYPE_FITNESS, TYPE_CELL>>(
-				this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem,
+				this->_mt_rand, _statistic, std::move(_stoppingCriterias), _problem,
 				std::move(_atomicOperation), configuration["lambda"].asUInt());
 		} else if(configuration["className"] == "IteratedLocalSearch") {
 			std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>
@@ -86,36 +86,36 @@ template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL> class Factory 
 					this->operator()(configuration["OptimizationAlgorithm"]);
 			optimizationAlgorithm =
 				std::make_unique<IteratedLocalSearch<SOL, TYPE_FITNESS, TYPE_CELL>>(
-					this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem,
+					this->_mt_rand, _statistic, std::move(_stoppingCriterias), _problem,
 					std::move(_atomicOperation), std::move(_optimizationAlgorithm_ils));
 		} else if(configuration["className"] == "TabuSearch") {
 			optimizationAlgorithm = std::make_unique<TabuSearch<SOL, TYPE_FITNESS, TYPE_CELL>>(
-				this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem,
+				this->_mt_rand, _statistic, std::move(_stoppingCriterias), _problem,
 				std::move(_atomicOperation));
 		} else if(configuration["className"] == "EvolutionaryAlgorithm") {
 			optimizationAlgorithm =
 				std::make_unique<EvolutionaryAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>(
-					this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem,
+					this->_mt_rand, _statistic, std::move(_stoppingCriterias), _problem,
 					std::move(_atomicOperation), configuration["mu"].asUInt(),
 					configuration["lambda"].asUInt());
 		} else if(configuration["className"] == "OnePlusLambda") {
 			optimizationAlgorithm = std::make_unique<OnePlusLambda<SOL, TYPE_FITNESS, TYPE_CELL>>(
-				this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem,
+				this->_mt_rand, _statistic, std::move(_stoppingCriterias), _problem,
 				std::move(_atomicOperation), configuration["lambda"].asInt());
 		} else if(configuration["className"] == "SimulatedAnnealing") {
 			optimizationAlgorithm =
 				std::make_unique<SimulatedAnnealing<SOL, TYPE_FITNESS, TYPE_CELL>>(
-					this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem,
+					this->_mt_rand, _statistic, std::move(_stoppingCriterias), _problem,
 					std::move(_atomicOperation));
 		} else if(configuration["className"] == "Backtraking") {
 		} else if(configuration["className"] == "CombinationGenerator") {
 			optimizationAlgorithm =
 				std::make_unique<CombinationGenerator<SOL, TYPE_FITNESS, TYPE_CELL>>(
-					this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem);
+					this->_mt_rand, _statistic, std::move(_stoppingCriterias), _problem);
 		} else if(configuration["className"] == "NearestNeighbourAlgorithm") {
 			optimizationAlgorithm =
 				std::make_unique<NearestNeighbourAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>(
-					this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem);
+					this->_mt_rand, _statistic, std::move(_stoppingCriterias), _problem);
 		} else {
 			throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) +
 									 " The algorithm " + configuration["className"].asString() +
@@ -160,17 +160,17 @@ template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL> class Factory 
 
 	std::shared_ptr<Statistic<SOL>> getStatistic() { return _statistic; }
 
-	std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>>
-		stoppingCriteria(const Json::Value& configuration) {
-		std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> _stoppingCriteria =
-			std::make_unique<StoppingCriteria<SOL, TYPE_FITNESS>>();
+	std::unique_ptr<StoppingCriterias<SOL, TYPE_FITNESS>>
+		stoppingCriterias(const Json::Value& configuration) {
+		std::unique_ptr<StoppingCriterias<SOL, TYPE_FITNESS>> _stoppingCriterias =
+			std::make_unique<StoppingCriterias<SOL, TYPE_FITNESS>>();
 		if(!configuration["budget"].empty())
-			_stoppingCriteria->addCriteria(
+			_stoppingCriterias->addCriteria(
 				new CriteriaBudget<SOL, TYPE_FITNESS>(configuration["budget"].asUInt()));
 		if(!configuration["fitnessObjectif"].empty())
-			_stoppingCriteria->addCriteria(new CriteriaFitnessObjectif<SOL, TYPE_FITNESS>(
+			_stoppingCriterias->addCriteria(new CriteriaFitnessObjectif<SOL, TYPE_FITNESS>(
 				static_cast<TYPE_FITNESS>(configuration["fitnessObjectif"].asDouble())));
-		return std::move(_stoppingCriteria);
+		return std::move(_stoppingCriterias);
 	}
 
 	std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>>

@@ -23,11 +23,11 @@ template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class Backtraking : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
   public:
 	Backtraking(std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
-				std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
+				std::unique_ptr<StoppingCriterias<SOL, TYPE_FITNESS>> stoppingCriterias,
 				std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
 				const unsigned int nbDigit, const unsigned int len_string)
 		: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic),
-															  std::move(stoppingCriteria), problem),
+															  std::move(stoppingCriterias), problem),
 		  _nbDigit(nbDigit), _len_string(len_string) {
 		nbCall = 0;
 		_string = std::unique_ptr<unsigned int[]>(new unsigned int[_len_string]);

@@ -29,7 +29,7 @@ if __name__ == '__main__':
         "OptimizationAlgorithm": {
             "0": {
                 "className":"TabuSearch",
-                "StoppingCriteria": {
+                "StoppingCriterias": {
                     "budget": 100000,
                     "fitnessObjectif": 10
                 },

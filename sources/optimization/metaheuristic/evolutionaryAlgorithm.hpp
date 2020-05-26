@@ -26,12 +26,12 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
   public:
 	EvolutionaryAlgorithm(
 		std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
-		std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
+		std::unique_ptr<StoppingCriterias<SOL, TYPE_FITNESS>> stoppingCriterias,
 		std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
 		std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations,
 		unsigned int mu = 50, unsigned int lambda = 50)
 		: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic),
-															  move(stoppingCriteria), problem),
+															  move(stoppingCriterias), problem),
 		  _atomicOperations(move(atomicOperations)), _mu(mu), _lambda(lambda) {
 		BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__
 								 << " Creation EvolutionaryAlgorithm";
@@ -61,7 +61,7 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
 		while(offsprings.size() < _lambda) offsprings.push_back(solution_star);
 
 		//
-		while(this->_stoppingCriteria->operator()(solution_star)) {
+		while(this->_stoppingCriterias->operator()(solution_star)) {
 			this->_statistic->operator()(solution_star, className());
 
 			// selection de deux parents aléatoire et différent pour construire la population

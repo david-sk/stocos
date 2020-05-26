@@ -28,6 +28,7 @@
 #include "solution/unitTest_population.hpp"
 #include "solution/unitTest_solution.hpp"
 #include "solution/unitTest_solutionArray.hpp"
+#include "stoppingCriteria/unitTest_criterias.hpp"
 #include "stoppingCriteria/unitTest_criteriaBudget.hpp"
 
 #include "optimization/exhaustiveSearch/unitTest_backtracking.hpp"
@@ -47,6 +48,7 @@
 #include "problem/unitTest_subsetsum.hpp"
 #include "problem/unitTest_travelingSalesmanProblem.hpp"
 
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_criterias);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_criteriaBudget);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solution);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solutionArray);
