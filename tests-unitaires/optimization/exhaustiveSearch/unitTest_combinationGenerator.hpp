@@ -34,13 +34,13 @@ class UnitTest_combinationGenerator : public CppUnit::TestFixture {
 		std::mt19937 mt_rand;
 		mt_rand.seed(0);
 
-		std::unique_ptr<StoppingCriteria<TYPESOL, unsigned int>> stoppingCriteria =
-			std::make_unique<StoppingCriteria<TYPESOL, unsigned int>>();
+		std::unique_ptr<StoppingCriterias<TYPESOL, unsigned int>> stoppingCriterias =
+			std::make_unique<StoppingCriterias<TYPESOL, unsigned int>>();
 		std::unique_ptr<Statistic<TYPESOL>> statistic = std::make_unique<Statistic<TYPESOL>>();
 		std::shared_ptr<OneMax> oneMax = std::make_shared<OneMax>(100);
 		TYPESOL s(4);
 
-		CombinationGenerator<TYPESOL, unsigned int, bool> cg(mt_rand, move(statistic), move(stoppingCriteria), oneMax);
+		CombinationGenerator<TYPESOL, unsigned int, bool> cg(mt_rand, move(statistic), move(stoppingCriterias), oneMax);
 		// cg(s);
 
 		/*const std::unique_ptr<unsigned int []> &u = cg.reset();

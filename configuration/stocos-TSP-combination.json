@@ -11,7 +11,7 @@
     "OptimizationAlgorithm": {
         "0": {
             "className":"IteratedLocalSearch",
-            "StoppingCriteria": {
+            "StoppingCriterias": {
                 "budget": 1000000,
                 "fitnessObjectif": 0
             },
@@ -21,7 +21,7 @@
             },
             "OptimizationAlgorithm": {
                 "className": "FirstImprovement",
-                "StoppingCriteria": {
+                "StoppingCriterias": {
                     "budget": 1000,
                     "fitnessObjectif": 0
                 },
@@ -33,7 +33,7 @@
         },
         "1": {
             "className":"EvolutionaryAlgorithm",
-            "StoppingCriteria": {
+            "StoppingCriterias": {
                 "budget": 100,
                 "fitnessObjectif": 50
             },
@@ -47,7 +47,7 @@
         },
         "2": {
             "className":"TabuSearch",
-            "StoppingCriteria": {
+            "StoppingCriterias": {
                 "budget": 1000000,
                 "fitnessObjectif": 0
             },
@@ -60,7 +60,7 @@
         },
         "3": {
             "className":"OnePlusLambda",
-            "StoppingCriteria": {
+            "StoppingCriterias": {
                 "budget": 5000000,
                 "fitnessObjectif": 0
             },
@@ -73,14 +73,14 @@
         },
         "4" : {
             "className":"NearestNeighbourAlgorithm",
-            "StoppingCriteria": {
+            "StoppingCriterias": {
                 "budget": 5000000,
                 "fitnessObjectif": 0
             }
         },
         "5" : {
             "className":"CombinationGenerator",
-            "StoppingCriteria": {}
+            "StoppingCriterias": {}
         }
     },
     "Statistic": {

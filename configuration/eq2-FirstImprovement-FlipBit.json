@@ -21,7 +21,7 @@
     "OptimizationAlgorithm": {
         "0": {
             "className": "FirstImprovement",
-            "StoppingCriteria": {
+            "StoppingCriterias": {
                 "budget": 1000
             },
             "AtomicOperation": {

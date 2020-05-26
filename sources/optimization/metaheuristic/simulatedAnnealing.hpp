@@ -21,11 +21,11 @@ class SimulatedAnnealing : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_
   public:
 	SimulatedAnnealing(
 		std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
-		std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
+		std::unique_ptr<StoppingCriterias<SOL, TYPE_FITNESS>> stoppingCriterias,
 		std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
 		std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations)
 		: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic),
-															  std::move(stoppingCriteria), problem),
+															  std::move(stoppingCriterias), problem),
 		  _atomicOperations(std::move(atomicOperations)) {
 		BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation SimulatedAnnealing";
 	}

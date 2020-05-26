@@ -8,7 +8,7 @@
     "OptimizationAlgorithm": {
         "0" :{
             "className": "FirstImprovement",
-            "StoppingCriteria": {
+            "StoppingCriterias": {
                 "budget": 1000
             },
             "AtomicOperation": {
@@ -20,7 +20,7 @@
         },
         "1": {
             "className":"IteratedLocalSearch",
-            "StoppingCriteria": {
+            "StoppingCriterias": {
                 "budget": 100
             },
             "AtomicOperation": {
@@ -31,7 +31,7 @@
             },
             "OptimizationAlgorithm": {
                 "className": "FirstImprovement",
-                "StoppingCriteria": {
+                "StoppingCriterias": {
                     "budget": 100,
                     "fitnessObjectif": 50
                 },

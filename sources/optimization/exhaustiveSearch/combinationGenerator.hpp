@@ -25,10 +25,10 @@ template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
   public:
 	CombinationGenerator(std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
-						 std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
+						 std::unique_ptr<StoppingCriterias<SOL, TYPE_FITNESS>> stoppingCriterias,
 						 std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem)
 		: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(
-			  mt_rand, std::move(statistic), std::move(stoppingCriteria), problem) {
+			  mt_rand, std::move(statistic), std::move(stoppingCriterias), problem) {
 		_nb_call = 0;
 		_nb_digit = 0;
 		_len_string = 0;
