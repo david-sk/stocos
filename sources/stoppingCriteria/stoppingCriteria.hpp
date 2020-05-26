@@ -1,5 +1,5 @@
 ///
-/// @file stoppingCriterias.hpp
+/// @file stoppingCriteria.hpp
 /// @author Jxtopher
 /// @version 1
 /// @copyright CC-BY-NC-SA
@@ -16,10 +16,10 @@
 
 namespace stocos {
 
-template<typename SOL, typename TYPE_FITNESS> class StoppingCriterias :
+template<typename SOL, typename TYPE_FITNESS> class StoppingCriteria :
 	private std::list<Criteria<SOL, TYPE_FITNESS>*>  {
   public:
-	virtual ~StoppingCriterias() {
+	virtual ~StoppingCriteria() {
 		for (auto criteria : *this) delete criteria;
 		this->clear();
 	}

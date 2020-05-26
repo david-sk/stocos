@@ -152,7 +152,7 @@
         <rect class="BoundingBox" stroke="none" fill="none" x="18899" y="5599" width="6903" height="1203"/>
         <path fill="rgb(114,159,207)" stroke="none" d="M 22350,6800 L 18900,6800 18900,5600 25800,5600 25800,6800 22350,6800 Z"/>
         <path fill="none" stroke="rgb(52,101,164)" d="M 22350,6800 L 18900,6800 18900,5600 25800,5600 25800,6800 22350,6800 Z"/>
-        <text class="TextShape"><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="635px" font-weight="400"><tspan class="TextPosition" x="20081" y="6421"><tspan fill="rgb(0,0,0)" stroke="none">StoppingCriterias</tspan></tspan></tspan></text>
+        <text class="TextShape"><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="635px" font-weight="400"><tspan class="TextPosition" x="20081" y="6421"><tspan fill="rgb(0,0,0)" stroke="none">StoppingCriteria</tspan></tspan></tspan></text>
        </g>
       </g>
       <g class="com.sun.star.drawing.CustomShape">

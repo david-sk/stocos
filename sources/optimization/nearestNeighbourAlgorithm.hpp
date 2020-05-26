@@ -27,10 +27,10 @@ template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class NearestNeighbourAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
   public:
 	NearestNeighbourAlgorithm(std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
-							  std::unique_ptr<StoppingCriterias<SOL, TYPE_FITNESS>> stoppingCriterias,
+							  std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
 							  std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem)
 		: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(
-			  mt_rand, std::move(statistic), std::move(stoppingCriterias), problem) {
+			  mt_rand, std::move(statistic), std::move(stoppingCriteria), problem) {
 		BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__
 								 << " Creation NearestNeighbourAlgorithm";
 	}

@@ -29,7 +29,7 @@ if __name__ == '__main__':
         "OptimizationAlgorithm": {
             "0": {
                 "className" : "OnePlusLambda",
-                "StoppingCriterias": {
+                "StoppingCriteria": {
                     "budget": 1000,
                     "fitnessObjectif": 10
                 },

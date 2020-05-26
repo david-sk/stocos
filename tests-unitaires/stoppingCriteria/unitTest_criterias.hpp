@@ -12,7 +12,7 @@
 
 #include "solution/solution.hpp"
 #include "stoppingCriteria/criteriaBudget.hpp"
-#include "stoppingCriteria/stoppingCriterias.hpp"
+#include "stoppingCriteria/stoppingCriteria.hpp"
 
 using namespace CppUnit;
 using namespace stocos;
@@ -32,13 +32,13 @@ class UnitTest_criterias : public CppUnit::TestFixture {
         criteriaBudget = new CriteriaBudget<Solution<int>, unsigned int>(100);
         
 
-		StoppingCriterias<Solution<int>, unsigned int> stoppingCriterias;
-		stoppingCriterias.addCriteria(criteriaBudget);
+		StoppingCriteria<Solution<int>, unsigned int> stoppingCriteria;
+		stoppingCriteria.addCriteria(criteriaBudget);
 		for(unsigned int i = 0; i < 100; i++)
-			CPPUNIT_ASSERT(stoppingCriterias(s));
+			CPPUNIT_ASSERT(stoppingCriteria(s));
 		
 		for(unsigned int i = 100; i < 200; i++) 
-			CPPUNIT_ASSERT(!stoppingCriterias(s));
+			CPPUNIT_ASSERT(!stoppingCriteria(s));
 	}
 };
 

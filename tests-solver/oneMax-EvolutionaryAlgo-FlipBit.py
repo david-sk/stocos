@@ -29,7 +29,7 @@ if __name__ == '__main__':
         "OptimizationAlgorithm": {
             "0": {
                 "className":"EvolutionaryAlgorithm",
-                "StoppingCriterias": {
+                "StoppingCriteria": {
                     "budget": 100,
                     "fitnessObjectif": 10
                 },

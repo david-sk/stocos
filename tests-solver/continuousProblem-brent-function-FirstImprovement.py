@@ -49,7 +49,7 @@ if __name__ == '__main__':
         "OptimizationAlgorithm": {
             "0": {
                 "className": "FirstImprovement",
-                "StoppingCriterias": {
+                "StoppingCriteria": {
                     "budget": 1000,
                 },
                 "AtomicOperation": {
