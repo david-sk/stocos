@@ -15,7 +15,7 @@
 #include <string>
 
 #include "../../problem/problem.hpp"
-#include "../../stoppingCriteria/stoppingCriterias.hpp"
+#include "../../stoppingCriteria/stoppingCriteria.hpp"
 #include "../optimizationAlgorithm.hpp"
 #include "operator/atomicOperation.hpp"
 #include "operator/mutation/neighborhood.hpp"
@@ -26,11 +26,11 @@ template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
   public:
 	BestImprovement(std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
-					std::unique_ptr<StoppingCriterias<SOL, TYPE_FITNESS>> stoppingCriterias,
+					std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
 					std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
 					std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations)
 		: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(
-			  mt_rand, std::move(statistic), std::move(stoppingCriterias), problem) {
+			  mt_rand, std::move(statistic), std::move(stoppingCriteria), problem) {
 		BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__
 								 << " Creation of BestImprovement class";
 		//_atomicOperations = new Neighborhood<SOL, TYPE_FITNESS, SOL>(mt_rand);
@@ -50,7 +50,7 @@ class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CEL
 		// #endif
 		// this->_statistic.operator()(solution_star);
 
-		// while (this->_stoppingCriterias.operator()(solution_star)) {
+		// while (this->_stoppingCriteria.operator()(solution_star)) {
 		//     //Best neighborhood
 		//     std::unique_ptr<std::vector<std::pair<unsigned int, SOL>>> listOfNeighborhood =
 		//     _atomicOperations.listOfMutations(solution_star);

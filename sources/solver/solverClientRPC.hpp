@@ -62,7 +62,7 @@ class SolverClientRPC : public Solver {
 		if(!initial_solution->fitnessIsValid()) { _problem->evaluation(*initial_solution); }
 
 		// Construction du global criterea
-		global_stopping_criteria = factory.stoppingCriterias(_configuration["StoppingCriterias"]);
+		global_stopping_criteria = factory.stoppingCriteria(_configuration["StoppingCriteria"]);
 
 		// Allocation
 		solution_t0 = std::make_unique<SOL>();
@@ -183,7 +183,7 @@ class SolverClientRPC : public Solver {
 	std::mt19937 mt_rand;
 	std::map<unsigned int, std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>>
 		optimizationAlgorithm;
-	std::unique_ptr<StoppingCriterias<SOL, TYPE_FITNESS>> global_stopping_criteria;
+	std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> global_stopping_criteria;
 	std::string object_id;
 	Json::Value received;
 	std::unique_ptr<SOL> initial_solution;

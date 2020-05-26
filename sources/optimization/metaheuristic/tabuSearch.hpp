@@ -23,12 +23,12 @@ template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class TabuSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
   public:
 	TabuSearch(std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
-			   std::unique_ptr<StoppingCriterias<SOL, TYPE_FITNESS>> stoppingCriterias,
+			   std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
 			   std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
 			   std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations,
 			   unsigned int sizeOfTabuList = 7)
 		: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic),
-															  std::move(stoppingCriterias), problem),
+															  std::move(stoppingCriteria), problem),
 		  _atomicOperations(std::move(atomicOperations)) {
 		BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation TabuSearch";
 		tabuList.set_capacity(sizeOfTabuList);
@@ -40,7 +40,7 @@ class TabuSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
 		solution_star = s;
 		if(!solution_star.fitnessIsValid()) { this->_problem->evaluation(solution_star); }
 
-		while(this->_stoppingCriterias->operator()(solution_star)) {
+		while(this->_stoppingCriteria->operator()(solution_star)) {
 			this->_statistic->operator()(solution_star, className());
 
 			solution_beta = solution_star;
