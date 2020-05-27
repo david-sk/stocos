@@ -21,7 +21,8 @@
 
 namespace stocos {
 
-template<class SOL> class Statistic {
+template<class SOL> 
+class Statistic : private std::vector<Sensor<SOL>*> {
   public:
 	static constexpr const char* NONE = "none";
 	static constexpr const char* STDOUT = "stdout";
@@ -78,10 +79,10 @@ template<class SOL> class Statistic {
 
 	virtual ~Statistic() {
 		Json::Value show_end;
-		for(unsigned int i = 0; i < sensor.size(); i++) {
-			Json::Value tmp = sensor[i]->finish();
-			if(!tmp.empty()) show_end[sensor[i]->name()] = tmp;
-			if(sensor[i]->name() == "final") {
+		for(unsigned int i = 0; i < this->size(); i++) {
+			Json::Value tmp = (*this)[i]->finish();
+			if(!tmp.empty()) show_end[(*this)[i]->name()] = tmp;
+			if((*this)[i]->name() == "final") {
 				if(_name_calling_class.empty())
 					show_end["final"]["nameCallingClass"] = "unknown";
 				else
@@ -108,9 +109,10 @@ template<class SOL> class Statistic {
 			}
 		}
 
-		for(unsigned int i = 0; i < sensor.size(); i++) delete sensor[i];
+		// for(unsigned int i = 0; i < this->size(); i++) delete this[i];
+		for(Sensor<SOL>* sensor : *this) delete sensor;
 
-		sensor.clear();
+		this->clear();
 	}
 
 	void operator()(const SOL& s, std::string name_calling_class = "") {
@@ -153,24 +155,23 @@ template<class SOL> class Statistic {
 
 	Json::Value asJson(const SOL& s) {
 		Json::Value jsonValue;
-		for(unsigned int i = 0; i < sensor.size(); i++) {
-			sensor[i]->apply(s);
-			Json::Value tmp = sensor[i]->asJson();
-			if(!tmp.empty()) jsonValue[sensor[i]->name()] = tmp;
-			if(sensor[i]->name() == "nameCallingClass") {
+		for(unsigned int i = 0; i < this->size(); i++) {
+			(*this)[i]->apply(s);
+			Json::Value tmp = (*this)[i]->asJson();
+			if(!tmp.empty()) jsonValue[(*this)[i]->name()] = tmp;
+			if((*this)[i]->name() == "nameCallingClass") {
 				if(_name_calling_class.empty())
-					jsonValue[sensor[i]->name()] = "unknown";
+					jsonValue[(*this)[i]->name()] = "unknown";
 				else
-					jsonValue[sensor[i]->name()] = _name_calling_class;
+					jsonValue[(*this)[i]->name()] = _name_calling_class;
 			}
 		}
 		return jsonValue;
 	}
 
-	void addSensor(Sensor<SOL>* s) { sensor.push_back(s); }
+	void addSensor(Sensor<SOL>* s) { this->push_back(s); }
 
   protected:
-	std::vector<Sensor<SOL>*> sensor;
 	std::string _name_calling_class;
 
 	const char* recording;

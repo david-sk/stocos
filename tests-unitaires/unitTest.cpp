@@ -30,6 +30,7 @@
 #include "solution/unitTest_solutionArray.hpp"
 #include "stoppingCriteria/unitTest_criterias.hpp"
 #include "stoppingCriteria/unitTest_criteriaBudget.hpp"
+#include "statistic/unitTest_statistic.hpp"
 
 #include "optimization/exhaustiveSearch/unitTest_backtracking.hpp"
 #include "optimization/exhaustiveSearch/unitTest_combinationGenerator.hpp"
@@ -48,6 +49,7 @@
 #include "problem/unitTest_subsetsum.hpp"
 #include "problem/unitTest_travelingSalesmanProblem.hpp"
 
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_statistic);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_criterias);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_criteriaBudget);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solution);
