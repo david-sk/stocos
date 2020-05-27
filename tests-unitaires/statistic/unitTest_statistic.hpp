@@ -10,8 +10,6 @@
 #ifndef UNITTEST_STATISTIC_H
 #define UNITTEST_STATISTIC_H
 
-#include <iostream>
-
 #include "solution/solution.hpp"
 #include "statistic/sensor.hpp"
 #include "statistic/statistic.hpp"
@@ -32,7 +30,7 @@ class UnitTest_statistic : public CppUnit::TestFixture {
 	void constructor(void) {
 		Solution<int> s;
 		Sensor<Solution<int>> *sensorNumRound = new SensorNumRound<Solution<int>>();
-		Statistic<Solution<int>> statistic;
+		Statistic<Solution<int>> statistic(true);
 		statistic.addSensor(sensorNumRound);
 		statistic(s);
 		Json::Value result = statistic.asJson(s);
