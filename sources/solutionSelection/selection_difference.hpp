@@ -14,11 +14,14 @@
 
 namespace stocos {
 
-template<class SOL> class Selection_difference : public SolutionSelection<SOL> {
+template<class SOL>
+class Selection_difference : public SolutionSelection<SOL> {
   public:
-	Selection_difference(const double fitnessObjectif) : _fitnessObjectif(fitnessObjectif) {}
+	Selection_difference(const double fitnessObjectif) : _fitnessObjectif(fitnessObjectif) {
+	}
 
-	virtual ~Selection_difference() {}
+	virtual ~Selection_difference() {
+	}
 
 	bool operator()(const SOL& s1, const SOL& s2, const unsigned int numObjectif = 0) const {
 		assert(s1.fitnessIsValid(numObjectif));
@@ -27,7 +30,9 @@ template<class SOL> class Selection_difference : public SolutionSelection<SOL> {
 			   abs(_fitnessObjectif - s2.getFitness(numObjectif));
 	}
 
-	unsigned int operator()(const Population<SOL>& p) const { return 0; }
+	unsigned int operator()(const Population<SOL>& p) const {
+		return 0;
+	}
 
   private:
 	const double _fitnessObjectif;

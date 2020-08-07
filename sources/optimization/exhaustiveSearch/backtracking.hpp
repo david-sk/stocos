@@ -33,7 +33,8 @@ class Backtraking : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
 		_string = std::unique_ptr<unsigned int[]>(new unsigned int[_len_string]);
 	}
 
-	virtual ~Backtraking() {}
+	virtual ~Backtraking() {
+	}
 
 	std::unique_ptr<SOL> operator()(const SOL& s) {
 		//
@@ -72,7 +73,9 @@ class Backtraking : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
 			return _class_name;
 	}
 
-	void className(const std::string& class_name) { _class_name = class_name; }
+	void className(const std::string& class_name) {
+		_class_name = class_name;
+	}
 
   private:
 	const unsigned int _nbDigit;

@@ -22,10 +22,14 @@ class UnitTest_subsetsum : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE_END();
 
   public:
-	void setUp(void) {}
-	void tearDown(void) {}
+	void setUp(void) {
+	}
+	void tearDown(void) {
+	}
 
-	void loadInstance(void) { Subsetsum sss("instances/SubSetSum/SubSetSum-5.json"); }
+	void loadInstance(void) {
+		Subsetsum sss("instances/SubSetSum/SubSetSum-5.json");
+	}
 
   private:
 };

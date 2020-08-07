@@ -21,7 +21,7 @@
 
 namespace stocos {
 
-template<class SOL> 
+template<class SOL>
 class Statistic : private std::vector<Sensor<SOL>*> {
   public:
 	static constexpr const char* NONE = "none";
@@ -102,6 +102,7 @@ class Statistic : private std::vector<Sensor<SOL>*> {
 				std::unique_ptr<Json::StreamWriter> writer(builder.newStreamWriter());
 				writer->write(show_end["final"], &outFile);
 				outFile << std::endl;
+				outFile.close();
 			} else if(recording == MONGODB) {
 				mongo::BSONObj bson =
 					mongo::fromjson(Json::writeString(builder, show_end["final"]));
@@ -169,7 +170,9 @@ class Statistic : private std::vector<Sensor<SOL>*> {
 		return jsonValue;
 	}
 
-	void addSensor(Sensor<SOL>* s) { this->push_back(s); }
+	void addSensor(Sensor<SOL>* s) {
+		this->push_back(s);
+	}
 
   protected:
 	std::string _name_calling_class;

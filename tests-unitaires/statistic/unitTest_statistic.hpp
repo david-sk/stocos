@@ -12,8 +12,8 @@
 
 #include "solution/solution.hpp"
 #include "statistic/sensor.hpp"
-#include "statistic/statistic.hpp"
 #include "statistic/sensorNumRound.hpp"
+#include "statistic/statistic.hpp"
 
 using namespace CppUnit;
 using namespace stocos;
@@ -24,12 +24,14 @@ class UnitTest_statistic : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE_END();
 
   public:
-	void setUp(void) {}
-	void tearDown(void) {  }
+	void setUp(void) {
+	}
+	void tearDown(void) {
+	}
 
 	void constructor(void) {
 		Solution<int> s;
-		Sensor<Solution<int>> *sensorNumRound = new SensorNumRound<Solution<int>>();
+		Sensor<Solution<int>>* sensorNumRound = new SensorNumRound<Solution<int>>();
 		Statistic<Solution<int>> statistic(true);
 		statistic.addSensor(sensorNumRound);
 		statistic(s);

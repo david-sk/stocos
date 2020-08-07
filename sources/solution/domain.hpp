@@ -22,19 +22,22 @@
 
 namespace stocos {
 
-template<typename TYPE_CELL> class Domain {
+template<typename TYPE_CELL>
+class Domain {
   public:
 	///
 	/// @brief Pour chaque variables, extension
 	///
 	Domain(std::map<unsigned int, std::shared_ptr<std::unordered_set<TYPE_CELL>>> exhaustive_list,
 		   std::shared_ptr<std::unordered_set<TYPE_CELL>> dom = nullptr)
-		: dom_each_cell(exhaustive_list), _dom(dom) {}
+		: dom_each_cell(exhaustive_list), _dom(dom) {
+	}
 
 	///
 	/// @brief Pour toutes les variables, give exhautive list, extension
 	///
-	Domain(const std::shared_ptr<std::unordered_set<TYPE_CELL>> dom) : _dom(dom) {}
+	Domain(const std::shared_ptr<std::unordered_set<TYPE_CELL>> dom) : _dom(dom) {
+	}
 
 	///
 	/// @brief Pour toutes les variables, definition du domaine
@@ -53,7 +56,9 @@ template<typename TYPE_CELL> class Domain {
 	}
 	// ! operator=
 
-	Domain(const Json::Value& jsonValue) { loadJson(jsonValue); }
+	Domain(const Json::Value& jsonValue) {
+		loadJson(jsonValue);
+	}
 
 	///
 	/// @brief Taille du domain pour une variable
@@ -61,9 +66,7 @@ template<typename TYPE_CELL> class Domain {
 	unsigned int get_size_domain(const unsigned int variable_index) const {
 		try {
 			return dom_each_cell.at(variable_index)->size();
-		} catch(const std::out_of_range& oor) { 
-			return _dom->size(); 
-		}
+		} catch(const std::out_of_range& oor) { return _dom->size(); }
 	}
 	///
 	/// @brief Ajouter une element au domaine d'une variable
@@ -84,14 +87,15 @@ template<typename TYPE_CELL> class Domain {
 	}
 
 	///
-	/// @brief 
+	/// @brief
 	///
 	bool in_domain(const unsigned int variable_index, const TYPE_CELL element) {
 		if(dom_each_cell[variable_index] == nullptr) {
 			typename std::unordered_set<TYPE_CELL>::const_iterator got = _dom->find(element);
 			return got != _dom->end();
 		} else {
-			typename std::unordered_set<TYPE_CELL>::const_iterator got = dom_each_cell[variable_index]->find(element);
+			typename std::unordered_set<TYPE_CELL>::const_iterator got =
+				dom_each_cell[variable_index]->find(element);
 			return got != dom_each_cell[variable_index]->end();
 		}
 		return false;
@@ -107,7 +111,10 @@ template<typename TYPE_CELL> class Domain {
 	}
 
 	void show() const {
-		for(typename std::map<unsigned int, std::shared_ptr<std::unordered_set<TYPE_CELL>>>::const_iterator it = dom_each_cell.begin(); it != dom_each_cell.end(); + +it) {
+		for(typename std::map<unsigned int,
+							  std::shared_ptr<std::unordered_set<TYPE_CELL>>>::const_iterator it =
+				dom_each_cell.begin();
+			it != dom_each_cell.end(); + +it) {
 			std::cout << it->first << " =>";
 			for(typename std::unordered_set<TYPE_CELL>::const_iterator it2 = it->second->begin();
 				it2 != it->second->end(); ++it2) {
@@ -133,7 +140,7 @@ template<typename TYPE_CELL> class Domain {
 	// }
 
   private:
-   	///< definition du domaine pour toutes les variables
+	///< definition du domaine pour toutes les variables
 	std::shared_ptr<std::unordered_set<TYPE_CELL>> _dom;
 	///< definition du domaine pour chaque variables
 	std::map<unsigned int, std::shared_ptr<std::unordered_set<TYPE_CELL>>> dom_each_cell;

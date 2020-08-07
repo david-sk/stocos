@@ -20,20 +20,25 @@
 
 namespace stocos {
 
-template<class SOL> class SensorFinal : public Sensor<SOL> {
+template<class SOL>
+class SensorFinal : public Sensor<SOL> {
   public:
-	SensorFinal(unsigned int num, std::string name = "") : Sensor<SOL>(), _num(num), _name(name) {
+	SensorFinal(unsigned int num, const std::string &name = "") : Sensor<SOL>(), _num(num), _name(name) {
 		stopwatch.start();
 	}
 
-	virtual ~SensorFinal() { stopwatch.stop(); }
+	virtual ~SensorFinal() {
+		stopwatch.stop();
+	}
 
 	void apply(const SOL& s) {
 		numRound.apply(s);
 		solution_best = s;
 	}
 
-	Json::Value asJson() const { return Json::Value(); }
+	Json::Value asJson() const {
+		return Json::Value();
+	}
 
 	Json::Value finish() {
 		Json::Value r;
@@ -48,7 +53,9 @@ template<class SOL> class SensorFinal : public Sensor<SOL> {
 		return r;
 	}
 
-	std::string name() const { return std::string("final"); }
+	std::string name() const {
+		return std::string("final");
+	}
 
   private:
 	SensorStopwatch<SOL> stopwatch;

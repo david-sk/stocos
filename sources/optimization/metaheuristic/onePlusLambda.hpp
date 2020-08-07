@@ -32,7 +32,8 @@ class OnePlusLambda : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>
 		BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation OnePlusLambda";
 	}
 
-	~OnePlusLambda() {}
+	~OnePlusLambda() {
+	}
 
 	std::unique_ptr<SOL> operator()(const SOL& s) {
 		solution_star = s;
@@ -64,7 +65,9 @@ class OnePlusLambda : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>
 			return _class_name;
 	}
 
-	void className(const std::string& class_name) { _class_name = class_name; }
+	void className(const std::string& class_name) {
+		_class_name = class_name;
+	}
 
   protected:
 	std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _atomicOperations;

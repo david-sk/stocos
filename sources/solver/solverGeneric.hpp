@@ -99,7 +99,9 @@ class SolverGeneric : public Solver {
 			return _class_name;
 	}
 
-	void className(const std::string& class_name) { _class_name = class_name; }
+	void className(const std::string& class_name) {
+		_class_name = class_name;
+	}
 
   protected:
 	const Json::Value& _configuration;

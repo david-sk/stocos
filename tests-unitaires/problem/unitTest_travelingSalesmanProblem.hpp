@@ -25,8 +25,10 @@ class UnitTest_travelingSalesmanProblem : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE_END();
 
   public:
-	void setUp(void) {}
-	void tearDown(void) {}
+	void setUp(void) {
+	}
+	void tearDown(void) {
+	}
 
 	void loadInstance(void) {
 		if(!std::ifstream(std::string("instances/TravelingSalesmanProblem/TSP-10-1.json").c_str())

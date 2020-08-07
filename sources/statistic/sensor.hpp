@@ -14,11 +14,14 @@
 
 namespace stocos {
 
-template<class SOL> class Sensor {
+template<class SOL>
+class Sensor {
   public:
-	Sensor() {}
+	Sensor() {
+	}
 
-	virtual ~Sensor() {}
+	virtual ~Sensor() {
+	}
 
 	virtual void apply(const SOL& s) = 0;
 	virtual Json::Value asJson() const = 0;

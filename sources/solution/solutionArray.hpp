@@ -108,7 +108,9 @@ class SolutionArray : public Solution<TYPE_FITNESS> {
 		return array[index];
 	}
 
-	unsigned int sizeArray() const { return _sizeArray; }
+	unsigned int sizeArray() const {
+		return _sizeArray;
+	}
 
 	// --------------------------------------------------------------------
 	friend std::ostream& operator<<(std::ostream& out,

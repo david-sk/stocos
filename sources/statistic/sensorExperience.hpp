@@ -18,13 +18,17 @@
 
 namespace stocos {
 
-template<class SOL> class SensorExperience : public Sensor<SOL> {
+template<class SOL>
+class SensorExperience : public Sensor<SOL> {
   public:
-	SensorExperience(unsigned int num, std::string name = "") : _num(num), _name(name) {}
+	SensorExperience(unsigned int num, const std::string &name = "") : _num(num), _name(name) {
+	}
 
-	virtual ~SensorExperience() {}
+	virtual ~SensorExperience() {
+	}
 
-	void apply(const SOL& s) {}
+	void apply(const SOL& s) {
+	}
 
 	Json::Value asJson() const {
 		Json::Value exp;
@@ -33,9 +37,13 @@ template<class SOL> class SensorExperience : public Sensor<SOL> {
 		return exp;
 	}
 
-	Json::Value finish() { return Json::Value(); }
+	Json::Value finish() {
+		return Json::Value();
+	}
 
-	std::string name() const { return std::string("experience"); }
+	std::string name() const {
+		return std::string("experience");
+	}
 
   private:
 	unsigned int _num;

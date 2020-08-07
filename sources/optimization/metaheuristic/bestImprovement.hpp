@@ -36,7 +36,8 @@ class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CEL
 		//_atomicOperations = new Neighborhood<SOL, TYPE_FITNESS, SOL>(mt_rand);
 	}
 
-	virtual ~BestImprovement() {}
+	virtual ~BestImprovement() {
+	}
 
 	std::unique_ptr<SOL> operator()(const SOL& s) {
 		solution_star = s;
@@ -87,7 +88,9 @@ class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CEL
 			return _class_name;
 	}
 
-	void className(const std::string& class_name) { _class_name = class_name; }
+	void className(const std::string& class_name) {
+		_class_name = class_name;
+	}
 
   protected:
 	SOL solution_star;
