@@ -22,6 +22,7 @@ RUN apt-get install -y --no-install-recommends libargtable2-dev
 RUN apt-get install -y --no-install-recommends libmicrohttpd-dev
 RUN apt-get install -y --no-install-recommends libhiredis-dev
 RUN apt-get install -y --no-install-recommends python3.7
+RUN apt-get install -y --no-install-recommends python3-pip
 RUN apt-get install -y --no-install-recommends clang-format
 RUN apt-get install -y --no-install-recommends pkg-config
 RUN apt-get install -y --no-install-recommends libcurl4
