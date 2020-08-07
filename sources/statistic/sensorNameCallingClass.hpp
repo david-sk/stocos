@@ -20,19 +20,29 @@
 
 namespace stocos {
 
-template<class SOL> class SensorNameCallingClass : public Sensor<SOL> {
+template<class SOL>
+class SensorNameCallingClass : public Sensor<SOL> {
   public:
-	SensorNameCallingClass() : Sensor<SOL>() {}
+	SensorNameCallingClass() : Sensor<SOL>() {
+	}
 
-	virtual ~SensorNameCallingClass() {}
+	virtual ~SensorNameCallingClass() {
+	}
 
-	void apply(const SOL& s) {}
+	void apply(const SOL& s) {
+	}
 
-	Json::Value asJson() const { return Json::Value(); }
+	Json::Value asJson() const {
+		return Json::Value();
+	}
 
-	Json::Value finish() { return Json::Value(); }
+	Json::Value finish() {
+		return Json::Value();
+	}
 
-	std::string name() const { return std::string("nameCallingClass"); }
+	std::string name() const {
+		return std::string("nameCallingClass");
+	}
 
   private:
 	SOL solution_best;

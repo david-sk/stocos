@@ -18,21 +18,30 @@
 #include "sensor.hpp"
 namespace stocos {
 
-template<class SOL> class SensorFitness : public Sensor<SOL> {
+template<class SOL>
+class SensorFitness : public Sensor<SOL> {
   public:
-	SensorFitness() : Sensor<SOL>() {}
+	SensorFitness() : Sensor<SOL>() {
+	}
 
-	virtual ~SensorFitness() {}
+	virtual ~SensorFitness() {
+	}
 
-	void apply(const SOL& s) { solution = s; }
+	void apply(const SOL& s) {
+		solution = s;
+	}
 
 	Json::Value asJson() const {
 		Json::Value x = solution.asJson();
 		return x["fitness"];
 	}
 
-	Json::Value finish() { return Json::Value(); }
-	std::string name() const { return std::string("Fitness"); }
+	Json::Value finish() {
+		return Json::Value();
+	}
+	std::string name() const {
+		return std::string("Fitness");
+	}
 
   private:
 	SOL solution;

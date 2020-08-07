@@ -23,8 +23,10 @@ class UnitTest_shuffle : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE_END();
 
   public:
-	void setUp(void) {}
-	void tearDown(void) {}
+	void setUp(void) {
+	}
+	void tearDown(void) {
+	}
 
 	void operator()(void) {
 		std::mt19937 mt_rand;

@@ -56,7 +56,7 @@ void version(std::string name_software) {
 	std::cout << "******************************************" << std::endl;
 	std::cout << "[+] *** " << name_software << " ***" << std::endl;
 	std::cout << "[+] Day compilation : " << __DATE__ << " " << __TIME__ << std::endl;
-	std::cout << "[+] Version ("<< CMAKE_BUILD_TYPE <<") : " << VERSION_PROJECT << std::endl;
+	std::cout << "[+] Version (" << CMAKE_BUILD_TYPE << ") : " << VERSION_PROJECT << std::endl;
 	std::cout << "[+] Git branch : " << GIT_BRANCH << std::endl;
 	std::cout << "[+] Git commit hash : " << GIT_COMMIT_HASH << std::endl;
 	std::cout << "******************************************" << std::endl;
@@ -85,7 +85,8 @@ int main(int argc, char** argv, char** envp) {
 	std::string loggin;
 
 	boost::program_options::variables_map vm;
-	boost::program_options::options_description args("**" + std::string(NAME_SOFTWARE) +"**" + " options");
+	boost::program_options::options_description args("**" + std::string(NAME_SOFTWARE) + "**" +
+													 " options");
 	args.add_options()("help,h", "help message")("version,v", "version")(
 		"config,c", boost::program_options::value<std::string>(&config_pathfile),
 		"file configuration json (default : null)")(
@@ -93,8 +94,8 @@ int main(int argc, char** argv, char** envp) {
 		"in string json (default : null)")(
 		"loggin,l", boost::program_options::value<std::string>(&loggin), "loggin (default : null)");
 	try {
-		boost::program_options::store(
-			boost::program_options::parse_command_line(argc, argv, args), vm);
+		boost::program_options::store(boost::program_options::parse_command_line(argc, argv, args),
+									  vm);
 		boost::program_options::notify(vm);
 	} catch(const boost::program_options::error& ex) {
 		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) +
@@ -106,8 +107,8 @@ int main(int argc, char** argv, char** envp) {
 		return EXIT_SUCCESS;
 	}
 
-	if (vm.count("help")) {
-		std::cout << args <<std::endl;
+	if(vm.count("help")) {
+		std::cout << args << std::endl;
 		return EXIT_SUCCESS;
 	}
 
@@ -120,7 +121,7 @@ int main(int argc, char** argv, char** envp) {
 											boost::log::trivial::info);
 
 	if(config_pathfile.empty() && config_json.empty()) {
-		std::cout << args <<std::endl;
+		std::cout << args << std::endl;
 		return EXIT_SUCCESS;
 	}
 

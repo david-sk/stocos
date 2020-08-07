@@ -27,8 +27,10 @@ class UnitTest_flipBit : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE_END();
 
   public:
-	void setUp(void) {}
-	void tearDown(void) {}
+	void setUp(void) {
+	}
+	void tearDown(void) {
+	}
 
 	void operator()(void) {
 		unsigned int N = 50;

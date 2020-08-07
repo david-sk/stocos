@@ -19,8 +19,10 @@ namespace stocos {
 
 class Solver {
   public:
-	Solver() {}
-	virtual ~Solver() {}
+	Solver() {
+	}
+	virtual ~Solver() {
+	}
 
 	virtual void operator()() = 0;
 

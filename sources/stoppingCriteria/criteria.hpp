@@ -12,11 +12,14 @@
 
 namespace stocos {
 
-template<typename SOL, typename TYPE_FITNESS> class Criteria {
+template<typename SOL, typename TYPE_FITNESS>
+class Criteria {
   public:
-	Criteria() {}
+	Criteria() {
+	}
 
-	virtual ~Criteria() {}
+	virtual ~Criteria() {
+	}
 
 	virtual bool operator()(const SOL& s) = 0;
 	virtual void reset() = 0;

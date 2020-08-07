@@ -55,9 +55,13 @@ class Objectif {
 		for(unsigned int i = 0; i < valueSize; i++) value[i] = s(i + offset);
 	}
 
-	unsigned int getValueSize() { return valueSize; }
+	unsigned int getValueSize() {
+		return valueSize;
+	}
 
-	double getFitness() { return expression.value(); }
+	double getFitness() {
+		return expression.value();
+	}
 
   private:
 	std::unique_ptr<double[]> value;
@@ -70,14 +74,16 @@ class Objectif {
 class ContinuousProblem : public Problem<SOL_CONTINUOUSPROBLEM, TYPE_FITNESS_CONTINUOUSPROBLEM,
 										 TYPE_CELL_CONTINUOUSPROBLEM> {
   public:
-	ContinuousProblem() : _domain(nullptr) {}
+	ContinuousProblem() : _domain(nullptr) {
+	}
 
 	ContinuousProblem(std::string fileInstance) : _domain(nullptr) {
 		Json::Value config = loadInstance(fileInstance);
 		loadJson(config);
 	}
 
-	~ContinuousProblem() {}
+	~ContinuousProblem() {
+	}
 
 	void loadJson(const Json::Value& config) {
 		instance_number = config["problem"]["instance_number"].asString();

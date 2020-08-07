@@ -26,8 +26,10 @@ class UnitTest_solution : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE_END();
 
   public:
-	void setUp(void) {}
-	void tearDown(void) {}
+	void setUp(void) {
+	}
+	void tearDown(void) {
+	}
 
 	void constructor(void) {
 		Solution<double> s1(10);

@@ -34,7 +34,8 @@ class TabuSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
 		tabuList.set_capacity(sizeOfTabuList);
 	}
 
-	virtual ~TabuSearch() {}
+	virtual ~TabuSearch() {
+	}
 
 	std::unique_ptr<SOL> operator()(const SOL& s) {
 		solution_star = s;
@@ -74,7 +75,9 @@ class TabuSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
 			return _class_name;
 	}
 
-	void className(const std::string& class_name) { _class_name = class_name; }
+	void className(const std::string& class_name) {
+		_class_name = class_name;
+	}
 
   protected:
 	std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _atomicOperations;

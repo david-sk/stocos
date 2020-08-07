@@ -21,7 +21,7 @@
 
 namespace stocos {
 
-template<class SOL> 
+template<class SOL>
 class Statistic : private std::vector<Sensor<SOL>*> {
   public:
 	static constexpr const char* NONE = "none";
@@ -169,7 +169,9 @@ class Statistic : private std::vector<Sensor<SOL>*> {
 		return jsonValue;
 	}
 
-	void addSensor(Sensor<SOL>* s) { this->push_back(s); }
+	void addSensor(Sensor<SOL>* s) {
+		this->push_back(s);
+	}
 
   protected:
 	std::string _name_calling_class;

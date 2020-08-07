@@ -24,7 +24,8 @@
 
 namespace stocos {
 
-template<typename TYPE_FITNESS> class Solution {
+template<typename TYPE_FITNESS>
+class Solution {
   public:
 	Solution(const Solution& s) : _number_of_objective(s._number_of_objective) {
 		BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__
@@ -74,7 +75,9 @@ template<typename TYPE_FITNESS> class Solution {
 		return *this;
 	}
 
-	~Solution() { BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Delete Solution"; }
+	~Solution() {
+		BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Delete Solution";
+	}
 
 	///
 	/// @brief Give for a numObjectif the state fitness
@@ -112,7 +115,9 @@ template<typename TYPE_FITNESS> class Solution {
 		return _fitness[numObjectif];
 	}
 
-	unsigned int numberOfObjective() const { return _number_of_objective; }
+	unsigned int numberOfObjective() const {
+		return _number_of_objective;
+	}
 
 	// --------------------------------------------------------------------
 	friend std::ostream& operator<<(std::ostream& out, const Solution<TYPE_FITNESS>& s) {

@@ -29,16 +29,19 @@ using TYPE_CELL_ONEMAX = bool;
 using SOL_ONEMAX = SolutionArray<TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>;
 class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX> {
   public:
-	OneMax() : _N(1) {}
+	OneMax() : _N(1) {
+	}
 
 	OneMax(const std::string& fileInstance) {
 		Json::Value config = loadInstance(fileInstance);
 		loadJson(config);
 	}
 
-	OneMax(unsigned int N) : _N(N) {}
+	OneMax(unsigned int N) : _N(N) {
+	}
 
-	~OneMax() {}
+	~OneMax() {
+	}
 
 	virtual void loadJson(const Json::Value& config) {
 		instance_number = config["problem"]["instance_number"].asString();

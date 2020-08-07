@@ -23,22 +23,21 @@ class UnitTest_criterias : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE_END();
 
   public:
-	void setUp(void) {}
-	void tearDown(void) {  }
+	void setUp(void) {
+	}
+	void tearDown(void) {
+	}
 
 	void constructor(void) {
 		Solution<int> s;
-        CriteriaBudget<Solution<int>, unsigned int>* criteriaBudget;
-        criteriaBudget = new CriteriaBudget<Solution<int>, unsigned int>(100);
-        
+		CriteriaBudget<Solution<int>, unsigned int>* criteriaBudget;
+		criteriaBudget = new CriteriaBudget<Solution<int>, unsigned int>(100);
 
 		StoppingCriteria<Solution<int>, unsigned int> stoppingCriteria;
 		stoppingCriteria.addCriteria(criteriaBudget);
-		for(unsigned int i = 0; i < 100; i++)
-			CPPUNIT_ASSERT(stoppingCriteria(s));
-		
-		for(unsigned int i = 100; i < 200; i++) 
-			CPPUNIT_ASSERT(!stoppingCriteria(s));
+		for(unsigned int i = 0; i < 100; i++) CPPUNIT_ASSERT(stoppingCriteria(s));
+
+		for(unsigned int i = 100; i < 200; i++) CPPUNIT_ASSERT(!stoppingCriteria(s));
 	}
 };
 

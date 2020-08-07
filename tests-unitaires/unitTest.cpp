@@ -28,9 +28,9 @@
 #include "solution/unitTest_population.hpp"
 #include "solution/unitTest_solution.hpp"
 #include "solution/unitTest_solutionArray.hpp"
-#include "stoppingCriteria/unitTest_criterias.hpp"
-#include "stoppingCriteria/unitTest_criteriaBudget.hpp"
 #include "statistic/unitTest_statistic.hpp"
+#include "stoppingCriteria/unitTest_criteriaBudget.hpp"
+#include "stoppingCriteria/unitTest_criterias.hpp"
 
 #include "optimization/exhaustiveSearch/unitTest_backtracking.hpp"
 #include "optimization/exhaustiveSearch/unitTest_combinationGenerator.hpp"

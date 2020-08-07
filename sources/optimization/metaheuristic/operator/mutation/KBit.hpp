@@ -29,7 +29,8 @@ class KBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
 		N = 1;
 		rid = std::make_unique<std::uniform_int_distribution<unsigned int>>(0, 1);
 	}
-	virtual ~KBit() {}
+	virtual ~KBit() {
+	}
 
 	void operator()(SOL& s) {
 		backup.clear();

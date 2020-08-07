@@ -28,7 +28,8 @@ class FlipBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
 		: AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, problem), _c(c), N(0) {
 		urd = std::make_unique<std::uniform_real_distribution<>>(0, 1);
 	}
-	virtual ~FlipBit() {}
+	virtual ~FlipBit() {
+	}
 
 	void operator()(SOL& s) {
 		backup.clear();

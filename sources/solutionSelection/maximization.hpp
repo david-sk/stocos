@@ -14,11 +14,14 @@
 
 namespace stocos {
 
-template<class SOL> class Maximization : public SolutionSelection<SOL> {
+template<class SOL>
+class Maximization : public SolutionSelection<SOL> {
   public:
-	Maximization() {}
+	Maximization() {
+	}
 
-	virtual ~Maximization() {}
+	virtual ~Maximization() {
+	}
 
 	bool operator()(const SOL& s1, const SOL& s2, const unsigned int numObjectif = 0) const {
 		assert(s1.fitnessIsValid(numObjectif));

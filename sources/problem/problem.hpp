@@ -25,11 +25,14 @@
 
 namespace stocos {
 
-template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL> class Problem {
+template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
+class Problem {
   public:
-	Problem() {}
+	Problem() {
+	}
 
-	virtual ~Problem() {}
+	virtual ~Problem() {
+	}
 
 	///
 	/// @brief give an instance from the json file in Json format
