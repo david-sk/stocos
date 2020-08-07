@@ -17,9 +17,14 @@ import json
 import subprocess
 import math
 import numpy as np
+import argparse
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('path', type=str,  help='Path stocos executable')
+    args = parser.parse_args()
+
     configuration : dict = {
         "seed": 0,
         "problem": {
@@ -84,7 +89,7 @@ if __name__ == '__main__':
     def f(x : float, y : float, z : float) -> float:
         return  (4/3)*( math.pow((( math.pow(x,2) + math.pow(y,2)) - (x * y)),(0.75))) + z
 
-    result = subprocess.run(["build/stocos", "-j", json.dumps(configuration)], capture_output=True)
+    result = subprocess.run([args.path, "-j", json.dumps(configuration)], capture_output=True)
     result_data = json.loads(result.stdout)
 
     result_stocos = result_data["Solution"]["fitness"][0]

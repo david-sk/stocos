@@ -12,9 +12,14 @@
 
 import json
 import subprocess
+import argparse
 
 if __name__ == '__main__':
-    OneMax : dict = {
+    parser = argparse.ArgumentParser()
+    parser.add_argument('path', type=str,  help='Path stocos executable')
+    args = parser.parse_args()
+
+    configuration : dict = {
         "seed": 0,
         "problem": {
             "name": "OneMax",
@@ -45,7 +50,7 @@ if __name__ == '__main__':
         }
     }
 
-    result = subprocess.run(["build/stocos", "-j", json.dumps(OneMax)], capture_output=True)
+    result = subprocess.run([args.path, "-j", json.dumps(configuration)], capture_output=True)
     result_data = json.loads(result.stdout)
     assert result_data["Solution"]["fitness"][0] == 10
     exit(result.returncode)
