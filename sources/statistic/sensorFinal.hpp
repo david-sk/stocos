@@ -23,7 +23,7 @@ namespace stocos {
 template<class SOL>
 class SensorFinal : public Sensor<SOL> {
   public:
-	SensorFinal(unsigned int num, std::string name = "") : Sensor<SOL>(), _num(num), _name(name) {
+	SensorFinal(unsigned int num, const std::string &name = "") : Sensor<SOL>(), _num(num), _name(name) {
 		stopwatch.start();
 	}
 

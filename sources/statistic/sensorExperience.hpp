@@ -21,7 +21,7 @@ namespace stocos {
 template<class SOL>
 class SensorExperience : public Sensor<SOL> {
   public:
-	SensorExperience(unsigned int num, std::string name = "") : _num(num), _name(name) {
+	SensorExperience(unsigned int num, const std::string &name = "") : _num(num), _name(name) {
 	}
 
 	virtual ~SensorExperience() {

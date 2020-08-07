@@ -102,6 +102,7 @@ class Statistic : private std::vector<Sensor<SOL>*> {
 				std::unique_ptr<Json::StreamWriter> writer(builder.newStreamWriter());
 				writer->write(show_end["final"], &outFile);
 				outFile << std::endl;
+				outFile.close();
 			} else if(recording == MONGODB) {
 				mongo::BSONObj bson =
 					mongo::fromjson(Json::writeString(builder, show_end["final"]));
