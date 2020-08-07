@@ -15,11 +15,14 @@
 
 namespace stocos {
 
-template<typename SOL> class Population : public Solution<double>, public std::vector<SOL> {
+template<typename SOL>
+class Population : public Solution<double>, public std::vector<SOL> {
   public:
-	Population() {}
+	Population() {
+	}
 
-	virtual ~Population() {}
+	virtual ~Population() {
+	}
 
   private:
 };

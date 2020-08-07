@@ -21,7 +21,8 @@
 
 namespace stocos {
 
-template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL> class solutionSelectionBuilder {
+template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
+class solutionSelectionBuilder {
   public:
 	static std::unique_ptr<SolutionSelection<SOL>>
 		build(const Problem<SOL, TYPE_FITNESS, TYPE_CELL>& problem,

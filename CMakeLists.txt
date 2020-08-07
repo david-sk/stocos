@@ -22,7 +22,7 @@ set(CMAKE_CXX_FLAGS "-std=c++2a -fopenmp\
                                 -Wno-unused") # -Wswitch-default -Wsign-conversion -Wshadow  -Wcast-qual -Wold-style-cast
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 set(CMAKE_CXX_FLAGS_DEBUG "-g3 -DDEBUG")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
 
 ###############################################################################
 # Load modules cmake
@@ -181,5 +181,5 @@ endif(NOT PYTHON3.7_EXECUTABLE)
 file(GLOB LIST_OF_FILES  tests-solver/*.py)
 foreach(PATH_FILE  ${LIST_OF_FILES})
     get_filename_component(FILE ${PATH_FILE} NAME)
-    add_test(NAME ${FILE} COMMAND ${PYTHON3.7_EXECUTABLE} ${PATH_FILE} WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+    add_test(NAME ${FILE} COMMAND ${PYTHON3.7_EXECUTABLE} ${PATH_FILE} "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}" WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 endforeach()

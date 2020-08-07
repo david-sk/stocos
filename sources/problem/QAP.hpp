@@ -28,7 +28,7 @@ using TYPE_CELL_QAP = unsigned int;
 using SOL_QAP = SolutionArray<TYPE_FITNESS_QAP, TYPE_CELL_QAP>;
 class QAP : public Problem<SOL_QAP, TYPE_FITNESS_QAP, TYPE_CELL_QAP> {
   public:
-	QAP(const std::string &fileInstance) {
+	QAP(const std::string& fileInstance) {
 		Json::Value config = loadInstance(fileInstance);
 		loadJson(config);
 	}
@@ -97,7 +97,8 @@ class QAP : public Problem<SOL_QAP, TYPE_FITNESS_QAP, TYPE_CELL_QAP> {
 	// 			j++;
 	// 	}
 	// }
-	void loadJson(const Json::Value& config) {}
+	void loadJson(const Json::Value& config) {
+	}
 
 	void evaluation(SOL_QAP& p) {
 		unsigned int sum = 0;
@@ -107,7 +108,8 @@ class QAP : public Problem<SOL_QAP, TYPE_FITNESS_QAP, TYPE_CELL_QAP> {
 		p.setFitness(0, sum);
 	}
 
-	void resetSolution(SOL_QAP& s) const {}
+	void resetSolution(SOL_QAP& s) const {
+	}
 
 	void showA() const {
 		for(unsigned int i = 0; i < n; i++) {

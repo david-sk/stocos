@@ -36,7 +36,8 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
 		_cpt = false;
 	}
 
-	virtual ~CombinationGenerator() {}
+	virtual ~CombinationGenerator() {
+	}
 
 	void reset() {
 		for(unsigned int j = 0; j < _len_string; j++) _string[j] = 0;
@@ -64,7 +65,9 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
 		}
 	}
 
-	bool stop() { return _cpt < (_len_string); }
+	bool stop() {
+		return _cpt < (_len_string);
+	}
 
 	std::unique_ptr<SOL> operator()(const SOL& s) {
 		// if(s.domain == nullptr)
@@ -72,7 +75,8 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
 		// 							 " [-] domain == nullptr)");
 		// // initialization
 		// _nb_digit = s.domain->size_domain(0);
-		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] domain == nullptr)");
+		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) +
+								 " [-] domain == nullptr)");
 		_len_string = s.sizeArray();
 		_string = std::unique_ptr<unsigned int[]>(new unsigned int[_len_string]);
 
@@ -102,7 +106,6 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
 				solution_star.reset(new SOL(*solution));
 				std::cout << *solution_star << std::endl;
 			}
-
 		} while(stop());
 
 		return std::move(solution_star);
@@ -115,7 +118,9 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
 			return _class_name;
 	}
 
-	void className(const std::string& class_name) { _class_name = class_name; }
+	void className(const std::string& class_name) {
+		_class_name = class_name;
+	}
 
   private:
 	unsigned int _nb_digit;

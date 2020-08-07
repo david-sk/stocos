@@ -27,14 +27,16 @@ using TYPE_CELL_STP = double;
 using SOL_STP = SolutionArray<TYPE_FITNESS_STP, TYPE_CELL_STP>;
 class TravelingSalesmanProblem : public Problem<SOL_STP, TYPE_FITNESS_STP, TYPE_CELL_STP> {
   public:
-	TravelingSalesmanProblem() {}
+	TravelingSalesmanProblem() {
+	}
 
 	TravelingSalesmanProblem(const std::string& fileInstance) {
 		Json::Value config = loadInstance(fileInstance);
 		loadJson(config);
 	}
 
-	virtual ~TravelingSalesmanProblem() {}
+	virtual ~TravelingSalesmanProblem() {
+	}
 
 	void loadJson(const Json::Value& config) {
 		instance_number = config["problem"]["instance_number"].asString();
@@ -85,7 +87,9 @@ class TravelingSalesmanProblem : public Problem<SOL_STP, TYPE_FITNESS_STP, TYPE_
 		return solution_selection(s_worst, s_best);
 	}
 
-	unsigned int solutionSelection(const Population<SOL_STP>& p) { return solution_selection(p); }
+	unsigned int solutionSelection(const Population<SOL_STP>& p) {
+		return solution_selection(p);
+	}
 
   private:
 	double distance_euclidienne(const std::pair<double, double>& node_a,

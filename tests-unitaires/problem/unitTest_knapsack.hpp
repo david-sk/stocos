@@ -23,8 +23,10 @@ class UnitTest_knapsack : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE_END();
 
   public:
-	void setUp(void) {}
-	void tearDown(void) {}
+	void setUp(void) {
+	}
+	void tearDown(void) {
+	}
 
 	void loadInstance(void) {
 		Knapsack eknapsack("instances/knapsackProblem/knapsackProblem-5-1.json");

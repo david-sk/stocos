@@ -26,9 +26,13 @@ using TYPE_CELL_SUBSETSUM = bool;
 using SOL_SUBSETSUM = SolutionArray<TYPE_FITNESS_SUBSETSUM, TYPE_CELL_SUBSETSUM>;
 class Subsetsum : public Problem<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CELL_SUBSETSUM> {
   public:
-	Subsetsum() { generateInstance(1); }
+	Subsetsum() {
+		generateInstance(1);
+	}
 
-	Subsetsum(const unsigned int N) { generateInstance(N); }
+	Subsetsum(const unsigned int N) {
+		generateInstance(N);
+	}
 
 	Subsetsum(const std::string& fileInstance) {
 		Json::Value config = loadInstance(fileInstance);
@@ -43,7 +47,8 @@ class Subsetsum : public Problem<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CEL
 		}
 	};
 
-	virtual ~Subsetsum() {}
+	virtual ~Subsetsum() {
+	}
 
 	void loadJson(const Json::Value& config) {
 		std::string encoding = config.get("encoding", "UTF-8").asString();

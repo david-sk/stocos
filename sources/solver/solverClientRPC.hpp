@@ -68,7 +68,8 @@ class SolverClientRPC : public Solver {
 		solution_t0 = std::make_unique<SOL>();
 		solution_t1 = std::make_unique<SOL>();
 	}
-	virtual ~SolverClientRPC() {}
+	virtual ~SolverClientRPC() {
+	}
 
 	std::string jsonAsString(const Json::Value& json) {
 		Json::StreamWriterBuilder builder;

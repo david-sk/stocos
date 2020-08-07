@@ -20,11 +20,15 @@
 
 namespace stocos {
 
-template<class SOL> class SensorStopwatch : public Sensor<SOL> {
+template<class SOL>
+class SensorStopwatch : public Sensor<SOL> {
   public:
-	SensorStopwatch() : Sensor<SOL>() { start(); }
+	SensorStopwatch() : Sensor<SOL>() {
+		start();
+	}
 
-	virtual ~SensorStopwatch() {}
+	virtual ~SensorStopwatch() {
+	}
 
 	void start() {
 		_start_minutes = std::chrono::duration_cast<std::chrono::minutes>(
@@ -50,7 +54,9 @@ template<class SOL> class SensorStopwatch : public Sensor<SOL> {
 		return m.count();
 	}
 
-	void apply(const SOL& s) { stop(); }
+	void apply(const SOL& s) {
+		stop();
+	}
 
 	Json::Value asJson() const {
 		std::chrono::microseconds microseconds =
@@ -68,7 +74,9 @@ template<class SOL> class SensorStopwatch : public Sensor<SOL> {
 		return Json::Value();
 	}
 
-	std::string name() const { return std::string("time_μs"); }
+	std::string name() const {
+		return std::string("time_μs");
+	}
 
   protected:
 	std::chrono::microseconds _start_microseconds;

@@ -17,13 +17,16 @@
 
 namespace stocos {
 
-template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL> class AtomicOperation {
+template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
+class AtomicOperation {
   public:
 	AtomicOperation(std::mt19937& mt_rand,
 					std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem)
-		: _mt_rand(mt_rand), _problem(problem) {}
+		: _mt_rand(mt_rand), _problem(problem) {
+	}
 
-	virtual ~AtomicOperation() {}
+	virtual ~AtomicOperation() {
+	}
 
 	virtual void operator()(SOL& s) = 0;
 	virtual std::unique_ptr<std::vector<std::pair<unsigned int, TYPE_CELL>>>

@@ -22,9 +22,11 @@ using SOL_MAGICSEQUENCE = SolutionArray<TYPE_FITNESS_MAGICSEQUENCE, TYPE_CELL_MA
 class MagicSequence
 	: public Problem<SOL_MAGICSEQUENCE, TYPE_FITNESS_MAGICSEQUENCE, TYPE_CELL_MAGICSEQUENCE> {
   public:
-	MagicSequence() {}
+	MagicSequence() {
+	}
 
-	void loadJson(const Json::Value& config) {}
+	void loadJson(const Json::Value& config) {
+	}
 
 	void evaluation(SOL_MAGICSEQUENCE& s) {
 		double resultat = 0;
@@ -44,7 +46,8 @@ class MagicSequence
 
 	}*/
 
-	void resetSolution(SOL_MAGICSEQUENCE& s) const {}
+	void resetSolution(SOL_MAGICSEQUENCE& s) const {
+	}
 
 	bool solutionSelection(const SOL_MAGICSEQUENCE& s_worst, const SOL_MAGICSEQUENCE& s_best) {
 		return solution_selection(s_worst, s_best);

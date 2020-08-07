@@ -25,11 +25,12 @@ class KBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
   public:
 	KBit(std::mt19937& mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
 		 unsigned int k)
-		: AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, problem), _k(k) {
-		N = 1;
-		rid = std::make_unique<std::uniform_int_distribution<unsigned int>>(0, 1);
+		: AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, problem),
+		rid(std::make_unique<std::uniform_int_distribution<unsigned int>>(0, 1)), _k(k), N(1) {
 	}
-	virtual ~KBit() {}
+	
+	virtual ~KBit() {
+	}
 
 	void operator()(SOL& s) {
 		backup.clear();
@@ -89,9 +90,9 @@ class KBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
 
   private:
 	std::unique_ptr<std::uniform_int_distribution<unsigned int>> rid;
-	std::vector<unsigned int> backup;
 	unsigned int _k;
 	unsigned int N;
+	std::vector<unsigned int> backup;
 };
 
 } // namespace stocos

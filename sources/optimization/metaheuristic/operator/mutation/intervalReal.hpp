@@ -32,19 +32,20 @@ class IntervalReal : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
 		mutation_rate = 0.5;
 		N = 0;
 	}
-	virtual ~IntervalReal() {}
+	virtual ~IntervalReal() {
+	}
 
 	void operator()(SOL& s) {
-		if (s.sizeArray() != N) {
-		    N = s.sizeArray();
-		    mutation_rate = static_cast<double>(_c) / static_cast<double>(N);
-		    backup.reserve(N);
+		if(s.sizeArray() != N) {
+			N = s.sizeArray();
+			mutation_rate = static_cast<double>(_c) / static_cast<double>(N);
+			backup.reserve(N);
 		}
 
-		for (unsigned int i = 0 ; i < s.sizeArray() ; i++) {
-		    if (urd_0_1->operator()(this->_mt_rand) < mutation_rate) {
-		        s(i, s(i) + urd->operator()(this->_mt_rand));
-		    }
+		for(unsigned int i = 0; i < s.sizeArray(); i++) {
+			if(urd_0_1->operator()(this->_mt_rand) < mutation_rate) {
+				s(i, s(i) + urd->operator()(this->_mt_rand));
+			}
 		}
 		//! use domain.hpp
 		// if (s.sizeArray() != N) {

@@ -45,7 +45,8 @@
 
 namespace stocos {
 
-template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL> class Factory {
+template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
+class Factory {
   public:
 	Factory(std::mt19937& mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
 			const Json::Value& configuration)
@@ -53,7 +54,8 @@ template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL> class Factory 
 		_statistic = statistic(configuration["Statistic"]);
 	}
 
-	virtual ~Factory() {}
+	virtual ~Factory() {
+	}
 
 	std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>
 		operator()(const Json::Value& configuration) {
@@ -158,7 +160,9 @@ template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL> class Factory 
 		}
 	}
 
-	std::shared_ptr<Statistic<SOL>> getStatistic() { return _statistic; }
+	std::shared_ptr<Statistic<SOL>> getStatistic() {
+		return _statistic;
+	}
 
 	std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>>
 		stoppingCriteria(const Json::Value& configuration) {

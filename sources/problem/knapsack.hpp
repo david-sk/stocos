@@ -28,14 +28,16 @@ using SOL_KNAPSACK = SolutionArray<TYPE_FITNESS_KNAPSACK, TYPE_CELL_KNAPSACK>;
 
 class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_KNAPSACK> {
   public:
-	Knapsack() {}
+	Knapsack() {
+	}
 
 	Knapsack(const std::string& fileInstance) {
 		Json::Value config = loadInstance(fileInstance);
 		loadJson(config);
 	}
 
-	~Knapsack() {}
+	~Knapsack() {
+	}
 
 	void loadJson(const Json::Value& config) {
 		instance_number = config["problem"]["instance_number"].asString();
@@ -78,7 +80,9 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
 		return std::move(s);
 	}
 
-	unsigned int sizeArraySolution() const { return nbItems; }
+	unsigned int sizeArraySolution() const {
+		return nbItems;
+	}
 
 	TYPE_FITNESS_KNAPSACK getFitnessObjectif(unsigned int numObjectif = 0) const {
 		assert(numObjectif = 0);

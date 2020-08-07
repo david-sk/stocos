@@ -26,12 +26,14 @@ class UnitTest_domain : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE_END();
 
   public:
-	void setUp(void) {}
-	void tearDown(void) {}
+	void setUp(void) {
+	}
+	void tearDown(void) {
+	}
 
 	// void constructor(void) {
-	// 	std::shared_ptr<std::unordered_set<double>> definition_dom = std::make_shared<std::unordered_set<double>>();
-	// 	definition_dom->insert(5.5);
+	// 	std::shared_ptr<std::unordered_set<double>> definition_dom =
+	// std::make_shared<std::unordered_set<double>>(); 	definition_dom->insert(5.5);
 	// 	definition_dom->insert(7.2);
 	// 	definition_dom->insert(9.2);
 

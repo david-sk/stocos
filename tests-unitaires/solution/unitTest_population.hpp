@@ -23,8 +23,10 @@ class UnitTest_population : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE_END();
 
   public:
-	void setUp(void) {}
-	void tearDown(void) {}
+	void setUp(void) {
+	}
+	void tearDown(void) {
+	}
 
 	void constructor(void) {
 		SolutionArray<double, bool> s(1, 22);

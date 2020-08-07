@@ -23,10 +23,13 @@ class UnitTest_magicSequence : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE_END();
 
   public:
-	void setUp(void) {}
-	void tearDown(void) {}
+	void setUp(void) {
+	}
+	void tearDown(void) {
+	}
 
-	void test_loadInstance(void) {}
+	void test_loadInstance(void) {
+	}
 
   private:
 };

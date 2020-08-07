@@ -41,7 +41,8 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
 			std::make_unique<std::uniform_int_distribution<unsigned int>>(0, _lambda - 1);
 	}
 
-	~EvolutionaryAlgorithm() {}
+	~EvolutionaryAlgorithm() {
+	}
 
 	std::unique_ptr<SOL> operator()(const SOL& s) {
 		solution_star = s;
@@ -114,7 +115,9 @@ class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TY
 			return _class_name;
 	}
 
-	void className(const std::string& class_name) { _class_name = class_name; }
+	void className(const std::string& class_name) {
+		_class_name = class_name;
+	}
 
   protected:
 	std::unique_ptr<std::uniform_int_distribution<unsigned int>> rid_parents;

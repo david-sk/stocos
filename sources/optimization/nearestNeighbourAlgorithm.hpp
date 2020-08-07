@@ -35,7 +35,8 @@ class NearestNeighbourAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS
 								 << " Creation NearestNeighbourAlgorithm";
 	}
 
-	~NearestNeighbourAlgorithm() {}
+	~NearestNeighbourAlgorithm() {
+	}
 
 	std::unique_ptr<SOL> operator()(const SOL& s) {
 		std::unique_ptr<SOL> solution_final = std::make_unique<SOL>(s);
@@ -91,7 +92,9 @@ class NearestNeighbourAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS
 			return _class_name;
 	}
 
-	void className(const std::string& class_name) { _class_name = class_name; }
+	void className(const std::string& class_name) {
+		_class_name = class_name;
+	}
 
   protected:
 	std::string _class_name;

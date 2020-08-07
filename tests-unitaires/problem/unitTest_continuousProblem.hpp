@@ -24,10 +24,13 @@ class UnitTest_ContinuousProblem : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE_END();
 
   public:
-	void setUp(void) {}
-	void tearDown(void) {}
+	void setUp(void) {
+	}
+	void tearDown(void) {
+	}
 
-	void evaluation(void) {}
+	void evaluation(void) {
+	}
 
 	void loadInstance(void) {
 		ContinuousProblem gProblem("instances/ContinuousProblem/test.json");

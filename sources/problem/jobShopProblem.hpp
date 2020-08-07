@@ -26,12 +26,13 @@ using SOL_JOBSHOPPROBLEM = SolutionArray<TYPE_FITNESS_JOBSHOPPROBLEM, TYPE_CELL_
 class JobShopProblem
 	: public Problem<SOL_JOBSHOPPROBLEM, TYPE_FITNESS_JOBSHOPPROBLEM, TYPE_CELL_JOBSHOPPROBLEM> {
   public:
-	JobShopProblem(const std::string &fileInstance) {
+	JobShopProblem(const std::string& fileInstance) {
 		Json::Value config = loadInstance(fileInstance);
 		loadJson(config);
 	}
 
-	~JobShopProblem() {}
+	~JobShopProblem() {
+	}
 
 	void loadJson(const Json::Value& config) {
 		// std::cout<<root<<std::endl;
@@ -59,13 +60,15 @@ class JobShopProblem
 		return instance;
 	}
 
-	void evaluation(SOL_JOBSHOPPROBLEM& s) {}
+	void evaluation(SOL_JOBSHOPPROBLEM& s) {
+	}
 
 	/*void incremental(SolutionArray const &s, unsigned int mutatedCell) const {
 
 	}*/
 
-	void resetSolution(SOL_JOBSHOPPROBLEM& s) const {}
+	void resetSolution(SOL_JOBSHOPPROBLEM& s) const {
+	}
 
   private:
 	std::vector<std::vector<std::pair<unsigned int, unsigned int>>> instance;

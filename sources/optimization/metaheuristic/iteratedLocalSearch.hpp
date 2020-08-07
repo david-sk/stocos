@@ -41,7 +41,8 @@ class IteratedLocalSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE
 		_exploitation->className("ILS>" + _exploitation->className());
 	}
 
-	~IteratedLocalSearch() {}
+	~IteratedLocalSearch() {
+	}
 
 	std::unique_ptr<SOL> operator()(const SOL& s) {
 		solution_star = s;
@@ -71,7 +72,9 @@ class IteratedLocalSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE
 			return _class_name;
 	}
 
-	void className(const std::string& class_name) { _class_name = class_name; }
+	void className(const std::string& class_name) {
+		_class_name = class_name;
+	}
 
   protected:
 	std::string _class_name;

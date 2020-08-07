@@ -22,9 +22,11 @@ class Neighborhood : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
   public:
 	Neighborhood(std::mt19937& mt_rand,
 				 std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem)
-		: AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, problem) {}
+		: AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, problem) {
+	}
 
-	virtual ~Neighborhood() {}
+	virtual ~Neighborhood() {
+	}
 
 	virtual void operator()(SOL& s) {
 		std::cerr << "Not implemented" << std::endl;

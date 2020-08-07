@@ -30,16 +30,19 @@ using SOL_LATINSQUARE = SolutionArray<TYPE_FITNESS_LATINSQUARE, TYPE_CELL_LATINS
 class LatinSquare
 	: public Problem<SOL_LATINSQUARE, TYPE_FITNESS_LATINSQUARE, TYPE_CELL_LATINSQUARE> {
   public:
-	LatinSquare() : _N(1) {}
+	LatinSquare() : _N(1) {
+	}
 
 	LatinSquare(const std::string& fileInstance) {
 		Json::Value config = loadInstance(fileInstance);
 		loadJson(config);
 	}
 
-	LatinSquare(unsigned int N) : _N(N) {}
+	LatinSquare(unsigned int N) : _N(N) {
+	}
 
-	~LatinSquare() {}
+	~LatinSquare() {
+	}
 
 	virtual void loadJson(const Json::Value& config) {
 		instance_number = config["problem"]["instance_number"].asString();
