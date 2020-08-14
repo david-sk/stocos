@@ -120,12 +120,7 @@ endif(NOT MongoDB_INCLUDE_DIR)
 ###############################################################################
 # Stocos
 ###############################################################################
-add_executable(${PROJECT_NAME} sources/main.cpp)
-file(GLOB_RECURSE ALL_SOURCE_FILES  sources/*.hpp)
-foreach(PATH_FILE  ${LIST_OF_FILES})
-    target_precompile_headers(${PROJECT_NAME} PRIVATE ${PATH_FILE})
-endforeach()
-
+add_executable(${PROJECT_NAME} include/main.cpp)
 target_include_directories(${PROJECT_NAME} PRIVATE 
     modules/
     ${CMAKE_CURRENT_BINARY_DIR}/deps/install/include/
@@ -160,8 +155,8 @@ link_libraries(${CPPUNIT_LIBRARIES})
 add_custom_target(unit-test COMMAND ${PROJECT_NAME}-unittest DEPENDS ${PROJECT_NAME}-unittest)
 add_executable(${PROJECT_NAME}-unittest tests-unitaires/unitTest.cpp)
 target_include_directories(${PROJECT_NAME}-unittest PRIVATE 
-    modules/
-    sources/)
+    "modules/"
+    "include/")
 target_link_libraries(${PROJECT_NAME}-unittest LINK_PRIVATE
     ${Boost_LIBRARIES}
     ${JSONCPP_LIBRARIES}
