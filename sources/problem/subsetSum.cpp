@@ -29,7 +29,7 @@ void Subsetsum::generateInstance(const unsigned int N) {
 		setOfNumbers.push_back(i % 50);
 		if(i % 3) fitnessObjectif += i;
 	}
-};
+}
 
 Subsetsum::~Subsetsum() {
 }
