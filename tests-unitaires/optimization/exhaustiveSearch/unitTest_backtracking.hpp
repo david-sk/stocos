@@ -14,10 +14,10 @@
 
 using namespace CppUnit;
 
-#include "optimization/exhaustiveSearch/backtracking.hpp"
-#include "problem/oneMax.hpp"
-#include "problem/problem.hpp"
-#include "solution/solution.hpp"
+#include "optimization/exhaustiveSearch/backtracking.h"
+#include "problem/oneMax.h"
+#include "problem/problem.h"
+#include "solution/solution.h"
 
 using namespace stocos;
 

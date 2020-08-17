@@ -10,8 +10,8 @@
 #ifndef UNITTEST_CRITERIABUDGET_H
 #define UNITTEST_CRITERIABUDGET_H
 
-#include "solution/solution.hpp"
-#include "stoppingCriteria/criteriaBudget.hpp"
+#include "solution/solution.h"
+#include "stoppingCriteria/criteriaBudget.h"
 
 using namespace CppUnit;
 using namespace stocos;

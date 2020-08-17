@@ -10,9 +10,9 @@
 #ifndef UNITTEST_POPULATION_H
 #define UNITTEST_POPULATION_H
 
-#include "solution/population.hpp"
-#include "solution/solution.hpp"
-#include "solution/solutionArray.hpp"
+#include "solution/population.h"
+#include "solution/solution.h"
+#include "solution/solutionArray.h"
 
 using namespace CppUnit;
 using namespace stocos;

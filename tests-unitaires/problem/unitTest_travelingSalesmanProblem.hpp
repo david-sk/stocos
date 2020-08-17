@@ -10,7 +10,7 @@
 #ifndef UNITTEST_EVALTRAVELINGSALESMANPROBLEM__H
 #define UNITTEST_EVALTRAVELINGSALESMANPROBLEM__H
 
-#include "problem/travelingSalesmanProblem.hpp"
+#include "problem/travelingSalesmanProblem.h"
 #include <fstream> // ifstream
 #include <string>
 

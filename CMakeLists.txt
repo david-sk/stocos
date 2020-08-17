@@ -123,6 +123,7 @@ endif(NOT MongoDB_INCLUDE_DIR)
 add_executable(${PROJECT_NAME} include/main.cpp)
 target_include_directories(${PROJECT_NAME} PRIVATE 
     modules/
+    "include/"
     ${CMAKE_CURRENT_BINARY_DIR}/deps/install/include/
 )
 
@@ -154,6 +155,19 @@ link_libraries(${CPPUNIT_LIBRARIES})
 ###############################################################################
 add_custom_target(unit-test COMMAND ${PROJECT_NAME}-unittest DEPENDS ${PROJECT_NAME}-unittest)
 add_executable(${PROJECT_NAME}-unittest tests-unitaires/unitTest.cpp)
+
+file(GLOB_RECURSE ALL_SOURCE_FILES sources/*.cpp)
+foreach (SOURCE_FILE ${ALL_SOURCE_FILES})
+    get_filename_component(NAME_FILE ${SOURCE_FILE} NAME_WE)
+    if (NOT "main" MATCHES  ${NAME_FILE} )
+    add_library(${NAME_FILE} STATIC ${SOURCE_FILE})
+    target_include_directories(${NAME_FILE} PRIVATE 
+    "modules/"
+    "include/")
+    message(${NAME_FILE})
+    endif()
+endforeach ()
+
 target_include_directories(${PROJECT_NAME}-unittest PRIVATE 
     "modules/"
     "include/")

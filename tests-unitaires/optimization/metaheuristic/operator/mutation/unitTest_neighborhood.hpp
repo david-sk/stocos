@@ -12,10 +12,10 @@
 
 #include <memory> // std::shared_ptr std::unique_ptr
 
-#include "optimization/metaheuristic/operator/atomicOperation.hpp"
-#include "optimization/metaheuristic/operator/mutation/neighborhood.hpp"
-#include "problem/oneMax.hpp"
-#include "solution/solutionArray.hpp"
+#include "optimization/metaheuristic/operator/atomicOperation.h"
+#include "optimization/metaheuristic/operator/mutation/neighborhood.h"
+#include "problem/oneMax.h"
+#include "solution/solutionArray.h"
 
 using namespace CppUnit;
 
