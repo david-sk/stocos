@@ -142,4 +142,11 @@ Json::Value SolutionArray<TYPE_FITNESS,TYPE_CELL>::asJson() const {
 	return jsonValue;
 }
 
+template class SolutionArray<double, double>;
+template class SolutionArray<double, bool>;
+template class SolutionArray<int, bool>;
+template class SolutionArray<unsigned int, bool>;
+template class SolutionArray<double, unsigned int>;
+template class SolutionArray<unsigned int, unsigned int>;
+
 } // namespace stocos

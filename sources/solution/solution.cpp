@@ -147,4 +147,7 @@ Json::Value Solution<TYPE_FITNESS>::asJson() const {
 	return jsonValue;
 }
 
+template class Solution<double>;
+template class Solution<int>;
+template class Solution<unsigned int>;
 } // namespace stocos

@@ -83,9 +83,6 @@ bool Problem<SOL,TYPE_FITNESS,TYPE_CELL>::checkSolutionStructure(const SOL& s) c
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-void Problem<SOL,TYPE_FITNESS,TYPE_CELL>::evaluation(SOL& s) = 0;
-
-template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 void Problem<SOL,TYPE_FITNESS,TYPE_CELL>::evaluationIncremental(
 	const SOL& s,
 	const std::vector<std::pair<unsigned int, TYPE_CELL>>& _listOfMutations) const {
@@ -119,4 +116,10 @@ unsigned int Problem<SOL,TYPE_FITNESS,TYPE_CELL>::solutionSelection(const Popula
 								"[-] Not implemented : solutionSelection(...)");
 }
 
+template class Problem<SolutionArray<double, double>, double, double>;
+template class Problem<SolutionArray<double, bool>, double, bool>;
+template class Problem<SolutionArray<int, bool>, int, bool>;
+template class Problem<SolutionArray<unsigned int, bool>, unsigned int, bool>;
+template class Problem<SolutionArray<double, unsigned int>, double, unsigned int>;
+template class Problem<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
 } // namespace stocos

@@ -162,4 +162,12 @@ void Statistic<SOL>::addSensor(Sensor<SOL>* s) {
 	this->push_back(s);
 }
 
+template class Statistic<Solution<int>>;
+template class Statistic<SolutionArray<double, double>>;
+template class Statistic<SolutionArray<double, bool>>;
+template class Statistic<SolutionArray<int, bool>>;
+template class Statistic<SolutionArray<unsigned int, bool>>;
+template class Statistic<SolutionArray<double, unsigned int>>;
+template class Statistic<SolutionArray<unsigned int, unsigned int>>;
+
 } // namespace stocos

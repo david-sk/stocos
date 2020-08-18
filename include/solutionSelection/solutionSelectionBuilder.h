@@ -18,6 +18,8 @@
 #include "minimization.h"
 #include "selection_difference.h"
 #include "solutionSelection.h"
+#include "../solution/solutionArray.h"
+
 
 namespace stocos {
 

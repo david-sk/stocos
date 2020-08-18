@@ -18,6 +18,7 @@
 #include <mongo/client/dbclient.h>
 
 #include "sensor.h"
+#include "../solution/solutionArray.h"
 
 namespace stocos {
 

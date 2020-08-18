@@ -30,4 +30,11 @@ std::unique_ptr<SolutionSelection<SOL>>
 	return std::move(_selection);
 }
 
+template class SolutionSelectionBuilder<SolutionArray<double, double>, double, double>;
+template class SolutionSelectionBuilder<SolutionArray<double, bool>, double, bool>;
+template class SolutionSelectionBuilder<SolutionArray<int, bool>, int, bool>;
+template class SolutionSelectionBuilder<SolutionArray<unsigned int, bool>, unsigned int, bool>;
+template class SolutionSelectionBuilder<SolutionArray<double, unsigned int>, double, unsigned int>;
+template class SolutionSelectionBuilder<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
+
 } // namespace stocos

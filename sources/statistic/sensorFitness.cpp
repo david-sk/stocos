@@ -34,4 +34,12 @@ std::string SensorFitness<SOL>::name() const {
 	return std::string("Fitness");
 }
 
+template class SensorFitness<Solution<int>>;
+template class SensorFitness<SolutionArray<double, double>>;
+template class SensorFitness<SolutionArray<double, bool>>;
+template class SensorFitness<SolutionArray<int, bool>>;
+template class SensorFitness<SolutionArray<unsigned int, bool>>;
+template class SensorFitness<SolutionArray<double, unsigned int>>;
+template class SensorFitness<SolutionArray<unsigned int, unsigned int>>;
+
 } // namespace stocos

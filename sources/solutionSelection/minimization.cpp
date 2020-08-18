@@ -52,4 +52,12 @@ unsigned int Minimization<SOL>::operator()(const Population<SOL>& p) const {
 	return index;
 }
 
+template class Minimization<Solution<int>>;
+template class Minimization<SolutionArray<double, double>>;
+template class Minimization<SolutionArray<double, bool>>;
+template class Minimization<SolutionArray<int, bool>>;
+template class Minimization<SolutionArray<unsigned int, bool>>;
+template class Minimization<SolutionArray<double, unsigned int>>;
+template class Minimization<SolutionArray<unsigned int, unsigned int>>;
+
 } // namespace stocos

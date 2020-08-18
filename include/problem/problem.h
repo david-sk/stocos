@@ -22,6 +22,7 @@
 
 #include "../solution/population.h"
 #include "../solution/solution.h"
+#include "../solution/solutionArray.h"
 
 namespace stocos {
 
@@ -75,7 +76,7 @@ class Problem {
 	/// @param s solution with the update fitness
 	///
 	virtual void evaluation(SOL& s) = 0;
-
+	
 	///
 	/// @brief Evaluation incremetal of the solution
 	///

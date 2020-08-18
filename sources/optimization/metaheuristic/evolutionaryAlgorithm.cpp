@@ -107,4 +107,11 @@ template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 void EvolutionaryAlgorithm<SOL,TYPE_FITNESS,TYPE_CELL>::className(const std::string& class_name) {
 	_class_name = class_name;
 }
+
+template class EvolutionaryAlgorithm<SolutionArray<double, double>, double, double>;
+template class EvolutionaryAlgorithm<SolutionArray<double, bool>, double, bool>;
+template class EvolutionaryAlgorithm<SolutionArray<int, bool>, int, bool>;
+template class EvolutionaryAlgorithm<SolutionArray<unsigned int, bool>, unsigned int, bool>;
+template class EvolutionaryAlgorithm<SolutionArray<double, unsigned int>, double, unsigned int>;
+template class EvolutionaryAlgorithm<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
 } // namespace stocos

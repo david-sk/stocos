@@ -59,4 +59,10 @@ void FirstImprovement<SOL,TYPE_FITNESS,TYPE_CELL>::className(const std::string& 
 	_class_name = class_name;
 }
 
+template class FirstImprovement<SolutionArray<double, double>, double, double>;
+template class FirstImprovement<SolutionArray<double, bool>, double, bool>;
+template class FirstImprovement<SolutionArray<int, bool>, int, bool>;
+template class FirstImprovement<SolutionArray<unsigned int, bool>, unsigned int, bool>;
+template class FirstImprovement<SolutionArray<double, unsigned int>, double, unsigned int>;
+template class FirstImprovement<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
 } // namespace stocos

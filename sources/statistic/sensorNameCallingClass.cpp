@@ -37,4 +37,12 @@ std::string SensorNameCallingClass<SOL>::name() const {
 	return std::string("nameCallingClass");
 }
 
+template class SensorNameCallingClass<Solution<int>>;
+template class SensorNameCallingClass<SolutionArray<double, double>>;
+template class SensorNameCallingClass<SolutionArray<double, bool>>;
+template class SensorNameCallingClass<SolutionArray<int, bool>>;
+template class SensorNameCallingClass<SolutionArray<unsigned int, bool>>;
+template class SensorNameCallingClass<SolutionArray<double, unsigned int>>;
+template class SensorNameCallingClass<SolutionArray<unsigned int, unsigned int>>;
+
 } // namespace stocos

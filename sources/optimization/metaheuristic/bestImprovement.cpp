@@ -83,4 +83,11 @@ template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 void BestImprovement<SOL,TYPE_FITNESS,TYPE_CELL>::className(const std::string& class_name) {
 	_class_name = class_name;
 }
+
+template class BestImprovement<SolutionArray<double, double>, double, double>;
+template class BestImprovement<SolutionArray<double, bool>, double, bool>;
+template class BestImprovement<SolutionArray<int, bool>, int, bool>;
+template class BestImprovement<SolutionArray<unsigned int, bool>, unsigned int, bool>;
+template class BestImprovement<SolutionArray<double, unsigned int>, double, unsigned int>;
+template class BestImprovement<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
 } // namespace stocos

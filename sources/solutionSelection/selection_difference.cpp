@@ -31,4 +31,12 @@ template<class SOL>
 unsigned int Selection_difference<SOL>::operator()(const Population<SOL>& p) const {
 	return 0;
 }
+
+template class Selection_difference<Solution<int>>;
+template class Selection_difference<SolutionArray<double, double>>;
+template class Selection_difference<SolutionArray<double, bool>>;
+template class Selection_difference<SolutionArray<int, bool>>;
+template class Selection_difference<SolutionArray<unsigned int, bool>>;
+template class Selection_difference<SolutionArray<double, unsigned int>>;
+template class Selection_difference<SolutionArray<unsigned int, unsigned int>>;
 } // namespace stocos

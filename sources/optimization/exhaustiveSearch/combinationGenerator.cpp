@@ -115,4 +115,10 @@ void CombinationGenerator<SOL, TYPE_FITNESS, TYPE_CELL>::className(const std::st
 	_class_name = class_name;
 }
 
+template class CombinationGenerator<SolutionArray<double, double>, double, double>;
+template class CombinationGenerator<SolutionArray<double, bool>, double, bool>;
+template class CombinationGenerator<SolutionArray<int, bool>, int, bool>;
+template class CombinationGenerator<SolutionArray<unsigned int, bool>, unsigned int, bool>;
+template class CombinationGenerator<SolutionArray<double, unsigned int>, double, unsigned int>;
+template class CombinationGenerator<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
 } // namespace stocos

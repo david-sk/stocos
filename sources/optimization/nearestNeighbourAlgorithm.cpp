@@ -87,5 +87,10 @@ template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 void NearestNeighbourAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>::className(const std::string& class_name) {
 	_class_name = class_name;
 }
-
+template class NearestNeighbourAlgorithm<SolutionArray<double, double>, double, double>;
+template class NearestNeighbourAlgorithm<SolutionArray<double, bool>, double, bool>;
+template class NearestNeighbourAlgorithm<SolutionArray<int, bool>, int, bool>;
+template class NearestNeighbourAlgorithm<SolutionArray<unsigned int, bool>, unsigned int, bool>;
+template class NearestNeighbourAlgorithm<SolutionArray<double, unsigned int>, double, unsigned int>;
+template class NearestNeighbourAlgorithm<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
 } // namespace stocos

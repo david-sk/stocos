@@ -82,4 +82,10 @@ void FlipBit<SOL,TYPE_FITNESS,TYPE_CELL>::applyOperator(SOL& s,
 	}
 }
 
+template class FlipBit<SolutionArray<double, double>, double, double>;
+template class FlipBit<SolutionArray<double, bool>, double, bool>;
+template class FlipBit<SolutionArray<int, bool>, int, bool>;
+template class FlipBit<SolutionArray<unsigned int, bool>, unsigned int, bool>;
+template class FlipBit<SolutionArray<double, unsigned int>, double, unsigned int>;
+template class FlipBit<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
 } // namespace stocos

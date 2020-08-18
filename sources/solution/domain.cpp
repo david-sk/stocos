@@ -17,7 +17,7 @@ namespace stocos {
 template<typename TYPE_CELL>
 Domain<TYPE_CELL>::Domain(std::map<unsigned int, std::shared_ptr<std::unordered_set<TYPE_CELL>>> exhaustive_list,
 		std::shared_ptr<std::unordered_set<TYPE_CELL>> dom)
-	: dom_each_cell(exhaustive_list), _dom(dom) {
+	: _dom(dom), dom_each_cell(exhaustive_list) {
 }
 
 ///
@@ -111,7 +111,7 @@ void Domain<TYPE_CELL>::show() const {
 	for(typename std::map<unsigned int,
 							std::shared_ptr<std::unordered_set<TYPE_CELL>>>::const_iterator it =
 			dom_each_cell.begin();
-		it != dom_each_cell.end(); + +it) {
+		it != dom_each_cell.end(); ++it) {
 		std::cout << it->first << " =>";
 		for(typename std::unordered_set<TYPE_CELL>::const_iterator it2 = it->second->begin();
 			it2 != it->second->end(); ++it2) {
@@ -132,5 +132,10 @@ void Domain<TYPE_CELL>::loadJson(const Json::Value& jsonValue) {
 		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) +
 									" [-] option does not exist.");
 }
+
+template class Domain<int>;
+template class Domain<double>;
+template class Domain<bool>;
+template class Domain<unsigned int>;
 
 } // namespace stocos

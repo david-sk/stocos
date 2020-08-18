@@ -8,7 +8,6 @@
 ///
 
 #include <stoppingCriteria/criteriaBudget.h>
-
 namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS>
@@ -39,5 +38,13 @@ template<typename SOL, typename TYPE_FITNESS>
 void CriteriaBudget<SOL, TYPE_FITNESS>::reset() {
 	consumedBudget = 0;
 }
+
+template class CriteriaBudget<Solution<int>, unsigned int>;
+template class CriteriaBudget<SolutionArray<double, double>, double>;
+template class CriteriaBudget<SolutionArray<double, bool>, double>;
+template class CriteriaBudget<SolutionArray<int, bool>, int>;
+template class CriteriaBudget<SolutionArray<unsigned int, bool>, unsigned int>;
+template class CriteriaBudget<SolutionArray<double, unsigned int>, double>;
+template class CriteriaBudget<SolutionArray<unsigned int, unsigned int>, unsigned int>;
 
 } // namespace stocos

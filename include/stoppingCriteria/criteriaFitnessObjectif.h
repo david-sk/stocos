@@ -13,6 +13,7 @@
 #include <cassert>
 
 #include "criteria.h"
+#include "../solution/solutionArray.h"
 
 namespace stocos {
 

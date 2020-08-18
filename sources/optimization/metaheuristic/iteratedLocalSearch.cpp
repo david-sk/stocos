@@ -69,4 +69,10 @@ void IteratedLocalSearch<SOL,TYPE_FITNESS,TYPE_CELL>::className(const std::strin
 	_class_name = class_name;
 }
 
+template class IteratedLocalSearch<SolutionArray<double, double>, double, double>;
+template class IteratedLocalSearch<SolutionArray<double, bool>, double, bool>;
+template class IteratedLocalSearch<SolutionArray<int, bool>, int, bool>;
+template class IteratedLocalSearch<SolutionArray<unsigned int, bool>, unsigned int, bool>;
+template class IteratedLocalSearch<SolutionArray<double, unsigned int>, double, unsigned int>;
+template class IteratedLocalSearch<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
 } // namespace stocos

@@ -12,7 +12,11 @@
 
 #include <memory> // std::shared_ptr std::unique_ptr
 #include <random>
+#include <list>
+#include <utility>
+#include <vector>
 
+#include "../../../../solution/solutionArray.h"
 #include "../atomicOperation.h"
 
 namespace stocos {

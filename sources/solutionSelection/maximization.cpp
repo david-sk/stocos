@@ -52,4 +52,11 @@ unsigned int Maximization<SOL>::operator()(const Population<SOL>& p) const {
 	return index;
 }
 
+template class Maximization<Solution<int>>;
+template class Maximization<SolutionArray<double, double>>;
+template class Maximization<SolutionArray<double, bool>>;
+template class Maximization<SolutionArray<int, bool>>;
+template class Maximization<SolutionArray<unsigned int, bool>>;
+template class Maximization<SolutionArray<double, unsigned int>>;
+template class Maximization<SolutionArray<unsigned int, unsigned int>>;
 } // namespace stocos

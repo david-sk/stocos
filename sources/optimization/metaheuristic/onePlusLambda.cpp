@@ -64,4 +64,10 @@ void OnePlusLambda<SOL,TYPE_FITNESS,TYPE_CELL>::className(const std::string& cla
 	_class_name = class_name;
 }
 
+template class OnePlusLambda<SolutionArray<double, double>, double, double>;
+template class OnePlusLambda<SolutionArray<double, bool>, double, bool>;
+template class OnePlusLambda<SolutionArray<int, bool>, int, bool>;
+template class OnePlusLambda<SolutionArray<unsigned int, bool>, unsigned int, bool>;
+template class OnePlusLambda<SolutionArray<double, unsigned int>, double, unsigned int>;
+template class OnePlusLambda<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
 } // namespace stocos

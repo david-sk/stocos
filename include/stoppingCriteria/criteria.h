@@ -10,6 +10,8 @@
 #ifndef CRITERIA_H
 #define CRITERIA_H
 
+#include "../solution/solutionArray.h"
+
 namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS>

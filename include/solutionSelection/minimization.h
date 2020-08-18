@@ -11,6 +11,8 @@
 #define MINIMIZATION_H
 
 #include "solutionSelection.h"
+#include "../solution/solutionArray.h"
+
 
 namespace stocos {
 

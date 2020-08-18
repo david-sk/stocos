@@ -8,6 +8,7 @@
 ///
 #include <stoppingCriteria/stoppingCriteria.h>
 
+
 namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS>
@@ -35,5 +36,13 @@ template<typename SOL, typename TYPE_FITNESS>
 void StoppingCriteria<SOL, TYPE_FITNESS>::reset() {
 	for(auto criteria : *this) this->reset();
 }
+
+template class StoppingCriteria<Solution<int>, unsigned int>;
+template class StoppingCriteria<SolutionArray<double, double>, double>;
+template class StoppingCriteria<SolutionArray<double, bool>, double>;
+template class StoppingCriteria<SolutionArray<int, bool>, int>;
+template class StoppingCriteria<SolutionArray<unsigned int, bool>, unsigned int>;
+template class StoppingCriteria<SolutionArray<double, unsigned int>, double>;
+template class StoppingCriteria<SolutionArray<unsigned int, unsigned int>, unsigned int>;
 
 }

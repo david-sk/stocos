@@ -75,4 +75,12 @@ std::string SensorStopwatch<SOL>::name() const {
 	return std::string("time_μs");
 }
 
+template class SensorStopwatch<Solution<int>>;
+template class SensorStopwatch<SolutionArray<double, double>>;
+template class SensorStopwatch<SolutionArray<double, bool>>;
+template class SensorStopwatch<SolutionArray<int, bool>>;
+template class SensorStopwatch<SolutionArray<unsigned int, bool>>;
+template class SensorStopwatch<SolutionArray<double, unsigned int>>;
+template class SensorStopwatch<SolutionArray<unsigned int, unsigned int>>;
+
 } // namespace stocos

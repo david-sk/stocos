@@ -11,6 +11,8 @@
 #define MAXIMIZATION_H
 
 #include "solutionSelection.h"
+#include "../solution/solutionArray.h"
+
 
 namespace stocos {
 

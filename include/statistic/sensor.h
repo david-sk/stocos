@@ -12,6 +12,8 @@
 
 #include <jsoncpp/json/json.h>
 
+#include "../solution/solutionArray.h"
+
 namespace stocos {
 
 template<class SOL>
