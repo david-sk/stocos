@@ -13,8 +13,8 @@ namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 std::unique_ptr<SolutionSelection<SOL>>
-	SolutionSelectionBuilder<SOL,TYPE_FITNESS,TYPE_CELL>::build(const Problem<SOL, TYPE_FITNESS, TYPE_CELL>& problem,
-			const Json::Value& configuration) {
+	SolutionSelectionBuilder<SOL, TYPE_FITNESS, TYPE_CELL>::build(
+		const Problem<SOL, TYPE_FITNESS, TYPE_CELL>& problem, const Json::Value& configuration) {
 	std::unique_ptr<SolutionSelection<SOL>> _selection = nullptr;
 	if(configuration.asString() == SolutionSelection<SOL>::MAXIMIZATION) {
 		_selection = std::make_unique<Maximization<SOL>>();
@@ -25,7 +25,7 @@ std::unique_ptr<SolutionSelection<SOL>>
 		// std::make_unique<Selection_difference<SOL>>(_problem->getFitnessObjectif());
 	} else {
 		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) +
-									" The SolutionSelection does not exist.");
+								 " The SolutionSelection does not exist.");
 	}
 	return std::move(_selection);
 }
@@ -35,6 +35,7 @@ template class SolutionSelectionBuilder<SolutionArray<double, bool>, double, boo
 template class SolutionSelectionBuilder<SolutionArray<int, bool>, int, bool>;
 template class SolutionSelectionBuilder<SolutionArray<unsigned int, bool>, unsigned int, bool>;
 template class SolutionSelectionBuilder<SolutionArray<double, unsigned int>, double, unsigned int>;
-template class SolutionSelectionBuilder<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
+template class SolutionSelectionBuilder<SolutionArray<unsigned int, unsigned int>, unsigned int,
+										unsigned int>;
 
 } // namespace stocos

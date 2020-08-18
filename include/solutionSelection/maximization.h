@@ -10,9 +10,8 @@
 #ifndef MAXIMIZATION_H
 #define MAXIMIZATION_H
 
-#include "solutionSelection.h"
 #include "../solution/solutionArray.h"
-
+#include "solutionSelection.h"
 
 namespace stocos {
 

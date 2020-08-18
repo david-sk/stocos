@@ -20,8 +20,8 @@
 
 #include <jsoncpp/json/json.h>
 
-#include "problem/problem.h"
 #include "factory.hpp"
+#include "problem/problem.h"
 #include "solver.hpp"
 
 namespace stocos {

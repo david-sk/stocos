@@ -10,9 +10,9 @@
 
 namespace stocos {
 
-
 template<class SOL>
-SensorFinal<SOL>::SensorFinal(unsigned int num, const std::string &name) : Sensor<SOL>(), _num(num), _name(name) {
+SensorFinal<SOL>::SensorFinal(unsigned int num, const std::string& name)
+	: Sensor<SOL>(), _num(num), _name(name) {
 	stopwatch.start();
 }
 

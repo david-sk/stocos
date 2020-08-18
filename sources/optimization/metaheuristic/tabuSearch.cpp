@@ -12,24 +12,25 @@
 namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-TabuSearch<SOL,TYPE_FITNESS,TYPE_CELL>::TabuSearch(std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
-			std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
-			std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
-			std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations,
-			unsigned int sizeOfTabuList)
+TabuSearch<SOL, TYPE_FITNESS, TYPE_CELL>::TabuSearch(
+	std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
+	std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
+	std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
+	std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations,
+	unsigned int sizeOfTabuList)
 	: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic),
-															std::move(stoppingCriteria), problem),
-		_atomicOperations(std::move(atomicOperations)) {
+														  std::move(stoppingCriteria), problem),
+	  _atomicOperations(std::move(atomicOperations)) {
 	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation TabuSearch";
 	tabuList.set_capacity(sizeOfTabuList);
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-TabuSearch<SOL,TYPE_FITNESS,TYPE_CELL>::~TabuSearch() {
+TabuSearch<SOL, TYPE_FITNESS, TYPE_CELL>::~TabuSearch() {
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-std::unique_ptr<SOL> TabuSearch<SOL,TYPE_FITNESS,TYPE_CELL>::operator()(const SOL& s) {
+std::unique_ptr<SOL> TabuSearch<SOL, TYPE_FITNESS, TYPE_CELL>::operator()(const SOL& s) {
 	solution_star = s;
 	if(!solution_star.fitnessIsValid()) { this->_problem->evaluation(solution_star); }
 
@@ -61,7 +62,7 @@ std::unique_ptr<SOL> TabuSearch<SOL,TYPE_FITNESS,TYPE_CELL>::operator()(const SO
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-std::string TabuSearch<SOL,TYPE_FITNESS,TYPE_CELL>::className() const {
+std::string TabuSearch<SOL, TYPE_FITNESS, TYPE_CELL>::className() const {
 	if(_class_name.empty())
 		return "TabuSearch";
 	else
@@ -69,7 +70,7 @@ std::string TabuSearch<SOL,TYPE_FITNESS,TYPE_CELL>::className() const {
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-void TabuSearch<SOL,TYPE_FITNESS,TYPE_CELL>::className(const std::string& class_name) {
+void TabuSearch<SOL, TYPE_FITNESS, TYPE_CELL>::className(const std::string& class_name) {
 	_class_name = class_name;
 }
 

@@ -12,10 +12,9 @@
 
 #include <cmath>
 
-#include "solutionSelection.h"
 #include "../solution/population.h"
 #include "../solution/solutionArray.h"
-
+#include "solutionSelection.h"
 
 namespace stocos {
 
@@ -28,6 +27,7 @@ class Selection_difference : public SolutionSelection<SOL> {
 	bool operator()(const SOL& s1, const SOL& s2, const unsigned int numObjectif = 0) const;
 
 	unsigned int operator()(const Population<SOL>& p) const;
+
   private:
 	const double _fitnessObjectif;
 };

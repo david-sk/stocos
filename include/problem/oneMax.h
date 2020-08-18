@@ -34,7 +34,7 @@ class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>
 	OneMax(const std::string& fileInstance);
 
 	OneMax(unsigned int N);
-	
+
 	~OneMax();
 
 	virtual void loadJson(const Json::Value& config);

@@ -51,7 +51,7 @@ void ContinuousProblem::loadJson(const Json::Value& config) {
 		}
 		solution_selection.push_back(
 			SolutionSelectionBuilder<SOL_CONTINUOUSPROBLEM, TYPE_FITNESS_CONTINUOUSPROBLEM,
-										TYPE_CELL_CONTINUOUSPROBLEM>::
+									 TYPE_CELL_CONTINUOUSPROBLEM>::
 				build(*this, config["problem"]["objectif"][i]["solutionSelection"]));
 	}
 }
@@ -78,12 +78,12 @@ std::pair<TYPE_CELL_CONTINUOUSPROBLEM, TYPE_CELL_CONTINUOUSPROBLEM>
 
 	if(_domain == nullptr)
 		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) +
-									"[-] Not implemented : domain()");
+								 "[-] Not implemented : domain()");
 	return _domain[index];
 }
 
 bool ContinuousProblem::solutionSelection(const SOL_CONTINUOUSPROBLEM& s_worst,
-						const SOL_CONTINUOUSPROBLEM& s_best) {
+										  const SOL_CONTINUOUSPROBLEM& s_best) {
 	// ! Need to implement multi-objectif !
 	return solution_selection[0]->operator()(s_worst, s_best);
 }

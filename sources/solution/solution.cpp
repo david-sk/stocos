@@ -13,8 +13,7 @@ namespace stocos {
 
 template<typename TYPE_FITNESS>
 Solution<TYPE_FITNESS>::Solution(const Solution& s) : _number_of_objective(s._number_of_objective) {
-	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__
-								<< " Constructeur de copie Solution";
+	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Constructeur de copie Solution";
 	assert(0 < _number_of_objective);
 	_fitness = std::make_unique<TYPE_FITNESS[]>(_number_of_objective);
 	_fitness_is_valid = std::make_unique<bool[]>(_number_of_objective);
@@ -31,7 +30,8 @@ Solution<TYPE_FITNESS>::Solution() : _number_of_objective(1) {
 	for(unsigned int i = 0; i < _number_of_objective; i++) _fitness_is_valid[i] = false;
 }
 template<typename TYPE_FITNESS>
-Solution<TYPE_FITNESS>::Solution(const unsigned int number_of_objective) : _number_of_objective(number_of_objective) {
+Solution<TYPE_FITNESS>::Solution(const unsigned int number_of_objective)
+	: _number_of_objective(number_of_objective) {
 	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation Solution";
 	assert(0 < _number_of_objective);
 	_fitness = std::make_unique<TYPE_FITNESS[]>(_number_of_objective);
@@ -113,8 +113,8 @@ void Solution<TYPE_FITNESS>::loadJson(const std::string& strJson) {
 	Json::Reader reader;
 	bool parsingSuccessful = reader.parse(strJson.c_str(), root); // parse process
 	if(!parsingSuccessful)
-		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) +
-									" " + reader.getFormattedErrorMessages());
+		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " +
+								 reader.getFormattedErrorMessages());
 	loadJson(root);
 }
 template<typename TYPE_FITNESS>
@@ -125,12 +125,12 @@ void Solution<TYPE_FITNESS>::loadJson(const Json::Value& jsonValue) {
 			std::unique_ptr<TYPE_FITNESS[]>(new TYPE_FITNESS[this->_number_of_objective]);
 		this->_fitness_is_valid = std::unique_ptr<bool[]>(new bool[this->_number_of_objective]);
 	} else {
-		this->_fitness.reset(static_cast<TYPE_FITNESS*>(
-			realloc(static_cast<void*>(this->_fitness.release()),
-					this->_number_of_objective * sizeof(TYPE_FITNESS))));
+		this->_fitness.reset(
+			static_cast<TYPE_FITNESS*>(realloc(static_cast<void*>(this->_fitness.release()),
+											   this->_number_of_objective * sizeof(TYPE_FITNESS))));
 		this->_fitness_is_valid.reset(
 			static_cast<bool*>(realloc(static_cast<void*>(this->_fitness_is_valid.release()),
-										this->_number_of_objective * sizeof(bool))));
+									   this->_number_of_objective * sizeof(bool))));
 	}
 	for(unsigned int i = 0; i < jsonValue["fitness"].size(); i++) {
 		_fitness[i] = static_cast<TYPE_FITNESS>(jsonValue["fitness"][i].asDouble());

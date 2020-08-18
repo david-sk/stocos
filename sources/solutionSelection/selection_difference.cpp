@@ -11,8 +11,8 @@
 namespace stocos {
 
 template<class SOL>
-Selection_difference<SOL>::Selection_difference(const double fitnessObjectif) : 
-	_fitnessObjectif(fitnessObjectif) {
+Selection_difference<SOL>::Selection_difference(const double fitnessObjectif)
+	: _fitnessObjectif(fitnessObjectif) {
 }
 
 template<class SOL>
@@ -20,11 +20,12 @@ Selection_difference<SOL>::~Selection_difference() {
 }
 
 template<class SOL>
-bool Selection_difference<SOL>::operator()(const SOL& s1, const SOL& s2, const unsigned int numObjectif) const {
+bool Selection_difference<SOL>::operator()(const SOL& s1, const SOL& s2,
+										   const unsigned int numObjectif) const {
 	assert(s1.fitnessIsValid(numObjectif));
 	assert(s2.fitnessIsValid(numObjectif));
 	return abs(_fitnessObjectif - s1.getFitness(numObjectif)) <
-			abs(_fitnessObjectif - s2.getFitness(numObjectif));
+		   abs(_fitnessObjectif - s2.getFitness(numObjectif));
 }
 
 template<class SOL>

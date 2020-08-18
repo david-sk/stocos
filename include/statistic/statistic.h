@@ -17,8 +17,8 @@
 #include <jsoncpp/json/json.h>
 #include <mongo/client/dbclient.h>
 
-#include "sensor.h"
 #include "../solution/solutionArray.h"
+#include "sensor.h"
 
 namespace stocos {
 

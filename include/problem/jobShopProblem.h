@@ -53,6 +53,7 @@ class JobShopProblem
 	// void incremental(SolutionArray const &s, unsigned int mutatedCell) const;
 
 	void resetSolution(SOL_JOBSHOPPROBLEM& s) const;
+
   private:
 	std::vector<std::vector<std::pair<unsigned int, unsigned int>>> instance;
 };

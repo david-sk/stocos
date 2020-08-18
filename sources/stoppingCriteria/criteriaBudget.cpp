@@ -11,7 +11,8 @@
 namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS>
-CriteriaBudget<SOL, TYPE_FITNESS>::CriteriaBudget(unsigned int _budget) : Criteria<SOL, TYPE_FITNESS>(), budget(_budget) {
+CriteriaBudget<SOL, TYPE_FITNESS>::CriteriaBudget(unsigned int _budget)
+	: Criteria<SOL, TYPE_FITNESS>(), budget(_budget) {
 	consumedBudget = 0;
 }
 

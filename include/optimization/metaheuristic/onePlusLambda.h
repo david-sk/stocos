@@ -17,8 +17,8 @@
 #include "../../problem/problem.h"
 #include "../../statistic/statistic.h"
 #include "../../stoppingCriteria/stoppingCriteria.h"
-#include "operator/atomicOperation.h"
 #include "../optimizationAlgorithm.h"
+#include "operator/atomicOperation.h"
 
 namespace stocos {
 

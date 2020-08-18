@@ -40,6 +40,7 @@ class TabuSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
 	std::string className() const;
 
 	void className(const std::string& class_name);
+
   protected:
 	std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _atomicOperations;
 	std::string _class_name;

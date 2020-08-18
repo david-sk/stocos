@@ -11,7 +11,8 @@
 namespace stocos {
 
 template<class SOL>
-SensorExperience<SOL>::SensorExperience(unsigned int num, const std::string &name) : _num(num), _name(name) {
+SensorExperience<SOL>::SensorExperience(unsigned int num, const std::string& name)
+	: _num(num), _name(name) {
 }
 
 template<class SOL>

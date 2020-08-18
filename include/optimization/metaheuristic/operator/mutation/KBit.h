@@ -25,7 +25,7 @@ class KBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
   public:
 	KBit(std::mt19937& mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
 		 unsigned int k);
-	
+
 	virtual ~KBit();
 
 	void operator()(SOL& s);

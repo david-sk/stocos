@@ -7,29 +7,28 @@
 /// @brief
 ///
 
-#include<optimization/metaheuristic/bestImprovement.h>
+#include <optimization/metaheuristic/bestImprovement.h>
 
 namespace stocos {
 
-
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-BestImprovement<SOL,TYPE_FITNESS,TYPE_CELL>::BestImprovement(std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
-				std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
-				std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
-				std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations)
-	: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(
-			mt_rand, std::move(statistic), std::move(stoppingCriteria), problem) {
-	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__
-								<< " Creation of BestImprovement class";
+BestImprovement<SOL, TYPE_FITNESS, TYPE_CELL>::BestImprovement(
+	std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
+	std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
+	std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
+	std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations)
+	: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic),
+														  std::move(stoppingCriteria), problem) {
+	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation of BestImprovement class";
 	//_atomicOperations = new Neighborhood<SOL, TYPE_FITNESS, SOL>(mt_rand);
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-BestImprovement<SOL,TYPE_FITNESS,TYPE_CELL>::~BestImprovement() {
+BestImprovement<SOL, TYPE_FITNESS, TYPE_CELL>::~BestImprovement() {
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-std::unique_ptr<SOL> BestImprovement<SOL,TYPE_FITNESS,TYPE_CELL>::operator()(const SOL& s) {
+std::unique_ptr<SOL> BestImprovement<SOL, TYPE_FITNESS, TYPE_CELL>::operator()(const SOL& s) {
 	solution_star = s;
 
 	// if (!solution_star.fitnessIsValid()) {
@@ -72,7 +71,7 @@ std::unique_ptr<SOL> BestImprovement<SOL,TYPE_FITNESS,TYPE_CELL>::operator()(con
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-std::string BestImprovement<SOL,TYPE_FITNESS,TYPE_CELL>::className() const {
+std::string BestImprovement<SOL, TYPE_FITNESS, TYPE_CELL>::className() const {
 	if(_class_name.empty())
 		return "BestImprovement";
 	else
@@ -80,7 +79,7 @@ std::string BestImprovement<SOL,TYPE_FITNESS,TYPE_CELL>::className() const {
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-void BestImprovement<SOL,TYPE_FITNESS,TYPE_CELL>::className(const std::string& class_name) {
+void BestImprovement<SOL, TYPE_FITNESS, TYPE_CELL>::className(const std::string& class_name) {
 	_class_name = class_name;
 }
 
@@ -89,5 +88,6 @@ template class BestImprovement<SolutionArray<double, bool>, double, bool>;
 template class BestImprovement<SolutionArray<int, bool>, int, bool>;
 template class BestImprovement<SolutionArray<unsigned int, bool>, unsigned int, bool>;
 template class BestImprovement<SolutionArray<double, unsigned int>, double, unsigned int>;
-template class BestImprovement<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
+template class BestImprovement<SolutionArray<unsigned int, unsigned int>, unsigned int,
+							   unsigned int>;
 } // namespace stocos

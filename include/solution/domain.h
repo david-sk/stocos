@@ -11,8 +11,8 @@
 #ifndef DOMDISCRETE_H
 #define DOMDISCRETE_H
 
-#include <iostream>
 #include <cassert>
+#include <iostream>
 #include <map>
 #include <memory>
 #include <unordered_set>

@@ -12,9 +12,9 @@
 #define EVALTRAVELINGSALESMANPROBLEM_H
 
 #include <cmath>
+#include <memory>
 #include <string>
 #include <vector>
-#include <memory> 
 
 #include <jsoncpp/json/json.h>
 

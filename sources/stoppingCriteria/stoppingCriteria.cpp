@@ -8,7 +8,6 @@
 ///
 #include <stoppingCriteria/stoppingCriteria.h>
 
-
 namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS>
@@ -45,4 +44,4 @@ template class StoppingCriteria<SolutionArray<unsigned int, bool>, unsigned int>
 template class StoppingCriteria<SolutionArray<double, unsigned int>, double>;
 template class StoppingCriteria<SolutionArray<unsigned int, unsigned int>, unsigned int>;
 
-}
+} // namespace stocos

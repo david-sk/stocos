@@ -19,7 +19,8 @@ Minimization<SOL>::~Minimization() {
 }
 
 template<class SOL>
-bool Minimization<SOL>::operator()(const SOL& s1, const SOL& s2, const unsigned int numObjectif) const {
+bool Minimization<SOL>::operator()(const SOL& s1, const SOL& s2,
+								   const unsigned int numObjectif) const {
 	assert(s1.fitnessIsValid(numObjectif));
 	assert(s2.fitnessIsValid(numObjectif));
 

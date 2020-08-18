@@ -10,7 +10,6 @@
 
 namespace stocos {
 
-
 JobShopProblem::JobShopProblem(const std::string& fileInstance) {
 	Json::Value config = loadInstance(fileInstance);
 	loadJson(config);
@@ -28,9 +27,8 @@ void JobShopProblem::loadJson(const Json::Value& config) {
 	// _N = root["problem"]["N"].asUInt();
 }
 
-
-
-const std::vector<std::vector<std::pair<unsigned int, unsigned int>>>& JobShopProblem::getInstance() const {
+const std::vector<std::vector<std::pair<unsigned int, unsigned int>>>&
+	JobShopProblem::getInstance() const {
 	return instance;
 }
 

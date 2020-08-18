@@ -76,8 +76,9 @@ unsigned int TravelingSalesmanProblem::solutionSelection(const Population<SOL_ST
 	return solution_selection(p);
 }
 
-double TravelingSalesmanProblem::distance_euclidienne(const std::pair<double, double>& node_a,
-							const std::pair<double, double>& node_b) const {
+double
+	TravelingSalesmanProblem::distance_euclidienne(const std::pair<double, double>& node_a,
+												   const std::pair<double, double>& node_b) const {
 	return sqrt(abs(node_b.second - node_a.second) * abs(node_b.second - node_a.second) +
 				abs(node_b.first - node_a.first) * abs(node_b.first - node_a.first));
 }

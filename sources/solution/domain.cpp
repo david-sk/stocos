@@ -15,8 +15,9 @@ namespace stocos {
 /// @brief Pour chaque variables, extension
 ///
 template<typename TYPE_CELL>
-Domain<TYPE_CELL>::Domain(std::map<unsigned int, std::shared_ptr<std::unordered_set<TYPE_CELL>>> exhaustive_list,
-		std::shared_ptr<std::unordered_set<TYPE_CELL>> dom)
+Domain<TYPE_CELL>::Domain(
+	std::map<unsigned int, std::shared_ptr<std::unordered_set<TYPE_CELL>>> exhaustive_list,
+	std::shared_ptr<std::unordered_set<TYPE_CELL>> dom)
 	: _dom(dom), dom_each_cell(exhaustive_list) {
 }
 
@@ -109,7 +110,7 @@ TYPE_CELL Domain<TYPE_CELL>::pick(const unsigned int variable_index, unsigned in
 template<typename TYPE_CELL>
 void Domain<TYPE_CELL>::show() const {
 	for(typename std::map<unsigned int,
-							std::shared_ptr<std::unordered_set<TYPE_CELL>>>::const_iterator it =
+						  std::shared_ptr<std::unordered_set<TYPE_CELL>>>::const_iterator it =
 			dom_each_cell.begin();
 		it != dom_each_cell.end(); ++it) {
 		std::cout << it->first << " =>";
@@ -130,7 +131,7 @@ void Domain<TYPE_CELL>::loadJson(const Json::Value& jsonValue) {
 	} else if(!jsonValue["interval"].empty()) {
 	} else
 		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) +
-									" [-] option does not exist.");
+								 " [-] option does not exist.");
 }
 
 template class Domain<int>;

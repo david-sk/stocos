@@ -12,15 +12,15 @@
 
 namespace stocos {
 
-
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-NearestNeighbourAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>::NearestNeighbourAlgorithm(std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
-							std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
-							std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem)
-	: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(
-			mt_rand, std::move(statistic), std::move(stoppingCriteria), problem) {
+NearestNeighbourAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>::NearestNeighbourAlgorithm(
+	std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
+	std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
+	std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem)
+	: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic),
+														  std::move(stoppingCriteria), problem) {
 	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__
-								<< " Creation NearestNeighbourAlgorithm";
+							 << " Creation NearestNeighbourAlgorithm";
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
@@ -28,7 +28,8 @@ NearestNeighbourAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>::~NearestNeighbourAlgori
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-std::unique_ptr<SOL> NearestNeighbourAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>::operator()(const SOL& s) {
+std::unique_ptr<SOL> NearestNeighbourAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>::
+	operator()(const SOL& s) {
 	std::unique_ptr<SOL> solution_final = std::make_unique<SOL>(s);
 	SOL subsolution(2);
 	rid = std::make_unique<std::uniform_int_distribution<unsigned int>>(
@@ -66,8 +67,7 @@ std::unique_ptr<SOL> NearestNeighbourAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>::op
 		nodes_not_use.erase(best_node.first);
 
 		std::cout << count << " "
-					<< (solution_final->sizeArray() * (solution_final->sizeArray() - 1)) / 2
-					<< "\r";
+				  << (solution_final->sizeArray() * (solution_final->sizeArray() - 1)) / 2 << "\r";
 		std::cout.flush();
 	}
 
@@ -84,7 +84,8 @@ std::string NearestNeighbourAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>::className()
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-void NearestNeighbourAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>::className(const std::string& class_name) {
+void NearestNeighbourAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>::className(
+	const std::string& class_name) {
 	_class_name = class_name;
 }
 template class NearestNeighbourAlgorithm<SolutionArray<double, double>, double, double>;
@@ -92,5 +93,6 @@ template class NearestNeighbourAlgorithm<SolutionArray<double, bool>, double, bo
 template class NearestNeighbourAlgorithm<SolutionArray<int, bool>, int, bool>;
 template class NearestNeighbourAlgorithm<SolutionArray<unsigned int, bool>, unsigned int, bool>;
 template class NearestNeighbourAlgorithm<SolutionArray<double, unsigned int>, double, unsigned int>;
-template class NearestNeighbourAlgorithm<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
+template class NearestNeighbourAlgorithm<SolutionArray<unsigned int, unsigned int>, unsigned int,
+										 unsigned int>;
 } // namespace stocos

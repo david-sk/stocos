@@ -12,8 +12,8 @@
 
 #include <list>
 
-#include "criteria.h"
 #include "../solution/solutionArray.h"
+#include "criteria.h"
 
 namespace stocos {
 

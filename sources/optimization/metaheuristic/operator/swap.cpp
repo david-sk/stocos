@@ -7,21 +7,22 @@
 /// @brief Echange N case distinc
 ///
 
-#include<optimization/metaheuristic/operator/swap.h>
+#include <optimization/metaheuristic/operator/swap.h>
 
 namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-Swap<SOL,TYPE_FITNESS,TYPE_CELL>::Swap(std::mt19937& mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
-		unsigned int number_of_swap)
+Swap<SOL, TYPE_FITNESS, TYPE_CELL>::Swap(
+	std::mt19937& mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
+	unsigned int number_of_swap)
 	: AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, problem),
-		_number_of_swap(number_of_swap) {
+	  _number_of_swap(number_of_swap) {
 	N = 1;
 	rid = std::make_unique<std::uniform_int_distribution<unsigned int>>(0, N - 1);
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-void Swap<SOL,TYPE_FITNESS,TYPE_CELL>::operator()(SOL& s) {
+void Swap<SOL, TYPE_FITNESS, TYPE_CELL>::operator()(SOL& s) {
 	// Random
 	if(s.sizeArray() != N) {
 		N = s.sizeArray() - 1;
@@ -30,8 +31,7 @@ void Swap<SOL,TYPE_FITNESS,TYPE_CELL>::operator()(SOL& s) {
 	}
 
 	// Tirage aléatoire sans remise
-	std::unique_ptr<std::vector<unsigned int>> list(
-		std::make_unique<std::vector<unsigned int>>());
+	std::unique_ptr<std::vector<unsigned int>> list(std::make_unique<std::vector<unsigned int>>());
 
 	while(list->size() != (_number_of_swap * 2)) {
 		unsigned int element = rid->operator()(this->_mt_rand);
@@ -56,7 +56,7 @@ void Swap<SOL,TYPE_FITNESS,TYPE_CELL>::operator()(SOL& s) {
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-void Swap<SOL,TYPE_FITNESS,TYPE_CELL>::cancelMutations(SOL& s) const {
+void Swap<SOL, TYPE_FITNESS, TYPE_CELL>::cancelMutations(SOL& s) const {
 	for(unsigned int i = 0; i < backup.size(); i++) { s(backup[i].first, backup[i].second); }
 }
 

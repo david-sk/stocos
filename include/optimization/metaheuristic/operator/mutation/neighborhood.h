@@ -10,9 +10,9 @@
 #ifndef NEIGHBORHOOD_H
 #define NEIGHBORHOOD_H
 
+#include <list>
 #include <memory> // std::shared_ptr std::unique_ptr
 #include <random>
-#include <list>
 #include <utility>
 #include <vector>
 

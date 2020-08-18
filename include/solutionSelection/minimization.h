@@ -10,9 +10,8 @@
 #ifndef MINIMIZATION_H
 #define MINIMIZATION_H
 
-#include "solutionSelection.h"
 #include "../solution/solutionArray.h"
-
+#include "solutionSelection.h"
 
 namespace stocos {
 

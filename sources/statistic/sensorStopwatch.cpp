@@ -54,9 +54,8 @@ void SensorStopwatch<SOL>::apply(const SOL& s) {
 
 template<class SOL>
 Json::Value SensorStopwatch<SOL>::asJson() const {
-	std::chrono::microseconds microseconds =
-		std::chrono::duration_cast<std::chrono::microseconds>(
-			std::chrono::steady_clock::now().time_since_epoch());
+	std::chrono::microseconds microseconds = std::chrono::duration_cast<std::chrono::microseconds>(
+		std::chrono::steady_clock::now().time_since_epoch());
 	std::chrono::microseconds minutes = std::chrono::duration_cast<std::chrono::minutes>(
 		std::chrono::steady_clock::now().time_since_epoch());
 

@@ -16,7 +16,6 @@
 ///
 #include <problem/QAP.h>
 
-
 namespace stocos {
 
 QAP::QAP(const std::string& fileInstance) {

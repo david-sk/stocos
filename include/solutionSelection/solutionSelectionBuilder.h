@@ -14,12 +14,11 @@
 #include <memory>
 
 #include "../problem/problem.h"
+#include "../solution/solutionArray.h"
 #include "maximization.h"
 #include "minimization.h"
 #include "selection_difference.h"
 #include "solutionSelection.h"
-#include "../solution/solutionArray.h"
-
 
 namespace stocos {
 

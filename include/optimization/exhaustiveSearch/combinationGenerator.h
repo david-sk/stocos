@@ -40,6 +40,7 @@ class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYP
 	std::string className() const;
 
 	void className(const std::string& class_name);
+
   private:
 	unsigned int _nb_digit;
 	unsigned int _len_string;

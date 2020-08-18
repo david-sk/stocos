@@ -10,8 +10,8 @@
 #ifndef CRITERIABUDGET_H
 #define CRITERIABUDGET_H
 
-#include "criteria.h"
 #include "../solution/solutionArray.h"
+#include "criteria.h"
 
 namespace stocos {
 

@@ -21,8 +21,8 @@
 #include "../../problem/problem.h"
 #include "../../statistic/statistic.h"
 #include "../../stoppingCriteria/stoppingCriteria.h"
-#include "operator/atomicOperation.h"
 #include "../optimizationAlgorithm.h"
+#include "operator/atomicOperation.h"
 
 namespace stocos {
 
@@ -43,6 +43,7 @@ class IteratedLocalSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE
 	std::string className() const;
 
 	void className(const std::string& class_name);
+
   protected:
 	std::string _class_name;
 	std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _exploration;

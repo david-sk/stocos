@@ -31,7 +31,7 @@ class LatinSquare
 	: public Problem<SOL_LATINSQUARE, TYPE_FITNESS_LATINSQUARE, TYPE_CELL_LATINSQUARE> {
   public:
 	LatinSquare();
-	
+
 	LatinSquare(const std::string& fileInstance);
 
 	LatinSquare(unsigned int N);

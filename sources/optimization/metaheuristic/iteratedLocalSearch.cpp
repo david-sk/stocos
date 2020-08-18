@@ -11,31 +11,31 @@
 ///        (https://econ-papers.upf.edu/papers/513.pdf)
 ///
 
-#include<optimization/metaheuristic/iteratedLocalSearch.h>
+#include <optimization/metaheuristic/iteratedLocalSearch.h>
 
 namespace stocos {
 
 // Exploration-Exploitation
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-IteratedLocalSearch<SOL,TYPE_FITNESS,TYPE_CELL>::IteratedLocalSearch(
+IteratedLocalSearch<SOL, TYPE_FITNESS, TYPE_CELL>::IteratedLocalSearch(
 	std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
 	std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
 	std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
 	std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> exploration,
 	std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> exploitation)
 	: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic),
-															std::move(stoppingCriteria), problem),
-		_exploration(std::move(exploration)), _exploitation(std::move(exploitation)) {
+														  std::move(stoppingCriteria), problem),
+	  _exploration(std::move(exploration)), _exploitation(std::move(exploitation)) {
 	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation IteratedLocalSearch";
 	_exploitation->className("ILS>" + _exploitation->className());
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-IteratedLocalSearch<SOL,TYPE_FITNESS,TYPE_CELL>::~IteratedLocalSearch() {
+IteratedLocalSearch<SOL, TYPE_FITNESS, TYPE_CELL>::~IteratedLocalSearch() {
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-std::unique_ptr<SOL> IteratedLocalSearch<SOL,TYPE_FITNESS,TYPE_CELL>::operator()(const SOL& s) {
+std::unique_ptr<SOL> IteratedLocalSearch<SOL, TYPE_FITNESS, TYPE_CELL>::operator()(const SOL& s) {
 	solution_star = s;
 	if(!solution_star.fitnessIsValid()) { this->_problem->evaluation(solution_star); }
 
@@ -57,7 +57,7 @@ std::unique_ptr<SOL> IteratedLocalSearch<SOL,TYPE_FITNESS,TYPE_CELL>::operator()
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-std::string IteratedLocalSearch<SOL,TYPE_FITNESS,TYPE_CELL>::className() const {
+std::string IteratedLocalSearch<SOL, TYPE_FITNESS, TYPE_CELL>::className() const {
 	if(_class_name.empty())
 		return "IteratedLocalSearch";
 	else
@@ -65,7 +65,7 @@ std::string IteratedLocalSearch<SOL,TYPE_FITNESS,TYPE_CELL>::className() const {
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-void IteratedLocalSearch<SOL,TYPE_FITNESS,TYPE_CELL>::className(const std::string& class_name) {
+void IteratedLocalSearch<SOL, TYPE_FITNESS, TYPE_CELL>::className(const std::string& class_name) {
 	_class_name = class_name;
 }
 
@@ -74,5 +74,6 @@ template class IteratedLocalSearch<SolutionArray<double, bool>, double, bool>;
 template class IteratedLocalSearch<SolutionArray<int, bool>, int, bool>;
 template class IteratedLocalSearch<SolutionArray<unsigned int, bool>, unsigned int, bool>;
 template class IteratedLocalSearch<SolutionArray<double, unsigned int>, double, unsigned int>;
-template class IteratedLocalSearch<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
+template class IteratedLocalSearch<SolutionArray<unsigned int, unsigned int>, unsigned int,
+								   unsigned int>;
 } // namespace stocos

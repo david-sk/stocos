@@ -7,23 +7,24 @@
 /// @brief exactly mute K bits distinct
 ///
 
-#include<optimization/metaheuristic/operator/mutation/KBit.h>
+#include <optimization/metaheuristic/operator/mutation/KBit.h>
 
 namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-KBit<SOL,TYPE_FITNESS,TYPE_CELL>::KBit(std::mt19937& mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
-		unsigned int k)
+KBit<SOL, TYPE_FITNESS, TYPE_CELL>::KBit(
+	std::mt19937& mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
+	unsigned int k)
 	: AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, problem),
-	rid(std::make_unique<std::uniform_int_distribution<unsigned int>>(0, 1)), _k(k), N(1) {
+	  rid(std::make_unique<std::uniform_int_distribution<unsigned int>>(0, 1)), _k(k), N(1) {
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-KBit<SOL,TYPE_FITNESS,TYPE_CELL>::~KBit() {
+KBit<SOL, TYPE_FITNESS, TYPE_CELL>::~KBit() {
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-void KBit<SOL,TYPE_FITNESS,TYPE_CELL>::operator()(SOL& s) {
+void KBit<SOL, TYPE_FITNESS, TYPE_CELL>::operator()(SOL& s) {
 	backup.clear();
 	std::unique_ptr<std::vector<std::pair<unsigned int, TYPE_CELL>>> list = listOfMutations(s);
 	for(unsigned int i = 0; i < list->size(); i++) {
@@ -33,7 +34,7 @@ void KBit<SOL,TYPE_FITNESS,TYPE_CELL>::operator()(SOL& s) {
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-void KBit<SOL,TYPE_FITNESS,TYPE_CELL>::cancelMutations(SOL& s) const {
+void KBit<SOL, TYPE_FITNESS, TYPE_CELL>::cancelMutations(SOL& s) const {
 	for(unsigned int i = 0; i < backup.size(); i++) {
 		if(s(backup[i]) == 1)
 			s(backup[i], 0);
@@ -43,7 +44,8 @@ void KBit<SOL,TYPE_FITNESS,TYPE_CELL>::cancelMutations(SOL& s) const {
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-std::unique_ptr<std::vector<std::pair<unsigned int, TYPE_CELL>>> KBit<SOL,TYPE_FITNESS,TYPE_CELL>::listOfMutations(const SOL& s) {
+std::unique_ptr<std::vector<std::pair<unsigned int, TYPE_CELL>>>
+	KBit<SOL, TYPE_FITNESS, TYPE_CELL>::listOfMutations(const SOL& s) {
 	assert(_k <= s.sizeArray());
 
 	std::unique_ptr<std::vector<std::pair<unsigned int, TYPE_CELL>>> list(
@@ -73,8 +75,8 @@ std::unique_ptr<std::vector<std::pair<unsigned int, TYPE_CELL>>> KBit<SOL,TYPE_F
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-void KBit<SOL,TYPE_FITNESS,TYPE_CELL>::applyOperator(SOL& s,
-					const std::vector<std::pair<unsigned int, TYPE_CELL>>& _listOfMutations) {
+void KBit<SOL, TYPE_FITNESS, TYPE_CELL>::applyOperator(
+	SOL& s, const std::vector<std::pair<unsigned int, TYPE_CELL>>& _listOfMutations) {
 	backup.clear();
 	for(unsigned int i = 0; i < _listOfMutations.size(); i++) {
 		s(_listOfMutations[i].first, _listOfMutations[i].second);

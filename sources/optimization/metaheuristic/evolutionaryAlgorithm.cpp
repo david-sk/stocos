@@ -9,29 +9,27 @@
 #include <optimization/metaheuristic/evolutionaryAlgorithm.h>
 namespace stocos {
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-EvolutionaryAlgorithm<SOL,TYPE_FITNESS,TYPE_CELL>::EvolutionaryAlgorithm(
+EvolutionaryAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>::EvolutionaryAlgorithm(
 	std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
 	std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
 	std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
 	std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations,
 	unsigned int mu, unsigned int lambda)
 	: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic),
-															move(stoppingCriteria), problem),
-		_atomicOperations(move(atomicOperations)), _mu(mu), _lambda(lambda) {
-	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__
-								<< " Creation EvolutionaryAlgorithm";
+														  move(stoppingCriteria), problem),
+	  _atomicOperations(move(atomicOperations)), _mu(mu), _lambda(lambda) {
+	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation EvolutionaryAlgorithm";
 	assert(_mu != 0);
 	rid_parents = std::make_unique<std::uniform_int_distribution<unsigned int>>(0, _mu - 1);
-	rid_offsprings =
-		std::make_unique<std::uniform_int_distribution<unsigned int>>(0, _lambda - 1);
+	rid_offsprings = std::make_unique<std::uniform_int_distribution<unsigned int>>(0, _lambda - 1);
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-EvolutionaryAlgorithm<SOL,TYPE_FITNESS,TYPE_CELL>::~EvolutionaryAlgorithm() {
+EvolutionaryAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>::~EvolutionaryAlgorithm() {
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-std::unique_ptr<SOL> EvolutionaryAlgorithm<SOL,TYPE_FITNESS,TYPE_CELL>::operator()(const SOL& s) {
+std::unique_ptr<SOL> EvolutionaryAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>::operator()(const SOL& s) {
 	solution_star = s;
 
 	if(!solution_star.fitnessIsValid()) { this->_problem->evaluation(solution_star); }
@@ -63,7 +61,7 @@ std::unique_ptr<SOL> EvolutionaryAlgorithm<SOL,TYPE_FITNESS,TYPE_CELL>::operator
 
 			if(it == offsprings.begin()) {
 				*it = solution_star; // * Ré-introduction de la meilleurs solution dans la
-										// population
+									 // population
 			} else {
 				if(this->_problem->solutionSelection(parents[e1], parents[e2]))
 					*it = parents[e1];
@@ -96,7 +94,7 @@ std::unique_ptr<SOL> EvolutionaryAlgorithm<SOL,TYPE_FITNESS,TYPE_CELL>::operator
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-std::string EvolutionaryAlgorithm<SOL,TYPE_FITNESS,TYPE_CELL>::className() const {
+std::string EvolutionaryAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>::className() const {
 	if(_class_name.empty())
 		return "EvolutionaryAlgorithm";
 	else
@@ -104,7 +102,7 @@ std::string EvolutionaryAlgorithm<SOL,TYPE_FITNESS,TYPE_CELL>::className() const
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-void EvolutionaryAlgorithm<SOL,TYPE_FITNESS,TYPE_CELL>::className(const std::string& class_name) {
+void EvolutionaryAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>::className(const std::string& class_name) {
 	_class_name = class_name;
 }
 
@@ -113,5 +111,6 @@ template class EvolutionaryAlgorithm<SolutionArray<double, bool>, double, bool>;
 template class EvolutionaryAlgorithm<SolutionArray<int, bool>, int, bool>;
 template class EvolutionaryAlgorithm<SolutionArray<unsigned int, bool>, unsigned int, bool>;
 template class EvolutionaryAlgorithm<SolutionArray<double, unsigned int>, double, unsigned int>;
-template class EvolutionaryAlgorithm<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
+template class EvolutionaryAlgorithm<SolutionArray<unsigned int, unsigned int>, unsigned int,
+									 unsigned int>;
 } // namespace stocos

@@ -14,15 +14,15 @@
 
 #include <jsoncpp/json/json.h>
 
-#include "sensor.h"
 #include "../solution/solutionArray.h"
+#include "sensor.h"
 
 namespace stocos {
 
 template<class SOL>
 class SensorExperience : public Sensor<SOL> {
   public:
-	SensorExperience(unsigned int num, const std::string &name = "");
+	SensorExperience(unsigned int num, const std::string& name = "");
 
 	virtual ~SensorExperience();
 

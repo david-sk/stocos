@@ -25,10 +25,11 @@ namespace stocos {
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class BestImprovement : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
   public:
-	BestImprovement(std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
-					std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
-					std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
-					std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations);
+	BestImprovement(
+		std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
+		std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
+		std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
+		std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations);
 
 	virtual ~BestImprovement();
 

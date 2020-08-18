@@ -14,10 +14,10 @@
 
 #include <jsoncpp/json/json.h>
 
+#include "../solution/solutionArray.h"
 #include "sensor.h"
 #include "sensorNumRound.h"
 #include "sensorStopwatch.h"
-#include "../solution/solutionArray.h"
 
 namespace stocos {
 

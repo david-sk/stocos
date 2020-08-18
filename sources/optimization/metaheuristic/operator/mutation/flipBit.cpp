@@ -7,22 +7,23 @@
 /// @brief
 ///
 
-#include<optimization/metaheuristic/operator/mutation/flipBit.h>
+#include <optimization/metaheuristic/operator/mutation/flipBit.h>
 namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-FlipBit<SOL,TYPE_FITNESS,TYPE_CELL>::FlipBit(std::mt19937& mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
-		unsigned int c)
+FlipBit<SOL, TYPE_FITNESS, TYPE_CELL>::FlipBit(
+	std::mt19937& mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
+	unsigned int c)
 	: AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, problem), _c(c), N(0) {
 	urd = std::make_unique<std::uniform_real_distribution<>>(0, 1);
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-FlipBit<SOL,TYPE_FITNESS,TYPE_CELL>::~FlipBit() {
+FlipBit<SOL, TYPE_FITNESS, TYPE_CELL>::~FlipBit() {
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-void FlipBit<SOL,TYPE_FITNESS,TYPE_CELL>::operator()(SOL& s) {
+void FlipBit<SOL, TYPE_FITNESS, TYPE_CELL>::operator()(SOL& s) {
 	backup.clear();
 	if(s.sizeArray() != N) {
 		N = s.sizeArray();
@@ -42,7 +43,7 @@ void FlipBit<SOL,TYPE_FITNESS,TYPE_CELL>::operator()(SOL& s) {
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-void FlipBit<SOL,TYPE_FITNESS,TYPE_CELL>::cancelMutations(SOL& s) const {
+void FlipBit<SOL, TYPE_FITNESS, TYPE_CELL>::cancelMutations(SOL& s) const {
 	for(unsigned int i = 0; i < backup.size(); i++) {
 		if(s(backup[i]) == 1)
 			s(backup[i], 0);
@@ -52,7 +53,8 @@ void FlipBit<SOL,TYPE_FITNESS,TYPE_CELL>::cancelMutations(SOL& s) const {
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-std::unique_ptr<std::vector<std::pair<unsigned int, TYPE_CELL>>> FlipBit<SOL,TYPE_FITNESS,TYPE_CELL>::listOfMutations(const SOL& s) {
+std::unique_ptr<std::vector<std::pair<unsigned int, TYPE_CELL>>>
+	FlipBit<SOL, TYPE_FITNESS, TYPE_CELL>::listOfMutations(const SOL& s) {
 	std::unique_ptr<std::vector<std::pair<unsigned int, TYPE_CELL>>> list(
 		std::make_unique<std::vector<std::pair<unsigned int, TYPE_CELL>>>());
 
@@ -73,8 +75,8 @@ std::unique_ptr<std::vector<std::pair<unsigned int, TYPE_CELL>>> FlipBit<SOL,TYP
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-void FlipBit<SOL,TYPE_FITNESS,TYPE_CELL>::applyOperator(SOL& s,
-					const std::vector<std::pair<unsigned int, TYPE_CELL>>& _listOfMutations) {
+void FlipBit<SOL, TYPE_FITNESS, TYPE_CELL>::applyOperator(
+	SOL& s, const std::vector<std::pair<unsigned int, TYPE_CELL>>& _listOfMutations) {
 	backup.clear();
 	for(unsigned int i = 0; i < _listOfMutations.size(); i++) {
 		s(_listOfMutations[i].first, _listOfMutations[i].second);

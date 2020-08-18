@@ -38,7 +38,8 @@ void MagicSequence::evaluation(SOL_MAGICSEQUENCE& s) {
 void MagicSequence::resetSolution(SOL_MAGICSEQUENCE& s) const {
 }
 
-bool MagicSequence::solutionSelection(const SOL_MAGICSEQUENCE& s_worst, const SOL_MAGICSEQUENCE& s_best) {
+bool MagicSequence::solutionSelection(const SOL_MAGICSEQUENCE& s_worst,
+									  const SOL_MAGICSEQUENCE& s_best) {
 	return solution_selection(s_worst, s_best);
 }
 

@@ -10,11 +10,12 @@
 namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-CombinationGenerator<SOL, TYPE_FITNESS, TYPE_CELL>::CombinationGenerator(std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
-						std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
-						std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem)
-	: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(
-			mt_rand, std::move(statistic), std::move(stoppingCriteria), problem) {
+CombinationGenerator<SOL, TYPE_FITNESS, TYPE_CELL>::CombinationGenerator(
+	std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
+	std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
+	std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem)
+	: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic),
+														  std::move(stoppingCriteria), problem) {
 	_nb_call = 0;
 	_nb_digit = 0;
 	_len_string = 0;
@@ -67,7 +68,7 @@ std::unique_ptr<SOL> CombinationGenerator<SOL, TYPE_FITNESS, TYPE_CELL>::operato
 	// // initialization
 	// _nb_digit = s.domain->size_domain(0);
 	throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) +
-								" [-] domain == nullptr)");
+							 " [-] domain == nullptr)");
 	_len_string = s.sizeArray();
 	_string = std::unique_ptr<unsigned int[]>(new unsigned int[_len_string]);
 
@@ -120,5 +121,6 @@ template class CombinationGenerator<SolutionArray<double, bool>, double, bool>;
 template class CombinationGenerator<SolutionArray<int, bool>, int, bool>;
 template class CombinationGenerator<SolutionArray<unsigned int, bool>, unsigned int, bool>;
 template class CombinationGenerator<SolutionArray<double, unsigned int>, double, unsigned int>;
-template class CombinationGenerator<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
+template class CombinationGenerator<SolutionArray<unsigned int, unsigned int>, unsigned int,
+									unsigned int>;
 } // namespace stocos

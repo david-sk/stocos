@@ -13,7 +13,6 @@
 #include "../solution/population.h"
 #include "../solution/solutionArray.h"
 
-
 namespace stocos {
 
 template<class SOL>

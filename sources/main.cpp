@@ -49,10 +49,10 @@
 
 using namespace stocos;
 
-void version(const std::string &name_software);
+void version(const std::string& name_software);
 void segfault_sigaction(int signal, siginfo_t* si, void* arg);
 
-void version(const std::string &name_software) {
+void version(const std::string& name_software) {
 	std::cout << "******************************************" << std::endl;
 	std::cout << "[+] *** " << name_software << " ***" << std::endl;
 	std::cout << "[+] Day compilation : " << __DATE__ << " " << __TIME__ << std::endl;

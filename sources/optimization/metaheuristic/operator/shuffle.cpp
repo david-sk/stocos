@@ -7,20 +7,21 @@
 /// @brief
 ///
 
-#include<optimization/metaheuristic/operator/shuffle.h>
+#include <optimization/metaheuristic/operator/shuffle.h>
 namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-Shuffle<SOL,TYPE_FITNESS,TYPE_CELL>::Shuffle(std::mt19937& mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem)
+Shuffle<SOL, TYPE_FITNESS, TYPE_CELL>::Shuffle(
+	std::mt19937& mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem)
 	: AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, problem) {
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-Shuffle<SOL,TYPE_FITNESS,TYPE_CELL>::~Shuffle() {
+Shuffle<SOL, TYPE_FITNESS, TYPE_CELL>::~Shuffle() {
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-void Shuffle<SOL,TYPE_FITNESS,TYPE_CELL>::operator()(SOL& s) {
+void Shuffle<SOL, TYPE_FITNESS, TYPE_CELL>::operator()(SOL& s) {
 	if(index.size() != s.sizeArray()) {
 		index.clear();
 		for(unsigned int i = 0; i < s.sizeArray(); i++) index.push_back(i);

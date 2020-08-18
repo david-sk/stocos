@@ -10,16 +10,17 @@
 #include <stoppingCriteria/criteriaFitnessObjectif.h>
 namespace stocos {
 
-
 template<typename SOL, typename TYPE_FITNESS>
-CriteriaFitnessObjectif<SOL, TYPE_FITNESS>::CriteriaFitnessObjectif(TYPE_FITNESS fitness_objectif) : Criteria<SOL, TYPE_FITNESS>() {
+CriteriaFitnessObjectif<SOL, TYPE_FITNESS>::CriteriaFitnessObjectif(TYPE_FITNESS fitness_objectif)
+	: Criteria<SOL, TYPE_FITNESS>() {
 	_number_of_objective = 1;
 	_fitness_objectif = new TYPE_FITNESS[_number_of_objective];
 	_fitness_objectif[0] = fitness_objectif;
 }
 
 template<typename SOL, typename TYPE_FITNESS>
-CriteriaFitnessObjectif<SOL, TYPE_FITNESS>::CriteriaFitnessObjectif(TYPE_FITNESS* fitness_objectif, unsigned int number_of_objective)
+CriteriaFitnessObjectif<SOL, TYPE_FITNESS>::CriteriaFitnessObjectif(
+	TYPE_FITNESS* fitness_objectif, unsigned int number_of_objective)
 	: Criteria<SOL, TYPE_FITNESS>() {
 	_number_of_objective = number_of_objective;
 	_fitness_objectif = new TYPE_FITNESS[_number_of_objective];

@@ -38,11 +38,10 @@ Statistic<SOL>::Statistic(const std::string& namefile) : _namefile(namefile) {
 
 template<class SOL>
 Statistic<SOL>::Statistic(const std::string& mongo_hostname, const std::string& mongo_database,
-			const std::string& mongo_collection, const std::string& mongo_username,
-			const std::string& mongo_pwd)
+						  const std::string& mongo_collection, const std::string& mongo_username,
+						  const std::string& mongo_pwd)
 	: _mongo_hostname(mongo_hostname), _mongo_database(mongo_database),
-		_mongo_collection(mongo_collection), _mongo_username(mongo_username),
-		_mongo_pwd(mongo_pwd) {
+	  _mongo_collection(mongo_collection), _mongo_username(mongo_username), _mongo_pwd(mongo_pwd) {
 	recording = MONGODB;
 	_none = false;
 	try {
@@ -53,8 +52,8 @@ Statistic<SOL>::Statistic(const std::string& mongo_hostname, const std::string& 
 			_mongo_client.auth(_mongo_database, _mongo_username, _mongo_pwd, errmsg);
 		_mongo_db_c = _mongo_database + "." + _mongo_collection;
 	} catch(const mongo::DBException& e) {
-		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) +
-									" " + e.what());
+		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " " +
+								 e.what());
 	}
 
 	builder["commentStyle"] = "None";
@@ -89,8 +88,7 @@ Statistic<SOL>::~Statistic() {
 			outFile << std::endl;
 			outFile.close();
 		} else if(recording == MONGODB) {
-			mongo::BSONObj bson =
-				mongo::fromjson(Json::writeString(builder, show_end["final"]));
+			mongo::BSONObj bson = mongo::fromjson(Json::writeString(builder, show_end["final"]));
 			_mongo_client.insert(_mongo_db_c, bson);
 		}
 	}
@@ -126,9 +124,8 @@ void Statistic<SOL>::operator()(const SOL& s, std::string name_calling_class) {
 				mongo::BSONObj bson = mongo::fromjson(Json::writeString(builder, tmp));
 				_mongo_client.insert(_mongo_db_c, bson);
 			} else {
-				throw std::runtime_error(std::string{} + __FILE__ + ":" +
-											std::to_string(__LINE__) +
-											" The output Statistic does not exist.");
+				throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) +
+										 " The output Statistic does not exist.");
 			}
 		}
 		show_before = tmp;
