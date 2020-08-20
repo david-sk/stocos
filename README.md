@@ -1,8 +1,10 @@
 # STOChastic Optimization Solver (stocos)
 
-Stocos est un solvers clé en main. Il intègre en particuler les algorithmes évolutionnaires. La description du plan d'optimisation s'écrite dans le format JSON : les algorithmes utilisés, le problème à résoudre et la façon d’enregistrer les résultats de l'optimisation.
+Stocos solves optimization problems with a large search space.  He is able to provide solutions with a good approximation. Optimization plan is described using the JSON format with in particular the following elements: the algorithms used, the problem to be solved and how to record the results of the optimization. Of course the solver can be used as liberay.
 
-- C++20
+
+Le solver uses the following technologies:
+- C++20 with boost, jsoncpp, mongoclient, json-rpc-cpp
 - Json like
 - Keep data in mongodb
 
@@ -15,20 +17,20 @@ Stocos est un solvers clé en main. Il intègre en particuler les algorithmes é
 | **CodeFactor**    | [![CodeFactor](https://www.codefactor.io/repository/github/jxtopher/stocos/badge)](https://www.codefactor.io/repository/github/jxtopher/stocos) |
 
 
-## Exemple
+## Example
 
 Le solver se configure de deux manières différents : 
-- prendre un ficher json
-- prendre une string json
+- take a file json
+- take a string json
 
 
 * Solve the oneMax problem :
 
 ```bash
-$ ./build/stocos-Release -c configuration/stocos-oneMax.json
+$ ./build/stocos -c configuration/stocos-oneMax.json
 ```
 
 ```bash
-$ ./build/stocos-Release -j '{ "seed": 0, "problem": { "name": "OneMax", "instance": "instances/OneMax/onemax-50.json" }, "parameter_id": 0, "OptimizationAlgorithm": { "0": { "className":"IteratedLocalSearch", "StoppingCriteria": { "budget": 100, "fitnessObjectif": 50 }, "AtomicOperation": { "className": "FlipBit", "c": 1 }, "OptimizationAlgorithm": { "className": "FirstImprovement", "StoppingCriteria": { "budget": 100, "fitnessObjectif": 50 }, "AtomicOperation": { "className": "FlipBit", "c": 1 } } }  }, "Statistic": { "recording":"stdout", "sensorNumRound" : true, "sensorSolution" : true, "sensorStopwatch" : false, "sensorFinal" : { "name" : "oneMax", "num" : 6 } } }'
+$ ./build/stocos -j '{ "seed": 0, "problem": { "name": "OneMax", "instance": "instances/OneMax/onemax-50.json" }, "parameter_id": 0, "OptimizationAlgorithm": { "0": { "className":"IteratedLocalSearch", "StoppingCriteria": { "budget": 100, "fitnessObjectif": 50 }, "AtomicOperation": { "className": "FlipBit", "c": 1 }, "OptimizationAlgorithm": { "className": "FirstImprovement", "StoppingCriteria": { "budget": 100, "fitnessObjectif": 50 }, "AtomicOperation": { "className": "FlipBit", "c": 1 } } }  }, "Statistic": { "recording":"stdout", "sensorNumRound" : true, "sensorSolution" : true, "sensorStopwatch" : false, "sensorFinal" : { "name" : "oneMax", "num" : 6 } } }'
 ```
 
