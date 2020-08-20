@@ -19,7 +19,7 @@ Le solver uses the following technologies:
 
 ## Example
 
-Le solver se configure de deux manières différents : 
+Stocos can be configured in two different ways:
 - take a file json
 - take a string json
 
