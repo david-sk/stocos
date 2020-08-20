@@ -10,7 +10,7 @@
 #ifndef UNITTEST_EVALQAP_H
 #define UNITTEST_EVALQAP_H
 
-#include "problem/QAP.hpp"
+#include "problem/QAP.h"
 
 using namespace CppUnit;
 using namespace stocos;

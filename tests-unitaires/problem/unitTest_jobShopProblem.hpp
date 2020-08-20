@@ -10,9 +10,9 @@
 #ifndef UNITTEST_JOBSHOPPROBLEM_H
 #define UNITTEST_JOBSHOPPROBLEM_H
 
-#include "solution/solutionArray.hpp"
+#include "solution/solutionArray.h"
 
-#include "problem/jobShopProblem.hpp"
+#include "problem/jobShopProblem.h"
 
 using namespace CppUnit;
 using namespace stocos;

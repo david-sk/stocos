@@ -12,9 +12,9 @@
 
 #include <string>
 
-#include "solution/solutionArray.hpp"
+#include "solution/solutionArray.h"
 
-#include "problem/oneMax.hpp"
+#include "problem/oneMax.h"
 
 using namespace CppUnit;
 using namespace stocos;

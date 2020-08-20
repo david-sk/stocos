@@ -120,13 +120,14 @@ endif(NOT MongoDB_INCLUDE_DIR)
 ###############################################################################
 # Stocos
 ###############################################################################
-add_executable(${PROJECT_NAME} include/main.cpp)
+add_executable(${PROJECT_NAME} sources/main.cpp)
 target_include_directories(${PROJECT_NAME} PRIVATE 
     modules/
+    "include/"
     ${CMAKE_CURRENT_BINARY_DIR}/deps/install/include/
 )
 
-target_link_libraries(${PROJECT_NAME}  
+target_link_libraries(${PROJECT_NAME}
     ${Boost_LIBRARIES} 
     ${JSONCPP_LIBRARIES}
     "${CMAKE_CURRENT_BINARY_DIR}/deps/install/lib/libjsonrpccpp-client.so"
@@ -139,7 +140,8 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
     MODULE_PROBLEM_KNAPSACK=${MODULE_PROBLEM_KNAPSACK} 
     MODULE_PROBLEM_TSP=${MODULE_PROBLEM_TSP} 
     MODULE_PROBLEM_SUBSETSUM=${MODULE_PROBLEM_SUBSETSUM} 
-    MODULE_PROBLEM_CONTINOUSPROBLEM=${MODULE_PROBLEM_CONTINOUSPROBLEM})
+    MODULE_PROBLEM_CONTINOUSPROBLEM=${MODULE_PROBLEM_CONTINOUSPROBLEM}
+    BOOST_LOG_DYN_LINK=1)
 
 ## Cppunit
 pkg_check_modules(CPPUNIT cppunit)
@@ -154,6 +156,9 @@ link_libraries(${CPPUNIT_LIBRARIES})
 ###############################################################################
 add_custom_target(unit-test COMMAND ${PROJECT_NAME}-unittest DEPENDS ${PROJECT_NAME}-unittest)
 add_executable(${PROJECT_NAME}-unittest tests-unitaires/unitTest.cpp)
+
+
+
 target_include_directories(${PROJECT_NAME}-unittest PRIVATE 
     "modules/"
     "include/")
@@ -162,6 +167,10 @@ target_link_libraries(${PROJECT_NAME}-unittest LINK_PRIVATE
     ${JSONCPP_LIBRARIES}
     ${CPPUNIT_LIBRARIES}
     ${MongoDB_LIBRARIES})
+
+target_compile_definitions(${PROJECT_NAME}-unittest PRIVATE
+BOOST_LOG_DYN_LINK=0)
+
 
 enable_testing()
 add_test(NAME "tests-unitaires" COMMAND ./build/${PROJECT_NAME}-unittest WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
@@ -178,3 +187,18 @@ foreach(PATH_FILE  ${LIST_OF_FILES})
     get_filename_component(FILE ${PATH_FILE} NAME)
     add_test(NAME ${FILE} COMMAND ${PYTHON3.7_EXECUTABLE} ${PATH_FILE} "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}" WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 endforeach()
+
+file(GLOB_RECURSE ALL_SOURCE_FILES sources/*.cpp)
+foreach (SOURCE_FILE ${ALL_SOURCE_FILES})
+    get_filename_component(NAME_FILE ${SOURCE_FILE} NAME)
+    if (NOT "main.cpp" MATCHES  ${NAME_FILE} )
+        add_library(${NAME_FILE} STATIC ${SOURCE_FILE})
+        target_include_directories(${NAME_FILE} PRIVATE 
+        "modules/"
+        "include/")
+        target_link_libraries(${PROJECT_NAME} ${NAME_FILE})
+        target_link_libraries(${PROJECT_NAME}-unittest LINK_PRIVATE ${NAME_FILE})
+        target_compile_definitions(${NAME_FILE} PRIVATE BOOST_LOG_DYN_LINK=1)
+        message(${NAME_FILE})
+    endif()
+endforeach ()

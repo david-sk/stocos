@@ -10,9 +10,9 @@
 #ifndef UNITTEST_MAGICSEQUENCE_H
 #define UNITTEST_MAGICSEQUENCE_H
 
-#include "solution/solutionArray.hpp"
+#include "solution/solutionArray.h"
 
-#include "problem/magicSequence.hpp"
+#include "problem/magicSequence.h"
 
 using namespace CppUnit;
 using namespace stocos;

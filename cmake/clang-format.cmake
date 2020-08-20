@@ -1,5 +1,8 @@
 ## > clang-format ##################################################################
-set(CLANG_FORMAT_TO_APPLY "sources/*.cpp" 
+set(CLANG_FORMAT_TO_APPLY "include/*.cpp" 
+                          "include/*.h" 
+                          "include/*.hpp" 
+                          "sources/*.cpp" 
                           "sources/*.h" 
                           "sources/*.hpp" 
                           "tests-unitaires/*.cpp" 

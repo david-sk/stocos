@@ -10,10 +10,10 @@
 #ifndef UNITTEST_STATISTIC_H
 #define UNITTEST_STATISTIC_H
 
-#include "solution/solution.hpp"
-#include "statistic/sensor.hpp"
-#include "statistic/sensorNumRound.hpp"
-#include "statistic/statistic.hpp"
+#include "solution/solution.h"
+#include "statistic/sensor.h"
+#include "statistic/sensorNumRound.h"
+#include "statistic/statistic.h"
 
 using namespace CppUnit;
 using namespace stocos;

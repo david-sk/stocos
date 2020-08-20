@@ -10,9 +10,9 @@
 #ifndef UNITTEST_KNAPSACK_H
 #define UNITTEST_KNAPSACK_H
 
-#include "solution/solutionArray.hpp"
+#include "solution/solutionArray.h"
 
-#include "problem/knapsack.hpp"
+#include "problem/knapsack.h"
 
 using namespace CppUnit;
 using namespace stocos;

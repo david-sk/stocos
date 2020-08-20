@@ -12,9 +12,9 @@
 
 #include <memory> // std::shared_ptr std::unique_ptr
 
-#include "optimization/metaheuristic/operator/swap.hpp"
-#include "problem/oneMax.hpp"
-#include "solution/solutionArray.hpp"
+#include "optimization/metaheuristic/operator/swap.h"
+#include "problem/oneMax.h"
+#include "solution/solutionArray.h"
 
 using namespace CppUnit;
 

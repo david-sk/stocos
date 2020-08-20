@@ -10,9 +10,9 @@
 #ifndef UNITTEST_CRITERIAS_H
 #define UNITTEST_CRITERIAS_H
 
-#include "solution/solution.hpp"
-#include "stoppingCriteria/criteriaBudget.hpp"
-#include "stoppingCriteria/stoppingCriteria.hpp"
+#include "solution/solution.h"
+#include "stoppingCriteria/criteriaBudget.h"
+#include "stoppingCriteria/stoppingCriteria.h"
 
 using namespace CppUnit;
 using namespace stocos;

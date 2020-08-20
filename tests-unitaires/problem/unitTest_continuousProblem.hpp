@@ -10,9 +10,9 @@
 #ifndef UNITTEST_CONTINUOUSPROBLEM_H
 #define UNITTEST_CONTINUOUSPROBLEM_H
 
-#include "solution/solutionArray.hpp"
+#include "solution/solutionArray.h"
 
-#include "problem/continuousProblem.hpp"
+#include "problem/continuousProblem.h"
 
 using namespace CppUnit;
 using namespace stocos;
