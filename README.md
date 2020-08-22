@@ -11,12 +11,11 @@ Le solver uses the following technologies:
 
 #### Branch Master 
 
-<p align="center">
 | Intergration  |        Status |
 | ------------- | ------------- |
 | **Build Status Linux**  | [![CircleCI](https://circleci.com/gh/Jxtopher/stocos.svg?style=svg)](https://circleci.com/gh/Jxtopher/stocos) |
 | **CodeFactor**    | [![CodeFactor](https://www.codefactor.io/repository/github/jxtopher/stocos/badge)](https://www.codefactor.io/repository/github/jxtopher/stocos) |
-</p>
+
 
 ## Example
 
