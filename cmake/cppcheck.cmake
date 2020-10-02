@@ -8,10 +8,6 @@ set(CPPCHECK_TO_APPLY "sources/*.cpp"
 
 ## Detection du programme cppcheck
 FIND_PROGRAM(CPPCHECK_EXECUTABLE cppcheck)
-if (NOT CPPCHECK_EXECUTABLE)
-    packageManager("cppcheck")
-    FIND_PROGRAM(CPPCHECK_EXECUTABLE cppcheck)
-endif(NOT CPPCHECK_EXECUTABLE)
 
 ## 
 SET(PROJECT_TRDPARTY_DIR third-party)
