@@ -28,7 +28,6 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
 # Load modules cmake
 ###############################################################################
 set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
-include(auto-install)   # auto install package
 include(cppcheck)       #
 include(clang-format)   #
 include(version)        # Version name generator form git branch, hash
@@ -80,42 +79,16 @@ ExternalProject_Add(LIBJSON_RPC_CPP
 
 ## PkgConfigmr
 find_package(PkgConfig)
-if (NOT PKG_CONFIG_FOUND)
-    packageManager("pkg-config")
-    find_package(PkgConfig REQUIRED)
-endif(NOT PKG_CONFIG_FOUND)
 
 ## jsoncpp
 pkg_check_modules(JSONCPP jsoncpp)
-link_libraries(${JSONCPP_LIBRARIES})
-if (NOT JSONCPP_FOUND)
-    packageManager("libjsoncpp-dev")
-    packageManager("libjsoncpp1")
-endif(NOT JSONCPP_FOUND)
 
 ## Boost - program_options + log
 find_package(Boost 1.40 COMPONENTS program_options log iostreams REQUIRED)
-# include_directories(${Boost_INCLUDE_DIRS})
-if (NOT Boost_FOUND)
-    packageManager("libboost-log-dev")
-    packageManager("libboost-program-options-dev")
-    packageManager("libboost-iostreams-dev")
-    find_package(Boost 1.40 COMPONENTS program_options log iostreams REQUIRED)
-    # include_directories(${Boost_INCLUDE_DIRS})
-endif(NOT Boost_FOUND)
 
 ## Mongo
 find_library(MongoDB_LIBRARIES NAMES mongoclient)
-if (NOT MongoDB_LIBRARIES)
-    packageManager("libmongoclient-dev")
-    find_library(MongoDB_LIBRARIES NAMES mongoclient)
-endif(NOT MongoDB_LIBRARIES)
-
 find_path(MongoDB_INCLUDE_DIR NAMES mongo/client/dbclient.h)
-if (NOT MongoDB_INCLUDE_DIR)
-    packageManager("libmongoclient0")
-    find_path(MongoDB_INCLUDE_DIR NAMES mongo/client/dbclient.h)
-endif(NOT MongoDB_INCLUDE_DIR)
 
 ###############################################################################
 # Stocos
@@ -145,9 +118,6 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 
 ## Cppunit
 pkg_check_modules(CPPUNIT cppunit)
-if (NOT CPPUNIT_FOUND)
-    packageManager("libcppunit-dev")
-endif(NOT CPPUNIT_FOUND)
 
 link_libraries(${CPPUNIT_LIBRARIES})
 
@@ -177,10 +147,6 @@ add_test(NAME "tests-unitaires" COMMAND ./build/${PROJECT_NAME}-unittest WORKING
 
 ## Detection du programme python3.7
 FIND_PROGRAM(PYTHON3.7_EXECUTABLE python3.7)
-if (NOT PYTHON3.7_EXECUTABLE)
-    packageManager("python3.7")
-    FIND_PROGRAM(PYTHON3.7_EXECUTABLE python3.7)
-endif(NOT PYTHON3.7_EXECUTABLE)
 
 file(GLOB LIST_OF_FILES  tests-solver/*.py)
 foreach(PATH_FILE  ${LIST_OF_FILES})

@@ -10,10 +10,6 @@ set(CLANG_FORMAT_TO_APPLY "include/*.cpp"
                           "tests-unitaires/*.hpp") 
 
 FIND_PROGRAM(CLANGFORMAT_EXECUTABLE clang-format)
-if (NOT CLANGFORMAT_EXECUTABLE)
-    packageManager("clang-format")
-    FIND_PROGRAM(CLANGFORMAT_EXECUTABLE clang-format)
-endif(NOT CLANGFORMAT_EXECUTABLE)
 
 file(GLOB_RECURSE ALL_SOURCE_FILES  ${CLANG_FORMAT_TO_APPLY})
 foreach (SOURCE_FILE ${ALL_SOURCE_FILES})
