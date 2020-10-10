@@ -47,6 +47,7 @@
 #include "problem/unitTest_jobShopProblem.hpp"
 #include "problem/unitTest_knapsack.hpp"
 #include "problem/unitTest_magicSequence.hpp"
+#include "problem/unitTest_nQueensProblem.hpp"
 #include "problem/unitTest_oneMax.hpp"
 #include "problem/unitTest_subsetsum.hpp"
 #include "problem/unitTest_travelingSalesmanProblem.hpp"
@@ -70,6 +71,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_shuffle);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_neighborhood);
 
 // Problem
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_NQueensProblem);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_population);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_OneMax);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_knapsack);

@@ -37,6 +37,7 @@ include(doxygen)        # Create le documentation
 # Load modules of the projet
 ###############################################################################
 project(stocos)
+set(MODULE_PROBLEM_NQUEENSPROBLEM true)
 set(MODULE_PROBLEM_ONEMAX true)
 set(MODULE_PROBLEM_LATINSQUARE true)
 set(MODULE_PROBLEM_KNAPSACK true)
@@ -114,6 +115,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
     MODULE_PROBLEM_TSP=${MODULE_PROBLEM_TSP} 
     MODULE_PROBLEM_SUBSETSUM=${MODULE_PROBLEM_SUBSETSUM} 
     MODULE_PROBLEM_CONTINOUSPROBLEM=${MODULE_PROBLEM_CONTINOUSPROBLEM}
+    MODULE_PROBLEM_NQUEENSPROBLEM=${MODULE_PROBLEM_NQUEENSPROBLEM}
     BOOST_LOG_DYN_LINK=1)
 
 ## Cppunit

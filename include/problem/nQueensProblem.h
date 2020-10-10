@@ -28,13 +28,14 @@ namespace stocos {
 using TYPE_FITNESS_NQUEENSPROBLEM = unsigned int;
 using TYPE_CELL_NQUEENSPROBLEM = unsigned int;
 using SOL_NQUEENSPROBLEM = SolutionArray<TYPE_FITNESS_NQUEENSPROBLEM, TYPE_CELL_NQUEENSPROBLEM>;
-class NQueensProblem : public Problem<SOL_NQUEENSPROBLEM, TYPE_FITNESS_NQUEENSPROBLEM, TYPE_CELL_NQUEENSPROBLEM> {
+class NQueensProblem
+	: public Problem<SOL_NQUEENSPROBLEM, TYPE_FITNESS_NQUEENSPROBLEM, TYPE_CELL_NQUEENSPROBLEM> {
   public:
 	NQueensProblem();
 
 	NQueensProblem(const std::string& fileInstance);
 
-	NQueensProblem(unsigned int N);
+	NQueensProblem(unsigned int n);
 
 	~NQueensProblem();
 
@@ -43,10 +44,10 @@ class NQueensProblem : public Problem<SOL_NQUEENSPROBLEM, TYPE_FITNESS_NQUEENSPR
 	std::unique_ptr<SOL_NQUEENSPROBLEM> new_solution() const;
 
 	bool checkSolutionStructure(const SOL_NQUEENSPROBLEM& s) const;
+
+	// Gives the number of queens without fail with another queen
 	void evaluation(SOL_NQUEENSPROBLEM& s);
-
-	// void incremental(const SolutionArray &s, unsigned int mutatedCell) const;
-
+	
 	void resetSolution(SOL_NQUEENSPROBLEM& s) const;
 
 	TYPE_FITNESS_NQUEENSPROBLEM getFitnessObjectif(unsigned int numObjectif = 0) const;
@@ -55,10 +56,14 @@ class NQueensProblem : public Problem<SOL_NQUEENSPROBLEM, TYPE_FITNESS_NQUEENSPR
 
 	unsigned int solutionSelection(const Population<SOL_NQUEENSPROBLEM>& p);
 
+	bool evaluationSubSolution(SOL_NQUEENSPROBLEM& s) const;
+	bool check_diagonal(const SOL_NQUEENSPROBLEM& solution) const;
+	bool check_line(const SOL_NQUEENSPROBLEM& solution) const;
+
   private:
 	Maximization<SOL_NQUEENSPROBLEM> solution_selection;
 	std::string instance_number;
-	unsigned int _N;
+	unsigned int _n;
 };
 
 } // namespace stocos

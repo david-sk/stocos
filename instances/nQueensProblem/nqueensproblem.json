@@ -2,7 +2,7 @@
     "problem": {
 		"name" : "N-Quenes problem",
         "instance_number": "10",
-        "N": 10,
+        "n": 10,
         "fitnessObjectif": 10
     }
 }

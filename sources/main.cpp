@@ -24,6 +24,9 @@
 #if MODULE_PROBLEM_ONEMAX
 #include "problem/oneMax.h"
 #endif
+#if MODULE_PROBLEM_NQUEENSPROBLEM
+#include "problem/nQueensProblem.h"
+#endif
 #if MODULE_PROBLEM_LATINSQUARE
 #include "problem/latinSquare.h"
 #endif
@@ -39,6 +42,8 @@
 #if MODULE_PROBLEM_CONTINOUSPROBLEM
 #include "problem/continuousProblem.h"
 #endif
+
+
 
 // Include solver
 #include "solver/solver.hpp"
@@ -155,18 +160,25 @@ int main(int argc, char** argv, char** envp) {
 							 " [-] The oneMax problem is not include of the binary. Please turn "
 							 "true of MODULE_PROBLEM_ONEMAX in complilation.");
 #endif
+#if MODULE_PROBLEM_NQUEENSPROBLEM
+	std::shared_ptr<NQueensProblem> eNQueensProblem = std::make_shared<NQueensProblem>();
+#else
+	throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) +
+							 " [-] The n-queens problem is not include of the binary. Please turn "
+							 "true of MODULE_PROBLEM_ONEMAX in complilation.");
+#endif
 #if MODULE_PROBLEM_SUBSETSUM
 	std::shared_ptr<Subsetsum> eSubsetsum = std::make_shared<Subsetsum>();
 #else
 	throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) +
-							 " [-] The oneMax problem is not include of the binary. Please turn "
+							 " [-] The subsetsum problem is not include of the binary. Please turn "
 							 "true of MODULE_PROBLEM_SUBSETSUM in complilation.");
 #endif
 #if MODULE_PROBLEM_KNAPSACK
 	std::shared_ptr<Knapsack> eKnapsack = std::make_shared<Knapsack>();
 #else
 	throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) +
-							 " [-] The oneMax problem is not include of the binary. Please turn "
+							 " [-] The Knapsack problem is not include of the binary. Please turn "
 							 "true of MODULE_PROBLEM_KNAPSACK in complilation.");
 #endif
 #if MODULE_PROBLEM_TSP
@@ -174,14 +186,14 @@ int main(int argc, char** argv, char** envp) {
 		std::make_shared<TravelingSalesmanProblem>();
 #else
 	throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) +
-							 " [-] The oneMax problem is not include of the binary. Please turn "
+							 " [-] The traveling salesman problem is not include of the binary. Please turn "
 							 "true of MODULE_PROBLEM_TSP in complilation.");
 #endif
 #if MODULE_PROBLEM_CONTINOUSPROBLEM
 	std::shared_ptr<ContinuousProblem> eContinuousProblem = std::make_shared<ContinuousProblem>();
 #else
 	throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) +
-							 " [-] The oneMax problem is not include of the binary. Please turn "
+							 " [-] The continous problem is not include of the binary. Please turn "
 							 "true of MODULE_PROBLEM_CONTINOUSPROBLEM in complilation.");
 #endif
 
@@ -192,6 +204,11 @@ int main(int argc, char** argv, char** envp) {
 #if MODULE_PROBLEM_ONEMAX
 			solver = new SolverGeneric<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>(
 				configuration, eOneMax);
+#endif
+		} else if(configuration["problem"]["name"].asString() == "n-queens") {
+#if MODULE_PROBLEM_NQUEENSPROBLEM
+			solver = new SolverGeneric<SOL_NQUEENSPROBLEM, TYPE_FITNESS_NQUEENSPROBLEM, TYPE_CELL_NQUEENSPROBLEM>(
+				configuration, eNQueensProblem);
 #endif
 		} else if(configuration["problem"]["name"].asString() == "Subsetsum") {
 #if MODULE_PROBLEM_SUBSETSUM
