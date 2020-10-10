@@ -24,6 +24,8 @@
 #include <cppunit/ui/text/TextTestRunner.h>
 #include <netinet/in.h>
 
+#include "filtering/filters.hpp"
+
 #include "solution/unitTest_domain.hpp"
 #include "solution/unitTest_population.hpp"
 #include "solution/unitTest_solution.hpp"
@@ -48,6 +50,8 @@
 #include "problem/unitTest_oneMax.hpp"
 #include "problem/unitTest_subsetsum.hpp"
 #include "problem/unitTest_travelingSalesmanProblem.hpp"
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_filters);
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_statistic);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_criterias);
