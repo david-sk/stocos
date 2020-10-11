@@ -43,9 +43,9 @@ jobs:
             python3.7 -m pip install numpy argparse
       - run:
           name: Compilation of the project
-          command: cmake .. && make -j 2
+          command: cmake .. && make -j 1
           working_directory: ~/project/build
       - run:
           name: Tests
-          command: make test
+          command: make test CTEST_OUTPUT_ON_FAILURE=1 
           working_directory: ~/project/build

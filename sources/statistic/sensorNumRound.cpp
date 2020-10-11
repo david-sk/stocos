@@ -1,10 +1,10 @@
 ///
 /// @file sensorNumRound.hpp
 /// @author Jxtopher
-/// @brief
 /// @version 0.1
 /// @copyright CC-BY-NC-SA
 /// @date 2019-08-30
+/// @brief
 ///
 #include <statistic/sensorNumRound.h>
 

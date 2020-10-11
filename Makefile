@@ -10,15 +10,15 @@ MAKEFLAGS += --no-print-directory
 
 all : tools-required
 	@cd build && cmake ..
-	@cd build && make -j 2
+	@cd build && make -j$(nproc)
 
 
 unit-test: tools-required
 	@cd build && make unit-test
 
 test: tools-required
-	@cd build && cmake ..
-	@cd build && make -j 2
+	#@cd build && cmake ..
+	@cd build && make -j$(nproc)
 	@cd build && make test
 
 run:

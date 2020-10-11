@@ -4,7 +4,7 @@
 /// @version 1
 /// @copyright CC-BY-NC-SA
 /// @date 2018-10
-/// @brief Stop watch
+/// @brief Stopwatch the execution time of a block
 ///
 
 #ifndef STOPWATCH_H
@@ -35,6 +35,7 @@ class SensorStopwatch : public Sensor<SOL> {
 	int diff_microseconds();
 
 	int diff_minutes();
+
 	void apply(const SOL& s);
 
 	Json::Value asJson() const;

@@ -25,11 +25,6 @@ class UnitTest_neighborhood : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE_END();
 
   public:
-	void setUp(void) {
-	}
-	void tearDown(void) {
-	}
-
 	void listOfMutations(void) {
 		// unsigned int N = 5;
 		// std::shared_ptr<OneMax> oneMax = std::make_shared<OneMax>(N);

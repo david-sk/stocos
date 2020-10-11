@@ -11,9 +11,8 @@
 namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-Shuffle<SOL, TYPE_FITNESS, TYPE_CELL>::Shuffle(
-	std::mt19937& mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem)
-	: AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, problem) {
+Shuffle<SOL, TYPE_FITNESS, TYPE_CELL>::Shuffle(std::mt19937& mt_rand)
+	: AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand) {
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
@@ -41,4 +40,5 @@ template class Shuffle<SolutionArray<int, bool>, int, bool>;
 template class Shuffle<SolutionArray<unsigned int, bool>, unsigned int, bool>;
 template class Shuffle<SolutionArray<double, unsigned int>, double, unsigned int>;
 template class Shuffle<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
+template class Shuffle<SolutionArray<int, int>, int, int>;
 } // namespace stocos

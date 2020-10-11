@@ -24,11 +24,6 @@ class UnitTest_combinationGenerator : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE_END();
 
   public:
-	void setUp(void) {
-	}
-	void tearDown(void) {
-	}
-
 	void test(void) {
 		typedef SolutionArray<unsigned int, bool> TYPESOL;
 		// //CPPUNIT_ASSERT(o->operator()(s) == false);
@@ -57,8 +52,6 @@ class UnitTest_combinationGenerator : public CppUnit::TestFixture {
 			std::cout<<std::endl;
 		} while (cg.stop());*/
 	}
-
-  private:
 };
 
 #endif

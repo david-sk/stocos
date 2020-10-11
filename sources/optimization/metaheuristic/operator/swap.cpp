@@ -12,11 +12,8 @@
 namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-Swap<SOL, TYPE_FITNESS, TYPE_CELL>::Swap(
-	std::mt19937& mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
-	unsigned int number_of_swap)
-	: AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, problem),
-	  _number_of_swap(number_of_swap) {
+Swap<SOL, TYPE_FITNESS, TYPE_CELL>::Swap(std::mt19937& mt_rand, unsigned int number_of_swap)
+	: AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand), _number_of_swap(number_of_swap) {
 	N = 1;
 	rid = std::make_unique<std::uniform_int_distribution<unsigned int>>(0, N - 1);
 }
@@ -66,4 +63,5 @@ template class Swap<SolutionArray<int, bool>, int, bool>;
 template class Swap<SolutionArray<unsigned int, bool>, unsigned int, bool>;
 template class Swap<SolutionArray<double, unsigned int>, double, unsigned int>;
 template class Swap<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
+template class Swap<SolutionArray<int, int>, int, int>;
 } // namespace stocos

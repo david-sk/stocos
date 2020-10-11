@@ -23,6 +23,7 @@
 #include "optimization/metaheuristic/onePlusLambda.h"
 #include "optimization/metaheuristic/operator/mutation/flipBit.h"
 #include "optimization/metaheuristic/operator/mutation/intervalReal.h"
+#include "optimization/metaheuristic/operator/mutation/intervalInteger.h"
 #include "optimization/metaheuristic/operator/mutation/neighborhood.h"
 #include "optimization/metaheuristic/operator/shuffle.h"
 #include "optimization/metaheuristic/operator/swap.h"
@@ -75,6 +76,7 @@ class Factory {
 					this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem,
 					std::move(_atomicOperation));
 		} else if(configuration["className"] == "BestImprovement") {
+			// ! TODO: need to fixed
 			// optimizationAlgorithm = std::make_unique<BestImprovement<SOL, TYPE_FITNESS,
 			// TYPE_CELL>>(this->_mt_rand, *_statistic, *_stoppingCriteria, _problem,
 			// *_atomicOperation, *_selection);
@@ -110,6 +112,7 @@ class Factory {
 					this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem,
 					std::move(_atomicOperation));
 		} else if(configuration["className"] == "Backtraking") {
+			// ! TODO: need to implement
 		} else if(configuration["className"] == "CombinationGenerator") {
 			optimizationAlgorithm =
 				std::make_unique<CombinationGenerator<SOL, TYPE_FITNESS, TYPE_CELL>>(
@@ -181,22 +184,25 @@ class Factory {
 		atomicOperation(const Json::Value& configuration) {
 		if(configuration["className"].asString() == "FlipBit") {
 			return std::make_unique<FlipBit<SOL, TYPE_FITNESS, TYPE_CELL>>(
-				this->_mt_rand, _problem, configuration["c"].asInt());
+				this->_mt_rand, configuration["c"].asInt());
 		} else if(configuration["className"].asString() == "IntervalReal") {
 			return std::make_unique<IntervalReal<SOL, TYPE_FITNESS, TYPE_CELL>>(
-				this->_mt_rand, _problem, configuration["c"].asInt(), configuration["a"].asInt(),
+				this->_mt_rand, configuration["c"].asInt(), configuration["a"].asInt(),
+				configuration["b"].asInt());
+		} else if(configuration["className"].asString() == "IntervalInteger") {
+			return std::make_unique<IntervalInteger<SOL, TYPE_FITNESS, TYPE_CELL>>(
+				this->_mt_rand, configuration["c"].asInt(), configuration["a"].asInt(),
 				configuration["b"].asInt());
 		} else if(configuration["className"].asString() == "Neighborhood") {
 			// return std::make_unique<Neighborhood<SOL, TYPE_FITNESS, SOL>>(this->_mt_rand);
 			// throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) +
 			// " Not implemented : "+configuration["className"].asString());
-			return nullptr;
+			return nullptr; //! TODO need to fixed
 		} else if(configuration["className"].asString() == "Swap") {
 			return std::make_unique<Swap<SOL, TYPE_FITNESS, TYPE_CELL>>(
-				this->_mt_rand, _problem, configuration["number_of_swap"].asInt());
+				this->_mt_rand, configuration["number_of_swap"].asInt());
 		} else if(configuration["className"].asString() == "Shuffle") {
-			return std::make_unique<Shuffle<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand,
-																		   _problem);
+			return std::make_unique<Shuffle<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand);
 		} else
 			throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) +
 									 " The atomicOperation " +

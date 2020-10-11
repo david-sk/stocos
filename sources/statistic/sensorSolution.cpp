@@ -1,10 +1,10 @@
 ///
 /// @file sensorSolution.hpp
 /// @author Jxtopher
-/// @brief
 /// @version 0.1
 /// @copyright CC-BY-NC-SA
 /// @date 2019-08-30
+/// @brief Capture the current solution
 ///
 #include <statistic/sensorSolution.h>
 

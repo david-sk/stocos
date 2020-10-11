@@ -24,10 +24,13 @@
 #include <cppunit/ui/text/TextTestRunner.h>
 #include <netinet/in.h>
 
+#include "filtering/filters.hpp"
+
 #include "solution/unitTest_domain.hpp"
 #include "solution/unitTest_population.hpp"
 #include "solution/unitTest_solution.hpp"
 #include "solution/unitTest_solutionArray.hpp"
+#include "statistic/unitTest_sensorStopwatch.hpp"
 #include "statistic/unitTest_statistic.hpp"
 #include "stoppingCriteria/unitTest_criteriaBudget.hpp"
 #include "stoppingCriteria/unitTest_criterias.hpp"
@@ -35,6 +38,8 @@
 #include "optimization/exhaustiveSearch/unitTest_backtracking.hpp"
 #include "optimization/exhaustiveSearch/unitTest_combinationGenerator.hpp"
 #include "optimization/metaheuristic/operator/mutation/unitTest_flipBit.hpp"
+#include "optimization/metaheuristic/operator/mutation/unitTest_intervalInteger.hpp"
+#include "optimization/metaheuristic/operator/mutation/unitTest_intervalReal.hpp"
 #include "optimization/metaheuristic/operator/mutation/unitTest_kBit.hpp"
 #include "optimization/metaheuristic/operator/mutation/unitTest_neighborhood.hpp"
 #include "optimization/metaheuristic/operator/unitTest_shuffle.hpp"
@@ -45,11 +50,15 @@
 #include "problem/unitTest_jobShopProblem.hpp"
 #include "problem/unitTest_knapsack.hpp"
 #include "problem/unitTest_magicSequence.hpp"
+#include "problem/unitTest_nQueensProblem.hpp"
 #include "problem/unitTest_oneMax.hpp"
 #include "problem/unitTest_subsetsum.hpp"
 #include "problem/unitTest_travelingSalesmanProblem.hpp"
 
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_filters);
+
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_statistic);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_sensorStopwatch);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_criterias);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_criteriaBudget);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solution);
@@ -61,11 +70,14 @@ CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_combinationGenerator);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_backtraking);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_flipBit);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_kBit);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_intervalInteger);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_intervalReal);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_swap);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_shuffle);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_neighborhood);
 
 // Problem
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_NQueensProblem);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_population);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_OneMax);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_knapsack);

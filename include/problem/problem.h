@@ -88,11 +88,11 @@ class Problem {
 		const std::vector<std::pair<unsigned int, TYPE_CELL>>& _listOfMutations) const;
 
 	///
-	/// @brief Evaluation d'une sous-solution
+	/// @brief Evaluation of a sub-solution
 	///
-	/// @param s
-	/// @return true 	si une sous-solution valid
-	/// @return false 	si une sous-solution **non** valid
+	/// @param s is a solution
+	/// @return true 	if the sub-solution valid
+	/// @return false 	if the sub-solution **non** valid
 	///
 	virtual bool evaluationSubSolution(SOL& s) const;
 
@@ -105,7 +105,6 @@ class Problem {
 	virtual TYPE_FITNESS getFitnessObjectif(unsigned int numObjectif = 0) const;
 
 	///-------------
-
 	virtual bool solutionSelection(const SOL& s_worst, const SOL& s_best);
 
 	virtual unsigned int solutionSelection(const Population<SOL>& p);

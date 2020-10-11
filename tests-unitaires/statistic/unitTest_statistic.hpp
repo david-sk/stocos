@@ -24,11 +24,6 @@ class UnitTest_statistic : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE_END();
 
   public:
-	void setUp(void) {
-	}
-	void tearDown(void) {
-	}
-
 	void constructor(void) {
 		Solution<int> s;
 		Sensor<Solution<int>>* sensorNumRound = new SensorNumRound<Solution<int>>();
