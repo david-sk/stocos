@@ -4,14 +4,14 @@
 /// @version 1
 /// @copyright CC-BY-NC-SA
 /// @date 2018-10
-/// @brief intervalle real [a,b]
+/// @brief interval real [a,b]
 ///
 #include <optimization/metaheuristic/operator/mutation/intervalReal.h>
 namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-IntervalReal<SOL, TYPE_FITNESS, TYPE_CELL>::IntervalReal(std::mt19937& mt_rand, 
-	unsigned int c, double a, double b)
+IntervalReal<SOL, TYPE_FITNESS, TYPE_CELL>::IntervalReal(std::mt19937& mt_rand, unsigned int c,
+														 double a, double b)
 	: AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand), _c(c), _a(a), _b(b) {
 	urd_0_1 = std::make_unique<std::uniform_real_distribution<>>(0, 1);
 	urd = std::make_unique<std::uniform_real_distribution<>>(a, b);
@@ -44,4 +44,5 @@ template class IntervalReal<SolutionArray<int, bool>, int, bool>;
 template class IntervalReal<SolutionArray<unsigned int, bool>, unsigned int, bool>;
 template class IntervalReal<SolutionArray<double, unsigned int>, double, unsigned int>;
 template class IntervalReal<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
+template class IntervalReal<SolutionArray<int, int>, int, int>;
 } // namespace stocos

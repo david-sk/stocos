@@ -33,8 +33,6 @@ class UnitTest_population : public CppUnit::TestFixture {
 		Population<SolutionArray<double, bool>> p;
 		p.push_back(s);
 	}
-
-  private:
 };
 
 #endif

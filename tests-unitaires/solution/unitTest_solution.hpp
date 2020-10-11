@@ -113,8 +113,6 @@ class UnitTest_solution : public CppUnit::TestFixture {
 		s3.loadJson(Json::writeString(Json::StreamWriterBuilder(), s1.asJson()));
 		CPPUNIT_ASSERT(s1.getFitness(2) == s3.getFitness(2));
 	}
-
-  private:
 };
 
 #endif

@@ -27,7 +27,7 @@ class SensorFinal : public Sensor<SOL> {
 	SensorFinal(unsigned int num, const std::string& name = "");
 
 	virtual ~SensorFinal();
-	
+
 	void apply(const SOL& s);
 
 	Json::Value asJson() const;

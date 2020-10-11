@@ -88,4 +88,5 @@ template class FlipBit<SolutionArray<int, bool>, int, bool>;
 template class FlipBit<SolutionArray<unsigned int, bool>, unsigned int, bool>;
 template class FlipBit<SolutionArray<double, unsigned int>, double, unsigned int>;
 template class FlipBit<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
+template class FlipBit<SolutionArray<int, int>, int, int>;
 } // namespace stocos

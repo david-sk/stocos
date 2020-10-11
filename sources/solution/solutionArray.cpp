@@ -153,5 +153,6 @@ template class SolutionArray<int, bool>;
 template class SolutionArray<unsigned int, bool>;
 template class SolutionArray<double, unsigned int>;
 template class SolutionArray<unsigned int, unsigned int>;
+template class SolutionArray<int, int>;
 
 } // namespace stocos

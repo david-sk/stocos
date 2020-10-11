@@ -10,6 +10,8 @@
 #ifndef UNITTEST_SENSORSTOPWATCH_H
 #define UNITTEST_SENSORSTOPWATCH_H
 
+#include <unistd.h>
+
 #include "statistic/sensorStopwatch.h"
 
 using namespace CppUnit;
@@ -21,13 +23,13 @@ class UnitTest_sensorStopwatch : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE_END();
 
   public:
-	void setUp(void) {
-		sensorStopwatch.start();
-	}
-
 	void diff_microseconds(void) {
+		unsigned int microseconds = 1;
+		sensorStopwatch.start();
+		usleep(microseconds);
 		sensorStopwatch.stop();
-		CPPUNIT_ASSERT(sensorStopwatch.diff_microseconds() != 0);
+		CPPUNIT_ASSERT(sensorStopwatch.diff_microseconds() > 0);
+		CPPUNIT_ASSERT(sensorStopwatch.diff_microseconds() < 50);
 	}
 
   private:

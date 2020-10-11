@@ -35,7 +35,7 @@ class SensorStopwatch : public Sensor<SOL> {
 	int diff_microseconds();
 
 	int diff_minutes();
-	
+
 	void apply(const SOL& s);
 
 	Json::Value asJson() const;

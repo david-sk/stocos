@@ -31,7 +31,7 @@ class Statistic : private std::vector<Sensor<SOL>*> {
 	static constexpr const char* MONGODB = "mongodb";
 
 	Statistic(bool none = false);
-	
+
 	///
 	/// @brief Enrengistre les données dans un fichier
 	///

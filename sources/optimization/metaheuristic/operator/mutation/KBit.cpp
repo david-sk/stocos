@@ -12,8 +12,7 @@
 namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-KBit<SOL, TYPE_FITNESS, TYPE_CELL>::KBit(
-	std::mt19937& mt_rand, unsigned int k)
+KBit<SOL, TYPE_FITNESS, TYPE_CELL>::KBit(std::mt19937& mt_rand, unsigned int k)
 	: AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand),
 	  rid(std::make_unique<std::uniform_int_distribution<unsigned int>>(0, 1)), _k(k), N(1) {
 }
@@ -89,4 +88,5 @@ template class KBit<SolutionArray<int, bool>, int, bool>;
 template class KBit<SolutionArray<unsigned int, bool>, unsigned int, bool>;
 template class KBit<SolutionArray<double, unsigned int>, double, unsigned int>;
 template class KBit<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
+template class KBit<SolutionArray<int, int>, int, int>;
 } // namespace stocos

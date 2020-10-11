@@ -28,7 +28,7 @@ class SensorFitness : public Sensor<SOL> {
 	virtual ~SensorFitness();
 
 	void apply(const SOL& s);
-	
+
 	Json::Value asJson() const;
 
 	Json::Value finish();

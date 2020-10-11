@@ -27,11 +27,6 @@ class UnitTest_backtraking : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE_END();
 
   public:
-	void setUp(void) {
-	}
-	void tearDown(void) {
-	}
-
 	void test(void) {
 		using TYPESOL = SolutionArray<unsigned int, bool>;
 		// CPPUNIT_ASSERT(o->operator()(s) == false);
@@ -49,8 +44,6 @@ class UnitTest_backtraking : public CppUnit::TestFixture {
 			mt_rand, std::move(statistic), std::move(stoppingCriteria), oneMax, 2, 4);
 		backtraking.recursive(0);
 	}
-
-  private:
 };
 
 #endif

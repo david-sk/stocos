@@ -30,8 +30,6 @@ class UnitTest_flipBit : public CppUnit::TestFixture {
 	void setUp(void) {
 		mt_rand.seed(0);
 	}
-	void tearDown(void) {
-	}
 
 	void operator()(void) {
 		unsigned int N = 50;

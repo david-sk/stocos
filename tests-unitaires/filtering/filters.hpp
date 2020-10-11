@@ -25,11 +25,6 @@ class UnitTest_filters : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE_END();
 
   public:
-	void setUp(void) {
-	}
-	void tearDown(void) {
-	}
-
 	static bool checks1_validity_solution(const Solution<double>& s) {
 		return true;
 	}
@@ -47,8 +42,6 @@ class UnitTest_filters : public CppUnit::TestFixture {
 		filters.insert(checks2_validity_solution);
 		CPPUNIT_ASSERT(filters(s1) == false);
 	}
-
-  private:
 };
 
 #endif

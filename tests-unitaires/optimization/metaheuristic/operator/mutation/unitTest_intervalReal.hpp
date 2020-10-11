@@ -21,16 +21,30 @@ using namespace CppUnit;
 
 class UnitTest_intervalReal : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE(UnitTest_intervalReal);
-	// CPPUNIT_TEST(listOfMutations);
+	CPPUNIT_TEST(operator());
 	CPPUNIT_TEST_SUITE_END();
 
   public:
 	void setUp(void) {
+		mt_rand.seed(0);
 	}
-	void tearDown(void) {
+
+	void operator()(void) {
+		unsigned int n = 20;
+		SolutionArray<double, double> s1(n);
+		SolutionArray<double, double> s2(s1);
+		IntervalReal<SolutionArray<double, double>, double, double> intervalReal(mt_rand, 20, -10,
+																				 10);
+		intervalReal(s1);
+		CPPUNIT_ASSERT(!(s1 == s2));
+		for(unsigned int i = 0; i < n; i++) {
+			CPPUNIT_ASSERT(s1(i) >= -10);
+			CPPUNIT_ASSERT(s1(i) <= 10);
+		}
 	}
 
   private:
+	std::mt19937 mt_rand;
 };
 
 #endif

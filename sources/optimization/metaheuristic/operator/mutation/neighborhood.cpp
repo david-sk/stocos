@@ -61,4 +61,5 @@ template class Neighborhood<SolutionArray<int, bool>, int, bool>;
 template class Neighborhood<SolutionArray<unsigned int, bool>, unsigned int, bool>;
 template class Neighborhood<SolutionArray<double, unsigned int>, double, unsigned int>;
 template class Neighborhood<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
+template class Neighborhood<SolutionArray<int, int>, int, int>;
 } // namespace stocos

@@ -20,7 +20,7 @@ namespace stocos {
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class AtomicOperation {
   public:
-	AtomicOperation(std::mt19937& mt_rand): _mt_rand(mt_rand) {
+	AtomicOperation(std::mt19937& mt_rand) : _mt_rand(mt_rand) {
 	}
 
 	virtual ~AtomicOperation() {
