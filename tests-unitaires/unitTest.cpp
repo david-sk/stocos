@@ -39,6 +39,8 @@
 #include "optimization/exhaustiveSearch/unitTest_combinationGenerator.hpp"
 #include "optimization/metaheuristic/operator/mutation/unitTest_flipBit.hpp"
 #include "optimization/metaheuristic/operator/mutation/unitTest_kBit.hpp"
+#include "optimization/metaheuristic/operator/mutation/unitTest_intervalInteger.hpp"
+#include "optimization/metaheuristic/operator/mutation/unitTest_intervalReal.hpp"
 #include "optimization/metaheuristic/operator/mutation/unitTest_neighborhood.hpp"
 #include "optimization/metaheuristic/operator/unitTest_shuffle.hpp"
 #include "optimization/metaheuristic/operator/unitTest_swap.hpp"
@@ -68,6 +70,8 @@ CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_combinationGenerator);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_backtraking);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_flipBit);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_kBit);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_intervalInteger);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_intervalReal);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_swap);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_shuffle);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_neighborhood);
