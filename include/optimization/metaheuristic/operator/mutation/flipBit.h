@@ -23,8 +23,7 @@ namespace stocos {
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class FlipBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
   public:
-	FlipBit(std::mt19937& mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
-			unsigned int c);
+	FlipBit(std::mt19937& mt_rand, unsigned int c);
 	virtual ~FlipBit();
 
 	void operator()(SOL& s);

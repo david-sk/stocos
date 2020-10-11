@@ -11,10 +11,8 @@
 namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-FlipBit<SOL, TYPE_FITNESS, TYPE_CELL>::FlipBit(
-	std::mt19937& mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
-	unsigned int c)
-	: AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, problem), _c(c), N(0) {
+FlipBit<SOL, TYPE_FITNESS, TYPE_CELL>::FlipBit(std::mt19937& mt_rand, unsigned int c)
+	: AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand), _c(c), N(0) {
 	urd = std::make_unique<std::uniform_real_distribution<>>(0, 1);
 }
 

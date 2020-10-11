@@ -23,8 +23,7 @@ namespace stocos {
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class KBit : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
   public:
-	KBit(std::mt19937& mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
-		 unsigned int k);
+	KBit(std::mt19937& mt_rand, unsigned int k);
 
 	virtual ~KBit();
 

@@ -11,9 +11,8 @@ namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 IntervalInteger<SOL, TYPE_FITNESS, TYPE_CELL>::IntervalInteger(
-	std::mt19937& mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
-	unsigned int c, double a, double b)
-	: AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, problem), _c(c), _a(a), _b(b) {
+	std::mt19937& mt_rand,	unsigned int c, double a, double b)
+	: AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand), _c(c), _a(a), _b(b) {
 	urd_0_1 = std::make_unique<std::uniform_real_distribution<>>(0, 1);
 	rid = std::make_unique<std::uniform_int_distribution<unsigned int>>(_a, _b); // unsigned int -> TYPE_CELL ?
 	mutation_rate = 0.5;

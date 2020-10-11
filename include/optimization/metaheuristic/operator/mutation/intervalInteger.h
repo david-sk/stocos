@@ -23,8 +23,7 @@ namespace stocos {
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class IntervalInteger : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
   public:
-	IntervalInteger(std::mt19937& mt_rand,
-				 std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem, unsigned int c,
+	IntervalInteger(std::mt19937& mt_rand, unsigned int c,
 				 double a, double b);
 	virtual ~IntervalInteger();
 

@@ -12,9 +12,8 @@
 namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-Neighborhood<SOL, TYPE_FITNESS, TYPE_CELL>::Neighborhood(
-	std::mt19937& mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem)
-	: AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, problem) {
+Neighborhood<SOL, TYPE_FITNESS, TYPE_CELL>::Neighborhood(std::mt19937& mt_rand)
+	: AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand) {
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
