@@ -21,8 +21,6 @@ using namespace stocos;
 
 class UnitTest_NQueensProblem : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE(UnitTest_NQueensProblem);
-	// CPPUNIT_TEST(evaluation);
-	// CPPUNIT_TEST(loadInstance);
 	CPPUNIT_TEST(check_diagonal);
 	CPPUNIT_TEST(check_line);
 	CPPUNIT_TEST(evaluationSubSolution);
@@ -51,13 +49,6 @@ class UnitTest_NQueensProblem : public CppUnit::TestFixture {
 		s_semi_valid(1, 3);
 		s_semi_valid(2, 3);
 		s_semi_valid(3, 2);
-	}
-	void tearDown(void) {
-	}
-
-	void loadInstance(void) {
-		// std::string file = "instances/OneMax/onemax-50.json";
-		// OneMax eOneMax(file);
 	}
 
 	void check_diagonal(void) {
