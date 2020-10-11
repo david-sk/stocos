@@ -45,12 +45,10 @@ void NQueensProblem::evaluation(SOL_NQUEENSPROBLEM& s) {
 	bool stat = true;
 	for(unsigned int i = 0; i < _n; i++) {
 		for(unsigned int j = i + 1; j < _n; j++) {
-			if(abs(s(i) - s(j)) == abs(static_cast<int>(i) - static_cast<int>(j)))
-				stat = false;
-			if(s(i) == s(j)) 
-				stat = false;
+			if(abs(s(i) - s(j)) == abs(static_cast<int>(i) - static_cast<int>(j))) stat = false;
+			if(s(i) == s(j)) stat = false;
 		}
-		if (stat) fitness++;
+		if(stat) fitness++;
 	}
 	s.setFitness(0, fitness);
 }

@@ -1,10 +1,10 @@
 ///
 /// @file sensorSolution.hpp
 /// @author Jxtopher
-/// @brief
 /// @version 0.1
 /// @copyright CC-BY-NC-SA
 /// @date 2019-08-30
+/// @brief Capture the current solution
 ///
 
 #ifndef SENSORSOLTUTION_H
@@ -29,7 +29,6 @@ class SensorSolution : public Sensor<SOL> {
 
 	void apply(const SOL& s);
 	Json::Value asJson() const;
-
 	Json::Value finish();
 	std::string name() const;
 

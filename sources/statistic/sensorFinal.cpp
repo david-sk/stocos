@@ -20,15 +20,18 @@ template<class SOL>
 SensorFinal<SOL>::~SensorFinal() {
 	stopwatch.stop();
 }
+
 template<class SOL>
 void SensorFinal<SOL>::apply(const SOL& s) {
 	numRound.apply(s);
 	solution_best = s;
 }
+
 template<class SOL>
 Json::Value SensorFinal<SOL>::asJson() const {
 	return Json::Value();
 }
+
 template<class SOL>
 Json::Value SensorFinal<SOL>::finish() {
 	Json::Value r;
@@ -42,6 +45,7 @@ Json::Value SensorFinal<SOL>::finish() {
 	r["experience"] = exp;
 	return r;
 }
+
 template<class SOL>
 std::string SensorFinal<SOL>::name() const {
 	return std::string("final");

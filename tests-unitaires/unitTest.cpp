@@ -30,6 +30,7 @@
 #include "solution/unitTest_population.hpp"
 #include "solution/unitTest_solution.hpp"
 #include "solution/unitTest_solutionArray.hpp"
+#include "statistic/unitTest_sensorStopwatch.hpp"
 #include "statistic/unitTest_statistic.hpp"
 #include "stoppingCriteria/unitTest_criteriaBudget.hpp"
 #include "stoppingCriteria/unitTest_criterias.hpp"
@@ -55,6 +56,7 @@
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_filters);
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_statistic);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_sensorStopwatch);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_criterias);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_criteriaBudget);
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solution);

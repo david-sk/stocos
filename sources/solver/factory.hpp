@@ -75,6 +75,7 @@ class Factory {
 					this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem,
 					std::move(_atomicOperation));
 		} else if(configuration["className"] == "BestImprovement") {
+			// ! TODO: need to fixed
 			// optimizationAlgorithm = std::make_unique<BestImprovement<SOL, TYPE_FITNESS,
 			// TYPE_CELL>>(this->_mt_rand, *_statistic, *_stoppingCriteria, _problem,
 			// *_atomicOperation, *_selection);
@@ -110,6 +111,7 @@ class Factory {
 					this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem,
 					std::move(_atomicOperation));
 		} else if(configuration["className"] == "Backtraking") {
+			// ! TODO: need to implement
 		} else if(configuration["className"] == "CombinationGenerator") {
 			optimizationAlgorithm =
 				std::make_unique<CombinationGenerator<SOL, TYPE_FITNESS, TYPE_CELL>>(

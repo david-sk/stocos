@@ -4,7 +4,7 @@
 /// @version 1
 /// @copyright CC-BY-NC-SA
 /// @date 2018-10
-/// @brief Stop watch
+/// @brief Stopwatch the execution time of a block
 ///
 #include <statistic/sensorStopwatch.h>
 
@@ -74,7 +74,9 @@ std::string SensorStopwatch<SOL>::name() const {
 	return std::string("time_μs");
 }
 
+template class SensorStopwatch<unsigned int>;
 template class SensorStopwatch<Solution<int>>;
+template class SensorStopwatch<Solution<unsigned int>>;
 template class SensorStopwatch<SolutionArray<double, double>>;
 template class SensorStopwatch<SolutionArray<double, bool>>;
 template class SensorStopwatch<SolutionArray<int, bool>>;

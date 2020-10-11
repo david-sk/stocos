@@ -43,8 +43,6 @@
 #include "problem/continuousProblem.h"
 #endif
 
-
-
 // Include solver
 #include "solver/solver.hpp"
 #include "solver/solverClientRPC.hpp"
@@ -185,9 +183,10 @@ int main(int argc, char** argv, char** envp) {
 	std::shared_ptr<TravelingSalesmanProblem> eTravelingSalesmanProblem =
 		std::make_shared<TravelingSalesmanProblem>();
 #else
-	throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) +
-							 " [-] The traveling salesman problem is not include of the binary. Please turn "
-							 "true of MODULE_PROBLEM_TSP in complilation.");
+	throw std::runtime_error(
+		std::string{} + __FILE__ + ":" + std::to_string(__LINE__) +
+		" [-] The traveling salesman problem is not include of the binary. Please turn "
+		"true of MODULE_PROBLEM_TSP in complilation.");
 #endif
 #if MODULE_PROBLEM_CONTINOUSPROBLEM
 	std::shared_ptr<ContinuousProblem> eContinuousProblem = std::make_shared<ContinuousProblem>();
@@ -207,8 +206,8 @@ int main(int argc, char** argv, char** envp) {
 #endif
 		} else if(configuration["problem"]["name"].asString() == "n-queens") {
 #if MODULE_PROBLEM_NQUEENSPROBLEM
-			solver = new SolverGeneric<SOL_NQUEENSPROBLEM, TYPE_FITNESS_NQUEENSPROBLEM, TYPE_CELL_NQUEENSPROBLEM>(
-				configuration, eNQueensProblem);
+			solver = new SolverGeneric<SOL_NQUEENSPROBLEM, TYPE_FITNESS_NQUEENSPROBLEM,
+									   TYPE_CELL_NQUEENSPROBLEM>(configuration, eNQueensProblem);
 #endif
 		} else if(configuration["problem"]["name"].asString() == "Subsetsum") {
 #if MODULE_PROBLEM_SUBSETSUM

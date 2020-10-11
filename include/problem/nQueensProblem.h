@@ -47,7 +47,7 @@ class NQueensProblem
 
 	// Gives the number of queens without fail with another queen
 	void evaluation(SOL_NQUEENSPROBLEM& s);
-	
+
 	void resetSolution(SOL_NQUEENSPROBLEM& s) const;
 
 	TYPE_FITNESS_NQUEENSPROBLEM getFitnessObjectif(unsigned int numObjectif = 0) const;
