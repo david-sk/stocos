@@ -28,8 +28,11 @@ class SensorSolution : public Sensor<SOL> {
 	virtual ~SensorSolution();
 
 	void apply(const SOL& s);
+	
 	Json::Value asJson() const;
+
 	Json::Value finish();
+
 	std::string name() const;
 
   private:
