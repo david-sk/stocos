@@ -65,7 +65,6 @@ Json::Value SensorStopwatch<SOL>::asJson() const {
 
 template<class SOL>
 Json::Value SensorStopwatch<SOL>::finish() {
-	// out<<"Time: " <<diff_minutes()<<"m "<<diff_microseconds()<<"μs";
 	return Json::Value();
 }
 
