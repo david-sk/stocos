@@ -183,10 +183,10 @@ class Factory {
 		atomicOperation(const Json::Value& configuration) {
 		if(configuration["className"].asString() == "FlipBit") {
 			return std::make_unique<FlipBit<SOL, TYPE_FITNESS, TYPE_CELL>>(
-				this->_mt_rand, _problem, configuration["c"].asInt());
+				this->_mt_rand, configuration["c"].asInt());
 		} else if(configuration["className"].asString() == "IntervalReal") {
 			return std::make_unique<IntervalReal<SOL, TYPE_FITNESS, TYPE_CELL>>(
-				this->_mt_rand, _problem, configuration["c"].asInt(), configuration["a"].asInt(),
+				this->_mt_rand, configuration["c"].asInt(), configuration["a"].asInt(),
 				configuration["b"].asInt());
 		} else if(configuration["className"].asString() == "Neighborhood") {
 			// return std::make_unique<Neighborhood<SOL, TYPE_FITNESS, SOL>>(this->_mt_rand);
@@ -195,10 +195,9 @@ class Factory {
 			return nullptr;
 		} else if(configuration["className"].asString() == "Swap") {
 			return std::make_unique<Swap<SOL, TYPE_FITNESS, TYPE_CELL>>(
-				this->_mt_rand, _problem, configuration["number_of_swap"].asInt());
+				this->_mt_rand, configuration["number_of_swap"].asInt());
 		} else if(configuration["className"].asString() == "Shuffle") {
-			return std::make_unique<Shuffle<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand,
-																		   _problem);
+			return std::make_unique<Shuffle<SOL, TYPE_FITNESS, TYPE_CELL>>(this->_mt_rand);
 		} else
 			throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) +
 									 " The atomicOperation " +
