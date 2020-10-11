@@ -23,6 +23,7 @@
 #include "optimization/metaheuristic/onePlusLambda.h"
 #include "optimization/metaheuristic/operator/mutation/flipBit.h"
 #include "optimization/metaheuristic/operator/mutation/intervalReal.h"
+#include "optimization/metaheuristic/operator/mutation/intervalInteger.h"
 #include "optimization/metaheuristic/operator/mutation/neighborhood.h"
 #include "optimization/metaheuristic/operator/shuffle.h"
 #include "optimization/metaheuristic/operator/swap.h"
@@ -188,11 +189,15 @@ class Factory {
 			return std::make_unique<IntervalReal<SOL, TYPE_FITNESS, TYPE_CELL>>(
 				this->_mt_rand, configuration["c"].asInt(), configuration["a"].asInt(),
 				configuration["b"].asInt());
+		} else if(configuration["className"].asString() == "IntervalInteger") {
+			return std::make_unique<IntervalInteger<SOL, TYPE_FITNESS, TYPE_CELL>>(
+				this->_mt_rand, configuration["c"].asInt(), configuration["a"].asInt(),
+				configuration["b"].asInt());
 		} else if(configuration["className"].asString() == "Neighborhood") {
 			// return std::make_unique<Neighborhood<SOL, TYPE_FITNESS, SOL>>(this->_mt_rand);
 			// throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) +
 			// " Not implemented : "+configuration["className"].asString());
-			return nullptr;
+			return nullptr; //! TODO need to fixed
 		} else if(configuration["className"].asString() == "Swap") {
 			return std::make_unique<Swap<SOL, TYPE_FITNESS, TYPE_CELL>>(
 				this->_mt_rand, configuration["number_of_swap"].asInt());

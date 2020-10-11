@@ -36,8 +36,10 @@ if __name__ == '__main__':
                     "fitnessObjectif": 10
                 },
                 "AtomicOperation": {
-                    "className": "FlipBit",
-                    "c": 1
+                    "className": "IntervalInteger",
+                    "c": 1,
+                    "a": 0,
+                    "b": 3
                 },
                 "sizeOfTabuList": 7
             }
@@ -48,14 +50,13 @@ if __name__ == '__main__':
             "sensorSolution" : False,
             "sensorStopwatch" : False,
             "sensorFinal" : {
-                "name" : "oneMax",
+                "name" : "n-queens problem",
                 "num" : 6
             }
         }
     }
     
     result = subprocess.run([args.path, "-j", json.dumps(OneMax)], capture_output=True)
-    # result_data = json.loads(result.stdout)
-    print(result)
-    # assert result_data["Solution"]["fitness"][0] == 10
+    result_data = json.loads(result.stdout)
+    assert result_data["Solution"]["fitness"][0] == 4
     # exit(result.returncode)
