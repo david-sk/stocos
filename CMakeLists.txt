@@ -129,8 +129,6 @@ link_libraries(${CPPUNIT_LIBRARIES})
 add_custom_target(unit-test COMMAND ${PROJECT_NAME}-unittest DEPENDS ${PROJECT_NAME}-unittest)
 add_executable(${PROJECT_NAME}-unittest tests-unitaires/unitTest.cpp)
 
-
-
 target_include_directories(${PROJECT_NAME}-unittest PRIVATE 
     "modules/"
     "include/")
@@ -142,7 +140,6 @@ target_link_libraries(${PROJECT_NAME}-unittest LINK_PRIVATE
 
 target_compile_definitions(${PROJECT_NAME}-unittest PRIVATE
 BOOST_LOG_DYN_LINK=0)
-
 
 enable_testing()
 add_test(NAME "tests-unitaires" COMMAND ./build/${PROJECT_NAME}-unittest WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
