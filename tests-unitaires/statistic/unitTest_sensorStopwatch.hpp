@@ -29,7 +29,7 @@ class UnitTest_sensorStopwatch : public CppUnit::TestFixture {
 		usleep(microseconds);
 		sensorStopwatch.stop();
 		CPPUNIT_ASSERT(sensorStopwatch.diff_microseconds() > 0);
-		CPPUNIT_ASSERT(sensorStopwatch.diff_microseconds() < 50);
+		CPPUNIT_ASSERT(sensorStopwatch.diff_microseconds() < 500);
 	}
 
   private:
