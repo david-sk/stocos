@@ -13,9 +13,8 @@ namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 KBit<SOL, TYPE_FITNESS, TYPE_CELL>::KBit(
-	std::mt19937& mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
-	unsigned int k)
-	: AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, problem),
+	std::mt19937& mt_rand, unsigned int k)
+	: AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand),
 	  rid(std::make_unique<std::uniform_int_distribution<unsigned int>>(0, 1)), _k(k), N(1) {
 }
 

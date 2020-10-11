@@ -24,8 +24,7 @@ namespace stocos {
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class Neighborhood : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
   public:
-	Neighborhood(std::mt19937& mt_rand,
-				 std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem);
+	Neighborhood(std::mt19937& mt_rand);
 
 	virtual ~Neighborhood();
 

@@ -20,7 +20,7 @@ namespace stocos {
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class Shuffle : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
   public:
-	Shuffle(std::mt19937& mt_rand, std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem);
+	Shuffle(std::mt19937& mt_rand);
 
 	~Shuffle();
 
