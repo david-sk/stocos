@@ -48,8 +48,8 @@ jobs:
               mkdir -p libjson-rpc-cpp/build &&
               cd libjson-rpc-cpp/build &&
               cmake .. && make &&
-              sudo make install &&
-              sudo ldconfig          #only required for linux
+              make install &&
+              ldconfig          #only required for linux
       - run:
           name: Compilation of the project
           command: cmake .. && make -j 1
