@@ -14,12 +14,11 @@
 
 #include <string>
 
+#include "problem/nQueensProblem.cpp"
 #include "problem/problem.cpp"
 #include "solution/solution.cpp"
 #include "solution/solutionArray.cpp"
 #include "solutionSelection/maximization.cpp"
-#include "problem/nQueensProblem.cpp"
-
 
 using namespace CppUnit;
 using namespace stocos;

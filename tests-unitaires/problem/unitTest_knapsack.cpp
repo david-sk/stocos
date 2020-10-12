@@ -12,10 +12,11 @@
 #ifndef UNITTEST_KNAPSACK_H
 #define UNITTEST_KNAPSACK_H
 
+#include "problem/knapsack.cpp"
 #include "problem/problem.cpp"
 #include "solution/solution.cpp"
 #include "solution/solutionArray.cpp"
-#include "problem/knapsack.cpp"
+#include "solutionSelection/maximization.cpp"
 
 using namespace CppUnit;
 using namespace stocos;

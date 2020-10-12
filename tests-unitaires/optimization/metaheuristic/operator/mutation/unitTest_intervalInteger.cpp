@@ -15,9 +15,10 @@
 #include <memory> // std::shared_ptr std::unique_ptr
 #include <random>
 
-#include "optimization/metaheuristic/operator/atomicOperation.cpp"
+#include "optimization/metaheuristic/operator/atomicOperation.h"
 #include "optimization/metaheuristic/operator/mutation/intervalInteger.cpp"
 #include "solution/solutionArray.cpp"
+#include "solution/solution.cpp"
 
 using namespace CppUnit;
 using namespace stocos;

@@ -4,7 +4,8 @@
 /// @version 1
 /// @copyright CC-BY-NC-SA
 /// @date 2018-10
-/// @brief g++ tests-unitaires/filtering/test.cpp -I sources/ -Iinclude -lcppunit -lpthread -lboost_log -lboost_system -ljsoncpp
+/// @brief g++ tests-unitaires/filtering/test.cpp -I sources/ -Iinclude -lcppunit -lpthread
+/// -lboost_log -lboost_system -ljsoncpp
 ///
 
 #include "../unitTest.h"

@@ -14,10 +14,10 @@
 
 #include <string>
 
+#include "problem/oneMax.cpp"
 #include "problem/problem.cpp"
 #include "solution/solution.cpp"
 #include "solution/solutionArray.cpp"
-#include "problem/oneMax.cpp"
 #include "solutionSelection/maximization.cpp"
 
 using namespace CppUnit;

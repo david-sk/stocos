@@ -15,10 +15,14 @@
 #include <memory> // std::shared_ptr std::unique_ptr
 
 #include "optimization/metaheuristic/operator/mutation/flipBit.cpp"
+#include "problem/problem.cpp"
 #include "problem/oneMax.cpp"
+#include "solution/solution.cpp"
 #include "solution/solutionArray.cpp"
+#include "solutionSelection/maximization.cpp"
 
 using namespace CppUnit;
+using namespace stocos;
 
 class UnitTest_flipBit : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE(UnitTest_flipBit);
@@ -37,7 +41,7 @@ class UnitTest_flipBit : public CppUnit::TestFixture {
 		unsigned int N = 50;
 		SOL_ONEMAX s(N);
 
-		for(unsigned int i = 0; i < N; i++) { s(i, 0); }
+		for(unsigned int i = 0; i < N; i++) s(i, 0);
 
 		FlipBit<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX> flipbit(mt_rand, 0);
 		flipbit(s);

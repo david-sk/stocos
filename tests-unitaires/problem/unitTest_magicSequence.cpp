@@ -12,11 +12,11 @@
 #ifndef UNITTEST_MAGICSEQUENCE_H
 #define UNITTEST_MAGICSEQUENCE_H
 
+#include "problem/magicSequence.cpp"
 #include "problem/problem.cpp"
 #include "solution/solution.cpp"
 #include "solution/solutionArray.cpp"
 #include "solutionSelection/maximization.cpp"
-#include "problem/magicSequence.cpp"
 
 using namespace CppUnit;
 using namespace stocos;

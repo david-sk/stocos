@@ -14,12 +14,15 @@
 
 #include <memory> // std::shared_ptr std::unique_ptr
 
-#include "solution/solutionArray.cpp"
 #include "optimization/metaheuristic/operator/swap.cpp"
+#include "problem/problem.cpp"
 #include "problem/oneMax.cpp"
-
+#include "solution/solution.cpp"
+#include "solution/solutionArray.cpp"
+#include "solutionSelection/maximization.cpp"
 
 using namespace CppUnit;
+using namespace stocos;
 
 class UnitTest_swap : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE(UnitTest_swap);

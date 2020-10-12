@@ -22,8 +22,8 @@ using namespace CppUnit;
 #include "problem/problem.cpp"
 #include "solution/solution.cpp"
 #include "solution/solutionArray.cpp"
-#include "stoppingCriteria/stoppingCriteria.cpp"
 #include "solutionSelection/maximization.cpp"
+#include "stoppingCriteria/stoppingCriteria.cpp"
 
 using namespace stocos;
 
@@ -36,13 +36,10 @@ class UnitTest_backtraking : public CppUnit::TestFixture {
 	void setUp(void) {
 		mt_rand.seed(0);
 	}
-	
+
 	void test(void) {
 		// using TYPESOL = SolutionArray<unsigned int, bool>;
 		// // CPPUNIT_ASSERT(o->operator()(s) == false);
-
-		
-		
 
 		// std::unique_ptr<StoppingCriteria<TYPESOL, unsigned int>> stoppingCriteria =
 		// 	std::make_unique<StoppingCriteria<TYPESOL, unsigned int>>();

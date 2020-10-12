@@ -16,9 +16,13 @@
 
 #include "optimization/metaheuristic/operator/mutation/KBit.cpp"
 #include "problem/oneMax.cpp"
+#include "problem/problem.cpp"
 #include "solution/solutionArray.cpp"
+#include "solution/solution.cpp"
+#include "solutionSelection/maximization.cpp"
 
 using namespace CppUnit;
+using namespace stocos;
 
 class UnitTest_kBit : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE(UnitTest_kBit);
