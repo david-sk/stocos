@@ -170,9 +170,9 @@ foreach (SOURCE_FILE ${ALL_SOURCE_FILES})
         add_library(${NAME_FILE} STATIC ${SOURCE_FILE})
         target_include_directories(${NAME_FILE} PRIVATE 
         "modules/"
-        "include/")
+        "include/"
+        "/usr/local/include/")
         target_link_libraries(${PROJECT_NAME} ${NAME_FILE})
-        # target_link_libraries(${PROJECT_NAME}-unittest LINK_PRIVATE ${NAME_FILE})
         target_compile_definitions(${NAME_FILE} PRIVATE BOOST_LOG_DYN_LINK=1)
         set_target_properties(${NAME_FILE}
             PROPERTIES
