@@ -66,18 +66,6 @@ endif()
 ###############################################################################
 # Get external libs
 ###############################################################################
-include(ExternalProject)
-
-ExternalProject_Add(LIBJSON_RPC_CPP
-    SOURCE_DIR "${PROJECT_BINARY_DIR}/deps/libjson-rpc-cpp"
-    BINARY_DIR "${PROJECT_BINARY_DIR}/deps/libjson-rpc-cpp-build"
-    INSTALL_DIR "${PROJECT_BINARY_DIR}/deps/install"
-    GIT_REPOSITORY https://github.com/cinemast/libjson-rpc-cpp.git
-    GIT_TAG c696f69
-    CMAKE_ARGS
-    -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
-)
-
 ## PkgConfigmr
 find_package(PkgConfig)
 
@@ -96,16 +84,16 @@ find_path(MongoDB_INCLUDE_DIR NAMES mongo/client/dbclient.h)
 ###############################################################################
 add_executable(${PROJECT_NAME} sources/main.cpp)
 target_include_directories(${PROJECT_NAME} PRIVATE 
-    modules/
+    "modules/"
     "include/"
-    ${CMAKE_CURRENT_BINARY_DIR}/deps/install/include/
+    "/usr/local/include/"
 )
 
 target_link_libraries(${PROJECT_NAME}
     ${Boost_LIBRARIES} 
     ${JSONCPP_LIBRARIES}
-    "${CMAKE_CURRENT_BINARY_DIR}/deps/install/lib/libjsonrpccpp-client.so"
-    "${CMAKE_CURRENT_BINARY_DIR}/deps/install/lib/libjsonrpccpp-common.so"
+    "/usr/local/lib/libjsonrpccpp-client.so"
+    "/usr/local/lib/libjsonrpccpp-common.so"
     ${MongoDB_LIBRARIES})
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE 
