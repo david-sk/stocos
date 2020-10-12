@@ -92,6 +92,7 @@ foreach (SOURCE_FILE ${ALL_SOURCE_FILES})
         target_include_directories(${NAME_FILE} PRIVATE 
         "modules/"
         "include/")
+        list(APPEND STATIC_LIB_FILES "${NAME_FILE}")
         target_link_libraries(${PROJECT_NAME} ${NAME_FILE})
         target_compile_definitions(${NAME_FILE} PRIVATE BOOST_LOG_DYN_LINK=1)
         set_target_properties(${NAME_FILE}
@@ -136,14 +137,6 @@ link_libraries(${CPPUNIT_LIBRARIES})
 ###############################################################################
 enable_testing()
 set(UNITTEST_TO_APPLY "tests-unitaires/*.cpp")
-
-file(GLOB_RECURSE ALL_STATIC_LIB_FILES sources/*.cpp)
-foreach (SOURCE_FILE ${ALL_STATIC_LIB_FILES})
-    get_filename_component(NAME_FILE ${SOURCE_FILE} NAME)
-    if (NOT "main.cpp" MATCHES  ${NAME_FILE})    
-        list(APPEND STATIC_LIB_FILES "${NAME_FILE}")
-    endif()
-endforeach ()
 
 file(GLOB_RECURSE ALL_SOURCE_FILES  ${UNITTEST_TO_APPLY})
 foreach (SOURCE_FILE ${ALL_SOURCE_FILES})
