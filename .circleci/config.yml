@@ -37,6 +37,7 @@ jobs:
             python3.7
             python3-pip
             zlib1g-dev
+            sudo
       - run:
           name: Install Dependencies python3.7
           command: >
