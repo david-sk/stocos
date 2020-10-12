@@ -128,7 +128,7 @@ foreach (SOURCE_FILE ${ALL_SOURCE_FILES})
     modules/
     "include/"
     "sources/"
-    ${CMAKE_CURRENT_BINARY_DIR}/deps/install/include/
+    "/usr/local/include/"
 )
 
     add_test(NAME ${NAME_FILE} COMMAND ${NAME_FILE} WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
@@ -170,8 +170,7 @@ foreach (SOURCE_FILE ${ALL_SOURCE_FILES})
         add_library(${NAME_FILE} STATIC ${SOURCE_FILE})
         target_include_directories(${NAME_FILE} PRIVATE 
         "modules/"
-        "include/"
-        "/usr/local/include/")
+        "include/")
         target_link_libraries(${PROJECT_NAME} ${NAME_FILE})
         target_compile_definitions(${NAME_FILE} PRIVATE BOOST_LOG_DYN_LINK=1)
         set_target_properties(${NAME_FILE}
