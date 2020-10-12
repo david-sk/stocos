@@ -17,13 +17,13 @@
 
 using namespace CppUnit;
 
-#include "optimization/exhaustiveSearch/backtracking.cpp"
-#include "problem/oneMax.cpp"
-#include "problem/problem.cpp"
-#include "solution/solution.cpp"
-#include "solution/solutionArray.cpp"
-#include "solutionSelection/maximization.cpp"
-#include "stoppingCriteria/stoppingCriteria.cpp"
+#include "optimization/exhaustiveSearch/backtracking.h"
+#include "problem/oneMax.h"
+#include "problem/problem.h"
+#include "solution/solution.h"
+#include "solution/solutionArray.h"
+#include "solutionSelection/maximization.h"
+#include "stoppingCriteria/stoppingCriteria.h"
 
 using namespace stocos;
 

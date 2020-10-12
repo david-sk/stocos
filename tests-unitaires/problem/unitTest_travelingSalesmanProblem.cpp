@@ -15,11 +15,11 @@
 #include <fstream> // ifstream
 #include <string>
 
-#include "problem/problem.cpp"
-#include "problem/travelingSalesmanProblem.cpp"
-#include "solution/solution.cpp"
-#include "solution/solutionArray.cpp"
-#include "solutionSelection/minimization.cpp"
+#include "problem/problem.h"
+#include "problem/travelingSalesmanProblem.h"
+#include "solution/solution.h"
+#include "solution/solutionArray.h"
+#include "solutionSelection/minimization.h"
 
 using namespace CppUnit;
 using namespace stocos;

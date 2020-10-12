@@ -1,8 +1,8 @@
 #
-# @Author: *
+# @Author: Jxtopher
 # @License: *
-# @Date: *
-# @Version: 1
+# @Date: 2020-11
+# @Version: 2
 # @Description: Makefile
 #
 
@@ -83,6 +83,26 @@ find_path(MongoDB_INCLUDE_DIR NAMES mongo/client/dbclient.h)
 # Stocos
 ###############################################################################
 add_executable(${PROJECT_NAME} sources/main.cpp)
+
+file(GLOB_RECURSE ALL_SOURCE_FILES sources/*.cpp)
+foreach (SOURCE_FILE ${ALL_SOURCE_FILES})
+    get_filename_component(NAME_FILE ${SOURCE_FILE} NAME)
+    if (NOT "main.cpp" MATCHES  ${NAME_FILE} )
+        add_library(${NAME_FILE} STATIC ${SOURCE_FILE})
+        target_include_directories(${NAME_FILE} PRIVATE 
+        "modules/"
+        "include/")
+        target_link_libraries(${PROJECT_NAME} ${NAME_FILE})
+        target_compile_definitions(${NAME_FILE} PRIVATE BOOST_LOG_DYN_LINK=1)
+        set_target_properties(${NAME_FILE}
+            PROPERTIES
+            ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-lib"
+            LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-lib"
+            RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-bin"
+        )
+    endif()
+endforeach()
+
 target_include_directories(${PROJECT_NAME} PRIVATE 
     "modules/"
     "include/"
@@ -114,7 +134,17 @@ link_libraries(${CPPUNIT_LIBRARIES})
 ###############################################################################
 # Stocos unit test
 ###############################################################################
+enable_testing()
 set(UNITTEST_TO_APPLY "tests-unitaires/*.cpp")
+
+file(GLOB_RECURSE ALL_STATIC_LIB_FILES sources/*.cpp)
+foreach (SOURCE_FILE ${ALL_STATIC_LIB_FILES})
+    get_filename_component(NAME_FILE ${SOURCE_FILE} NAME)
+    if (NOT "main.cpp" MATCHES  ${NAME_FILE})    
+        list(APPEND STATIC_LIB_FILES "${NAME_FILE}")
+    endif()
+endforeach ()
+
 file(GLOB_RECURSE ALL_SOURCE_FILES  ${UNITTEST_TO_APPLY})
 foreach (SOURCE_FILE ${ALL_SOURCE_FILES})
     get_filename_component(NAME_FILE ${SOURCE_FILE} NAME_WE)
@@ -123,34 +153,15 @@ foreach (SOURCE_FILE ${ALL_SOURCE_FILES})
     ${Boost_LIBRARIES}
     ${JSONCPP_LIBRARIES}
     ${CPPUNIT_LIBRARIES}
-    ${MongoDB_LIBRARIES})
+    ${MongoDB_LIBRARIES}
+    ${STATIC_LIB_FILES})
     target_include_directories(${NAME_FILE} PRIVATE 
-    modules/
-    "include/"
-    "sources/"
-    "/usr/local/include/"
-)
-
+        modules/
+        "include/"
+        "/usr/local/include/"
+    )
     add_test(NAME ${NAME_FILE} COMMAND ${NAME_FILE} WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 endforeach ()
-
-# add_custom_target(unit-test COMMAND ${PROJECT_NAME}-unittest DEPENDS ${PROJECT_NAME}-unittest)
-# add_executable(${PROJECT_NAME}-unittest tests-unitaires/unitTest.cpp)
-
-# target_include_directories(${PROJECT_NAME}-unittest PRIVATE 
-#     "modules/"
-#     "include/")
-# target_link_libraries(${PROJECT_NAME}-unittest LINK_PRIVATE
-#     ${Boost_LIBRARIES}
-#     ${JSONCPP_LIBRARIES}
-#     ${CPPUNIT_LIBRARIES}
-#     ${MongoDB_LIBRARIES})
-
-# target_compile_definitions(${PROJECT_NAME}-unittest PRIVATE
-# BOOST_LOG_DYN_LINK=0)
-
-enable_testing()
-# add_test(NAME "tests-unitaires" COMMAND ./build/${PROJECT_NAME}-unittest WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 
 ## Detection du programme python3.7
 FIND_PROGRAM(PYTHON3.7_EXECUTABLE python3.7)
@@ -160,26 +171,3 @@ foreach(PATH_FILE  ${LIST_OF_FILES})
     get_filename_component(FILE ${PATH_FILE} NAME)
     add_test(NAME ${FILE} COMMAND ${PYTHON3.7_EXECUTABLE} ${PATH_FILE} "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}" WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 endforeach()
-
-
-# --->
-file(GLOB_RECURSE ALL_SOURCE_FILES sources/*.cpp)
-foreach (SOURCE_FILE ${ALL_SOURCE_FILES})
-    get_filename_component(NAME_FILE ${SOURCE_FILE} NAME)
-    if (NOT "main.cpp" MATCHES  ${NAME_FILE} )
-        add_library(${NAME_FILE} STATIC ${SOURCE_FILE})
-        target_include_directories(${NAME_FILE} PRIVATE 
-        "modules/"
-        "include/")
-        target_link_libraries(${PROJECT_NAME} ${NAME_FILE})
-        target_compile_definitions(${NAME_FILE} PRIVATE BOOST_LOG_DYN_LINK=1)
-        set_target_properties(${NAME_FILE}
-            PROPERTIES
-            ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-lib"
-            LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-lib"
-            RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-bin"
-        )
-    
-    endif()
-endforeach()
-# <----
