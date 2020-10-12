@@ -7,13 +7,15 @@
 /// @brief
 ///
 
+#include "../unitTest.h"
+
 #ifndef UNITTEST_STATISTIC_H
 #define UNITTEST_STATISTIC_H
 
-#include "solution/solution.h"
+#include "solution/solution.cpp"
 #include "statistic/sensor.h"
-#include "statistic/sensorNumRound.h"
-#include "statistic/statistic.h"
+#include "statistic/sensorNumRound.cpp"
+#include "statistic/statistic.cpp"
 
 using namespace CppUnit;
 using namespace stocos;
@@ -34,5 +36,7 @@ class UnitTest_statistic : public CppUnit::TestFixture {
 		CPPUNIT_ASSERT(result["round"].asInt() == 2);
 	}
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_statistic);
 
 #endif

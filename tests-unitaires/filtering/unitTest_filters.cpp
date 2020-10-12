@@ -4,18 +4,16 @@
 /// @version 1
 /// @copyright CC-BY-NC-SA
 /// @date 2018-10
-/// @brief
+/// @brief g++ tests-unitaires/filtering/test.cpp -I sources/ -Iinclude -lcppunit -lpthread -lboost_log -lboost_system -ljsoncpp
 ///
+
+#include "../unitTest.h"
 
 #ifndef UNITTEST_FILTERS_H
 #define UNITTEST_FILTERS_H
 
-#include <typeinfo>
-
-using namespace CppUnit;
-
-#include "filtering/filters.h"
-#include "solution/solution.h"
+#include "filtering/filters.cpp"
+#include "solution/solution.cpp"
 
 using namespace stocos;
 
@@ -43,5 +41,7 @@ class UnitTest_filters : public CppUnit::TestFixture {
 		CPPUNIT_ASSERT(filters(s1) == false);
 	}
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_filters);
 
 #endif

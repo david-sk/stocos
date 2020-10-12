@@ -7,11 +7,13 @@
 /// @brief
 ///
 
+#include "../unitTest.h"
+
 #ifndef UNITTEST_SOLUTIONARRAY_H
 #define UNITTEST_SOLUTIONARRAY_H
 
-#include "solution/solution.h"
-#include "solution/solutionArray.h"
+#include "solution/solution.cpp"
+#include "solution/solutionArray.cpp"
 
 using namespace CppUnit;
 using namespace stocos;
@@ -80,5 +82,7 @@ class UnitTest_solutionArray : public CppUnit::TestFixture {
 
   private:
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solutionArray);
 
 #endif

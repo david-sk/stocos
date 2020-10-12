@@ -7,12 +7,14 @@
 /// @brief
 ///
 
+#include "../unitTest.h"
+
 #ifndef UNITTEST_SENSORSTOPWATCH_H
 #define UNITTEST_SENSORSTOPWATCH_H
 
 #include <unistd.h>
 
-#include "statistic/sensorStopwatch.h"
+#include "statistic/sensorStopwatch.cpp"
 
 using namespace CppUnit;
 using namespace stocos;
@@ -35,5 +37,7 @@ class UnitTest_sensorStopwatch : public CppUnit::TestFixture {
   private:
 	SensorStopwatch<unsigned int> sensorStopwatch;
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_sensorStopwatch);
 
 #endif

@@ -7,12 +7,16 @@
 /// @brief
 ///
 
+#include "../unitTest.h"
+
 #ifndef UNITTEST_MAGICSEQUENCE_H
 #define UNITTEST_MAGICSEQUENCE_H
 
-#include "solution/solutionArray.h"
-
-#include "problem/magicSequence.h"
+#include "problem/problem.cpp"
+#include "solution/solution.cpp"
+#include "solution/solutionArray.cpp"
+#include "solutionSelection/maximization.cpp"
+#include "problem/magicSequence.cpp"
 
 using namespace CppUnit;
 using namespace stocos;
@@ -33,5 +37,7 @@ class UnitTest_magicSequence : public CppUnit::TestFixture {
 
   private:
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_magicSequence);
 
 #endif

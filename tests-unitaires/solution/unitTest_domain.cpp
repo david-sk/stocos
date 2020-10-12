@@ -7,13 +7,15 @@
 /// @brief
 ///
 
+#include "../unitTest.h"
+
 #ifndef UNITTEST_DOMAIN_H
 #define UNITTEST_DOMAIN_H
 
 #include <memory>
 #include <unordered_set>
 
-#include "solution/domain.h"
+#include "solution/domain.cpp"
 
 using namespace CppUnit;
 using namespace stocos;
@@ -60,5 +62,7 @@ class UnitTest_domain : public CppUnit::TestFixture {
 
   private:
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_domain);
 
 #endif

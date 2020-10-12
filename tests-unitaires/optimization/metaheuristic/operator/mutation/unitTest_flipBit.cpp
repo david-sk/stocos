@@ -7,14 +7,16 @@
 /// @brief
 ///
 
+#include "../../../../unitTest.h"
+
 #ifndef UNITTEST_FLIPBIT_H
 #define UNITTEST_FLIPBIT_H
 
 #include <memory> // std::shared_ptr std::unique_ptr
 
-#include "optimization/metaheuristic/operator/mutation/flipBit.h"
-#include "problem/oneMax.h"
-#include "solution/solutionArray.h"
+#include "optimization/metaheuristic/operator/mutation/flipBit.cpp"
+#include "problem/oneMax.cpp"
+#include "solution/solutionArray.cpp"
 
 using namespace CppUnit;
 
@@ -82,5 +84,7 @@ class UnitTest_flipBit : public CppUnit::TestFixture {
   private:
 	std::mt19937 mt_rand;
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_flipBit);
 
 #endif

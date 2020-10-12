@@ -7,12 +7,15 @@
 /// @brief
 ///
 
+#include "../unitTest.h"
+
 #ifndef UNITTEST_CONTINUOUSPROBLEM_H
 #define UNITTEST_CONTINUOUSPROBLEM_H
 
-#include "solution/solutionArray.h"
-
-#include "problem/continuousProblem.h"
+#include "problem/problem.cpp"
+#include "solution/solution.cpp"
+#include "solution/solutionArray.cpp"
+#include "problem/continuousProblem.cpp"
 
 using namespace CppUnit;
 using namespace stocos;
@@ -38,8 +41,8 @@ class UnitTest_ContinuousProblem : public CppUnit::TestFixture {
 		for(unsigned int i = 0; i < s->sizeArray(); i++) { s->operator()(i, i + (7 * i) + 1); }
 		gProblem.evaluation(*s);
 	}
-
-  private:
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_ContinuousProblem);
 
 #endif

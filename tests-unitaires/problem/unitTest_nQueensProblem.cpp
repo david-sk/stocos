@@ -7,14 +7,19 @@
 /// @brief
 ///
 
+#include "../unitTest.h"
+
 #ifndef UNITTEST_NQUEENSPROBLEM_H
 #define UNITTEST_NQUEENSPROBLEM_H
 
 #include <string>
 
-#include "solution/solutionArray.h"
+#include "problem/problem.cpp"
+#include "solution/solution.cpp"
+#include "solution/solutionArray.cpp"
+#include "solutionSelection/maximization.cpp"
+#include "problem/nQueensProblem.cpp"
 
-#include "problem/nQueensProblem.h"
 
 using namespace CppUnit;
 using namespace stocos;
@@ -90,5 +95,7 @@ class UnitTest_NQueensProblem : public CppUnit::TestFixture {
 	SOL_NQUEENSPROBLEM s_invalid;
 	SOL_NQUEENSPROBLEM s_semi_valid;
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_NQueensProblem);
 
 #endif

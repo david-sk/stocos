@@ -7,15 +7,17 @@
 /// @brief
 ///
 
+#include "../../../../unitTest.h"
+
 #ifndef UNITTEST_NEIGHBORHOOD_H
 #define UNITTEST_NEIGHBORHOOD_H
 
 #include <memory> // std::shared_ptr std::unique_ptr
 
-#include "optimization/metaheuristic/operator/atomicOperation.h"
-#include "optimization/metaheuristic/operator/mutation/neighborhood.h"
-#include "problem/oneMax.h"
-#include "solution/solutionArray.h"
+#include "optimization/metaheuristic/operator/atomicOperation.cpp"
+#include "optimization/metaheuristic/operator/mutation/neighborhood.cpp"
+#include "problem/oneMax.cpp"
+#include "solution/solutionArray.cpp"
 
 using namespace CppUnit;
 
@@ -50,8 +52,8 @@ class UnitTest_neighborhood : public CppUnit::TestFixture {
 
 		// CPPUNIT_ASSERT((*l)[1].second == s2);
 	}
-
-  private:
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_neighborhood);
 
 #endif

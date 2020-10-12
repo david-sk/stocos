@@ -6,13 +6,14 @@
 /// @date 2019-05
 /// @brief
 ///
+#include "../unitTest.h"
 
 #ifndef UNITTEST_POPULATION_H
 #define UNITTEST_POPULATION_H
 
 #include "solution/population.h"
-#include "solution/solution.h"
-#include "solution/solutionArray.h"
+#include "solution/solution.cpp"
+#include "solution/solutionArray.cpp"
 
 using namespace CppUnit;
 using namespace stocos;
@@ -34,5 +35,7 @@ class UnitTest_population : public CppUnit::TestFixture {
 		p.push_back(s);
 	}
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_population);
 
 #endif

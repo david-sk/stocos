@@ -7,13 +7,15 @@
 /// @brief
 ///
 
+#include "../../unitTest.h"
+
 #ifndef UNITTEST_COMBINATIONGENERATOR_H
 #define UNITTEST_COMBINATIONGENERATOR_H
 
-#include "optimization/exhaustiveSearch/combinationGenerator.h"
-#include "problem/oneMax.h"
-#include "problem/problem.h"
-#include "solution/solution.h"
+#include "optimization/exhaustiveSearch/combinationGenerator.cpp"
+#include "problem/oneMax.cpp"
+#include "problem/problem.cpp"
+#include "solution/solution.cpp"
 
 using namespace CppUnit;
 using namespace stocos;
@@ -53,5 +55,7 @@ class UnitTest_combinationGenerator : public CppUnit::TestFixture {
 		} while (cg.stop());*/
 	}
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_combinationGenerator);
 
 #endif

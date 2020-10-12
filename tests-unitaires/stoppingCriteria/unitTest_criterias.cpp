@@ -7,12 +7,14 @@
 /// @brief
 ///
 
+#include "../unitTest.h"
+
 #ifndef UNITTEST_CRITERIAS_H
 #define UNITTEST_CRITERIAS_H
 
-#include "solution/solution.h"
-#include "stoppingCriteria/criteriaBudget.h"
-#include "stoppingCriteria/stoppingCriteria.h"
+#include "solution/solution.cpp"
+#include "stoppingCriteria/criteriaBudget.cpp"
+#include "stoppingCriteria/stoppingCriteria.cpp"
 
 using namespace CppUnit;
 using namespace stocos;
@@ -35,5 +37,7 @@ class UnitTest_criterias : public CppUnit::TestFixture {
 		for(unsigned int i = 100; i < 200; i++) CPPUNIT_ASSERT(!stoppingCriteria(s));
 	}
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_criterias);
 
 #endif

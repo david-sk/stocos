@@ -28,10 +28,10 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
 # Load modules cmake
 ###############################################################################
 set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
-include(cppcheck)       #
-include(clang-format)   #
+include(cppcheck)       # apply cppcheck
+include(clang-format)   # apply clang-format
 include(version)        # Version name generator form git branch, hash
-include(doxygen)        # Create le documentation
+include(doxygen)        # Create the documentation
 
 ###############################################################################
 # Load modules of the projet
@@ -126,23 +126,43 @@ link_libraries(${CPPUNIT_LIBRARIES})
 ###############################################################################
 # Stocos unit test
 ###############################################################################
-add_custom_target(unit-test COMMAND ${PROJECT_NAME}-unittest DEPENDS ${PROJECT_NAME}-unittest)
-add_executable(${PROJECT_NAME}-unittest tests-unitaires/unitTest.cpp)
-
-target_include_directories(${PROJECT_NAME}-unittest PRIVATE 
-    "modules/"
-    "include/")
-target_link_libraries(${PROJECT_NAME}-unittest LINK_PRIVATE
+set(UNITTEST_TO_APPLY "tests-unitaires/*.cpp")
+file(GLOB_RECURSE ALL_SOURCE_FILES  ${UNITTEST_TO_APPLY})
+foreach (SOURCE_FILE ${ALL_SOURCE_FILES})
+    get_filename_component(NAME_FILE ${SOURCE_FILE} NAME_WE)
+    add_executable(${NAME_FILE} ${SOURCE_FILE})
+    target_link_libraries(${NAME_FILE} LINK_PRIVATE
     ${Boost_LIBRARIES}
     ${JSONCPP_LIBRARIES}
     ${CPPUNIT_LIBRARIES}
     ${MongoDB_LIBRARIES})
+    target_include_directories(${NAME_FILE} PRIVATE 
+    modules/
+    "include/"
+    "sources/"
+    ${CMAKE_CURRENT_BINARY_DIR}/deps/install/include/
+)
 
-target_compile_definitions(${PROJECT_NAME}-unittest PRIVATE
-BOOST_LOG_DYN_LINK=0)
+    add_test(NAME ${NAME_FILE} COMMAND ${NAME_FILE} WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+endforeach ()
+
+# add_custom_target(unit-test COMMAND ${PROJECT_NAME}-unittest DEPENDS ${PROJECT_NAME}-unittest)
+# add_executable(${PROJECT_NAME}-unittest tests-unitaires/unitTest.cpp)
+
+# target_include_directories(${PROJECT_NAME}-unittest PRIVATE 
+#     "modules/"
+#     "include/")
+# target_link_libraries(${PROJECT_NAME}-unittest LINK_PRIVATE
+#     ${Boost_LIBRARIES}
+#     ${JSONCPP_LIBRARIES}
+#     ${CPPUNIT_LIBRARIES}
+#     ${MongoDB_LIBRARIES})
+
+# target_compile_definitions(${PROJECT_NAME}-unittest PRIVATE
+# BOOST_LOG_DYN_LINK=0)
 
 enable_testing()
-add_test(NAME "tests-unitaires" COMMAND ./build/${PROJECT_NAME}-unittest WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+# add_test(NAME "tests-unitaires" COMMAND ./build/${PROJECT_NAME}-unittest WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 
 ## Detection du programme python3.7
 FIND_PROGRAM(PYTHON3.7_EXECUTABLE python3.7)
@@ -153,6 +173,8 @@ foreach(PATH_FILE  ${LIST_OF_FILES})
     add_test(NAME ${FILE} COMMAND ${PYTHON3.7_EXECUTABLE} ${PATH_FILE} "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}" WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 endforeach()
 
+
+# --->
 file(GLOB_RECURSE ALL_SOURCE_FILES sources/*.cpp)
 foreach (SOURCE_FILE ${ALL_SOURCE_FILES})
     get_filename_component(NAME_FILE ${SOURCE_FILE} NAME)
@@ -162,7 +184,15 @@ foreach (SOURCE_FILE ${ALL_SOURCE_FILES})
         "modules/"
         "include/")
         target_link_libraries(${PROJECT_NAME} ${NAME_FILE})
-        target_link_libraries(${PROJECT_NAME}-unittest LINK_PRIVATE ${NAME_FILE})
+        # target_link_libraries(${PROJECT_NAME}-unittest LINK_PRIVATE ${NAME_FILE})
         target_compile_definitions(${NAME_FILE} PRIVATE BOOST_LOG_DYN_LINK=1)
+        set_target_properties(${NAME_FILE}
+            PROPERTIES
+            ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-lib"
+            LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-lib"
+            RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-bin"
+        )
+    
     endif()
 endforeach()
+# <----

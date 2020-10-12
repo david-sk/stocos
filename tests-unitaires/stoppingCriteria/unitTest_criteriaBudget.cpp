@@ -7,11 +7,13 @@
 /// @brief
 ///
 
+#include "../unitTest.h"
+
 #ifndef UNITTEST_CRITERIABUDGET_H
 #define UNITTEST_CRITERIABUDGET_H
 
-#include "solution/solution.h"
-#include "stoppingCriteria/criteriaBudget.h"
+#include "solution/solution.cpp"
+#include "stoppingCriteria/criteriaBudget.cpp"
 
 using namespace CppUnit;
 using namespace stocos;
@@ -53,4 +55,5 @@ class UnitTest_criteriaBudget : public CppUnit::TestFixture {
 	CriteriaBudget<Solution<int>, unsigned int>* o;
 };
 
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_criteriaBudget);
 #endif

@@ -7,6 +7,8 @@
 /// @brief
 ///
 
+#include "../../unitTest.h"
+
 #ifndef UNITTEST_BACKTRACKING_H
 #define UNITTEST_BACKTRACKING_H
 
@@ -15,10 +17,13 @@
 
 using namespace CppUnit;
 
-#include "optimization/exhaustiveSearch/backtracking.h"
-#include "problem/oneMax.h"
-#include "problem/problem.h"
-#include "solution/solution.h"
+#include "optimization/exhaustiveSearch/backtracking.cpp"
+#include "problem/oneMax.cpp"
+#include "problem/problem.cpp"
+#include "solution/solution.cpp"
+#include "solution/solutionArray.cpp"
+#include "stoppingCriteria/stoppingCriteria.cpp"
+#include "solutionSelection/maximization.cpp"
 
 using namespace stocos;
 
@@ -53,5 +58,7 @@ class UnitTest_backtraking : public CppUnit::TestFixture {
   private:
 	std::mt19937 mt_rand;
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_backtraking);
 
 #endif
