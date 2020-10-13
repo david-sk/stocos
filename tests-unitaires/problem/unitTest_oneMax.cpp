@@ -7,14 +7,18 @@
 /// @brief
 ///
 
+#include "../unitTest.h"
+
 #ifndef UNITTEST_EVALONEMAX_H
 #define UNITTEST_EVALONEMAX_H
 
 #include <string>
 
-#include "solution/solutionArray.h"
-
 #include "problem/oneMax.h"
+#include "problem/problem.h"
+#include "solution/solution.h"
+#include "solution/solutionArray.h"
+#include "solutionSelection/maximization.h"
 
 using namespace CppUnit;
 using namespace stocos;
@@ -55,5 +59,7 @@ class UnitTest_OneMax : public CppUnit::TestFixture {
 
   private:
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_OneMax);
 
 #endif

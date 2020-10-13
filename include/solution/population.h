@@ -24,8 +24,6 @@ class Population : public Solution<double>, public std::vector<SOL> {
 
 	virtual ~Population() {
 	}
-
-  private:
 };
 
 } // namespace stocos

@@ -7,6 +7,8 @@
 /// @brief
 ///
 
+#include "../../../../unitTest.h"
+
 #ifndef UNITTEST_INTERVALREAL_H
 #define UNITTEST_INTERVALREAL_H
 
@@ -14,10 +16,14 @@
 
 #include "optimization/metaheuristic/operator/atomicOperation.h"
 #include "optimization/metaheuristic/operator/mutation/intervalReal.h"
+#include "problem/problem.h"
 #include "problem/oneMax.h"
+#include "solution/solution.h"
 #include "solution/solutionArray.h"
+#include "solutionSelection/maximization.h"
 
 using namespace CppUnit;
+using namespace stocos;
 
 class UnitTest_intervalReal : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE(UnitTest_intervalReal);
@@ -46,5 +52,7 @@ class UnitTest_intervalReal : public CppUnit::TestFixture {
   private:
 	std::mt19937 mt_rand;
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_intervalReal);
 
 #endif

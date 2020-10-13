@@ -7,6 +7,8 @@
 /// @brief
 ///
 
+#include "../unitTest.h"
+
 #ifndef UNITTEST_CRITERIAS_H
 #define UNITTEST_CRITERIAS_H
 
@@ -35,5 +37,7 @@ class UnitTest_criterias : public CppUnit::TestFixture {
 		for(unsigned int i = 100; i < 200; i++) CPPUNIT_ASSERT(!stoppingCriteria(s));
 	}
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_criterias);
 
 #endif

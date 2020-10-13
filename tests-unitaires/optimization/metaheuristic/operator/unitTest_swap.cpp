@@ -7,16 +7,22 @@
 /// @brief
 ///
 
+#include "../../../unitTest.h"
+
 #ifndef UNITTEST_SWAP_H
 #define UNITTEST_SWAP_H
 
 #include <memory> // std::shared_ptr std::unique_ptr
 
 #include "optimization/metaheuristic/operator/swap.h"
+#include "problem/problem.h"
 #include "problem/oneMax.h"
+#include "solution/solution.h"
 #include "solution/solutionArray.h"
+#include "solutionSelection/maximization.h"
 
 using namespace CppUnit;
+using namespace stocos;
 
 class UnitTest_swap : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE(UnitTest_swap);
@@ -42,5 +48,7 @@ class UnitTest_swap : public CppUnit::TestFixture {
   private:
 	std::mt19937 mt_rand;
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_swap);
 
 #endif

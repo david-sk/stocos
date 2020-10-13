@@ -6,6 +6,7 @@
 /// @date 2018-10
 /// @brief
 ///
+#include "../unitTest.h"
 
 #ifndef UNITTEST_SOLUTION_H
 #define UNITTEST_SOLUTION_H
@@ -114,5 +115,7 @@ class UnitTest_solution : public CppUnit::TestFixture {
 		CPPUNIT_ASSERT(s1.getFitness(2) == s3.getFitness(2));
 	}
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solution);
 
 #endif

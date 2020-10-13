@@ -7,12 +7,15 @@
 /// @brief
 ///
 
+#include "../unitTest.h"
+
 #ifndef UNITTEST_JOBSHOPPROBLEM_H
 #define UNITTEST_JOBSHOPPROBLEM_H
 
-#include "solution/solutionArray.h"
-
 #include "problem/jobShopProblem.h"
+#include "problem/problem.h"
+#include "solution/solution.h"
+#include "solution/solutionArray.h"
 
 using namespace CppUnit;
 using namespace stocos;
@@ -31,8 +34,8 @@ class UnitTest_jobShopProblem : public CppUnit::TestFixture {
 	void loadInstance(void) {
 		JobShopProblem("instances/JobShopProblem/JobShopProblem-0.json");
 	}
-
-  private:
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_jobShopProblem);
 
 #endif

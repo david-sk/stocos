@@ -7,11 +7,12 @@
 /// @brief
 ///
 
+#include "../unitTest.h"
+
 #ifndef UNITTEST_SUBSETSUM_H
 #define UNITTEST_SUBSETSUM_H
 
 #include "problem/subsetSum.h"
-#include "solution/solutionArray.h"
 
 using namespace CppUnit;
 using namespace stocos;
@@ -33,5 +34,7 @@ class UnitTest_subsetsum : public CppUnit::TestFixture {
 
   private:
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_subsetsum);
 
 #endif

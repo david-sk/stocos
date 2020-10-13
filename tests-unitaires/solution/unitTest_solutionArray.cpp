@@ -7,6 +7,8 @@
 /// @brief
 ///
 
+#include "../unitTest.h"
+
 #ifndef UNITTEST_SOLUTIONARRAY_H
 #define UNITTEST_SOLUTIONARRAY_H
 
@@ -80,5 +82,7 @@ class UnitTest_solutionArray : public CppUnit::TestFixture {
 
   private:
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_solutionArray);
 
 #endif

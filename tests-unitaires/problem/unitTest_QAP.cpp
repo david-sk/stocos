@@ -7,10 +7,15 @@
 /// @brief
 ///
 
+#include "../unitTest.h"
+
 #ifndef UNITTEST_EVALQAP_H
 #define UNITTEST_EVALQAP_H
 
 #include "problem/QAP.h"
+#include "problem/problem.h"
+#include "solution/solution.h"
+#include "solution/solutionArray.h"
 
 using namespace CppUnit;
 using namespace stocos;
@@ -86,5 +91,7 @@ class UnitTest_QAP : public CppUnit::TestFixture {
 
   private:
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_QAP);
 
 #endif

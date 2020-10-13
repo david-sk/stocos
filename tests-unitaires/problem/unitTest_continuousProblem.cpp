@@ -7,12 +7,18 @@
 /// @brief
 ///
 
+#include "../unitTest.h"
+
 #ifndef UNITTEST_CONTINUOUSPROBLEM_H
 #define UNITTEST_CONTINUOUSPROBLEM_H
 
-#include "solution/solutionArray.h"
-
 #include "problem/continuousProblem.h"
+#include "problem/problem.h"
+#include "solution/solution.h"
+#include "solution/solutionArray.h"
+#include "solutionSelection/solutionSelectionBuilder.h"
+#include "solutionSelection/minimization.h"
+#include "solutionSelection/maximization.h"
 
 using namespace CppUnit;
 using namespace stocos;
@@ -35,11 +41,11 @@ class UnitTest_ContinuousProblem : public CppUnit::TestFixture {
 	void loadInstance(void) {
 		ContinuousProblem gProblem("instances/ContinuousProblem/test.json");
 		std::unique_ptr<SOL_CONTINUOUSPROBLEM> s = gProblem.new_solution();
-		for(unsigned int i = 0; i < s->sizeArray(); i++) { s->operator()(i, i + (7 * i) + 1); }
+		for(unsigned int i = 0; i < s->sizeArray(); i++) s->operator()(i, i + (7 * i) + 1);
 		gProblem.evaluation(*s);
 	}
-
-  private:
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_ContinuousProblem);
 
 #endif

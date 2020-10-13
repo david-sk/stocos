@@ -14,6 +14,7 @@
 #include <string>
 #include <vector>
 
+#include "../../solution/domain.h"
 #include "../../solution/solutionArray.h"
 #include "../optimizationAlgorithm.h"
 
@@ -25,7 +26,7 @@ class Backtraking : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
 	Backtraking(std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
 				std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
 				std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
-				const unsigned int nbDigit, const unsigned int len_string);
+				Domain<TYPE_CELL> dom);
 
 	virtual ~Backtraking();
 
@@ -38,8 +39,8 @@ class Backtraking : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
 	void className(const std::string& class_name);
 
   private:
-	const unsigned int _nbDigit;
-	const unsigned int _len_string;
+	unsigned int _nbDigit;
+	unsigned int _len_string;
 
 	unsigned int nbCall;
 	std::unique_ptr<unsigned int[]> _string;

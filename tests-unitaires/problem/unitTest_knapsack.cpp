@@ -7,12 +7,16 @@
 /// @brief
 ///
 
+#include "../unitTest.h"
+
 #ifndef UNITTEST_KNAPSACK_H
 #define UNITTEST_KNAPSACK_H
 
-#include "solution/solutionArray.h"
-
 #include "problem/knapsack.h"
+#include "problem/problem.h"
+#include "solution/solution.h"
+#include "solution/solutionArray.h"
+#include "solutionSelection/maximization.h"
 
 using namespace CppUnit;
 using namespace stocos;
@@ -41,8 +45,8 @@ class UnitTest_knapsack : public CppUnit::TestFixture {
 		eknapsack.evaluation(s);
 		CPPUNIT_ASSERT(s.getFitness() == fitness);
 	}
-
-  private:
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_knapsack);
 
 #endif

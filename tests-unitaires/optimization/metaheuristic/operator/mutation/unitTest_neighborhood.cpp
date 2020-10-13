@@ -7,6 +7,8 @@
 /// @brief
 ///
 
+#include "../../../../unitTest.h"
+
 #ifndef UNITTEST_NEIGHBORHOOD_H
 #define UNITTEST_NEIGHBORHOOD_H
 
@@ -14,10 +16,14 @@
 
 #include "optimization/metaheuristic/operator/atomicOperation.h"
 #include "optimization/metaheuristic/operator/mutation/neighborhood.h"
+#include "problem/problem.h"
 #include "problem/oneMax.h"
+#include "solution/solution.h"
 #include "solution/solutionArray.h"
+#include "solutionSelection/maximization.h"
 
 using namespace CppUnit;
+using namespace stocos;
 
 class UnitTest_neighborhood : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE(UnitTest_neighborhood);
@@ -50,8 +56,8 @@ class UnitTest_neighborhood : public CppUnit::TestFixture {
 
 		// CPPUNIT_ASSERT((*l)[1].second == s2);
 	}
-
-  private:
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_neighborhood);
 
 #endif
