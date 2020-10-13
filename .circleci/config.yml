@@ -52,7 +52,7 @@ jobs:
               ldconfig          #only required for linux
       - run:
           name: Compilation of the project
-          command: cmake .. && make -j 1
+          command: cmake .. && make -j 4
           working_directory: ~/project/build
       - run:
           name: Tests
