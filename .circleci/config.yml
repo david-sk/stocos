@@ -47,12 +47,12 @@ jobs:
               git clone https://github.com/cinemast/libjson-rpc-cpp.git &&
               mkdir -p libjson-rpc-cpp/build &&
               cd libjson-rpc-cpp/build &&
-              cmake .. && make &&
+              cmake .. && make -j 4 &&
               make install &&
               ldconfig          #only required for linux
       - run:
           name: Compilation of the project
-          command: cmake .. && make -j 1
+          command: cmake .. && make -j 4
           working_directory: ~/project/build
       - run:
           name: Tests

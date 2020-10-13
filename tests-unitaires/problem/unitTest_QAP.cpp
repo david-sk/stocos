@@ -12,10 +12,10 @@
 #ifndef UNITTEST_EVALQAP_H
 #define UNITTEST_EVALQAP_H
 
-#include "problem/QAP.cpp"
-#include "problem/problem.cpp"
-#include "solution/solution.cpp"
-#include "solution/solutionArray.cpp"
+#include "problem/QAP.h"
+#include "problem/problem.h"
+#include "solution/solution.h"
+#include "solution/solutionArray.h"
 
 using namespace CppUnit;
 using namespace stocos;

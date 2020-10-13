@@ -16,9 +16,9 @@
 #include <random>
 
 #include "optimization/metaheuristic/operator/atomicOperation.h"
-#include "optimization/metaheuristic/operator/mutation/intervalInteger.cpp"
-#include "solution/solutionArray.cpp"
-#include "solution/solution.cpp"
+#include "optimization/metaheuristic/operator/mutation/intervalInteger.h"
+#include "solution/solutionArray.h"
+#include "solution/solution.h"
 
 using namespace CppUnit;
 using namespace stocos;

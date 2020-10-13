@@ -12,8 +12,8 @@
 #ifndef UNITTEST_CRITERIABUDGET_H
 #define UNITTEST_CRITERIABUDGET_H
 
-#include "solution/solution.cpp"
-#include "stoppingCriteria/criteriaBudget.cpp"
+#include "solution/solution.h"
+#include "stoppingCriteria/criteriaBudget.h"
 
 using namespace CppUnit;
 using namespace stocos;

@@ -12,8 +12,8 @@
 #ifndef UNITTEST_SOLUTIONARRAY_H
 #define UNITTEST_SOLUTIONARRAY_H
 
-#include "solution/solution.cpp"
-#include "solution/solutionArray.cpp"
+#include "solution/solution.h"
+#include "solution/solutionArray.h"
 
 using namespace CppUnit;
 using namespace stocos;

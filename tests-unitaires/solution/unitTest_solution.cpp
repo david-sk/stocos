@@ -11,7 +11,7 @@
 #ifndef UNITTEST_SOLUTION_H
 #define UNITTEST_SOLUTION_H
 
-#include "solution/solution.cpp"
+#include "solution/solution.h"
 
 using namespace CppUnit;
 using namespace stocos;

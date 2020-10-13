@@ -13,8 +13,8 @@
 #ifndef UNITTEST_FILTERS_H
 #define UNITTEST_FILTERS_H
 
-#include "filtering/filters.cpp"
-#include "solution/solution.cpp"
+#include "filtering/filters.h"
+#include "solution/solution.h"
 
 using namespace stocos;
 

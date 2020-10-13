@@ -12,13 +12,13 @@
 #ifndef UNITTEST_CONTINUOUSPROBLEM_H
 #define UNITTEST_CONTINUOUSPROBLEM_H
 
-#include "problem/continuousProblem.cpp"
-#include "problem/problem.cpp"
-#include "solution/solution.cpp"
-#include "solution/solutionArray.cpp"
-#include "solutionSelection/solutionSelectionBuilder.cpp"
-#include "solutionSelection/minimization.cpp"
-#include "solutionSelection/maximization.cpp"
+#include "problem/continuousProblem.h"
+#include "problem/problem.h"
+#include "solution/solution.h"
+#include "solution/solutionArray.h"
+#include "solutionSelection/solutionSelectionBuilder.h"
+#include "solutionSelection/minimization.h"
+#include "solutionSelection/maximization.h"
 
 using namespace CppUnit;
 using namespace stocos;

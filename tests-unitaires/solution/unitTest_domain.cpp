@@ -15,7 +15,7 @@
 #include <memory>
 #include <unordered_set>
 
-#include "solution/domain.cpp"
+#include "solution/domain.h"
 
 using namespace CppUnit;
 using namespace stocos;

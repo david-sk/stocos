@@ -12,8 +12,8 @@
 #define UNITTEST_POPULATION_H
 
 #include "solution/population.h"
-#include "solution/solution.cpp"
-#include "solution/solutionArray.cpp"
+#include "solution/solution.h"
+#include "solution/solutionArray.h"
 
 using namespace CppUnit;
 using namespace stocos;

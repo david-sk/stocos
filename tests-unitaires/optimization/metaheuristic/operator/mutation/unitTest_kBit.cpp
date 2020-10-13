@@ -14,12 +14,12 @@
 
 #include <memory> // std::shared_ptr std::unique_ptr
 
-#include "optimization/metaheuristic/operator/mutation/KBit.cpp"
-#include "problem/oneMax.cpp"
-#include "problem/problem.cpp"
-#include "solution/solutionArray.cpp"
-#include "solution/solution.cpp"
-#include "solutionSelection/maximization.cpp"
+#include "optimization/metaheuristic/operator/mutation/KBit.h"
+#include "problem/oneMax.h"
+#include "problem/problem.h"
+#include "solution/solutionArray.h"
+#include "solution/solution.h"
+#include "solutionSelection/maximization.h"
 
 using namespace CppUnit;
 using namespace stocos;

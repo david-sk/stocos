@@ -12,10 +12,7 @@
 #ifndef UNITTEST_SUBSETSUM_H
 #define UNITTEST_SUBSETSUM_H
 
-#include "problem/problem.cpp"
-#include "problem/subsetSum.cpp"
-#include "solution/solution.cpp"
-#include "solution/solutionArray.cpp"
+#include "problem/subsetSum.h"
 
 using namespace CppUnit;
 using namespace stocos;

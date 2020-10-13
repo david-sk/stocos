@@ -12,16 +12,16 @@
 #ifndef UNITTEST_COMBINATIONGENERATOR_H
 #define UNITTEST_COMBINATIONGENERATOR_H
 
-#include "optimization/exhaustiveSearch/combinationGenerator.cpp"
-#include "solutionSelection/solutionSelectionBuilder.cpp"
-#include "problem/oneMax.cpp"
-#include "problem/problem.cpp"
-#include "solution/solution.cpp"
-#include "solution/solutionArray.cpp"
-#include "stoppingCriteria/stoppingCriteria.cpp"
-#include "solutionSelection/maximization.cpp"
-#include "solutionSelection/minimization.cpp"
-#include "statistic/statistic.cpp"
+#include "optimization/exhaustiveSearch/combinationGenerator.h"
+#include "solutionSelection/solutionSelectionBuilder.h"
+#include "problem/oneMax.h"
+#include "problem/problem.h"
+#include "solution/solution.h"
+#include "solution/solutionArray.h"
+#include "stoppingCriteria/stoppingCriteria.h"
+#include "solutionSelection/maximization.h"
+#include "solutionSelection/minimization.h"
+#include "statistic/statistic.h"
 
 using namespace CppUnit;
 using namespace stocos;

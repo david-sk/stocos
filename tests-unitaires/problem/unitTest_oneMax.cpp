@@ -14,11 +14,11 @@
 
 #include <string>
 
-#include "problem/oneMax.cpp"
-#include "problem/problem.cpp"
-#include "solution/solution.cpp"
-#include "solution/solutionArray.cpp"
-#include "solutionSelection/maximization.cpp"
+#include "problem/oneMax.h"
+#include "problem/problem.h"
+#include "solution/solution.h"
+#include "solution/solutionArray.h"
+#include "solutionSelection/maximization.h"
 
 using namespace CppUnit;
 using namespace stocos;

@@ -14,7 +14,7 @@
 
 #include <unistd.h>
 
-#include "statistic/sensorStopwatch.cpp"
+#include "statistic/sensorStopwatch.h"
 
 using namespace CppUnit;
 using namespace stocos;

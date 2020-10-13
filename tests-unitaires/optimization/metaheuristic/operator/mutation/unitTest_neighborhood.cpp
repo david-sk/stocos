@@ -15,12 +15,12 @@
 #include <memory> // std::shared_ptr std::unique_ptr
 
 #include "optimization/metaheuristic/operator/atomicOperation.h"
-#include "optimization/metaheuristic/operator/mutation/neighborhood.cpp"
-#include "problem/problem.cpp"
-#include "problem/oneMax.cpp"
-#include "solution/solution.cpp"
-#include "solution/solutionArray.cpp"
-#include "solutionSelection/maximization.cpp"
+#include "optimization/metaheuristic/operator/mutation/neighborhood.h"
+#include "problem/problem.h"
+#include "problem/oneMax.h"
+#include "solution/solution.h"
+#include "solution/solutionArray.h"
+#include "solutionSelection/maximization.h"
 
 using namespace CppUnit;
 using namespace stocos;
