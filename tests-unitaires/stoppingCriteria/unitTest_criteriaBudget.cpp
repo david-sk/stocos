@@ -7,6 +7,8 @@
 /// @brief
 ///
 
+#include "../unitTest.h"
+
 #ifndef UNITTEST_CRITERIABUDGET_H
 #define UNITTEST_CRITERIABUDGET_H
 
@@ -53,4 +55,5 @@ class UnitTest_criteriaBudget : public CppUnit::TestFixture {
 	CriteriaBudget<Solution<int>, unsigned int>* o;
 };
 
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_criteriaBudget);
 #endif

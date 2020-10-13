@@ -7,6 +7,8 @@
 /// @brief
 ///
 
+#include "../unitTest.h"
+
 #ifndef UNITTEST_STATISTIC_H
 #define UNITTEST_STATISTIC_H
 
@@ -34,5 +36,7 @@ class UnitTest_statistic : public CppUnit::TestFixture {
 		CPPUNIT_ASSERT(result["round"].asInt() == 2);
 	}
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_statistic);
 
 #endif

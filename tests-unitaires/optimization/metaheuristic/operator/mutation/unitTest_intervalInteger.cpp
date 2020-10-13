@@ -7,6 +7,8 @@
 /// @brief
 ///
 
+#include "../../../../unitTest.h"
+
 #ifndef UNITTEST_INTERVALINTEGER_H
 #define UNITTEST_INTERVALINTEGER_H
 
@@ -16,6 +18,7 @@
 #include "optimization/metaheuristic/operator/atomicOperation.h"
 #include "optimization/metaheuristic/operator/mutation/intervalInteger.h"
 #include "solution/solutionArray.h"
+#include "solution/solution.h"
 
 using namespace CppUnit;
 using namespace stocos;
@@ -46,5 +49,7 @@ class UnitTest_intervalInteger : public CppUnit::TestFixture {
   private:
 	std::mt19937 mt_rand;
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_intervalInteger);
 
 #endif

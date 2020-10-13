@@ -7,16 +7,22 @@
 /// @brief
 ///
 
+#include "../../../../unitTest.h"
+
 #ifndef UNITTEST_FLIPBIT_H
 #define UNITTEST_FLIPBIT_H
 
 #include <memory> // std::shared_ptr std::unique_ptr
 
 #include "optimization/metaheuristic/operator/mutation/flipBit.h"
+#include "problem/problem.h"
 #include "problem/oneMax.h"
+#include "solution/solution.h"
 #include "solution/solutionArray.h"
+#include "solutionSelection/maximization.h"
 
 using namespace CppUnit;
+using namespace stocos;
 
 class UnitTest_flipBit : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE(UnitTest_flipBit);
@@ -35,7 +41,7 @@ class UnitTest_flipBit : public CppUnit::TestFixture {
 		unsigned int N = 50;
 		SOL_ONEMAX s(N);
 
-		for(unsigned int i = 0; i < N; i++) { s(i, 0); }
+		for(unsigned int i = 0; i < N; i++) s(i, 0);
 
 		FlipBit<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX> flipbit(mt_rand, 0);
 		flipbit(s);
@@ -82,5 +88,7 @@ class UnitTest_flipBit : public CppUnit::TestFixture {
   private:
 	std::mt19937 mt_rand;
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_flipBit);
 
 #endif

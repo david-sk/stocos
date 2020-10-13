@@ -7,12 +7,19 @@
 /// @brief
 ///
 
+#include "../unitTest.h"
+
 #ifndef UNITTEST_EVALTRAVELINGSALESMANPROBLEM__H
 #define UNITTEST_EVALTRAVELINGSALESMANPROBLEM__H
 
-#include "problem/travelingSalesmanProblem.h"
 #include <fstream> // ifstream
 #include <string>
+
+#include "problem/problem.h"
+#include "problem/travelingSalesmanProblem.h"
+#include "solution/solution.h"
+#include "solution/solutionArray.h"
+#include "solutionSelection/minimization.h"
 
 using namespace CppUnit;
 using namespace stocos;
@@ -61,5 +68,7 @@ class UnitTest_travelingSalesmanProblem : public CppUnit::TestFixture {
 
   private:
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_travelingSalesmanProblem);
 
 #endif

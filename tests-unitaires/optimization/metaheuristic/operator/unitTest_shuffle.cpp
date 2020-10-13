@@ -7,15 +7,22 @@
 /// @brief
 ///
 
+#include "../../../unitTest.h"
+
 #ifndef UNITTEST_SHUFFLE_H
 #define UNITTEST_SHUFFLE_H
 
 #include <memory> // std::shared_ptr std::unique_ptr
 
 #include "optimization/metaheuristic/operator/shuffle.h"
+#include "problem/problem.h"
 #include "problem/oneMax.h"
+#include "solution/solution.h"
 #include "solution/solutionArray.h"
+#include "solutionSelection/maximization.h"
+
 using namespace CppUnit;
+using namespace stocos;
 
 class UnitTest_shuffle : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE(UnitTest_shuffle);
@@ -42,5 +49,7 @@ class UnitTest_shuffle : public CppUnit::TestFixture {
   private:
 	std::mt19937 mt_rand;
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_shuffle);
 
 #endif

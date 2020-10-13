@@ -7,6 +7,8 @@
 /// @brief
 ///
 
+#include "../../../../unitTest.h"
+
 #ifndef UNITTEST_KBIT_H
 #define UNITTEST_KBIT_H
 
@@ -14,9 +16,13 @@
 
 #include "optimization/metaheuristic/operator/mutation/KBit.h"
 #include "problem/oneMax.h"
+#include "problem/problem.h"
 #include "solution/solutionArray.h"
+#include "solution/solution.h"
+#include "solutionSelection/maximization.h"
 
 using namespace CppUnit;
+using namespace stocos;
 
 class UnitTest_kBit : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE(UnitTest_kBit);
@@ -62,5 +68,7 @@ class UnitTest_kBit : public CppUnit::TestFixture {
   private:
 	std::mt19937 mt_rand;
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_kBit);
 
 #endif

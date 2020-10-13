@@ -7,6 +7,8 @@
 /// @brief
 ///
 
+#include "../unitTest.h"
+
 #ifndef UNITTEST_DOMAIN_H
 #define UNITTEST_DOMAIN_H
 
@@ -60,5 +62,7 @@ class UnitTest_domain : public CppUnit::TestFixture {
 
   private:
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_domain);
 
 #endif

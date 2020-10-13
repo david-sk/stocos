@@ -14,9 +14,9 @@ template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 Backtraking<SOL, TYPE_FITNESS, TYPE_CELL>::Backtraking(
 	std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
 	std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
-	std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
-	Domain<TYPE_CELL> dom)
-	: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic), std::move(stoppingCriteria), problem) {
+	std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem, Domain<TYPE_CELL> dom)
+	: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic),
+														  std::move(stoppingCriteria), problem) {
 	// 	  const unsigned int nbDigit,
 	// const unsigned int len_string
 	// _nbDigit(nbDigit), _len_string(len_string)

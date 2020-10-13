@@ -6,6 +6,7 @@
 /// @date 2019-05
 /// @brief
 ///
+#include "../unitTest.h"
 
 #ifndef UNITTEST_POPULATION_H
 #define UNITTEST_POPULATION_H
@@ -34,5 +35,7 @@ class UnitTest_population : public CppUnit::TestFixture {
 		p.push_back(s);
 	}
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_population);
 
 #endif
