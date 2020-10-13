@@ -95,12 +95,6 @@ foreach (SOURCE_FILE ${ALL_SOURCE_FILES})
         list(APPEND STATIC_LIB_FILES "${NAME_FILE}")
         target_link_libraries(${PROJECT_NAME} ${NAME_FILE})
         target_compile_definitions(${NAME_FILE} PRIVATE BOOST_LOG_DYN_LINK=1)
-        set_target_properties(${NAME_FILE}
-            PROPERTIES
-            ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-lib"
-            LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-lib"
-            RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-bin"
-        )
     endif()
 endforeach()
 
@@ -138,10 +132,6 @@ link_libraries(${CPPUNIT_LIBRARIES})
 enable_testing()
 set(UNITTEST_TO_APPLY "tests-unitaires/*.cpp")
 
-foreach (SOURCE_FILE ${STATIC_LIB_FILES})
-    list(APPEND XXX "${SOURCE_FILE}")
-endforeach()
-
 file(GLOB_RECURSE ALL_SOURCE_FILES  ${UNITTEST_TO_APPLY})
 foreach (SOURCE_FILE ${ALL_SOURCE_FILES})
     get_filename_component(NAME_FILE ${SOURCE_FILE} NAME_WE)
@@ -152,7 +142,7 @@ foreach (SOURCE_FILE ${ALL_SOURCE_FILES})
     ${CPPUNIT_LIBRARIES}
     ${MongoDB_LIBRARIES}
     ${STATIC_LIB_FILES}
-    ${XXX})
+    ${STATIC_LIB_FILES})
     target_include_directories(${NAME_FILE} PRIVATE 
         modules/
         "include/"
