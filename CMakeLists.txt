@@ -138,6 +138,10 @@ link_libraries(${CPPUNIT_LIBRARIES})
 enable_testing()
 set(UNITTEST_TO_APPLY "tests-unitaires/*.cpp")
 
+foreach (SOURCE_FILE ${STATIC_LIB_FILES})
+    list(APPEND XXX "${SOURCE_FILE}")
+endforeach()
+
 file(GLOB_RECURSE ALL_SOURCE_FILES  ${UNITTEST_TO_APPLY})
 foreach (SOURCE_FILE ${ALL_SOURCE_FILES})
     get_filename_component(NAME_FILE ${SOURCE_FILE} NAME_WE)
@@ -147,14 +151,15 @@ foreach (SOURCE_FILE ${ALL_SOURCE_FILES})
     ${JSONCPP_LIBRARIES}
     ${CPPUNIT_LIBRARIES}
     ${MongoDB_LIBRARIES}
-    ${STATIC_LIB_FILES})
+    ${STATIC_LIB_FILES}
+    ${XXX})
     target_include_directories(${NAME_FILE} PRIVATE 
         modules/
         "include/"
         "/usr/local/include/"
     )
     add_test(NAME ${NAME_FILE} COMMAND ${NAME_FILE} WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
-endforeach ()
+endforeach()
 
 ## Detection du programme python3.7
 FIND_PROGRAM(PYTHON3.7_EXECUTABLE python3.7)
