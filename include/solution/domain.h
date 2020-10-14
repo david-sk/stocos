@@ -40,8 +40,7 @@ class Domain {
 	///
 	/// @brief Pour toutes les variables, definition du domaine
 	///
-	/// @param a : Starting point of the sequence.
-	/// @param b : Endpoint of the sequence. This item will not be included in the sequence.
+	/// @param [a, b[ : range definition
 	/// @param step : Step size of the sequence. It defaults to 1.
 	///
 	Domain(const TYPE_CELL a, const TYPE_CELL b, const TYPE_CELL step = 1);

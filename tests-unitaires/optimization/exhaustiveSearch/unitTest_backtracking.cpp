@@ -15,45 +15,50 @@
 #include <memory>
 #include <typeinfo>
 
-using namespace CppUnit;
-
+#include <iostream>
 #include "optimization/exhaustiveSearch/backtracking.h"
-#include "problem/oneMax.h"
-#include "problem/problem.h"
-#include "solution/solution.h"
 #include "solution/solutionArray.h"
-#include "solutionSelection/maximization.h"
 #include "stoppingCriteria/stoppingCriteria.h"
+#include "problem/nQueensProblem.h"
+#include "solution/domain.h"
 
+using namespace CppUnit;
 using namespace stocos;
 
 class UnitTest_backtraking : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE(UnitTest_backtraking);
-	CPPUNIT_TEST(test);
+	CPPUNIT_TEST(backtraking);
 	CPPUNIT_TEST_SUITE_END();
 
   public:
 	void setUp(void) {
+		n = 4;
 		mt_rand.seed(0);
+		eNQueensProblem = std::make_shared<NQueensProblem>(n);
 	}
 
-	void test(void) {
-		// using TYPESOL = SolutionArray<unsigned int, bool>;
-		// // CPPUNIT_ASSERT(o->operator()(s) == false);
+	void backtraking(void) {
+		std::unique_ptr<StoppingCriteria<SOL_NQUEENSPROBLEM, unsigned int>> stoppingCriteria =
+			std::make_unique<StoppingCriteria<SOL_NQUEENSPROBLEM, unsigned int>>();
+		std::unique_ptr<Statistic<SOL_NQUEENSPROBLEM>> statistic = std::make_unique<Statistic<SOL_NQUEENSPROBLEM>>();
 
-		// std::unique_ptr<StoppingCriteria<TYPESOL, unsigned int>> stoppingCriteria =
-		// 	std::make_unique<StoppingCriteria<TYPESOL, unsigned int>>();
-		// std::unique_ptr<Statistic<TYPESOL>> statistic = std::make_unique<Statistic<TYPESOL>>();
-		// std::shared_ptr<OneMax> oneMax = std::make_shared<OneMax>(100);
-		// TYPESOL s(4);
+		SOL_NQUEENSPROBLEM s(n);
+		Domain<unsigned int> dom(0, n);
 
-		// Backtraking<TYPESOL, unsigned int, bool> backtraking(
-		// 	mt_rand, std::move(statistic), std::move(stoppingCriteria), oneMax, 2, 4);
-		// backtraking.recursive(0);
+		Backtraking<SOL_NQUEENSPROBLEM, unsigned int, unsigned int> backtraking(
+			mt_rand, 
+			std::move(statistic), 
+			std::move(stoppingCriteria), 
+			eNQueensProblem, 
+			dom);
+
+		backtraking(s);
 	}
 
   private:
 	std::mt19937 mt_rand;
+	std::shared_ptr<NQueensProblem> eNQueensProblem;
+	unsigned int n;
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_backtraking);

@@ -72,12 +72,13 @@ unsigned int NQueensProblem::solutionSelection(const Population<SOL_NQUEENSPROBL
 }
 
 bool NQueensProblem::evaluationSubSolution(SOL_NQUEENSPROBLEM& s) const {
+	if (s.sizeArray() == 1) return true;
 	return check_diagonal(s) && check_line(s);
 }
 
 bool NQueensProblem::check_diagonal(const SOL_NQUEENSPROBLEM& solution) const {
-	for(unsigned int i = 0; i < _n; i++) {
-		for(unsigned int j = i + 1; j < _n; j++) {
+	for(unsigned int i = 0; i < solution.sizeArray(); i++) {
+		for(unsigned int j = i + 1; j < solution.sizeArray(); j++) {
 			if(abs(solution(i) - solution(j)) == abs(static_cast<int>(i) - static_cast<int>(j))) {
 				return false;
 			}
@@ -87,8 +88,8 @@ bool NQueensProblem::check_diagonal(const SOL_NQUEENSPROBLEM& solution) const {
 }
 
 bool NQueensProblem::check_line(const SOL_NQUEENSPROBLEM& solution) const {
-	for(unsigned int i = 0; i < _n; i++) {
-		for(unsigned int j = i + 1; j < _n; j++) {
+	for(unsigned int i = 0; i < solution.sizeArray(); i++) {
+		for(unsigned int j = i + 1; j < solution.sizeArray(); j++) {
 			if(solution(i) == solution(j)) return false;
 		}
 	}

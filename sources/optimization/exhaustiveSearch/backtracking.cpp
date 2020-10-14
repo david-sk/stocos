@@ -16,12 +16,8 @@ Backtraking<SOL, TYPE_FITNESS, TYPE_CELL>::Backtraking(
 	std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
 	std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem, Domain<TYPE_CELL> dom)
 	: OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic),
-														  std::move(stoppingCriteria), problem) {
-	// 	  const unsigned int nbDigit,
-	// const unsigned int len_string
-	// _nbDigit(nbDigit), _len_string(len_string)
+														  std::move(stoppingCriteria), problem), _dom(dom) {
 	nbCall = 0;
-	_string = std::unique_ptr<unsigned int[]>(new unsigned int[_len_string]);
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
@@ -30,32 +26,29 @@ Backtraking<SOL, TYPE_FITNESS, TYPE_CELL>::~Backtraking() {
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 std::unique_ptr<SOL> Backtraking<SOL, TYPE_FITNESS, TYPE_CELL>::operator()(const SOL& s) {
-	//
 	std::unique_ptr<SOL> result;
+	this->recursive(0, s.sizeArray(), s);
+	
 	return std::move(result);
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-void Backtraking<SOL, TYPE_FITNESS, TYPE_CELL>::recursive(unsigned int currentCell) {
-	// current_sol.print();
-	if(_len_string == currentCell) {
-		// for(unsigned int j = 0 ; j < _len_string ; j++)
-		//     cout<<string[j];
-		// std::cout<<std::endl;
-		// cout<<"Wine : ";
-		// current_sol.print();
-	} else {
-		unsigned int i = 0;
-		while(i < _nbDigit) {
-			_string[currentCell] = i;
-
-			// Verification des contraites
-			// if (filtering(current_sol, currentCell + 1)) {
-			// if(this-> _problem.filtering(string)) {
-			// Descendre dans l'arbre (parcourt en profondeur)
-			recursive(currentCell + 1);
-			//}
-			i++;
+void Backtraking<SOL, TYPE_FITNESS, TYPE_CELL>::recursive(unsigned int currentCell, unsigned int depth, SOL s) {
+	SOL new_s(currentCell+1);
+	if (currentCell > 0) {
+		for (unsigned int i = 0 ; i < currentCell + 1; i++) {
+			new_s(i, s(i));
+		}
+	}
+	
+	unsigned int size_of_dom = _dom.get_size_domain(currentCell);
+	for (unsigned int i = 0 ; i < size_of_dom ; i++) {		
+		new_s(currentCell, _dom.pick(currentCell, i));
+		if (currentCell + 1 < depth && this->_problem->evaluationSubSolution(new_s))
+			this->recursive(currentCell + 1, depth, new_s);
+		else if (currentCell + 1 == depth && this->_problem->evaluationSubSolution(new_s) ) {
+			// All good solutions
+			std::cout<<__LINE__<<" "<<new_s<<std::endl;
 		}
 	}
 }
