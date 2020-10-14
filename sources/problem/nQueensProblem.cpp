@@ -72,7 +72,7 @@ unsigned int NQueensProblem::solutionSelection(const Population<SOL_NQUEENSPROBL
 }
 
 bool NQueensProblem::evaluationSubSolution(SOL_NQUEENSPROBLEM& s) const {
-	if (s.sizeArray() == 1) return true;
+	if(s.sizeArray() == 1) return true;
 	return check_diagonal(s) && check_line(s);
 }
 

@@ -2,8 +2,8 @@
 /// @file backtracking.hpp
 /// @author Jxtopher
 /// @version 1
-/// @date 2019
-/// @brief *
+/// @date 2020-10
+/// @brief see: https://en.wikipedia.org/wiki/Backtracking
 ///
 
 #ifndef BACKTRACKING_H
@@ -32,7 +32,7 @@ class Backtraking : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
 
 	std::unique_ptr<SOL> operator()(const SOL& s);
 
-	void recursive(unsigned int currentCell, unsigned int depth,SOL s);
+	std::unique_ptr<SOL> recursive(unsigned int currentCell, unsigned int depth, SOL s);
 
 	std::string className() const;
 

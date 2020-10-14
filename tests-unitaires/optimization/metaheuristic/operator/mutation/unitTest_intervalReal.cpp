@@ -16,8 +16,8 @@
 
 #include "optimization/metaheuristic/operator/atomicOperation.h"
 #include "optimization/metaheuristic/operator/mutation/intervalReal.h"
-#include "problem/problem.h"
 #include "problem/oneMax.h"
+#include "problem/problem.h"
 #include "solution/solution.h"
 #include "solution/solutionArray.h"
 #include "solutionSelection/maximization.h"

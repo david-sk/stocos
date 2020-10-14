@@ -59,19 +59,19 @@ class UnitTest_domain : public CppUnit::TestFixture {
 		Domain<int> dom(2, 25);
 		CPPUNIT_ASSERT(dom.get_size_domain(5) == 23);
 	}
-	
+
 	void pick(void) {
 		Domain<int> dom(2, 25);
-		CPPUNIT_ASSERT(dom.pick(0,0) == dom.pick(0,0));
+		CPPUNIT_ASSERT(dom.pick(0, 0) == dom.pick(0, 0));
 	}
 
 	void copy_builder(void) {
-		Domain<int> dom(2,25);
+		Domain<int> dom(2, 25);
 		dom.remove_element(0, 5);
 		Domain<int> dom_copy(dom);
 		CPPUNIT_ASSERT(dom.get_size_domain(0) == dom_copy.get_size_domain(0));
-		CPPUNIT_ASSERT(dom.pick(0,0) == dom_copy.pick(0,0));
-		CPPUNIT_ASSERT(!dom_copy.in_domain(0,5));
+		CPPUNIT_ASSERT(dom.pick(0, 0) == dom_copy.pick(0, 0));
+		CPPUNIT_ASSERT(!dom_copy.in_domain(0, 5));
 	}
 };
 

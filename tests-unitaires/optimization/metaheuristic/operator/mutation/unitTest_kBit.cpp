@@ -17,8 +17,8 @@
 #include "optimization/metaheuristic/operator/mutation/KBit.h"
 #include "problem/oneMax.h"
 #include "problem/problem.h"
-#include "solution/solutionArray.h"
 #include "solution/solution.h"
+#include "solution/solutionArray.h"
 #include "solutionSelection/maximization.h"
 
 using namespace CppUnit;

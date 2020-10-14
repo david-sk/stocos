@@ -42,10 +42,11 @@ Domain<TYPE_CELL>::Domain(const TYPE_CELL a, const TYPE_CELL b, const TYPE_CELL 
 }
 
 template<typename TYPE_CELL>
-Domain<TYPE_CELL>::Domain(const Domain& dom) {	
+Domain<TYPE_CELL>::Domain(const Domain& dom) {
 	this->_dom = std::make_shared<std::unordered_set<TYPE_CELL>>(*dom._dom);
-	for (auto cell : dom.dom_each_cell)
-		this->dom_each_cell[cell.first] = std::make_shared<std::unordered_set<TYPE_CELL>>(*cell.second);
+	for(auto cell : dom.dom_each_cell)
+		this->dom_each_cell[cell.first] =
+			std::make_shared<std::unordered_set<TYPE_CELL>>(*cell.second);
 }
 // ! operator=
 
@@ -92,7 +93,7 @@ bool Domain<TYPE_CELL>::in_domain(const unsigned int variable_index, const TYPE_
 		typename std::unordered_set<TYPE_CELL>::const_iterator got =
 			dom_each_cell.at(variable_index)->find(element);
 		return got != dom_each_cell.at(variable_index)->end();
-	} catch(const std::out_of_range& oor) { 
+	} catch(const std::out_of_range& oor) {
 		typename std::unordered_set<TYPE_CELL>::const_iterator got = _dom->find(element);
 		return got != _dom->end();
 	}
@@ -108,7 +109,7 @@ TYPE_CELL Domain<TYPE_CELL>::pick(const unsigned int variable_index, unsigned in
 		auto it = dom_each_cell.at(variable_index)->begin();
 		std::advance(it, element_index);
 		return (*it);
-	} catch(const std::out_of_range& oor) { 
+	} catch(const std::out_of_range& oor) {
 		auto it = _dom->begin();
 		std::advance(it, element_index);
 		return (*it);
