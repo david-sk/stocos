@@ -14,7 +14,6 @@ template<typename TYPE_FITNESS, typename TYPE_CELL>
 SolutionArray<TYPE_FITNESS, TYPE_CELL>::SolutionArray() : Solution<TYPE_FITNESS>(1), _sizeArray(1) {
 	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation SolutionArray";
 	array = std::make_unique<TYPE_CELL[]>(_sizeArray);
-	// domain = nullptr;
 }
 
 template<typename TYPE_FITNESS, typename TYPE_CELL>
@@ -22,7 +21,6 @@ SolutionArray<TYPE_FITNESS, TYPE_CELL>::SolutionArray(const unsigned int sizeArr
 	: Solution<TYPE_FITNESS>(1), _sizeArray(sizeArray) {
 	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation SolutionArray";
 	array = std::make_unique<TYPE_CELL[]>(_sizeArray);
-	// domain = nullptr;
 }
 
 template<typename TYPE_FITNESS, typename TYPE_CELL>
@@ -31,7 +29,6 @@ SolutionArray<TYPE_FITNESS, TYPE_CELL>::SolutionArray(const unsigned int numberO
 	: Solution<TYPE_FITNESS>(numberOfObjective), _sizeArray(sizeArray) {
 	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation SolutionArray";
 	array = std::make_unique<TYPE_CELL[]>(_sizeArray);
-	// domain = nullptr;
 }
 
 template<typename TYPE_FITNESS, typename TYPE_CELL>
@@ -41,22 +38,18 @@ SolutionArray<TYPE_FITNESS, TYPE_CELL>::SolutionArray(const SolutionArray& s)
 
 	array = std::make_unique<TYPE_CELL[]>(_sizeArray);
 	for(unsigned int i = 0; i < _sizeArray; i++) array[i] = s.array[i];
-
-	// domain = s.domain;
 }
 
 template<typename TYPE_FITNESS, typename TYPE_CELL>
 SolutionArray<TYPE_FITNESS, TYPE_CELL>::SolutionArray(const Json::Value& jsonValue)
 	: Solution<TYPE_FITNESS>(jsonValue), array(nullptr), _sizeArray(0) {
 	loadJson(jsonValue);
-	// ! loadJson for dom ?
 }
 
 template<typename TYPE_FITNESS, typename TYPE_CELL>
 SolutionArray<TYPE_FITNESS, TYPE_CELL>::SolutionArray(const std::string& solution)
 	: Solution<TYPE_FITNESS>(), array(nullptr), _sizeArray(0) {
 	loadJson(solution);
-	// ! loadJson for dom ?
 }
 
 template<typename TYPE_FITNESS, typename TYPE_CELL>

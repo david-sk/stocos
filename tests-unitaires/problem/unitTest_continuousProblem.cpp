@@ -16,9 +16,9 @@
 #include "problem/problem.h"
 #include "solution/solution.h"
 #include "solution/solutionArray.h"
-#include "solutionSelection/solutionSelectionBuilder.h"
-#include "solutionSelection/minimization.h"
 #include "solutionSelection/maximization.h"
+#include "solutionSelection/minimization.h"
+#include "solutionSelection/solutionSelectionBuilder.h"
 
 using namespace CppUnit;
 using namespace stocos;

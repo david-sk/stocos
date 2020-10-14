@@ -13,15 +13,15 @@
 #define UNITTEST_COMBINATIONGENERATOR_H
 
 #include "optimization/exhaustiveSearch/combinationGenerator.h"
-#include "solutionSelection/solutionSelectionBuilder.h"
 #include "problem/oneMax.h"
 #include "problem/problem.h"
 #include "solution/solution.h"
 #include "solution/solutionArray.h"
-#include "stoppingCriteria/stoppingCriteria.h"
 #include "solutionSelection/maximization.h"
 #include "solutionSelection/minimization.h"
+#include "solutionSelection/solutionSelectionBuilder.h"
 #include "statistic/statistic.h"
+#include "stoppingCriteria/stoppingCriteria.h"
 
 using namespace CppUnit;
 using namespace stocos;
@@ -39,7 +39,6 @@ class UnitTest_combinationGenerator : public CppUnit::TestFixture {
 	void test(void) {
 		typedef SolutionArray<unsigned int, bool> TYPESOL;
 		// //CPPUNIT_ASSERT(o->operator()(s) == false);
-
 
 		std::unique_ptr<StoppingCriteria<TYPESOL, unsigned int>> stoppingCriteria =
 			std::make_unique<StoppingCriteria<TYPESOL, unsigned int>>();
@@ -62,6 +61,7 @@ class UnitTest_combinationGenerator : public CppUnit::TestFixture {
 			std::cout<<std::endl;
 		} while (cg.stop());*/
 	}
+
   private:
 	std::mt19937 mt_rand;
 };
