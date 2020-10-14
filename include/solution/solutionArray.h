@@ -68,8 +68,6 @@ class SolutionArray : public Solution<TYPE_FITNESS> {
 	///
 	Json::Value asJson() const;
 
-	// std::shared_ptr<Domain<TYPE_CELL>> domain;
-
   private:
 	std::unique_ptr<TYPE_CELL[]> array;
 	unsigned int _sizeArray;
