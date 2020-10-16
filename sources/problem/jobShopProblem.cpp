@@ -35,7 +35,7 @@ const std::vector<std::vector<std::pair<unsigned int, unsigned int>>>&
 void JobShopProblem::evaluation(SOL_JOBSHOPPROBLEM& s) {
 }
 
-/*void JobShopProblem::incremental(SolutionArray const &s, unsigned int mutatedCell) const {
+/*void JobShopProblem::incremental(Solution const &s, unsigned int mutatedCell) const {
 
 }*/
 

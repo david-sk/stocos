@@ -34,12 +34,12 @@ void IntervalInteger<SOL, TYPE_FITNESS, TYPE_CELL>::operator()(SOL& s) {
 	}
 }
 
-template class IntervalInteger<SolutionArray<double, double>, double, double>;
-template class IntervalInteger<SolutionArray<double, bool>, double, bool>;
-template class IntervalInteger<SolutionArray<int, bool>, int, bool>;
-template class IntervalInteger<SolutionArray<unsigned int, bool>, unsigned int, bool>;
-template class IntervalInteger<SolutionArray<double, unsigned int>, double, unsigned int>;
-template class IntervalInteger<SolutionArray<unsigned int, unsigned int>, unsigned int,
+template class IntervalInteger<Solution<double, double>, double, double>;
+template class IntervalInteger<Solution<double, bool>, double, bool>;
+template class IntervalInteger<Solution<int, bool>, int, bool>;
+template class IntervalInteger<Solution<unsigned int, bool>, unsigned int, bool>;
+template class IntervalInteger<Solution<double, unsigned int>, double, unsigned int>;
+template class IntervalInteger<Solution<unsigned int, unsigned int>, unsigned int,
 							   unsigned int>;
-template class IntervalInteger<SolutionArray<int, int>, int, int>;
+template class IntervalInteger<Solution<int, int>, int, int>;
 } // namespace stocos

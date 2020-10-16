@@ -11,7 +11,7 @@
 #define SOLUTION_SELECTION_H
 
 #include "../solution/population.h"
-#include "../solution/solutionArray.h"
+#include "../solution/solution.h"
 
 namespace stocos {
 

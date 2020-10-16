@@ -15,7 +15,6 @@
 #include "problem/magicSequence.h"
 #include "problem/problem.h"
 #include "solution/solution.h"
-#include "solution/solutionArray.h"
 #include "solutionSelection/maximization.h"
 
 using namespace CppUnit;

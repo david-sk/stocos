@@ -82,11 +82,11 @@ void KBit<SOL, TYPE_FITNESS, TYPE_CELL>::applyOperator(
 	}
 }
 
-template class KBit<SolutionArray<double, double>, double, double>;
-template class KBit<SolutionArray<double, bool>, double, bool>;
-template class KBit<SolutionArray<int, bool>, int, bool>;
-template class KBit<SolutionArray<unsigned int, bool>, unsigned int, bool>;
-template class KBit<SolutionArray<double, unsigned int>, double, unsigned int>;
-template class KBit<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
-template class KBit<SolutionArray<int, int>, int, int>;
+template class KBit<Solution<double, double>, double, double>;
+template class KBit<Solution<double, bool>, double, bool>;
+template class KBit<Solution<int, bool>, int, bool>;
+template class KBit<Solution<unsigned int, bool>, unsigned int, bool>;
+template class KBit<Solution<double, unsigned int>, double, unsigned int>;
+template class KBit<Solution<unsigned int, unsigned int>, unsigned int, unsigned int>;
+template class KBit<Solution<int, int>, int, int>;
 } // namespace stocos

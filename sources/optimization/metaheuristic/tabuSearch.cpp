@@ -74,10 +74,10 @@ void TabuSearch<SOL, TYPE_FITNESS, TYPE_CELL>::className(const std::string& clas
 	_class_name = class_name;
 }
 
-template class TabuSearch<SolutionArray<double, double>, double, double>;
-template class TabuSearch<SolutionArray<double, bool>, double, bool>;
-template class TabuSearch<SolutionArray<int, bool>, int, bool>;
-template class TabuSearch<SolutionArray<unsigned int, bool>, unsigned int, bool>;
-template class TabuSearch<SolutionArray<double, unsigned int>, double, unsigned int>;
-template class TabuSearch<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
+template class TabuSearch<Solution<double, double>, double, double>;
+template class TabuSearch<Solution<double, bool>, double, bool>;
+template class TabuSearch<Solution<int, bool>, int, bool>;
+template class TabuSearch<Solution<unsigned int, bool>, unsigned int, bool>;
+template class TabuSearch<Solution<double, unsigned int>, double, unsigned int>;
+template class TabuSearch<Solution<unsigned int, unsigned int>, unsigned int, unsigned int>;
 } // namespace stocos

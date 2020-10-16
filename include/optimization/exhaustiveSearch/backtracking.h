@@ -15,7 +15,7 @@
 #include <vector>
 
 #include "../../solution/domain.h"
-#include "../../solution/solutionArray.h"
+#include "../../solution/solution.h"
 #include "../optimizationAlgorithm.h"
 
 namespace stocos {

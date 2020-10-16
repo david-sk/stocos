@@ -21,14 +21,14 @@
 #include <iostream>
 #include <memory>
 
-#include "../solution/solutionArray.h"
+#include "../solution/solution.h"
 #include "problem.h"
 
 namespace stocos {
 
 using TYPE_FITNESS_QAP = unsigned int;
 using TYPE_CELL_QAP = unsigned int;
-using SOL_QAP = SolutionArray<TYPE_FITNESS_QAP, TYPE_CELL_QAP>;
+using SOL_QAP = Solution<TYPE_FITNESS_QAP, TYPE_CELL_QAP>;
 class QAP : public Problem<SOL_QAP, TYPE_FITNESS_QAP, TYPE_CELL_QAP> {
   public:
 	QAP(const std::string& fileInstance);

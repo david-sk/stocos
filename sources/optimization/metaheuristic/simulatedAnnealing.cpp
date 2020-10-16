@@ -46,11 +46,11 @@ void SimulatedAnnealing<SOL, TYPE_FITNESS, TYPE_CELL>::className(const std::stri
 	_class_name = class_name;
 }
 
-template class SimulatedAnnealing<SolutionArray<double, double>, double, double>;
-template class SimulatedAnnealing<SolutionArray<double, bool>, double, bool>;
-template class SimulatedAnnealing<SolutionArray<int, bool>, int, bool>;
-template class SimulatedAnnealing<SolutionArray<unsigned int, bool>, unsigned int, bool>;
-template class SimulatedAnnealing<SolutionArray<double, unsigned int>, double, unsigned int>;
-template class SimulatedAnnealing<SolutionArray<unsigned int, unsigned int>, unsigned int,
+template class SimulatedAnnealing<Solution<double, double>, double, double>;
+template class SimulatedAnnealing<Solution<double, bool>, double, bool>;
+template class SimulatedAnnealing<Solution<int, bool>, int, bool>;
+template class SimulatedAnnealing<Solution<unsigned int, bool>, unsigned int, bool>;
+template class SimulatedAnnealing<Solution<double, unsigned int>, double, unsigned int>;
+template class SimulatedAnnealing<Solution<unsigned int, unsigned int>, unsigned int,
 								  unsigned int>;
 } // namespace stocos

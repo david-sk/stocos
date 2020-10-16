@@ -12,12 +12,12 @@
 
 #include <vector>
 
-#include "solution.h"
+#include "fitness.h"
 
 namespace stocos {
 
 template<typename SOL>
-class Population : public Solution<double>, public std::vector<SOL> {
+class Population : public Fitness<double>, public std::vector<SOL> {
   public:
 	Population() {
 	}

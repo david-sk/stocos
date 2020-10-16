@@ -52,12 +52,12 @@ template<typename SOL, typename TYPE_FITNESS>
 void CriteriaFitnessObjectif<SOL, TYPE_FITNESS>::reset() {
 }
 
-template class CriteriaFitnessObjectif<Solution<int>, unsigned int>;
-template class CriteriaFitnessObjectif<SolutionArray<double, double>, double>;
-template class CriteriaFitnessObjectif<SolutionArray<double, bool>, double>;
-template class CriteriaFitnessObjectif<SolutionArray<int, bool>, int>;
-template class CriteriaFitnessObjectif<SolutionArray<unsigned int, bool>, unsigned int>;
-template class CriteriaFitnessObjectif<SolutionArray<double, unsigned int>, double>;
-template class CriteriaFitnessObjectif<SolutionArray<unsigned int, unsigned int>, unsigned int>;
+template class CriteriaFitnessObjectif<Fitness<int>, unsigned int>;
+template class CriteriaFitnessObjectif<Solution<double, double>, double>;
+template class CriteriaFitnessObjectif<Solution<double, bool>, double>;
+template class CriteriaFitnessObjectif<Solution<int, bool>, int>;
+template class CriteriaFitnessObjectif<Solution<unsigned int, bool>, unsigned int>;
+template class CriteriaFitnessObjectif<Solution<double, unsigned int>, double>;
+template class CriteriaFitnessObjectif<Solution<unsigned int, unsigned int>, unsigned int>;
 
 } // namespace stocos

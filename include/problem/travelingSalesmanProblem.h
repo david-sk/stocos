@@ -19,7 +19,7 @@
 #include <jsoncpp/json/json.h>
 
 #include "../solution/population.h"
-#include "../solution/solutionArray.h"
+#include "../solution/solution.h"
 #include "../solutionSelection/minimization.h"
 #include "problem.h"
 
@@ -27,7 +27,7 @@ namespace stocos {
 
 using TYPE_FITNESS_STP = double;
 using TYPE_CELL_STP = double;
-using SOL_STP = SolutionArray<TYPE_FITNESS_STP, TYPE_CELL_STP>;
+using SOL_STP = Solution<TYPE_FITNESS_STP, TYPE_CELL_STP>;
 class TravelingSalesmanProblem : public Problem<SOL_STP, TYPE_FITNESS_STP, TYPE_CELL_STP> {
   public:
 	TravelingSalesmanProblem();

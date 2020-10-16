@@ -142,7 +142,7 @@ class Factory {
 		}
 		if(!configuration["sensorSolution"].empty()) {
 			if(configuration["sensorSolution"] == true)
-				__statistic->addSensor(new SensorSolution<SOL>);
+				__statistic->addSensor(new SensorFitness<SOL>);
 		}
 		if(!configuration["sensorFitness"].empty()) {
 			if(configuration["sensorFitness"] == true)

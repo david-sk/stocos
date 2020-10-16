@@ -55,11 +55,11 @@ void Neighborhood<SOL, TYPE_FITNESS, TYPE_CELL>::applyOperator(
 	exit(EXIT_FAILURE);
 }
 
-template class Neighborhood<SolutionArray<double, double>, double, double>;
-template class Neighborhood<SolutionArray<double, bool>, double, bool>;
-template class Neighborhood<SolutionArray<int, bool>, int, bool>;
-template class Neighborhood<SolutionArray<unsigned int, bool>, unsigned int, bool>;
-template class Neighborhood<SolutionArray<double, unsigned int>, double, unsigned int>;
-template class Neighborhood<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
-template class Neighborhood<SolutionArray<int, int>, int, int>;
+template class Neighborhood<Solution<double, double>, double, double>;
+template class Neighborhood<Solution<double, bool>, double, bool>;
+template class Neighborhood<Solution<int, bool>, int, bool>;
+template class Neighborhood<Solution<unsigned int, bool>, unsigned int, bool>;
+template class Neighborhood<Solution<double, unsigned int>, double, unsigned int>;
+template class Neighborhood<Solution<unsigned int, unsigned int>, unsigned int, unsigned int>;
+template class Neighborhood<Solution<int, int>, int, int>;
 } // namespace stocos

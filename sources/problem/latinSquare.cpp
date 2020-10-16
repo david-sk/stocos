@@ -44,7 +44,7 @@ void LatinSquare::evaluation(SOL_LATINSQUARE& s) {
 	//
 }
 
-/*void LatinSquare::incremental(const SolutionArray &s, unsigned int mutatedCell) const {
+/*void LatinSquare::incremental(const Solution &s, unsigned int mutatedCell) const {
 
 }*/
 

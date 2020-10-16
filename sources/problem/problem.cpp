@@ -116,10 +116,10 @@ unsigned int Problem<SOL, TYPE_FITNESS, TYPE_CELL>::solutionSelection(const Popu
 							 "[-] Not implemented : solutionSelection(...)");
 }
 
-template class Problem<SolutionArray<double, double>, double, double>;
-template class Problem<SolutionArray<double, bool>, double, bool>;
-template class Problem<SolutionArray<int, bool>, int, bool>;
-template class Problem<SolutionArray<unsigned int, bool>, unsigned int, bool>;
-template class Problem<SolutionArray<double, unsigned int>, double, unsigned int>;
-template class Problem<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
+template class Problem<Solution<double, double>, double, double>;
+template class Problem<Solution<double, bool>, double, bool>;
+template class Problem<Solution<int, bool>, int, bool>;
+template class Problem<Solution<unsigned int, bool>, unsigned int, bool>;
+template class Problem<Solution<double, unsigned int>, double, unsigned int>;
+template class Problem<Solution<unsigned int, unsigned int>, unsigned int, unsigned int>;
 } // namespace stocos

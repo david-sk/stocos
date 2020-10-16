@@ -19,7 +19,6 @@
 #include "problem/oneMax.h"
 #include "problem/problem.h"
 #include "solution/solution.h"
-#include "solution/solutionArray.h"
 #include "solutionSelection/maximization.h"
 
 using namespace CppUnit;
@@ -37,9 +36,9 @@ class UnitTest_intervalReal : public CppUnit::TestFixture {
 
 	void operator()(void) {
 		unsigned int n = 20;
-		SolutionArray<double, double> s1(n);
-		SolutionArray<double, double> s2(s1);
-		IntervalReal<SolutionArray<double, double>, double, double> intervalReal(mt_rand, 20, -10,
+		Solution<double, double> s1(n);
+		Solution<double, double> s2(s1);
+		IntervalReal<Solution<double, double>, double, double> intervalReal(mt_rand, 20, -10,
 																				 10);
 		intervalReal(s1);
 		CPPUNIT_ASSERT(!(s1 == s2));

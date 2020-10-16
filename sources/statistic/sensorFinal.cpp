@@ -51,12 +51,12 @@ std::string SensorFinal<SOL>::name() const {
 	return std::string("final");
 }
 
-template class SensorFinal<Solution<int>>;
-template class SensorFinal<SolutionArray<double, double>>;
-template class SensorFinal<SolutionArray<double, bool>>;
-template class SensorFinal<SolutionArray<int, bool>>;
-template class SensorFinal<SolutionArray<unsigned int, bool>>;
-template class SensorFinal<SolutionArray<double, unsigned int>>;
-template class SensorFinal<SolutionArray<unsigned int, unsigned int>>;
+template class SensorFinal<Fitness<int>>;
+template class SensorFinal<Solution<double, double>>;
+template class SensorFinal<Solution<double, bool>>;
+template class SensorFinal<Solution<int, bool>>;
+template class SensorFinal<Solution<unsigned int, bool>>;
+template class SensorFinal<Solution<double, unsigned int>>;
+template class SensorFinal<Solution<unsigned int, unsigned int>>;
 
 } // namespace stocos

@@ -14,7 +14,7 @@
 
 #include <jsoncpp/json/json.h>
 
-#include "../solution/solutionArray.h"
+#include "../solution/solution.h"
 #include "sensor.h"
 #include "sensorNumRound.h"
 #include "sensorStopwatch.h"

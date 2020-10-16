@@ -17,7 +17,7 @@
 #include <memory>
 #include <unistd.h>
 
-#include "../solution/solutionArray.h"
+#include "../solution/solution.h"
 #include "../solutionSelection/maximization.h"
 #include "../solutionSelection/solutionSelection.h"
 
@@ -27,7 +27,7 @@ namespace stocos {
 
 using TYPE_FITNESS_NQUEENSPROBLEM = unsigned int;
 using TYPE_CELL_NQUEENSPROBLEM = unsigned int;
-using SOL_NQUEENSPROBLEM = SolutionArray<TYPE_FITNESS_NQUEENSPROBLEM, TYPE_CELL_NQUEENSPROBLEM>;
+using SOL_NQUEENSPROBLEM = Solution<TYPE_FITNESS_NQUEENSPROBLEM, TYPE_CELL_NQUEENSPROBLEM>;
 class NQueensProblem
 	: public Problem<SOL_NQUEENSPROBLEM, TYPE_FITNESS_NQUEENSPROBLEM, TYPE_CELL_NQUEENSPROBLEM> {
   public:

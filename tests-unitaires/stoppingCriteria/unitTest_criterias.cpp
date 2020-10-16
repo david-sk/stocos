@@ -12,7 +12,6 @@
 #ifndef UNITTEST_CRITERIAS_H
 #define UNITTEST_CRITERIAS_H
 
-#include "solution/solution.h"
 #include "stoppingCriteria/criteriaBudget.h"
 #include "stoppingCriteria/stoppingCriteria.h"
 
@@ -26,11 +25,11 @@ class UnitTest_criterias : public CppUnit::TestFixture {
 
   public:
 	void constructor(void) {
-		Solution<int> s;
-		CriteriaBudget<Solution<int>, unsigned int>* criteriaBudget;
-		criteriaBudget = new CriteriaBudget<Solution<int>, unsigned int>(100);
+		Fitness<int> s;
+		CriteriaBudget<Fitness<int>, unsigned int>* criteriaBudget;
+		criteriaBudget = new CriteriaBudget<Fitness<int>, unsigned int>(100);
 
-		StoppingCriteria<Solution<int>, unsigned int> stoppingCriteria;
+		StoppingCriteria<Fitness<int>, unsigned int> stoppingCriteria;
 		stoppingCriteria.addCriteria(criteriaBudget);
 		for(unsigned int i = 0; i < 100; i++) CPPUNIT_ASSERT(stoppingCriteria(s));
 

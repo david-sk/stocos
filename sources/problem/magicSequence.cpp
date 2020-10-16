@@ -31,7 +31,7 @@ void MagicSequence::evaluation(SOL_MAGICSEQUENCE& s) {
 	s.setFitness(0, resultat / static_cast<double>(s.sizeArray()));
 }
 
-/*void MagicSequence::incremental(const SolutionArray &s, unsigned int mutatedCell) const {
+/*void MagicSequence::incremental(const Solution &s, unsigned int mutatedCell) const {
 
 }*/
 

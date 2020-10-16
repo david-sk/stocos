@@ -14,8 +14,8 @@
 
 #include <jsoncpp/json/json.h>
 
+#include "../solution/fitness.h"
 #include "../solution/solution.h"
-#include "../solution/solutionArray.h"
 #include "sensor.h"
 
 namespace stocos {

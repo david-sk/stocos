@@ -49,7 +49,7 @@ void Knapsack::evaluation(SOL_KNAPSACK& s) {
 	s.setFitness(fitness);
 }
 
-/*void Knapsack::incremental(const SolutionArray &s, unsigned int mutatedCell) const {
+/*void Knapsack::incremental(const Solution &s, unsigned int mutatedCell) const {
 
 }*/
 

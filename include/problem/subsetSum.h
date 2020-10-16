@@ -16,14 +16,14 @@
 
 #include <jsoncpp/json/json.h>
 
-#include "../solution/solutionArray.h"
+#include "../solution/solution.h"
 #include "problem.h"
 
 namespace stocos {
 
 using TYPE_FITNESS_SUBSETSUM = unsigned int;
 using TYPE_CELL_SUBSETSUM = bool;
-using SOL_SUBSETSUM = SolutionArray<TYPE_FITNESS_SUBSETSUM, TYPE_CELL_SUBSETSUM>;
+using SOL_SUBSETSUM = Solution<TYPE_FITNESS_SUBSETSUM, TYPE_CELL_SUBSETSUM>;
 class Subsetsum : public Problem<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CELL_SUBSETSUM> {
   public:
 	Subsetsum();
@@ -42,7 +42,7 @@ class Subsetsum : public Problem<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CEL
 
 	void evaluation(SOL_SUBSETSUM& s);
 
-	// void incremental(const SolutionArray &s, unsigned int mutatedCell) const;
+	// void incremental(const Solution &s, unsigned int mutatedCell) const;
 
 	void resetSolution(SOL_SUBSETSUM& s) const;
 

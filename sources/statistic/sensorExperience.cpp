@@ -41,12 +41,12 @@ std::string SensorExperience<SOL>::name() const {
 	return std::string("experience");
 }
 
-template class SensorExperience<Solution<int>>;
-template class SensorExperience<SolutionArray<double, double>>;
-template class SensorExperience<SolutionArray<double, bool>>;
-template class SensorExperience<SolutionArray<int, bool>>;
-template class SensorExperience<SolutionArray<unsigned int, bool>>;
-template class SensorExperience<SolutionArray<double, unsigned int>>;
-template class SensorExperience<SolutionArray<unsigned int, unsigned int>>;
+template class SensorExperience<Fitness<int>>;
+template class SensorExperience<Solution<double, double>>;
+template class SensorExperience<Solution<double, bool>>;
+template class SensorExperience<Solution<int, bool>>;
+template class SensorExperience<Solution<unsigned int, bool>>;
+template class SensorExperience<Solution<double, unsigned int>>;
+template class SensorExperience<Solution<unsigned int, unsigned int>>;
 
 } // namespace stocos

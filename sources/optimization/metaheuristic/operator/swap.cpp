@@ -57,11 +57,11 @@ void Swap<SOL, TYPE_FITNESS, TYPE_CELL>::cancelMutations(SOL& s) const {
 	for(unsigned int i = 0; i < backup.size(); i++) { s(backup[i].first, backup[i].second); }
 }
 
-template class Swap<SolutionArray<double, double>, double, double>;
-template class Swap<SolutionArray<double, bool>, double, bool>;
-template class Swap<SolutionArray<int, bool>, int, bool>;
-template class Swap<SolutionArray<unsigned int, bool>, unsigned int, bool>;
-template class Swap<SolutionArray<double, unsigned int>, double, unsigned int>;
-template class Swap<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
-template class Swap<SolutionArray<int, int>, int, int>;
+template class Swap<Solution<double, double>, double, double>;
+template class Swap<Solution<double, bool>, double, bool>;
+template class Swap<Solution<int, bool>, int, bool>;
+template class Swap<Solution<unsigned int, bool>, unsigned int, bool>;
+template class Swap<Solution<double, unsigned int>, double, unsigned int>;
+template class Swap<Solution<unsigned int, unsigned int>, unsigned int, unsigned int>;
+template class Swap<Solution<int, int>, int, int>;
 } // namespace stocos

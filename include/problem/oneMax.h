@@ -16,7 +16,7 @@
 #include <memory>
 #include <unistd.h>
 
-#include "../solution/solutionArray.h"
+#include "../solution/solution.h"
 #include "../solutionSelection/maximization.h"
 #include "../solutionSelection/solutionSelection.h"
 
@@ -26,7 +26,7 @@ namespace stocos {
 
 using TYPE_FITNESS_ONEMAX = unsigned int;
 using TYPE_CELL_ONEMAX = bool;
-using SOL_ONEMAX = SolutionArray<TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>;
+using SOL_ONEMAX = Solution<TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>;
 class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX> {
   public:
 	OneMax();
@@ -44,7 +44,7 @@ class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>
 	bool checkSolutionStructure(const SOL_ONEMAX& s) const;
 	void evaluation(SOL_ONEMAX& s);
 
-	// void incremental(const SolutionArray &s, unsigned int mutatedCell) const;
+	// void incremental(const Solution &s, unsigned int mutatedCell) const;
 
 	void resetSolution(SOL_ONEMAX& s) const;
 

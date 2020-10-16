@@ -1,5 +1,5 @@
 ///
-/// @file sensorSolution.hpp
+/// @file sensorSolution.h
 /// @author Jxtopher
 /// @version 0.1
 /// @copyright CC-BY-NC-SA
@@ -14,8 +14,8 @@
 
 #include <jsoncpp/json/json.h>
 
+#include "../solution/fitness.h"
 #include "../solution/solution.h"
-#include "../solution/solutionArray.h"
 #include "sensor.h"
 
 namespace stocos {

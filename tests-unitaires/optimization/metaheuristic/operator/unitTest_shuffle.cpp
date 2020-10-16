@@ -18,7 +18,6 @@
 #include "problem/oneMax.h"
 #include "problem/problem.h"
 #include "solution/solution.h"
-#include "solution/solutionArray.h"
 #include "solutionSelection/maximization.h"
 
 using namespace CppUnit;
@@ -36,7 +35,7 @@ class UnitTest_shuffle : public CppUnit::TestFixture {
 
 	void operator()(void) {
 		unsigned int N = 50;
-		SOL_ONEMAX s1(1, N);
+		SOL_ONEMAX s1(N);
 		for(unsigned int i = 0; i < N; i++) { s1(i, static_cast<int>(i % 2)); }
 		SOL_ONEMAX s2(s1);
 
