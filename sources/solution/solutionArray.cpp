@@ -11,44 +11,38 @@
 namespace stocos {
 
 template<typename TYPE_FITNESS, typename TYPE_CELL>
-SolutionArray<TYPE_FITNESS, TYPE_CELL>::SolutionArray() : Solution<TYPE_FITNESS>(1), _sizeArray(1) {
+SolutionArray<TYPE_FITNESS, TYPE_CELL>::SolutionArray() : Solution<TYPE_FITNESS>(1), std::vector<TYPE_CELL>(1) {
 	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation SolutionArray";
-	array = std::make_unique<TYPE_CELL[]>(_sizeArray);
 }
 
 template<typename TYPE_FITNESS, typename TYPE_CELL>
 SolutionArray<TYPE_FITNESS, TYPE_CELL>::SolutionArray(const unsigned int sizeArray)
-	: Solution<TYPE_FITNESS>(1), _sizeArray(sizeArray) {
+	: Solution<TYPE_FITNESS>(1), std::vector<TYPE_CELL>(sizeArray) {
 	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation SolutionArray";
-	array = std::make_unique<TYPE_CELL[]>(_sizeArray);
 }
 
 template<typename TYPE_FITNESS, typename TYPE_CELL>
 SolutionArray<TYPE_FITNESS, TYPE_CELL>::SolutionArray(const unsigned int numberOfObjective,
 													  const unsigned int sizeArray)
-	: Solution<TYPE_FITNESS>(numberOfObjective), _sizeArray(sizeArray) {
+	: Solution<TYPE_FITNESS>(numberOfObjective), std::vector<TYPE_CELL>(sizeArray) {
 	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation SolutionArray";
-	array = std::make_unique<TYPE_CELL[]>(_sizeArray);
 }
 
 template<typename TYPE_FITNESS, typename TYPE_CELL>
 SolutionArray<TYPE_FITNESS, TYPE_CELL>::SolutionArray(const SolutionArray& s)
-	: Solution<TYPE_FITNESS>(s), _sizeArray(s._sizeArray) {
+	: Solution<TYPE_FITNESS>(s), std::vector<TYPE_CELL>(s) {
 	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation SolutionArray";
-
-	array = std::make_unique<TYPE_CELL[]>(_sizeArray);
-	for(unsigned int i = 0; i < _sizeArray; i++) array[i] = s.array[i];
 }
 
 template<typename TYPE_FITNESS, typename TYPE_CELL>
 SolutionArray<TYPE_FITNESS, TYPE_CELL>::SolutionArray(const Json::Value& jsonValue)
-	: Solution<TYPE_FITNESS>(jsonValue), array(nullptr), _sizeArray(0) {
+	: Solution<TYPE_FITNESS>(jsonValue) {
 	loadJson(jsonValue);
 }
 
 template<typename TYPE_FITNESS, typename TYPE_CELL>
 SolutionArray<TYPE_FITNESS, TYPE_CELL>::SolutionArray(const std::string& solution)
-	: Solution<TYPE_FITNESS>(), array(nullptr), _sizeArray(0) {
+	: Solution<TYPE_FITNESS>() {
 	loadJson(solution);
 }
 
@@ -61,23 +55,17 @@ template<typename TYPE_FITNESS, typename TYPE_CELL>
 SolutionArray<TYPE_FITNESS, TYPE_CELL>& SolutionArray<TYPE_FITNESS, TYPE_CELL>::
 	operator=(const SolutionArray& s) {
 	Solution<TYPE_FITNESS>::operator=(s);
-	if(_sizeArray != s._sizeArray) {
-		_sizeArray = s._sizeArray;
-		array = std::make_unique<TYPE_CELL[]>(_sizeArray);
-	}
-
-	for(unsigned int i = 0; i < _sizeArray; i++) array[i] = s.array[i];
-
+	std::vector<TYPE_CELL>::operator=(s);
 	return *this;
 }
 
 template<typename TYPE_FITNESS, typename TYPE_CELL>
 bool SolutionArray<TYPE_FITNESS, TYPE_CELL>::operator==(const SolutionArray& s) const {
-	if(sizeArray() != s.sizeArray())
+	if(this->size() != s.size())
 		return false;
 	else {
 		for(unsigned int i = 0; i < s.sizeArray(); i++) {
-			if(array[i] != s(i)) return false;
+			if(this->operator[](i) != s(i)) return false;
 		}
 	}
 	return true;
@@ -86,23 +74,23 @@ bool SolutionArray<TYPE_FITNESS, TYPE_CELL>::operator==(const SolutionArray& s) 
 template<typename TYPE_FITNESS, typename TYPE_CELL>
 void SolutionArray<TYPE_FITNESS, TYPE_CELL>::operator()(const unsigned int index,
 														const TYPE_CELL value) {
-	assert(index < _sizeArray);
-	if(array[index] != value) {
+	assert(index < this->size());
+	if(this->operator[](index) != value) {
 		for(unsigned int i = 0; i < this->_number_of_objective; i++)
 			this->_fitness_is_valid[i] = false;
-		array[index] = value;
+		this->operator[](index) = value;
 	}
 }
 
 template<typename TYPE_FITNESS, typename TYPE_CELL>
 TYPE_CELL SolutionArray<TYPE_FITNESS, TYPE_CELL>::operator()(const unsigned int index) const {
-	assert(index < _sizeArray);
-	return array[index];
+	assert(index < this->size());
+	return this->operator[](index);
 }
 
 template<typename TYPE_FITNESS, typename TYPE_CELL>
 unsigned int SolutionArray<TYPE_FITNESS, TYPE_CELL>::sizeArray() const {
-	return _sizeArray;
+	return this->size();
 }
 
 // --------------------------------------------------------------------
@@ -120,14 +108,9 @@ void SolutionArray<TYPE_FITNESS, TYPE_CELL>::loadJson(const std::string& strJson
 template<typename TYPE_FITNESS, typename TYPE_CELL>
 void SolutionArray<TYPE_FITNESS, TYPE_CELL>::loadJson(const Json::Value& jsonValue) {
 	Solution<TYPE_FITNESS>::loadJson(jsonValue);
-	_sizeArray = jsonValue["solution"].size();
-	if(array == nullptr)
-		array = std::make_unique<TYPE_CELL[]>(_sizeArray);
-	else
-		this->array.reset(static_cast<TYPE_CELL*>(realloc(static_cast<void*>(this->array.release()),
-														  this->_sizeArray * sizeof(TYPE_CELL))));
+	this->resize(jsonValue["solution"].size());
 	for(unsigned int i = 0; i < jsonValue["solution"].size(); i++)
-		array[i] = jsonValue["solution"][i].asDouble();
+		this->operator[](i) = jsonValue["solution"][i].asDouble();
 }
 
 ///
@@ -136,7 +119,7 @@ void SolutionArray<TYPE_FITNESS, TYPE_CELL>::loadJson(const Json::Value& jsonVal
 template<typename TYPE_FITNESS, typename TYPE_CELL>
 Json::Value SolutionArray<TYPE_FITNESS, TYPE_CELL>::asJson() const {
 	Json::Value jsonValue = Solution<TYPE_FITNESS>::asJson();
-	for(unsigned int i = 0; i < _sizeArray; i++) jsonValue["solution"].append(array[i]);
+	for(unsigned int i = 0; i < this->size(); i++) jsonValue["solution"].append(this->operator[](i));
 	return jsonValue;
 }
 
