@@ -51,6 +51,5 @@ template class SimulatedAnnealing<Solution<double, bool>, double, bool>;
 template class SimulatedAnnealing<Solution<int, bool>, int, bool>;
 template class SimulatedAnnealing<Solution<unsigned int, bool>, unsigned int, bool>;
 template class SimulatedAnnealing<Solution<double, unsigned int>, double, unsigned int>;
-template class SimulatedAnnealing<Solution<unsigned int, unsigned int>, unsigned int,
-								  unsigned int>;
+template class SimulatedAnnealing<Solution<unsigned int, unsigned int>, unsigned int, unsigned int>;
 } // namespace stocos

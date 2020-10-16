@@ -64,6 +64,5 @@ template class FirstImprovement<Solution<double, bool>, double, bool>;
 template class FirstImprovement<Solution<int, bool>, int, bool>;
 template class FirstImprovement<Solution<unsigned int, bool>, unsigned int, bool>;
 template class FirstImprovement<Solution<double, unsigned int>, double, unsigned int>;
-template class FirstImprovement<Solution<unsigned int, unsigned int>, unsigned int,
-								unsigned int>;
+template class FirstImprovement<Solution<unsigned int, unsigned int>, unsigned int, unsigned int>;
 } // namespace stocos

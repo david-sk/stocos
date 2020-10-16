@@ -11,7 +11,8 @@
 namespace stocos {
 
 template<typename TYPE_FITNESS, typename TYPE_CELL>
-Solution<TYPE_FITNESS, TYPE_CELL>::Solution(const unsigned int sizeArray, const unsigned int numberOfObjective)
+Solution<TYPE_FITNESS, TYPE_CELL>::Solution(const unsigned int sizeArray,
+											const unsigned int numberOfObjective)
 	: Fitness<TYPE_FITNESS>(numberOfObjective), std::vector<TYPE_CELL>(sizeArray) {
 	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation Solution";
 }
@@ -29,8 +30,7 @@ Solution<TYPE_FITNESS, TYPE_CELL>::Solution(const Json::Value& jsonValue)
 }
 
 template<typename TYPE_FITNESS, typename TYPE_CELL>
-Solution<TYPE_FITNESS, TYPE_CELL>::Solution(const std::string& solution)
-	: Fitness<TYPE_FITNESS>() {
+Solution<TYPE_FITNESS, TYPE_CELL>::Solution(const std::string& solution) : Fitness<TYPE_FITNESS>() {
 	loadJson(solution);
 }
 
@@ -40,8 +40,7 @@ Solution<TYPE_FITNESS, TYPE_CELL>::~Solution() {
 }
 
 template<typename TYPE_FITNESS, typename TYPE_CELL>
-Solution<TYPE_FITNESS, TYPE_CELL>& Solution<TYPE_FITNESS, TYPE_CELL>::
-	operator=(const Solution& s) {
+Solution<TYPE_FITNESS, TYPE_CELL>& Solution<TYPE_FITNESS, TYPE_CELL>::operator=(const Solution& s) {
 	Fitness<TYPE_FITNESS>::operator=(s);
 	std::vector<TYPE_CELL>::operator=(s);
 	return *this;
@@ -61,7 +60,7 @@ bool Solution<TYPE_FITNESS, TYPE_CELL>::operator==(const Solution& s) const {
 
 template<typename TYPE_FITNESS, typename TYPE_CELL>
 void Solution<TYPE_FITNESS, TYPE_CELL>::operator()(const unsigned int index,
-														const TYPE_CELL value) {
+												   const TYPE_CELL value) {
 	assert(index < this->size());
 	if(this->operator[](index) != value) {
 		for(unsigned int i = 0; i < this->_number_of_objective; i++)
@@ -107,7 +106,8 @@ void Solution<TYPE_FITNESS, TYPE_CELL>::loadJson(const Json::Value& jsonValue) {
 template<typename TYPE_FITNESS, typename TYPE_CELL>
 Json::Value Solution<TYPE_FITNESS, TYPE_CELL>::asJson() const {
 	Json::Value jsonValue = Fitness<TYPE_FITNESS>::asJson();
-	for(unsigned int i = 0; i < this->size(); i++) jsonValue["solution"].append(this->operator[](i));
+	for(unsigned int i = 0; i < this->size(); i++)
+		jsonValue["solution"].append(this->operator[](i));
 	return jsonValue;
 }
 

@@ -56,7 +56,7 @@ class UnitTest_backtraking : public CppUnit::TestFixture {
 			mt_rand, std::move(statistic), std::move(stoppingCriteria), eNQueensProblem, dom);
 
 		std::unique_ptr<SOL_NQUEENSPROBLEM> result = backtraking(s);
-		
+
 		CPPUNIT_ASSERT(*result == solution_vaid);
 	}
 

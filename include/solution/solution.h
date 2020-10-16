@@ -48,8 +48,7 @@ class Solution : public Fitness<TYPE_FITNESS>, private std::vector<TYPE_CELL> {
 	unsigned int sizeArray() const;
 
 	// --------------------------------------------------------------------
-	friend std::ostream& operator<<(std::ostream& out,
-									Solution<TYPE_FITNESS, TYPE_CELL> const& s) {
+	friend std::ostream& operator<<(std::ostream& out, Solution<TYPE_FITNESS, TYPE_CELL> const& s) {
 		for(unsigned int i = 0; i < s.numberOfObjective(); i++) out << s.getFitness(i) << " ";
 		out << ": ";
 		for(unsigned int i = 0; i < s.sizeArray(); i++) out << s(i) << " ";

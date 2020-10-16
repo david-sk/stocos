@@ -20,8 +20,8 @@
 #include <utility>   // std::pair
 #include <vector>	// std::vector
 
-#include "../solution/population.h"
 #include "../solution/fitness.h"
+#include "../solution/population.h"
 #include "../solution/solution.h"
 
 namespace stocos {

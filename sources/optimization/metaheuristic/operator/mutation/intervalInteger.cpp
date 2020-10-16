@@ -39,7 +39,6 @@ template class IntervalInteger<Solution<double, bool>, double, bool>;
 template class IntervalInteger<Solution<int, bool>, int, bool>;
 template class IntervalInteger<Solution<unsigned int, bool>, unsigned int, bool>;
 template class IntervalInteger<Solution<double, unsigned int>, double, unsigned int>;
-template class IntervalInteger<Solution<unsigned int, unsigned int>, unsigned int,
-							   unsigned int>;
+template class IntervalInteger<Solution<unsigned int, unsigned int>, unsigned int, unsigned int>;
 template class IntervalInteger<Solution<int, int>, int, int>;
 } // namespace stocos
