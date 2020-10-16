@@ -16,7 +16,7 @@
 #include <memory>
 #include <unistd.h>
 
-#include "../solution/solutionArray.h"
+#include "../solution/solution.h"
 #include "../solutionSelection/maximization.h"
 #include "../solutionSelection/solutionSelection.h"
 
@@ -26,7 +26,7 @@ namespace stocos {
 
 using TYPE_FITNESS_LATINSQUARE = unsigned int;
 using TYPE_CELL_LATINSQUARE = bool;
-using SOL_LATINSQUARE = SolutionArray<TYPE_FITNESS_LATINSQUARE, TYPE_CELL_LATINSQUARE>;
+using SOL_LATINSQUARE = Solution<TYPE_FITNESS_LATINSQUARE, TYPE_CELL_LATINSQUARE>;
 class LatinSquare
 	: public Problem<SOL_LATINSQUARE, TYPE_FITNESS_LATINSQUARE, TYPE_CELL_LATINSQUARE> {
   public:
@@ -45,7 +45,7 @@ class LatinSquare
 
 	void evaluation(SOL_LATINSQUARE& s);
 
-	// void incremental(const SolutionArray &s, unsigned int mutatedCell) const;
+	// void incremental(const Solution &s, unsigned int mutatedCell) const;
 
 	void resetSolution(SOL_LATINSQUARE& s) const;
 

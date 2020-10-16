@@ -18,7 +18,7 @@
 #include "optimization/exhaustiveSearch/backtracking.h"
 #include "problem/nQueensProblem.h"
 #include "solution/domain.h"
-#include "solution/solutionArray.h"
+#include "solution/solution.h"
 #include "stoppingCriteria/stoppingCriteria.h"
 #include <iostream>
 

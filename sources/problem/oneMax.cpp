@@ -46,7 +46,7 @@ void OneMax::evaluation(SOL_ONEMAX& s) {
 	s.setFitness(0, sum);
 }
 
-/*void OneMax::incremental(const SolutionArray &s, unsigned int mutatedCell) const {
+/*void OneMax::incremental(const Solution &s, unsigned int mutatedCell) const {
 
 }*/
 

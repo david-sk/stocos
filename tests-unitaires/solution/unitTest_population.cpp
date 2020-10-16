@@ -13,7 +13,6 @@
 
 #include "solution/population.h"
 #include "solution/solution.h"
-#include "solution/solutionArray.h"
 
 using namespace CppUnit;
 using namespace stocos;
@@ -30,8 +29,8 @@ class UnitTest_population : public CppUnit::TestFixture {
 	}
 
 	void constructor(void) {
-		SolutionArray<double, bool> s(1, 22);
-		Population<SolutionArray<double, bool>> p;
+		Solution<double, bool> s(1, 22);
+		Population<Solution<double, bool>> p;
 		p.push_back(s);
 	}
 };

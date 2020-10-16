@@ -1,5 +1,5 @@
 ///
-/// @file stoppingCriteria.hpp
+/// @file filters.cpp
 /// @author Jxtopher
 /// @version 1
 /// @copyright CC-BY-NC-SA
@@ -8,6 +8,7 @@
 ///
 
 #include <filtering/filters.h>
+#include <solution/solution.h>
 
 namespace stocos {
 
@@ -18,13 +19,13 @@ bool Filters<SOL>::operator()(const SOL& s) const {
 	return ret;
 }
 
-template class Filters<Solution<int>>;
-template class Filters<Solution<double>>;
-template class Filters<SolutionArray<double, double>>;
-template class Filters<SolutionArray<double, bool>>;
-template class Filters<SolutionArray<int, bool>>;
-template class Filters<SolutionArray<unsigned int, bool>>;
-template class Filters<SolutionArray<double, unsigned int>>;
-template class Filters<SolutionArray<unsigned int, unsigned int>>;
+template class Filters<Fitness<int>>;
+template class Filters<Fitness<double>>;
+template class Filters<Solution<double, double>>;
+template class Filters<Solution<double, bool>>;
+template class Filters<Solution<int, bool>>;
+template class Filters<Solution<unsigned int, bool>>;
+template class Filters<Solution<double, unsigned int>>;
+template class Filters<Solution<unsigned int, unsigned int>>;
 
 } // namespace stocos

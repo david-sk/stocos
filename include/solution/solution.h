@@ -4,77 +4,69 @@
 /// @version 1
 /// @copyright CC-BY-NC-SA
 /// @date 2018-10
-/// @brief Definition of the number of goals, fitness, and fitnessIsValid
+/// @brief
 ///
 
-#ifndef SOLUTION_H
-#define SOLUTION_H
+#ifndef SOLUTIONARRAY_H
+#define SOLUTIONARRAY_H
 
 #include <cassert>
-#include <cstdio>
-#include <cstring>
+#include <iostream>
 #include <memory>
+#include <sstream>
 #include <string>
-
-#include <boost/log/core.hpp>
-#include <boost/log/expressions.hpp>
-#include <boost/log/trivial.hpp>
+#include <vector>
 
 #include <jsoncpp/json/json.h>
 
+#include "domain.h"
+#include "fitness.h"
+
 namespace stocos {
 
-template<typename TYPE_FITNESS>
-class Solution {
+template<typename TYPE_FITNESS, typename TYPE_CELL>
+class Solution : public Fitness<TYPE_FITNESS>, private std::vector<TYPE_CELL> {
   public:
-	Solution(const Solution& s);
 	Solution();
 
-	Solution(const unsigned int number_of_objective);
+	Solution(const unsigned int sizeArray);
+
+	Solution(const unsigned int numberOfObjective, const unsigned int sizeArray);
+
+	Solution(const Solution& s);
 
 	Solution(const Json::Value& jsonValue);
 
-	Solution& operator=(const Solution& s);
+	Solution(const std::string& solution);
 
 	~Solution();
 
-	///
-	/// @brief Give for a numObjectif the state fitness
-	///
-	/// @param numObjectif
-	/// @return true if the fitness is valide
-	/// @return false if the fitness is not valide
-	///
-	bool fitnessIsValid(unsigned int numObjectif = 0) const;
+	Solution& operator=(const Solution& s);
 
-	///
-	/// @brief Set the value fitness for a objectif
-	///
-	/// @param numObjectif objectif id
-	/// @param value new value
-	///
-	void setFitness(unsigned int numObjectif, TYPE_FITNESS value);
+	bool operator==(const Solution& s) const;
 
-	void setFitness(TYPE_FITNESS value);
-	TYPE_FITNESS getFitness(unsigned int numObjectif = 0) const;
+	void operator()(const unsigned int index, const TYPE_CELL value);
 
-	unsigned int numberOfObjective() const;
+	TYPE_CELL operator()(const unsigned int index) const;
+
+	unsigned int sizeArray() const;
+
 	// --------------------------------------------------------------------
-	friend std::ostream& operator<<(std::ostream& out, const Solution<TYPE_FITNESS>& s) {
-		for(unsigned int i = 0; i < s.numberOfObjective(); i++) out << s.getFitness(i);
+	friend std::ostream& operator<<(std::ostream& out,
+									Solution<TYPE_FITNESS, TYPE_CELL> const& s) {
+		for(unsigned int i = 0; i < s.numberOfObjective(); i++) out << s.getFitness(i) << " ";
+		out << ": ";
+		for(unsigned int i = 0; i < s.sizeArray(); i++) out << s(i) << " ";
 		return out;
 	}
 
 	void loadJson(const std::string& strJson);
-
 	void loadJson(const Json::Value& jsonValue);
 
+	///
+	/// @return the solution in JSON format
+	///
 	Json::Value asJson() const;
-
-  protected:
-	unsigned int _number_of_objective;		   ///< number of objectif
-	std::unique_ptr<TYPE_FITNESS[]> _fitness;  ///< list of fitness
-	std::unique_ptr<bool[]> _fitness_is_valid; ///< list of the fitness state
 };
 
 } // namespace stocos

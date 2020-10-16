@@ -34,11 +34,11 @@ void Shuffle<SOL, TYPE_FITNESS, TYPE_CELL>::operator()(SOL& s) {
 	}
 }
 
-template class Shuffle<SolutionArray<double, double>, double, double>;
-template class Shuffle<SolutionArray<double, bool>, double, bool>;
-template class Shuffle<SolutionArray<int, bool>, int, bool>;
-template class Shuffle<SolutionArray<unsigned int, bool>, unsigned int, bool>;
-template class Shuffle<SolutionArray<double, unsigned int>, double, unsigned int>;
-template class Shuffle<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
-template class Shuffle<SolutionArray<int, int>, int, int>;
+template class Shuffle<Solution<double, double>, double, double>;
+template class Shuffle<Solution<double, bool>, double, bool>;
+template class Shuffle<Solution<int, bool>, int, bool>;
+template class Shuffle<Solution<unsigned int, bool>, unsigned int, bool>;
+template class Shuffle<Solution<double, unsigned int>, double, unsigned int>;
+template class Shuffle<Solution<unsigned int, unsigned int>, unsigned int, unsigned int>;
+template class Shuffle<Solution<int, int>, int, int>;
 } // namespace stocos

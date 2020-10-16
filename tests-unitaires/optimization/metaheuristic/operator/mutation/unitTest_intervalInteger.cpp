@@ -18,7 +18,6 @@
 #include "optimization/metaheuristic/operator/atomicOperation.h"
 #include "optimization/metaheuristic/operator/mutation/intervalInteger.h"
 #include "solution/solution.h"
-#include "solution/solutionArray.h"
 
 using namespace CppUnit;
 using namespace stocos;
@@ -35,9 +34,9 @@ class UnitTest_intervalInteger : public CppUnit::TestFixture {
 
 	void operator()(void) {
 		unsigned int n = 20;
-		SolutionArray<int, int> s1(n);
-		SolutionArray<int, int> s2(s1);
-		IntervalInteger<SolutionArray<int, int>, int, int> intervalInteger(mt_rand, 20, -10, 10);
+		Solution<int, int> s1(n);
+		Solution<int, int> s2(s1);
+		IntervalInteger<Solution<int, int>, int, int> intervalInteger(mt_rand, 20, -10, 10);
 		intervalInteger(s1);
 		CPPUNIT_ASSERT(!(s1 == s2));
 		for(unsigned int i = 0; i < n; i++) {

@@ -18,7 +18,6 @@
 #include "problem/problem.h"
 #include "problem/travelingSalesmanProblem.h"
 #include "solution/solution.h"
-#include "solution/solutionArray.h"
 #include "solutionSelection/minimization.h"
 
 using namespace CppUnit;

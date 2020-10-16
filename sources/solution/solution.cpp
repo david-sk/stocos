@@ -4,111 +4,98 @@
 /// @version 1
 /// @copyright CC-BY-NC-SA
 /// @date 2018-10
-/// @brief Definition of the number of goals, fitness, and fitnessIsValid
+/// @brief
 ///
-
 #include <solution/solution.h>
 
 namespace stocos {
 
-template<typename TYPE_FITNESS>
-Solution<TYPE_FITNESS>::Solution(const Solution& s) : _number_of_objective(s._number_of_objective) {
-	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Constructeur de copie Solution";
-	assert(0 < _number_of_objective);
-	_fitness = std::make_unique<TYPE_FITNESS[]>(_number_of_objective);
-	_fitness_is_valid = std::make_unique<bool[]>(_number_of_objective);
-	for(unsigned int i = 0; i < _number_of_objective; i++) {
-		_fitness[i] = s._fitness[i];
-		_fitness_is_valid[i] = s._fitness_is_valid[i];
-	}
-}
-template<typename TYPE_FITNESS>
-Solution<TYPE_FITNESS>::Solution() : _number_of_objective(1) {
+template<typename TYPE_FITNESS, typename TYPE_CELL>
+Solution<TYPE_FITNESS, TYPE_CELL>::Solution() : Fitness<TYPE_FITNESS>(1), std::vector<TYPE_CELL>(1) {
 	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation Solution";
-	_fitness = std::make_unique<TYPE_FITNESS[]>(_number_of_objective);
-	_fitness_is_valid = std::make_unique<bool[]>(_number_of_objective);
-	for(unsigned int i = 0; i < _number_of_objective; i++) _fitness_is_valid[i] = false;
 }
-template<typename TYPE_FITNESS>
-Solution<TYPE_FITNESS>::Solution(const unsigned int number_of_objective)
-	: _number_of_objective(number_of_objective) {
+
+template<typename TYPE_FITNESS, typename TYPE_CELL>
+Solution<TYPE_FITNESS, TYPE_CELL>::Solution(const unsigned int sizeArray)
+	: Fitness<TYPE_FITNESS>(1), std::vector<TYPE_CELL>(sizeArray) {
 	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation Solution";
-	assert(0 < _number_of_objective);
-	_fitness = std::make_unique<TYPE_FITNESS[]>(_number_of_objective);
-	_fitness_is_valid = std::make_unique<bool[]>(_number_of_objective);
-	for(unsigned int i = 0; i < _number_of_objective; i++) _fitness_is_valid[i] = false;
 }
-template<typename TYPE_FITNESS>
-Solution<TYPE_FITNESS>::Solution(const Json::Value& jsonValue)
-	: _number_of_objective(0), _fitness(nullptr), _fitness_is_valid(nullptr) {
+
+template<typename TYPE_FITNESS, typename TYPE_CELL>
+Solution<TYPE_FITNESS, TYPE_CELL>::Solution(const unsigned int numberOfObjective,
+													  const unsigned int sizeArray)
+	: Fitness<TYPE_FITNESS>(numberOfObjective), std::vector<TYPE_CELL>(sizeArray) {
 	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation Solution";
+}
+
+template<typename TYPE_FITNESS, typename TYPE_CELL>
+Solution<TYPE_FITNESS, TYPE_CELL>::Solution(const Solution& s)
+	: Fitness<TYPE_FITNESS>(s), std::vector<TYPE_CELL>(s) {
+	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation Solution";
+}
+
+template<typename TYPE_FITNESS, typename TYPE_CELL>
+Solution<TYPE_FITNESS, TYPE_CELL>::Solution(const Json::Value& jsonValue)
+	: Fitness<TYPE_FITNESS>(jsonValue) {
 	loadJson(jsonValue);
 }
-template<typename TYPE_FITNESS>
-Solution<TYPE_FITNESS>& Solution<TYPE_FITNESS>::operator=(const Solution& s) {
-	if(_number_of_objective != s._number_of_objective) {
-		_number_of_objective = s._number_of_objective;
-		_fitness = std::unique_ptr<TYPE_FITNESS[]>(new TYPE_FITNESS[_number_of_objective]);
-		_fitness_is_valid = std::unique_ptr<bool[]>(new bool[_number_of_objective]);
-		for(unsigned int i = 0; i < _number_of_objective; i++) _fitness_is_valid[i] = false;
-	}
 
-	for(unsigned int i = 0; i < _number_of_objective; i++) {
-		_fitness[i] = s._fitness[i];
-		_fitness_is_valid[i] = s._fitness_is_valid[i];
-	}
-	return *this;
+template<typename TYPE_FITNESS, typename TYPE_CELL>
+Solution<TYPE_FITNESS, TYPE_CELL>::Solution(const std::string& solution)
+	: Fitness<TYPE_FITNESS>() {
+	loadJson(solution);
 }
-template<typename TYPE_FITNESS>
-Solution<TYPE_FITNESS>::~Solution() {
+
+template<typename TYPE_FITNESS, typename TYPE_CELL>
+Solution<TYPE_FITNESS, TYPE_CELL>::~Solution() {
 	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Delete Solution";
 }
 
-///
-/// @brief Give for a numObjectif the state fitness
-///
-/// @param numObjectif
-/// @return true if the fitness is valide
-/// @return false if the fitness is not valide
-///
-template<typename TYPE_FITNESS>
-bool Solution<TYPE_FITNESS>::fitnessIsValid(unsigned int numObjectif) const {
-	assert(numObjectif < _number_of_objective);
-	return _fitness_is_valid[numObjectif];
+template<typename TYPE_FITNESS, typename TYPE_CELL>
+Solution<TYPE_FITNESS, TYPE_CELL>& Solution<TYPE_FITNESS, TYPE_CELL>::
+	operator=(const Solution& s) {
+	Fitness<TYPE_FITNESS>::operator=(s);
+	std::vector<TYPE_CELL>::operator=(s);
+	return *this;
 }
 
-///
-/// @brief Set the value fitness for a objectif
-///
-/// @param numObjectif objectif id
-/// @param value new value
-///
-template<typename TYPE_FITNESS>
-void Solution<TYPE_FITNESS>::setFitness(unsigned int numObjectif, TYPE_FITNESS value) {
-	assert(numObjectif < _number_of_objective);
-	_fitness[numObjectif] = value;
-	_fitness_is_valid[numObjectif] = true;
+template<typename TYPE_FITNESS, typename TYPE_CELL>
+bool Solution<TYPE_FITNESS, TYPE_CELL>::operator==(const Solution& s) const {
+	if(this->size() != s.size())
+		return false;
+	else {
+		for(unsigned int i = 0; i < s.sizeArray(); i++) {
+			if(this->operator[](i) != s(i)) return false;
+		}
+	}
+	return true;
 }
-template<typename TYPE_FITNESS>
-void Solution<TYPE_FITNESS>::setFitness(TYPE_FITNESS value) {
-	unsigned int numObjectif = 0;
-	assert(numObjectif < _number_of_objective);
-	_fitness[numObjectif] = value;
-	_fitness_is_valid[numObjectif] = true;
+
+template<typename TYPE_FITNESS, typename TYPE_CELL>
+void Solution<TYPE_FITNESS, TYPE_CELL>::operator()(const unsigned int index,
+														const TYPE_CELL value) {
+	assert(index < this->size());
+	if(this->operator[](index) != value) {
+		for(unsigned int i = 0; i < this->_number_of_objective; i++)
+			this->_fitness_is_valid[i] = false;
+		this->operator[](index) = value;
+	}
 }
-template<typename TYPE_FITNESS>
-TYPE_FITNESS Solution<TYPE_FITNESS>::getFitness(unsigned int numObjectif) const {
-	assert(numObjectif < _number_of_objective);
-	return _fitness[numObjectif];
+
+template<typename TYPE_FITNESS, typename TYPE_CELL>
+TYPE_CELL Solution<TYPE_FITNESS, TYPE_CELL>::operator()(const unsigned int index) const {
+	assert(index < this->size());
+	return this->operator[](index);
 }
-template<typename TYPE_FITNESS>
-unsigned int Solution<TYPE_FITNESS>::numberOfObjective() const {
-	return _number_of_objective;
+
+template<typename TYPE_FITNESS, typename TYPE_CELL>
+unsigned int Solution<TYPE_FITNESS, TYPE_CELL>::sizeArray() const {
+	return this->size();
 }
 
 // --------------------------------------------------------------------
-template<typename TYPE_FITNESS>
-void Solution<TYPE_FITNESS>::loadJson(const std::string& strJson) {
+template<typename TYPE_FITNESS, typename TYPE_CELL>
+void Solution<TYPE_FITNESS, TYPE_CELL>::loadJson(const std::string& strJson) {
 	Json::Value root;
 	Json::Reader reader;
 	bool parsingSuccessful = reader.parse(strJson.c_str(), root); // parse process
@@ -117,37 +104,31 @@ void Solution<TYPE_FITNESS>::loadJson(const std::string& strJson) {
 								 reader.getFormattedErrorMessages());
 	loadJson(root);
 }
-template<typename TYPE_FITNESS>
-void Solution<TYPE_FITNESS>::loadJson(const Json::Value& jsonValue) {
-	_number_of_objective = jsonValue["fitness"].size();
-	if(this->_fitness == nullptr) {
-		this->_fitness =
-			std::unique_ptr<TYPE_FITNESS[]>(new TYPE_FITNESS[this->_number_of_objective]);
-		this->_fitness_is_valid = std::unique_ptr<bool[]>(new bool[this->_number_of_objective]);
-	} else {
-		this->_fitness.reset(
-			static_cast<TYPE_FITNESS*>(realloc(static_cast<void*>(this->_fitness.release()),
-											   this->_number_of_objective * sizeof(TYPE_FITNESS))));
-		this->_fitness_is_valid.reset(
-			static_cast<bool*>(realloc(static_cast<void*>(this->_fitness_is_valid.release()),
-									   this->_number_of_objective * sizeof(bool))));
-	}
-	for(unsigned int i = 0; i < jsonValue["fitness"].size(); i++) {
-		_fitness[i] = static_cast<TYPE_FITNESS>(jsonValue["fitness"][i].asDouble());
-		_fitness_is_valid[i] = jsonValue["fitnessIsValid"][i].asBool();
-	}
+
+template<typename TYPE_FITNESS, typename TYPE_CELL>
+void Solution<TYPE_FITNESS, TYPE_CELL>::loadJson(const Json::Value& jsonValue) {
+	Fitness<TYPE_FITNESS>::loadJson(jsonValue);
+	this->resize(jsonValue["solution"].size());
+	for(unsigned int i = 0; i < jsonValue["solution"].size(); i++)
+		this->operator[](i) = jsonValue["solution"][i].asDouble();
 }
-template<typename TYPE_FITNESS>
-Json::Value Solution<TYPE_FITNESS>::asJson() const {
-	Json::Value jsonValue;
-	for(unsigned int i = 0; i < _number_of_objective; i++) {
-		jsonValue["fitness"].append(_fitness[i]);
-		jsonValue["fitnessIsValid"].append(_fitness_is_valid[i]);
-	}
+
+///
+/// @return the solution in JSON format
+///
+template<typename TYPE_FITNESS, typename TYPE_CELL>
+Json::Value Solution<TYPE_FITNESS, TYPE_CELL>::asJson() const {
+	Json::Value jsonValue = Fitness<TYPE_FITNESS>::asJson();
+	for(unsigned int i = 0; i < this->size(); i++) jsonValue["solution"].append(this->operator[](i));
 	return jsonValue;
 }
 
-template class Solution<double>;
-template class Solution<int>;
-template class Solution<unsigned int>;
+template class Solution<double, double>;
+template class Solution<double, bool>;
+template class Solution<int, bool>;
+template class Solution<unsigned int, bool>;
+template class Solution<double, unsigned int>;
+template class Solution<unsigned int, unsigned int>;
+template class Solution<int, int>;
+
 } // namespace stocos

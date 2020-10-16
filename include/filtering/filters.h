@@ -3,7 +3,7 @@
 
 #include <unordered_set>
 
-#include "../solution/solutionArray.h"
+#include "../solution/solution.h"
 
 namespace stocos {
 

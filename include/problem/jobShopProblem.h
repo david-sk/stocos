@@ -16,14 +16,14 @@
 
 #include <jsoncpp/json/json.h>
 
-#include "../solution/solutionArray.h"
+#include "../solution/solution.h"
 #include "problem.h"
 
 namespace stocos {
 
 using TYPE_FITNESS_JOBSHOPPROBLEM = double;
 using TYPE_CELL_JOBSHOPPROBLEM = bool;
-using SOL_JOBSHOPPROBLEM = SolutionArray<TYPE_FITNESS_JOBSHOPPROBLEM, TYPE_CELL_JOBSHOPPROBLEM>;
+using SOL_JOBSHOPPROBLEM = Solution<TYPE_FITNESS_JOBSHOPPROBLEM, TYPE_CELL_JOBSHOPPROBLEM>;
 class JobShopProblem
 	: public Problem<SOL_JOBSHOPPROBLEM, TYPE_FITNESS_JOBSHOPPROBLEM, TYPE_CELL_JOBSHOPPROBLEM> {
   public:
@@ -50,7 +50,7 @@ class JobShopProblem
 
 	void evaluation(SOL_JOBSHOPPROBLEM& s);
 
-	// void incremental(SolutionArray const &s, unsigned int mutatedCell) const;
+	// void incremental(Solution const &s, unsigned int mutatedCell) const;
 
 	void resetSolution(SOL_JOBSHOPPROBLEM& s) const;
 

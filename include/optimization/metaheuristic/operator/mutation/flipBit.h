@@ -14,7 +14,7 @@
 #include <random> // std::mt19937
 #include <vector> // std::vector
 
-#include "../../../../solution/solutionArray.h"
+#include "../../../../solution/solution.h"
 
 #include "../atomicOperation.h"
 

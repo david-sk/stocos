@@ -20,7 +20,7 @@
 
 #include <exprtk/exprtk.hpp>
 
-#include "../solution/solutionArray.h"
+#include "../solution/solution.h"
 #include "../solutionSelection/solutionSelection.h"
 #include "../solutionSelection/solutionSelectionBuilder.h"
 #include "problem.h"
@@ -30,7 +30,7 @@ namespace stocos {
 using TYPE_FITNESS_CONTINUOUSPROBLEM = double;
 using TYPE_CELL_CONTINUOUSPROBLEM = double;
 using SOL_CONTINUOUSPROBLEM =
-	SolutionArray<TYPE_FITNESS_CONTINUOUSPROBLEM, TYPE_CELL_CONTINUOUSPROBLEM>;
+	Solution<TYPE_FITNESS_CONTINUOUSPROBLEM, TYPE_CELL_CONTINUOUSPROBLEM>;
 
 class Objectif {
 	typedef exprtk::symbol_table<double> symbol_table_t;

@@ -38,11 +38,11 @@ void IntervalReal<SOL, TYPE_FITNESS, TYPE_CELL>::operator()(SOL& s) {
 	}
 }
 
-template class IntervalReal<SolutionArray<double, double>, double, double>;
-template class IntervalReal<SolutionArray<double, bool>, double, bool>;
-template class IntervalReal<SolutionArray<int, bool>, int, bool>;
-template class IntervalReal<SolutionArray<unsigned int, bool>, unsigned int, bool>;
-template class IntervalReal<SolutionArray<double, unsigned int>, double, unsigned int>;
-template class IntervalReal<SolutionArray<unsigned int, unsigned int>, unsigned int, unsigned int>;
-template class IntervalReal<SolutionArray<int, int>, int, int>;
+template class IntervalReal<Solution<double, double>, double, double>;
+template class IntervalReal<Solution<double, bool>, double, bool>;
+template class IntervalReal<Solution<int, bool>, int, bool>;
+template class IntervalReal<Solution<unsigned int, bool>, unsigned int, bool>;
+template class IntervalReal<Solution<double, unsigned int>, double, unsigned int>;
+template class IntervalReal<Solution<unsigned int, unsigned int>, unsigned int, unsigned int>;
+template class IntervalReal<Solution<int, int>, int, int>;
 } // namespace stocos

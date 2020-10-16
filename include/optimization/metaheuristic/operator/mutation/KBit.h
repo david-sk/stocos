@@ -15,7 +15,7 @@
 #include <random>
 #include <vector> // std::vector
 
-#include "../../../../solution/solutionArray.h"
+#include "../../../../solution/solution.h"
 #include "../atomicOperation.h"
 
 namespace stocos {

@@ -15,7 +15,6 @@
 #include "problem/jobShopProblem.h"
 #include "problem/problem.h"
 #include "solution/solution.h"
-#include "solution/solutionArray.h"
 
 using namespace CppUnit;
 using namespace stocos;

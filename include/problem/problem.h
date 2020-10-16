@@ -21,8 +21,8 @@
 #include <vector>	// std::vector
 
 #include "../solution/population.h"
+#include "../solution/fitness.h"
 #include "../solution/solution.h"
-#include "../solution/solutionArray.h"
 
 namespace stocos {
 

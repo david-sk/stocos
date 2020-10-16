@@ -40,12 +40,12 @@ void CriteriaBudget<SOL, TYPE_FITNESS>::reset() {
 	consumedBudget = 0;
 }
 
-template class CriteriaBudget<Solution<int>, unsigned int>;
-template class CriteriaBudget<SolutionArray<double, double>, double>;
-template class CriteriaBudget<SolutionArray<double, bool>, double>;
-template class CriteriaBudget<SolutionArray<int, bool>, int>;
-template class CriteriaBudget<SolutionArray<unsigned int, bool>, unsigned int>;
-template class CriteriaBudget<SolutionArray<double, unsigned int>, double>;
-template class CriteriaBudget<SolutionArray<unsigned int, unsigned int>, unsigned int>;
+template class CriteriaBudget<Fitness<int>, unsigned int>;
+template class CriteriaBudget<Solution<double, double>, double>;
+template class CriteriaBudget<Solution<double, bool>, double>;
+template class CriteriaBudget<Solution<int, bool>, int>;
+template class CriteriaBudget<Solution<unsigned int, bool>, unsigned int>;
+template class CriteriaBudget<Solution<double, unsigned int>, double>;
+template class CriteriaBudget<Solution<unsigned int, unsigned int>, unsigned int>;
 
 } // namespace stocos

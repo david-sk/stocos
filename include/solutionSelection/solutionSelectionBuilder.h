@@ -14,7 +14,7 @@
 #include <memory>
 
 #include "../problem/problem.h"
-#include "../solution/solutionArray.h"
+#include "../solution/solution.h"
 #include "maximization.h"
 #include "minimization.h"
 #include "selection_difference.h"

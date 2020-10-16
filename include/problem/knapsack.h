@@ -17,7 +17,7 @@
 
 #include <jsoncpp/json/json.h>
 
-#include "../solution/solutionArray.h"
+#include "../solution/solution.h"
 #include "../solutionSelection/maximization.h"
 #include "problem.h"
 
@@ -25,7 +25,7 @@ namespace stocos {
 
 using TYPE_FITNESS_KNAPSACK = int;
 using TYPE_CELL_KNAPSACK = bool;
-using SOL_KNAPSACK = SolutionArray<TYPE_FITNESS_KNAPSACK, TYPE_CELL_KNAPSACK>;
+using SOL_KNAPSACK = Solution<TYPE_FITNESS_KNAPSACK, TYPE_CELL_KNAPSACK>;
 
 class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_KNAPSACK> {
   public:
@@ -39,7 +39,7 @@ class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_K
 
 	void evaluation(SOL_KNAPSACK& s);
 
-	// void incremental(const SolutionArray &s, unsigned int mutatedCell) const;
+	// void incremental(const Solution &s, unsigned int mutatedCell) const;
 
 	void resetSolution(SOL_KNAPSACK& s) const;
 

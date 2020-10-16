@@ -16,7 +16,7 @@
 #include <utility>
 #include <vector>
 
-#include "../../../../solution/solutionArray.h"
+#include "../../../../solution/solution.h"
 #include "../atomicOperation.h"
 
 namespace stocos {

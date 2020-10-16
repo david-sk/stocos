@@ -16,7 +16,6 @@
 #include "problem/oneMax.h"
 #include "problem/problem.h"
 #include "solution/solution.h"
-#include "solution/solutionArray.h"
 #include "solutionSelection/maximization.h"
 #include "solutionSelection/minimization.h"
 #include "solutionSelection/solutionSelectionBuilder.h"
@@ -37,7 +36,7 @@ class UnitTest_combinationGenerator : public CppUnit::TestFixture {
 	}
 
 	void test(void) {
-		typedef SolutionArray<unsigned int, bool> TYPESOL;
+		typedef Solution<unsigned int, bool> TYPESOL;
 		// //CPPUNIT_ASSERT(o->operator()(s) == false);
 
 		std::unique_ptr<StoppingCriteria<TYPESOL, unsigned int>> stoppingCriteria =

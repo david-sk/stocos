@@ -12,7 +12,6 @@
 #ifndef UNITTEST_CRITERIABUDGET_H
 #define UNITTEST_CRITERIABUDGET_H
 
-#include "solution/solution.h"
 #include "stoppingCriteria/criteriaBudget.h"
 
 using namespace CppUnit;
@@ -25,14 +24,14 @@ class UnitTest_criteriaBudget : public CppUnit::TestFixture {
 
   public:
 	void setUp(void) {
-		o = new CriteriaBudget<Solution<int>, unsigned int>(1000);
+		o = new CriteriaBudget<Fitness<int>, unsigned int>(1000);
 	}
 	void tearDown(void) {
 		delete o;
 	}
 
 	void constructor(void) {
-		Solution<int> s;
+		Fitness<int> s;
 		for(unsigned int i = 0; i < 200; i++) { o->operator()(s); }
 
 		CPPUNIT_ASSERT(o->getConsumedBudget() == 200);
@@ -52,7 +51,7 @@ class UnitTest_criteriaBudget : public CppUnit::TestFixture {
 	}
 
   private:
-	CriteriaBudget<Solution<int>, unsigned int>* o;
+	CriteriaBudget<Fitness<int>, unsigned int>* o;
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_criteriaBudget);

@@ -12,7 +12,7 @@
 
 #include <jsoncpp/json/json.h>
 
-#include "../solution/solutionArray.h"
+#include "../solution/solution.h"
 
 namespace stocos {
 

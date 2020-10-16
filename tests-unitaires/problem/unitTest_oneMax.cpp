@@ -17,7 +17,6 @@
 #include "problem/oneMax.h"
 #include "problem/problem.h"
 #include "solution/solution.h"
-#include "solution/solutionArray.h"
 #include "solutionSelection/maximization.h"
 
 using namespace CppUnit;
@@ -38,7 +37,7 @@ class UnitTest_OneMax : public CppUnit::TestFixture {
 	void evaluation(void) {
 		unsigned int n = 10, fitness = 0;
 		OneMax eOneMax(n);
-		SolutionArray<unsigned int, bool> s(1, n);
+		Solution<unsigned int, bool> s(1, n);
 		for(unsigned int i = 0; i < n; i++) {
 			if(i % 2) {
 				s(i, 0);

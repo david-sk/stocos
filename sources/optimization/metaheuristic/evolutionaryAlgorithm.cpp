@@ -106,11 +106,11 @@ void EvolutionaryAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>::className(const std::s
 	_class_name = class_name;
 }
 
-template class EvolutionaryAlgorithm<SolutionArray<double, double>, double, double>;
-template class EvolutionaryAlgorithm<SolutionArray<double, bool>, double, bool>;
-template class EvolutionaryAlgorithm<SolutionArray<int, bool>, int, bool>;
-template class EvolutionaryAlgorithm<SolutionArray<unsigned int, bool>, unsigned int, bool>;
-template class EvolutionaryAlgorithm<SolutionArray<double, unsigned int>, double, unsigned int>;
-template class EvolutionaryAlgorithm<SolutionArray<unsigned int, unsigned int>, unsigned int,
+template class EvolutionaryAlgorithm<Solution<double, double>, double, double>;
+template class EvolutionaryAlgorithm<Solution<double, bool>, double, bool>;
+template class EvolutionaryAlgorithm<Solution<int, bool>, int, bool>;
+template class EvolutionaryAlgorithm<Solution<unsigned int, bool>, unsigned int, bool>;
+template class EvolutionaryAlgorithm<Solution<double, unsigned int>, double, unsigned int>;
+template class EvolutionaryAlgorithm<Solution<unsigned int, unsigned int>, unsigned int,
 									 unsigned int>;
 } // namespace stocos

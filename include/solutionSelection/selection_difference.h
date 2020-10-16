@@ -13,7 +13,7 @@
 #include <cmath>
 
 #include "../solution/population.h"
-#include "../solution/solutionArray.h"
+#include "../solution/solution.h"
 #include "solutionSelection.h"
 
 namespace stocos {
