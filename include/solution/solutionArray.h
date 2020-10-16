@@ -25,7 +25,7 @@
 namespace stocos {
 
 template<typename TYPE_FITNESS, typename TYPE_CELL>
-class SolutionArray : public Solution<TYPE_FITNESS> {
+class SolutionArray : public Solution<TYPE_FITNESS>, public std::vector<TYPE_CELL> {
   public:
 	SolutionArray();
 
@@ -67,10 +67,6 @@ class SolutionArray : public Solution<TYPE_FITNESS> {
 	/// @return the solution in JSON format
 	///
 	Json::Value asJson() const;
-
-  private:
-	std::unique_ptr<TYPE_CELL[]> array;
-	unsigned int _sizeArray;
 };
 
 } // namespace stocos
