@@ -70,7 +70,7 @@ class UnitTest_QAP : public CppUnit::TestFixture {
 		}
 
 		//
-		SOL_QAP s(1, n);
+		SOL_QAP s(n);
 		for(unsigned int i = 0; i < n; i++) s(i, p[i]);
 
 		//

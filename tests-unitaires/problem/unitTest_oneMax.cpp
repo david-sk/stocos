@@ -37,7 +37,7 @@ class UnitTest_OneMax : public CppUnit::TestFixture {
 	void evaluation(void) {
 		unsigned int n = 10, fitness = 0;
 		OneMax eOneMax(n);
-		Solution<unsigned int, bool> s(1, n);
+		Solution<unsigned int, bool> s(n);
 		for(unsigned int i = 0; i < n; i++) {
 			if(i % 2) {
 				s(i, 0);

@@ -29,7 +29,7 @@ class UnitTest_population : public CppUnit::TestFixture {
 	}
 
 	void constructor(void) {
-		Solution<double, bool> s(1, 22);
+		Solution<double, bool> s(22);
 		Population<Solution<double, bool>> p;
 		p.push_back(s);
 	}

@@ -32,8 +32,8 @@ class UnitTest_kBit : public CppUnit::TestFixture {
   public:
 	void cancelMutations(void) {
 		unsigned int N = 50;
-		SOL_ONEMAX s1(1, N);
-		SOL_ONEMAX s2(1, N);
+		SOL_ONEMAX s1(N);
+		SOL_ONEMAX s2(N);
 		for(unsigned int i = 0; i < N; i++) {
 			s1(i, 0);
 			s2(i, 0);
@@ -49,8 +49,8 @@ class UnitTest_kBit : public CppUnit::TestFixture {
 	//! TODO need to fixed
 	void listOfMutations(void) {
 		unsigned int N = 50;
-		SOL_ONEMAX s1(1, N);
-		SOL_ONEMAX s2(1, N);
+		SOL_ONEMAX s1(N);
+		SOL_ONEMAX s2(N);
 		unsigned int checklist[] = {39, 15, 1,  25, 32, 22, 38, 42, 29, 11, 10, 36, 13, 8,  4,
 									7,  34, 48, 41, 0,  17, 26, 45, 31, 44, 14, 37, 46, 27, 6,
 									21, 19, 9,  5,  3,  33, 2,  30, 16, 28, 20, 43, 50, 23, 18};

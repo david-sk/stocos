@@ -27,11 +27,7 @@ namespace stocos {
 template<typename TYPE_FITNESS, typename TYPE_CELL>
 class Solution : public Fitness<TYPE_FITNESS>, private std::vector<TYPE_CELL> {
   public:
-	Solution();
-
-	Solution(const unsigned int sizeArray);
-
-	Solution(const unsigned int numberOfObjective, const unsigned int sizeArray);
+	Solution(const unsigned int sizeArray = 1, const unsigned int numberOfObjective = 1);
 
 	Solution(const Solution& s);
 

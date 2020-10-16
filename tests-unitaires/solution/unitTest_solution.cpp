@@ -46,13 +46,13 @@ class UnitTest_solution : public CppUnit::TestFixture {
 	}
 
 	void sizeArray(void) {
-		Solution<double, unsigned int> s1(2, 100);
+		Solution<double, unsigned int> s1(100, 2);
 		CPPUNIT_ASSERT(s1.sizeArray() == 100);
 
 		Solution<double, unsigned int> s2(s1);
 		CPPUNIT_ASSERT(s2.sizeArray() == 100);
 
-		Solution<double, unsigned int> s3(20, 1000);
+		Solution<double, unsigned int> s3(1000, 20);
 		s3 = s1;
 		CPPUNIT_ASSERT(s3.sizeArray() == 100);
 	}

@@ -11,19 +11,7 @@
 namespace stocos {
 
 template<typename TYPE_FITNESS, typename TYPE_CELL>
-Solution<TYPE_FITNESS, TYPE_CELL>::Solution() : Fitness<TYPE_FITNESS>(1), std::vector<TYPE_CELL>(1) {
-	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation Solution";
-}
-
-template<typename TYPE_FITNESS, typename TYPE_CELL>
-Solution<TYPE_FITNESS, TYPE_CELL>::Solution(const unsigned int sizeArray)
-	: Fitness<TYPE_FITNESS>(1), std::vector<TYPE_CELL>(sizeArray) {
-	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation Solution";
-}
-
-template<typename TYPE_FITNESS, typename TYPE_CELL>
-Solution<TYPE_FITNESS, TYPE_CELL>::Solution(const unsigned int numberOfObjective,
-													  const unsigned int sizeArray)
+Solution<TYPE_FITNESS, TYPE_CELL>::Solution(const unsigned int sizeArray, const unsigned int numberOfObjective)
 	: Fitness<TYPE_FITNESS>(numberOfObjective), std::vector<TYPE_CELL>(sizeArray) {
 	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation Solution";
 }
