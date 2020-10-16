@@ -25,7 +25,7 @@
 namespace stocos {
 
 template<typename TYPE_FITNESS, typename TYPE_CELL>
-class SolutionArray : public Solution<TYPE_FITNESS>, public std::vector<TYPE_CELL> {
+class SolutionArray : public Solution<TYPE_FITNESS>, private std::vector<TYPE_CELL> {
   public:
 	SolutionArray();
 
