@@ -21,21 +21,21 @@
 #include "../../problem/problem.h"
 #include "../../statistic/statistic.h"
 #include "../../stoppingCriteria/stoppingCriteria.h"
-#include "../optimizationAlgorithm.h"
+#include "../optimization.h"
 #include "operator/atomicOperation.h"
 
 namespace stocos {
 
 // Exploration-Exploitation
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-class IteratedLocalSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
+class IteratedLocalSearch : public Optimization<SOL, TYPE_FITNESS, TYPE_CELL> {
   public:
 	IteratedLocalSearch(
 		std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
 		std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
 		std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
 		std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> exploration,
-		std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> exploitation);
+		std::unique_ptr<Optimization<SOL, TYPE_FITNESS, TYPE_CELL>> exploitation);
 
 	~IteratedLocalSearch();
 
@@ -47,7 +47,7 @@ class IteratedLocalSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE
   protected:
 	std::string _class_name;
 	std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _exploration;
-	std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> _exploitation;
+	std::unique_ptr<Optimization<SOL, TYPE_FITNESS, TYPE_CELL>> _exploitation;
 	SOL solution_star;
 	SOL solution_beta;
 };

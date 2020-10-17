@@ -17,13 +17,13 @@
 #include "../../problem/problem.h"
 #include "../../statistic/statistic.h"
 #include "../../stoppingCriteria/stoppingCriteria.h"
-#include "../optimizationAlgorithm.h"
+#include "../optimization.h"
 #include "operator/atomicOperation.h"
 
 namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-class OnePlusLambda : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
+class OnePlusLambda : public Optimization<SOL, TYPE_FITNESS, TYPE_CELL> {
   public:
 	OnePlusLambda(std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
 				  std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,

@@ -51,9 +51,9 @@ class SolverGeneric : public Solver {
 
 		Factory<SOL, TYPE_FITNESS, TYPE_CELL> factory(mt_rand, _problem, _configuration);
 
-		for(std::string const& id : _configuration["OptimizationAlgorithm"].getMemberNames())
-			optimizationAlgorithm[stoul(id)] =
-				factory(std::move(_configuration["OptimizationAlgorithm"][id]));
+		for(std::string const& id : _configuration["Optimization"].getMemberNames())
+			optimization[stoul(id)] =
+				factory(std::move(_configuration["Optimization"][id]));
 
 		//
 		_statistic = factory.getStatistic();
@@ -76,19 +76,19 @@ class SolverGeneric : public Solver {
 	}
 
 	void operator()() {
-		if(optimizationAlgorithm.size() <= _configuration["parameter_id"].asUInt())
+		if(optimization.size() <= _configuration["parameter_id"].asUInt())
 			throw std::runtime_error(
 				std::string{} + __FILE__ + ":" + std::to_string(__LINE__) + " [-] parameter_id " +
 				std::to_string(_configuration["parameter_id"].asUInt()) + " does not exist.");
 
 		BOOST_LOG_TRIVIAL(debug)
 			<< __FILE__ << ":" << __LINE__ << " Launch optimisation "
-			<< optimizationAlgorithm[_configuration["parameter_id"].asUInt()]->className();
+			<< optimization[_configuration["parameter_id"].asUInt()]->className();
 		std::unique_ptr<SOL> s_new =
-			optimizationAlgorithm[_configuration["parameter_id"].asUInt()]->operator()(
+			optimization[_configuration["parameter_id"].asUInt()]->operator()(
 				*initial_solution);
 
-		className(optimizationAlgorithm[_configuration["parameter_id"].asUInt()]->className());
+		className(optimization[_configuration["parameter_id"].asUInt()]->className());
 		_statistic->operator()(*s_new, className());
 	}
 
@@ -109,8 +109,8 @@ class SolverGeneric : public Solver {
 	std::shared_ptr<Statistic<SOL>> _statistic;
 	std::mt19937 mt_rand;
 	std::unique_ptr<SOL> initial_solution;
-	std::map<unsigned int, std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>>
-		optimizationAlgorithm;
+	std::map<unsigned int, std::unique_ptr<Optimization<SOL, TYPE_FITNESS, TYPE_CELL>>>
+		optimization;
 	std::string _class_name;
 	std::shared_ptr<Domain<TYPE_CELL>> domain;
 };

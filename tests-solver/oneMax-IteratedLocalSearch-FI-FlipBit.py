@@ -26,7 +26,7 @@ if __name__ == '__main__':
             "instance": "instances/OneMax/onemax-10.json"
         },
         "parameter_id": 0,
-        "OptimizationAlgorithm": {
+        "Optimization": {
             "0": {
                 "className":"IteratedLocalSearch",
                 "StoppingCriteria": {
@@ -37,7 +37,7 @@ if __name__ == '__main__':
                     "className": "FlipBit",
                     "c": 1
                 },
-                "OptimizationAlgorithm": {
+                "Optimization": {
                     "className": "FirstImprovement",
                     "StoppingCriteria": {
                         "budget": 100,

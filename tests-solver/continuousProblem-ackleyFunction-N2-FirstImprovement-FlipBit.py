@@ -47,7 +47,7 @@ if __name__ == '__main__':
             ]
         },
         "parameter_id": 0,
-        "OptimizationAlgorithm": {
+        "Optimization": {
             "0": {
                 "className": "FirstImprovement",
                 "StoppingCriteria": {

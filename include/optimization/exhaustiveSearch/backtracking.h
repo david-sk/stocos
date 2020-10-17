@@ -16,12 +16,12 @@
 
 #include "../../solution/domain.h"
 #include "../../solution/solution.h"
-#include "../optimizationAlgorithm.h"
+#include "../optimization.h"
 
 namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-class Backtraking : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
+class Backtraking : public Optimization<SOL, TYPE_FITNESS, TYPE_CELL> {
   public:
 	Backtraking(std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
 				std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,

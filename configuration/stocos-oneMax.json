@@ -5,7 +5,7 @@
         "instance": "instances/OneMax/onemax-50.json"
     },
     "parameter_id": 1,
-    "OptimizationAlgorithm": {
+    "Optimization": {
         "0": {
             "className":"IteratedLocalSearch",
             "StoppingCriteria": {
@@ -16,7 +16,7 @@
                 "className": "FlipBit",
                 "c": 1
             },
-            "OptimizationAlgorithm": {
+            "Optimization": {
                 "className": "FirstImprovement",
                 "StoppingCriteria": {
                     "budget": 100,

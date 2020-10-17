@@ -10,7 +10,7 @@
         }
     },
     "parameter_id": 4,
-    "OptimizationAlgorithm": {
+    "Optimization": {
         "0": {
             "className":"IteratedLocalSearch",
             "StoppingCriteria": {
@@ -21,7 +21,7 @@
                 "className": "Swap",
                 "number_of_swap": 6000
             },
-            "OptimizationAlgorithm": {
+            "Optimization": {
                 "className": "FirstImprovement",
                 "StoppingCriteria": {
                     "budget": 1000,

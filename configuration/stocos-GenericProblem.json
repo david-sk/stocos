@@ -5,7 +5,7 @@
         "instance": "instances/ContinuousProblem/brent-function.json"
     },
     "parameter_id": 1,
-    "OptimizationAlgorithm": {
+    "Optimization": {
         "0" :{
             "className": "FirstImprovement",
             "StoppingCriteria": {
@@ -29,7 +29,7 @@
                 "a": -1,
                 "b": 1
             },
-            "OptimizationAlgorithm": {
+            "Optimization": {
                 "className": "FirstImprovement",
                 "StoppingCriteria": {
                     "budget": 100,

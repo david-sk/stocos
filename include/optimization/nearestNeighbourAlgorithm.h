@@ -19,12 +19,12 @@
 #include <vector>	// std::vector
 
 #include "../problem/problem.h"
-#include "optimizationAlgorithm.h"
+#include "optimization.h"
 
 namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-class NearestNeighbourAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
+class NearestNeighbourAlgorithm : public Optimization<SOL, TYPE_FITNESS, TYPE_CELL> {
   public:
 	NearestNeighbourAlgorithm(std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
 							  std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
