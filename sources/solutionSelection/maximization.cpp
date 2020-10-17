@@ -11,14 +11,6 @@
 namespace stocos {
 
 template<class SOL>
-Maximization<SOL>::Maximization() {
-}
-
-template<class SOL>
-Maximization<SOL>::~Maximization() {
-}
-
-template<class SOL>
 bool Maximization<SOL>::operator()(const SOL& s1, const SOL& s2,
 								   const unsigned int numObjectif) const {
 	assert(s1.fitnessIsValid(numObjectif));
