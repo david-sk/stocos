@@ -5,7 +5,7 @@
         "instance": "instances/OneMax/onemax-50.json"
     },
     "parameter_id": 0,
-    "OptimizationAlgorithm": {
+    "Optimization": {
         "0" :{
             "className": "FirstImprovement",
             "StoppingCriteria": {

@@ -18,7 +18,7 @@
 #include <memory>
 
 #include "factory.hpp"
-#include "optimization/optimizationAlgorithm.h"
+#include "optimization/optimization.h"
 
 using namespace jsonrpc;
 
@@ -50,8 +50,8 @@ class SolverClientRPC : public Solver {
 		// Definition of optimization algorithms
 		Factory<SOL, TYPE_FITNESS, TYPE_CELL> factory(mt_rand, _problem, _configuration);
 
-		for(std::string const& id : _configuration["OptimizationAlgorithm"].getMemberNames())
-			optimizationAlgorithm[stoul(id)] = factory(_configuration["OptimizationAlgorithm"][id]);
+		for(std::string const& id : _configuration["Optimization"].getMemberNames())
+			optimization[stoul(id)] = factory(_configuration["Optimization"][id]);
 
 		// Create the initial solution
 		if(_configuration["initial_solution"].empty())
@@ -156,13 +156,13 @@ class SolverClientRPC : public Solver {
 										 " received from aposd" + received["error_msg"].asString());
 
 			// Check du numero du paramètre reçus
-			assert(received["num_paramter"].asUInt() < optimizationAlgorithm.size());
+			assert(received["num_paramter"].asUInt() < optimization.size());
 
 			//
 			solution_t0->loadJson(received["Solution"]);
-			optimizationAlgorithm[received["num_paramter"].asUInt()]->reset();
+			optimization[received["num_paramter"].asUInt()]->reset();
 			solution_t1 =
-				optimizationAlgorithm[received["num_paramter"].asUInt()]->operator()(*solution_t0);
+				optimization[received["num_paramter"].asUInt()]->operator()(*solution_t0);
 
 			Json::Value send;
 			send["Solution_t0"] = solution_t0->asJson();
@@ -182,8 +182,8 @@ class SolverClientRPC : public Solver {
 	std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> _problem;
 	HttpClient client;
 	std::mt19937 mt_rand;
-	std::map<unsigned int, std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>>
-		optimizationAlgorithm;
+	std::map<unsigned int, std::unique_ptr<Optimization<SOL, TYPE_FITNESS, TYPE_CELL>>>
+		optimization;
 	std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> global_stopping_criteria;
 	std::string object_id;
 	Json::Value received;

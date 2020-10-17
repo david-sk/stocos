@@ -58,9 +58,9 @@ class Factory {
 	virtual ~Factory() {
 	}
 
-	std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>
+	std::unique_ptr<Optimization<SOL, TYPE_FITNESS, TYPE_CELL>>
 		operator()(const Json::Value& configuration) {
-		std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>> optimizationAlgorithm =
+		std::unique_ptr<Optimization<SOL, TYPE_FITNESS, TYPE_CELL>> optimization =
 			nullptr;
 		std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> _stoppingCriteria =
 			stoppingCriteria(configuration["StoppingCriteria"]);
@@ -71,54 +71,54 @@ class Factory {
 			_atomicOperation = atomicOperation(configuration["AtomicOperation"]);
 
 		if(configuration["className"] == "FirstImprovement") {
-			optimizationAlgorithm =
+			optimization =
 				std::make_unique<FirstImprovement<SOL, TYPE_FITNESS, TYPE_CELL>>(
 					this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem,
 					std::move(_atomicOperation));
 		} else if(configuration["className"] == "BestImprovement") {
 			// ! TODO: need to fixed
-			// optimizationAlgorithm = std::make_unique<BestImprovement<SOL, TYPE_FITNESS,
+			// optimization = std::make_unique<BestImprovement<SOL, TYPE_FITNESS,
 			// TYPE_CELL>>(this->_mt_rand, *_statistic, *_stoppingCriteria, _problem,
 			// *_atomicOperation, *_selection);
 		} else if(configuration["className"] == "OnePlusLambda") {
-			optimizationAlgorithm = std::make_unique<OnePlusLambda<SOL, TYPE_FITNESS, TYPE_CELL>>(
+			optimization = std::make_unique<OnePlusLambda<SOL, TYPE_FITNESS, TYPE_CELL>>(
 				this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem,
 				std::move(_atomicOperation), configuration["lambda"].asUInt());
 		} else if(configuration["className"] == "IteratedLocalSearch") {
-			std::unique_ptr<OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>
-				_optimizationAlgorithm_ils =
-					this->operator()(configuration["OptimizationAlgorithm"]);
-			optimizationAlgorithm =
+			std::unique_ptr<Optimization<SOL, TYPE_FITNESS, TYPE_CELL>>
+				_optimization_ils =
+					this->operator()(configuration["Optimization"]);
+			optimization =
 				std::make_unique<IteratedLocalSearch<SOL, TYPE_FITNESS, TYPE_CELL>>(
 					this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem,
-					std::move(_atomicOperation), std::move(_optimizationAlgorithm_ils));
+					std::move(_atomicOperation), std::move(_optimization_ils));
 		} else if(configuration["className"] == "TabuSearch") {
-			optimizationAlgorithm = std::make_unique<TabuSearch<SOL, TYPE_FITNESS, TYPE_CELL>>(
+			optimization = std::make_unique<TabuSearch<SOL, TYPE_FITNESS, TYPE_CELL>>(
 				this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem,
 				std::move(_atomicOperation));
 		} else if(configuration["className"] == "EvolutionaryAlgorithm") {
-			optimizationAlgorithm =
+			optimization =
 				std::make_unique<EvolutionaryAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>(
 					this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem,
 					std::move(_atomicOperation), configuration["mu"].asUInt(),
 					configuration["lambda"].asUInt());
 		} else if(configuration["className"] == "OnePlusLambda") {
-			optimizationAlgorithm = std::make_unique<OnePlusLambda<SOL, TYPE_FITNESS, TYPE_CELL>>(
+			optimization = std::make_unique<OnePlusLambda<SOL, TYPE_FITNESS, TYPE_CELL>>(
 				this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem,
 				std::move(_atomicOperation), configuration["lambda"].asInt());
 		} else if(configuration["className"] == "SimulatedAnnealing") {
-			optimizationAlgorithm =
+			optimization =
 				std::make_unique<SimulatedAnnealing<SOL, TYPE_FITNESS, TYPE_CELL>>(
 					this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem,
 					std::move(_atomicOperation));
 		} else if(configuration["className"] == "Backtraking") {
 			// ! TODO: need to implement
 		} else if(configuration["className"] == "CombinationGenerator") {
-			optimizationAlgorithm =
+			optimization =
 				std::make_unique<CombinationGenerator<SOL, TYPE_FITNESS, TYPE_CELL>>(
 					this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem);
 		} else if(configuration["className"] == "NearestNeighbourAlgorithm") {
-			optimizationAlgorithm =
+			optimization =
 				std::make_unique<NearestNeighbourAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>>(
 					this->_mt_rand, _statistic, std::move(_stoppingCriteria), _problem);
 		} else {
@@ -127,7 +127,7 @@ class Factory {
 									 " does not exist.");
 		}
 
-		return std::move(optimizationAlgorithm);
+		return std::move(optimization);
 	}
 
 	void sensor(const Json::Value& configuration, std::shared_ptr<Statistic<SOL>> __statistic) {

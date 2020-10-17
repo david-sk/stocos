@@ -28,7 +28,7 @@ if __name__ == '__main__':
             "fitnessObjectif": 4
         },
         "parameter_id": 0,
-        "OptimizationAlgorithm": {
+        "Optimization": {
             "0": {
                 "className":"TabuSearch",
                 "StoppingCriteria": {

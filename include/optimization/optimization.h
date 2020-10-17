@@ -1,5 +1,5 @@
 ///
-/// @file optimizationAlgorithm.hpp
+/// @file optimization.hpp
 /// @author Jxtopher
 /// @version 1
 /// @copyright CC-BY-NC-SA
@@ -7,8 +7,8 @@
 /// @brief
 ///
 
-#ifndef OPTIMIZATIONALGORITHM_H
-#define OPTIMIZATIONALGORITHM_H
+#ifndef OPTIMIZATION_H
+#define OPTIMIZATION_H
 
 #include <memory>
 #include <random>
@@ -21,15 +21,15 @@
 namespace stocos {
 
 template<class SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-class OptimizationAlgorithm {
+class Optimization {
   public:
-	OptimizationAlgorithm(std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
+	Optimization(std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
 						  std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
 						  std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem)
 		: _mt_rand(mt_rand), _statistic(std::move(statistic)),
 		  _stoppingCriteria(std::move(stoppingCriteria)), _problem(problem) {
 	}
-	virtual ~OptimizationAlgorithm() {
+	virtual ~Optimization() {
 	}
 
 	virtual void reset() {

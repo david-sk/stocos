@@ -17,12 +17,12 @@
 #include "../../problem/problem.h"
 #include "../../solution/population.h"
 #include "../../solution/solution.h"
-#include "../optimizationAlgorithm.h"
+#include "../optimization.h"
 
 namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-class CombinationGenerator : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
+class CombinationGenerator : public Optimization<SOL, TYPE_FITNESS, TYPE_CELL> {
   public:
 	CombinationGenerator(std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
 						 std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,

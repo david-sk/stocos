@@ -25,7 +25,7 @@
 namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-class TabuSearch : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
+class TabuSearch : public Optimization<SOL, TYPE_FITNESS, TYPE_CELL> {
   public:
 	TabuSearch(std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
 			   std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,

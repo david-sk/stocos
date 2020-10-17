@@ -13,7 +13,7 @@
 #include <memory> // std::shared_ptr std::unique_ptr
 #include <random>
 
-#include "../../optimizationAlgorithm.h"
+#include "../../optimization.h"
 
 namespace stocos {
 

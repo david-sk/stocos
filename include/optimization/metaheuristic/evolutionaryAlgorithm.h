@@ -16,13 +16,13 @@
 
 #include "../../problem/problem.h"
 #include "../../solution/population.h"
-#include "../optimizationAlgorithm.h"
+#include "../optimization.h"
 #include "operator/atomicOperation.h"
 
 namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
-class EvolutionaryAlgorithm : public OptimizationAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL> {
+class EvolutionaryAlgorithm : public Optimization<SOL, TYPE_FITNESS, TYPE_CELL> {
   public:
 	EvolutionaryAlgorithm(
 		std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
