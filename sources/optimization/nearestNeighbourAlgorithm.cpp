@@ -18,7 +18,7 @@ NearestNeighbourAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>::NearestNeighbourAlgorit
 	std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
 	std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem)
 	: Optimization<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic),
-														  std::move(stoppingCriteria), problem) {
+												 std::move(stoppingCriteria), problem) {
 	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__
 							 << " Creation NearestNeighbourAlgorithm";
 }

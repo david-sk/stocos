@@ -13,18 +13,18 @@
 namespace stocos {
 
 #include <iostream>
-#include <unordered_map>
 #include <string>
+#include <unordered_map>
 
 class Messages : protected std::unordered_map<std::string, std::string> {
-public:
-    Messages() {
-        this->operator[]("STOChastic Optimization Solver") = "STOChastic Optimization Solver";
-    }
+  public:
+	Messages() {
+		this->operator[]("STOChastic Optimization Solver") = "STOChastic Optimization Solver";
+	}
 
-    virtual std::string operator()(const std::string code) const {
-        return this->at(code);
-    }
+	virtual std::string operator()(const std::string code) const {
+		return this->at(code);
+	}
 };
 
 } // namespace stocos

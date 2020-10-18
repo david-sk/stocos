@@ -13,16 +13,16 @@
 namespace stocos {
 
 #include <iostream>
-#include <unordered_map>
 #include <string>
+#include <unordered_map>
 
 #include "messages.h"
 
 class French : public Messages {
-public:
-    French() {
-        this->operator[]("MPI") = "MPI_fr";
-    }
+  public:
+	French() {
+		this->operator[]("MPI") = "MPI_fr";
+	}
 };
 
 } // namespace stocos

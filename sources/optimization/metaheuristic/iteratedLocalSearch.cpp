@@ -24,7 +24,7 @@ IteratedLocalSearch<SOL, TYPE_FITNESS, TYPE_CELL>::IteratedLocalSearch(
 	std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> exploration,
 	std::unique_ptr<Optimization<SOL, TYPE_FITNESS, TYPE_CELL>> exploitation)
 	: Optimization<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic),
-														  std::move(stoppingCriteria), problem),
+												 std::move(stoppingCriteria), problem),
 	  _exploration(std::move(exploration)), _exploitation(std::move(exploitation)) {
 	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation IteratedLocalSearch";
 	_exploitation->className("ILS>" + _exploitation->className());

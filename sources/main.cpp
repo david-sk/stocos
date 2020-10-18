@@ -17,9 +17,9 @@
 #include <cstdlib>
 #include <iostream>
 #include <map>
+#include <memory>
 #include <signal.h>
 #include <string>
-#include <memory>
 
 // Include problem
 #if MODULE_PROBLEM_ONEMAX
@@ -49,8 +49,8 @@
 #include "solver/solverClientRPC.hpp"
 #include "solver/solverGeneric.hpp"
 
-#include "messages/messages.h"
 #include "messages/french.h"
+#include "messages/messages.h"
 #include "version.h"
 
 using namespace stocos;

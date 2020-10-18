@@ -13,8 +13,8 @@
 #ifndef UNITTEST_MESSAGES_H
 #define UNITTEST_MESSAGES_H
 
-#include "messages/messages.h"
 #include "messages/french.h"
+#include "messages/messages.h"
 
 using namespace stocos;
 
@@ -25,10 +25,11 @@ class UnitTest_messages : public CppUnit::TestFixture {
 
   public:
 	void show_message(void) {
-        Messages *messages = new French();
-        CPPUNIT_ASSERT((*messages)("STOChastic Optimization Solver") == "STOChastic Optimization Solver");
-        CPPUNIT_ASSERT((*messages)("STOChastic Optimization Solver") != "XTOChastic Optimization Solver");
-
+		Messages* messages = new French();
+		CPPUNIT_ASSERT((*messages)("STOChastic Optimization Solver") ==
+					   "STOChastic Optimization Solver");
+		CPPUNIT_ASSERT((*messages)("STOChastic Optimization Solver") !=
+					   "XTOChastic Optimization Solver");
 	}
 };
 
