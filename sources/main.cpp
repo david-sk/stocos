@@ -49,8 +49,8 @@
 #include "solver/solverClientRPC.hpp"
 #include "solver/solverGeneric.hpp"
 
-#include "messages/french.h"
 #include "messages/messages.h"
+#include "messages/french.h"
 #include "version.h"
 
 using namespace stocos;
@@ -68,7 +68,7 @@ void version(const std::string& name_software) {
 	std::cout << "******************************************" << std::endl;
 }
 
-std::unique_ptr<Messages> messages;
+Messages* messages;
 
 void segfault_sigaction(int signal, siginfo_t* si, void* arg) {
 	printf("Caught segfault at address %p\n", si->si_addr);
@@ -156,7 +156,7 @@ int main(int argc, char** argv, char** envp) {
 	std::string encoding = configuration.get("encoding", "UTF-8").asString();
 
 	// Langague des messages afficher à l'utilisateur
-	messages = std::make_unique<French>();
+	messages = new French();
 
 // Definition des problems
 #if MODULE_PROBLEM_ONEMAX
