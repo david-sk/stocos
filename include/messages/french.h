@@ -10,13 +10,13 @@
 #ifndef MESSAGES_FRENCH_H
 #define MESSAGES_FRENCH_H
 
-namespace stocos {
-
 #include <iostream>
 #include <string>
 #include <unordered_map>
 
 #include "messages.h"
+
+namespace stocos {
 
 class French : public Messages {
   public:

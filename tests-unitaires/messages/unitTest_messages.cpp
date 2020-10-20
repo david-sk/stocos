@@ -13,7 +13,6 @@
 #ifndef UNITTEST_MESSAGES_H
 #define UNITTEST_MESSAGES_H
 
-#include "messages/messages.h"
 #include "messages/french.h"
 
 using namespace stocos;

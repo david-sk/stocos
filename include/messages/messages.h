@@ -12,59 +12,62 @@
 
 namespace stocos {
 
+#include <cstdarg>
 #include <iostream>
+#include <map>
+#include <sstream>
 #include <string>
 #include <unordered_map>
-#include <map>
 #include <vector>
-#include <sstream>
-#include <cstdarg>
 
 class Messages : protected std::unordered_map<std::string, std::string> {
   public:
 	Messages() {
 		this->operator[]("STOChastic Optimization Solver") = "STOChastic Optimization Solver";
-		this->operator[]("TEST") = "[$1] This is the test $0 name $1.";
+		this->operator[]("TEST") = "[$1] This i$s the test $0 name $1.";
 	}
 
 	virtual std::string operator()(const std::string code) const {
 		return this->at(code);
 	}
 
-	virtual std::string operator()(const std::string code, const std::initializer_list<std::string> &args) const {
+	virtual std::string operator()(const std::string code,
+								   const std::initializer_list<std::string>& args) const {
 		std::map<unsigned int, unsigned int> refactoring;
-		std::string s;
+		std::string ret;
 		unsigned int j = 0;
-		for (unsigned int i = 0 ; i < this->at(code).size() ; i++) {
-			if (this->at(code)[i] == '$') {
+		for(unsigned int i = 0; i < this->at(code).size(); i++) {
+			if(this->at(code)[i] == '$') {
 				std::stringstream ss_num_arg;
 				do {
-					j=0;
+					j = 0;
 					i++;
-					while (j < 10 && this->at(code)[i] != numeric[j]) j++;
-					if (this->at(code)[i] == numeric[j]) ss_num_arg<<numeric[j];
-				} while (this->at(code)[i] == numeric[j]);
-				unsigned int num_arg;
-				ss_num_arg>>num_arg;
-				refactoring[s.size()] = num_arg;
+					while(j < 10 && this->at(code)[i] != numeric[j]) j++;
+					if(this->at(code)[i] == numeric[j]) ss_num_arg << numeric[j];
+				} while(this->at(code)[i] == numeric[j]);
+				if(!ss_num_arg.str().empty()) {
+					unsigned int num_arg;
+					ss_num_arg >> num_arg;
+					refactoring[ret.size()] = num_arg;
+				} else
+					i--;
 			}
-			s += this->at(code)[i];
+			ret += this->at(code)[i];
 		}
 
 		unsigned int shift = 0;
-		for (std::map<unsigned int, unsigned int>::const_iterator it = refactoring.begin(); it != refactoring.end(); ++it) {
+		for(std::map<unsigned int, unsigned int>::const_iterator it = refactoring.begin();
+			it != refactoring.end(); ++it) {
 			auto vi = args.begin();
 			std::advance(vi, it->second);
-			s.insert(it->first + shift, *vi);
-			shift+= vi->size();
+			ret.insert(it->first + shift, *vi);
+			shift += vi->size();
 		}
-
-		std::cout<<">"<<s<<"<"<<std::endl;
-		return s;
+		return ret;
 	}
 
   private:
-	const unsigned char numeric[10] = {'0','1','2','3','4','5','6','7','8','9'};
+	const unsigned char numeric[10] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 };
 
 } // namespace stocos

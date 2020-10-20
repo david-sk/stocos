@@ -48,7 +48,6 @@ Domain<TYPE_CELL>::Domain(const Domain& dom) {
 		this->dom_each_cell[cell.first] =
 			std::make_shared<std::unordered_set<TYPE_CELL>>(*cell.second);
 }
-// ! operator=
 
 template<typename TYPE_CELL>
 Domain<TYPE_CELL>::Domain(const Json::Value& jsonValue) {
