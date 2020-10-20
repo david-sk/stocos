@@ -30,6 +30,8 @@ class UnitTest_messages : public CppUnit::TestFixture {
 					   "STOChastic Optimization Solver");
 		CPPUNIT_ASSERT((*messages)("STOChastic Optimization Solver") !=
 					   "XTOChastic Optimization Solver");
+
+		(*messages)("TEST", {"my$0", "my$1"});
 	}
 };
 
