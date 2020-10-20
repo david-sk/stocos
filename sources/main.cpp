@@ -17,6 +17,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <map>
+#include <memory>
 #include <signal.h>
 #include <string>
 
@@ -149,7 +150,7 @@ int main(int argc, char** argv, char** envp) {
 								 reader.getFormattedErrorMessages());
 
 	std::string encoding = configuration.get("encoding", "UTF-8").asString();
-
+	
 // Definition des problems
 #if MODULE_PROBLEM_ONEMAX
 	std::shared_ptr<OneMax> eOneMax = std::make_shared<OneMax>();

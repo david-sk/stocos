@@ -15,7 +15,7 @@ Backtraking<SOL, TYPE_FITNESS, TYPE_CELL>::Backtraking(
 	std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
 	std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem, Domain<TYPE_CELL> dom)
 	: Optimization<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic),
-														  std::move(stoppingCriteria), problem),
+												 std::move(stoppingCriteria), problem),
 	  _dom(dom) {
 	nbCall = 0;
 }

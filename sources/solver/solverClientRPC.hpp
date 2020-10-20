@@ -161,8 +161,7 @@ class SolverClientRPC : public Solver {
 			//
 			solution_t0->loadJson(received["Solution"]);
 			optimization[received["num_paramter"].asUInt()]->reset();
-			solution_t1 =
-				optimization[received["num_paramter"].asUInt()]->operator()(*solution_t0);
+			solution_t1 = optimization[received["num_paramter"].asUInt()]->operator()(*solution_t0);
 
 			Json::Value send;
 			send["Solution_t0"] = solution_t0->asJson();

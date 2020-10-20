@@ -16,7 +16,7 @@ EvolutionaryAlgorithm<SOL, TYPE_FITNESS, TYPE_CELL>::EvolutionaryAlgorithm(
 	std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations,
 	unsigned int mu, unsigned int lambda)
 	: Optimization<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic),
-														  move(stoppingCriteria), problem),
+												 move(stoppingCriteria), problem),
 	  _atomicOperations(move(atomicOperations)), _mu(mu), _lambda(lambda) {
 	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation EvolutionaryAlgorithm";
 	assert(_mu != 0);

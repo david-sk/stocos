@@ -15,7 +15,7 @@ CombinationGenerator<SOL, TYPE_FITNESS, TYPE_CELL>::CombinationGenerator(
 	std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
 	std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem)
 	: Optimization<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic),
-														  std::move(stoppingCriteria), problem) {
+												 std::move(stoppingCriteria), problem) {
 	_nb_call = 0;
 	_nb_digit = 0;
 	_len_string = 0;

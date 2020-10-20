@@ -52,8 +52,7 @@ class SolverGeneric : public Solver {
 		Factory<SOL, TYPE_FITNESS, TYPE_CELL> factory(mt_rand, _problem, _configuration);
 
 		for(std::string const& id : _configuration["Optimization"].getMemberNames())
-			optimization[stoul(id)] =
-				factory(std::move(_configuration["Optimization"][id]));
+			optimization[stoul(id)] = factory(std::move(_configuration["Optimization"][id]));
 
 		//
 		_statistic = factory.getStatistic();
@@ -85,8 +84,7 @@ class SolverGeneric : public Solver {
 			<< __FILE__ << ":" << __LINE__ << " Launch optimisation "
 			<< optimization[_configuration["parameter_id"].asUInt()]->className();
 		std::unique_ptr<SOL> s_new =
-			optimization[_configuration["parameter_id"].asUInt()]->operator()(
-				*initial_solution);
+			optimization[_configuration["parameter_id"].asUInt()]->operator()(*initial_solution);
 
 		className(optimization[_configuration["parameter_id"].asUInt()]->className());
 		_statistic->operator()(*s_new, className());

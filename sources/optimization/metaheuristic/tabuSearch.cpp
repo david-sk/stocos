@@ -19,7 +19,7 @@ TabuSearch<SOL, TYPE_FITNESS, TYPE_CELL>::TabuSearch(
 	std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> atomicOperations,
 	unsigned int sizeOfTabuList)
 	: Optimization<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand, std::move(statistic),
-														  std::move(stoppingCriteria), problem),
+												 std::move(stoppingCriteria), problem),
 	  _atomicOperations(std::move(atomicOperations)) {
 	BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __LINE__ << " Creation TabuSearch";
 	tabuList.set_capacity(sizeOfTabuList);
