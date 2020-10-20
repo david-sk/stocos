@@ -49,7 +49,6 @@
 #include "solver/solverClientRPC.hpp"
 #include "solver/solverGeneric.hpp"
 
-#include "messages/french.h"
 #include "version.h"
 
 using namespace stocos;
@@ -66,8 +65,6 @@ void version(const std::string& name_software) {
 	std::cout << "[+] Git commit hash : " << GIT_COMMIT_HASH << std::endl;
 	std::cout << "******************************************" << std::endl;
 }
-
-Messages* messages;
 
 void segfault_sigaction(int signal, siginfo_t* si, void* arg) {
 	printf("Caught segfault at address %p\n", si->si_addr);
@@ -153,10 +150,7 @@ int main(int argc, char** argv, char** envp) {
 								 reader.getFormattedErrorMessages());
 
 	std::string encoding = configuration.get("encoding", "UTF-8").asString();
-
-	// Langague des messages afficher à l'utilisateur
-	messages = new French();
-
+	
 // Definition des problems
 #if MODULE_PROBLEM_ONEMAX
 	std::shared_ptr<OneMax> eOneMax = std::make_shared<OneMax>();
