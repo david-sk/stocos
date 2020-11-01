@@ -27,54 +27,54 @@ namespace stocos {
 template<typename TYPE_FITNESS>
 class Fitness {
   public:
-	Fitness(const Fitness& s);
-	Fitness();
+    Fitness(const Fitness& s);
+    Fitness();
 
-	Fitness(const unsigned int number_of_objective);
+    Fitness(const unsigned int number_of_objective);
 
-	Fitness(const Json::Value& jsonValue);
+    Fitness(const Json::Value& jsonValue);
 
-	Fitness& operator=(const Fitness& s);
+    Fitness& operator=(const Fitness& s);
 
-	~Fitness();
+    ~Fitness();
 
-	///
-	/// @brief Give for a numObjectif the state fitness
-	///
-	/// @param numObjectif
-	/// @return true if the fitness is valide
-	/// @return false if the fitness is not valide
-	///
-	bool fitnessIsValid(unsigned int numObjectif = 0) const;
+    ///
+    /// @brief Give for a numObjectif the state fitness
+    ///
+    /// @param numObjectif
+    /// @return true if the fitness is valide
+    /// @return false if the fitness is not valide
+    ///
+    bool fitnessIsValid(unsigned int numObjectif = 0) const;
 
-	///
-	/// @brief Set the value fitness for a objectif
-	///
-	/// @param numObjectif objectif id
-	/// @param value new value
-	///
-	void setFitness(unsigned int numObjectif, TYPE_FITNESS value);
+    ///
+    /// @brief Set the value fitness for a objectif
+    ///
+    /// @param numObjectif objectif id
+    /// @param value new value
+    ///
+    void setFitness(unsigned int numObjectif, TYPE_FITNESS value);
 
-	void setFitness(TYPE_FITNESS value);
-	TYPE_FITNESS getFitness(unsigned int numObjectif = 0) const;
+    void setFitness(TYPE_FITNESS value);
+    TYPE_FITNESS getFitness(unsigned int numObjectif = 0) const;
 
-	unsigned int numberOfObjective() const;
-	// --------------------------------------------------------------------
-	friend std::ostream& operator<<(std::ostream& out, const Fitness<TYPE_FITNESS>& s) {
-		for(unsigned int i = 0; i < s.numberOfObjective(); i++) out << s.getFitness(i);
-		return out;
-	}
+    unsigned int numberOfObjective() const;
+    // --------------------------------------------------------------------
+    friend std::ostream& operator<<(std::ostream& out, const Fitness<TYPE_FITNESS>& s) {
+        for(unsigned int i = 0; i < s.numberOfObjective(); i++) out << s.getFitness(i);
+        return out;
+    }
 
-	void loadJson(const std::string& strJson);
+    void loadJson(const std::string& strJson);
 
-	void loadJson(const Json::Value& jsonValue);
+    void loadJson(const Json::Value& jsonValue);
 
-	Json::Value asJson() const;
+    Json::Value asJson() const;
 
   protected:
-	unsigned int _number_of_objective;		   ///< number of objectif
-	std::unique_ptr<TYPE_FITNESS[]> _fitness;  ///< list of fitness
-	std::unique_ptr<bool[]> _fitness_is_valid; ///< list of the fitness state
+    unsigned int _number_of_objective;         ///< number of objectif
+    std::unique_ptr<TYPE_FITNESS[]> _fitness;  ///< list of fitness
+    std::unique_ptr<bool[]> _fitness_is_valid; ///< list of the fitness state
 };
 
 } // namespace stocos

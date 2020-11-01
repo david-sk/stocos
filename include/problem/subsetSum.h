@@ -26,31 +26,31 @@ using TYPE_CELL_SUBSETSUM = bool;
 using SOL_SUBSETSUM = Solution<TYPE_FITNESS_SUBSETSUM, TYPE_CELL_SUBSETSUM>;
 class Subsetsum : public Problem<SOL_SUBSETSUM, TYPE_FITNESS_SUBSETSUM, TYPE_CELL_SUBSETSUM> {
   public:
-	Subsetsum();
+    Subsetsum();
 
-	Subsetsum(const unsigned int N);
+    Subsetsum(const unsigned int N);
 
-	Subsetsum(const std::string& fileInstance);
+    Subsetsum(const std::string& fileInstance);
 
-	void generateInstance(const unsigned int N);
+    void generateInstance(const unsigned int N);
 
-	virtual ~Subsetsum();
+    virtual ~Subsetsum();
 
-	void loadJson(const Json::Value& config);
+    void loadJson(const Json::Value& config);
 
-	TYPE_FITNESS_SUBSETSUM getFitnessObjectif(unsigned int numObjectif = 0) const;
+    TYPE_FITNESS_SUBSETSUM getFitnessObjectif(unsigned int numObjectif = 0) const;
 
-	void evaluation(SOL_SUBSETSUM& s);
+    void evaluation(SOL_SUBSETSUM& s);
 
-	// void incremental(const Solution &s, unsigned int mutatedCell) const;
+    // void incremental(const Solution &s, unsigned int mutatedCell) const;
 
-	void resetSolution(SOL_SUBSETSUM& s) const;
+    void resetSolution(SOL_SUBSETSUM& s) const;
 
-	std::unique_ptr<SOL_SUBSETSUM> new_solution() const;
+    std::unique_ptr<SOL_SUBSETSUM> new_solution() const;
 
   private:
-	std::vector<unsigned int> setOfNumbers;
-	unsigned int fitnessObjectif;
+    std::vector<unsigned int> setOfNumbers;
+    unsigned int fitnessObjectif;
 };
 
 } // namespace stocos

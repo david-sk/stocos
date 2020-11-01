@@ -14,9 +14,9 @@ namespace stocos {
 
 template<typename SOL>
 bool Filters<SOL>::operator()(const SOL& s) const {
-	bool ret = true;
-	for(auto it = this->begin(); it != this->end(); ++it) ret = ret && (*it)(s);
-	return ret;
+    bool ret = true;
+    for(auto it = this->begin(); it != this->end(); ++it) ret = ret && (*it)(s);
+    return ret;
 }
 
 template class Filters<Fitness<int>>;

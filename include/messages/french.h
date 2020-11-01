@@ -20,9 +20,9 @@ namespace stocos {
 
 class French : public Messages {
   public:
-	French() {
-		this->operator[]("MPI") = "MPI_fr";
-	}
+    French() {
+        this->operator[]("MPI") = "MPI_fr";
+    }
 };
 
 } // namespace stocos

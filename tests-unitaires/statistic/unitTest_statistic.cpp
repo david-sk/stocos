@@ -20,20 +20,20 @@ using namespace CppUnit;
 using namespace stocos;
 
 class UnitTest_statistic : public CppUnit::TestFixture {
-	CPPUNIT_TEST_SUITE(UnitTest_statistic);
-	CPPUNIT_TEST(constructor);
-	CPPUNIT_TEST_SUITE_END();
+    CPPUNIT_TEST_SUITE(UnitTest_statistic);
+    CPPUNIT_TEST(constructor);
+    CPPUNIT_TEST_SUITE_END();
 
   public:
-	void constructor(void) {
-		Fitness<int> s;
-		Sensor<Fitness<int>>* sensorNumRound = new SensorNumRound<Fitness<int>>();
-		Statistic<Fitness<int>> statistic(true);
-		statistic.addSensor(sensorNumRound);
-		statistic(s);
-		Json::Value result = statistic.asJson(s);
-		CPPUNIT_ASSERT(result["round"].asInt() == 2);
-	}
+    void constructor(void) {
+        Fitness<int> s;
+        Sensor<Fitness<int>>* sensorNumRound = new SensorNumRound<Fitness<int>>();
+        Statistic<Fitness<int>> statistic(true);
+        statistic.addSensor(sensorNumRound);
+        statistic(s);
+        Json::Value result = statistic.asJson(s);
+        CPPUNIT_ASSERT(result["round"].asInt() == 2);
+    }
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_statistic);

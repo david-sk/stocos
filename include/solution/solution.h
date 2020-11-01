@@ -27,41 +27,41 @@ namespace stocos {
 template<typename TYPE_FITNESS, typename TYPE_CELL>
 class Solution : public Fitness<TYPE_FITNESS>, private std::vector<TYPE_CELL> {
   public:
-	Solution(const unsigned int sizeArray = 1, const unsigned int numberOfObjective = 1);
+    Solution(const unsigned int sizeArray = 1, const unsigned int numberOfObjective = 1);
 
-	Solution(const Solution& s);
+    Solution(const Solution& s);
 
-	Solution(const Json::Value& jsonValue);
+    Solution(const Json::Value& jsonValue);
 
-	Solution(const std::string& solution);
+    Solution(const std::string& solution);
 
-	~Solution();
+    ~Solution();
 
-	Solution& operator=(const Solution& s);
+    Solution& operator=(const Solution& s);
 
-	bool operator==(const Solution& s) const;
+    bool operator==(const Solution& s) const;
 
-	void operator()(const unsigned int index, const TYPE_CELL value);
+    void operator()(const unsigned int index, const TYPE_CELL value);
 
-	TYPE_CELL operator()(const unsigned int index) const;
+    TYPE_CELL operator()(const unsigned int index) const;
 
-	unsigned int sizeArray() const;
+    unsigned int sizeArray() const;
 
-	// --------------------------------------------------------------------
-	friend std::ostream& operator<<(std::ostream& out, Solution<TYPE_FITNESS, TYPE_CELL> const& s) {
-		for(unsigned int i = 0; i < s.numberOfObjective(); i++) out << s.getFitness(i) << " ";
-		out << ": ";
-		for(unsigned int i = 0; i < s.sizeArray(); i++) out << s(i) << " ";
-		return out;
-	}
+    // --------------------------------------------------------------------
+    friend std::ostream& operator<<(std::ostream& out, Solution<TYPE_FITNESS, TYPE_CELL> const& s) {
+        for(unsigned int i = 0; i < s.numberOfObjective(); i++) out << s.getFitness(i) << " ";
+        out << ": ";
+        for(unsigned int i = 0; i < s.sizeArray(); i++) out << s(i) << " ";
+        return out;
+    }
 
-	void loadJson(const std::string& strJson);
-	void loadJson(const Json::Value& jsonValue);
+    void loadJson(const std::string& strJson);
+    void loadJson(const Json::Value& jsonValue);
 
-	///
-	/// @return the solution in JSON format
-	///
-	Json::Value asJson() const;
+    ///
+    /// @return the solution in JSON format
+    ///
+    Json::Value asJson() const;
 };
 
 } // namespace stocos

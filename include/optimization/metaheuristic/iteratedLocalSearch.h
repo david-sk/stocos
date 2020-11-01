@@ -30,25 +30,25 @@ namespace stocos {
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class IteratedLocalSearch : public Optimization<SOL, TYPE_FITNESS, TYPE_CELL> {
   public:
-	IteratedLocalSearch(std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
-						std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
-						std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
-						std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> exploration,
-						std::unique_ptr<Optimization<SOL, TYPE_FITNESS, TYPE_CELL>> exploitation);
+    IteratedLocalSearch(std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
+                        std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
+                        std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem,
+                        std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> exploration,
+                        std::unique_ptr<Optimization<SOL, TYPE_FITNESS, TYPE_CELL>> exploitation);
 
-	~IteratedLocalSearch();
+    ~IteratedLocalSearch();
 
-	std::unique_ptr<SOL> operator()(const SOL& s);
-	std::string className() const;
+    std::unique_ptr<SOL> operator()(const SOL& s);
+    std::string className() const;
 
-	void className(const std::string& class_name);
+    void className(const std::string& class_name);
 
   protected:
-	std::string _class_name;
-	std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _exploration;
-	std::unique_ptr<Optimization<SOL, TYPE_FITNESS, TYPE_CELL>> _exploitation;
-	SOL solution_star;
-	SOL solution_beta;
+    std::string _class_name;
+    std::unique_ptr<AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>> _exploration;
+    std::unique_ptr<Optimization<SOL, TYPE_FITNESS, TYPE_CELL>> _exploitation;
+    SOL solution_star;
+    SOL solution_beta;
 };
 
 } // namespace stocos

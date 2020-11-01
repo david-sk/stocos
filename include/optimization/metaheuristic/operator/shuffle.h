@@ -11,7 +11,7 @@
 #define OPERATION_SHUFFLE_H
 
 #include <algorithm> // std::random_shuffle
-#include <memory>	// std::shared_ptr std::unique_ptr
+#include <memory>    // std::shared_ptr std::unique_ptr
 
 #include "atomicOperation.h"
 
@@ -20,14 +20,14 @@ namespace stocos {
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class Shuffle : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
   public:
-	Shuffle(std::mt19937& mt_rand);
+    Shuffle(std::mt19937& mt_rand);
 
-	~Shuffle();
+    ~Shuffle();
 
-	virtual void operator()(SOL& s);
+    virtual void operator()(SOL& s);
 
   private:
-	std::vector<TYPE_CELL> index;
+    std::vector<TYPE_CELL> index;
 };
 
 } // namespace stocos

@@ -23,30 +23,30 @@ using namespace CppUnit;
 using namespace stocos;
 
 class UnitTest_intervalInteger : public CppUnit::TestFixture {
-	CPPUNIT_TEST_SUITE(UnitTest_intervalInteger);
-	CPPUNIT_TEST(operator());
-	CPPUNIT_TEST_SUITE_END();
+    CPPUNIT_TEST_SUITE(UnitTest_intervalInteger);
+    CPPUNIT_TEST(operator());
+    CPPUNIT_TEST_SUITE_END();
 
   public:
-	void setUp(void) {
-		mt_rand.seed(0);
-	}
+    void setUp(void) {
+        mt_rand.seed(0);
+    }
 
-	void operator()(void) {
-		unsigned int n = 20;
-		Solution<int, int> s1(n);
-		Solution<int, int> s2(s1);
-		IntervalInteger<Solution<int, int>, int, int> intervalInteger(mt_rand, 20, -10, 10);
-		intervalInteger(s1);
-		CPPUNIT_ASSERT(!(s1 == s2));
-		for(unsigned int i = 0; i < n; i++) {
-			CPPUNIT_ASSERT(s1(i) >= -10);
-			CPPUNIT_ASSERT(s1(i) <= 10);
-		}
-	}
+    void operator()(void) {
+        unsigned int n = 20;
+        Solution<int, int> s1(n);
+        Solution<int, int> s2(s1);
+        IntervalInteger<Solution<int, int>, int, int> intervalInteger(mt_rand, 20, -10, 10);
+        intervalInteger(s1);
+        CPPUNIT_ASSERT(!(s1 == s2));
+        for(unsigned int i = 0; i < n; i++) {
+            CPPUNIT_ASSERT(s1(i) >= -10);
+            CPPUNIT_ASSERT(s1(i) <= 10);
+        }
+    }
 
   private:
-	std::mt19937 mt_rand;
+    std::mt19937 mt_rand;
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_intervalInteger);

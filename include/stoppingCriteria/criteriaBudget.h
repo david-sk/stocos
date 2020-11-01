@@ -18,20 +18,20 @@ namespace stocos {
 template<typename SOL, typename TYPE_FITNESS>
 class CriteriaBudget : public Criteria<SOL, TYPE_FITNESS> {
   public:
-	CriteriaBudget(unsigned int _budget);
-	virtual ~CriteriaBudget();
+    CriteriaBudget(unsigned int _budget);
+    virtual ~CriteriaBudget();
 
-	virtual bool operator()(const SOL& s);
+    virtual bool operator()(const SOL& s);
 
-	unsigned int getConsumedBudget() const;
+    unsigned int getConsumedBudget() const;
 
-	void resetConsumedBudget();
+    void resetConsumedBudget();
 
-	void reset();
+    void reset();
 
   protected:
-	unsigned int consumedBudget;
-	unsigned int budget;
+    unsigned int consumedBudget;
+    unsigned int budget;
 };
 
 } // namespace stocos

@@ -19,19 +19,19 @@ namespace stocos {
 template<class SOL>
 class Sensor {
   public:
-	Sensor() {
-	}
+    Sensor() {
+    }
 
-	virtual ~Sensor() {
-	}
+    virtual ~Sensor() {
+    }
 
-	virtual void apply(const SOL& s) = 0;
+    virtual void apply(const SOL& s) = 0;
 
-	virtual Json::Value asJson() const = 0;
+    virtual Json::Value asJson() const = 0;
 
-	virtual Json::Value finish() = 0;
+    virtual Json::Value finish() = 0;
 
-	virtual std::string name() const = 0;
+    virtual std::string name() const = 0;
 };
 
 } // namespace stocos

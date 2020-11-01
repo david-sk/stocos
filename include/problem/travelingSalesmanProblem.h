@@ -30,32 +30,32 @@ using TYPE_CELL_STP = double;
 using SOL_STP = Solution<TYPE_FITNESS_STP, TYPE_CELL_STP>;
 class TravelingSalesmanProblem : public Problem<SOL_STP, TYPE_FITNESS_STP, TYPE_CELL_STP> {
   public:
-	TravelingSalesmanProblem();
+    TravelingSalesmanProblem();
 
-	TravelingSalesmanProblem(const std::string& fileInstance);
+    TravelingSalesmanProblem(const std::string& fileInstance);
 
-	virtual ~TravelingSalesmanProblem();
+    virtual ~TravelingSalesmanProblem();
 
-	void loadJson(const Json::Value& config);
+    void loadJson(const Json::Value& config);
 
-	std::unique_ptr<SOL_STP> new_solution() const;
+    std::unique_ptr<SOL_STP> new_solution() const;
 
-	bool checkSolutionStructure(const SOL_STP& s) const;
+    bool checkSolutionStructure(const SOL_STP& s) const;
 
-	void evaluation(SOL_STP& s);
+    void evaluation(SOL_STP& s);
 
-	bool solutionSelection(const SOL_STP& s_worst, const SOL_STP& s_best);
+    bool solutionSelection(const SOL_STP& s_worst, const SOL_STP& s_best);
 
-	unsigned int solutionSelection(const Population<SOL_STP>& p);
+    unsigned int solutionSelection(const Population<SOL_STP>& p);
 
   private:
-	double distance_euclidienne(const std::pair<double, double>& node_a,
-								const std::pair<double, double>& node_b) const;
+    double distance_euclidienne(const std::pair<double, double>& node_a,
+                                const std::pair<double, double>& node_b) const;
 
-	Minimization<SOL_STP> solution_selection;
-	std::string instance_number;
-	unsigned int numberOfNodes;
-	std::vector<std::pair<double, double>> nodes;
+    Minimization<SOL_STP> solution_selection;
+    std::string instance_number;
+    unsigned int numberOfNodes;
+    std::vector<std::pair<double, double>> nodes;
 };
 
 } // namespace stocos

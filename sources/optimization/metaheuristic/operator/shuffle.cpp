@@ -12,7 +12,7 @@ namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 Shuffle<SOL, TYPE_FITNESS, TYPE_CELL>::Shuffle(std::mt19937& mt_rand)
-	: AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand) {
+    : AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL>(mt_rand) {
 }
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
@@ -21,17 +21,17 @@ Shuffle<SOL, TYPE_FITNESS, TYPE_CELL>::~Shuffle() {
 
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 void Shuffle<SOL, TYPE_FITNESS, TYPE_CELL>::operator()(SOL& s) {
-	if(index.size() != s.sizeArray()) {
-		index.clear();
-		for(unsigned int i = 0; i < s.sizeArray(); i++) index.push_back(i);
-	}
+    if(index.size() != s.sizeArray()) {
+        index.clear();
+        for(unsigned int i = 0; i < s.sizeArray(); i++) index.push_back(i);
+    }
 
-	std::shuffle(index.begin(), index.end(), this->_mt_rand);
-	for(unsigned int i = 0; i < s.sizeArray(); i++) {
-		TYPE_CELL tmp = s(i);
-		s(i, s(index[i]));
-		s(index[i], tmp);
-	}
+    std::shuffle(index.begin(), index.end(), this->_mt_rand);
+    for(unsigned int i = 0; i < s.sizeArray(); i++) {
+        TYPE_CELL tmp = s(i);
+        s(i, s(index[i]));
+        s(index[i], tmp);
+    }
 }
 
 template class Shuffle<Solution<double, double>, double, double>;

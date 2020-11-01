@@ -12,7 +12,7 @@ namespace stocos {
 
 template<class SOL>
 SensorExperience<SOL>::SensorExperience(unsigned int num, const std::string& name)
-	: _num(num), _name(name) {
+    : _num(num), _name(name) {
 }
 
 template<class SOL>
@@ -25,20 +25,20 @@ void SensorExperience<SOL>::apply(const SOL& s) {
 
 template<class SOL>
 Json::Value SensorExperience<SOL>::asJson() const {
-	Json::Value exp;
-	exp["name"] = _name;
-	exp["number"] = _num;
-	return exp;
+    Json::Value exp;
+    exp["name"] = _name;
+    exp["number"] = _num;
+    return exp;
 }
 
 template<class SOL>
 Json::Value SensorExperience<SOL>::finish() {
-	return Json::Value();
+    return Json::Value();
 }
 
 template<class SOL>
 std::string SensorExperience<SOL>::name() const {
-	return std::string("experience");
+    return std::string("experience");
 }
 
 template class SensorExperience<Fitness<int>>;

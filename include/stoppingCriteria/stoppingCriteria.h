@@ -20,15 +20,15 @@ namespace stocos {
 template<typename SOL, typename TYPE_FITNESS>
 class StoppingCriteria : private std::list<Criteria<SOL, TYPE_FITNESS>*> {
   public:
-	virtual ~StoppingCriteria();
+    virtual ~StoppingCriteria();
 
-	bool operator()(const SOL& s);
-	///
-	/// @brief add a criterion to the list
-	///
-	void addCriteria(Criteria<SOL, TYPE_FITNESS>* criteria);
+    bool operator()(const SOL& s);
+    ///
+    /// @brief add a criterion to the list
+    ///
+    void addCriteria(Criteria<SOL, TYPE_FITNESS>* criteria);
 
-	void reset();
+    void reset();
 };
 
 } // namespace stocos

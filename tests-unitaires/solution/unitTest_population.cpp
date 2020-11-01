@@ -18,21 +18,21 @@ using namespace CppUnit;
 using namespace stocos;
 
 class UnitTest_population : public CppUnit::TestFixture {
-	CPPUNIT_TEST_SUITE(UnitTest_population);
-	CPPUNIT_TEST(constructor);
-	CPPUNIT_TEST_SUITE_END();
+    CPPUNIT_TEST_SUITE(UnitTest_population);
+    CPPUNIT_TEST(constructor);
+    CPPUNIT_TEST_SUITE_END();
 
   public:
-	void setUp(void) {
-	}
-	void tearDown(void) {
-	}
+    void setUp(void) {
+    }
+    void tearDown(void) {
+    }
 
-	void constructor(void) {
-		Solution<double, bool> s(22);
-		Population<Solution<double, bool>> p;
-		p.push_back(s);
-	}
+    void constructor(void) {
+        Solution<double, bool> s(22);
+        Population<Solution<double, bool>> p;
+        p.push_back(s);
+    }
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_population);

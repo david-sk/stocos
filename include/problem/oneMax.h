@@ -29,35 +29,35 @@ using TYPE_CELL_ONEMAX = bool;
 using SOL_ONEMAX = Solution<TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX>;
 class OneMax : public Problem<SOL_ONEMAX, TYPE_FITNESS_ONEMAX, TYPE_CELL_ONEMAX> {
   public:
-	OneMax();
+    OneMax();
 
-	OneMax(const std::string& fileInstance);
+    OneMax(const std::string& fileInstance);
 
-	OneMax(unsigned int N);
+    OneMax(unsigned int N);
 
-	~OneMax();
+    ~OneMax();
 
-	virtual void loadJson(const Json::Value& config);
+    virtual void loadJson(const Json::Value& config);
 
-	std::unique_ptr<SOL_ONEMAX> new_solution() const;
+    std::unique_ptr<SOL_ONEMAX> new_solution() const;
 
-	bool checkSolutionStructure(const SOL_ONEMAX& s) const;
-	void evaluation(SOL_ONEMAX& s);
+    bool checkSolutionStructure(const SOL_ONEMAX& s) const;
+    void evaluation(SOL_ONEMAX& s);
 
-	// void incremental(const Solution &s, unsigned int mutatedCell) const;
+    // void incremental(const Solution &s, unsigned int mutatedCell) const;
 
-	void resetSolution(SOL_ONEMAX& s) const;
+    void resetSolution(SOL_ONEMAX& s) const;
 
-	TYPE_FITNESS_ONEMAX getFitnessObjectif(unsigned int numObjectif = 0) const;
+    TYPE_FITNESS_ONEMAX getFitnessObjectif(unsigned int numObjectif = 0) const;
 
-	bool solutionSelection(const SOL_ONEMAX& s_worst, const SOL_ONEMAX& s_best);
+    bool solutionSelection(const SOL_ONEMAX& s_worst, const SOL_ONEMAX& s_best);
 
-	unsigned int solutionSelection(const Population<SOL_ONEMAX>& p);
+    unsigned int solutionSelection(const Population<SOL_ONEMAX>& p);
 
   private:
-	Maximization<SOL_ONEMAX> solution_selection;
-	std::string instance_number;
-	unsigned int _N;
+    Maximization<SOL_ONEMAX> solution_selection;
+    std::string instance_number;
+    unsigned int _N;
 };
 
 } // namespace stocos

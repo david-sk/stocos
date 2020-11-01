@@ -23,20 +23,20 @@ namespace stocos {
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class IntervalReal : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
   public:
-	IntervalReal(std::mt19937& mt_rand, unsigned int c, double a, double b);
-	virtual ~IntervalReal();
+    IntervalReal(std::mt19937& mt_rand, unsigned int c, double a, double b);
+    virtual ~IntervalReal();
 
-	void operator()(SOL& s);
+    void operator()(SOL& s);
 
   private:
-	const unsigned int _c; // < Nombre de case à mute / arraySize
-	const unsigned int _a; // < Lower bound
-	const unsigned int _b; // < Upper bollard
-	std::unique_ptr<std::uniform_real_distribution<>> urd_0_1;
-	std::unique_ptr<std::uniform_real_distribution<>> urd;
-	double mutation_rate;
-	unsigned int N;
-	std::vector<unsigned int> backup;
+    const unsigned int _c; // < Nombre de case à mute / arraySize
+    const unsigned int _a; // < Lower bound
+    const unsigned int _b; // < Upper bollard
+    std::unique_ptr<std::uniform_real_distribution<>> urd_0_1;
+    std::unique_ptr<std::uniform_real_distribution<>> urd;
+    double mutation_rate;
+    unsigned int N;
+    std::vector<unsigned int> backup;
 };
 
 } // namespace stocos

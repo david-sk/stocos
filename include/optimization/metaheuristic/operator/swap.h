@@ -22,17 +22,17 @@ namespace stocos {
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class Swap : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
   public:
-	Swap(std::mt19937& mt_rand, unsigned int number_of_swap);
+    Swap(std::mt19937& mt_rand, unsigned int number_of_swap);
 
-	virtual void operator()(SOL& s);
+    virtual void operator()(SOL& s);
 
-	void cancelMutations(SOL& s) const;
+    void cancelMutations(SOL& s) const;
 
   private:
-	std::unique_ptr<std::uniform_int_distribution<unsigned int>> rid;
-	std::vector<std::pair<unsigned int, TYPE_CELL>> backup;
-	unsigned int _number_of_swap;
-	unsigned int N;
+    std::unique_ptr<std::uniform_int_distribution<unsigned int>> rid;
+    std::vector<std::pair<unsigned int, TYPE_CELL>> backup;
+    unsigned int _number_of_swap;
+    unsigned int N;
 };
 
 } // namespace stocos

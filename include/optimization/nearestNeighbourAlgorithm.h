@@ -12,11 +12,11 @@
 #define NEARESTNEIGHOURALGORITHM_H
 
 #include <algorithm> // std::shuffle
-#include <memory>	// std::shared_ptr std::unique_ptr
-#include <random>	// std::mt19937
-#include <string>	// std::string
+#include <memory>    // std::shared_ptr std::unique_ptr
+#include <random>    // std::mt19937
+#include <string>    // std::string
 #include <utility>   // std::pair
-#include <vector>	// std::vector
+#include <vector>    // std::vector
 
 #include "../problem/problem.h"
 #include "optimization.h"
@@ -26,20 +26,20 @@ namespace stocos {
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class NearestNeighbourAlgorithm : public Optimization<SOL, TYPE_FITNESS, TYPE_CELL> {
   public:
-	NearestNeighbourAlgorithm(std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
-							  std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
-							  std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem);
+    NearestNeighbourAlgorithm(std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
+                              std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
+                              std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem);
 
-	~NearestNeighbourAlgorithm();
+    ~NearestNeighbourAlgorithm();
 
-	std::unique_ptr<SOL> operator()(const SOL& s);
+    std::unique_ptr<SOL> operator()(const SOL& s);
 
-	std::string className() const;
-	void className(const std::string& class_name);
+    std::string className() const;
+    void className(const std::string& class_name);
 
   protected:
-	std::string _class_name;
-	std::unique_ptr<std::uniform_int_distribution<unsigned int>> rid;
+    std::string _class_name;
+    std::unique_ptr<std::uniform_int_distribution<unsigned int>> rid;
 };
 
 } // namespace stocos

@@ -28,37 +28,37 @@ using TYPE_FITNESS_LATINSQUARE = unsigned int;
 using TYPE_CELL_LATINSQUARE = bool;
 using SOL_LATINSQUARE = Solution<TYPE_FITNESS_LATINSQUARE, TYPE_CELL_LATINSQUARE>;
 class LatinSquare
-	: public Problem<SOL_LATINSQUARE, TYPE_FITNESS_LATINSQUARE, TYPE_CELL_LATINSQUARE> {
+    : public Problem<SOL_LATINSQUARE, TYPE_FITNESS_LATINSQUARE, TYPE_CELL_LATINSQUARE> {
   public:
-	LatinSquare();
+    LatinSquare();
 
-	LatinSquare(const std::string& fileInstance);
+    LatinSquare(const std::string& fileInstance);
 
-	LatinSquare(unsigned int N);
+    LatinSquare(unsigned int N);
 
-	~LatinSquare();
+    ~LatinSquare();
 
-	virtual void loadJson(const Json::Value& config);
-	std::unique_ptr<SOL_LATINSQUARE> new_solution() const;
+    virtual void loadJson(const Json::Value& config);
+    std::unique_ptr<SOL_LATINSQUARE> new_solution() const;
 
-	bool checkSolutionStructure(const SOL_LATINSQUARE& s) const;
+    bool checkSolutionStructure(const SOL_LATINSQUARE& s) const;
 
-	void evaluation(SOL_LATINSQUARE& s);
+    void evaluation(SOL_LATINSQUARE& s);
 
-	// void incremental(const Solution &s, unsigned int mutatedCell) const;
+    // void incremental(const Solution &s, unsigned int mutatedCell) const;
 
-	void resetSolution(SOL_LATINSQUARE& s) const;
+    void resetSolution(SOL_LATINSQUARE& s) const;
 
-	TYPE_FITNESS_LATINSQUARE getFitnessObjectif(unsigned int numObjectif = 0) const;
+    TYPE_FITNESS_LATINSQUARE getFitnessObjectif(unsigned int numObjectif = 0) const;
 
-	bool solutionSelection(const SOL_LATINSQUARE& s_worst, const SOL_LATINSQUARE& s_best);
+    bool solutionSelection(const SOL_LATINSQUARE& s_worst, const SOL_LATINSQUARE& s_best);
 
-	unsigned int solutionSelection(const Population<SOL_LATINSQUARE>& p);
+    unsigned int solutionSelection(const Population<SOL_LATINSQUARE>& p);
 
   private:
-	Maximization<SOL_LATINSQUARE> solution_selection;
-	std::string instance_number;
-	unsigned int _N;
+    Maximization<SOL_LATINSQUARE> solution_selection;
+    std::string instance_number;
+    unsigned int _N;
 };
 
 } // namespace stocos

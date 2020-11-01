@@ -20,22 +20,22 @@ SensorSolution<SOL>::~SensorSolution() {
 
 template<class SOL>
 void SensorSolution<SOL>::apply(const SOL& s) {
-	solution = s;
+    solution = s;
 }
 
 template<class SOL>
 Json::Value SensorSolution<SOL>::asJson() const {
-	return solution.asJson();
+    return solution.asJson();
 }
 
 template<class SOL>
 Json::Value SensorSolution<SOL>::finish() {
-	return Json::Value();
+    return Json::Value();
 }
 
 template<class SOL>
 std::string SensorSolution<SOL>::name() const {
-	return std::string("Solution");
+    return std::string("Solution");
 }
 
 template class SensorSolution<Fitness<int>>;

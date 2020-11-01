@@ -20,27 +20,27 @@ namespace stocos {
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class AtomicOperation {
   public:
-	AtomicOperation(std::mt19937& mt_rand) : _mt_rand(mt_rand) {
-	}
+    AtomicOperation(std::mt19937& mt_rand) : _mt_rand(mt_rand) {
+    }
 
-	virtual ~AtomicOperation() {
-	}
+    virtual ~AtomicOperation() {
+    }
 
-	virtual void operator()(SOL& s) = 0;
-	virtual std::unique_ptr<std::vector<std::pair<unsigned int, TYPE_CELL>>>
-		listOfMutations(const SOL& s) {
-		std::cerr << "Not implemented" << std::endl;
-		exit(EXIT_FAILURE);
-	}
-	virtual void
-		applyOperator(SOL& s,
-					  const std::vector<std::pair<unsigned int, TYPE_CELL>>& _listOfMutations) {
-		std::cerr << "Not implemented" << std::endl;
-		exit(EXIT_FAILURE);
-	}
+    virtual void operator()(SOL& s) = 0;
+    virtual std::unique_ptr<std::vector<std::pair<unsigned int, TYPE_CELL>>>
+        listOfMutations(const SOL& s) {
+        std::cerr << "Not implemented" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    virtual void
+        applyOperator(SOL& s,
+                      const std::vector<std::pair<unsigned int, TYPE_CELL>>& _listOfMutations) {
+        std::cerr << "Not implemented" << std::endl;
+        exit(EXIT_FAILURE);
+    }
 
   protected:
-	std::mt19937& _mt_rand;
+    std::mt19937& _mt_rand;
 };
 
 } // namespace stocos

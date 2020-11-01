@@ -31,22 +31,22 @@ using TYPE_CELL_QAP = unsigned int;
 using SOL_QAP = Solution<TYPE_FITNESS_QAP, TYPE_CELL_QAP>;
 class QAP : public Problem<SOL_QAP, TYPE_FITNESS_QAP, TYPE_CELL_QAP> {
   public:
-	QAP(const std::string& fileInstance);
+    QAP(const std::string& fileInstance);
 
-	QAP(unsigned int _n, unsigned int** _A, unsigned int** _B);
+    QAP(unsigned int _n, unsigned int** _A, unsigned int** _B);
 
-	// virtual ~QAP();
-	void loadJson(const Json::Value& config);
+    // virtual ~QAP();
+    void loadJson(const Json::Value& config);
 
-	void evaluation(SOL_QAP& p);
+    void evaluation(SOL_QAP& p);
 
-	void resetSolution(SOL_QAP& s) const;
-	void showA() const;
+    void resetSolution(SOL_QAP& s) const;
+    void showA() const;
 
   private:
-	unsigned int n;   // instance size
-	unsigned int** A; // distance between locations i and j
-	unsigned int** B; // the flow between facilities r and s
+    unsigned int n;   // instance size
+    unsigned int** A; // distance between locations i and j
+    unsigned int** B; // the flow between facilities r and s
 };
 
 } // namespace stocos

@@ -19,22 +19,22 @@ using namespace CppUnit;
 using namespace stocos;
 
 class UnitTest_criterias : public CppUnit::TestFixture {
-	CPPUNIT_TEST_SUITE(UnitTest_criterias);
-	CPPUNIT_TEST(constructor);
-	CPPUNIT_TEST_SUITE_END();
+    CPPUNIT_TEST_SUITE(UnitTest_criterias);
+    CPPUNIT_TEST(constructor);
+    CPPUNIT_TEST_SUITE_END();
 
   public:
-	void constructor(void) {
-		Fitness<int> s;
-		CriteriaBudget<Fitness<int>, unsigned int>* criteriaBudget;
-		criteriaBudget = new CriteriaBudget<Fitness<int>, unsigned int>(100);
+    void constructor(void) {
+        Fitness<int> s;
+        CriteriaBudget<Fitness<int>, unsigned int>* criteriaBudget;
+        criteriaBudget = new CriteriaBudget<Fitness<int>, unsigned int>(100);
 
-		StoppingCriteria<Fitness<int>, unsigned int> stoppingCriteria;
-		stoppingCriteria.addCriteria(criteriaBudget);
-		for(unsigned int i = 0; i < 100; i++) CPPUNIT_ASSERT(stoppingCriteria(s));
+        StoppingCriteria<Fitness<int>, unsigned int> stoppingCriteria;
+        stoppingCriteria.addCriteria(criteriaBudget);
+        for(unsigned int i = 0; i < 100; i++) CPPUNIT_ASSERT(stoppingCriteria(s));
 
-		for(unsigned int i = 100; i < 200; i++) CPPUNIT_ASSERT(!stoppingCriteria(s));
-	}
+        for(unsigned int i = 100; i < 200; i++) CPPUNIT_ASSERT(!stoppingCriteria(s));
+    }
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_criterias);

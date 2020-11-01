@@ -20,22 +20,22 @@ using namespace CppUnit;
 using namespace stocos;
 
 class UnitTest_sensorStopwatch : public CppUnit::TestFixture {
-	CPPUNIT_TEST_SUITE(UnitTest_sensorStopwatch);
-	CPPUNIT_TEST(diff_microseconds);
-	CPPUNIT_TEST_SUITE_END();
+    CPPUNIT_TEST_SUITE(UnitTest_sensorStopwatch);
+    CPPUNIT_TEST(diff_microseconds);
+    CPPUNIT_TEST_SUITE_END();
 
   public:
-	void diff_microseconds(void) {
-		unsigned int microseconds = 1;
-		sensorStopwatch.start();
-		usleep(microseconds);
-		sensorStopwatch.stop();
-		CPPUNIT_ASSERT(sensorStopwatch.diff_microseconds() > 0);
-		CPPUNIT_ASSERT(sensorStopwatch.diff_microseconds() < 500);
-	}
+    void diff_microseconds(void) {
+        unsigned int microseconds = 1;
+        sensorStopwatch.start();
+        usleep(microseconds);
+        sensorStopwatch.stop();
+        CPPUNIT_ASSERT(sensorStopwatch.diff_microseconds() > 0);
+        CPPUNIT_ASSERT(sensorStopwatch.diff_microseconds() < 500);
+    }
 
   private:
-	SensorStopwatch<unsigned int> sensorStopwatch;
+    SensorStopwatch<unsigned int> sensorStopwatch;
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_sensorStopwatch);

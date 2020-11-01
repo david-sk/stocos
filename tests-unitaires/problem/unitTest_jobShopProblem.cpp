@@ -20,19 +20,19 @@ using namespace CppUnit;
 using namespace stocos;
 
 class UnitTest_jobShopProblem : public CppUnit::TestFixture {
-	CPPUNIT_TEST_SUITE(UnitTest_jobShopProblem);
-	CPPUNIT_TEST(loadInstance);
-	CPPUNIT_TEST_SUITE_END();
+    CPPUNIT_TEST_SUITE(UnitTest_jobShopProblem);
+    CPPUNIT_TEST(loadInstance);
+    CPPUNIT_TEST_SUITE_END();
 
   public:
-	void setUp(void) {
-	}
-	void tearDown(void) {
-	}
+    void setUp(void) {
+    }
+    void tearDown(void) {
+    }
 
-	void loadInstance(void) {
-		JobShopProblem("instances/JobShopProblem/JobShopProblem-0.json");
-	}
+    void loadInstance(void) {
+        JobShopProblem("instances/JobShopProblem/JobShopProblem-0.json");
+    }
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_jobShopProblem);

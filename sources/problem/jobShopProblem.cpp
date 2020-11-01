@@ -11,25 +11,25 @@
 namespace stocos {
 
 JobShopProblem::JobShopProblem(const std::string& fileInstance) {
-	Json::Value config = loadInstance(fileInstance);
-	loadJson(config);
+    Json::Value config = loadInstance(fileInstance);
+    loadJson(config);
 }
 
 JobShopProblem::~JobShopProblem() {
 }
 
 void JobShopProblem::loadJson(const Json::Value& config) {
-	// std::cout<<root<<std::endl;
-	// for (auto name : root["problem"].getMemberNames()) {
-	//     std::cout<<name<<std::endl;
-	// }
+    // std::cout<<root<<std::endl;
+    // for (auto name : root["problem"].getMemberNames()) {
+    //     std::cout<<name<<std::endl;
+    // }
 
-	// _N = root["problem"]["N"].asUInt();
+    // _N = root["problem"]["N"].asUInt();
 }
 
 const std::vector<std::vector<std::pair<unsigned int, unsigned int>>>&
-	JobShopProblem::getInstance() const {
-	return instance;
+    JobShopProblem::getInstance() const {
+    return instance;
 }
 
 void JobShopProblem::evaluation(SOL_JOBSHOPPROBLEM& s) {

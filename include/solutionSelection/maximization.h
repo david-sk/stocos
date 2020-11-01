@@ -18,8 +18,8 @@ namespace stocos {
 template<class SOL>
 class Maximization : public SolutionSelection<SOL> {
   public:
-	bool operator()(const SOL& s1, const SOL& s2, const unsigned int numObjectif = 0) const;
-	unsigned int operator()(const Population<SOL>& p) const;
+    bool operator()(const SOL& s1, const SOL& s2, const unsigned int numObjectif = 0) const;
+    unsigned int operator()(const Population<SOL>& p) const;
 };
 
 } // namespace stocos

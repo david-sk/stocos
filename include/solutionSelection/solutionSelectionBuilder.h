@@ -25,9 +25,9 @@ namespace stocos {
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class SolutionSelectionBuilder {
   public:
-	static std::unique_ptr<SolutionSelection<SOL>>
-		build(const Problem<SOL, TYPE_FITNESS, TYPE_CELL>& problem,
-			  const Json::Value& configuration);
+    static std::unique_ptr<SolutionSelection<SOL>>
+        build(const Problem<SOL, TYPE_FITNESS, TYPE_CELL>& problem,
+              const Json::Value& configuration);
 };
 
 } // namespace stocos

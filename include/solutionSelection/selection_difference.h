@@ -21,15 +21,15 @@ namespace stocos {
 template<class SOL>
 class Selection_difference : public SolutionSelection<SOL> {
   public:
-	Selection_difference(const double fitnessObjectif);
+    Selection_difference(const double fitnessObjectif);
 
-	virtual ~Selection_difference();
-	bool operator()(const SOL& s1, const SOL& s2, const unsigned int numObjectif = 0) const;
+    virtual ~Selection_difference();
+    bool operator()(const SOL& s1, const SOL& s2, const unsigned int numObjectif = 0) const;
 
-	unsigned int operator()(const Population<SOL>& p) const;
+    unsigned int operator()(const Population<SOL>& p) const;
 
   private:
-	const double _fitnessObjectif;
+    const double _fitnessObjectif;
 };
 
 } // namespace stocos

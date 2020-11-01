@@ -12,8 +12,8 @@ namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS>
 CriteriaBudget<SOL, TYPE_FITNESS>::CriteriaBudget(unsigned int _budget)
-	: Criteria<SOL, TYPE_FITNESS>(), budget(_budget) {
-	consumedBudget = 0;
+    : Criteria<SOL, TYPE_FITNESS>(), budget(_budget) {
+    consumedBudget = 0;
 }
 
 template<typename SOL, typename TYPE_FITNESS>
@@ -22,22 +22,22 @@ CriteriaBudget<SOL, TYPE_FITNESS>::~CriteriaBudget() {
 
 template<typename SOL, typename TYPE_FITNESS>
 bool CriteriaBudget<SOL, TYPE_FITNESS>::operator()(const SOL& s) {
-	return consumedBudget++ < budget;
+    return consumedBudget++ < budget;
 }
 
 template<typename SOL, typename TYPE_FITNESS>
 unsigned int CriteriaBudget<SOL, TYPE_FITNESS>::getConsumedBudget() const {
-	return consumedBudget;
+    return consumedBudget;
 }
 
 template<typename SOL, typename TYPE_FITNESS>
 void CriteriaBudget<SOL, TYPE_FITNESS>::resetConsumedBudget() {
-	consumedBudget = 0;
+    consumedBudget = 0;
 }
 
 template<typename SOL, typename TYPE_FITNESS>
 void CriteriaBudget<SOL, TYPE_FITNESS>::reset() {
-	consumedBudget = 0;
+    consumedBudget = 0;
 }
 
 template class CriteriaBudget<Fitness<int>, unsigned int>;

@@ -24,24 +24,24 @@ namespace stocos {
 template<class SOL>
 class SensorFinal : public Sensor<SOL> {
   public:
-	SensorFinal(unsigned int num, const std::string& name = "");
+    SensorFinal(unsigned int num, const std::string& name = "");
 
-	virtual ~SensorFinal();
+    virtual ~SensorFinal();
 
-	void apply(const SOL& s);
+    void apply(const SOL& s);
 
-	Json::Value asJson() const;
+    Json::Value asJson() const;
 
-	Json::Value finish();
+    Json::Value finish();
 
-	std::string name() const;
+    std::string name() const;
 
   private:
-	SensorStopwatch<SOL> stopwatch;
-	SensorNumRound<SOL> numRound;
-	unsigned int _num;
-	std::string _name;
-	SOL solution_best;
+    SensorStopwatch<SOL> stopwatch;
+    SensorNumRound<SOL> numRound;
+    unsigned int _num;
+    std::string _name;
+    SOL solution_best;
 };
 
 } // namespace stocos

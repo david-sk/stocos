@@ -22,21 +22,21 @@ namespace stocos {
 template<class SOL>
 class SensorExperience : public Sensor<SOL> {
   public:
-	SensorExperience(unsigned int num, const std::string& name = "");
+    SensorExperience(unsigned int num, const std::string& name = "");
 
-	virtual ~SensorExperience();
+    virtual ~SensorExperience();
 
-	void apply(const SOL& s);
+    void apply(const SOL& s);
 
-	Json::Value asJson() const;
+    Json::Value asJson() const;
 
-	Json::Value finish();
+    Json::Value finish();
 
-	std::string name() const;
+    std::string name() const;
 
   private:
-	unsigned int _num;
-	std::string _name;
+    unsigned int _num;
+    std::string _name;
 };
 
 } // namespace stocos

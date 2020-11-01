@@ -24,35 +24,35 @@ namespace stocos {
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class CombinationGenerator : public Optimization<SOL, TYPE_FITNESS, TYPE_CELL> {
   public:
-	CombinationGenerator(std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
-						 std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
-						 std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem);
+    CombinationGenerator(std::mt19937& mt_rand, std::shared_ptr<Statistic<SOL>> statistic,
+                         std::unique_ptr<StoppingCriteria<SOL, TYPE_FITNESS>> stoppingCriteria,
+                         std::shared_ptr<Problem<SOL, TYPE_FITNESS, TYPE_CELL>> problem);
 
-	virtual ~CombinationGenerator();
+    virtual ~CombinationGenerator();
 
-	void reset();
+    void reset();
 
-	void step();
+    void step();
 
-	bool stop();
-	std::unique_ptr<SOL> operator()(const SOL& s);
+    bool stop();
+    std::unique_ptr<SOL> operator()(const SOL& s);
 
-	std::string className() const;
+    std::string className() const;
 
-	void className(const std::string& class_name);
+    void className(const std::string& class_name);
 
   private:
-	unsigned int _nb_digit;
-	unsigned int _len_string;
-	std::string _class_name;
+    unsigned int _nb_digit;
+    unsigned int _len_string;
+    std::string _class_name;
 
-	unsigned int _nb_call;
-	std::unique_ptr<unsigned int[]> _string;
-	std::unique_ptr<SOL> solution;
-	std::unique_ptr<SOL> solution_star;
+    unsigned int _nb_call;
+    std::unique_ptr<unsigned int[]> _string;
+    std::unique_ptr<SOL> solution;
+    std::unique_ptr<SOL> solution_star;
 
-	bool _x;
-	unsigned int _cpt;
+    bool _x;
+    unsigned int _cpt;
 };
 
 } // namespace stocos

@@ -10,7 +10,7 @@ namespace stocos {
 template<typename SOL>
 class Filters : public std::unordered_set<bool (*)(const SOL&)> {
   public:
-	bool operator()(const SOL& s) const;
+    bool operator()(const SOL& s) const;
 };
 
 } // namespace stocos

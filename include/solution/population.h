@@ -19,11 +19,11 @@ namespace stocos {
 template<typename SOL>
 class Population : public Fitness<double>, public std::vector<SOL> {
   public:
-	Population() {
-	}
+    Population() {
+    }
 
-	virtual ~Population() {
-	}
+    virtual ~Population() {
+    }
 };
 
 } // namespace stocos

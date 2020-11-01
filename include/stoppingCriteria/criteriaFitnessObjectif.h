@@ -20,19 +20,19 @@ namespace stocos {
 template<typename SOL, typename TYPE_FITNESS>
 class CriteriaFitnessObjectif : public Criteria<SOL, TYPE_FITNESS> {
   public:
-	CriteriaFitnessObjectif(TYPE_FITNESS fitness_objectif);
+    CriteriaFitnessObjectif(TYPE_FITNESS fitness_objectif);
 
-	CriteriaFitnessObjectif(TYPE_FITNESS* fitness_objectif, unsigned int number_of_objective);
+    CriteriaFitnessObjectif(TYPE_FITNESS* fitness_objectif, unsigned int number_of_objective);
 
-	virtual ~CriteriaFitnessObjectif();
+    virtual ~CriteriaFitnessObjectif();
 
-	virtual bool operator()(const SOL& s);
+    virtual bool operator()(const SOL& s);
 
-	void reset();
+    void reset();
 
   protected:
-	TYPE_FITNESS* _fitness_objectif;
-	unsigned int _number_of_objective;
+    TYPE_FITNESS* _fitness_objectif;
+    unsigned int _number_of_objective;
 };
 
 } // namespace stocos

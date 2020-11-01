@@ -19,19 +19,19 @@ using namespace CppUnit;
 using namespace stocos;
 
 class UnitTest_minimization : public CppUnit::TestFixture {
-	CPPUNIT_TEST_SUITE(UnitTest_minimization);
-	CPPUNIT_TEST(minimizationSolution);
-	CPPUNIT_TEST_SUITE_END();
+    CPPUNIT_TEST_SUITE(UnitTest_minimization);
+    CPPUNIT_TEST(minimizationSolution);
+    CPPUNIT_TEST_SUITE_END();
 
   public:
-	void minimizationSolution(void) {
-		SOL_ONEMAX s1(10);
-		SOL_ONEMAX s2(10);
-		s1.setFitness(5);
-		s2.setFitness(10);
-		Minimization<SOL_ONEMAX> min;
-		CPPUNIT_ASSERT(min(s1, s2));
-	}
+    void minimizationSolution(void) {
+        SOL_ONEMAX s1(10);
+        SOL_ONEMAX s2(10);
+        s1.setFitness(5);
+        s2.setFitness(10);
+        Minimization<SOL_ONEMAX> min;
+        CPPUNIT_ASSERT(min(s1, s2));
+    }
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_minimization);

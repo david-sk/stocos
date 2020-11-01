@@ -19,26 +19,26 @@
 namespace stocos {
 
 QAP::QAP(const std::string& fileInstance) {
-	Json::Value config = loadInstance(fileInstance);
-	loadJson(config);
+    Json::Value config = loadInstance(fileInstance);
+    loadJson(config);
 }
 
 QAP::QAP(unsigned int _n, unsigned int** _A, unsigned int** _B) : n(_n) {
-	// Allocation of A and B
-	A = new unsigned int*[n];
-	B = new unsigned int*[n];
-	for(unsigned int i = 0; i < n; i++) {
-		A[i] = new unsigned int[n];
-		B[i] = new unsigned int[n];
-	}
+    // Allocation of A and B
+    A = new unsigned int*[n];
+    B = new unsigned int*[n];
+    for(unsigned int i = 0; i < n; i++) {
+        A[i] = new unsigned int[n];
+        B[i] = new unsigned int[n];
+    }
 
-	// Copy
-	for(unsigned int i = 0; i < n; i++) {
-		for(unsigned int j = 0; j < n; j++) {
-			A[i][j] = _A[i][j];
-			B[i][j] = _B[i][j];
-		}
-	}
+    // Copy
+    for(unsigned int i = 0; i < n; i++) {
+        for(unsigned int j = 0; j < n; j++) {
+            A[i][j] = _A[i][j];
+            B[i][j] = _B[i][j];
+        }
+    }
 }
 
 // virtual ~QAP() {
@@ -91,26 +91,26 @@ void QAP::loadJson(const Json::Value& config) {
 }
 
 void QAP::evaluation(SOL_QAP& p) {
-	unsigned int sum = 0;
-	for(unsigned int i = 0; i < n; i++) {
-		for(unsigned int j = 0; j < n; j++) sum += A[i][j] * B[p(i) - 1][p(j) - 1];
-	}
-	p.setFitness(0, sum);
+    unsigned int sum = 0;
+    for(unsigned int i = 0; i < n; i++) {
+        for(unsigned int j = 0; j < n; j++) sum += A[i][j] * B[p(i) - 1][p(j) - 1];
+    }
+    p.setFitness(0, sum);
 }
 
 void QAP::resetSolution(SOL_QAP& s) const {
 }
 
 void QAP::showA() const {
-	for(unsigned int i = 0; i < n; i++) {
-		for(unsigned int j = 0; j < n; j++) std::cout << A[i][j] << "\t";
-		std::cout << std::endl;
-	}
-	std::cout << std::endl;
-	for(unsigned int i = 0; i < n; i++) {
-		for(unsigned int j = 0; j < n; j++) std::cout << B[i][j] << "\t";
-		std::cout << std::endl;
-	}
+    for(unsigned int i = 0; i < n; i++) {
+        for(unsigned int j = 0; j < n; j++) std::cout << A[i][j] << "\t";
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
+    for(unsigned int i = 0; i < n; i++) {
+        for(unsigned int j = 0; j < n; j++) std::cout << B[i][j] << "\t";
+        std::cout << std::endl;
+    }
 }
 
 } // namespace stocos

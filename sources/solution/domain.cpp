@@ -16,9 +16,9 @@ namespace stocos {
 ///
 template<typename TYPE_CELL>
 Domain<TYPE_CELL>::Domain(
-	std::map<unsigned int, std::shared_ptr<std::unordered_set<TYPE_CELL>>> exhaustive_list,
-	std::shared_ptr<std::unordered_set<TYPE_CELL>> dom)
-	: _dom(dom), dom_each_cell(exhaustive_list) {
+    std::map<unsigned int, std::shared_ptr<std::unordered_set<TYPE_CELL>>> exhaustive_list,
+    std::shared_ptr<std::unordered_set<TYPE_CELL>> dom)
+    : _dom(dom), dom_each_cell(exhaustive_list) {
 }
 
 ///
@@ -37,21 +37,21 @@ Domain<TYPE_CELL>::Domain(const std::shared_ptr<std::unordered_set<TYPE_CELL>> d
 ///
 template<typename TYPE_CELL>
 Domain<TYPE_CELL>::Domain(const TYPE_CELL a, const TYPE_CELL b, const TYPE_CELL step) {
-	_dom = std::make_shared<std::unordered_set<TYPE_CELL>>();
-	for(TYPE_CELL i = a; i < b; i += step) _dom->insert(i);
+    _dom = std::make_shared<std::unordered_set<TYPE_CELL>>();
+    for(TYPE_CELL i = a; i < b; i += step) _dom->insert(i);
 }
 
 template<typename TYPE_CELL>
 Domain<TYPE_CELL>::Domain(const Domain& dom) {
-	this->_dom = std::make_shared<std::unordered_set<TYPE_CELL>>(*dom._dom);
-	for(auto cell : dom.dom_each_cell)
-		this->dom_each_cell[cell.first] =
-			std::make_shared<std::unordered_set<TYPE_CELL>>(*cell.second);
+    this->_dom = std::make_shared<std::unordered_set<TYPE_CELL>>(*dom._dom);
+    for(auto cell : dom.dom_each_cell)
+        this->dom_each_cell[cell.first] =
+            std::make_shared<std::unordered_set<TYPE_CELL>>(*cell.second);
 }
 
 template<typename TYPE_CELL>
 Domain<TYPE_CELL>::Domain(const Json::Value& jsonValue) {
-	loadJson(jsonValue);
+    loadJson(jsonValue);
 }
 
 ///
@@ -59,18 +59,18 @@ Domain<TYPE_CELL>::Domain(const Json::Value& jsonValue) {
 ///
 template<typename TYPE_CELL>
 unsigned int Domain<TYPE_CELL>::get_size_domain(const unsigned int variable_index) const {
-	try {
-		return dom_each_cell.at(variable_index)->size();
-	} catch(const std::out_of_range& oor) { return _dom->size(); }
+    try {
+        return dom_each_cell.at(variable_index)->size();
+    } catch(const std::out_of_range& oor) { return _dom->size(); }
 }
 ///
 /// @brief Ajouter une element au domaine d'une variable
 ///
 template<typename TYPE_CELL>
 void Domain<TYPE_CELL>::add_element(const unsigned int variable_index, TYPE_CELL element) {
-	if(dom_each_cell[variable_index] == nullptr)
-		dom_each_cell[variable_index] = std::make_shared<std::unordered_set<TYPE_CELL>>(*_dom);
-	dom_each_cell[variable_index]->insert(element);
+    if(dom_each_cell[variable_index] == nullptr)
+        dom_each_cell[variable_index] = std::make_shared<std::unordered_set<TYPE_CELL>>(*_dom);
+    dom_each_cell[variable_index]->insert(element);
 }
 
 ///
@@ -78,9 +78,9 @@ void Domain<TYPE_CELL>::add_element(const unsigned int variable_index, TYPE_CELL
 ///
 template<typename TYPE_CELL>
 void Domain<TYPE_CELL>::remove_element(const unsigned int variable_index, TYPE_CELL element) {
-	if(dom_each_cell[variable_index] == nullptr)
-		dom_each_cell[variable_index] = std::make_shared<std::unordered_set<TYPE_CELL>>(*_dom);
-	dom_each_cell[variable_index]->erase(element);
+    if(dom_each_cell[variable_index] == nullptr)
+        dom_each_cell[variable_index] = std::make_shared<std::unordered_set<TYPE_CELL>>(*_dom);
+    dom_each_cell[variable_index]->erase(element);
 }
 
 ///
@@ -88,15 +88,15 @@ void Domain<TYPE_CELL>::remove_element(const unsigned int variable_index, TYPE_C
 ///
 template<typename TYPE_CELL>
 bool Domain<TYPE_CELL>::in_domain(const unsigned int variable_index, const TYPE_CELL element) {
-	try {
-		typename std::unordered_set<TYPE_CELL>::const_iterator got =
-			dom_each_cell.at(variable_index)->find(element);
-		return got != dom_each_cell.at(variable_index)->end();
-	} catch(const std::out_of_range& oor) {
-		typename std::unordered_set<TYPE_CELL>::const_iterator got = _dom->find(element);
-		return got != _dom->end();
-	}
-	return false;
+    try {
+        typename std::unordered_set<TYPE_CELL>::const_iterator got =
+            dom_each_cell.at(variable_index)->find(element);
+        return got != dom_each_cell.at(variable_index)->end();
+    } catch(const std::out_of_range& oor) {
+        typename std::unordered_set<TYPE_CELL>::const_iterator got = _dom->find(element);
+        return got != _dom->end();
+    }
+    return false;
 }
 
 ///
@@ -104,42 +104,42 @@ bool Domain<TYPE_CELL>::in_domain(const unsigned int variable_index, const TYPE_
 ///
 template<typename TYPE_CELL>
 TYPE_CELL Domain<TYPE_CELL>::pick(const unsigned int variable_index, unsigned int element_index) {
-	try {
-		auto it = dom_each_cell.at(variable_index)->begin();
-		std::advance(it, element_index);
-		return (*it);
-	} catch(const std::out_of_range& oor) {
-		auto it = _dom->begin();
-		std::advance(it, element_index);
-		return (*it);
-	}
+    try {
+        auto it = dom_each_cell.at(variable_index)->begin();
+        std::advance(it, element_index);
+        return (*it);
+    } catch(const std::out_of_range& oor) {
+        auto it = _dom->begin();
+        std::advance(it, element_index);
+        return (*it);
+    }
 }
 
 template<typename TYPE_CELL>
 void Domain<TYPE_CELL>::show() const {
-	for(typename std::map<unsigned int,
-						  std::shared_ptr<std::unordered_set<TYPE_CELL>>>::const_iterator it =
-			dom_each_cell.begin();
-		it != dom_each_cell.end(); ++it) {
-		std::cout << it->first << " =>";
-		for(typename std::unordered_set<TYPE_CELL>::const_iterator it2 = it->second->begin();
-			it2 != it->second->end(); ++it2) {
-			std::cout << " " << *it2;
-		}
-		std::cout << std::endl;
-	}
+    for(typename std::map<unsigned int,
+                          std::shared_ptr<std::unordered_set<TYPE_CELL>>>::const_iterator it =
+            dom_each_cell.begin();
+        it != dom_each_cell.end(); ++it) {
+        std::cout << it->first << " =>";
+        for(typename std::unordered_set<TYPE_CELL>::const_iterator it2 = it->second->begin();
+            it2 != it->second->end(); ++it2) {
+            std::cout << " " << *it2;
+        }
+        std::cout << std::endl;
+    }
 }
 
 template<typename TYPE_CELL>
 void Domain<TYPE_CELL>::loadJson(const Json::Value& jsonValue) {
-	if(!jsonValue["exhaustive_list"].empty()) {
-		_dom = std::make_shared<std::unordered_set<TYPE_CELL>>();
-		for(unsigned int i = 0; i < jsonValue["exhaustive_list"].size(); i++)
-			_dom->insert(jsonValue["exhaustive_list"][i].asDouble());
-	} else if(!jsonValue["interval"].empty()) {
-	} else
-		throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) +
-								 " [-] option does not exist.");
+    if(!jsonValue["exhaustive_list"].empty()) {
+        _dom = std::make_shared<std::unordered_set<TYPE_CELL>>();
+        for(unsigned int i = 0; i < jsonValue["exhaustive_list"].size(); i++)
+            _dom->insert(jsonValue["exhaustive_list"][i].asDouble());
+    } else if(!jsonValue["interval"].empty()) {
+    } else
+        throw std::runtime_error(std::string{} + __FILE__ + ":" + std::to_string(__LINE__) +
+                                 " [-] option does not exist.");
 }
 
 template class Domain<int>;

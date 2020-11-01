@@ -23,20 +23,20 @@ namespace stocos {
 template<class SOL>
 class SensorSolution : public Sensor<SOL> {
   public:
-	SensorSolution();
+    SensorSolution();
 
-	virtual ~SensorSolution();
+    virtual ~SensorSolution();
 
-	void apply(const SOL& s);
+    void apply(const SOL& s);
 
-	Json::Value asJson() const;
+    Json::Value asJson() const;
 
-	Json::Value finish();
+    Json::Value finish();
 
-	std::string name() const;
+    std::string name() const;
 
   private:
-	SOL solution;
+    SOL solution;
 };
 
 } // namespace stocos

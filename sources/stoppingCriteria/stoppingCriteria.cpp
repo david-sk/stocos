@@ -12,15 +12,15 @@ namespace stocos {
 
 template<typename SOL, typename TYPE_FITNESS>
 StoppingCriteria<SOL, TYPE_FITNESS>::~StoppingCriteria() {
-	for(auto criteria : *this) delete criteria;
-	this->clear();
+    for(auto criteria : *this) delete criteria;
+    this->clear();
 }
 
 template<typename SOL, typename TYPE_FITNESS>
 bool StoppingCriteria<SOL, TYPE_FITNESS>::operator()(const SOL& s) {
-	bool total = true;
-	for(auto criteria : *this) total = total & criteria->operator()(s);
-	return total;
+    bool total = true;
+    for(auto criteria : *this) total = total & criteria->operator()(s);
+    return total;
 }
 
 ///
@@ -28,12 +28,12 @@ bool StoppingCriteria<SOL, TYPE_FITNESS>::operator()(const SOL& s) {
 ///
 template<typename SOL, typename TYPE_FITNESS>
 void StoppingCriteria<SOL, TYPE_FITNESS>::addCriteria(Criteria<SOL, TYPE_FITNESS>* criteria) {
-	this->push_back(criteria);
+    this->push_back(criteria);
 }
 
 template<typename SOL, typename TYPE_FITNESS>
 void StoppingCriteria<SOL, TYPE_FITNESS>::reset() {
-	for(auto criteria : *this) this->reset();
+    for(auto criteria : *this) this->reset();
 }
 
 template class StoppingCriteria<Fitness<int>, unsigned int>;

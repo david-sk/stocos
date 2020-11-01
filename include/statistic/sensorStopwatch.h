@@ -24,31 +24,31 @@ namespace stocos {
 template<class SOL>
 class SensorStopwatch : public Sensor<SOL> {
   public:
-	SensorStopwatch();
+    SensorStopwatch();
 
-	virtual ~SensorStopwatch();
+    virtual ~SensorStopwatch();
 
-	void start();
+    void start();
 
-	void stop();
+    void stop();
 
-	int diff_microseconds();
+    int diff_microseconds();
 
-	int diff_minutes();
+    int diff_minutes();
 
-	void apply(const SOL& s);
+    void apply(const SOL& s);
 
-	Json::Value asJson() const;
+    Json::Value asJson() const;
 
-	Json::Value finish();
+    Json::Value finish();
 
-	std::string name() const;
+    std::string name() const;
 
   protected:
-	std::chrono::microseconds _start_microseconds;
-	std::chrono::microseconds _end_microseconds;
-	std::chrono::minutes _start_minutes;
-	std::chrono::minutes _end_minutes;
+    std::chrono::microseconds _start_microseconds;
+    std::chrono::microseconds _end_microseconds;
+    std::chrono::minutes _start_minutes;
+    std::chrono::minutes _end_minutes;
 };
 
 } // namespace stocos

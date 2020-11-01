@@ -23,26 +23,26 @@ using namespace CppUnit;
 using namespace stocos;
 
 class UnitTest_ContinuousProblem : public CppUnit::TestFixture {
-	CPPUNIT_TEST_SUITE(UnitTest_ContinuousProblem);
-	CPPUNIT_TEST(evaluation);
-	CPPUNIT_TEST(loadInstance);
-	CPPUNIT_TEST_SUITE_END();
+    CPPUNIT_TEST_SUITE(UnitTest_ContinuousProblem);
+    CPPUNIT_TEST(evaluation);
+    CPPUNIT_TEST(loadInstance);
+    CPPUNIT_TEST_SUITE_END();
 
   public:
-	void setUp(void) {
-	}
-	void tearDown(void) {
-	}
+    void setUp(void) {
+    }
+    void tearDown(void) {
+    }
 
-	void evaluation(void) {
-	}
+    void evaluation(void) {
+    }
 
-	void loadInstance(void) {
-		ContinuousProblem gProblem("instances/ContinuousProblem/test.json");
-		std::unique_ptr<SOL_CONTINUOUSPROBLEM> s = gProblem.new_solution();
-		for(unsigned int i = 0; i < s->sizeArray(); i++) s->operator()(i, i + (7 * i) + 1);
-		gProblem.evaluation(*s);
-	}
+    void loadInstance(void) {
+        ContinuousProblem gProblem("instances/ContinuousProblem/test.json");
+        std::unique_ptr<SOL_CONTINUOUSPROBLEM> s = gProblem.new_solution();
+        for(unsigned int i = 0; i < s->sizeArray(); i++) s->operator()(i, i + (7 * i) + 1);
+        gProblem.evaluation(*s);
+    }
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_ContinuousProblem);

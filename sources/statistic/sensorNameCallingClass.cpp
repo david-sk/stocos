@@ -24,17 +24,17 @@ void SensorNameCallingClass<SOL>::apply(const SOL& s) {
 
 template<class SOL>
 Json::Value SensorNameCallingClass<SOL>::asJson() const {
-	return Json::Value();
+    return Json::Value();
 }
 
 template<class SOL>
 Json::Value SensorNameCallingClass<SOL>::finish() {
-	return Json::Value();
+    return Json::Value();
 }
 
 template<class SOL>
 std::string SensorNameCallingClass<SOL>::name() const {
-	return std::string("nameCallingClass");
+    return std::string("nameCallingClass");
 }
 
 template class SensorNameCallingClass<Fitness<int>>;

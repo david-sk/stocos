@@ -12,7 +12,7 @@ namespace stocos {
 
 template<class SOL>
 SensorNumRound<SOL>::SensorNumRound() : Sensor<SOL>() {
-	numRound = 0;
+    numRound = 0;
 }
 
 template<class SOL>
@@ -21,22 +21,22 @@ SensorNumRound<SOL>::~SensorNumRound() {
 
 template<class SOL>
 void SensorNumRound<SOL>::apply(const SOL& s) {
-	numRound++;
+    numRound++;
 }
 
 template<class SOL>
 Json::Value SensorNumRound<SOL>::asJson() const {
-	return Json::Value(numRound);
+    return Json::Value(numRound);
 }
 
 template<class SOL>
 Json::Value SensorNumRound<SOL>::finish() {
-	return Json::Value();
+    return Json::Value();
 }
 
 template<class SOL>
 std::string SensorNumRound<SOL>::name() const {
-	return std::string("round");
+    return std::string("round");
 }
 
 template class SensorNumRound<Fitness<int>>;

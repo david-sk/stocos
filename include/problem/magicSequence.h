@@ -20,24 +20,24 @@ using TYPE_FITNESS_MAGICSEQUENCE = double;
 using TYPE_CELL_MAGICSEQUENCE = unsigned int;
 using SOL_MAGICSEQUENCE = Solution<TYPE_FITNESS_MAGICSEQUENCE, TYPE_CELL_MAGICSEQUENCE>;
 class MagicSequence
-	: public Problem<SOL_MAGICSEQUENCE, TYPE_FITNESS_MAGICSEQUENCE, TYPE_CELL_MAGICSEQUENCE> {
+    : public Problem<SOL_MAGICSEQUENCE, TYPE_FITNESS_MAGICSEQUENCE, TYPE_CELL_MAGICSEQUENCE> {
   public:
-	MagicSequence();
+    MagicSequence();
 
-	void loadJson(const Json::Value& config);
+    void loadJson(const Json::Value& config);
 
-	void evaluation(SOL_MAGICSEQUENCE& s);
+    void evaluation(SOL_MAGICSEQUENCE& s);
 
-	// void incremental(const Solution &s, unsigned int mutatedCell) const;
+    // void incremental(const Solution &s, unsigned int mutatedCell) const;
 
-	void resetSolution(SOL_MAGICSEQUENCE& s) const;
+    void resetSolution(SOL_MAGICSEQUENCE& s) const;
 
-	bool solutionSelection(const SOL_MAGICSEQUENCE& s_worst, const SOL_MAGICSEQUENCE& s_best);
+    bool solutionSelection(const SOL_MAGICSEQUENCE& s_worst, const SOL_MAGICSEQUENCE& s_best);
 
-	unsigned int solutionSelection(const Population<SOL_MAGICSEQUENCE>& p);
+    unsigned int solutionSelection(const Population<SOL_MAGICSEQUENCE>& p);
 
   private:
-	Maximization<SOL_MAGICSEQUENCE> solution_selection;
+    Maximization<SOL_MAGICSEQUENCE> solution_selection;
 };
 
 } // namespace stocos

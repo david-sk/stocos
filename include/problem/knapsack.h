@@ -29,37 +29,37 @@ using SOL_KNAPSACK = Solution<TYPE_FITNESS_KNAPSACK, TYPE_CELL_KNAPSACK>;
 
 class Knapsack : public Problem<SOL_KNAPSACK, TYPE_FITNESS_KNAPSACK, TYPE_CELL_KNAPSACK> {
   public:
-	Knapsack();
+    Knapsack();
 
-	Knapsack(const std::string& fileInstance);
+    Knapsack(const std::string& fileInstance);
 
-	~Knapsack();
+    ~Knapsack();
 
-	void loadJson(const Json::Value& config);
+    void loadJson(const Json::Value& config);
 
-	void evaluation(SOL_KNAPSACK& s);
+    void evaluation(SOL_KNAPSACK& s);
 
-	// void incremental(const Solution &s, unsigned int mutatedCell) const;
+    // void incremental(const Solution &s, unsigned int mutatedCell) const;
 
-	void resetSolution(SOL_KNAPSACK& s) const;
+    void resetSolution(SOL_KNAPSACK& s) const;
 
-	std::unique_ptr<SOL_KNAPSACK> new_solution() const;
+    std::unique_ptr<SOL_KNAPSACK> new_solution() const;
 
-	unsigned int sizeArraySolution() const;
+    unsigned int sizeArraySolution() const;
 
-	TYPE_FITNESS_KNAPSACK getFitnessObjectif(unsigned int numObjectif = 0) const;
+    TYPE_FITNESS_KNAPSACK getFitnessObjectif(unsigned int numObjectif = 0) const;
 
-	bool solutionSelection(const SOL_KNAPSACK& s_worst, const SOL_KNAPSACK& s_best);
-	unsigned int solutionSelection(const Population<SOL_KNAPSACK>& p);
+    bool solutionSelection(const SOL_KNAPSACK& s_worst, const SOL_KNAPSACK& s_best);
+    unsigned int solutionSelection(const Population<SOL_KNAPSACK>& p);
 
   private:
-	Maximization<SOL_KNAPSACK> solution_selection;
-	std::string instance_number;
-	int capacity;
-	unsigned int nbItems;
-	std::vector<int> weight;
-	std::vector<int> profit;
-	int fitnessObjectif;
+    Maximization<SOL_KNAPSACK> solution_selection;
+    std::string instance_number;
+    int capacity;
+    unsigned int nbItems;
+    std::vector<int> weight;
+    std::vector<int> profit;
+    int fitnessObjectif;
 };
 
 } // namespace stocos

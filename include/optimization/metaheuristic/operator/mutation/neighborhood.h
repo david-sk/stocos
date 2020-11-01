@@ -24,18 +24,18 @@ namespace stocos {
 template<typename SOL, typename TYPE_FITNESS, typename TYPE_CELL>
 class Neighborhood : public AtomicOperation<SOL, TYPE_FITNESS, TYPE_CELL> {
   public:
-	Neighborhood(std::mt19937& mt_rand);
+    Neighborhood(std::mt19937& mt_rand);
 
-	virtual ~Neighborhood();
+    virtual ~Neighborhood();
 
-	virtual void operator()(SOL& s);
+    virtual void operator()(SOL& s);
 
-	virtual std::unique_ptr<std::vector<std::pair<unsigned int, TYPE_CELL>>>
-		listOfMutations(const SOL& s);
+    virtual std::unique_ptr<std::vector<std::pair<unsigned int, TYPE_CELL>>>
+        listOfMutations(const SOL& s);
 
-	virtual void
-		applyOperator(SOL& s,
-					  const std::vector<std::pair<unsigned int, TYPE_CELL>>& _listOfMutations);
+    virtual void
+        applyOperator(SOL& s,
+                      const std::vector<std::pair<unsigned int, TYPE_CELL>>& _listOfMutations);
 };
 
 } // namespace stocos

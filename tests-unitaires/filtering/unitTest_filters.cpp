@@ -19,28 +19,28 @@
 using namespace stocos;
 
 class UnitTest_filters : public CppUnit::TestFixture {
-	CPPUNIT_TEST_SUITE(UnitTest_filters);
-	CPPUNIT_TEST(run);
-	CPPUNIT_TEST_SUITE_END();
+    CPPUNIT_TEST_SUITE(UnitTest_filters);
+    CPPUNIT_TEST(run);
+    CPPUNIT_TEST_SUITE_END();
 
   public:
-	static bool checks1_validity_solution(const Fitness<double>& s) {
-		return true;
-	}
+    static bool checks1_validity_solution(const Fitness<double>& s) {
+        return true;
+    }
 
-	static bool checks2_validity_solution(const Fitness<double>& s) {
-		return false;
-	}
+    static bool checks2_validity_solution(const Fitness<double>& s) {
+        return false;
+    }
 
-	void run(void) {
-		Fitness<double> s1(10);
-		Filters<Fitness<double>> filters;
-		filters.insert(checks1_validity_solution);
-		CPPUNIT_ASSERT(filters(s1));
+    void run(void) {
+        Fitness<double> s1(10);
+        Filters<Fitness<double>> filters;
+        filters.insert(checks1_validity_solution);
+        CPPUNIT_ASSERT(filters(s1));
 
-		filters.insert(checks2_validity_solution);
-		CPPUNIT_ASSERT(filters(s1) == false);
-	}
+        filters.insert(checks2_validity_solution);
+        CPPUNIT_ASSERT(filters(s1) == false);
+    }
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_filters);
