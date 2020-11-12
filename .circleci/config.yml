@@ -1,7 +1,6 @@
 version: 2.1
-
 jobs:
-  Debian:
+  build:
     docker:
       - image: debian:buster
     working_directory: ~/project
@@ -46,6 +45,8 @@ jobs:
           name: Compile and install libjson-rpc-cp
           command: >
               git clone https://github.com/cinemast/libjson-rpc-cpp.git &&
+              cd libjson-rpc-cpp && 
+              git checkout tags/v1.3.0 &&
               mkdir -p libjson-rpc-cpp/build &&
               cd libjson-rpc-cpp/build &&
               cmake .. && make -j 4 &&
@@ -59,68 +60,3 @@ jobs:
           name: Tests
           command: make test CTEST_OUTPUT_ON_FAILURE=1
           working_directory: ~/project/build
-
-  Ubuntu:
-    docker:
-      - image: cimg/base:stable
-    working_directory: ~/project
-    steps:
-      - checkout
-      - run:
-          name: Install Dependencies
-          command: >
-            apt-get update && apt-get install -y
-            clang-format
-            cppcheck
-            build-essential
-            cmake
-            doxygen
-            git
-            libargtable2-dev
-            libboost-iostreams-dev
-            libboost-log-dev
-            libboost-program-options-dev
-            libc6
-            libc6-dev
-            libcppunit-dev
-            libcurl4
-            libcurl4-gnutls-dev
-            libhiredis-dev
-            libicu-dev
-            libjsoncpp-dev
-            libjsoncpp1
-            libmicrohttpd-dev
-            libmongoclient-dev
-            libmongoclient0
-            libpcre3-dev
-            pkg-config
-            python3.7
-            python3-pip
-            zlib1g-dev
-      - run:
-          name: Install Dependencies python3.7
-          command: >
-            python3.7 -m pip install numpy argparse
-      - run:
-          name: Compile and install libjson-rpc-cp
-          command: >
-              git clone https://github.com/cinemast/libjson-rpc-cpp.git &&
-              mkdir -p libjson-rpc-cpp/build &&
-              cd libjson-rpc-cpp/build &&
-              cmake .. && make -j 4 &&
-              make install &&
-              ldconfig          #only required for linux
-      - run:
-          name: Compilation of the project
-          command: cmake .. && make -j 4
-          working_directory: ~/project/build
-      - run:
-          name: Tests
-          command: make test CTEST_OUTPUT_ON_FAILURE=1
-          working_directory: ~/project/build
-
-workflows:
-  build-test-deploy:
-    jobs:
-      - Debian
-      - Ubuntu
