@@ -61,3 +61,8 @@ jobs:
           name: Tests
           command: make test CTEST_OUTPUT_ON_FAILURE=1
           working_directory: ~/project/build
+
+workflows:
+  build-test-deploy:
+    jobs:
+      - Debian
