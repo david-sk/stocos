@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  build:
+  Debian:
     docker:
       - image: debian:buster
     working_directory: ~/project
