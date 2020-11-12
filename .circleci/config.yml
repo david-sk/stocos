@@ -62,7 +62,7 @@ jobs:
 
   Ubuntu:
     docker:
-      - image: ubuntu-2004:202010-01
+      - image: cimg/base:stable
     working_directory: ~/project
     steps:
       - checkout
