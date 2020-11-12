@@ -67,7 +67,7 @@ void version(const std::string& name_software) {
 }
 
 void segfault_sigaction(int signal, siginfo_t* si, void* arg) {
-    printf("Caught segfault at address %p\n", si->si_addr);
+    std::cerr << __FILE__ << ":" << __LINE__ << static_cast<void*>(si->si_addr) << std::endl;
     exit(EXIT_SUCCESS);
 }
 
@@ -253,6 +253,5 @@ int main(int argc, char** argv, char** envp) {
 
     solver->operator()();
     delete solver;
-
     return EXIT_SUCCESS;
 }
