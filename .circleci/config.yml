@@ -60,8 +60,6 @@ jobs:
           command: make test CTEST_OUTPUT_ON_FAILURE=1
           working_directory: ~/project/build
 
-
-jobs:
   Ubuntu:
     docker:
       - image: ubuntu-2004:202010-01
