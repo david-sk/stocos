@@ -31,6 +31,7 @@ class Messages : protected std::unordered_map<std::string, std::string> {
         return this->at(code);
     }
 
+    // Replace $[0-9]+ with a arg
     virtual std::string operator()(const std::string code,
                                    const std::initializer_list<std::string>& args) const {
         std::map<unsigned int, unsigned int> refactoring;
