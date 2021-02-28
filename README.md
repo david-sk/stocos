@@ -1,9 +1,9 @@
 # STOChastic Optimization Solver (stocos)
 
-Stocos solves optimization problems with a large search space.  He is able to provide solutions with a good approximation. Optimization plan is described using the JSON format with in particular the following elements: the algorithms used, the problem to be solved and how to record the results of the optimization. Of course the solver can be used as liberay.
+Stocos solves optimization problems with a large search space.  It is able to provide solutions with a good approximation. The optimization plan is described using the JSON format with in particular the following elements: the algorithms used, the problem to be solved and how to record the results of the optimization. Of course the solver can be used as library.
 
 
-Le solver uses the following technologies:
+The solver uses the following technologies:
 - C++20 with boost, jsoncpp, mongoclient, json-rpc-cpp
 - Json like
 - Keep data in mongodb
@@ -20,11 +20,11 @@ Le solver uses the following technologies:
 ## Example
 
 Stocos can be configured in two different ways:
-- take a file json
-- take a string json
+- with a json file
+- with a json string
 
 
-* Solve the oneMax problem :
+* Solving the oneMax problem:
 
 ```bash
 $ ./build/stocos -c configuration/stocos-oneMax.json
